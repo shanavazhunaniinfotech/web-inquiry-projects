@@ -1,0 +1,64 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="robots" content="noindex, nofollow">
+  <title>Client Sites</title>
+  <style>
+    :root {
+      color-scheme: light dark;
+      --bg: #f6f7f9;
+      --card: #ffffff;
+      --text: #1a1d23;
+      --muted: #5f6673;
+      --border: #e2e5ea;
+      --accent: #2f6fde;
+    }
+    @media (prefers-color-scheme: dark) {
+      :root {
+        --bg: #111318;
+        --card: #1a1d24;
+        --text: #eceef2;
+        --muted: #9aa1ad;
+        --border: #2a2e37;
+        --accent: #7aa7ff;
+      }
+    }
+    * { box-sizing: border-box; }
+    body {
+      margin: 0;
+      background: var(--bg);
+      color: var(--text);
+      font-family: system-ui, -apple-system, "Segoe UI", Roboto, sans-serif;
+      line-height: 1.5;
+    }
+    main { max-width: 760px; margin: 0 auto; padding: 48px 16px; }
+    h1 { margin: 0 0 4px; font-size: 1.9rem; }
+    p.lead { margin: 0 0 28px; color: var(--muted); }
+    ul { list-style: none; margin: 0; padding: 0; display: grid; gap: 12px; }
+    .card {
+      display: block;
+      padding: 16px 18px;
+      background: var(--card);
+      border: 1px solid var(--border);
+      border-radius: 12px;
+      color: inherit;
+      text-decoration: none;
+      transition: border-color .15s, transform .15s;
+    }
+    .card:hover, .card:focus-visible { border-color: var(--accent); transform: translateY(-1px); }
+    .card strong { display: block; font-size: 1.05rem; }
+    .card span { display: block; color: var(--muted); font-size: .9rem; overflow-wrap: anywhere; }
+  </style>
+</head>
+<body>
+  <main>
+    <h1>Client Sites</h1>
+    <p class="lead">Every folder in this repo is its own website.</p>
+    <ul>
+      <li><a class="card" href="/sample-site/"><strong>Sample Site</strong><span>/sample-site · Template for new client sites · 2026-11-05</span></a></li>
+    </ul>
+  </main>
+</body>
+</html>
