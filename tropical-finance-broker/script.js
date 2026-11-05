@@ -492,6 +492,7 @@
     /* horizontal journey (desktop only) */
     var mm = gsap.matchMedia();
     mm.add('(min-width: 1024px)', function () {
+      document.documentElement.classList.add('has-pin');
       var track = $('.journey-track');
       var dist = function () { return Math.max(track.scrollWidth - window.innerWidth, 0); };
       gsap.to(track, {
@@ -500,6 +501,7 @@
       });
       gsap.fromTo('.journey-progress span', { scaleX: 0 }, { scaleX: 1, ease: 'none', scrollTrigger: { trigger: '.journey-pin', start: 'top top', end: function () { return '+=' + dist(); }, scrub: true, invalidateOnRefresh: true } });
       gsap.from('.step', { y: 60, opacity: 0, duration: 1, stagger: 0.08, ease: 'expo.out', scrollTrigger: { trigger: '.journey-pin', start: 'top 70%', once: true } });
+      return function () { document.documentElement.classList.remove('has-pin'); };
     });
 
     /* magnetic buttons */
