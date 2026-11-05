@@ -2,466 +2,634 @@
 <html lang="en">
 <head>
   <meta charset="utf-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
   <meta name="robots" content="noindex, nofollow">
-  <title>ÉLARA — Modern Essentials | Homepage Concept</title>
-  <meta name="description" content="Homepage design concept for a modern clothing brand Shopify store — built around product presentation and conversion.">
-  <meta name="theme-color" content="#F7F3EE">
+  <title>ÉLARA — Timeless Womenswear | Homepage Concept</title>
+  <meta name="description" content="Premium homepage concept for a luxury womenswear Shopify store — editorial design built for conversion.">
+  <meta name="theme-color" content="#0A0908">
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link rel="preconnect" href="https://images.unsplash.com">
-  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,500;0,600;1,500&family=Manrope:wght@400;500;600;700&display=swap" rel="stylesheet">
-  <link rel="preload" as="image" href="https://images.unsplash.com/photo-1539109136881-3be0616acf4b?w=1000&q=75&auto=format&fit=crop">
+  <link href="https://fonts.googleapis.com/css2?family=Bodoni+Moda:ital,opsz,wght@0,6..96,400;0,6..96,500;0,6..96,600;1,6..96,400;1,6..96,500&family=Jost:wght@300;400;500;600&display=swap" rel="stylesheet">
+  <link rel="preload" as="image" href="https://images.unsplash.com/photo-1609505848912-b7c3b8b4beda?w=1920&q=75&auto=format&fit=crop" media="(min-width: 768px)">
   <link rel="stylesheet" href="style.css">
   <script>
-    if (!window.matchMedia('(prefers-reduced-motion: reduce)').matches) {
-      document.documentElement.classList.add('js-anim');
-      setTimeout(function () { if (!window.gsap) document.documentElement.classList.remove('js-anim'); }, 2500);
-    }
+    (function () {
+      var d = document.documentElement;
+      if (!window.matchMedia('(prefers-reduced-motion: reduce)').matches) {
+        d.classList.add('js-anim');
+        var seen = false; try { seen = sessionStorage.getItem('elara_intro') === '1'; } catch (e) {}
+        if (!seen) d.classList.add('is-loading');
+        setTimeout(function () { if (!window.gsap) d.classList.remove('js-anim', 'is-loading'); }, 3000);
+      }
+    })();
   </script>
 </head>
 <body>
-  <!-- SVG icon sprite -->
   <svg width="0" height="0" style="position:absolute" aria-hidden="true">
     <defs>
-      <symbol id="i-search" viewBox="0 0 24 24"><circle cx="11" cy="11" r="7" fill="none" stroke="currentColor" stroke-width="1.6"/><path d="M20 20l-3.5-3.5" stroke="currentColor" stroke-width="1.6" stroke-linecap="round"/></symbol>
-      <symbol id="i-user" viewBox="0 0 24 24"><circle cx="12" cy="8" r="4" fill="none" stroke="currentColor" stroke-width="1.6"/><path d="M4 21c1.5-4 4.5-6 8-6s6.5 2 8 6" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round"/></symbol>
-      <symbol id="i-heart" viewBox="0 0 24 24"><path d="M12 20s-7.5-4.6-9.2-9.4C1.6 7.2 3.9 4 7.2 4c2 0 3.6 1.1 4.8 2.8C13.2 5.1 14.8 4 16.8 4c3.3 0 5.6 3.2 4.4 6.6C19.5 15.4 12 20 12 20z" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linejoin="round"/></symbol>
-      <symbol id="i-bag" viewBox="0 0 24 24"><path d="M5 8h14l-1 12H6L5 8z" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linejoin="round"/><path d="M9 8V6a3 3 0 016 0v2" fill="none" stroke="currentColor" stroke-width="1.6"/></symbol>
-      <symbol id="i-menu" viewBox="0 0 24 24"><path d="M3 7h18M3 12h18M3 17h18" stroke="currentColor" stroke-width="1.6" stroke-linecap="round"/></symbol>
-      <symbol id="i-close" viewBox="0 0 24 24"><path d="M6 6l12 12M18 6L6 18" stroke="currentColor" stroke-width="1.6" stroke-linecap="round"/></symbol>
-      <symbol id="i-arrow" viewBox="0 0 24 24"><path d="M5 12h14M13 6l6 6-6 6" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/></symbol>
-      <symbol id="i-chev" viewBox="0 0 24 24"><path d="M9 6l6 6-6 6" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/></symbol>
+      <symbol id="i-search" viewBox="0 0 24 24"><circle cx="11" cy="11" r="6.5" fill="none" stroke="currentColor" stroke-width="1.3"/><path d="M20 20l-4-4" stroke="currentColor" stroke-width="1.3" stroke-linecap="round"/></symbol>
+      <symbol id="i-user" viewBox="0 0 24 24"><circle cx="12" cy="8" r="3.8" fill="none" stroke="currentColor" stroke-width="1.3"/><path d="M4.5 20.5c1.4-3.6 4.2-5.5 7.5-5.5s6.1 1.9 7.5 5.5" fill="none" stroke="currentColor" stroke-width="1.3" stroke-linecap="round"/></symbol>
+      <symbol id="i-heart" viewBox="0 0 24 24"><path d="M12 20s-7.5-4.6-9.2-9.4C1.6 7.2 3.9 4 7.2 4c2 0 3.6 1.1 4.8 2.8C13.2 5.1 14.8 4 16.8 4c3.3 0 5.6 3.2 4.4 6.6C19.5 15.4 12 20 12 20z" fill="none" stroke="currentColor" stroke-width="1.3" stroke-linejoin="round"/></symbol>
+      <symbol id="i-bag" viewBox="0 0 24 24"><path d="M5 8h14l-1.1 12.5H6.1L5 8z" fill="none" stroke="currentColor" stroke-width="1.3" stroke-linejoin="round"/><path d="M9 8V6.5a3 3 0 016 0V8" fill="none" stroke="currentColor" stroke-width="1.3"/></symbol>
+      <symbol id="i-menu" viewBox="0 0 24 24"><path d="M3 8h18M3 16h12" stroke="currentColor" stroke-width="1.3" stroke-linecap="round"/></symbol>
+      <symbol id="i-close" viewBox="0 0 24 24"><path d="M6 6l12 12M18 6L6 18" stroke="currentColor" stroke-width="1.3" stroke-linecap="round"/></symbol>
+      <symbol id="i-arrow" viewBox="0 0 24 24"><path d="M4 12h16M14 6l6 6-6 6" fill="none" stroke="currentColor" stroke-width="1.3" stroke-linecap="round" stroke-linejoin="round"/></symbol>
+      <symbol id="i-arrow-ur" viewBox="0 0 24 24"><path d="M7 17L17 7M9 7h8v8" fill="none" stroke="currentColor" stroke-width="1.3" stroke-linecap="round" stroke-linejoin="round"/></symbol>
+      <symbol id="i-chev" viewBox="0 0 24 24"><path d="M9 6l6 6-6 6" fill="none" stroke="currentColor" stroke-width="1.3" stroke-linecap="round" stroke-linejoin="round"/></symbol>
+      <symbol id="i-down" viewBox="0 0 24 24"><path d="M6 9l6 6 6-6" fill="none" stroke="currentColor" stroke-width="1.3" stroke-linecap="round" stroke-linejoin="round"/></symbol>
       <symbol id="i-star" viewBox="0 0 24 24"><path d="M12 2.8l2.8 5.9 6.4.8-4.7 4.4 1.2 6.4L12 17.2l-5.7 3.1 1.2-6.4L2.8 9.5l6.4-.8L12 2.8z" fill="currentColor"/></symbol>
-      <symbol id="i-truck" viewBox="0 0 24 24"><path d="M2 6h11v10H2zM13 9h4l3 3v4h-7" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linejoin="round"/><circle cx="6" cy="17.5" r="1.8" fill="none" stroke="currentColor" stroke-width="1.5"/><circle cx="17" cy="17.5" r="1.8" fill="none" stroke="currentColor" stroke-width="1.5"/></symbol>
-      <symbol id="i-return" viewBox="0 0 24 24"><path d="M4 9h11a5 5 0 010 10H8" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/><path d="M8 5L4 9l4 4" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></symbol>
-      <symbol id="i-lock" viewBox="0 0 24 24"><rect x="5" y="10" width="14" height="10" rx="2" fill="none" stroke="currentColor" stroke-width="1.5"/><path d="M8 10V7a4 4 0 018 0v3" fill="none" stroke="currentColor" stroke-width="1.5"/></symbol>
-      <symbol id="i-leaf" viewBox="0 0 24 24"><path d="M5 19C5 10 10 5 20 4c0 10-5 15-14 15z" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linejoin="round"/><path d="M5 19l8-8" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/></symbol>
-      <symbol id="i-ruler" viewBox="0 0 24 24"><rect x="2" y="8" width="20" height="8" rx="1.5" fill="none" stroke="currentColor" stroke-width="1.5"/><path d="M6 8v3M10 8v4M14 8v3M18 8v4" stroke="currentColor" stroke-width="1.5"/></symbol>
-      <symbol id="i-check" viewBox="0 0 24 24"><path d="M5 12.5l4.5 4.5L19 7.5" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></symbol>
-      <symbol id="i-plus" viewBox="0 0 24 24"><path d="M12 5v14M5 12h14" stroke="currentColor" stroke-width="1.6" stroke-linecap="round"/></symbol>
-      <symbol id="i-minus" viewBox="0 0 24 24"><path d="M5 12h14" stroke="currentColor" stroke-width="1.6" stroke-linecap="round"/></symbol>
-      <symbol id="i-eye" viewBox="0 0 24 24"><path d="M2 12s3.6-6.5 10-6.5S22 12 22 12s-3.6 6.5-10 6.5S2 12 2 12z" fill="none" stroke="currentColor" stroke-width="1.5"/><circle cx="12" cy="12" r="3" fill="none" stroke="currentColor" stroke-width="1.5"/></symbol>
-      <symbol id="i-insta" viewBox="0 0 24 24"><rect x="3" y="3" width="18" height="18" rx="5" fill="none" stroke="currentColor" stroke-width="1.5"/><circle cx="12" cy="12" r="4" fill="none" stroke="currentColor" stroke-width="1.5"/><circle cx="17.5" cy="6.5" r="1" fill="currentColor"/></symbol>
-      <symbol id="i-tiktok" viewBox="0 0 24 24"><path d="M14 3v11.5a3.5 3.5 0 11-3.5-3.5M14 3c.5 2.8 2.4 4.6 5 5" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/></symbol>
-      <symbol id="i-pin" viewBox="0 0 24 24"><circle cx="12" cy="12" r="9" fill="none" stroke="currentColor" stroke-width="1.5"/><path d="M11 8c3-1 5 1 4 3.5S11 13 11 13l-1.5 6" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/></symbol>
-      <symbol id="i-bulb" viewBox="0 0 24 24"><path d="M9 18h6M10 21h4M12 3a6 6 0 00-3.5 10.9c.6.5 1 1.2 1 2V16h5v-.1c0-.8.4-1.5 1-2A6 6 0 0012 3z" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linejoin="round"/></symbol>
-      <symbol id="i-gift" viewBox="0 0 24 24"><rect x="3" y="9" width="18" height="4" fill="none" stroke="currentColor" stroke-width="1.5"/><path d="M5 13v8h14v-8M12 9v12M12 9c-2-4-6-4-6-1.5S9.5 9 12 9zm0 0c2-4 6-4 6-1.5S14.5 9 12 9z" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linejoin="round"/></symbol>
+      <symbol id="i-truck" viewBox="0 0 32 32"><path d="M3 9h15v12H3zM18 13h6l4 4v4h-10" fill="none" stroke="currentColor" stroke-width="1.1" stroke-linejoin="round"/><circle cx="8" cy="23" r="2.2" fill="none" stroke="currentColor" stroke-width="1.1"/><circle cx="23" cy="23" r="2.2" fill="none" stroke="currentColor" stroke-width="1.1"/></symbol>
+      <symbol id="i-return" viewBox="0 0 32 32"><path d="M6 12h15a6 6 0 010 12H11" fill="none" stroke="currentColor" stroke-width="1.1" stroke-linecap="round"/><path d="M11 7l-5 5 5 5" fill="none" stroke="currentColor" stroke-width="1.1" stroke-linecap="round" stroke-linejoin="round"/></symbol>
+      <symbol id="i-lock" viewBox="0 0 32 32"><rect x="7" y="14" width="18" height="13" rx="2" fill="none" stroke="currentColor" stroke-width="1.1"/><path d="M11 14v-3a5 5 0 0110 0v3" fill="none" stroke="currentColor" stroke-width="1.1"/><circle cx="16" cy="20.5" r="1.5" fill="currentColor"/></symbol>
+      <symbol id="i-hanger" viewBox="0 0 32 32"><path d="M16 11a2.5 2.5 0 10-2.5-2.5M16 11v2L4 21.5c-.8.6-.4 1.5.5 1.5h23c.9 0 1.3-.9.5-1.5L16 13" fill="none" stroke="currentColor" stroke-width="1.1" stroke-linecap="round" stroke-linejoin="round"/></symbol>
+      <symbol id="i-ruler" viewBox="0 0 24 24"><rect x="2" y="8" width="20" height="8" rx="1" fill="none" stroke="currentColor" stroke-width="1.3"/><path d="M6 8v3M10 8v4M14 8v3M18 8v4" stroke="currentColor" stroke-width="1.3"/></symbol>
+      <symbol id="i-check" viewBox="0 0 24 24"><path d="M5 12.5l4.5 4.5L19 7.5" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/></symbol>
+      <symbol id="i-plus" viewBox="0 0 24 24"><path d="M12 5v14M5 12h14" stroke="currentColor" stroke-width="1.3" stroke-linecap="round"/></symbol>
+      <symbol id="i-minus" viewBox="0 0 24 24"><path d="M5 12h14" stroke="currentColor" stroke-width="1.3" stroke-linecap="round"/></symbol>
+      <symbol id="i-insta" viewBox="0 0 24 24"><rect x="3" y="3" width="18" height="18" rx="5" fill="none" stroke="currentColor" stroke-width="1.3"/><circle cx="12" cy="12" r="4" fill="none" stroke="currentColor" stroke-width="1.3"/><circle cx="17.5" cy="6.5" r="1" fill="currentColor"/></symbol>
+      <symbol id="i-tiktok" viewBox="0 0 24 24"><path d="M14 3v11.5a3.5 3.5 0 11-3.5-3.5M14 3c.5 2.8 2.4 4.6 5 5" fill="none" stroke="currentColor" stroke-width="1.3" stroke-linecap="round"/></symbol>
+      <symbol id="i-pin" viewBox="0 0 24 24"><circle cx="12" cy="12" r="9" fill="none" stroke="currentColor" stroke-width="1.3"/><path d="M11 8c3-1 5 1 4 3.5S11 13 11 13l-1.5 6" fill="none" stroke="currentColor" stroke-width="1.3" stroke-linecap="round"/></symbol>
+      <symbol id="i-bulb" viewBox="0 0 24 24"><path d="M9 18h6M10 21h4M12 3a6 6 0 00-3.5 10.9c.6.5 1 1.2 1 2V16h5v-.1c0-.8.4-1.5 1-2A6 6 0 0012 3z" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linejoin="round"/></symbol>
+      <symbol id="i-pause" viewBox="0 0 24 24"><path d="M9 6v12M15 6v12" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/></symbol>
+      <symbol id="i-play" viewBox="0 0 24 24"><path d="M8 6l10 6-10 6z" fill="currentColor"/></symbol>
+      <symbol id="i-spark" viewBox="0 0 24 24"><path d="M12 2l1.6 8.4L22 12l-8.4 1.6L12 22l-1.6-8.4L2 12l8.4-1.6z" fill="currentColor"/></symbol>
     </defs>
   </svg>
 
   <a class="skip" href="#main">Skip to content</a>
 
+  <!-- Preloader (first visit per session, ~1s) -->
+  <div class="loader" id="loader" aria-hidden="true">
+    <div class="loader__word"><span>É</span><span>L</span><span>A</span><span>R</span><span>A</span></div>
+    <div class="loader__line"><i></i></div>
+    <p class="loader__tag">Timeless Womenswear</p>
+  </div>
+
+  <!-- Custom cursor (desktop only) -->
+  <div class="cursor" id="cursor" aria-hidden="true"><span class="cursor__label">View</span></div>
+  <div class="cursor-dot" id="cursorDot" aria-hidden="true"></div>
+
   <!-- 1. Announcement bar -->
   <div class="announce" data-cro="announce">
-    <div class="announce__track" aria-live="polite">
-      <p class="announce__msg is-active">Free shipping on orders over $100 &nbsp;·&nbsp; <a href="#bestsellers">Shop now</a></p>
-      <p class="announce__msg">Free 30-day returns &amp; exchanges — no questions asked</p>
-      <p class="announce__msg">New here? Get 10% off your first order &nbsp;·&nbsp; <a href="#newsletter">Claim code</a></p>
+    <div class="announce__inner">
+      <span class="announce__side hide-md">Complimentary Gift Wrapping</span>
+      <div class="announce__track" aria-live="polite">
+        <p class="announce__msg is-active">Complimentary shipping on orders over $150</p>
+        <p class="announce__msg">Free 30-day returns &amp; exchanges</p>
+        <p class="announce__msg">Enjoy 10% off your first order — <a href="#newsletter">Join the Inner Circle</a></p>
+      </div>
+      <span class="announce__side hide-md announce__side--r">USD $ · United States</span>
     </div>
   </div>
 
   <!-- 2. Header -->
   <header class="header" id="header" data-cro="header">
-    <div class="header__inner container">
-      <button class="icon-btn header__burger" id="menuOpen" aria-label="Open menu"><svg><use href="#i-menu"/></svg></button>
-
-      <nav class="nav" aria-label="Primary">
-        <ul class="nav__list">
-          <li class="nav__item has-mega">
-            <a href="#new" class="nav__link">New In</a>
-          </li>
-          <li class="nav__item has-mega">
-            <a href="#categories" class="nav__link">Shop <svg class="nav__chev"><use href="#i-chev"/></svg></a>
-            <div class="mega">
-              <div class="mega__inner container">
-                <div class="mega__col">
-                  <h4>Clothing</h4>
-                  <a href="#categories">Dresses</a><a href="#categories">Tops &amp; Tees</a><a href="#categories">Knitwear</a><a href="#categories">Outerwear</a><a href="#categories">Trousers &amp; Denim</a><a href="#categories">Matching Sets</a>
+    <div class="header__inner">
+      <div class="header__left">
+        <button class="icon-btn burger" id="menuOpen" aria-label="Open menu"><svg><use href="#i-menu"/></svg></button>
+        <nav class="nav" aria-label="Primary">
+          <ul>
+            <li><a href="#bestsellers" class="nav__link" data-tab-link="new">New In</a></li>
+            <li class="has-mega">
+              <a href="#categories" class="nav__link">Clothing <svg class="nav__chev"><use href="#i-down"/></svg></a>
+              <div class="mega" data-lenis-prevent>
+                <div class="mega__inner">
+                  <div class="mega__col">
+                    <h4>Clothing</h4>
+                    <a href="#categories">Dresses</a><a href="#categories">Tops &amp; Blouses</a><a href="#categories">Blazers &amp; Tailoring</a><a href="#categories">Coats &amp; Outerwear</a><a href="#categories">Knitwear</a><a href="#categories">Skirts &amp; Trousers</a>
+                  </div>
+                  <div class="mega__col">
+                    <h4>Discover</h4>
+                    <a href="#bestsellers" data-tab-link="new">New Arrivals</a><a href="#bestsellers">Bestsellers</a><a href="#lookbook">The AW26 Lookbook</a><a href="#campaign">The Evening Edit</a><a href="#bestsellers" class="is-sale">Archive Sale — up to 40% off</a>
+                  </div>
+                  <div class="mega__col">
+                    <h4>Client Care</h4>
+                    <a href="#promise" data-open="sizeModal">Size Guide &amp; Fit Finder</a><a href="#faq">Shipping &amp; Delivery</a><a href="#faq">Returns &amp; Exchanges</a><a href="#faq">Track Your Order</a>
+                  </div>
+                  <a class="mega__card" href="#campaign">
+                    <img src="https://images.unsplash.com/photo-1550614000-4895a10e1bfd?w=640&h=800&q=70&auto=format&fit=crop" alt="Models in burgundy sequin eveningwear" loading="lazy">
+                    <span><small>New Season</small>The Evening Edit</span>
+                  </a>
+                  <a class="mega__card" href="#lookbook">
+                    <img src="https://images.unsplash.com/photo-1571513722275-4b41940f54b8?w=640&h=800&q=70&auto=format&fit=crop" alt="Ivory tailored blazer with red rose" loading="lazy">
+                    <span><small>Just Landed</small>Modern Tailoring</span>
+                  </a>
                 </div>
-                <div class="mega__col">
-                  <h4>Featured</h4>
-                  <a href="#new">New Arrivals</a><a href="#bestsellers">Bestsellers</a><a href="#look">The Autumn Edit</a><a href="#bestsellers">Back in Stock</a><a href="#bestsellers" class="is-sale">Sale — up to 40% off</a>
-                </div>
-                <div class="mega__col">
-                  <h4>Help</h4>
-                  <a href="#fit">Size Guide</a><a href="#faq">Shipping &amp; Delivery</a><a href="#faq">Returns &amp; Exchanges</a><a href="#faq">Track Your Order</a>
-                </div>
-                <a class="mega__promo" href="#look">
-                  <img src="https://images.unsplash.com/photo-1485968579580-b6d095142e6e?w=600&q=70&auto=format&fit=crop" alt="Model in a tailored plaid coat" loading="lazy">
-                  <span><small>Just landed</small>The Autumn Edit <svg><use href="#i-arrow"/></svg></span>
-                </a>
               </div>
-            </div>
-          </li>
-          <li class="nav__item"><a href="#bestsellers" class="nav__link">Bestsellers</a></li>
-          <li class="nav__item"><a href="#story" class="nav__link">Our Story</a></li>
-          <li class="nav__item"><a href="#bestsellers" class="nav__link nav__link--sale">Sale</a></li>
-        </ul>
-      </nav>
+            </li>
+            <li><a href="#bestsellers" class="nav__link">Bestsellers</a></li>
+            <li><a href="#lookbook" class="nav__link">Lookbook</a></li>
+            <li><a href="#bestsellers" class="nav__link nav__link--sale">Sale</a></li>
+          </ul>
+        </nav>
+      </div>
 
       <a href="#main" class="logo" aria-label="ÉLARA home">ÉLARA</a>
 
-      <div class="header__actions">
+      <div class="header__right">
         <button class="icon-btn" id="searchOpen" aria-label="Search"><svg><use href="#i-search"/></svg></button>
         <a class="icon-btn hide-sm" href="#newsletter" aria-label="Account"><svg><use href="#i-user"/></svg></a>
         <button class="icon-btn hide-sm" id="wishBtn" aria-label="Wishlist"><svg><use href="#i-heart"/></svg><span class="count" id="wishCount" hidden>0</span></button>
-        <button class="icon-btn" id="cartOpen" aria-label="Open bag"><svg><use href="#i-bag"/></svg><span class="count" id="cartCount" hidden>0</span></button>
+        <button class="icon-btn" id="cartOpen" aria-label="Open shopping bag"><svg><use href="#i-bag"/></svg><span class="count" id="cartCount" hidden>0</span></button>
       </div>
     </div>
   </header>
 
   <main id="main">
-    <!-- 3. Hero -->
-    <section class="hero" data-cro="hero">
-      <div class="hero__inner container">
-        <div class="hero__copy">
-          <p class="eyebrow hero__reveal">The Autumn Edit · Now Live</p>
-          <h1 class="hero__title hero__reveal">Effortless pieces,<br><em>made to be lived in.</em></h1>
-          <p class="hero__sub hero__reveal">Elevated everyday essentials in premium fabrics — designed to mix, match and last well beyond one season.</p>
-          <div class="hero__ctas hero__reveal">
-            <a href="#new" class="btn btn--primary">Shop New Arrivals <svg><use href="#i-arrow"/></svg></a>
-            <a href="#bestsellers" class="btn btn--ghost">Shop Bestsellers</a>
-          </div>
-          <div class="hero__proof hero__reveal">
-            <div class="avatars" aria-hidden="true">
-              <img src="https://images.unsplash.com/photo-1524504388940-b1c1722653e1?w=80&h=80&q=60&auto=format&fit=crop&crop=faces" alt="">
-              <img src="https://images.unsplash.com/photo-1517841905240-472988babdf9?w=80&h=80&q=60&auto=format&fit=crop&crop=faces" alt="">
-              <img src="https://images.unsplash.com/photo-1583744946564-b52ac1c389c8?w=80&h=80&q=60&auto=format&fit=crop&crop=faces" alt="">
-            </div>
-            <div>
-              <div class="stars" aria-label="Rated 4.8 out of 5"><svg><use href="#i-star"/></svg><svg><use href="#i-star"/></svg><svg><use href="#i-star"/></svg><svg><use href="#i-star"/></svg><svg><use href="#i-star"/></svg></div>
-              <p><strong>4.8/5</strong> from 2,400+ happy customers</p>
+    <!-- 3. Hero slideshow -->
+    <section class="hero" id="hero" data-cro="hero" aria-roledescription="carousel" aria-label="Featured collections">
+      <div class="hero__slides">
+        <article class="slide is-active" data-index="0">
+          <div class="slide__media"><img src="https://images.unsplash.com/photo-1609505848912-b7c3b8b4beda?w=1920&q=75&auto=format&fit=crop" srcset="https://images.unsplash.com/photo-1609505848912-b7c3b8b4beda?w=800&h=1300&q=70&auto=format&fit=crop 800w, https://images.unsplash.com/photo-1609505848912-b7c3b8b4beda?w=1920&q=75&auto=format&fit=crop 1920w" sizes="100vw" alt="Model in an ivory ruffled poplin blouse" fetchpriority="high"></div>
+          <div class="slide__content">
+            <p class="slide__eyebrow"><span>AW26</span> The Autumn Collection</p>
+            <h2 class="slide__title">The Art of<br><em>Quiet Luxury</em></h2>
+            <p class="slide__sub">Timeless silhouettes in exquisite fabrics — designed to be treasured, season after season.</p>
+            <div class="slide__ctas">
+              <a href="#bestsellers" class="btn btn--gold" data-tab-link="new">Shop New Arrivals <svg><use href="#i-arrow"/></svg></a>
+              <a href="#bestsellers" class="btn btn--line">Explore Bestsellers</a>
             </div>
           </div>
-        </div>
-        <div class="hero__media">
-          <figure class="hero__img hero__img--main">
-            <img src="https://images.unsplash.com/photo-1539109136881-3be0616acf4b?w=1000&q=75&auto=format&fit=crop" alt="Model wearing a pale blue oversized coat" fetchpriority="high">
-            <a href="#look" class="hero__tag">
-              <span class="hero__tag-dot"></span>
-              <span><small>Bestseller</small>Oversized Wool Coat · $189</span>
-            </a>
-          </figure>
-          <figure class="hero__img hero__img--sub">
-            <img src="https://images.unsplash.com/photo-1550639525-c97d455acf70?w=600&q=70&auto=format&fit=crop" alt="Model wearing a black rib turtleneck and midi skirt">
-          </figure>
-          <div class="hero__badge" aria-hidden="true">
-            <svg viewBox="0 0 100 100"><defs><path id="circ" d="M50,50 m-37,0 a37,37 0 1,1 74,0 a37,37 0 1,1 -74,0"/></defs><text><textPath href="#circ">FREE RETURNS · FREE RETURNS · FREE RETURNS ·</textPath></text></svg>
-            <span>30<small>days</small></span>
+          <button class="slide__product" data-qv="p1">
+            <img src="https://images.unsplash.com/photo-1609505848912-b7c3b8b4beda?w=120&h=150&q=60&auto=format&fit=crop" alt="">
+            <span><small>Shop this look</small>Ruffle Poplin Blouse<b>$128</b></span>
+            <svg><use href="#i-plus"/></svg>
+          </button>
+        </article>
+        <article class="slide" data-index="1">
+          <div class="slide__media"><img src="https://images.unsplash.com/photo-1611042553484-d61f84d22784?w=1920&q=75&auto=format&fit=crop" srcset="https://images.unsplash.com/photo-1611042553484-d61f84d22784?w=800&h=1300&q=70&auto=format&fit=crop 800w, https://images.unsplash.com/photo-1611042553484-d61f84d22784?w=1920&q=75&auto=format&fit=crop 1920w" sizes="100vw" alt="Model in a felt hat and ivory satin blouse" loading="lazy"></div>
+          <div class="slide__content">
+            <p class="slide__eyebrow"><span>New</span> Signature Silks</p>
+            <h2 class="slide__title">Effortless by<br><em>Design</em></h2>
+            <p class="slide__sub">Fluid satins and soft tailoring for days that move from desk to dinner.</p>
+            <div class="slide__ctas">
+              <a href="#bestsellers" class="btn btn--gold">Shop Silks &amp; Blouses <svg><use href="#i-arrow"/></svg></a>
+              <a href="#lookbook" class="btn btn--line">View the Lookbook</a>
+            </div>
           </div>
-        </div>
-      </div>
-    </section>
-
-    <!-- 4. USP / trust strip -->
-    <section class="usp" aria-label="Why shop with us" data-cro="usp">
-      <div class="usp__inner container">
-        <div class="usp__item"><svg><use href="#i-truck"/></svg><div><strong>Free Shipping</strong><span>On all orders over $100</span></div></div>
-        <div class="usp__item"><svg><use href="#i-return"/></svg><div><strong>Free 30-Day Returns</strong><span>Easy exchanges, no stress</span></div></div>
-        <div class="usp__item"><svg><use href="#i-lock"/></svg><div><strong>Secure Checkout</strong><span>Shop Pay, Apple Pay &amp; more</span></div></div>
-        <div class="usp__item"><svg><use href="#i-leaf"/></svg><div><strong>Responsibly Made</strong><span>Quality fabrics that last</span></div></div>
-      </div>
-    </section>
-
-    <!-- 5. Shop by category -->
-    <section class="section categories" id="categories" data-cro="categories">
-      <div class="container">
-        <div class="section__head">
-          <div>
-            <p class="eyebrow">Find your fit faster</p>
-            <h2 class="section__title">Shop by Category</h2>
+          <button class="slide__product" data-qv="p5">
+            <img src="https://images.unsplash.com/photo-1611042553484-d61f84d22784?w=120&h=150&q=60&auto=format&fit=crop" alt="">
+            <span><small>Shop this look</small>Satin Bishop-Sleeve Blouse<b>$145</b></span>
+            <svg><use href="#i-plus"/></svg>
+          </button>
+        </article>
+        <article class="slide" data-index="2">
+          <div class="slide__media"><img src="https://images.unsplash.com/photo-1584273143981-41c073dfe8f8?w=1920&q=75&auto=format&fit=crop" srcset="https://images.unsplash.com/photo-1584273143981-41c073dfe8f8?w=800&h=1300&q=70&auto=format&fit=crop 800w, https://images.unsplash.com/photo-1584273143981-41c073dfe8f8?w=1920&q=75&auto=format&fit=crop 1920w" sizes="100vw" alt="Model in a black double-breasted suit on a city street" loading="lazy"></div>
+          <div class="slide__content">
+            <p class="slide__eyebrow"><span>Edit</span> Modern Tailoring</p>
+            <h2 class="slide__title">Power, Softly<br><em>Spoken</em></h2>
+            <p class="slide__sub">Sculpted blazers and precise trousers, cut to flatter and built to last.</p>
+            <div class="slide__ctas">
+              <a href="#bestsellers" class="btn btn--gold">Shop Tailoring <svg><use href="#i-arrow"/></svg></a>
+              <a href="#look" class="btn btn--line">Shop the Look</a>
+            </div>
           </div>
-          <a href="#bestsellers" class="link-arrow">View all <svg><use href="#i-arrow"/></svg></a>
+          <button class="slide__product" data-qv="p2">
+            <img src="https://images.unsplash.com/photo-1584273143981-41c073dfe8f8?w=120&h=150&q=60&auto=format&fit=crop" alt="">
+            <span><small>Shop this look</small>Sculpted Double-Breasted Blazer<b>$245</b></span>
+            <svg><use href="#i-plus"/></svg>
+          </button>
+        </article>
+      </div>
+
+      <div class="hero__bar">
+        <div class="hero__proof">
+          <span class="stars"><svg><use href="#i-star"/></svg><svg><use href="#i-star"/></svg><svg><use href="#i-star"/></svg><svg><use href="#i-star"/></svg><svg><use href="#i-star"/></svg></span>
+          <span><b>4.9</b> · 2,400+ verified reviews</span>
         </div>
-        <div class="cat-grid">
-          <a class="cat cat--lg reveal" href="#bestsellers"><img src="https://images.unsplash.com/photo-1595777457583-95e059d581b8?w=900&q=70&auto=format&fit=crop" alt="Flowing red maxi dress" loading="lazy"><span class="cat__label">Dresses <em>48 styles</em><svg><use href="#i-arrow"/></svg></span></a>
-          <a class="cat reveal" href="#bestsellers"><img src="https://images.unsplash.com/photo-1485968579580-b6d095142e6e?w=600&q=70&auto=format&fit=crop" alt="Plaid tailored coat" loading="lazy"><span class="cat__label">Outerwear <em>22 styles</em><svg><use href="#i-arrow"/></svg></span></a>
-          <a class="cat reveal" href="#bestsellers"><img src="https://images.unsplash.com/photo-1558769132-cb1aea458c5e?w=600&q=70&auto=format&fit=crop" alt="Rail of neutral knitwear" loading="lazy"><span class="cat__label">Knitwear <em>31 styles</em><svg><use href="#i-arrow"/></svg></span></a>
-          <a class="cat reveal" href="#bestsellers"><img src="https://images.unsplash.com/photo-1564257631407-4deb1f99d992?w=600&q=70&auto=format&fit=crop" alt="Embroidered white shirt with denim" loading="lazy"><span class="cat__label">Tops &amp; Tees <em>56 styles</em><svg><use href="#i-arrow"/></svg></span></a>
-          <a class="cat reveal" href="#bestsellers"><img src="https://images.unsplash.com/photo-1515886657613-9f3515b0c78f?w=600&q=70&auto=format&fit=crop" alt="Yellow matching lounge set" loading="lazy"><span class="cat__label">Matching Sets <em>14 styles</em><svg><use href="#i-arrow"/></svg></span></a>
+        <div class="hero__nav" role="tablist" aria-label="Choose slide">
+          <button class="hero__dot is-active" role="tab" aria-selected="true" data-go="0"><span>01</span><em>The Autumn Collection</em><i><b></b></i></button>
+          <button class="hero__dot" role="tab" aria-selected="false" data-go="1"><span>02</span><em>Signature Silks</em><i><b></b></i></button>
+          <button class="hero__dot" role="tab" aria-selected="false" data-go="2"><span>03</span><em>Modern Tailoring</em><i><b></b></i></button>
+        </div>
+        <button class="hero__pause" id="heroPause" aria-label="Pause slideshow"><svg><use href="#i-pause"/></svg></button>
+      </div>
+      <a href="#categories" class="hero__scroll" aria-label="Scroll down"><span>Scroll</span><i></i></a>
+    </section>
+
+    <!-- 4. Trust marquee -->
+    <section class="marquee" aria-label="Our promises" data-cro="marquee">
+      <div class="marquee__track">
+        <div class="marquee__group">
+          <span>Complimentary Shipping Over $150</span><svg><use href="#i-spark"/></svg>
+          <span>Free 30-Day Returns</span><svg><use href="#i-spark"/></svg>
+          <span>Rated 4.9 by 2,400+ Clients</span><svg><use href="#i-spark"/></svg>
+          <span>Secure Checkout · Pay in 4</span><svg><use href="#i-spark"/></svg>
+          <span>Ethically Crafted in Small Batches</span><svg><use href="#i-spark"/></svg>
+        </div>
+        <div class="marquee__group" aria-hidden="true">
+          <span>Complimentary Shipping Over $150</span><svg><use href="#i-spark"/></svg>
+          <span>Free 30-Day Returns</span><svg><use href="#i-spark"/></svg>
+          <span>Rated 4.9 by 2,400+ Clients</span><svg><use href="#i-spark"/></svg>
+          <span>Secure Checkout · Pay in 4</span><svg><use href="#i-spark"/></svg>
+          <span>Ethically Crafted in Small Batches</span><svg><use href="#i-spark"/></svg>
         </div>
       </div>
     </section>
 
-    <!-- 6. Product carousel with tabs -->
-    <section class="section products" id="bestsellers" data-cro="products">
-      <span id="new" class="anchor-offset" aria-hidden="true"></span>
+    <!-- 5. Categories: expanding panels -->
+    <section class="section section--dark cats" id="categories" data-cro="categories">
       <div class="container">
-        <div class="section__head">
+        <div class="head">
           <div>
-            <p class="eyebrow">Loved by our community</p>
-            <h2 class="section__title">Customer Favourites</h2>
+            <p class="eyebrow"><i></i>Shop by Category</p>
+            <h2 class="title split">Curated for <em>every moment</em></h2>
+          </div>
+          <a href="#bestsellers" class="link-line">View all clothing <svg><use href="#i-arrow"/></svg></a>
+        </div>
+      </div>
+      <div class="panels" id="panels">
+        <a class="panel is-open" href="#bestsellers" data-cursor="Shop">
+          <img src="https://images.unsplash.com/photo-1551803091-e20673f15770?w=900&h=1200&q=72&auto=format&fit=crop" alt="Navy lace cut-out maxi dress" loading="lazy">
+          <span class="panel__num">01</span>
+          <span class="panel__vert">Dresses</span>
+          <span class="panel__info"><b>Dresses</b><em>64 styles · from $148</em><i class="panel__cta">Shop Dresses <svg><use href="#i-arrow"/></svg></i></span>
+        </a>
+        <a class="panel" href="#bestsellers" data-cursor="Shop">
+          <img src="https://images.unsplash.com/photo-1571513722275-4b41940f54b8?w=900&h=1200&q=72&auto=format&fit=crop" alt="Ivory blazer with red rose" loading="lazy">
+          <span class="panel__num">02</span>
+          <span class="panel__vert">Tailoring</span>
+          <span class="panel__info"><b>Tailoring</b><em>38 styles · from $165</em><i class="panel__cta">Shop Tailoring <svg><use href="#i-arrow"/></svg></i></span>
+        </a>
+        <a class="panel" href="#bestsellers" data-cursor="Shop">
+          <img src="https://images.unsplash.com/photo-1485462537746-965f33f7f6a7?w=900&h=1200&q=72&auto=format&fit=crop" alt="Model in a blush wool coat under an arcade" loading="lazy">
+          <span class="panel__num">03</span>
+          <span class="panel__vert">Outerwear</span>
+          <span class="panel__info"><b>Outerwear</b><em>26 styles · from $245</em><i class="panel__cta">Shop Outerwear <svg><use href="#i-arrow"/></svg></i></span>
+        </a>
+        <a class="panel" href="#bestsellers" data-cursor="Shop">
+          <img src="https://images.unsplash.com/photo-1609505848912-b7c3b8b4beda?w=900&h=1200&q=72&auto=format&fit=crop" alt="Ivory ruffle blouse" loading="lazy">
+          <span class="panel__num">04</span>
+          <span class="panel__vert">Tops &amp; Blouses</span>
+          <span class="panel__info"><b>Tops &amp; Blouses</b><em>52 styles · from $88</em><i class="panel__cta">Shop Tops <svg><use href="#i-arrow"/></svg></i></span>
+        </a>
+        <a class="panel" href="#bestsellers" data-cursor="Shop">
+          <img src="https://images.unsplash.com/photo-1568252542512-9fe8fe9c87bb?w=900&h=1200&q=72&auto=format&fit=crop" alt="Burgundy embellished tulle gown" loading="lazy">
+          <span class="panel__num">05</span>
+          <span class="panel__vert">Evening</span>
+          <span class="panel__info"><b>Evening</b><em>21 styles · from $210</em><i class="panel__cta">Shop Evening <svg><use href="#i-arrow"/></svg></i></span>
+        </a>
+      </div>
+    </section>
+
+    <!-- 6. Products -->
+    <section class="section section--light products" id="bestsellers" data-cro="products">
+      <div class="container">
+        <div class="head">
+          <div>
+            <p class="eyebrow"><i></i>Most Loved</p>
+            <h2 class="title split">The pieces everyone<br><em>is talking about</em></h2>
           </div>
           <div class="tabs" role="tablist" aria-label="Product collections">
             <button class="tab is-active" role="tab" aria-selected="true" data-tab="best">Bestsellers</button>
             <button class="tab" role="tab" aria-selected="false" data-tab="new">New Arrivals</button>
-            <button class="tab" role="tab" aria-selected="false" data-tab="under">Under $100</button>
+            <button class="tab" role="tab" aria-selected="false" data-tab="under">Under $150</button>
+            <span class="tabs__ink" aria-hidden="true"></span>
           </div>
         </div>
         <div class="slider">
-          <button class="slider__btn slider__btn--prev" aria-label="Previous products"><svg><use href="#i-chev"/></svg></button>
           <div class="product-row" id="productRow" tabindex="0" aria-live="polite"></div>
-          <button class="slider__btn slider__btn--next" aria-label="Next products"><svg><use href="#i-chev"/></svg></button>
-        </div>
-        <div class="products__foot">
-          <a href="#categories" class="btn btn--outline">Shop All Products</a>
-        </div>
-      </div>
-    </section>
-
-    <!-- 7. Shop the look -->
-    <section class="section look" id="look" data-cro="look">
-      <div class="look__inner container">
-        <div class="look__media reveal">
-          <img src="https://images.unsplash.com/photo-1485968579580-b6d095142e6e?w=1100&q=75&auto=format&fit=crop" alt="Model wearing a plaid coat, knit and trousers" loading="lazy">
-          <button class="hotspot" style="top:38%;left:46%" data-product="p2" aria-label="View Tailored Check Coat"><span></span></button>
-          <button class="hotspot" style="top:64%;left:34%" data-product="p8" aria-label="View Wide-Leg Trousers"><span></span></button>
-          <button class="hotspot" style="top:83%;left:56%" data-product="p11" aria-label="View Leather Tote"><span></span></button>
-        </div>
-        <div class="look__copy">
-          <p class="eyebrow">Shop the Look</p>
-          <h2 class="section__title">The Autumn Edit</h2>
-          <p class="look__text">Tailored layers in warm, grounded tones. Tap the dots to shop each piece — or add the full look in one click.</p>
-          <ul class="look__list" id="lookList"></ul>
-          <div class="look__total">
-            <div><span>Complete look</span><strong id="lookTotal">$0</strong><s id="lookWas"></s></div>
-            <button class="btn btn--primary" id="addLook">Add Full Look — Save 10%</button>
-          </div>
-        </div>
-      </div>
-    </section>
-
-    <!-- 8. Reviews -->
-    <section class="section reviews" id="reviews" data-cro="reviews">
-      <div class="container">
-        <div class="reviews__head">
-          <div class="reviews__score">
-            <strong>4.8</strong>
-            <div>
-              <div class="stars stars--lg"><svg><use href="#i-star"/></svg><svg><use href="#i-star"/></svg><svg><use href="#i-star"/></svg><svg><use href="#i-star"/></svg><svg><use href="#i-star"/></svg></div>
-              <p>Based on 2,418 verified reviews</p>
+          <div class="slider__foot">
+            <div class="slider__progress"><i id="sliderBar"></i></div>
+            <div class="slider__btns">
+              <button class="round-btn" id="prevBtn" aria-label="Previous products"><svg style="transform:rotate(180deg)"><use href="#i-arrow"/></svg></button>
+              <button class="round-btn" id="nextBtn" aria-label="Next products"><svg><use href="#i-arrow"/></svg></button>
             </div>
           </div>
-          <div class="reviews__bars" aria-hidden="true">
-            <div><span>5★</span><i style="--w:86%"></i><em>86%</em></div>
-            <div><span>4★</span><i style="--w:10%"></i><em>10%</em></div>
-            <div><span>3★</span><i style="--w:3%"></i><em>3%</em></div>
-            <div><span>2★</span><i style="--w:1%"></i><em>1%</em></div>
-          </div>
-          <div class="reviews__fit">
-            <p class="eyebrow">How it fits</p>
-            <div class="fitbar"><i style="left:52%"></i></div>
-            <div class="fitbar__labels"><span>Runs small</span><span>True to size</span><span>Runs large</span></div>
-            <p class="reviews__fit-note">92% say our pieces fit true to size</p>
-          </div>
         </div>
-        <div class="review-row" id="reviewRow"></div>
+        <div class="center"><a href="#categories" class="btn btn--dark">Shop All Products <svg><use href="#i-arrow"/></svg></a></div>
       </div>
     </section>
 
-    <!-- 9. Fit confidence -->
-    <section class="section fit" id="fit" data-cro="fit">
-      <div class="fit__inner container">
-        <div class="fit__copy">
-          <p class="eyebrow">Shop with confidence</p>
-          <h2 class="section__title">Not sure about your size?</h2>
-          <p>Answer two quick questions and we'll recommend your perfect size. And if it's not right, exchanges are always free.</p>
-          <form class="finder" id="finder">
-            <label>Your usual size
-              <select name="usual" required>
-                <option value="">Select</option>
-                <option>XS (0–2)</option><option>S (4–6)</option><option>M (8–10)</option><option>L (12–14)</option><option>XL (16–18)</option>
-              </select>
-            </label>
-            <label>How do you like it to fit?
-              <select name="pref" required>
-                <option value="">Select</option>
-                <option value="0">Fitted</option><option value="1">Relaxed</option><option value="2">Oversized</option>
-              </select>
-            </label>
-            <button class="btn btn--primary" type="submit">Find My Size</button>
-            <p class="finder__result" id="finderResult" aria-live="polite"></p>
-          </form>
-          <button class="link-arrow" data-open="sizeModal"><svg><use href="#i-ruler"/></svg> View full size guide</button>
-        </div>
-        <div class="fit__cards">
-          <div class="fit__card"><svg><use href="#i-return"/></svg><h3>Free exchanges</h3><p>Wrong size? Swap it for free within 30 days.</p></div>
-          <div class="fit__card"><svg><use href="#i-truck"/></svg><h3>Fast dispatch</h3><p>Orders placed before 2pm ship the same day.</p></div>
-          <div class="fit__card"><svg><use href="#i-lock"/></svg><h3>Pay your way</h3><p>Split into 4 interest-free payments with Shop Pay.</p></div>
-          <div class="fit__card"><svg><use href="#i-gift"/></svg><h3>Gift ready</h3><p>Every order arrives beautifully packaged.</p></div>
+    <!-- 7. Manifesto -->
+    <section class="section section--dark manifesto" data-cro="manifesto">
+      <div class="container">
+        <p class="eyebrow eyebrow--center"><i></i>The ÉLARA Philosophy<i></i></p>
+        <p class="manifesto__text" id="manifesto">
+          We design for the woman who dresses with
+          <span class="pill"><img src="https://images.unsplash.com/photo-1574015974293-817f0ebebb74?w=240&h=120&q=60&auto=format&fit=crop" alt="" loading="lazy"></span>
+          intention — timeless silhouettes, exquisite fabrics
+          <span class="pill"><img src="https://images.unsplash.com/photo-1558769132-cb1aea458c5e?w=240&h=120&q=60&auto=format&fit=crop" alt="" loading="lazy"></span>
+          and an effortless ease that outlasts every season.
+        </p>
+        <div class="manifesto__stats">
+          <div><strong data-count="25">0</strong><span>Thousand women dressed</span></div>
+          <div><strong data-count="98">0</strong><span>% would recommend us</span></div>
+          <div><strong data-count="100">0</strong><span>% hand-finished &amp; quality checked</span></div>
         </div>
       </div>
     </section>
 
-    <!-- 10. Brand story -->
-    <section class="section story" id="story" data-cro="story">
-      <div class="story__inner container">
-        <div class="story__media reveal">
-          <img src="https://images.unsplash.com/photo-1558769132-cb1aea458c5e?w=1000&q=75&auto=format&fit=crop" alt="Neutral knitwear hanging in the studio" loading="lazy">
+    <!-- 8. Campaign: scale reveal -->
+    <section class="campaign" id="campaign" data-cro="campaign">
+      <div class="campaign__frame">
+        <img src="https://images.unsplash.com/photo-1550614000-4895a10e1bfd?w=1920&q=75&auto=format&fit=crop" alt="Two models in burgundy sequin evening wear" loading="lazy">
+        <div class="campaign__content">
+          <p class="eyebrow eyebrow--center"><i></i>Limited Edition<i></i></p>
+          <h2 class="campaign__title">The Evening<br><em>Edit</em></h2>
+          <p>Hand-embellished pieces for nights worth remembering. Once they're gone, they're gone.</p>
+          <div class="campaign__ctas">
+            <a href="#bestsellers" class="btn btn--gold">Shop The Evening Edit <svg><use href="#i-arrow"/></svg></a>
+          </div>
+          <p class="campaign__stock"><span class="live"></span> 214 pieces remaining in this release</p>
+        </div>
+      </div>
+    </section>
+
+    <!-- 9. Lookbook: pinned horizontal scroll -->
+    <section class="lookbook section--dark" id="lookbook" data-cro="lookbook">
+      <div class="lookbook__pin">
+        <div class="lookbook__track" id="lbTrack">
+          <div class="lb-intro">
+            <p class="eyebrow"><i></i>AW26 Lookbook</p>
+            <h2 class="title">Styled to<br><em>inspire</em></h2>
+            <p>Five complete looks from our stylists. Tap any look to shop every piece.</p>
+            <span class="lb-hint">Scroll to explore <svg><use href="#i-arrow"/></svg></span>
+          </div>
+          <a class="lb-card" href="#look" data-qv="p2" data-cursor="Shop">
+            <div class="lb-card__img"><img src="https://images.unsplash.com/photo-1584273143981-41c073dfe8f8?w=900&h=1200&q=72&auto=format&fit=crop" alt="Black double-breasted suit look" loading="lazy"></div>
+            <div class="lb-card__cap"><span>Look 01</span><b>The Midnight Suit</b><em>Blazer $245 · Trouser $165</em></div>
+          </a>
+          <a class="lb-card lb-card--tall" href="#look" data-qv="p3" data-cursor="Shop">
+            <div class="lb-card__img"><img src="https://images.unsplash.com/photo-1632149877166-f75d49000351?w=900&h=1300&q=72&auto=format&fit=crop" alt="Oversized ivory blazer dress with black boots" loading="lazy"></div>
+            <div class="lb-card__cap"><span>Look 02</span><b>Ivory Power Dressing</b><em>Blazer Dress $265</em></div>
+          </a>
+          <a class="lb-card" href="#look" data-qv="p6" data-cursor="Shop">
+            <div class="lb-card__img"><img src="https://images.unsplash.com/photo-1551803091-e20673f15770?w=900&h=1200&q=72&auto=format&fit=crop" alt="Navy lace maxi dress" loading="lazy"></div>
+            <div class="lb-card__cap"><span>Look 03</span><b>Lace After Dark</b><em>Lace Cut-Out Maxi $295</em></div>
+          </a>
+          <a class="lb-card lb-card--tall" href="#look" data-qv="p11" data-cursor="Shop">
+            <div class="lb-card__img"><img src="https://images.unsplash.com/photo-1597586124394-fbd6ef244026?w=900&h=1300&q=72&auto=format&fit=crop" alt="Prince of Wales check blazer" loading="lazy"></div>
+            <div class="lb-card__cap"><span>Look 04</span><b>Weekend in the City</b><em>Check Blazer $225</em></div>
+          </a>
+          <a class="lb-card" href="#look" data-qv="p7" data-cursor="Shop">
+            <div class="lb-card__img"><img src="https://images.unsplash.com/photo-1566174053879-31528523f8ae?w=900&h=1200&q=72&auto=format&fit=crop" alt="Plum velvet off-shoulder gown" loading="lazy"></div>
+            <div class="lb-card__cap"><span>Look 05</span><b>Velvet Hour</b><em>Off-Shoulder Gown $345</em></div>
+          </a>
+          <div class="lb-end">
+            <h3>Find your<br><em>signature</em></h3>
+            <a href="#bestsellers" class="btn btn--gold">Shop All Looks <svg><use href="#i-arrow"/></svg></a>
+          </div>
+        </div>
+        <div class="lookbook__progress"><i id="lbBar"></i></div>
+      </div>
+    </section>
+
+    <!-- 10. Shop the look -->
+    <section class="section section--light look" id="look" data-cro="look">
+      <div class="container look__inner">
+        <div class="look__media" data-cursor="Explore">
+          <img src="https://images.unsplash.com/photo-1619086303291-0ef7699e4b31?w=1000&h=1250&q=75&auto=format&fit=crop" alt="Model in a camel wrap coat, bandeau top and white jeans" loading="lazy">
+          <button class="hotspot" style="top:30%;left:30%" data-spot="p4" aria-label="Camel Wool Wrap Coat"><span></span></button>
+          <button class="hotspot" style="top:24%;left:56%" data-spot="p14" aria-label="Ribbed Bandeau Top"><span></span></button>
+          <button class="hotspot" style="top:68%;left:52%" data-spot="p15" aria-label="High-Rise Sculpt Jean"><span></span></button>
+          <button class="hotspot" style="top:45%;left:62%" data-spot="p16" aria-label="Mini Leather Bag"><span></span></button>
+          <div class="look__tip" id="lookTip" aria-hidden="true"></div>
+        </div>
+        <div class="look__copy">
+          <p class="eyebrow"><i></i>Shop the Look</p>
+          <h2 class="title split">Camel <em>Season</em></h2>
+          <p class="look__lead">Our most-requested outfit, styled head to toe. Add the complete look and save 15% — applied automatically at checkout.</p>
+          <ul class="look__list" id="lookList"></ul>
+          <div class="look__total">
+            <div><span>Complete look</span><p><strong id="lookTotal">$0</strong><s id="lookWas"></s><em class="save" id="lookSave"></em></p></div>
+            <button class="btn btn--dark" id="addLook">Add Full Look to Bag</button>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- 11. Reviews -->
+    <section class="section section--dark reviews" id="reviews" data-cro="reviews">
+      <div class="container">
+        <div class="reviews__grid">
+          <div class="reviews__summary">
+            <p class="eyebrow"><i></i>Client Love</p>
+            <div class="reviews__score"><strong>4.9</strong><div><span class="stars stars--lg"><svg><use href="#i-star"/></svg><svg><use href="#i-star"/></svg><svg><use href="#i-star"/></svg><svg><use href="#i-star"/></svg><svg><use href="#i-star"/></svg></span><p>2,418 verified reviews</p></div></div>
+            <div class="bars">
+              <div><span>5</span><i style="--w:89%"></i><em>89%</em></div>
+              <div><span>4</span><i style="--w:8%"></i><em>8%</em></div>
+              <div><span>3</span><i style="--w:2%"></i><em>2%</em></div>
+              <div><span>2</span><i style="--w:1%"></i><em>1%</em></div>
+            </div>
+            <div class="fit">
+              <p>How it fits</p>
+              <div class="fit__bar"><i style="left:50%"></i></div>
+              <div class="fit__labels"><span>Small</span><span>True to size</span><span>Large</span></div>
+            </div>
+          </div>
+          <div class="quotes" id="quotes" aria-live="polite">
+            <div class="quotes__mark" aria-hidden="true">“</div>
+            <div class="quotes__stage" id="quoteStage"></div>
+            <div class="quotes__foot">
+              <div class="quotes__dots" id="quoteDots"></div>
+              <div class="slider__btns">
+                <button class="round-btn round-btn--light" id="qPrev" aria-label="Previous review"><svg style="transform:rotate(180deg)"><use href="#i-arrow"/></svg></button>
+                <button class="round-btn round-btn--light" id="qNext" aria-label="Next review"><svg><use href="#i-arrow"/></svg></button>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="badges-row">
+          <div><strong>92%</strong><span>say it fits true to size</span></div>
+          <div><strong>98%</strong><span>would recommend to a friend</span></div>
+          <div><strong>4.9/5</strong><span>average quality rating</span></div>
+          <div><strong>24h</strong><span>average dispatch time</span></div>
+        </div>
+      </div>
+    </section>
+
+    <!-- 12. Promise -->
+    <section class="section section--light promise" id="promise" data-cro="promise">
+      <div class="container">
+        <div class="head head--center">
+          <p class="eyebrow eyebrow--center"><i></i>The ÉLARA Promise<i></i></p>
+          <h2 class="title split">Shop with complete <em>confidence</em></h2>
+        </div>
+        <div class="promise__grid">
+          <div class="promise__item"><svg><use href="#i-truck"/></svg><h3>Complimentary Shipping</h3><p>Free express delivery on every order over $150. Dispatched within 24 hours.</p></div>
+          <div class="promise__item"><svg><use href="#i-return"/></svg><h3>30-Day Free Returns</h3><p>Not quite right? Return or exchange free of charge — no questions asked.</p></div>
+          <div class="promise__item promise__item--hl"><svg><use href="#i-hanger"/></svg><h3>Perfect Fit Guarantee</h3><p>Find your size in 10 seconds with our Fit Finder. Free exchanges if it's not perfect.</p><button class="link-line" data-open="sizeModal">Find my size <svg><use href="#i-arrow"/></svg></button></div>
+          <div class="promise__item"><svg><use href="#i-lock"/></svg><h3>Secure Checkout</h3><p>Shop Pay, Apple Pay, PayPal &amp; all major cards. Split into 4 interest-free payments.</p></div>
+        </div>
+      </div>
+    </section>
+
+    <!-- 13. Story -->
+    <section class="section section--dark story" id="story" data-cro="story">
+      <div class="container story__inner">
+        <div class="story__media">
+          <div class="story__img story__img--a"><img src="https://images.unsplash.com/photo-1558769132-cb1aea458c5e?w=900&h=1150&q=72&auto=format&fit=crop" alt="Neutral knitwear in the ÉLARA studio" loading="lazy"></div>
+          <div class="story__img story__img--b"><img src="https://images.unsplash.com/photo-1574015974293-817f0ebebb74?w=600&h=750&q=72&auto=format&fit=crop" alt="Black and white editorial portrait" loading="lazy"></div>
+          <div class="story__seal" aria-hidden="true">
+            <svg viewBox="0 0 120 120"><defs><path id="seal" d="M60,60 m-46,0 a46,46 0 1,1 92,0 a46,46 0 1,1 -92,0"/></defs><text><textPath href="#seal">EST. 2026 · ÉLARA · CRAFTED WITH CARE ·</textPath></text></svg>
+            <span>É</span>
+          </div>
         </div>
         <div class="story__copy">
-          <p class="eyebrow">Our Story</p>
-          <h2 class="section__title">Fewer, better pieces — <em>designed with intention.</em></h2>
-          <p>ÉLARA started with a simple idea: clothing should feel as good as it looks, and last long after the trend has passed. Every piece is designed in-house, made in small batches from carefully sourced fabrics, and finished with details you'll notice every time you wear it.</p>
-          <div class="stats">
-            <div><strong data-count="25000">0</strong><span>Customers worldwide</span></div>
-            <div><strong data-count="100">0</strong><span>Quality checked</span></div>
-            <div><strong data-count="30">0</strong><span>Day free returns</span></div>
-          </div>
-          <a href="#story" class="btn btn--outline">Read Our Story</a>
+          <p class="eyebrow"><i></i>Our Story</p>
+          <h2 class="title split">Made slowly.<br><em>Worn endlessly.</em></h2>
+          <p>ÉLARA was born from a belief that a woman's wardrobe should be built on fewer, better pieces. Every design begins in our studio, is cut from responsibly sourced fabrics, and is finished by hand in small batches — so it feels as extraordinary on the hundredth wear as it does on the first.</p>
+          <blockquote>“I wanted to create clothes that make women feel quietly powerful — pieces you reach for again and again.”<cite>— Founder, ÉLARA</cite></blockquote>
+          <a href="#story" class="btn btn--line">Discover Our Story <svg><use href="#i-arrow"/></svg></a>
         </div>
       </div>
     </section>
 
-    <!-- 11. UGC -->
-    <section class="section ugc" data-cro="ugc">
+    <!-- 14. UGC -->
+    <section class="section section--dark ugc" data-cro="ugc">
       <div class="container">
-        <div class="section__head section__head--center">
-          <p class="eyebrow">#WearingElara</p>
-          <h2 class="section__title">Styled by You</h2>
-          <p class="section__sub">Tag <strong>@elara</strong> for a chance to be featured. Tap any photo to shop the look.</p>
+        <div class="head head--center">
+          <p class="eyebrow eyebrow--center"><i></i>#WearingElara<i></i></p>
+          <h2 class="title split">As worn <em>by you</em></h2>
+          <p class="head__sub">Tag <b>@elara</b> to be featured. Tap any photo to shop the pieces.</p>
         </div>
       </div>
-      <div class="ugc__grid" id="ugcGrid"></div>
+      <div class="ugc__marquee"><div class="ugc__track" id="ugcTrack"></div></div>
     </section>
 
-    <!-- 12. FAQ -->
-    <section class="section faq" id="faq" data-cro="faq">
-      <div class="faq__inner container">
+    <!-- 15. FAQ -->
+    <section class="section section--light faq" id="faq" data-cro="faq">
+      <div class="container faq__inner">
         <div>
-          <p class="eyebrow">Good to know</p>
-          <h2 class="section__title">Questions, answered.</h2>
-          <p class="faq__help">Still need help? <a href="#newsletter">Chat with us</a> — we reply within a few hours.</p>
+          <p class="eyebrow"><i></i>Client Care</p>
+          <h2 class="title split">Questions, <em>answered</em></h2>
+          <p class="faq__help">Can't find what you need? Our client care team replies within 2 hours.<br><a href="#newsletter" class="link-line">Chat with a stylist <svg><use href="#i-arrow"/></svg></a></p>
         </div>
         <div class="accordion">
-          <details open><summary>How long does shipping take?</summary><p>Orders placed before 2pm (EST) ship the same business day. Standard US delivery takes 3–5 business days and is free on orders over $100. Express (1–2 days) is available at checkout.</p></details>
-          <details><summary>What is your returns policy?</summary><p>We offer free returns and exchanges within 30 days of delivery. Items must be unworn with tags attached. Start a return in seconds from our Returns page — no printer needed.</p></details>
-          <details><summary>How do I find my size?</summary><p>Use our quick Size Finder above or open the full size guide. Every product page also shows model measurements and the size they're wearing.</p></details>
-          <details><summary>Do you ship internationally?</summary><p>Yes — we ship to 40+ countries with duties and taxes calculated at checkout, so there are no surprise fees on delivery.</p></details>
-          <details><summary>Can I pay in instalments?</summary><p>Absolutely. Choose Shop Pay Installments at checkout to split your order into 4 interest-free payments.</p></details>
+          <details open><summary>How long does delivery take?<i></i></summary><div><p>Orders placed before 2pm EST are dispatched the same day. US delivery takes 2–4 business days and is complimentary on orders over $150. Next-day express is available at checkout.</p></div></details>
+          <details><summary>What is your returns policy?<i></i></summary><div><p>Enjoy free returns and exchanges within 30 days of delivery. Items should be unworn with tags attached. Start a return online in under a minute — no printer required.</p></div></details>
+          <details><summary>How do I find my perfect size?<i></i></summary><div><p>Use our 10-second Fit Finder or view the detailed size guide. Every product page also lists model measurements and the size she's wearing.</p></div></details>
+          <details><summary>Do you ship internationally?<i></i></summary><div><p>Yes — we ship to 40+ countries with duties and taxes calculated at checkout, so there are never surprise fees on delivery.</p></div></details>
+          <details><summary>Can I pay in instalments?<i></i></summary><div><p>Absolutely. Select Shop Pay Installments at checkout to split your purchase into 4 interest-free payments.</p></div></details>
         </div>
       </div>
     </section>
 
-    <!-- 13. Newsletter -->
+    <!-- 16. Newsletter -->
     <section class="newsletter" id="newsletter" data-cro="newsletter">
-      <div class="newsletter__inner container">
-        <div>
-          <p class="eyebrow eyebrow--light">Join the ÉLARA list</p>
-          <h2>Get 10% off your first order</h2>
-          <p>Plus early access to new drops, private sales and styling notes. No spam — unsubscribe anytime.</p>
-        </div>
+      <div class="newsletter__bg"><img src="https://images.unsplash.com/photo-1574015974293-817f0ebebb74?w=1800&q=70&auto=format&fit=crop" alt="" loading="lazy"></div>
+      <div class="container newsletter__inner">
+        <p class="eyebrow eyebrow--center"><i></i>The Inner Circle<i></i></p>
+        <h2 class="newsletter__title">Enjoy <em>10% off</em><br>your first order</h2>
+        <p class="newsletter__sub">Plus early access to new collections, private sales and styling notes — delivered with care, never too often.</p>
         <form class="subscribe" data-subscribe>
           <label class="sr-only" for="nlEmail">Email address</label>
-          <input id="nlEmail" type="email" placeholder="Enter your email" required autocomplete="email">
-          <button class="btn btn--light" type="submit">Unlock 10% Off</button>
+          <input id="nlEmail" type="email" placeholder="Your email address" required autocomplete="email">
+          <button class="btn btn--gold" type="submit">Unlock 10% Off</button>
           <p class="subscribe__msg" aria-live="polite"></p>
         </form>
+        <p class="newsletter__fine">Join 25,000+ women. Unsubscribe anytime.</p>
       </div>
     </section>
   </main>
 
-  <!-- 14. Footer -->
+  <!-- 17. Footer -->
   <footer class="footer" data-cro="footer">
-    <div class="footer__inner container">
-      <div class="footer__brand">
-        <a href="#main" class="logo logo--footer">ÉLARA</a>
-        <p>Modern essentials, thoughtfully made. Designed to be worn, loved and lived in.</p>
-        <div class="social">
-          <a href="#main" aria-label="Instagram"><svg><use href="#i-insta"/></svg></a>
-          <a href="#main" aria-label="TikTok"><svg><use href="#i-tiktok"/></svg></a>
-          <a href="#main" aria-label="Pinterest"><svg><use href="#i-pin"/></svg></a>
+    <div class="container">
+      <div class="footer__top">
+        <div class="footer__brand">
+          <p>Timeless womenswear, thoughtfully made. Designed to be treasured, worn and loved for years.</p>
+          <div class="social">
+            <a href="#main" aria-label="Instagram"><svg><use href="#i-insta"/></svg></a>
+            <a href="#main" aria-label="TikTok"><svg><use href="#i-tiktok"/></svg></a>
+            <a href="#main" aria-label="Pinterest"><svg><use href="#i-pin"/></svg></a>
+          </div>
         </div>
+        <div class="footer__col"><h4>Shop</h4><a href="#bestsellers">New Arrivals</a><a href="#bestsellers">Bestsellers</a><a href="#categories">Dresses</a><a href="#categories">Tailoring</a><a href="#bestsellers">Sale</a></div>
+        <div class="footer__col"><h4>Client Care</h4><a href="#faq">Shipping &amp; Delivery</a><a href="#faq">Returns &amp; Exchanges</a><a href="#faq">Track Your Order</a><a href="#promise">Size Guide</a><a href="#faq">FAQ</a></div>
+        <div class="footer__col"><h4>The House</h4><a href="#story">Our Story</a><a href="#newsletter">Contact Us</a><a href="#main">Privacy Policy</a><a href="#main">Terms of Service</a><a href="#main">Refund Policy</a></div>
       </div>
-      <div class="footer__col"><h4>Shop</h4><a href="#new">New Arrivals</a><a href="#bestsellers">Bestsellers</a><a href="#categories">Dresses</a><a href="#categories">Outerwear</a><a href="#bestsellers">Sale</a></div>
-      <div class="footer__col"><h4>Help</h4><a href="#faq">Shipping &amp; Delivery</a><a href="#faq">Returns &amp; Exchanges</a><a href="#faq">Track Your Order</a><a href="#fit">Size Guide</a><a href="#faq">FAQ</a></div>
-      <div class="footer__col"><h4>Company</h4><a href="#story">About Us</a><a href="#newsletter">Contact Us</a><a href="#main">Privacy Policy</a><a href="#main">Terms of Service</a><a href="#main">Refund Policy</a></div>
-    </div>
-    <div class="footer__bottom container">
-      <p>© 2026 ÉLARA. All rights reserved.</p>
-      <div class="pay" aria-label="Accepted payment methods">
-        <span>VISA</span><span>Mastercard</span><span>AMEX</span><span>PayPal</span><span>Apple Pay</span><span>Shop Pay</span>
+      <div class="footer__word" aria-hidden="true">ÉLARA</div>
+      <div class="footer__bottom">
+        <p>© 2026 ÉLARA. All rights reserved.</p>
+        <div class="pay" aria-label="Accepted payment methods"><span>Visa</span><span>Mastercard</span><span>Amex</span><span>PayPal</span><span>Apple Pay</span><span>Shop Pay</span></div>
       </div>
     </div>
   </footer>
 
   <!-- Mobile menu -->
   <div class="drawer drawer--left" id="menu" aria-hidden="true" role="dialog" aria-label="Menu">
-    <div class="drawer__panel">
-      <div class="drawer__head"><span class="logo">ÉLARA</span><button class="icon-btn" data-close aria-label="Close menu"><svg><use href="#i-close"/></svg></button></div>
+    <div class="drawer__panel drawer__panel--dark" data-lenis-prevent>
+      <div class="drawer__head"><span class="logo logo--sm">ÉLARA</span><button class="icon-btn" data-close aria-label="Close menu"><svg><use href="#i-close"/></svg></button></div>
       <nav class="mnav">
-        <a href="#new">New In</a>
-        <a href="#bestsellers">Bestsellers</a>
-        <details><summary>Shop by Category</summary><a href="#categories">Dresses</a><a href="#categories">Tops &amp; Tees</a><a href="#categories">Knitwear</a><a href="#categories">Outerwear</a><a href="#categories">Matching Sets</a></details>
-        <a href="#look">The Autumn Edit</a>
-        <a href="#story">Our Story</a>
-        <a href="#bestsellers" class="is-sale">Sale</a>
+        <a href="#bestsellers" data-tab-link="new">New In <svg><use href="#i-arrow"/></svg></a>
+        <a href="#bestsellers">Bestsellers <svg><use href="#i-arrow"/></svg></a>
+        <details><summary>Clothing <svg><use href="#i-down"/></svg></summary><div><a href="#categories">Dresses</a><a href="#categories">Tops &amp; Blouses</a><a href="#categories">Tailoring</a><a href="#categories">Outerwear</a><a href="#categories">Evening</a></div></details>
+        <a href="#lookbook">Lookbook <svg><use href="#i-arrow"/></svg></a>
+        <a href="#story">Our Story <svg><use href="#i-arrow"/></svg></a>
+        <a href="#bestsellers" class="is-sale">Sale <svg><use href="#i-arrow"/></svg></a>
       </nav>
-      <div class="mnav__promo">
-        <img src="https://images.unsplash.com/photo-1539109136881-3be0616acf4b?w=500&q=60&auto=format&fit=crop" alt="" loading="lazy">
-        <a href="#newsletter" class="btn btn--primary btn--block">Get 10% Off First Order</a>
-      </div>
-      <div class="mnav__help"><a href="#fit">Size Guide</a><a href="#faq">Shipping</a><a href="#faq">Returns</a></div>
+      <a class="mnav__promo" href="#newsletter">
+        <img src="https://images.unsplash.com/photo-1611042553484-d61f84d22784?w=600&h=400&q=65&auto=format&fit=crop" alt="" loading="lazy">
+        <span><small>Welcome offer</small>10% off your first order</span>
+      </a>
+      <div class="mnav__help"><button data-open="sizeModal">Size Guide</button><a href="#faq">Shipping</a><a href="#faq">Returns</a></div>
     </div>
   </div>
 
-  <!-- Search overlay -->
+  <!-- Search -->
   <div class="search" id="search" aria-hidden="true" role="dialog" aria-label="Search">
-    <div class="search__panel">
+    <div class="search__panel" data-lenis-prevent>
       <div class="container">
         <form class="search__form" id="searchForm">
           <svg><use href="#i-search"/></svg>
-          <input type="search" id="searchInput" placeholder="Search dresses, coats, knitwear…" autocomplete="off">
+          <input type="search" id="searchInput" placeholder="Search for dresses, blazers, silk…" autocomplete="off">
           <button type="button" class="icon-btn" data-close aria-label="Close search"><svg><use href="#i-close"/></svg></button>
         </form>
         <div class="search__body">
-          <div>
-            <h4>Trending searches</h4>
-            <div class="chips" id="chips"><button>Wool coat</button><button>Midi dress</button><button>Knitwear</button><button>Matching set</button><button>Under $100</button></div>
-          </div>
-          <div>
-            <h4 id="searchLabel">Popular right now</h4>
-            <div class="search__results" id="searchResults"></div>
-          </div>
+          <div><h4>Trending</h4><div class="chips" id="chips"><button>Blazer</button><button>Evening dress</button><button>Coat</button><button>Silk blouse</button><button>Under $150</button></div></div>
+          <div><h4 id="searchLabel">Most wanted right now</h4><div class="search__results" id="searchResults"></div></div>
         </div>
       </div>
     </div>
   </div>
 
-  <!-- Cart drawer -->
+  <!-- Cart -->
   <div class="drawer drawer--right" id="cart" aria-hidden="true" role="dialog" aria-label="Shopping bag">
-    <div class="drawer__panel cart">
+    <div class="drawer__panel cart" data-lenis-prevent>
       <div class="drawer__head"><h3>Your Bag <span id="cartHeadCount">(0)</span></h3><button class="icon-btn" data-close aria-label="Close bag"><svg><use href="#i-close"/></svg></button></div>
-      <div class="ship">
-        <p id="shipMsg">You're <strong>$100.00</strong> away from free shipping</p>
-        <div class="ship__bar"><i id="shipBar"></i></div>
+      <div class="ship"><p id="shipMsg"></p><div class="ship__bar"><i id="shipBar"></i></div></div>
+      <div class="cart__body">
+        <div class="cart__items" id="cartItems"></div>
+        <div class="cart__upsell" id="cartUpsell"></div>
       </div>
-      <div class="cart__items" id="cartItems"></div>
-      <div class="cart__upsell" id="cartUpsell"></div>
       <div class="cart__foot">
         <div class="cart__row"><span>Subtotal</span><strong id="cartSubtotal">$0.00</strong></div>
-        <p class="cart__note">or 4 interest-free payments of <strong id="cartInstal">$0.00</strong> with Shop Pay</p>
-        <button class="btn btn--primary btn--block" id="checkoutBtn">Secure Checkout <svg><use href="#i-lock"/></svg></button>
-        <div class="cart__trust"><span><svg><use href="#i-return"/></svg>Free 30-day returns</span><span><svg><use href="#i-lock"/></svg>SSL secure</span></div>
+        <p class="cart__note">or 4 interest-free payments of <b id="cartInstal">$0.00</b> with Shop Pay</p>
+        <button class="btn btn--dark btn--block" id="checkoutBtn"><svg><use href="#i-lock"/></svg> Secure Checkout</button>
+        <div class="cart__pay"><span>Shop Pay</span><span>Apple Pay</span><span>PayPal</span><span>Visa</span></div>
+        <div class="cart__trust"><span><svg><use href="#i-check"/></svg>Free 30-day returns</span><span><svg><use href="#i-check"/></svg>Gift-wrapped with care</span></div>
       </div>
     </div>
   </div>
 
-  <!-- Quick view modal -->
+  <!-- Quick view -->
   <div class="modal" id="qv" aria-hidden="true" role="dialog" aria-label="Quick view">
-    <div class="modal__box modal__box--wide">
+    <div class="modal__box modal__box--wide" data-lenis-prevent>
       <button class="icon-btn modal__close" data-close aria-label="Close"><svg><use href="#i-close"/></svg></button>
       <div class="qv" id="qvBody"></div>
     </div>
   </div>
 
-  <!-- Size guide modal -->
-  <div class="modal" id="sizeModal" aria-hidden="true" role="dialog" aria-label="Size guide">
-    <div class="modal__box">
+  <!-- Size guide + finder -->
+  <div class="modal" id="sizeModal" aria-hidden="true" role="dialog" aria-label="Size guide and fit finder">
+    <div class="modal__box" data-lenis-prevent>
       <button class="icon-btn modal__close" data-close aria-label="Close"><svg><use href="#i-close"/></svg></button>
-      <h3 class="modal__title">Size Guide</h3>
-      <p class="modal__sub">Body measurements in inches. Between sizes? We recommend sizing up for a relaxed fit.</p>
+      <p class="eyebrow"><i></i>Fit Finder</p>
+      <h3 class="modal__title">Find your <em>perfect size</em></h3>
+      <form class="finder" id="finder">
+        <label>Your usual size
+          <select name="usual" required><option value="">Select</option><option>XS (US 0–2)</option><option>S (US 4–6)</option><option>M (US 8–10)</option><option>L (US 12–14)</option><option>XL (US 16–18)</option></select>
+        </label>
+        <label>Preferred fit
+          <select name="pref" required><option value="">Select</option><option value="0">Fitted</option><option value="1">Relaxed</option><option value="2">Oversized</option></select>
+        </label>
+        <button class="btn btn--dark" type="submit">Get My Size</button>
+        <p class="finder__result" id="finderResult" aria-live="polite"></p>
+      </form>
+      <h4 class="modal__sub">Size guide <small>(body measurements, inches)</small></h4>
       <div class="table-wrap">
         <table class="size-table">
           <thead><tr><th>Size</th><th>US</th><th>Bust</th><th>Waist</th><th>Hips</th></tr></thead>
@@ -477,54 +645,49 @@
     </div>
   </div>
 
-  <!-- Welcome offer popup -->
+  <!-- Welcome offer -->
   <div class="modal" id="offer" aria-hidden="true" role="dialog" aria-label="Welcome offer">
-    <div class="modal__box offer">
+    <div class="modal__box offer" data-lenis-prevent>
       <button class="icon-btn modal__close" data-close aria-label="Close"><svg><use href="#i-close"/></svg></button>
-      <div class="offer__img"><img src="https://images.unsplash.com/photo-1550639525-c97d455acf70?w=600&q=70&auto=format&fit=crop" alt="" loading="lazy"></div>
+      <div class="offer__img"><img src="https://images.unsplash.com/photo-1611042553484-d61f84d22784?w=700&h=900&q=70&auto=format&fit=crop" alt="" loading="lazy"></div>
       <div class="offer__copy">
-        <p class="eyebrow">Welcome to ÉLARA</p>
-        <h3>Enjoy <em>10% off</em> your first order</h3>
-        <p>Join our list for your welcome code, early access to new drops and members-only offers.</p>
+        <p class="eyebrow"><i></i>Welcome to ÉLARA</p>
+        <h3>A little gift<br>for you — <em>10% off</em></h3>
+        <p>Join the Inner Circle and receive 10% off your first order, plus early access to every new collection.</p>
         <form class="subscribe subscribe--stack" data-subscribe>
           <label class="sr-only" for="popEmail">Email address</label>
           <input id="popEmail" type="email" placeholder="Your email address" required autocomplete="email">
-          <button class="btn btn--primary btn--block" type="submit">Claim My 10% Off</button>
+          <button class="btn btn--gold btn--block" type="submit">Claim My 10% Off</button>
           <p class="subscribe__msg" aria-live="polite"></p>
         </form>
-        <button class="offer__no" data-close>No thanks, I'll pay full price</button>
+        <button class="offer__no" data-close>No thanks, I prefer full price</button>
       </div>
     </div>
   </div>
 
-  <!-- Toasts -->
   <div class="toast" id="toast" role="status" aria-live="polite"></div>
   <div class="proof" id="proof" aria-live="polite"></div>
 
-  <!-- Mobile sticky CTA -->
   <div class="sticky-cta" id="stickyCta">
-    <span><svg><use href="#i-truck"/></svg>Free shipping over $100</span>
-    <a href="#bestsellers" class="btn btn--primary btn--sm">Shop Bestsellers</a>
+    <div><b>Complimentary shipping</b><span>on orders over $150</span></div>
+    <a href="#bestsellers" class="btn btn--gold btn--sm">Shop Bestsellers</a>
   </div>
 
-  <!-- CRO notes (presentation layer for client review) -->
-  <button class="cro-toggle" id="croToggle" aria-pressed="false">
-    <svg><use href="#i-bulb"/></svg><span>Show design notes</span>
-  </button>
-  <aside class="cro-panel" id="croPanel" aria-hidden="true" aria-label="Design and CRO notes">
+  <!-- CRO notes layer -->
+  <button class="cro-toggle" id="croToggle" aria-pressed="false"><svg><use href="#i-bulb"/></svg><span>Show design notes</span></button>
+  <aside class="cro-panel" id="croPanel" aria-hidden="true" aria-label="Design and CRO notes" data-lenis-prevent>
     <div class="cro-panel__head">
-      <div>
-        <p class="eyebrow">Homepage concept</p>
-        <h3>Why this layout converts</h3>
-      </div>
+      <div><p class="eyebrow"><i></i>Homepage Concept</p><h3>Why this layout <em>converts</em></h3></div>
       <button class="icon-btn" id="croClose" aria-label="Close notes"><svg><use href="#i-close"/></svg></button>
     </div>
-    <p class="cro-panel__intro">Every section is placed to move a visitor one step closer to checkout: <strong>attention → trust → discovery → desire → reassurance → purchase</strong>. Click a note to jump to that section.</p>
+    <p class="cro-panel__intro">Each section moves a visitor one step closer to checkout:<br><strong>Desire → Trust → Discovery → Inspiration → Reassurance → Purchase.</strong><br>Tap a note to jump to that section.</p>
     <ol class="cro-panel__list" id="croList"></ol>
   </aside>
 
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/gsap.min.js" defer></script>
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/ScrollTrigger.min.js" defer></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.13.0/gsap.min.js" defer></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.13.0/ScrollTrigger.min.js" defer></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.13.0/SplitText.min.js" defer></script>
+  <script src="https://cdn.jsdelivr.net/npm/lenis@1.1.20/dist/lenis.min.js" defer></script>
   <script src="script.js" defer></script>
 </body>
 </html>
