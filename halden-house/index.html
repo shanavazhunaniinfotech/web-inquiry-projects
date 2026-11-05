@@ -1,0 +1,439 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Halden House | A quiet house of twelve rooms and one long table</title>
+  <meta name="description" content="Twelve rooms, one long table and the fields around us. A small country house kept properly. Book direct for flexible dates and breakfast included.">
+  <meta name="robots" content="noindex, nofollow">
+  <meta name="theme-color" content="#f3eee6">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link rel="preconnect" href="https://images.unsplash.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Newsreader:ital,opsz,wght@0,6..72,300;0,6..72,400;0,6..72,500;1,6..72,300;1,6..72,400&family=Inter+Tight:wght@400;500;600&display=swap" rel="stylesheet">
+  <link rel="preload" as="image"
+        imagesrcset="https://images.unsplash.com/photo-1629140727571-9b5c6f6267b4?w=800&q=70&auto=format&fit=crop 800w, https://images.unsplash.com/photo-1629140727571-9b5c6f6267b4?w=1400&q=70&auto=format&fit=crop 1400w, https://images.unsplash.com/photo-1629140727571-9b5c6f6267b4?w=2000&q=70&auto=format&fit=crop 2000w"
+        imagesizes="100vw">
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <a class="skip" href="#main">Skip to content</a>
+
+  <!-- ============ HEADER ============ -->
+  <header class="header" id="header"
+    data-note-title="A calm header with one clear action"
+    data-note="Only four menu links and one button. Most hotel menus have 8 to 12 links, and every extra choice slows people down. 'Check availability' is the only filled button on the page, so the eye learns that it is the action. The header sits over the photo at first, then turns solid on scroll and stays in view, so booking is always one tap away.">
+    <div class="wrap header__inner">
+      <a class="wordmark" href="index.html" aria-label="Halden House, home">Halden<span>House</span></a>
+      <nav class="nav" aria-label="Primary">
+        <a href="#stay">Stay</a>
+        <a href="#eat">Eat</a>
+        <a href="#gather">Gather</a>
+        <a href="#place">The place</a>
+      </nav>
+      <div class="header__actions">
+        <a class="btn btn--solid btn--sm header__cta" href="#book" data-book>Check availability</a>
+        <button class="menu-btn" aria-label="Open menu" aria-expanded="false" aria-controls="drawer">
+          <span></span><span></span>
+        </button>
+      </div>
+    </div>
+  </header>
+
+  <div class="drawer" id="drawer" hidden>
+    <nav aria-label="Mobile">
+      <a href="#stay">Stay</a>
+      <a href="#eat">Eat</a>
+      <a href="#gather">Gather</a>
+      <a href="#place">The place</a>
+      <a href="#questions">Questions</a>
+    </nav>
+    <div class="drawer__foot">
+      <a class="btn btn--solid" href="#book" data-book>Check availability</a>
+      <a class="btn btn--line" href="#eat">Reserve a table</a>
+      <p>+44 (0)1234 567 890 &middot; stay@haldenhouse.com</p>
+    </div>
+  </div>
+
+  <main id="main">
+
+    <!-- ============ HERO ============ -->
+    <section class="hero" id="top"
+      data-note-title="Hero: feeling first, then the action"
+      data-note="One quiet photo, one line that says what the place is, and the booking bar straight under it. A visitor gets three answers in about three seconds: what this is (a small country house), why it is different (twelve rooms, one table), and what to do next (check dates). There is no slider: sliders hide the message and slow the page. Two exits only, 'Stay' and 'Eat', because those are the two ways people buy.">
+      <picture class="hero__media">
+        <img src="https://images.unsplash.com/photo-1629140727571-9b5c6f6267b4?w=1400&q=70&auto=format&fit=crop"
+             srcset="https://images.unsplash.com/photo-1629140727571-9b5c6f6267b4?w=800&q=70&auto=format&fit=crop 800w, https://images.unsplash.com/photo-1629140727571-9b5c6f6267b4?w=1400&q=70&auto=format&fit=crop 1400w, https://images.unsplash.com/photo-1629140727571-9b5c6f6267b4?w=2000&q=70&auto=format&fit=crop 2000w"
+             sizes="100vw" alt="Morning light through linen curtains in a guest room" fetchpriority="high" width="2000" height="1333">
+      </picture>
+      <div class="hero__shade" aria-hidden="true"></div>
+      <div class="wrap hero__content">
+        <p class="eyebrow eyebrow--light">A country house &middot; Twelve rooms &middot; One long table</p>
+        <h1 class="hero__title">Stay a little longer<br><em>than you planned.</em></h1>
+        <p class="hero__lede">A small house in open fields, kept properly. Good beds, a kitchen that cooks what the land gives, and very little noise.</p>
+        <div class="hero__actions">
+          <a class="btn btn--solid btn--light" href="#book" data-book>Check availability</a>
+          <a class="btn btn--ghost" href="#eat">Reserve a table</a>
+        </div>
+      </div>
+    </section>
+
+    <!-- ============ BOOKING BAR ============ -->
+    <section class="booking" id="book" aria-label="Check availability"
+      data-note-title="Booking bar: dates before details"
+      data-note="Asking for dates early is the single strongest move for a hotel site. Someone who has typed a date is already picturing the stay. This is not a contact form: it simply hands the dates to your booking engine (Mews, Cloudbeds, SiteMinder or similar), which then shows live rooms. In Squarespace this is one Code Block. The small line under it removes the two biggest worries at that moment: price and commitment.">
+      <div class="wrap">
+        <div class="booking__bar">
+          <label class="field">
+            <span>Arrive</span>
+            <input type="date" id="arrive" name="arrive">
+          </label>
+          <label class="field">
+            <span>Nights</span>
+            <select id="nights" name="nights">
+              <option>1</option><option selected>2</option><option>3</option><option>4</option><option>5</option><option>6</option><option>7</option>
+            </select>
+          </label>
+          <label class="field">
+            <span>Guests</span>
+            <select id="guests" name="guests">
+              <option>1</option><option selected>2</option><option>3</option><option>4</option>
+            </select>
+          </label>
+          <button class="btn btn--solid booking__go" type="button" id="checkBtn">Check availability</button>
+        </div>
+        <ul class="booking__assure">
+          <li><svg viewBox="0 0 16 16" aria-hidden="true"><path d="M3 8.5l3 3 7-7"/></svg>Best rate when you book here</li>
+          <li><svg viewBox="0 0 16 16" aria-hidden="true"><path d="M3 8.5l3 3 7-7"/></svg>Free changes up to 7 days before</li>
+          <li><svg viewBox="0 0 16 16" aria-hidden="true"><path d="M3 8.5l3 3 7-7"/></svg>Breakfast always included</li>
+        </ul>
+      </div>
+    </section>
+
+    <!-- ============ PROOF ============ -->
+    <section class="proof"
+      data-note-title="Quiet proof, early"
+      data-note="Trust has to arrive before the visitor scrolls far. Three plain numbers and one guest line, set in small type, prove the claim without shouting. This keeps the restrained tone while still doing the job of a review badge. Numbers here are placeholders for your real ones.">
+      <div class="wrap proof__inner">
+        <div class="proof__stat"><strong>4.9</strong><span>from 640 guest reviews</span></div>
+        <div class="proof__stat"><strong>1 in 3</strong><span>guests return within a year</span></div>
+        <div class="proof__stat"><strong>8 miles</strong><span>the furthest our food travels</span></div>
+        <blockquote class="proof__quote">&ldquo;The kind of place you tell one friend about, carefully.&rdquo;<cite>Guest, October</cite></blockquote>
+      </div>
+    </section>
+
+    <!-- ============ PHILOSOPHY ============ -->
+    <section class="philosophy" id="philosophy"
+      data-note-title="The philosophy, in one breath"
+      data-note="This is where your philosophy becomes something people remember. One large sentence, then three short principles. Big serif type and plenty of space do the art direction here, not decoration. It answers 'why here and not somewhere else?' before we show any rooms, so the rooms are seen through that idea.">
+      <div class="wrap philosophy__inner">
+        <p class="eyebrow">Our way</p>
+        <h2 class="statement reveal">We do <em>fewer things</em>, and we do them properly. A bed that is made well. Bread made that morning. A room with nothing in it that does not need to be there.</h2>
+        <ol class="principles">
+          <li class="reveal"><span>01</span><h3>Made slowly</h3><p>Linen washed in the sun, floors oiled by hand, a menu that changes when the weather does.</p></li>
+          <li class="reveal"><span>02</span><h3>Kept small</h3><p>Twelve rooms, so we know your name by the second morning and the house never feels busy.</p></li>
+          <li class="reveal"><span>03</span><h3>Left quiet</h3><p>No televisions, no piped music. Books, a fire, and the fields outside every window.</p></li>
+        </ol>
+      </div>
+    </section>
+
+    <!-- ============ STAY ============ -->
+    <section class="chapter" id="stay"
+      data-note-title="Stay: the main revenue line comes first"
+      data-note="Rooms come before food and events because rooms make most of the money. Each room type shows what people actually compare: size, who it sleeps and the view. There are no prices, as the brief asks. Instead every card ends in 'Check dates', which takes people straight back into booking. It swipes sideways on a phone so the page stays short.">
+      <div class="wrap">
+        <div class="chapter__head">
+          <div>
+            <p class="eyebrow">I. Stay</p>
+            <h2 class="h2 reveal">Twelve rooms, <em>each one different.</em></h2>
+          </div>
+          <p class="chapter__intro reveal">Thick walls, deep baths and beds we would choose for ourselves. Every room looks out on the fields, and none of them sits above the kitchen.</p>
+        </div>
+      </div>
+
+      <div class="rooms" role="region" aria-label="Room types" tabindex="0">
+        <article class="room reveal">
+          <div class="room__img"><img loading="lazy" src="https://images.unsplash.com/photo-1596394516093-501ba68a0ba6?w=900&q=70&auto=format&fit=crop" alt="A bed on a covered terrace looking out over a lake and hills" width="900" height="1125"></div>
+          <div class="room__body">
+            <h3>Field Rooms</h3>
+            <p class="room__meta">22 m&sup2; &middot; Sleeps 2 &middot; Open view</p>
+            <p>Our simplest rooms, and often the ones guests ask for again.</p>
+            <a class="link" href="#book" data-book>Check dates <span aria-hidden="true">&rarr;</span></a>
+          </div>
+        </article>
+        <article class="room reveal">
+          <div class="room__img"><img loading="lazy" src="https://images.unsplash.com/photo-1522771739844-6a9f6d5f14af?w=900&q=70&auto=format&fit=crop" alt="Low bed with a reading lamp and soft grey walls" width="900" height="1125"></div>
+          <div class="room__body">
+            <h3>Barn Rooms</h3>
+            <p class="room__meta">30 m&sup2; &middot; Sleeps 2 &middot; Own terrace</p>
+            <p>Under old oak beams, with a door straight onto the grass.</p>
+            <a class="link" href="#book" data-book>Check dates <span aria-hidden="true">&rarr;</span></a>
+          </div>
+        </article>
+        <article class="room reveal">
+          <div class="room__img"><img loading="lazy" src="https://images.unsplash.com/photo-1578683010236-d716f9a3f461?w=900&q=70&auto=format&fit=crop" alt="Large suite with a sitting area and glass bathroom" width="900" height="1125"></div>
+          <div class="room__body">
+            <h3>Long Suites</h3>
+            <p class="room__meta">45 m&sup2; &middot; Sleeps 2&ndash;3 &middot; Bath with a view</p>
+            <p>A room to sit in, a room to sleep in, and a bath by the window.</p>
+            <a class="link" href="#book" data-book>Check dates <span aria-hidden="true">&rarr;</span></a>
+          </div>
+        </article>
+        <article class="room reveal">
+          <div class="room__img"><img loading="lazy" src="https://images.unsplash.com/photo-1582719478250-c89cae4dc85b?w=900&q=70&auto=format&fit=crop" alt="Room with a wooden bench and evening light" width="900" height="1125"></div>
+          <div class="room__body">
+            <h3>The Cottage</h3>
+            <p class="room__meta">60 m&sup2; &middot; Sleeps 4 &middot; Private garden</p>
+            <p>Two bedrooms and a kitchen, for families or friends who want their own door.</p>
+            <a class="link" href="#book" data-book>Check dates <span aria-hidden="true">&rarr;</span></a>
+          </div>
+        </article>
+      </div>
+      <div class="wrap rooms__nav" aria-hidden="true">
+        <button class="arrow" data-dir="-1" tabindex="-1">&larr;</button>
+        <button class="arrow" data-dir="1" tabindex="-1">&rarr;</button>
+      </div>
+    </section>
+
+    <!-- ============ EAT ============ -->
+    <section class="split" id="eat"
+      data-note-title="Eat: the second way in"
+      data-note="Many people first meet a house like this through dinner, then come back to stay. So the restaurant gets its own clear action, 'Reserve a table', which links to your table booking tool (OpenTable, SevenRooms or similar). Image and text swap sides from the section above to set a reading rhythm, the way a magazine spread does.">
+      <div class="wrap split__inner">
+        <figure class="split__media reveal">
+          <img loading="lazy" src="https://images.unsplash.com/photo-1414235077428-338989a2e8c0?w=1200&q=70&auto=format&fit=crop" alt="A plated dish and wine glasses at a candlelit dinner table" width="1200" height="1400">
+        </figure>
+        <div class="split__text">
+          <p class="eyebrow">II. Eat</p>
+          <h2 class="h2 reveal">One menu a night, <em>written that morning.</em></h2>
+          <p class="reveal">The kitchen cooks what came out of the garden and from the farms on our road. Dinner is served at one long table or at your own, whichever you like. Breakfast is slow, and lasts until eleven.</p>
+          <ul class="facts reveal">
+            <li><span>Dinner</span>Wednesday to Sunday, from 7pm</li>
+            <li><span>Lunch</span>Saturday and Sunday</li>
+            <li><span>Open to</span>Guests and non-residents</li>
+          </ul>
+          <div class="split__actions reveal">
+            <a class="btn btn--line" href="#eat" data-table>Reserve a table</a>
+            <a class="link" href="#rhythm">See a day here <span aria-hidden="true">&rarr;</span></a>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ============ RHYTHM ============ -->
+    <section class="rhythm" id="rhythm"
+      data-note-title="A day at the house: selling the feeling, not the features"
+      data-note="People do not book a room, they book how they will feel. This section walks them through one day, hour by hour, so they can picture themselves here. It also sets the pace of the page: smaller images, more air, a slower read before we ask for the booking again. On a phone it becomes a simple vertical timeline.">
+      <div class="wrap">
+        <div class="rhythm__head">
+          <p class="eyebrow">III. A day here</p>
+          <h2 class="h2 reveal">Nothing to do, <em>and all day to do it.</em></h2>
+        </div>
+        <ol class="timeline">
+          <li class="moment reveal">
+            <img loading="lazy" src="https://images.unsplash.com/photo-1495474472287-4d71bcdd2085?w=600&q=70&auto=format&fit=crop" alt="Two cups of coffee on a wooden table" width="600" height="750">
+            <time>8:00</time><h3>Coffee on the step</h3><p>Brought to your door, if you like. The fields are still white.</p>
+          </li>
+          <li class="moment reveal">
+            <img loading="lazy" src="https://images.unsplash.com/photo-1500382017468-9049fed747ef?w=600&q=70&auto=format&fit=crop" alt="Golden field at sunrise" width="600" height="750">
+            <time>11:00</time><h3>A long walk</h3><p>Three marked paths start at the gate. The longest ends at a pub.</p>
+          </li>
+          <li class="moment reveal">
+            <img loading="lazy" src="https://images.unsplash.com/photo-1552321554-5fefe8c9ef14?w=600&q=70&auto=format&fit=crop" alt="Bright bathroom with a deep bath and plants" width="600" height="750">
+            <time>16:00</time><h3>A deep bath</h3><p>Our own soap, made down the road. A book from the library.</p>
+          </li>
+          <li class="moment reveal">
+            <img loading="lazy" src="https://images.unsplash.com/photo-1551218808-94e220e084d2?w=600&q=70&auto=format&fit=crop" alt="Chef chopping herbs on a board" width="600" height="750">
+            <time>19:30</time><h3>Dinner</h3><p>Whatever the garden gave today, and a fire that stays lit late.</p>
+          </li>
+        </ol>
+      </div>
+    </section>
+
+    <!-- ============ GATHER ============ -->
+    <section class="gather" id="gather"
+      data-note-title="Gather: high-value enquiries, no form"
+      data-note="Whole-house hire, small weddings and team retreats are the biggest single bookings a small house takes. They get their own wide image so they feel important. As the brief rules out contact forms, the action opens an email with a clear subject line, and a phone number sits next to it. Big buyers like to talk to a person anyway.">
+      <img class="gather__bg" loading="lazy" src="https://images.unsplash.com/photo-1424847651672-bf20a4b0982b?w=1800&q=70&auto=format&fit=crop" alt="Hands reaching across a shared breakfast table" width="1800" height="1200">
+      <div class="gather__shade" aria-hidden="true"></div>
+      <div class="wrap gather__inner">
+        <div class="gather__card reveal">
+          <p class="eyebrow eyebrow--light">IV. Gather</p>
+          <h2 class="h2">Have the whole house <em>to yourselves.</em></h2>
+          <p>Twelve rooms, one table for twenty-four, and our team for as long as you need. For small weddings, family birthdays and teams who want to think clearly.</p>
+          <div class="gather__actions">
+            <a class="btn btn--solid btn--light" href="mailto:stay@haldenhouse.com?subject=Whole%20house%20enquiry">Email about dates</a>
+            <a class="link link--light" href="tel:+441234567890">or call +44 (0)1234 567 890</a>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ============ GUESTS ============ -->
+    <section class="voices"
+      data-note-title="Guest words, at the point of decision"
+      data-note="By now the visitor is interested but not yet sure. This is the moment real voices work best, because other guests are more believable than we are. Three short quotes, each answering a different worry: is it worth the trip, is it too formal, will the food be good. Swap in real reviews from Google or TripAdvisor.">
+      <div class="wrap">
+        <p class="eyebrow">What guests say</p>
+        <div class="voices__list">
+          <figure class="voice reveal">
+            <blockquote>&ldquo;We came for one night and changed our train. The quiet is the thing. You forget how loud everywhere else is.&rdquo;</blockquote>
+            <figcaption>Hannah &amp; Tom &middot; Barn Room</figcaption>
+          </figure>
+          <figure class="voice reveal">
+            <blockquote>&ldquo;Beautiful without trying to be. Nobody fussed, and yet everything we needed was already there.&rdquo;</blockquote>
+            <figcaption>Marcus &middot; Long Suite</figcaption>
+          </figure>
+          <figure class="voice reveal">
+            <blockquote>&ldquo;The best dinner we had all year was at the long table, next to people we had only just met.&rdquo;</blockquote>
+            <figcaption>Priya &middot; Field Room</figcaption>
+          </figure>
+        </div>
+        <p class="voices__source"><span class="stars" aria-hidden="true">&#9733;&#9733;&#9733;&#9733;&#9733;</span> 4.9 average from 640 reviews on Google and TripAdvisor</p>
+      </div>
+    </section>
+
+    <!-- ============ BOOK DIRECT ============ -->
+    <section class="direct" id="direct"
+      data-note-title="Why book here: winning the booking back from Booking.com"
+      data-note="Most hotel guests find you on your site, then leave to book on an online travel agent, which takes 15 to 25% commission. These four reasons give people a concrete reason to book on your site instead. It sits just before the final call to action, so the reason and the button arrive together.">
+      <div class="wrap direct__inner">
+        <div class="direct__head">
+          <p class="eyebrow">Booking with us</p>
+          <h2 class="h2 reveal">Book here, <em>and a few things are easier.</em></h2>
+        </div>
+        <ul class="direct__list">
+          <li class="reveal"><span>01</span><h3>The best rate</h3><p>You will not find our rooms for less anywhere else. If you do, we will match it.</p></li>
+          <li class="reveal"><span>02</span><h3>Free changes</h3><p>Move your dates for free up to seven days before you arrive.</p></li>
+          <li class="reveal"><span>03</span><h3>Breakfast, always</h3><p>Included with every stay, served until eleven.</p></li>
+          <li class="reveal"><span>04</span><h3>The room you want</h3><p>Tell us which room, and we will hold it for you by name.</p></li>
+        </ul>
+      </div>
+    </section>
+
+    <!-- ============ PLACE ============ -->
+    <section class="place" id="place"
+      data-note-title="The place: removing the 'is it too far?' doubt"
+      data-note="Distance is one of the most common reasons people do not book a country stay. Clear travel times by car and train, plus a link to directions, turn 'somewhere far away' into 'an easy Friday'. The landscape photo also reminds people why the trip is worth it.">
+      <div class="wrap place__inner">
+        <figure class="place__media reveal">
+          <img loading="lazy" src="https://images.unsplash.com/photo-1470770841072-f978cf4d019e?w=1200&q=70&auto=format&fit=crop" alt="A lake and mountains around a quiet house" width="1200" height="900">
+        </figure>
+        <div class="place__text">
+          <p class="eyebrow">V. The place</p>
+          <h2 class="h2 reveal">Far enough away. <em>Easy to reach.</em></h2>
+          <p class="reveal">At the end of a lane, by the water and the woods. Close enough for a Friday, far enough that you stop checking your phone.</p>
+          <dl class="travel reveal">
+            <div><dt>By train</dt><dd>1 h 50 from the city, we collect you from the station</dd></div>
+            <div><dt>By car</dt><dd>2 h 10, with parking and a charging point</dd></div>
+            <div><dt>Nearest town</dt><dd>12 minutes, for market days and antiques</dd></div>
+          </dl>
+          <a class="link reveal" href="https://maps.google.com" target="_blank" rel="noopener">Get directions <span aria-hidden="true">&rarr;</span></a>
+        </div>
+      </div>
+    </section>
+
+    <!-- ============ FAQ ============ -->
+    <section class="faq" id="questions"
+      data-note-title="Questions: answering doubts before they become emails"
+      data-note="Each question here is a reason someone might not book: dogs, children, cancelling, getting there. Answering them on the page removes the doubt at once, cuts down on emails to your team, and helps the page show up in Google. They fold away so the page stays tidy and short on a phone.">
+      <div class="wrap faq__inner">
+        <div>
+          <p class="eyebrow">Good to know</p>
+          <h2 class="h2">Questions people <em>often ask.</em></h2>
+          <p class="faq__aside">Anything else? Write to <a href="mailto:stay@haldenhouse.com">stay@haldenhouse.com</a> and a person will answer the same day.</p>
+        </div>
+        <div class="faq__list">
+          <details>
+            <summary>Can I change or cancel my booking?</summary>
+            <p>Yes. When you book here, you can change your dates for free up to seven days before you arrive. After that, we will always try to help.</p>
+          </details>
+          <details>
+            <summary>Are children and dogs welcome?</summary>
+            <p>Children of all ages are welcome, and the Cottage is made for families. Well-behaved dogs can stay in our Barn Rooms, with a bed and bowl waiting.</p>
+          </details>
+          <details>
+            <summary>What time is check-in and check-out?</summary>
+            <p>Check-in is from 3pm and check-out is at 11am. If your room is free, we are happy to let you arrive early or leave late.</p>
+          </details>
+          <details>
+            <summary>Do I need to be staying to eat here?</summary>
+            <p>No. Dinner and weekend lunch are open to everyone. We do suggest booking a table, as there are only a few.</p>
+          </details>
+          <details>
+            <summary>Is there Wi-Fi?</summary>
+            <p>Yes, fast Wi-Fi in every room. We just do not have televisions, by choice.</p>
+          </details>
+        </div>
+      </div>
+    </section>
+
+    <!-- ============ FINAL CTA ============ -->
+    <section class="final"
+      data-note-title="The last ask: one clear step"
+      data-note="Visitors who scroll to the end are the most interested of all, so they get one calm, final invitation. It repeats the booking action and the reassurance in a single line. Nobody has to scroll back to the top to act.">
+      <img class="final__bg" loading="lazy" src="https://images.unsplash.com/photo-1519710164239-da123dc03ef4?w=1800&q=70&auto=format&fit=crop" alt="White linen curtains, a small table and a plant in soft daylight" width="1800" height="1200">
+      <div class="final__shade" aria-hidden="true"></div>
+      <div class="wrap final__inner">
+        <h2 class="final__title reveal">Your room is <em>ready when you are.</em></h2>
+        <p class="reveal">Best rate here &middot; Free changes &middot; Breakfast included</p>
+        <a class="btn btn--solid btn--light reveal" href="#book" data-book>Check availability</a>
+      </div>
+    </section>
+  </main>
+
+  <!-- ============ FOOTER ============ -->
+  <footer class="footer"
+    data-note-title="Footer: the practical details"
+    data-note="Address, phone and email are written out in full and can be tapped, because people often scroll to the bottom looking for them. Social links come last, so they do not pull people away from booking.">
+    <div class="wrap footer__inner">
+      <div class="footer__brand">
+        <a class="wordmark" href="index.html">Halden<span>House</span></a>
+        <p>A quiet house of twelve rooms and one long table.</p>
+      </div>
+      <div>
+        <h3>Find us</h3>
+        <p>Halden Lane<br>Little Wold, Countryshire<br>AB1 2CD</p>
+      </div>
+      <div>
+        <h3>Talk to us</h3>
+        <p><a href="tel:+441234567890">+44 (0)1234 567 890</a><br><a href="mailto:stay@haldenhouse.com">stay@haldenhouse.com</a></p>
+      </div>
+      <div>
+        <h3>Follow</h3>
+        <p><a href="https://instagram.com" target="_blank" rel="noopener">Instagram</a><br><a href="#questions">Questions</a></p>
+      </div>
+    </div>
+    <div class="wrap footer__base">
+      <span>&copy; 2026 Halden House</span>
+      <span>Home page concept &middot; placeholder name, copy and images</span>
+    </div>
+  </footer>
+
+  <!-- Mobile sticky bar -->
+  <div class="mbar" id="mbar"
+    data-note-title="Phone: a booking bar that follows you"
+    data-note="On a phone the header button is small, so once you scroll past the hero a slim bar appears at the bottom, within thumb reach. It holds the two ways to buy: a room and a table. It hides near the final call to action so the two never compete.">
+    <a class="btn btn--solid" href="#book" data-book>Check availability</a>
+    <a class="btn btn--line" href="#eat" data-table>Table</a>
+  </div>
+
+  <!-- Toast -->
+  <div class="toast" id="toast" role="status" aria-live="polite"></div>
+
+  <!-- Design notes UI -->
+  <button class="notes-toggle" id="notesToggle" aria-pressed="false">
+    <span class="notes-toggle__dot" aria-hidden="true"></span>
+    <span class="notes-toggle__label">Show design notes</span>
+  </button>
+  <aside class="notes-panel" id="notesPanel" aria-label="Design notes" hidden>
+    <div class="notes-panel__head">
+      <p class="eyebrow">Design notes</p>
+      <button class="notes-panel__close" id="notesClose" aria-label="Close design notes">&times;</button>
+    </div>
+    <div class="notes-panel__body" id="notesBody"></div>
+  </aside>
+
+  <script src="script.js" defer></script>
+</body>
+</html>
