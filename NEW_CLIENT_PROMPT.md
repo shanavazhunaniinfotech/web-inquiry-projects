@@ -1,6 +1,6 @@
 # Copy-paste prompts
 
-Start a new Claude chat on the `shanavazhunaniinfotech/web-inquiry-projects` repo and paste one of these. Public links look like `https://web-inquiry-projects.vercel.app/<folder>/`.
+Start a new Claude chat on the `shanavazhunaniinfotech/web-inquiry-projects` repo and paste one of these. Public links look like `https://web-projects-final.vercel.app/<folder>/`.
 
 ## New client website
 

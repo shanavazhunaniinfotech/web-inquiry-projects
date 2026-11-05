@@ -2,7 +2,7 @@
 
 One repo, many client websites. Every top-level folder is a separate client's static site (HTML/CSS/JS), deployed by a single Vercel project. Every push to `main` goes live.
 
-- Client site: `https://web-inquiry-projects.vercel.app/<folder>/`
+- Client site: `https://web-projects-final.vercel.app/<folder>/`
 - Home page (`/`): lists all clients and is password-protected so clients can't see each other.
 
 ## Structure

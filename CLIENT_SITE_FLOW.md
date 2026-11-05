@@ -11,8 +11,8 @@ Follow every step below yourself. Only stop where a step says to.
 - One private GitHub repo holds every client's site: **`shanavazhunaniinfotech/web-inquiry-projects`**.
 - Each **top-level folder** in that repo is one client's site (e.g. `acme-bakery/`).
 - One Vercel project (**`web-inquiry-projects`**) deploys the whole repo. **Every push to `main` goes live automatically.** No Vercel tool is needed to deploy.
-- Each client's public link is: **`https://web-inquiry-projects.vercel.app/<folder>/`**
-- The home page `https://web-inquiry-projects.vercel.app/` lists every client and is password-protected. It is for me only. **Never give the home page link to a client, and never put it in a client's site.**
+- Each client's public link is: **`https://web-projects-final.vercel.app/<folder>/`**
+- The home page `https://web-projects-final.vercel.app/` lists every client and is password-protected. It is for me only. **Never give the home page link to a client, and never put it in a client's site.**
 - `sample-site/` is a ready template you can copy as a starting point.
 
 ## 2. Connections (use these, don't look them up)
@@ -22,7 +22,7 @@ Follow every step below yourself. Only stop where a step says to.
 | GitHub repo | `shanavazhunaniinfotech/web-inquiry-projects`, branch `main` |
 | Vercel team | name `projects`, id `team_N21L9AnKuYlHoTlLJKR1MEjv`, slug `projects-20c3` |
 | Vercel project | name `web-inquiry-projects`, id `prj_cPCi5750YNKbVHlsTEEFv11Jm8WW` |
-| Production URL | https://web-inquiry-projects.vercel.app |
+| Production URL | https://web-projects-final.vercel.app |
 | Home page password | stored in Vercel env var `HOME_PASSWORD`. Never ask for it, print it or commit it. |
 
 ## 3. Rules
@@ -69,7 +69,7 @@ git push origin HEAD:main
 **4.6 Confirm it's live** (Vercel tools):
 1. `list_deployments` with `projectId: prj_cPCi5750YNKbVHlsTEEFv11Jm8WW` and `teamId: team_N21L9AnKuYlHoTlLJKR1MEjv`.
 2. Poll `get_deployment` on the newest one until it is `READY`. Check that its commit is the one you just pushed to `main`.
-3. Fetch `https://web-inquiry-projects.vercel.app/<folder>/` with `web_fetch_vercel_url` (or `curl`) and check it returns **200** with your page.
+3. Fetch `https://web-projects-final.vercel.app/<folder>/` with `web_fetch_vercel_url` (or `curl`) and check it returns **200** with your page.
 4. A **401 on `/`** is the home page password and is expected. Don't try to get past it.
 
 If something goes wrong:
@@ -77,7 +77,7 @@ If something goes wrong:
 - If there are no Vercel tools, still push to `main`, wait about a minute, check the link with `curl` if you can, and tell me it wasn't confirmed through Vercel.
 
 **4.7 Reply to me** with:
-- the public link: `https://web-inquiry-projects.vercel.app/<folder>/`
+- the public link: `https://web-projects-final.vercel.app/<folder>/`
 - whether it was **confirmed live** (and how) or not
 - a short summary of what you built (pages and sections)
 
