@@ -1,0 +1,359 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Ghost Control Barbers | Homepage Strategy &amp; Design Rationale</title>
+  <meta name="robots" content="noindex, nofollow">
+  <meta name="theme-color" content="#0c0c0c">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Archivo:wdth,wght@62..125,400..900&family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
+  <style>
+    :root { --bg:#0c0c0c; --bg2:#121212; --bg3:#181818; --line:rgba(242,240,235,.1); --line2:rgba(242,240,235,.18); --text:#f2f0eb; --muted:#9a968e; --accent:#c9a46a; --ink:#14100a; --display:"Archivo",Arial,sans-serif; --body:"Inter",system-ui,sans-serif; color-scheme: dark; }
+    * { box-sizing: border-box; }
+    body { margin: 0; background: var(--bg); color: var(--text); font-family: var(--body); font-size: 16px; line-height: 1.65; -webkit-font-smoothing: antialiased; }
+    img { display: block; max-width: 100%; height: auto; }
+    a { color: inherit; }
+    h1, h2, h3, p { margin: 0; }
+    .wrap { max-width: 1200px; margin: 0 auto; padding: 0 40px; }
+    @media (max-width: 700px) { .wrap { padding: 0 16px; } }
+    .top { position: sticky; top: 0; z-index: 10; background: rgba(12,12,12,.92); backdrop-filter: blur(12px); border-bottom: 1px solid var(--line); }
+    .top__in { display: flex; align-items: center; justify-content: space-between; gap: 16px; height: 64px; }
+    .logo { font-family: var(--display); font-weight: 800; font-stretch: 115%; letter-spacing: .02em; font-size: 1rem; text-decoration: none; }
+    .logo small { display: block; font-family: var(--body); font-weight: 500; font-size: .56rem; letter-spacing: .3em; color: var(--accent); margin-top: 3px; }
+    .btn { display: inline-flex; align-items: center; justify-content: center; min-height: 42px; padding: 0 18px; border-radius: 2px; background: var(--accent); color: var(--ink); font-size: .72rem; font-weight: 600; letter-spacing: .12em; text-transform: uppercase; text-decoration: none; white-space: nowrap; }
+    .btn--ghost { background: transparent; color: var(--text); border: 1px solid var(--line2); }
+    .label { font-size: .72rem; font-weight: 600; letter-spacing: .18em; text-transform: uppercase; color: var(--accent); margin-bottom: 18px; }
+    .hero { padding: 96px 0 72px; border-bottom: 1px solid var(--line); }
+    .hero h1 { font-family: var(--display); font-weight: 800; font-size: clamp(2.4rem, 5.6vw, 4.6rem); line-height: 1; letter-spacing: -.03em; max-width: 14em; }
+    .hero h1 span { color: var(--accent); }
+    .hero p.lead { color: var(--muted); font-size: 1.12rem; max-width: 40em; margin-top: 24px; }
+    .hero__btns { display: flex; gap: 10px; flex-wrap: wrap; margin-top: 32px; }
+    .kpis { display: grid; grid-template-columns: repeat(4, 1fr); margin-top: 56px; border-top: 1px solid var(--line2); }
+    .kpi { padding: 22px 20px 0 0; }
+    .kpi + .kpi { padding-left: 20px; border-left: 1px solid var(--line); }
+    .kpi b { display: block; font-family: var(--display); font-weight: 700; font-size: 1.15rem; margin-bottom: 4px; }
+    .kpi span { color: var(--muted); font-size: .9rem; }
+    @media (max-width: 800px) { .kpis { grid-template-columns: 1fr 1fr; } .kpi:nth-child(3) { border-left: 0; padding-left: 0; } .kpi:nth-child(n+3) { margin-top: 20px; } }
+    section.block { padding: 80px 0; border-bottom: 1px solid var(--line); }
+    .h2 { font-family: var(--display); font-weight: 700; font-size: clamp(1.8rem, 3.4vw, 2.6rem); line-height: 1.08; letter-spacing: -.02em; margin-bottom: 18px; }
+    .muted { color: var(--muted); }
+    .principles { display: grid; grid-template-columns: repeat(2, 1fr); gap: 16px; margin-top: 36px; }
+    .pr { padding: 26px; border: 1px solid var(--line); background: var(--bg2); }
+    .pr h3 { font-family: var(--display); font-weight: 600; font-size: 1.2rem; margin-bottom: 8px; }
+    .pr p { color: var(--muted); font-size: .95rem; }
+    @media (max-width: 800px) { .principles { grid-template-columns: 1fr; } }
+    .flow { display: grid; grid-template-columns: repeat(5, 1fr); gap: 8px; margin-top: 32px; counter-reset: f; }
+    .flow li { list-style: none; padding: 18px; border: 1px solid var(--line); background: var(--bg2); font-size: .9rem; }
+    .flow li b { display: block; font-family: var(--display); color: var(--accent); margin-bottom: 6px; }
+    .flow { padding: 0; }
+    @media (max-width: 900px) { .flow { grid-template-columns: 1fr 1fr; } }
+    .sec { display: grid; grid-template-columns: 1.25fr 1fr; gap: 48px; align-items: start; padding: 64px 0; border-top: 1px solid var(--line); }
+    .sec:first-of-type { border-top: 0; }
+    .sec figure { margin: 0; border: 1px solid var(--line2); background: var(--bg2); }
+    .sec figcaption { padding: 10px 14px; font-size: .74rem; color: var(--muted); border-top: 1px solid var(--line); }
+    .sec__n { font-family: var(--display); font-weight: 700; color: var(--accent); font-size: .9rem; margin-bottom: 10px; }
+    .sec h3 { font-family: var(--display); font-weight: 700; font-size: 1.7rem; letter-spacing: -.02em; line-height: 1.1; margin-bottom: 14px; }
+    .sec h4 { margin: 22px 0 8px; font-size: .7rem; letter-spacing: .16em; text-transform: uppercase; color: var(--muted); font-weight: 600; }
+    .sec ul { margin: 0; padding-left: 18px; }
+    .sec li { margin: 6px 0; font-size: .96rem; }
+    .sec li b { color: var(--text); }
+    .metric { display: inline-block; margin-top: 22px; padding: 6px 12px; border: 1px solid var(--accent); color: var(--accent); font-size: .7rem; font-weight: 600; letter-spacing: .12em; text-transform: uppercase; }
+    @media (max-width: 900px) { .sec { grid-template-columns: 1fr; gap: 24px; } }
+    .mobile { display: grid; grid-template-columns: 1fr 1fr 1.3fr; gap: 24px; align-items: start; margin-top: 36px; }
+    .mobile figure { margin: 0; border: 1px solid var(--line2); }
+    @media (max-width: 900px) { .mobile { grid-template-columns: 1fr 1fr; } .mobile > div { grid-column: 1 / -1; } }
+    .next { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; margin-top: 32px; }
+    .next div { padding: 26px; border: 1px solid var(--line); background: var(--bg2); }
+    .next h3 { font-family: var(--display); font-weight: 600; font-size: 1.15rem; margin-bottom: 10px; }
+    .next ul { margin: 0; padding-left: 18px; color: var(--muted); }
+    .next li { margin: 5px 0; }
+    @media (max-width: 800px) { .next { grid-template-columns: 1fr; } }
+    footer { padding: 48px 0 64px; color: var(--muted); font-size: .85rem; }
+    footer .wrap { display: flex; justify-content: space-between; gap: 16px; flex-wrap: wrap; align-items: center; }
+  </style>
+</head>
+<body>
+  <header class="top">
+    <div class="wrap top__in">
+      <a class="logo" href="index.html">GHOST CONTROL<small>HOMEPAGE STRATEGY</small></a>
+      <a class="btn" href="index.html">View the homepage</a>
+    </div>
+  </header>
+
+  <section class="hero">
+    <div class="wrap">
+      <p class="label">Design rationale · Homepage proposal</p>
+      <h1>A homepage built to turn visitors into <span>booked chairs.</span></h1>
+      <p class="lead">This page explains why every section of the new Ghost Control homepage exists, why it sits where it does, and how it moves a visitor from “just looking” to a confirmed appointment. The design looks premium so it can charge a premium, and it’s structured so booking is never more than one tap away.</p>
+      <div class="hero__btns">
+        <a class="btn" href="index.html">Open the live homepage</a>
+        <a class="btn btn--ghost" href="#sections">Jump to section breakdown</a>
+      </div>
+      <div class="kpis">
+        <div class="kpi"><b>More bookings</b><span>Booking starts and completions from homepage traffic</span></div>
+        <div class="kpi"><b>Higher ticket</b><span>More combos and Signature Rituals per booking</span></div>
+        <div class="kpi"><b>Fewer no-shows</b><span>WhatsApp confirmation, reminders, calendar invite</span></div>
+        <div class="kpi"><b>More regulars</b><span>Barber-specific booking and Ghost Club membership</span></div>
+      </div>
+    </div>
+  </section>
+
+  <section class="block">
+    <div class="wrap">
+      <p class="label">Design direction</p>
+      <h2 class="h2">Premium, consistent and confident, like the world’s best barbershops.</h2>
+      <p class="muted" style="max-width:44em">Top barbershop brands share four traits: strong photography, bold type, a strict grid and restraint. We applied all four so Ghost Control looks established, trustworthy and worth the price.</p>
+      <div class="principles">
+        <div class="pr"><h3>One photographic style</h3><p>Every image uses the same black-and-white grade, so the site feels like one cohesive shoot. Your real photos will be graded the same way, so it stays consistent as new work is added.</p></div>
+        <div class="pr"><h3>Bold, readable type</h3><p>A strong modern sans-serif for headlines and a clean one for text. Large, high-contrast headings can be scanned in seconds on any phone.</p></div>
+        <div class="pr"><h3>A strict grid</h3><p>Thin dividing lines and consistent spacing keep every section aligned. That structure reads as professional and makes prices and options easy to compare.</p></div>
+        <div class="pr"><h3>One accent colour, used with purpose</h3><p>Brass gold appears only on things that matter: booking buttons, prices, ratings and key words. Your eye always lands on the next action.</p></div>
+      </div>
+    </div>
+  </section>
+
+  <section class="block">
+    <div class="wrap">
+      <p class="label">The conversion journey</p>
+      <h2 class="h2">The page answers each question a visitor has, in order.</h2>
+      <ol class="flow">
+        <li><b>1. Is this for me?</b>Hero: what you do, where, and the promise (precision, no waiting).</li>
+        <li><b>2. Can I trust them?</b>4.9★ rating, numbers, promises, reviews and real barbers.</li>
+        <li><b>3. What does it cost?</b>Full price list with clear prices and durations.</li>
+        <li><b>4. Are they good?</b>Portfolio of real cuts and barber profiles.</li>
+        <li><b>5. How do I book?</b>A booking button in every section, a 4-step booking flow and WhatsApp.</li>
+      </ol>
+    </div>
+  </section>
+
+  <section class="block" id="sections">
+    <div class="wrap">
+      <p class="label">Section-by-section breakdown</p>
+      <h2 class="h2">Why each section is there, and why it sits where it does.</h2>
+
+      <article class="sec">
+        <figure><img loading="lazy" src="strategy/01-hero.jpg" alt="Hero section screenshot" width="1200" height="750"><figcaption>01 · Hero and live info bar</figcaption></figure>
+        <div>
+          <p class="sec__n">01</p>
+          <h3>Hero: the first 5 seconds</h3>
+          <h4>What it does</h4>
+          <ul>
+            <li><b>The headline sells the two biggest reasons</b> people switch barbers: a better cut (precision) and no waiting.</li>
+            <li><b>One primary gold button</b> (“Book your chair”), plus “See prices” for people who want the cost first.</li>
+            <li>The <b>live info bar</b> answers the four instant questions: rating (trust), today’s hours (can I go now?), <b>next free times</b> (tap one to book) and location.</li>
+            <li>The header stays reachable, with live <b>open/closed status</b>, WhatsApp and Book always visible.</li>
+          </ul>
+          <h4>Why it converts</h4>
+          <ul><li>Visitors decide within seconds whether to stay. Clear value, social proof and a visible next step stop them bouncing. Showing real free times creates honest urgency and removes the “will they have space?” doubt.</li></ul>
+          <span class="metric">Measures: bounce rate · booking starts</span>
+        </div>
+      </article>
+
+      <article class="sec">
+        <figure><img loading="lazy" src="strategy/02-intro.jpg" alt="About and stats section screenshot" width="1200" height="459"><figcaption>02 · Positioning and proof numbers</figcaption></figure>
+        <div>
+          <p class="sec__n">02</p>
+          <h3>About: positioning and proof</h3>
+          <ul>
+            <li>One sentence of positioning, <b>“run like a precision studio”</b>, sets you apart from ordinary barbershops.</li>
+            <li><b>Four proof numbers</b> (4.9 rating, 15,000+ cuts, 97% rebook, 9 years’ average experience) build credibility at a glance.</li>
+          </ul>
+          <span class="metric">Measures: scroll depth</span>
+        </div>
+      </article>
+
+      <article class="sec">
+        <figure><img loading="lazy" src="strategy/03-services.jpg" alt="Services and prices section screenshot" width="1200" height="1257"><figcaption>03 · Price list with a Book button on every service</figcaption></figure>
+        <div>
+          <p class="sec__n">03</p>
+          <h3>Services &amp; prices, placed high</h3>
+          <ul>
+            <li>Not knowing the price is one of the top reasons people leave without booking. <b>The full price list appears early</b>, grouped into Haircuts, Beard &amp; Shave and Packages.</li>
+            <li><b>Every service has its own Book button</b> with that service already selected, which skips a step.</li>
+            <li><b>“Most booked”</b> guides undecided visitors. <b>“Save 100 MT”</b> on the combo encourages a bigger booking.</li>
+            <li>The <b>Signature Ritual</b> stays on screen as you scroll the list. As the top-price option it makes the other prices feel reasonable and lifts the average spend.</li>
+            <li>“Not sure?” sends people to <b>WhatsApp with a photo</b>, so undecided visitors are captured instead of lost.</li>
+          </ul>
+          <span class="metric">Measures: average booking value</span>
+        </div>
+      </article>
+
+      <article class="sec">
+        <figure><img loading="lazy" src="strategy/04-promises.jpg" alt="Four promises section screenshot" width="1200" height="552"><figcaption>04 · Objection handling</figcaption></figure>
+        <div>
+          <p class="sec__n">04</p>
+          <h3>Four promises: objection handling</h3>
+          <ul>
+            <li>Each promise answers a common fear about trying a new barbershop: <b>waiting</b> (on-time guarantee), <b>hygiene</b>, <b>skill</b> (master barbers) and <b>a bad result</b> (free fix within 7 days).</li>
+            <li>Guarantees reduce risk, which is especially important for <b>first-time clients</b>.</li>
+          </ul>
+          <span class="metric">Measures: new-client conversion</span>
+        </div>
+      </article>
+
+      <article class="sec">
+        <figure><img loading="lazy" src="strategy/05-work.jpg" alt="Our work gallery screenshot" width="1200" height="1112"><figcaption>05 · Portfolio of recent cuts</figcaption></figure>
+        <div>
+          <p class="sec__n">05</p>
+          <h3>Our work: proof of skill</h3>
+          <ul>
+            <li>A tight portfolio grid showing a range of styles and hair types. People choose barbers with their eyes.</li>
+            <li><b>“Book this look”</b> appears at the moment of desire. The Instagram link adds more social proof.</li>
+            <li>Placeholder photos for now. We’ll replace them with <b>your real cuts</b>, graded in the same style.</li>
+          </ul>
+          <span class="metric">Measures: clicks to book from gallery</span>
+        </div>
+      </article>
+
+      <article class="sec">
+        <figure><img loading="lazy" src="strategy/06-barbers.jpg" alt="Barbers section screenshot" width="1200" height="831"><figcaption>06 · Barber profiles with direct booking</figcaption></figure>
+        <div>
+          <p class="sec__n">06</p>
+          <h3>The team: people book people</h3>
+          <ul>
+            <li>Faces build trust. Each barber shows a <b>rating, speciality and years of experience</b>.</li>
+            <li><b>“Book with [name]”</b> opens the booking with that barber already selected, which loyal clients love. New clients can choose “any barber” for the fastest slot.</li>
+          </ul>
+          <span class="metric">Measures: repeat bookings</span>
+        </div>
+      </article>
+
+      <article class="sec">
+        <figure><img loading="lazy" src="strategy/07-reviews.jpg" alt="Reviews section screenshot" width="1200" height="620"><figcaption>07 · Google rating and reviews</figcaption></figure>
+        <div>
+          <p class="sec__n">07</p>
+          <h3>Reviews: third-party trust</h3>
+          <ul>
+            <li>The <b>Google rating badge</b> is trusted more than anything the shop says about itself.</li>
+            <li>Each review answers a different doubt: punctuality, premium value, family-friendly, hygiene. We can connect your live Google reviews.</li>
+          </ul>
+          <span class="metric">Measures: trust → booking starts</span>
+        </div>
+      </article>
+
+      <article class="sec">
+        <figure><img loading="lazy" src="strategy/08-offer.jpg" alt="Offer and membership section screenshot" width="1200" height="648"><figcaption>08 · First-visit offer and Ghost Club membership</figcaption></figure>
+        <div>
+          <p class="sec__n">08</p>
+          <h3>Offer &amp; membership: a reason to act now</h3>
+          <ul>
+            <li><b>15% off the first visit</b> lowers the barrier for new clients. The code copies with one tap and is <b>applied automatically</b> in the booking flow.</li>
+            <li><b>Ghost Club</b> turns one-off clients into monthly recurring revenue with priority booking.</li>
+            <li>On desktop, a one-time <b>exit offer</b> wins back visitors who are about to leave.</li>
+          </ul>
+          <span class="metric">Measures: new clients · memberships</span>
+        </div>
+      </article>
+
+      <article class="sec">
+        <figure><img loading="lazy" src="strategy/09-faq.jpg" alt="FAQ section screenshot" width="1200" height="684"><figcaption>09 · FAQ</figcaption></figure>
+        <div>
+          <p class="sec__n">09</p>
+          <h3>FAQ: clear the final doubts</h3>
+          <ul><li>Answers the questions that stop bookings (walk-ins, payment, cancelling, guarantee, kids, parking). Anything else goes to WhatsApp, so nobody leaves with an unanswered question.</li></ul>
+          <span class="metric">Measures: drop-off before booking</span>
+        </div>
+      </article>
+
+      <article class="sec">
+        <figure><img loading="lazy" src="strategy/10-visit.jpg" alt="Visit section screenshot" width="1200" height="751"><figcaption>10 · Location, hours and map</figcaption></figure>
+        <div>
+          <p class="sec__n">10</p>
+          <h3>Visit: built for local search</h3>
+          <ul>
+            <li>Today’s hours highlight automatically, with one-tap <b>directions</b> and <b>calling</b>.</li>
+            <li>The page includes <b>LocalBusiness data for Google</b> (rating, hours, address), which helps you appear in Maps and “barber near me” searches.</li>
+          </ul>
+          <span class="metric">Measures: calls · direction requests</span>
+        </div>
+      </article>
+
+      <article class="sec">
+        <figure><img loading="lazy" src="strategy/11-final.jpg" alt="Final call to action screenshot" width="1200" height="547"><figcaption>11 · Final call to action</figcaption></figure>
+        <div>
+          <p class="sec__n">11</p>
+          <h3>Final call to action</h3>
+          <ul><li>Visitors who scroll to the end are high-intent. A bold closing headline, the 3-step booking summary, both booking options and live “chairs left today” turn that intent into a booking.</li></ul>
+          <span class="metric">Measures: bottom-of-page conversions</span>
+        </div>
+      </article>
+
+      <article class="sec">
+        <figure><img loading="lazy" src="strategy/12-booking.jpg" alt="Booking flow screenshot" width="1200" height="750"><figcaption>12 · Four-step booking flow</figcaption></figure>
+        <div>
+          <p class="sec__n">12</p>
+          <h3>The booking flow: the conversion engine</h3>
+          <ul>
+            <li>Opens instantly from any Book button, with <b>no page reload</b>: service → barber → day &amp; time → details.</li>
+            <li><b>Smart shortcuts:</b> whatever the visitor already chose (a service, a barber or a time from the hero) is pre-filled and those steps are skipped.</li>
+            <li>A progress bar, crossed-out booked times and “only X slots left” keep people moving.</li>
+            <li>The request is sent to <b>WhatsApp</b> (no app or account needed), with an <b>add-to-calendar</b> option to cut no-shows.</li>
+            <li>It can later connect to a booking system (Fresha, Booksy, Square, etc.) for fully automatic scheduling.</li>
+          </ul>
+          <span class="metric">Measures: booking completion rate</span>
+        </div>
+      </article>
+    </div>
+  </section>
+
+  <section class="block">
+    <div class="wrap">
+      <p class="label">Mobile first</p>
+      <h2 class="h2">Most clients will find you on their phone.</h2>
+      <div class="mobile">
+        <figure><img loading="lazy" src="strategy/13-mobile-hero.jpg" alt="Mobile hero screenshot" width="560" height="953"></figure>
+        <figure><img loading="lazy" src="strategy/14-mobile-sticky.jpg" alt="Mobile sticky booking bar screenshot" width="560" height="953"></figure>
+        <div>
+          <ul class="muted" style="padding-left:18px;margin:0">
+            <li style="margin:8px 0"><b style="color:var(--text)">Sticky booking bar</b>: Call, WhatsApp and Book (with the next free time) stay within thumb reach after the hero.</li>
+            <li style="margin:8px 0"><b style="color:var(--text)">Booking slides up from the bottom</b>, like a native app, with large touch targets.</li>
+            <li style="margin:8px 0">Price list, barbers and reviews reflow into easy single-column layouts. Nothing is hidden, nothing is cramped.</li>
+            <li style="margin:8px 0">Lightweight code and optimised images for fast loading on mobile data.</li>
+          </ul>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="block">
+    <div class="wrap">
+      <p class="label">Measurement &amp; next steps</p>
+      <h2 class="h2">Built to measure, then improve.</h2>
+      <p class="muted" style="max-width:44em">Every key action (booking opened, each booking step, booking sent, WhatsApp click, call click, promo code copied) is already tracked and ready for Google Analytics 4 and Meta Pixel, so we can see what converts and keep improving it.</p>
+      <div class="next">
+        <div>
+          <h3>What we need from you</h3>
+          <ul>
+            <li>Logo and brand colours (if any)</li>
+            <li>Real photos: your shop, barbers and recent cuts (or we can arrange a shoot or guide you)</li>
+            <li>Final services, prices and opening hours</li>
+            <li>Barber names, specialities and short bios</li>
+            <li>Address, phone, WhatsApp number and social links</li>
+            <li>Your Google Business profile, for live reviews</li>
+          </ul>
+        </div>
+        <div>
+          <h3>Next steps</h3>
+          <ul>
+            <li>Your feedback on this homepage direction</li>
+            <li>Refine the design with your real content and photos</li>
+            <li>Build the remaining pages (Services, About, Gallery, Contact)</li>
+            <li>Optional: Portuguese language version</li>
+            <li>Optional: connect a booking system and analytics</li>
+            <li>Launch, then monthly conversion improvements</li>
+          </ul>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <footer>
+    <div class="wrap">
+      <span>Ghost Control Barbers · Homepage strategy · Prototype with placeholder images and content</span>
+      <a class="btn" href="index.html">View the homepage</a>
+    </div>
+  </footer>
+</body>
+</html>
