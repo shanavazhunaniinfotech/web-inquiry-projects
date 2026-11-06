@@ -1,545 +1,615 @@
 <!doctype html>
 <html lang="en">
 <head>
-  <meta charset="utf-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1">
-  <title>Technogel® | The Original Gel Pillows &amp; Mattresses – Sleep Cooler, Wake Up Lighter</title>
-  <meta name="description" content="Technogel® is the original patented gel. Pillows, mattresses and seat pads that adapt to your body in 3D, draw heat away and relieve pressure. Made in Italy. Clinically tested.">
-  <meta name="theme-color" content="#1f3242">
-  <link rel="preconnect" href="https://fonts.googleapis.com">
-  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&family=Roboto+Slab:wght@200;300;400;500&display=swap" rel="stylesheet">
-  <link rel="stylesheet" href="style.css">
-  <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect width='32' height='32' rx='8' fill='%231f3242'/%3E%3Cg fill='%2300a6e2'%3E%3Crect x='7' y='7' width='8' height='8' rx='2.5'/%3E%3Crect x='17' y='7' width='8' height='8' rx='2.5' opacity='.7'/%3E%3Crect x='7' y='17' width='8' height='8' rx='2.5' opacity='.7'/%3E%3Crect x='17' y='17' width='8' height='8' rx='2.5'/%3E%3C/g%3E%3C/svg%3E">
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Technogel® | Pure Gel Pillows That Keep You Cool – Made in Italy</title>
+<meta name="description" content="Not gel-infused foam. Technogel® is a patented, plasticizer-free gel that moves with you in 3D, pulls heat away and never flattens. 30-night risk-free trial, free shipping & returns.">
+<meta name="theme-color" content="#0b1822">
+<meta property="og:title" content="Technogel® – Pure gel. Cooler nights.">
+<meta property="og:description" content="The original gel pillow. Engineered in Germany, made in Italy.">
+<meta property="og:image" content="assets/video/hero-poster.jpg">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Instrument+Serif:ital@0;1&family=Inter+Tight:wght@300;400;500;600&display=swap" rel="stylesheet">
+<link rel="preload" as="image" href="assets/video/hero-poster.jpg">
+<link rel="stylesheet" href="style.css">
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect width='32' height='32' rx='9' fill='%230b1822'/%3E%3Cg fill='%2300a7e1'%3E%3Crect x='7' y='7' width='8' height='8' rx='2.6'/%3E%3Crect x='17' y='7' width='8' height='8' rx='2.6' opacity='.65'/%3E%3Crect x='7' y='17' width='8' height='8' rx='2.6' opacity='.65'/%3E%3Crect x='17' y='17' width='8' height='8' rx='2.6'/%3E%3C/g%3E%3C/svg%3E">
+<script type="importmap">{"imports":{"three":"https://cdn.jsdelivr.net/npm/three@0.160.0/build/three.module.js","three/addons/":"https://cdn.jsdelivr.net/npm/three@0.160.0/examples/jsm/"}}</script>
 </head>
-<body>
+<body class="is-loading">
+
+<!-- Preloader -->
+<div class="loader" aria-hidden="true">
+  <div class="loader__logo"><svg class="logo-svg" role="img" aria-label="Technogel" fill="currentColor" fill-rule="evenodd" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 495.41 106.19"> <path d="M86.51,78.41q-.6,8.24-.6,17.32V127q0,17.43.87,19.22c.58,1.18,2.65,1.78,6.22,1.78h4.08v3.42c-6.44-.29-11.9-.45-16.36-.45s-9.93.16-16.26.45V148H69c2.4,0,4-.33,4.68-1s1.18-1.9,1.37-3.76q.54-6.42.54-16.55V95.4q0-9.25-.38-17H69.69q-13.51,0-14.88.64c-.9.41-1.51,2-1.79,4.87l-.77,7.31H48.83l.11-6.53q0-3.95-.71-11.35,29.58.45,34.78.45l30.3-.45q-1,9.27-1.19,17.88h-3.43l-.54-7.15c-.22-2.47-.54-3.93-.94-4.39a4.17,4.17,0,0,0-2.68-.84q-6-.43-13.74-.44Z" transform="translate(-48.23 -73.35)"/> <path d="M125.28,111a10.82,10.82,0,0,1,8.81-4,12.1,12.1,0,0,1,6.25,1.59,9.1,9.1,0,0,1,3.8,4,20.06,20.06,0,0,1,1.71,8.18v2.74c-2.29.22-4.67.34-7.13.34-6.15,0-11.75-.1-16.84-.3.06-5.65,1.2-9.83,3.4-12.51ZM134,127.42c6.22,0,11.09-.15,14.59-.42a37.47,37.47,0,0,0,6.19-1.08l.15-2.92q0-9.27-5.12-14.41T136,103.43a24.36,24.36,0,0,0-11.91,3.42q-6.14,3.42-8.4,7.42a28.65,28.65,0,0,0-3.46,14.41q0,10.89,6.14,17.24t16.16,6.37a33.73,33.73,0,0,0,8.93-1.19,35.86,35.86,0,0,0,8.44-3.58l1.58-4.16-.83-.74a27.56,27.56,0,0,1-6.73,3.45,21,21,0,0,1-6.82,1.15,16.16,16.16,0,0,1-12.38-5q-4.71-5-5-14.76Z" transform="translate(-48.23 -73.35)"/> <path d="M201.37,144.21l1.34,1.18-2,3.17a29.2,29.2,0,0,1-14.19,3.73,25.35,25.35,0,0,1-12.34-2.78,19.11,19.11,0,0,1-7.84-8A26.36,26.36,0,0,1,163.54,129a26.83,26.83,0,0,1,2.12-11.11,17.56,17.56,0,0,1,6-7.4,60.31,60.31,0,0,1,9.56-5.25,21.78,21.78,0,0,1,9.05-1.83,29.77,29.77,0,0,1,6.56.63,26,26,0,0,1,5.91,2.21,76.61,76.61,0,0,0-1.35,13.1h-3v-2.48a8.17,8.17,0,0,0-.91-4.49c-.62-.88-2-1.75-4.2-2.61a19.33,19.33,0,0,0-7.14-1.29c-4.47,0-7.92,1.37-10.34,4.08s-3.62,6.8-3.62,12.21q0,10.45,5.34,16.73a15.39,15.39,0,0,0,12.35,5.7,22.55,22.55,0,0,0,5.83-.77,26.7,26.7,0,0,0,5.68-2.24Z" transform="translate(-48.23 -73.35)"/> <path d="M226.83,112.85l6.45-5.7a13.14,13.14,0,0,1,4.45-2.92,15.56,15.56,0,0,1,5.3-.8,19.38,19.38,0,0,1,9.45,2.2,12.21,12.21,0,0,1,5.56,5.65c1,2.3,1.56,6.19,1.56,11.7l-.15,14.64a63.25,63.25,0,0,0,.38,7.82,2.79,2.79,0,0,0,.79,1.78,5.18,5.18,0,0,0,2.8.8l3.62.39v2.83q-4.71-.3-9.19-.3c-2.56,0-5.1.1-7.64.3q.9-12.39.9-24.41c0-5.36-.34-9-1-10.92a8.75,8.75,0,0,0-3.63-4.54,12,12,0,0,0-6.62-1.68,14.55,14.55,0,0,0-7.47,2,11.33,11.33,0,0,0-4.65,4.52q-.89,1.83-.89,8.7v8.61q0,11.76.55,13c.36.83,1.67,1.34,4,1.54l4.29.39v2.83q-7.69-.3-12.38-.3c-3.27,0-7.52.1-12.79.3v-2.83l3.09-.4a10.94,10.94,0,0,0,3.63-.81,3,3,0,0,0,1-2.16q.36-2.68.35-12V99.55q0-13.24-.68-14.84c-.3-.72-1.62-1.08-4-1.08h-3.38V80.8a66.07,66.07,0,0,0,12.28-2.21l4.06-1.37c.53,0,.79.35.79,1l-.16,2-.32,8.89c-.17,4.48-.27,8-.27,10.43v13.24Z" transform="translate(-48.23 -73.35)"/> <path d="M290.73,112.9l7.47-6.64a8.93,8.93,0,0,1,2.83-1.74,20.75,20.75,0,0,1,6.53-1.09,18.52,18.52,0,0,1,9.16,2.16,12.91,12.91,0,0,1,5.54,5.59q1.68,3.43,1.68,10.77l-.15,15.58c0,5.37.24,8.48.68,9.3.6,1,1.81,1.58,3.58,1.58h3.48v2.83c-3.47-.2-6.49-.3-9-.3s-5.13.1-8,.3q.9-9.62.9-26c0-4.41-.4-7.54-1.17-9.38a9.52,9.52,0,0,0-3.93-4.45,12.52,12.52,0,0,0-6.64-1.68,13.59,13.59,0,0,0-8.18,2.43,10.06,10.06,0,0,0-4.16,5.33q-.5,1.93-.49,10.1c0,6,0,11.63.15,16.81,0,1.54.26,2.51.7,2.92a6,6,0,0,0,4.09,1.13h3.54v2.83c-5.59-.2-10.05-.3-13.35-.3q-5.26,0-12,.3v-2.83h3.58c2.44,0,3.87-.57,4.28-1.71s.63-8,.63-20.54q0-8.46-.2-13.25a3,3,0,0,0-.8-2.18c-.46-.4-1.77-.59-3.91-.59h-3.58v-2.83a60.07,60.07,0,0,0,7.62-1.36,55.37,55.37,0,0,0,7.57-2.61,2,2,0,0,1,.85-.2q.78,0,.78,1.14l0,1.9-.1,6.72Z" transform="translate(-48.23 -73.35)"/> <path d="M347.44,114.27A11.75,11.75,0,0,1,352,109a12.52,12.52,0,0,1,6.92-2,13.18,13.18,0,0,1,7.81,2.49,17.07,17.07,0,0,1,5.64,8,35.26,35.26,0,0,1,2.13,12.92q0,9.24-3.62,13.78a11.52,11.52,0,0,1-9.48,4.55q-7.72,0-11.83-7.24t-4.11-17.42a23.86,23.86,0,0,1,2-9.78Zm-5.33,31.36q6.19,6.65,16.05,6.66a25.76,25.76,0,0,0,17.62-6.49q8.24-7.23,8.23-19.5,0-10.39-6.31-16.63t-16.82-6.24a26.43,26.43,0,0,0-12.95,3.13,22.3,22.3,0,0,0-8.86,8.63,24.46,24.46,0,0,0-3.16,12.35q0,11.43,6.2,18.09Z" transform="translate(-48.23 -73.35)"/> <path d="M421.39,129.47a9.92,9.92,0,0,1-7.62,3.15,9.73,9.73,0,0,1-7.81-3.75q-3.12-3.77-3.11-10.37,0-5.48,2.86-8.56a10.44,10.44,0,0,1,15.45.7q3.13,3.8,3.13,10c0,3.78-1,6.72-2.9,8.83Zm19.43-16.8a34.33,34.33,0,0,1,2.68-4.47l-.54-1a85.84,85.84,0,0,1-9.93.45H428.9a19.61,19.61,0,0,0-5.78-3.34,20.24,20.24,0,0,0-6.58-1,28.31,28.31,0,0,0-12.24,3,17.39,17.39,0,0,0-7.53,6.51,17.09,17.09,0,0,0-2.56,9.15,13.22,13.22,0,0,0,3.42,9.4c1.72,1.83,4.55,3.22,8.46,4.22L401.38,139a9.78,9.78,0,0,0-3.21,3,8.17,8.17,0,0,0-1.13,4,3.73,3.73,0,0,0,1.14,2.81c.75.74,2.46,1.54,5.1,2.42a57.56,57.56,0,0,1-8.59,4.89,14,14,0,0,0-2.86,8.09,13.52,13.52,0,0,0,5.47,10.9q5.49,4.41,15.64,4.42a33.89,33.89,0,0,0,14.76-3.07,23.37,23.37,0,0,0,9.76-8.13,18.9,18.9,0,0,0,3.36-10.6,16.5,16.5,0,0,0-1.47-7.09,10,10,0,0,0-3.55-4.41,11.61,11.61,0,0,0-6-1.26c-1.82,0-4.73.1-8.77.29-2.83.1-5,.16-6.51.16-3.94,0-6.56-.36-7.85-1.06a3.28,3.28,0,0,1-1.91-2.92,3.9,3.9,0,0,1,.85-2.3,21.16,21.16,0,0,1,4.07-3.55H412a23.06,23.06,0,0,0,10.66-2.51,19.12,19.12,0,0,0,7.6-6.64,15.43,15.43,0,0,0,2.66-8.54,16.35,16.35,0,0,0-1.14-5.24ZM422.45,152a22.7,22.7,0,0,1,5.2.35,7.14,7.14,0,0,1,3.82,3.11,10,10,0,0,1,1.61,5.64,13.16,13.16,0,0,1-2.3,7.29,15.82,15.82,0,0,1-6.45,5.55,21.59,21.59,0,0,1-9.63,2c-4.76,0-8.46-1.18-11.13-3.5a11.39,11.39,0,0,1-4-8.91,12.75,12.75,0,0,1,1.49-6.47c.58-1.09,2.27-2.53,5-4.3.87-.53,2.46-.79,4.8-.79Z" transform="translate(-48.23 -73.35)"/> <path d="M460.94,111a10.78,10.78,0,0,1,8.8-4A12.11,12.11,0,0,1,476,108.6a9.13,9.13,0,0,1,3.79,4,20.07,20.07,0,0,1,1.72,8.18v2.74c-2.3.22-4.68.34-7.14.34-6.14,0-11.74-.1-16.84-.3.07-5.65,1.2-9.83,3.41-12.51Zm8.73,16.39c6.22,0,11.09-.15,14.59-.42a37.36,37.36,0,0,0,6.18-1.08l.16-2.92q0-9.27-5.12-14.41t-13.85-5.16a24.4,24.4,0,0,0-11.92,3.42q-6.13,3.42-8.39,7.42a28.65,28.65,0,0,0-3.47,14.41q0,10.89,6.15,17.24t16.16,6.37a33.85,33.85,0,0,0,8.93-1.19,35.86,35.86,0,0,0,8.44-3.58l1.58-4.16-.84-.74a27.21,27.21,0,0,1-6.73,3.45,21,21,0,0,1-6.82,1.15,16.16,16.16,0,0,1-12.38-5q-4.71-5-5-14.76Z" transform="translate(-48.23 -73.35)"/> <path d="M514.24,77.82q-.75,14.49-.74,26.22v25.43c0,10.08.2,15.82.63,17.17.23.68,1.3,1.13,3.24,1.33l4.17.44v2.83q-5.37-.3-10.25-.3-5.43,0-14.17.3v-2.83l4.2-.35c1.86-.16,2.93-.64,3.19-1.43.42-1.3.65-7.16.65-17.61V103.7l-.06-9.52L505,87.69c0-1.62-.17-2.61-.53-3-.53-.52-1.62-.79-3.29-.79h-4V81.1q10.2-.94,16.28-3.88l.84.6Z" transform="translate(-48.23 -73.35)"/> <path d="M538.42,79.45a7.88,7.88,0,0,1,4,6.87,7.72,7.72,0,0,1-1,4,7.86,7.86,0,0,1-2.9,2.91,7.93,7.93,0,0,1-7.92,0,8,8,0,0,1-2.89-2.91,7.95,7.95,0,0,1,0-7.93,8,8,0,0,1,2.89-2.9,7.93,7.93,0,0,1,7.92,0Zm-8.54-1.09a8.91,8.91,0,0,0-3.36,3.37,9.21,9.21,0,0,0,3.36,12.56,9.16,9.16,0,0,0,9.17,0,9.2,9.2,0,0,0,3.36-12.56,8.91,8.91,0,0,0-3.36-3.37,9.1,9.1,0,0,0-9.17,0Zm1.39,3.07c.09.07.12.29.12.68v7.42a1.33,1.33,0,0,1-.1.7,1.89,1.89,0,0,1-.76.15l-.37,0v.67h4.06v-.67l-.73-.07a.73.73,0,0,1-.48-.15,2,2,0,0,1-.09-.75V86.36h.61a2.09,2.09,0,0,1,1.35.32,6.76,6.76,0,0,1,1,2,6.2,6.2,0,0,0,1,2,1.53,1.53,0,0,0,1.09.39h1.37v-.75c-.57,0-.94-.06-1.1-.25a13.27,13.27,0,0,1-1-2A5.11,5.11,0,0,0,535.83,86a3.15,3.15,0,0,0,1.8-1,2.58,2.58,0,0,0,.61-1.73,2.4,2.4,0,0,0-.88-2,4.39,4.39,0,0,0-2.84-.75h-4.44v.76a4.15,4.15,0,0,1,1.19.13Zm1.65.55c0-.29.06-.48.17-.56a2,2,0,0,1,.92-.12,3.43,3.43,0,0,1,2.15.52,1.89,1.89,0,0,1,.63,1.54,1.93,1.93,0,0,1-.73,1.64,4.37,4.37,0,0,1-2.58.57l-.56,0V82Z" transform="translate(-48.23 -73.35)"/> </svg></div>
+  <div class="loader__bar"><i></i></div>
+  <div class="loader__count"><span>0</span>%</div>
+</div>
+
+<!-- Custom cursor -->
+<div class="cursor" aria-hidden="true"><span class="cursor__label">View</span></div>
 
 <a class="skip" href="#main">Skip to content</a>
 
-<!-- Announcement bar -->
-<div class="announce" role="region" aria-label="Offers">
-  <div class="announce__track">
-    <span>Free US shipping on every pillow</span><i></i>
-    <span>100-night comfort trial</span><i></i>
-    <span>Designed &amp; made in Italy</span><i></i>
-    <span>Clinically tested · OEKO-TEX® certified</span><i></i>
-    <span>Free US shipping on every pillow</span><i></i>
-    <span>100-night comfort trial</span><i></i>
-    <span>Designed &amp; made in Italy</span><i></i>
-    <span>Clinically tested · OEKO-TEX® certified</span><i></i>
+<!-- Promo bar -->
+<div class="promo" role="region" aria-label="Current offers">
+  <div class="promo__track">
+    <span><b>30-night</b> risk-free trial</span><i></i>
+    <span><b>Free</b> shipping &amp; returns</span><i></i>
+    <span>Bundle two pillows, <b>save 15%</b> with code <b>BUNDLE15</b></span><i></i>
+    <span>Better sleep for just <b>$0.18</b> a day</span><i></i>
+    <span><b>30-night</b> risk-free trial</span><i></i>
+    <span><b>Free</b> shipping &amp; returns</span><i></i>
+    <span>Bundle two pillows, <b>save 15%</b> with code <b>BUNDLE15</b></span><i></i>
+    <span>Better sleep for just <b>$0.18</b> a day</span><i></i>
   </div>
 </div>
 
 <!-- Header -->
 <header class="hdr" id="top">
-  <div class="hdr__in wrap">
-    <a href="#top" class="logo" aria-label="Technogel home">Technogel<sup>®</sup></a>
-
+  <div class="hdr__in">
+    <a class="hdr__logo" href="#top" aria-label="Technogel home"><svg class="logo-svg" role="img" aria-label="Technogel" fill="currentColor" fill-rule="evenodd" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 495.41 106.19"> <path d="M86.51,78.41q-.6,8.24-.6,17.32V127q0,17.43.87,19.22c.58,1.18,2.65,1.78,6.22,1.78h4.08v3.42c-6.44-.29-11.9-.45-16.36-.45s-9.93.16-16.26.45V148H69c2.4,0,4-.33,4.68-1s1.18-1.9,1.37-3.76q.54-6.42.54-16.55V95.4q0-9.25-.38-17H69.69q-13.51,0-14.88.64c-.9.41-1.51,2-1.79,4.87l-.77,7.31H48.83l.11-6.53q0-3.95-.71-11.35,29.58.45,34.78.45l30.3-.45q-1,9.27-1.19,17.88h-3.43l-.54-7.15c-.22-2.47-.54-3.93-.94-4.39a4.17,4.17,0,0,0-2.68-.84q-6-.43-13.74-.44Z" transform="translate(-48.23 -73.35)"/> <path d="M125.28,111a10.82,10.82,0,0,1,8.81-4,12.1,12.1,0,0,1,6.25,1.59,9.1,9.1,0,0,1,3.8,4,20.06,20.06,0,0,1,1.71,8.18v2.74c-2.29.22-4.67.34-7.13.34-6.15,0-11.75-.1-16.84-.3.06-5.65,1.2-9.83,3.4-12.51ZM134,127.42c6.22,0,11.09-.15,14.59-.42a37.47,37.47,0,0,0,6.19-1.08l.15-2.92q0-9.27-5.12-14.41T136,103.43a24.36,24.36,0,0,0-11.91,3.42q-6.14,3.42-8.4,7.42a28.65,28.65,0,0,0-3.46,14.41q0,10.89,6.14,17.24t16.16,6.37a33.73,33.73,0,0,0,8.93-1.19,35.86,35.86,0,0,0,8.44-3.58l1.58-4.16-.83-.74a27.56,27.56,0,0,1-6.73,3.45,21,21,0,0,1-6.82,1.15,16.16,16.16,0,0,1-12.38-5q-4.71-5-5-14.76Z" transform="translate(-48.23 -73.35)"/> <path d="M201.37,144.21l1.34,1.18-2,3.17a29.2,29.2,0,0,1-14.19,3.73,25.35,25.35,0,0,1-12.34-2.78,19.11,19.11,0,0,1-7.84-8A26.36,26.36,0,0,1,163.54,129a26.83,26.83,0,0,1,2.12-11.11,17.56,17.56,0,0,1,6-7.4,60.31,60.31,0,0,1,9.56-5.25,21.78,21.78,0,0,1,9.05-1.83,29.77,29.77,0,0,1,6.56.63,26,26,0,0,1,5.91,2.21,76.61,76.61,0,0,0-1.35,13.1h-3v-2.48a8.17,8.17,0,0,0-.91-4.49c-.62-.88-2-1.75-4.2-2.61a19.33,19.33,0,0,0-7.14-1.29c-4.47,0-7.92,1.37-10.34,4.08s-3.62,6.8-3.62,12.21q0,10.45,5.34,16.73a15.39,15.39,0,0,0,12.35,5.7,22.55,22.55,0,0,0,5.83-.77,26.7,26.7,0,0,0,5.68-2.24Z" transform="translate(-48.23 -73.35)"/> <path d="M226.83,112.85l6.45-5.7a13.14,13.14,0,0,1,4.45-2.92,15.56,15.56,0,0,1,5.3-.8,19.38,19.38,0,0,1,9.45,2.2,12.21,12.21,0,0,1,5.56,5.65c1,2.3,1.56,6.19,1.56,11.7l-.15,14.64a63.25,63.25,0,0,0,.38,7.82,2.79,2.79,0,0,0,.79,1.78,5.18,5.18,0,0,0,2.8.8l3.62.39v2.83q-4.71-.3-9.19-.3c-2.56,0-5.1.1-7.64.3q.9-12.39.9-24.41c0-5.36-.34-9-1-10.92a8.75,8.75,0,0,0-3.63-4.54,12,12,0,0,0-6.62-1.68,14.55,14.55,0,0,0-7.47,2,11.33,11.33,0,0,0-4.65,4.52q-.89,1.83-.89,8.7v8.61q0,11.76.55,13c.36.83,1.67,1.34,4,1.54l4.29.39v2.83q-7.69-.3-12.38-.3c-3.27,0-7.52.1-12.79.3v-2.83l3.09-.4a10.94,10.94,0,0,0,3.63-.81,3,3,0,0,0,1-2.16q.36-2.68.35-12V99.55q0-13.24-.68-14.84c-.3-.72-1.62-1.08-4-1.08h-3.38V80.8a66.07,66.07,0,0,0,12.28-2.21l4.06-1.37c.53,0,.79.35.79,1l-.16,2-.32,8.89c-.17,4.48-.27,8-.27,10.43v13.24Z" transform="translate(-48.23 -73.35)"/> <path d="M290.73,112.9l7.47-6.64a8.93,8.93,0,0,1,2.83-1.74,20.75,20.75,0,0,1,6.53-1.09,18.52,18.52,0,0,1,9.16,2.16,12.91,12.91,0,0,1,5.54,5.59q1.68,3.43,1.68,10.77l-.15,15.58c0,5.37.24,8.48.68,9.3.6,1,1.81,1.58,3.58,1.58h3.48v2.83c-3.47-.2-6.49-.3-9-.3s-5.13.1-8,.3q.9-9.62.9-26c0-4.41-.4-7.54-1.17-9.38a9.52,9.52,0,0,0-3.93-4.45,12.52,12.52,0,0,0-6.64-1.68,13.59,13.59,0,0,0-8.18,2.43,10.06,10.06,0,0,0-4.16,5.33q-.5,1.93-.49,10.1c0,6,0,11.63.15,16.81,0,1.54.26,2.51.7,2.92a6,6,0,0,0,4.09,1.13h3.54v2.83c-5.59-.2-10.05-.3-13.35-.3q-5.26,0-12,.3v-2.83h3.58c2.44,0,3.87-.57,4.28-1.71s.63-8,.63-20.54q0-8.46-.2-13.25a3,3,0,0,0-.8-2.18c-.46-.4-1.77-.59-3.91-.59h-3.58v-2.83a60.07,60.07,0,0,0,7.62-1.36,55.37,55.37,0,0,0,7.57-2.61,2,2,0,0,1,.85-.2q.78,0,.78,1.14l0,1.9-.1,6.72Z" transform="translate(-48.23 -73.35)"/> <path d="M347.44,114.27A11.75,11.75,0,0,1,352,109a12.52,12.52,0,0,1,6.92-2,13.18,13.18,0,0,1,7.81,2.49,17.07,17.07,0,0,1,5.64,8,35.26,35.26,0,0,1,2.13,12.92q0,9.24-3.62,13.78a11.52,11.52,0,0,1-9.48,4.55q-7.72,0-11.83-7.24t-4.11-17.42a23.86,23.86,0,0,1,2-9.78Zm-5.33,31.36q6.19,6.65,16.05,6.66a25.76,25.76,0,0,0,17.62-6.49q8.24-7.23,8.23-19.5,0-10.39-6.31-16.63t-16.82-6.24a26.43,26.43,0,0,0-12.95,3.13,22.3,22.3,0,0,0-8.86,8.63,24.46,24.46,0,0,0-3.16,12.35q0,11.43,6.2,18.09Z" transform="translate(-48.23 -73.35)"/> <path d="M421.39,129.47a9.92,9.92,0,0,1-7.62,3.15,9.73,9.73,0,0,1-7.81-3.75q-3.12-3.77-3.11-10.37,0-5.48,2.86-8.56a10.44,10.44,0,0,1,15.45.7q3.13,3.8,3.13,10c0,3.78-1,6.72-2.9,8.83Zm19.43-16.8a34.33,34.33,0,0,1,2.68-4.47l-.54-1a85.84,85.84,0,0,1-9.93.45H428.9a19.61,19.61,0,0,0-5.78-3.34,20.24,20.24,0,0,0-6.58-1,28.31,28.31,0,0,0-12.24,3,17.39,17.39,0,0,0-7.53,6.51,17.09,17.09,0,0,0-2.56,9.15,13.22,13.22,0,0,0,3.42,9.4c1.72,1.83,4.55,3.22,8.46,4.22L401.38,139a9.78,9.78,0,0,0-3.21,3,8.17,8.17,0,0,0-1.13,4,3.73,3.73,0,0,0,1.14,2.81c.75.74,2.46,1.54,5.1,2.42a57.56,57.56,0,0,1-8.59,4.89,14,14,0,0,0-2.86,8.09,13.52,13.52,0,0,0,5.47,10.9q5.49,4.41,15.64,4.42a33.89,33.89,0,0,0,14.76-3.07,23.37,23.37,0,0,0,9.76-8.13,18.9,18.9,0,0,0,3.36-10.6,16.5,16.5,0,0,0-1.47-7.09,10,10,0,0,0-3.55-4.41,11.61,11.61,0,0,0-6-1.26c-1.82,0-4.73.1-8.77.29-2.83.1-5,.16-6.51.16-3.94,0-6.56-.36-7.85-1.06a3.28,3.28,0,0,1-1.91-2.92,3.9,3.9,0,0,1,.85-2.3,21.16,21.16,0,0,1,4.07-3.55H412a23.06,23.06,0,0,0,10.66-2.51,19.12,19.12,0,0,0,7.6-6.64,15.43,15.43,0,0,0,2.66-8.54,16.35,16.35,0,0,0-1.14-5.24ZM422.45,152a22.7,22.7,0,0,1,5.2.35,7.14,7.14,0,0,1,3.82,3.11,10,10,0,0,1,1.61,5.64,13.16,13.16,0,0,1-2.3,7.29,15.82,15.82,0,0,1-6.45,5.55,21.59,21.59,0,0,1-9.63,2c-4.76,0-8.46-1.18-11.13-3.5a11.39,11.39,0,0,1-4-8.91,12.75,12.75,0,0,1,1.49-6.47c.58-1.09,2.27-2.53,5-4.3.87-.53,2.46-.79,4.8-.79Z" transform="translate(-48.23 -73.35)"/> <path d="M460.94,111a10.78,10.78,0,0,1,8.8-4A12.11,12.11,0,0,1,476,108.6a9.13,9.13,0,0,1,3.79,4,20.07,20.07,0,0,1,1.72,8.18v2.74c-2.3.22-4.68.34-7.14.34-6.14,0-11.74-.1-16.84-.3.07-5.65,1.2-9.83,3.41-12.51Zm8.73,16.39c6.22,0,11.09-.15,14.59-.42a37.36,37.36,0,0,0,6.18-1.08l.16-2.92q0-9.27-5.12-14.41t-13.85-5.16a24.4,24.4,0,0,0-11.92,3.42q-6.13,3.42-8.39,7.42a28.65,28.65,0,0,0-3.47,14.41q0,10.89,6.15,17.24t16.16,6.37a33.85,33.85,0,0,0,8.93-1.19,35.86,35.86,0,0,0,8.44-3.58l1.58-4.16-.84-.74a27.21,27.21,0,0,1-6.73,3.45,21,21,0,0,1-6.82,1.15,16.16,16.16,0,0,1-12.38-5q-4.71-5-5-14.76Z" transform="translate(-48.23 -73.35)"/> <path d="M514.24,77.82q-.75,14.49-.74,26.22v25.43c0,10.08.2,15.82.63,17.17.23.68,1.3,1.13,3.24,1.33l4.17.44v2.83q-5.37-.3-10.25-.3-5.43,0-14.17.3v-2.83l4.2-.35c1.86-.16,2.93-.64,3.19-1.43.42-1.3.65-7.16.65-17.61V103.7l-.06-9.52L505,87.69c0-1.62-.17-2.61-.53-3-.53-.52-1.62-.79-3.29-.79h-4V81.1q10.2-.94,16.28-3.88l.84.6Z" transform="translate(-48.23 -73.35)"/> <path d="M538.42,79.45a7.88,7.88,0,0,1,4,6.87,7.72,7.72,0,0,1-1,4,7.86,7.86,0,0,1-2.9,2.91,7.93,7.93,0,0,1-7.92,0,8,8,0,0,1-2.89-2.91,7.95,7.95,0,0,1,0-7.93,8,8,0,0,1,2.89-2.9,7.93,7.93,0,0,1,7.92,0Zm-8.54-1.09a8.91,8.91,0,0,0-3.36,3.37,9.21,9.21,0,0,0,3.36,12.56,9.16,9.16,0,0,0,9.17,0,9.2,9.2,0,0,0,3.36-12.56,8.91,8.91,0,0,0-3.36-3.37,9.1,9.1,0,0,0-9.17,0Zm1.39,3.07c.09.07.12.29.12.68v7.42a1.33,1.33,0,0,1-.1.7,1.89,1.89,0,0,1-.76.15l-.37,0v.67h4.06v-.67l-.73-.07a.73.73,0,0,1-.48-.15,2,2,0,0,1-.09-.75V86.36h.61a2.09,2.09,0,0,1,1.35.32,6.76,6.76,0,0,1,1,2,6.2,6.2,0,0,0,1,2,1.53,1.53,0,0,0,1.09.39h1.37v-.75c-.57,0-.94-.06-1.1-.25a13.27,13.27,0,0,1-1-2A5.11,5.11,0,0,0,535.83,86a3.15,3.15,0,0,0,1.8-1,2.58,2.58,0,0,0,.61-1.73,2.4,2.4,0,0,0-.88-2,4.39,4.39,0,0,0-2.84-.75h-4.44v.76a4.15,4.15,0,0,1,1.19.13Zm1.65.55c0-.29.06-.48.17-.56a2,2,0,0,1,.92-.12,3.43,3.43,0,0,1,2.15.52,1.89,1.89,0,0,1,.63,1.54,1.93,1.93,0,0,1-.73,1.64,4.37,4.37,0,0,1-2.58.57l-.56,0V82Z" transform="translate(-48.23 -73.35)"/> </svg></a>
     <nav class="nav" aria-label="Main">
       <div class="nav__item has-mega">
-        <button class="nav__link" aria-expanded="false" aria-controls="mega-products">Products <span class="chev"></span></button>
-        <div class="mega" id="mega-products">
-          <div class="wrap mega__grid">
-            <div class="mega__col">
-              <p class="mega__h">Pillow Range</p>
-              <a href="#shop"><strong>Original Collection</strong><span>Our wide range of everyday gel pillows</span></a>
-              <a href="#shop"><strong>Original Travel</strong><span>Smart pillows for life on the move</span></a>
-              <a href="#shop"><strong>Vive Collection</strong><span>Our most exclusive pillow collection</span></a>
-              <a href="#shop"><strong>Lab Collection</strong><span>Clinically designed pillows for medical use</span></a>
+        <button class="nav__link" aria-expanded="false" aria-controls="mega-shop">Shop <span class="nav__chev"></span></button>
+        <div class="mega" id="mega-shop">
+          <div class="mega__in">
+            <div class="mega__cols">
+              <div>
+                <p class="mega__k">Pillows</p>
+                <a href="#shop" data-filter-link="pillow">Original Collection</a>
+                <a href="#shop" data-filter-link="pillow">Vive® Collection</a>
+                <a href="#shop" data-filter-link="pillow">Lab Collection</a>
+                <a href="#shop" data-filter-link="travel">Travel &amp; Kids</a>
+              </div>
+              <div>
+                <p class="mega__k">Comfort &amp; living</p>
+                <a href="#shop" data-filter-link="living">Seat pads</a>
+                <a href="#shop" data-filter-link="living">Lumbar support</a>
+                <a href="#collections">Mattresses</a>
+                <a href="#finder">Find my pillow →</a>
+              </div>
             </div>
-            <div class="mega__col">
-              <p class="mega__h">Mattress Range</p>
-              <a href="#shop"><strong>Original Collection</strong><span>Gel mattresses for deep, cool sleep</span></a>
-              <p class="mega__h mt">Living Range</p>
-              <a href="#shop"><strong>Living</strong><span>Seat pads &amp; everyday comfort accessories</span></a>
-            </div>
-            <a class="mega__promo" href="#finder">
-              <span class="mega__promo-k">Not sure where to start?</span>
-              <strong>Find your perfect pillow in 30 seconds</strong>
-              <span class="btn btn--sm btn--light">Take the sleep quiz →</span>
+            <a class="mega__card" href="https://technogelusa.com/products/technogel-contour-cooling-gel-pillow" target="_blank" rel="noopener">
+              <span class="mega__tag">Best seller</span>
+              <img src="assets/img/p_contour.webp" alt="Technogel Contour pillow" loading="lazy">
+              <span class="mega__name">Contour Pillow</span>
+              <span class="mega__price">$199 <s>$215</s></span>
+            </a>
+            <a class="mega__card mega__card--dark" href="https://technogelusa.com/products/vive-deluxe-gel-pillow" target="_blank" rel="noopener">
+              <span class="mega__tag">Most exclusive</span>
+              <img src="assets/img/p_vive.webp" alt="Technogel Vive pillow" loading="lazy">
+              <span class="mega__name">Vive® Deluxe</span>
+              <span class="mega__price">$249 <s>$269</s></span>
             </a>
           </div>
         </div>
       </div>
-      <a class="nav__link" href="#gel">Discover the Gel</a>
-      <div class="nav__item has-mega">
-        <button class="nav__link" aria-expanded="false" aria-controls="mega-b2b">B2B <span class="chev"></span></button>
-        <div class="mega" id="mega-b2b">
-          <div class="wrap mega__grid mega__grid--b2b">
-            <a href="#b2b"><strong>Automotive</strong><span>Sealings, comfort seating, anti-vibration pads</span></a>
-            <a href="#b2b"><strong>Bonding</strong><span>Sticky pads, adhesion tapes, removable tools</span></a>
-            <a href="#b2b"><strong>Consumer</strong><span>Paddings, helmet pads, mouse pads</span></a>
-            <a href="#b2b"><strong>Footwear</strong><span>Insoles, after-sales, comfort paddings</span></a>
-            <a href="#b2b"><strong>Gaming</strong><span>Seating, arm rests, slot machine buttons</span></a>
-            <a href="#b2b"><strong>Industry</strong><span>Cable sealings, heavy industry sealings</span></a>
-            <a href="#b2b"><strong>Medical</strong><span>Impulse wave pads, sleep apnea masks, orthotics</span></a>
-            <a href="#b2b"><strong>Office</strong><span>Arm rests, mouse pads, office seats</span></a>
-            <a href="#b2b"><strong>Shooting sports</strong><span>Recoil pads, magazine bumpers, cheek pads</span></a>
-          </div>
-        </div>
-      </div>
-      <a class="nav__link" href="#story">Company</a>
-      <a class="nav__link" href="#news">News</a>
-      <a class="nav__link" href="#contact">Contact</a>
+      <a class="nav__link" href="#technology">Technology</a>
+      <a class="nav__link" href="#finder">Pillow finder</a>
+      <a class="nav__link" href="#business">For business</a>
+      <a class="nav__link" href="#story">Our story</a>
     </nav>
-
-    <div class="hdr__tools">
-      <a class="tool" href="#contact" aria-label="Store locator">
-        <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 21s-7-6.1-7-11.5A7 7 0 0 1 19 9.5C19 14.9 12 21 12 21z"/><circle cx="12" cy="9.5" r="2.5"/></svg>
-        <span>Stores</span>
+    <div class="hdr__right">
+      <a class="hdr__icon" href="#locations" aria-label="Store locator" data-tip="Stores">
+        <svg viewBox="0 0 24 24"><path d="M12 21s-7-6.2-7-11.6a7 7 0 0 1 14 0C19 14.8 12 21 12 21z"/><circle cx="12" cy="9.4" r="2.4"/></svg>
       </a>
-      <a class="btn btn--primary btn--sm hdr__cta" href="#shop">Shop Online</a>
-      <button class="burger" aria-label="Open menu" aria-expanded="false" aria-controls="drawer"><span></span><span></span></button>
+      <a class="hdr__icon" href="https://technogelusa.com/cart" target="_blank" rel="noopener" aria-label="Cart">
+        <svg viewBox="0 0 24 24"><path d="M5 7h14l-1.2 11.2a2 2 0 0 1-2 1.8H8.2a2 2 0 0 1-2-1.8z"/><path d="M9 7a3 3 0 0 1 6 0"/></svg>
+      </a>
+      <a class="btn btn--blue btn--sm hdr__cta" href="#shop"><span>Shop now</span></a>
+      <button class="burger" aria-label="Menu" aria-expanded="false" aria-controls="drawer"><i></i><i></i></button>
     </div>
   </div>
 </header>
 
-<!-- Mobile drawer -->
 <div class="drawer" id="drawer" aria-hidden="true">
-  <nav class="drawer__nav" aria-label="Mobile">
-    <p class="drawer__k">Shop</p>
-    <a href="#shop">Pillows</a>
-    <a href="#shop">Mattresses</a>
-    <a href="#shop">Living &amp; Travel</a>
-    <a href="#finder">Sleep quiz</a>
-    <p class="drawer__k">Explore</p>
-    <a href="#gel">Discover the Gel</a>
-    <a href="#b2b">B2B Solutions</a>
-    <a href="#story">Company</a>
-    <a href="#news">News</a>
-    <a href="#contact">Contact &amp; Stores</a>
-    <a class="btn btn--primary" href="#shop">Shop Online</a>
-  </nav>
+  <div class="drawer__in">
+    <a href="#shop">Shop pillows</a>
+    <a href="#finder">Pillow finder</a>
+    <a href="#technology">Technology</a>
+    <a href="#collections">Mattresses &amp; living</a>
+    <a href="#business">For business</a>
+    <a href="#story">Our story</a>
+    <a href="#locations">Stores &amp; contact</a>
+    <div class="drawer__foot">
+      <a class="btn btn--blue btn--block" href="#shop"><span>Shop now · from $69</span></a>
+      <p>30-night trial · Free shipping &amp; returns</p>
+    </div>
+  </div>
 </div>
 
 <main id="main">
 
-  <!-- HERO -->
-  <section class="hero">
-    <div class="hero__bg" aria-hidden="true">
-      <div class="hero__glow hero__glow--a"></div>
-      <div class="hero__glow hero__glow--b"></div>
-      <svg class="hero__waves" viewBox="0 0 1440 600" preserveAspectRatio="none"><path d="M0 420C220 360 380 480 620 430S1060 300 1440 380V600H0Z"/><path d="M0 480C260 430 420 540 700 490S1120 390 1440 450V600H0Z"/></svg>
-    </div>
+<!-- ============ HERO ============ -->
+<section class="hero" data-theme="dark">
+  <div class="hero__media" aria-hidden="true">
+    <video class="hero__video" autoplay muted loop playsinline preload="auto" poster="assets/video/hero-poster.jpg">
+      <source src="assets/video/hero-gel.webm" type="video/webm">
+      <source src="assets/video/hero-gel.mp4" type="video/mp4">
+    </video>
+    <div class="hero__shade"></div>
+    <div class="hero__grain"></div>
+  </div>
 
-    <div class="wrap hero__grid">
-      <div class="hero__copy">
-        <p class="eyebrow" data-hero><span class="dot"></span> The original gel technology · since 1990</p>
-        <h1 class="hero__h" data-hero>
-          <span class="line"><span>Sleep cooler.</span></span>
-          <span class="line"><span>Wake up <em>lighter.</em></span></span>
-        </h1>
-        <p class="hero__sub" data-hero>Technogel® is a patented gel that moves with you in <strong>three dimensions</strong>. It draws heat away and spreads pressure evenly, so your neck, shoulders and back can rest. Made in Italy and clinically tested.</p>
-        <div class="hero__ctas" data-hero>
-          <a href="#shop" class="btn btn--primary btn--lg magnetic">Shop Pillows <span class="arr">→</span></a>
-          <a href="#finder" class="btn btn--ghost btn--lg">Find my pillow <small>30 sec</small></a>
-        </div>
-        <ul class="hero__proof" data-hero>
-          <li><span class="stars" aria-label="5 stars">★★★★★</span> Loved in 50+ countries</li>
-          <li><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M5 12l4 4 10-10"/></svg> 100-night trial</li>
-          <li><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M5 12l4 4 10-10"/></svg> Free US shipping</li>
-        </ul>
-      </div>
-
-      <div class="hero__visual" data-hero-visual>
-        <div class="gelcard">
-          <canvas id="gelHero" aria-label="Interactive Technogel surface. Move your pointer to press the gel." role="img"></canvas>
-          <div class="gelcard__hint"><span class="pulse"></span> Touch the gel. Watch it adapt.</div>
-        </div>
-        <div class="chip chip--a"><b>3D</b> adapts to every move</div>
-        <div class="chip chip--b"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 2v20M4.9 6l14.2 12M19.1 6 4.9 18"/></svg> Cooling, all night</div>
-        <div class="chip chip--c"><span class="flag"><i></i><i></i><i></i></span> Made in Italy</div>
+  <div class="hero__in">
+    <p class="eyebrow hero__eyebrow"><span class="pulse"></span>The original gel technology · since 1998</p>
+    <h1 class="hero__title">
+      <span class="ln"><span>Pure gel.</span></span>
+      <span class="ln"><span><em>Cooler</em> nights.</span></span>
+    </h1>
+    <div class="hero__row">
+      <p class="hero__sub">It isn't foam with gel mixed in. Technogel® is a patented, plasticizer-free gel that moves with you in 3D, pulls heat away and never flattens. Engineered in Germany, made in Italy.</p>
+      <div class="hero__ctas">
+        <a href="#shop" class="btn btn--blue btn--lg magnetic"><span>Shop pillows · from $199</span><i class="btn__arr">→</i></a>
+        <a href="#finder" class="btn btn--glass btn--lg"><span>Find my pillow</span><small>60 sec</small></a>
       </div>
     </div>
+    <ul class="hero__proof">
+      <li><svg viewBox="0 0 24 24"><path d="M5 12.5l4.2 4.2L19 7"/></svg>30-night risk-free trial</li>
+      <li><svg viewBox="0 0 24 24"><path d="M5 12.5l4.2 4.2L19 7"/></svg>Free shipping &amp; returns</li>
+      <li><svg viewBox="0 0 24 24"><path d="M5 12.5l4.2 4.2L19 7"/></svg>OEKO-TEX® Standard 100</li>
+    </ul>
+  </div>
 
-    <div class="wrap">
-      <div class="trustbar" data-reveal>
-        <span>Clinically tested</span>
-        <span>OEKO-TEX® Standard 100</span>
-        <span>Hohenstein Institute tested</span>
-        <span>Plasticizer-free gel</span>
-        <span>Patented tower design</span>
+  <a class="hero__card" href="https://technogelusa.com/products/technogel-contour-cooling-gel-pillow" target="_blank" rel="noopener" data-cursor="Shop">
+    <span class="hero__card-tag">Best seller</span>
+    <img src="assets/img/p_contour.webp" alt="Technogel Contour cooling gel pillow" width="1100" height="640">
+    <span class="hero__card-body">
+      <span class="hero__card-name">Contour Pillow</span>
+      <span class="hero__card-meta"><span class="stars">★★★★★</span> Neck support · Cooling</span>
+      <span class="hero__card-price">$199 <s>$215</s></span>
+    </span>
+    <span class="hero__card-go">→</span>
+  </a>
+
+  <div class="hero__scroll" aria-hidden="true"><span>Scroll</span><i></i></div>
+</section>
+
+<!-- ============ CREDENTIALS MARQUEE ============ -->
+<section class="creds" aria-label="Certifications and credentials">
+  <div class="creds__track">
+    <span>OEKO-TEX® Standard 100</span><b>✦</b>
+    <span>Hohenstein Institute tested</span><b>✦</b>
+    <span>PFI Pirmasens: best rebound</span><b>✦</b>
+    <span>DIN EN ISO 9001</span><b>✦</b>
+    <span>Clinically studied</span><b>✦</b>
+    <span>Plasticizer-free</span><b>✦</b>
+    <span>Made in Italy</span><b>✦</b>
+    <span>German engineering</span><b>✦</b>
+    <span>OEKO-TEX® Standard 100</span><b>✦</b>
+    <span>Hohenstein Institute tested</span><b>✦</b>
+    <span>PFI Pirmasens: best rebound</span><b>✦</b>
+    <span>DIN EN ISO 9001</span><b>✦</b>
+    <span>Clinically studied</span><b>✦</b>
+    <span>Plasticizer-free</span><b>✦</b>
+    <span>Made in Italy</span><b>✦</b>
+    <span>German engineering</span><b>✦</b>
+  </div>
+</section>
+
+<!-- ============ MANIFESTO ============ -->
+<section class="manifesto">
+  <div class="wrap">
+    <p class="kicker">Why Technogel®</p>
+    <p class="manifesto__text" data-words>Foam traps heat. Foam flattens. Foam pushes back. <strong>Technogel® does none of it.</strong> It flows like a liquid, holds you like a solid and stays cool from the first minute to the last.</p>
+    <div class="manifesto__foot">
+      <figure class="manifesto__img"><img src="assets/img/what_is.webp" alt="A hand pressing into blue Technogel" loading="lazy"></figure>
+      <div class="manifesto__facts">
+        <div><b data-count="30">0</b><sup>+</sup><span>years of gel innovation</span></div>
+        <div><b>3D</b><span>moves in every direction, not just down</span></div>
+        <div><b>0</b><span>plasticizers or harmful substances</span></div>
+        <div><b>$0.18</b><span>a night for better sleep</span></div>
       </div>
     </div>
-  </section>
+  </div>
+</section>
 
-  <!-- AUDIENCE SPLIT -->
-  <section class="split" aria-label="Select your area">
-    <div class="wrap">
-      <div class="sec-head sec-head--center" data-reveal>
-        <p class="kicker">Select your area</p>
-        <h2 class="h2">One gel. Two worlds of comfort.</h2>
+<!-- ============ SHOP ============ -->
+<section class="shop" id="shop">
+  <div class="wrap">
+    <div class="head head--split">
+      <div>
+        <p class="kicker">Best sellers</p>
+        <h2 class="h2">Find your <em>perfect</em> pillow.</h2>
       </div>
-      <div class="split__grid">
-        <a class="area" href="#shop" data-reveal>
-          <img src="https://images.unsplash.com/photo-1520206183501-b80df61043c2?w=1200&q=70&auto=format&fit=crop" alt="Woman sleeping peacefully on a pillow" loading="lazy">
-          <div class="area__body">
-            <span class="area__tag">For your home</span>
-            <h3>Solutions for your sleep</h3>
-            <p>Pillows, mattresses and living accessories that keep you cool and supported.</p>
-            <span class="area__cta">Shop sleep products <i>→</i></span>
-          </div>
-        </a>
-        <a class="area" href="#b2b" data-reveal>
-          <img src="https://images.unsplash.com/photo-1518152006812-edab29b069ac?w=1200&q=70&auto=format&fit=crop" alt="Laboratory microscopes in a research facility" loading="lazy">
-          <div class="area__body">
-            <span class="area__tag">For your business</span>
-            <h3>Solutions for your industry</h3>
-            <p>Custom gel parts for automotive, medical, footwear, office and more, made with our engineers.</p>
-            <span class="area__cta">Explore B2B solutions <i>→</i></span>
-          </div>
-        </a>
-      </div>
-    </div>
-  </section>
-
-  <!-- PROBLEM / STATS -->
-  <section class="problem">
-    <div class="wrap problem__grid">
-      <div class="problem__copy" data-reveal>
-        <p class="kicker">Why you wake up tired</p>
-        <h2 class="h2">Your pillow traps heat, flattens overnight, and leaves your neck to do the work.</h2>
-        <p class="lead">Ordinary foam presses back and holds on to warmth. Technogel® is different. It isn't foam with a little gel mixed in. It is pure gel that flows with you, stays cool to the touch and keeps its shape for years.</p>
-      </div>
-      <div class="stats">
-        <div class="stat" data-reveal><b><span data-count="30">0</span>+</b><span>years of gel innovation</span></div>
-        <div class="stat" data-reveal><b><span data-count="50">0</span>+</b><span>countries sleeping on Technogel®</span></div>
-        <div class="stat" data-reveal><b><span data-count="3">0</span>D</b><span>deformation for true body adaptation</span></div>
-        <div class="stat" data-reveal><b><span data-count="100">0</span>%</b><span>designed &amp; made in Italy</span></div>
-      </div>
-    </div>
-  </section>
-
-  <!-- DISCOVER THE GEL (pinned) -->
-  <section class="gel" id="gel">
-    <div class="wrap gel__grid">
-      <div class="gel__stage">
-        <div class="gel__sticky">
-          <div class="gel__screen">
-            <canvas id="gelDemo" aria-hidden="true"></canvas>
-            <div class="gel__legend">
-              <span class="gel__legend-k" id="gelLegend">Pressure applied</span>
-              <div class="gel__bar"><i></i></div>
-            </div>
-          </div>
-          <div class="gel__dots" aria-hidden="true"><i class="on"></i><i></i><i></i></div>
-        </div>
-      </div>
-      <div class="gel__steps">
-        <div class="sec-head" data-reveal>
-          <p class="kicker">Discover the gel</p>
-          <h2 class="h2">What makes Technogel® unlike anything you've slept on</h2>
-        </div>
-        <article class="step is-active" data-step="0">
-          <span class="step__n">01</span>
-          <h3>It adapts in three dimensions</h3>
-          <p>Foam only squashes down. Technogel® also moves sideways and in every direction, so it shapes itself to your head, neck and body in any position. There's no "sinking" feeling and no pushing back.</p>
-          <ul class="ticks"><li>Fits back, side &amp; stomach sleepers</li><li>Instant response when you turn</li></ul>
-        </article>
-        <article class="step" data-step="1">
-          <span class="step__n">02</span>
-          <h3>It draws heat away from your body</h3>
-          <p>The gel has a very high heat capacity, and our patented tower design lets air flow through. Together they carry heat away from your body. Clinical studies show a gentle drop in body temperature, which helps you reach and stay in deep sleep longer.</p>
-          <ul class="ticks"><li>Cool-to-touch, all night</li><li>Patented ventilation channels</li></ul>
-        </article>
-        <article class="step" data-step="2">
-          <span class="step__n">03</span>
-          <h3>It spreads pressure evenly</h3>
-          <p>Shoulders and hips carry most of your weight. Technogel® spreads that pressure over a larger area, which relieves pressure points and lets your muscles relax. That's why hospitals and wheelchair users have relied on our gel since 1990.</p>
-          <ul class="ticks"><li>Fewer pressure points</li><li>Permanently elastic, never flattens</li></ul>
-        </article>
-        <a href="#compare" class="link-arrow" data-reveal>See how it compares to memory foam <i>→</i></a>
-      </div>
-    </div>
-  </section>
-
-  <!-- BEST SELLERS -->
-  <section class="shop" id="shop">
-    <div class="wrap">
-      <div class="sec-head sec-head--row" data-reveal>
-        <div>
-          <p class="kicker">Best sellers</p>
-          <h2 class="h2">Find the comfort that fits your sleep</h2>
-        </div>
-        <div class="tabs" role="tablist" aria-label="Product category">
+      <div class="head__side">
+        <p>Every Technogel® pillow pairs our patented gel with premium memory foam. Pick the shape that fits how you sleep.</p>
+        <div class="chips" role="tablist" aria-label="Filter products">
           <button role="tab" aria-selected="true" data-filter="all">All</button>
           <button role="tab" aria-selected="false" data-filter="pillow">Pillows</button>
-          <button role="tab" aria-selected="false" data-filter="mattress">Mattresses</button>
-          <button role="tab" aria-selected="false" data-filter="living">Living &amp; Travel</button>
+          <button role="tab" aria-selected="false" data-filter="living">Seat &amp; lumbar</button>
+          <button role="tab" aria-selected="false" data-filter="travel">Travel &amp; kids</button>
         </div>
-      </div>
-      <div class="products" id="products"><!-- rendered by script.js --></div>
-      <div class="shop__assure" data-reveal>
-        <span><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M3 7h11v9H3zM14 10h4l3 3v3h-7z"/><circle cx="7" cy="18" r="1.6"/><circle cx="17" cy="18" r="1.6"/></svg> Free US shipping</span>
-        <span><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M21 12a9 9 0 1 1-3-6.7M21 4v5h-5"/></svg> 100-night comfort trial</span>
-        <span><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 3l8 3v6c0 5-3.5 8-8 9-4.5-1-8-4-8-9V6z"/><path d="M8.5 12l2.5 2.5 4.5-5"/></svg> Up to 5-year warranty</span>
-        <span><svg viewBox="0 0 24 24" aria-hidden="true"><rect x="5" y="10" width="14" height="10" rx="2"/><path d="M8 10V7a4 4 0 0 1 8 0v3"/></svg> Secure checkout</span>
       </div>
     </div>
-  </section>
-
-  <!-- SLEEP FINDER QUIZ -->
-  <section class="finder" id="finder">
-    <div class="wrap finder__grid">
-      <div class="finder__intro" data-reveal>
-        <p class="kicker kicker--light">Sleep finder</p>
-        <h2 class="h2">Your perfect pillow in 3 quick questions</h2>
-        <p class="lead">Every sleeper is different. Tell us how you sleep, and we'll match you with the Technogel® pillow our sleep experts would pick for you.</p>
-        <ul class="finder__perks">
-          <li>Takes about 30 seconds</li>
-          <li>Personal recommendation</li>
-          <li>No email required</li>
-        </ul>
+  </div>
+  <div class="rail" id="rail">
+    <div class="rail__track" id="products"></div>
+  </div>
+  <div class="wrap">
+    <div class="rail__ui">
+      <div class="rail__progress"><i id="railBar"></i></div>
+      <div class="rail__btns">
+        <button class="rbtn" data-dir="-1" aria-label="Previous products">←</button>
+        <button class="rbtn" data-dir="1" aria-label="Next products">→</button>
       </div>
-      <div class="quiz" data-reveal>
-        <div class="quiz__progress"><i id="quizBar"></i></div>
-        <div class="quiz__step is-on" data-q="0">
-          <p class="quiz__count">Question 1 of 3</p>
-          <h3>How do you usually fall asleep?</h3>
-          <div class="quiz__opts">
-            <button data-v="back">On my back</button>
-            <button data-v="side">On my side</button>
-            <button data-v="mix">I move around</button>
+    </div>
+
+    <div class="bundle">
+      <div class="bundle__art" aria-hidden="true">
+        <img src="assets/img/p_deluxe.webp" alt="">
+        <img src="assets/img/p_contour.webp" alt="">
+      </div>
+      <div class="bundle__copy">
+        <p class="kicker kicker--light">Bundle &amp; save</p>
+        <h3>No pillow should have to sleep alone.</h3>
+        <p>Bundle two pillows and get <b>15% off</b> your order. Use code <button class="code" data-copy="BUNDLE15">BUNDLE15 <span>Copy</span></button></p>
+        <small>Applies to orders of $300 or more.</small>
+      </div>
+      <a class="btn btn--white btn--lg" href="https://technogelusa.com/collections/all" target="_blank" rel="noopener"><span>Build my bundle</span><i class="btn__arr">→</i></a>
+    </div>
+  </div>
+</section>
+
+<!-- ============ PRESS THE GEL (3D) ============ -->
+<section class="press" data-theme="dark" id="technology">
+  <canvas id="gel3d" aria-label="Interactive 3D Technogel surface. Move your pointer to press the gel." role="img"></canvas>
+  <div class="press__fallback" aria-hidden="true"></div>
+  <div class="press__in">
+    <p class="kicker kicker--light">Discover the gel</p>
+    <h2 class="h2 h2--xl">Go on, <em>press it.</em></h2>
+    <p class="press__sub">Move your cursor or finger over the gel. It gives way in every direction, then springs right back. That's what your head, neck and shoulders feel all night.</p>
+  </div>
+  <div class="press__hint"><span class="pulse"></span> Interactive · move to press</div>
+</section>
+
+<!-- ============ TECHNOLOGY CHAPTERS ============ -->
+<section class="tech" data-theme="dark">
+  <div class="wrap tech__grid">
+    <div class="tech__visual">
+      <div class="tech__frame">
+        <img class="tech__img is-on" src="assets/img/sleep_side.webp" decoding="async" alt="Woman sleeping on Technogel, shown from above">
+        <img class="tech__img" src="assets/img/thermo.webp" decoding="async" alt="Thermal camera showing heat on a bed">
+        <img class="tech__img" src="assets/img/deepsleep.webp" decoding="async" alt="Woman in deep sleep on a Technogel mattress">
+        <div class="tech__badge"><span id="techNum">01</span><i>/03</i></div>
+      </div>
+    </div>
+    <div class="tech__chapters">
+      <article class="chapter is-on" data-i="0">
+        <img class="chapter__img" src="assets/img/sleep_side.webp" alt="" loading="lazy"><p class="chapter__k">01 · 3D support</p>
+        <h3>Moves like water.<br><em>Supports like a solid.</em></h3>
+        <p>Foam only gives way downward. Technogel® also moves up, down, left and right, so it spreads your weight evenly from head to toe. It relieves tension and keeps your spine aligned while you move freely.</p>
+        <ul class="ticks"><li>Relieves more pressure than standard or memory foam</li><li>Fewer pressure points, less waking up with numbness</li></ul>
+      </article>
+      <article class="chapter" data-i="1">
+        <img class="chapter__img" src="assets/img/thermo.webp" alt="" loading="lazy"><p class="chapter__k">02 · Thermoregulation</p>
+        <h3>Pulls heat away.<br><em>Keeps it away.</em></h3>
+        <p>The gel has a naturally high thermal capacity, so it soaks up body heat and carries it off. Our patented tower-grid design keeps air moving. Foam is different: its tiny air chambers trap heat right against your skin.</p>
+        <ul class="ticks"><li>Patented tower-grid airflow</li><li>Patented vertical ventilation in every pillow</li></ul>
+      </article>
+      <article class="chapter" data-i="2">
+        <img class="chapter__img" src="assets/img/deepsleep.webp" alt="" loading="lazy"><p class="chapter__k">03 · Clinically proven</p>
+        <h3>Deeper sleep.<br><em>Measurably.</em></h3>
+        <p>In clinical tests, sleeping on Technogel® lowered core body temperature and heart rate, which led to deeper, more continuous sleep. You wake up refreshed, not hot and restless.</p>
+        <ul class="ticks"><li>Lower core body temperature</li><li>Lower heart rate · more continuous sleep</li></ul>
+      </article>
+    </div>
+  </div>
+
+  <!-- Heat comparison -->
+  <div class="wrap">
+    <div class="heat">
+      <div class="heat__copy">
+        <p class="kicker kicker--light">Feel the difference</p>
+        <h3 class="h3">Memory foam holds the heat.<br>Technogel® lets it go.</h3>
+        <p>Drag the slider to compare how each surface handles body heat during the night.</p>
+        <small>Illustration based on Technogel® thermoregulation research.</small>
+      </div>
+      <div class="heat__viz" id="heat">
+        <div class="heat__layer heat__layer--foam"><span class="heat__lab">Memory foam</span></div>
+        <div class="heat__layer heat__layer--gel"><span class="heat__lab heat__lab--r">Technogel®</span></div>
+        <div class="heat__handle" role="slider" tabindex="0" aria-label="Compare memory foam and Technogel" aria-valuemin="0" aria-valuemax="100" aria-valuenow="50"><span>⟷</span></div>
+        <div class="heat__scale"><span>Cool</span><i></i><span>Hot</span></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ============ COLLECTIONS ============ -->
+<section class="collections" id="collections">
+  <div class="wrap">
+    <div class="head head--split">
+      <div>
+        <p class="kicker">Collections</p>
+        <h2 class="h2">Comfort for <em>day</em> and night.</h2>
+      </div>
+      <p class="head__side">From the pillow you sleep on to the seat you work on, every product is built around the same original gel.</p>
+    </div>
+    <div class="acc-cols">
+      <a class="col is-open" href="#shop" data-filter-link="pillow">
+        <img src="assets/img/enter_pillows.webp" alt="Technogel pillow with gel surface" loading="lazy">
+        <div class="col__body">
+          <span class="col__n">01</span>
+          <h3>Pillows</h3>
+          <p>Original · Vive® · Lab · Travel. Contoured gel support for back, side and stomach sleepers.</p>
+          <span class="col__cta">Shop pillows · from $199 →</span>
+        </div>
+      </a>
+      <a class="col" href="#locations">
+        <img src="assets/img/enter_mattress.webp" alt="Technogel mattress with gel layer" loading="lazy">
+        <div class="col__body">
+          <span class="col__n">02</span>
+          <h3>Mattresses</h3>
+          <p>Armonia · Estasi · Favola · Sereno. Patented gel towers on zoned foam or Talalay latex.</p>
+          <span class="col__cta">Find a retailer →</span>
+        </div>
+      </a>
+      <a class="col" href="#shop" data-filter-link="living">
+        <img src="assets/img/enter_living.webp" alt="Technogel living accessories" loading="lazy">
+        <div class="col__body">
+          <span class="col__n">03</span>
+          <h3>Living</h3>
+          <p>Seat pads, lumbar support and travel. Healthy posture at your desk, in the car, on the go.</p>
+          <span class="col__cta">Shop living · from $69 →</span>
+        </div>
+      </a>
+    </div>
+  </div>
+</section>
+
+<!-- ============ FINDER ============ -->
+<section class="finder" id="finder">
+  <div class="wrap finder__grid">
+    <div class="finder__intro">
+      <p class="kicker">Pillow finder</p>
+      <h2 class="h2">Your perfect pillow in <em>60 seconds.</em></h2>
+      <p class="lead">Answer three quick questions and we'll match you with the pillow our sleep engineers would pick for you, in the right height.</p>
+      <ul class="finder__list">
+        <li>Personal recommendation</li>
+        <li>No email needed</li>
+        <li>Backed by a 30-night trial</li>
+      </ul>
+    </div>
+    <div class="quiz" id="quiz">
+      <div class="quiz__top">
+        <span class="quiz__step-label" id="quizLabel">Step 1 of 3</span>
+        <div class="quiz__bar"><i id="quizBar"></i></div>
+      </div>
+      <div class="quiz__panes">
+        <div class="pane is-on" data-q="0">
+          <h3>How do you usually sleep?</h3>
+          <div class="opts opts--3">
+            <button data-v="back"><span class="opt__ic"><svg viewBox="0 0 48 48"><circle cx="12" cy="24" r="5"/><path d="M19 24h22M19 20h18"/></svg></span>On my back</button>
+            <button data-v="side"><span class="opt__ic"><svg viewBox="0 0 48 48"><circle cx="12" cy="20" r="5"/><path d="M18 22c6 0 8 6 14 6h9M18 28h12"/></svg></span>On my side</button>
+            <button data-v="mix"><span class="opt__ic"><svg viewBox="0 0 48 48"><path d="M10 24a14 14 0 0 1 26-7M38 24a14 14 0 0 1-26 7"/><path d="M36 11v6h-6M12 37v-6h6"/></svg></span>I move around</button>
           </div>
         </div>
-        <div class="quiz__step" data-q="1">
-          <p class="quiz__count">Question 2 of 3</p>
-          <h3>Do you wake up feeling hot?</h3>
-          <div class="quiz__opts">
-            <button data-v="hot">Often, I sleep hot</button>
-            <button data-v="some">Sometimes</button>
-            <button data-v="no">Rarely</button>
+        <div class="pane" data-q="1">
+          <h3>What would you like to fix most?</h3>
+          <div class="opts">
+            <button data-v="neck">Neck &amp; shoulder tension</button>
+            <button data-v="hot">I sleep hot</button>
+            <button data-v="lux">I want the most luxurious feel</button>
+            <button data-v="travel">Comfort when I travel</button>
           </div>
         </div>
-        <div class="quiz__step" data-q="2">
-          <p class="quiz__count">Question 3 of 3</p>
-          <h3>What matters most to you?</h3>
-          <div class="quiz__opts">
-            <button data-v="neck">Neck &amp; shoulder relief</button>
-            <button data-v="lux">The most luxurious feel</button>
-            <button data-v="travel">Comfort when travelling</button>
+        <div class="pane" data-q="2">
+          <h3>How would you describe your shoulders?</h3>
+          <div class="opts opts--3">
+            <button data-v="narrow">Narrow</button>
+            <button data-v="avg">Average</button>
+            <button data-v="broad">Broad</button>
           </div>
         </div>
-        <div class="quiz__step quiz__result" data-q="3">
-          <p class="quiz__count">Your match</p>
+        <div class="pane pane--result" data-q="3">
           <div class="result">
-            <div class="result__art" id="resultArt"></div>
-            <div>
-              <h3 id="resultName">Original Deluxe Pillow</h3>
-              <p id="resultWhy">Recommended because…</p>
-              <p class="result__price" id="resultPrice"></p>
+            <div class="result__art"><img id="rImg" src="assets/img/p_contour.webp" alt=""></div>
+            <div class="result__body">
+              <p class="result__k">Your match</p>
+              <h3 id="rName">Contour Pillow</h3>
+              <p id="rWhy"></p>
+              <p class="result__fit" id="rFit"></p>
+              <div class="result__price" id="rPrice"></div>
               <div class="result__ctas">
-                <a href="#shop" class="btn btn--primary">Shop my match →</a>
-                <button class="btn btn--text" id="quizRestart">Start over</button>
+                <a class="btn btn--blue" id="rLink" href="#" target="_blank" rel="noopener"><span>Shop my match</span><i class="btn__arr">→</i></a>
+                <button class="btn btn--line" id="quizRestart"><span>Start over</span></button>
               </div>
             </div>
           </div>
         </div>
       </div>
+      <button class="quiz__back" id="quizBack" hidden>← Back</button>
     </div>
-  </section>
+  </div>
+</section>
 
-  <!-- COMPARISON -->
-  <section class="compare" id="compare">
-    <div class="wrap">
-      <div class="sec-head sec-head--center" data-reveal>
-        <p class="kicker">The difference</p>
-        <h2 class="h2">Not all "gel" is Technogel®</h2>
-        <p class="lead">Many brands call foam "gel-infused". Technogel® is a pure polyurethane gel, first developed with Bayer and patented. Here's what that means for your sleep.</p>
-      </div>
-      <div class="table" role="table" aria-label="Comparison" data-reveal>
-        <div class="trow thead" role="row">
-          <span role="columnheader"></span>
-          <span role="columnheader" class="tg">Technogel®</span>
-          <span role="columnheader">Gel-infused foam</span>
-          <span role="columnheader">Memory foam</span>
-        </div>
-        <div class="trow" role="row"><span role="cell">True 3D deformation</span><span role="cell" class="tg yes"></span><span role="cell" class="no">–</span><span role="cell" class="no">–</span></div>
-        <div class="trow" role="row"><span role="cell">Stays cool all night</span><span role="cell" class="tg yes"></span><span role="cell" class="mid">At first</span><span role="cell" class="no">Traps heat</span></div>
-        <div class="trow" role="row"><span role="cell">Permanently elastic, never flattens</span><span role="cell" class="tg yes"></span><span role="cell" class="no">–</span><span role="cell" class="mid">Softens over time</span></div>
-        <div class="trow" role="row"><span role="cell">Plasticizer-free, hypoallergenic</span><span role="cell" class="tg yes"></span><span role="cell" class="mid">Varies</span><span role="cell" class="mid">Varies</span></div>
-        <div class="trow" role="row"><span role="cell">Clinically tested</span><span role="cell" class="tg yes"></span><span role="cell" class="no">–</span><span role="cell" class="no">–</span></div>
-        <div class="trow" role="row"><span role="cell">Designed &amp; made in Italy</span><span role="cell" class="tg yes"></span><span role="cell" class="no">–</span><span role="cell" class="no">–</span></div>
-      </div>
-      <div class="center" data-reveal><a href="#shop" class="btn btn--primary btn--lg magnetic">Feel the difference <span class="arr">→</span></a></div>
+<!-- ============ FILM + REVIEWS ============ -->
+<section class="proof" data-theme="dark">
+  <div class="wrap">
+    <div class="film" id="film" data-cursor="Play">
+      <img src="assets/img/video_home.webp" alt="Still from the Technogel brand film" loading="lazy">
+      <button class="film__play" aria-label="Play the Technogel film"><svg viewBox="0 0 24 24"><path d="M8 5v14l11-7z"/></svg></button>
+      <div class="film__cap"><span>The original gel technology</span><b>Watch the film · 0:52</b></div>
     </div>
-  </section>
 
-  <!-- REVIEWS -->
-  <section class="reviews" aria-label="Customer reviews">
-    <div class="wrap reviews__head" data-reveal>
-      <div>
-        <p class="kicker">Real sleepers, real mornings</p>
-        <h2 class="h2">"I didn't know a pillow could change my mornings."</h2>
+    <div class="reviews">
+      <div class="reviews__score">
+        <p class="kicker kicker--light">Sleepers who switched</p>
+        <h2 class="h2">"Most comfortable pillow I have <em>ever</em> owned."</h2>
+        <div class="reviews__meta"><span class="stars stars--lg">★★★★★</span><span>Jacob T. · verified buyer · 3rd Technogel pillow</span></div>
       </div>
-      <div class="score">
-        <b>4.8</b>
-        <div><span class="stars">★★★★★</span><span>Average customer rating</span></div>
+      <div class="reviews__grid">
+        <figure class="rv"><span class="stars">★★★★★</span><blockquote>"I used to flip my pillow to the cold side all night. Now I don't have to. The gel just stays cool."</blockquote><figcaption><b>Melissa R.</b> · Contour Pillow</figcaption></figure>
+        <figure class="rv"><span class="stars">★★★★★</span><blockquote>"Two weeks in and the morning neck stiffness is gone. You can feel the quality the moment you unbox it."</blockquote><figcaption><b>David K.</b> · Anatomic Pillow</figcaption></figure>
+        <figure class="rv"><span class="stars">★★★★★</span><blockquote>"I sit at a desk ten hours a day. The seat pad took the pressure off my lower back almost immediately."</blockquote><figcaption><b>Priya S.</b> · Square Seat Pad</figcaption></figure>
       </div>
     </div>
-    <div class="marquee" data-reveal>
-      <div class="marquee__track" id="reviewTrack">
-        <figure class="review"><span class="stars">★★★★★</span><blockquote>"I used to flip my pillow to the cold side ten times a night. With the Deluxe, I don't have to anymore. It just stays cool."</blockquote><figcaption><b>Sarah M.</b> · Pittsburgh, PA · Original Deluxe</figcaption></figure>
-        <figure class="review"><span class="stars">★★★★★</span><blockquote>"My physical therapist recommended the Lab Back &amp; Side. Two weeks in, the morning neck stiffness is basically gone."</blockquote><figcaption><b>David R.</b> · Austin, TX · Lab Back &amp; Side</figcaption></figure>
-        <figure class="review"><span class="stars">★★★★★</span><blockquote>"You can feel the Italian quality the moment you unbox it. The gel moves with you in a way foam never did."</blockquote><figcaption><b>Elena V.</b> · Chicago, IL · Vive Pillow</figcaption></figure>
-        <figure class="review"><span class="stars">★★★★★</span><blockquote>"Worth every penny. I sleep hot and this is the first mattress where I don't wake up sweating at 3 a.m."</blockquote><figcaption><b>Marcus T.</b> · Denver, CO · Original Mattress</figcaption></figure>
-        <figure class="review"><span class="stars">★★★★★</span><blockquote>"I sit at a desk ten hours a day. The seat pad took the pressure off my lower back almost immediately."</blockquote><figcaption><b>Priya K.</b> · Seattle, WA · Living Seatpad</figcaption></figure>
-        <figure class="review"><span class="stars">★★★★☆</span><blockquote>"It takes a couple of nights to get used to the gel feel. After that, I'm never going back to regular pillows."</blockquote><figcaption><b>James L.</b> · Boston, MA · Original Deluxe</figcaption></figure>
-      </div>
+  </div>
+</section>
+
+<!-- ============ GUARANTEE ============ -->
+<section class="guarantee">
+  <div class="wrap guarantee__grid">
+    <div class="g"><span class="g__ic"><svg viewBox="0 0 32 32"><path d="M16 4l10 4v8c0 6.5-4.4 10.4-10 12-5.6-1.6-10-5.5-10-12V8z"/><path d="M11.5 16l3.2 3.2 6-6.4"/></svg></span><b>30-night risk-free trial</b><span>Try it, love it, or return it.</span></div>
+    <div class="g"><span class="g__ic"><svg viewBox="0 0 32 32"><path d="M3 9h16v13H3zM19 13h6l4 4v5H19z"/><circle cx="9" cy="24" r="2.4"/><circle cx="23" cy="24" r="2.4"/></svg></span><b>Free shipping &amp; returns</b><span>On every order in the US.</span></div>
+    <div class="g"><span class="g__ic"><svg viewBox="0 0 32 32"><rect x="6" y="13" width="20" height="14" rx="3"/><path d="M11 13V9.5a5 5 0 0 1 10 0V13"/></svg></span><b>Secure checkout</b><span>Payments processed securely.</span></div>
+    <div class="g"><span class="g__ic"><svg viewBox="0 0 32 32"><path d="M8 4h12l6 6v18H8z"/><path d="M20 4v6h6M12 17h10M12 22h7"/></svg></span><b>Manufacturer warranty</b><span>Official warranty on every product.</span></div>
+  </div>
+</section>
+
+<!-- ============ B2B ============ -->
+<section class="b2b" id="business" data-theme="dark">
+  <div class="b2b__intro wrap">
+    <div>
+      <p class="kicker kicker--light">Technogel® for business</p>
+      <h2 class="h2 h2--xl">The gel inside the world's most <em>comfortable</em> products.</h2>
     </div>
-  </section>
-
-  <!-- B2B -->
-  <section class="b2b" id="b2b">
-    <div class="wrap">
-      <div class="b2b__top">
-        <div class="sec-head" data-reveal>
-          <p class="kicker kicker--light">Technogel® for business</p>
-          <h2 class="h2">Engineered comfort for products that people touch, sit on and rely on.</h2>
-          <p class="lead">For more than 30 years, we've worked with leading brands to build Technogel® into their products. Our engineers work with yours, from the first prototype to series production in Italy and Germany.</p>
-        </div>
-        <div class="partners" data-reveal>
-          <p>Trusted by design &amp; industry leaders</p>
-          <div class="partners__row"><span>Vitra</span><span>Steelcase</span><span>Humanscale</span><span>Saporiti</span><span>Otto Bock</span></div>
-        </div>
-      </div>
-
-      <div class="industries">
-        <button class="ind" data-reveal><span class="ind__ic">01</span><b>Automotive</b><span>Sealings, comfort seating, anti-vibration pads</span></button>
-        <button class="ind" data-reveal><span class="ind__ic">02</span><b>Medical</b><span>Impulse wave pads, sleep apnea masks, orthotic pads</span></button>
-        <button class="ind" data-reveal><span class="ind__ic">03</span><b>Footwear</b><span>Insoles, comfort paddings, after-sales</span></button>
-        <button class="ind" data-reveal><span class="ind__ic">04</span><b>Office</b><span>Arm rests, mouse pads, office seats</span></button>
-        <button class="ind" data-reveal><span class="ind__ic">05</span><b>Gaming</b><span>Seating, arm rests, slot machine buttons</span></button>
-        <button class="ind" data-reveal><span class="ind__ic">06</span><b>Industry</b><span>Cable sealings, heavy industry sealings</span></button>
-        <button class="ind" data-reveal><span class="ind__ic">07</span><b>Bonding</b><span>Sticky pads, adhesion tapes, removable tools</span></button>
-        <button class="ind" data-reveal><span class="ind__ic">08</span><b>Shooting sports</b><span>Recoil pads, magazine bumpers, cheek pads</span></button>
-        <button class="ind" data-reveal><span class="ind__ic">09</span><b>Consumer</b><span>Paddings, helmet pads, mouse pads</span></button>
-      </div>
-
-      <div class="b2b__form" data-reveal>
-        <div class="b2b__pitch">
-          <h3>Have a product that needs better comfort?</h3>
-          <p>Tell us about your project. A Technogel® application engineer will reply within one business day.</p>
-          <ul class="ticks ticks--light">
-            <li>Free feasibility check</li>
-            <li>Samples &amp; prototyping</li>
-            <li>Industrial production in the EU</li>
-          </ul>
-        </div>
-        <form class="form" id="b2bForm" novalidate>
-          <div class="form__row">
-            <label>Name<input name="name" required autocomplete="name" placeholder="Jane Smith"></label>
-            <label>Company<input name="company" required autocomplete="organization" placeholder="Company Inc."></label>
-          </div>
-          <div class="form__row">
-            <label>Work email<input name="email" type="email" required autocomplete="email" placeholder="jane@company.com"></label>
-            <label>Industry
-              <select name="industry" id="industrySelect" required>
-                <option value="">Select…</option>
-                <option>Automotive</option><option>Medical</option><option>Footwear</option><option>Office</option><option>Gaming</option><option>Industry</option><option>Bonding</option><option>Shooting sports</option><option>Consumer</option><option>Other</option>
-              </select>
-            </label>
-          </div>
-          <label>Project details<textarea name="msg" rows="3" placeholder="What are you building? Volumes, timeline…"></textarea></label>
-          <button class="btn btn--primary btn--lg btn--block" type="submit">Request a free consultation →</button>
-          <p class="form__note">We respect your privacy. No spam, ever.</p>
-          <p class="form__ok" role="status" hidden>Thank you! Our B2B team will be in touch within one business day.</p>
-        </form>
-      </div>
+    <div class="b2b__aside">
+      <p>For more than 30 years, brands have relied on our engineers to build Technogel® into car seats, medical devices, insoles, office chairs and more. Our lab tunes the gel to your exact specification, and we produce it at our own plants in Germany and Italy.</p>
+      <a class="btn btn--blue btn--lg" href="#b2bForm"><span>Start a project</span><i class="btn__arr">→</i></a>
     </div>
-  </section>
+  </div>
 
-  <!-- STORY / TIMELINE -->
-  <section class="story" id="story">
-    <div class="wrap story__grid">
-      <div class="story__media" data-reveal>
-        <img src="https://images.unsplash.com/photo-1581091226825-a6a2a5aee158?w=1100&q=70&auto=format&fit=crop" alt="Engineer working in a production facility" loading="lazy">
-        <div class="story__badge"><b>Since 1990</b><span>Italy · Germany · USA</span></div>
-      </div>
-      <div class="story__copy">
-        <div class="sec-head" data-reveal>
-          <p class="kicker">Our story</p>
-          <h2 class="h2">Born in medicine. Perfected for your everyday comfort.</h2>
-          <p class="lead">Technogel® started by helping people in wheelchairs and hospital beds avoid pressure sores. That same gel now makes nights cooler and days more comfortable around the world.</p>
-        </div>
-        <ol class="timeline">
-          <li data-reveal><b>1990</b><span>Gel is first used to relieve pressure for people in wheelchairs and hospital beds.</span></li>
-          <li data-reveal><b>1998</b><span>Technogel® is founded as a joint venture with Otto Bock.</span></li>
-          <li data-reveal><b>2008</b><span>Technogel Sleeping launches its first gel pillows and mattresses.</span></li>
-          <li data-reveal><b>2010</b><span>Technogel U.S. opens its headquarters in Pittsburgh, PA.</span></li>
-          <li data-reveal><b>Today</b><span>Made in Italy and Germany. Loved in more than 50 countries.</span></li>
+  <div class="hscroll" id="hscroll">
+    <div class="hscroll__track">
+      <article class="ind"><img src="assets/img/ind_automotive.webp" alt="Automotive gel application" loading="lazy"><div class="ind__body"><span>01</span><h3>Automotive</h3><p>Silicone-free seals from –40° to +110°, anti-vibration pads, seat &amp; armrest comfort.</p></div></article>
+      <article class="ind"><img src="assets/img/ind_medical.webp" alt="Medical respiratory mask with gel cushion" loading="lazy"><div class="ind__body"><span>02</span><h3>Medical</h3><p>Shockwave-therapy pads, respiratory masks, orthotic and bunion pads. Biocompatible.</p></div></article>
+      <article class="ind"><img src="assets/img/ind_footwear.webp" alt="Footwear with gel insole" loading="lazy"><div class="ind__body"><span>03</span><h3>Footwear</h3><p>Insoles and comfort paddings with the best rebound in PFI Pirmasens tests.</p></div></article>
+      <article class="ind"><img src="assets/img/ind_office.webp" alt="Office chair with gel armrests" loading="lazy"><div class="ind__body"><span>04</span><h3>Office</h3><p>Armrests, mouse pads and seat comfort for healthier hours at the desk.</p></div></article>
+      <article class="ind"><img src="assets/img/ind_gaming.webp" alt="Gaming equipment with gel components" loading="lazy"><div class="ind__body"><span>05</span><h3>Gaming</h3><p>Seating technology, armrests and slot machine buttons built for long sessions.</p></div></article>
+      <article class="ind"><img src="assets/img/ind_industry.webp" alt="Industrial cable sealing" loading="lazy"><div class="ind__body"><span>06</span><h3>Industry</h3><p>Cable and heavy-industry sealings, self-adhesive and re-usable.</p></div></article>
+      <article class="ind"><img src="assets/img/ind_bonding.webp" alt="Gel bonding tape" loading="lazy"><div class="ind__body"><span>07</span><h3>Bonding</h3><p>Sticky pads, adhesion tapes and removable tools that restore with water.</p></div></article>
+      <article class="ind"><img src="assets/img/ind_consumer.webp" alt="Consumer product with gel padding" loading="lazy"><div class="ind__body"><span>08</span><h3>Consumer</h3><p>Paddings, helmet pads, mouse pads and sticky tools.</p></div></article>
+      <article class="ind"><img src="assets/img/ind_sport.webp" alt="Recoil pad for shooting sports" loading="lazy"><div class="ind__body"><span>09</span><h3>Shooting sports</h3><p>Recoil pads, magazine bumpers and cheek pads.</p></div></article>
+    </div>
+  </div>
+
+  <div class="wrap">
+    <div class="caps">
+      <div><b>30+</b><span>years engineering custom gel parts</span></div>
+      <div><b>00 8 – A 90</b><span>Shore hardness, tuned to your spec</span></div>
+      <div><b>ISO 9001</b><span>certified quality management</span></div>
+      <div><b>DE · IT</b><span>own production in the heart of Europe</span></div>
+    </div>
+
+    <div class="b2b__lead">
+      <div class="steps">
+        <p class="kicker kicker--light">From idea to series production</p>
+        <ol>
+          <li><b>Inquiry</b><span>Consultation on your project</span></li>
+          <li><b>Feasibility</b><span>Parameters &amp; schedule review</span></li>
+          <li><b>Prototyping</b><span>3D drawings, 3D printing &amp; tooling</span></li>
+          <li><b>Samples</b><span>Sample parts for your inspection</span></li>
+          <li><b>Series</b><span>Approval and series production</span></li>
+          <li><b>Delivery</b><span>Quality check &amp; worldwide logistics</span></li>
         </ol>
       </div>
-    </div>
-  </section>
-
-  <!-- NEWS -->
-  <section class="news" id="news">
-    <div class="wrap">
-      <div class="sec-head sec-head--row" data-reveal>
-        <div>
-          <p class="kicker">Latest news</p>
-          <h2 class="h2">What's new at Technogel®</h2>
+      <form class="form" id="b2bForm" novalidate>
+        <h3>Tell us about your project</h3>
+        <p class="form__sub">An application engineer replies within 48 hours.</p>
+        <div class="form__row">
+          <label><span>Name</span><input name="name" required autocomplete="name"></label>
+          <label><span>Company</span><input name="company" required autocomplete="organization"></label>
         </div>
-        <a class="link-arrow" href="#news">All news <i>→</i></a>
-      </div>
-      <div class="news__grid">
-        <article class="post" data-reveal>
-          <div class="post__img post__img--a" aria-hidden="true"><span>Luxe Pack Monaco</span></div>
-          <time datetime="2025-10-10">October 10, 2025</time>
-          <h3>Blue, Not Green: Technogel® featured at Luxe Pack Monaco's "Blue Materials" exhibition</h3>
-          <p>At this year's Luxe Pack Monaco, Technogel® questioned conventional thinking about sustainability with the exhibition "Blue Materials".</p>
-          <a href="#news" class="link-arrow">Read more <i>→</i></a>
-        </article>
-        <article class="post" data-reveal>
-          <div class="post__img post__img--b" aria-hidden="true"><span>Every night matters</span></div>
-          <time datetime="2025-09-30">September 30, 2025</time>
-          <h3>Technogel® joins the fight against breast cancer, because every night matters</h3>
-          <p>Technogel® has always been about more than products. It started in medical applications and still brings gel innovation to people who need comfort most.</p>
-          <a href="#news" class="link-arrow">Read more <i>→</i></a>
-        </article>
-      </div>
-    </div>
-  </section>
-
-  <!-- FAQ -->
-  <section class="faq" aria-label="Frequently asked questions">
-    <div class="wrap faq__grid">
-      <div class="sec-head" data-reveal>
-        <p class="kicker">FAQ</p>
-        <h2 class="h2">Questions before you sleep on it?</h2>
-        <p class="lead">Can't find your answer? Email <a href="mailto:info@technogel.us">info@technogel.us</a>. Our Pittsburgh team is happy to help.</p>
-      </div>
-      <div class="acc">
-        <details data-reveal open><summary>What is Technogel®?</summary><p>Technogel® is a unique polyurethane gel made without plasticizer oils. It was first developed and patented with Bayer and is now licensed exclusively to Technogel. Unlike foam, it deforms in three dimensions, so it adapts to your body and spreads pressure evenly.</p></details>
-        <details data-reveal><summary>Does the gel really keep me cooler?</summary><p>Yes. The gel has a high heat capacity, so it absorbs body heat. Our patented tower design and ventilation holes let air flow through. Clinical studies have shown a gentle drop in body temperature, which helps you sleep more deeply.</p></details>
-        <details data-reveal><summary>Which pillow is right for me?</summary><p>That depends on how you sleep. Back sleepers usually love the Lab Back &amp; Side, side sleepers and hot sleepers the Original Deluxe, and anyone who wants maximum luxury the Vive. <a href="#finder">Take our 30-second quiz</a> for a personal match.</p></details>
-        <details data-reveal><summary>Is Technogel® safe and hypoallergenic?</summary><p>Our gel contains no harmful substances and is also used in medical products. It is odorless and hypoallergenic. Our pillows are certified by OEKO-TEX® and tested by the Hohenstein Institute.</p></details>
-        <details data-reveal><summary>What if it's not right for me?</summary><p>Every pillow comes with a 100-night comfort trial. If you're not happy, contact us and we'll make it right.</p></details>
-        <details data-reveal><summary>How do I care for my pillow?</summary><p>The outer cover is removable and washable. The antibacterial inner cover protects the gel and foam core, so your pillow stays fresh for years.</p></details>
-      </div>
-    </div>
-  </section>
-
-  <!-- FINAL CTA -->
-  <section class="final" id="contact">
-    <div class="final__bg" aria-hidden="true"><img src="https://images.unsplash.com/photo-1522771739844-6a9f6d5f14af?w=1800&q=70&auto=format&fit=crop" alt="" loading="lazy"></div>
-    <div class="wrap final__in">
-      <div class="final__copy" data-reveal>
-        <h2 class="h2">Tonight could be your coolest night's sleep yet.</h2>
-        <p class="lead">Join thousands of sleepers who wake up refreshed. Get <b>10% off your first order</b> and expert sleep tips.</p>
-        <form class="news-form" id="newsForm" novalidate>
-          <input type="email" required placeholder="Your email address" aria-label="Email address" autocomplete="email">
-          <button class="btn btn--primary" type="submit">Get 10% off</button>
-        </form>
-        <p class="form__ok form__ok--light" role="status" hidden>You're in! Check your inbox for your welcome code.</p>
-        <div class="final__ctas">
-          <a href="#shop" class="btn btn--light btn--lg">Shop Online</a>
-          <a href="#contact" class="btn btn--ghost btn--lg">Find a store near you</a>
+        <div class="form__row">
+          <label><span>Work email</span><input name="email" type="email" required autocomplete="email"></label>
+          <label><span>Industry</span>
+            <select name="industry" required>
+              <option value="">Select…</option>
+              <option>Automotive</option><option>Medical</option><option>Footwear</option><option>Office</option><option>Gaming</option><option>Industry</option><option>Bonding</option><option>Consumer</option><option>Shooting sports</option><option>Other</option>
+            </select>
+          </label>
         </div>
-      </div>
+        <label><span>Project details</span><textarea name="msg" rows="3" placeholder="Application, volumes, timeline…"></textarea></label>
+        <button class="btn btn--blue btn--lg btn--block" type="submit"><span>Request a free consultation</span><i class="btn__arr">→</i></button>
+        <p class="form__ok" role="status" hidden>Thank you! Our B2B team will be in touch within 48 hours.</p>
+      </form>
     </div>
-  </section>
+  </div>
+</section>
+
+<!-- ============ STORY ============ -->
+<section class="story" id="story">
+  <div class="wrap">
+    <div class="head head--split">
+      <div>
+        <p class="kicker">Our story</p>
+        <h2 class="h2">Born in medicine.<br><em>Perfected</em> for your sleep.</h2>
+      </div>
+      <p class="head__side">Technogel® started as pressure-relieving cushions that improved life for patients. Today it's the world's leading gel producer, with a dream that hasn't changed: make daily life more comfortable.</p>
+    </div>
+    <div class="timeline">
+      <div class="tl"><b>1998</b><h4>Joint venture</h4><p>Royal Medica &amp; Ottobock found Technogel.</p></div>
+      <div class="tl"><b>2008</b><h4>Technogel Sleeping</h4><p>The first gel pillows and mattresses.</p></div>
+      <div class="tl"><b>2013</b><h4>Technogel Living</h4><p>The first lifestyle &amp; living collection.</p></div>
+      <div class="tl"><b>2022</b><h4>A new brand</h4><p>New look, sustainable packaging, new gel types.</p></div>
+      <div class="tl"><b>2025</b><h4>Investing ahead</h4><p>A new state-of-the-art PU system facility.</p></div>
+    </div>
+
+    <div class="locations" id="locations">
+      <article class="loc"><img src="assets/img/ger.webp" alt="Technogel Germany headquarters" loading="lazy"><div><span class="loc__flag">Headquarters · Production</span><h4>Technogel Germany GmbH</h4><p>Zum Eichberg 1, 37339 Berlingerode<br><a href="tel:+4936071363900">+49 36071 363900</a></p></div></article>
+      <article class="loc"><img src="assets/img/it.webp" alt="Technogel Italy production site" loading="lazy"><div><span class="loc__flag">Production · Sales</span><h4>Technogel Italia S.r.l.</h4><p>Via Bassanese Inferiore 32, 36050 Pozzoleone (VI)<br><a href="tel:+390444463811">+39 0444 463811</a></p></div></article>
+      <article class="loc"><img src="assets/img/usa.webp" alt="Technogel U.S. office building" loading="lazy"><div><span class="loc__flag">US sales office</span><h4>Technogel U.S., Inc.</h4><p>730 Holiday Dr., Suite 330, Pittsburgh, PA 15220<br><a href="tel:+14127220030">+1 412 722 0030</a></p></div></article>
+    </div>
+  </div>
+</section>
+
+<!-- ============ NEWS ============ -->
+<section class="news">
+  <div class="wrap">
+    <div class="head head--split">
+      <div>
+        <p class="kicker">Newsroom</p>
+        <h2 class="h2">Latest from <em>Technogel®</em></h2>
+      </div>
+      <a class="link" href="#story">All news <i>→</i></a>
+    </div>
+    <div class="news__grid">
+      <article class="post"><div class="post__img"><img src="assets/img/news_luxe.webp" alt="Technogel at Luxe Pack Monaco 2025" loading="lazy"></div><time>Oct 16, 2025</time><h3>Blue, Not Green: Technogel® featured at Luxe Pack Monaco's "Blue Materials" exhibition</h3></article>
+      <article class="post"><div class="post__img"><img src="assets/img/news_pink.webp" alt="Technogel Think Pink campaign" loading="lazy"></div><time>Sep 30, 2025</time><h3>Technogel® joins the fight against breast cancer, because every night matters</h3></article>
+      <article class="post"><div class="post__img"><img src="assets/img/news_medical.webp" alt="Technogel in medical technology" loading="lazy"></div><time>Aug 25, 2025</time><h3>Technogel® in medical technology: when a unique material makes the difference</h3></article>
+      <article class="post"><div class="post__img"><img src="assets/img/news_pu.webp" alt="Technogel PU system facility" loading="lazy"></div><time>Apr 1, 2025</time><h3>Technogel® invests in a state-of-the-art PU system facility</h3></article>
+    </div>
+  </div>
+</section>
+
+<!-- ============ FAQ ============ -->
+<section class="faq">
+  <div class="wrap faq__grid">
+    <div>
+      <p class="kicker">Good to know</p>
+      <h2 class="h2">Questions, <em>answered.</em></h2>
+      <p class="lead">Still unsure? Our Pittsburgh team is happy to help: <a href="mailto:info@technogel.us">info@technogel.us</a></p>
+    </div>
+    <div class="acc">
+      <details open><summary>Is Technogel® just gel-infused foam?</summary><p>No. Gel-infused foam has particles mixed into the foam. Technogel® is a solid, patented layer of pure polyurethane gel, made without plasticizers, on top of premium memory foam. That's why it cools and supports consistently without heat building up.</p></details>
+      <details><summary>Which pillow is right for me?</summary><p>Back sleepers love the Anatomic. Side and back sleepers love the Contour, and the Side Sleeper has a shoulder cut-out. If you move around, choose the Deluxe. The Vive® Deluxe has an extra-thick gel layer for maximum luxury. <a href="#finder">Take the 60-second pillow finder</a> for your personal match.</p></details>
+      <details><summary>What if it doesn't suit me?</summary><p>Every order is backed by a 30-night risk-free trial with free shipping and returns. Try it, love it, or return it.</p></details>
+      <details><summary>Is it safe for sensitive skin?</summary><p>Yes. Technogel® is non-toxic, odorless and hypoallergenic. It is certified to OEKO-TEX® Standard 100 (98.0.2425), which approves it for direct skin contact and even newborns. The covers have an antibacterial finish.</p></details>
+      <details><summary>How do I care for my pillow?</summary><p>The outer cover is removable and washable, and the antibacterial inner cover protects the core. Replacement covers are available too.</p></details>
+      <details><summary>Where are Technogel® products made?</summary><p>Our gel and products are made in our own facilities in Germany and Italy, combining German engineering with Italian craftsmanship.</p></details>
+    </div>
+  </div>
+</section>
+
+<!-- ============ FINAL CTA ============ -->
+<section class="final" data-theme="dark">
+  <div class="final__bg"><img src="assets/img/thermo_big.webp" alt="" loading="lazy"></div>
+  <div class="wrap final__in">
+    <h2 class="final__title">Your coolest night<br><em>starts tonight.</em></h2>
+    <p>Try any Technogel® pillow for 30 nights, risk-free. Free shipping and returns.</p>
+    <div class="final__ctas">
+      <a href="#shop" class="btn btn--blue btn--lg magnetic"><span>Shop pillows</span><i class="btn__arr">→</i></a>
+      <a href="#finder" class="btn btn--glass btn--lg"><span>Find my pillow</span></a>
+    </div>
+    <form class="signup" id="signup" novalidate>
+      <label for="signupEmail">Sleep tips, launches &amp; offers. Weekly, never spammy.</label>
+      <div class="signup__row"><input id="signupEmail" type="email" required placeholder="Your email address" autocomplete="email"><button class="btn btn--white" type="submit"><span>Subscribe</span></button></div>
+      <p class="form__ok" role="status" hidden>You're in. Welcome to better sleep.</p>
+    </form>
+  </div>
+</section>
 
 </main>
 
@@ -547,54 +617,65 @@
   <div class="wrap">
     <div class="ftr__top">
       <div class="ftr__brand">
-        <a href="#top" class="logo">Technogel<sup>®</sup></a>
-        <p>The original gel technology, designed and made in Italy since 1990.</p>
+        <a href="#top" class="ftr__logo" aria-label="Technogel"><svg class="logo-svg" role="img" aria-label="Technogel" fill="currentColor" fill-rule="evenodd" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 495.41 106.19"> <path d="M86.51,78.41q-.6,8.24-.6,17.32V127q0,17.43.87,19.22c.58,1.18,2.65,1.78,6.22,1.78h4.08v3.42c-6.44-.29-11.9-.45-16.36-.45s-9.93.16-16.26.45V148H69c2.4,0,4-.33,4.68-1s1.18-1.9,1.37-3.76q.54-6.42.54-16.55V95.4q0-9.25-.38-17H69.69q-13.51,0-14.88.64c-.9.41-1.51,2-1.79,4.87l-.77,7.31H48.83l.11-6.53q0-3.95-.71-11.35,29.58.45,34.78.45l30.3-.45q-1,9.27-1.19,17.88h-3.43l-.54-7.15c-.22-2.47-.54-3.93-.94-4.39a4.17,4.17,0,0,0-2.68-.84q-6-.43-13.74-.44Z" transform="translate(-48.23 -73.35)"/> <path d="M125.28,111a10.82,10.82,0,0,1,8.81-4,12.1,12.1,0,0,1,6.25,1.59,9.1,9.1,0,0,1,3.8,4,20.06,20.06,0,0,1,1.71,8.18v2.74c-2.29.22-4.67.34-7.13.34-6.15,0-11.75-.1-16.84-.3.06-5.65,1.2-9.83,3.4-12.51ZM134,127.42c6.22,0,11.09-.15,14.59-.42a37.47,37.47,0,0,0,6.19-1.08l.15-2.92q0-9.27-5.12-14.41T136,103.43a24.36,24.36,0,0,0-11.91,3.42q-6.14,3.42-8.4,7.42a28.65,28.65,0,0,0-3.46,14.41q0,10.89,6.14,17.24t16.16,6.37a33.73,33.73,0,0,0,8.93-1.19,35.86,35.86,0,0,0,8.44-3.58l1.58-4.16-.83-.74a27.56,27.56,0,0,1-6.73,3.45,21,21,0,0,1-6.82,1.15,16.16,16.16,0,0,1-12.38-5q-4.71-5-5-14.76Z" transform="translate(-48.23 -73.35)"/> <path d="M201.37,144.21l1.34,1.18-2,3.17a29.2,29.2,0,0,1-14.19,3.73,25.35,25.35,0,0,1-12.34-2.78,19.11,19.11,0,0,1-7.84-8A26.36,26.36,0,0,1,163.54,129a26.83,26.83,0,0,1,2.12-11.11,17.56,17.56,0,0,1,6-7.4,60.31,60.31,0,0,1,9.56-5.25,21.78,21.78,0,0,1,9.05-1.83,29.77,29.77,0,0,1,6.56.63,26,26,0,0,1,5.91,2.21,76.61,76.61,0,0,0-1.35,13.1h-3v-2.48a8.17,8.17,0,0,0-.91-4.49c-.62-.88-2-1.75-4.2-2.61a19.33,19.33,0,0,0-7.14-1.29c-4.47,0-7.92,1.37-10.34,4.08s-3.62,6.8-3.62,12.21q0,10.45,5.34,16.73a15.39,15.39,0,0,0,12.35,5.7,22.55,22.55,0,0,0,5.83-.77,26.7,26.7,0,0,0,5.68-2.24Z" transform="translate(-48.23 -73.35)"/> <path d="M226.83,112.85l6.45-5.7a13.14,13.14,0,0,1,4.45-2.92,15.56,15.56,0,0,1,5.3-.8,19.38,19.38,0,0,1,9.45,2.2,12.21,12.21,0,0,1,5.56,5.65c1,2.3,1.56,6.19,1.56,11.7l-.15,14.64a63.25,63.25,0,0,0,.38,7.82,2.79,2.79,0,0,0,.79,1.78,5.18,5.18,0,0,0,2.8.8l3.62.39v2.83q-4.71-.3-9.19-.3c-2.56,0-5.1.1-7.64.3q.9-12.39.9-24.41c0-5.36-.34-9-1-10.92a8.75,8.75,0,0,0-3.63-4.54,12,12,0,0,0-6.62-1.68,14.55,14.55,0,0,0-7.47,2,11.33,11.33,0,0,0-4.65,4.52q-.89,1.83-.89,8.7v8.61q0,11.76.55,13c.36.83,1.67,1.34,4,1.54l4.29.39v2.83q-7.69-.3-12.38-.3c-3.27,0-7.52.1-12.79.3v-2.83l3.09-.4a10.94,10.94,0,0,0,3.63-.81,3,3,0,0,0,1-2.16q.36-2.68.35-12V99.55q0-13.24-.68-14.84c-.3-.72-1.62-1.08-4-1.08h-3.38V80.8a66.07,66.07,0,0,0,12.28-2.21l4.06-1.37c.53,0,.79.35.79,1l-.16,2-.32,8.89c-.17,4.48-.27,8-.27,10.43v13.24Z" transform="translate(-48.23 -73.35)"/> <path d="M290.73,112.9l7.47-6.64a8.93,8.93,0,0,1,2.83-1.74,20.75,20.75,0,0,1,6.53-1.09,18.52,18.52,0,0,1,9.16,2.16,12.91,12.91,0,0,1,5.54,5.59q1.68,3.43,1.68,10.77l-.15,15.58c0,5.37.24,8.48.68,9.3.6,1,1.81,1.58,3.58,1.58h3.48v2.83c-3.47-.2-6.49-.3-9-.3s-5.13.1-8,.3q.9-9.62.9-26c0-4.41-.4-7.54-1.17-9.38a9.52,9.52,0,0,0-3.93-4.45,12.52,12.52,0,0,0-6.64-1.68,13.59,13.59,0,0,0-8.18,2.43,10.06,10.06,0,0,0-4.16,5.33q-.5,1.93-.49,10.1c0,6,0,11.63.15,16.81,0,1.54.26,2.51.7,2.92a6,6,0,0,0,4.09,1.13h3.54v2.83c-5.59-.2-10.05-.3-13.35-.3q-5.26,0-12,.3v-2.83h3.58c2.44,0,3.87-.57,4.28-1.71s.63-8,.63-20.54q0-8.46-.2-13.25a3,3,0,0,0-.8-2.18c-.46-.4-1.77-.59-3.91-.59h-3.58v-2.83a60.07,60.07,0,0,0,7.62-1.36,55.37,55.37,0,0,0,7.57-2.61,2,2,0,0,1,.85-.2q.78,0,.78,1.14l0,1.9-.1,6.72Z" transform="translate(-48.23 -73.35)"/> <path d="M347.44,114.27A11.75,11.75,0,0,1,352,109a12.52,12.52,0,0,1,6.92-2,13.18,13.18,0,0,1,7.81,2.49,17.07,17.07,0,0,1,5.64,8,35.26,35.26,0,0,1,2.13,12.92q0,9.24-3.62,13.78a11.52,11.52,0,0,1-9.48,4.55q-7.72,0-11.83-7.24t-4.11-17.42a23.86,23.86,0,0,1,2-9.78Zm-5.33,31.36q6.19,6.65,16.05,6.66a25.76,25.76,0,0,0,17.62-6.49q8.24-7.23,8.23-19.5,0-10.39-6.31-16.63t-16.82-6.24a26.43,26.43,0,0,0-12.95,3.13,22.3,22.3,0,0,0-8.86,8.63,24.46,24.46,0,0,0-3.16,12.35q0,11.43,6.2,18.09Z" transform="translate(-48.23 -73.35)"/> <path d="M421.39,129.47a9.92,9.92,0,0,1-7.62,3.15,9.73,9.73,0,0,1-7.81-3.75q-3.12-3.77-3.11-10.37,0-5.48,2.86-8.56a10.44,10.44,0,0,1,15.45.7q3.13,3.8,3.13,10c0,3.78-1,6.72-2.9,8.83Zm19.43-16.8a34.33,34.33,0,0,1,2.68-4.47l-.54-1a85.84,85.84,0,0,1-9.93.45H428.9a19.61,19.61,0,0,0-5.78-3.34,20.24,20.24,0,0,0-6.58-1,28.31,28.31,0,0,0-12.24,3,17.39,17.39,0,0,0-7.53,6.51,17.09,17.09,0,0,0-2.56,9.15,13.22,13.22,0,0,0,3.42,9.4c1.72,1.83,4.55,3.22,8.46,4.22L401.38,139a9.78,9.78,0,0,0-3.21,3,8.17,8.17,0,0,0-1.13,4,3.73,3.73,0,0,0,1.14,2.81c.75.74,2.46,1.54,5.1,2.42a57.56,57.56,0,0,1-8.59,4.89,14,14,0,0,0-2.86,8.09,13.52,13.52,0,0,0,5.47,10.9q5.49,4.41,15.64,4.42a33.89,33.89,0,0,0,14.76-3.07,23.37,23.37,0,0,0,9.76-8.13,18.9,18.9,0,0,0,3.36-10.6,16.5,16.5,0,0,0-1.47-7.09,10,10,0,0,0-3.55-4.41,11.61,11.61,0,0,0-6-1.26c-1.82,0-4.73.1-8.77.29-2.83.1-5,.16-6.51.16-3.94,0-6.56-.36-7.85-1.06a3.28,3.28,0,0,1-1.91-2.92,3.9,3.9,0,0,1,.85-2.3,21.16,21.16,0,0,1,4.07-3.55H412a23.06,23.06,0,0,0,10.66-2.51,19.12,19.12,0,0,0,7.6-6.64,15.43,15.43,0,0,0,2.66-8.54,16.35,16.35,0,0,0-1.14-5.24ZM422.45,152a22.7,22.7,0,0,1,5.2.35,7.14,7.14,0,0,1,3.82,3.11,10,10,0,0,1,1.61,5.64,13.16,13.16,0,0,1-2.3,7.29,15.82,15.82,0,0,1-6.45,5.55,21.59,21.59,0,0,1-9.63,2c-4.76,0-8.46-1.18-11.13-3.5a11.39,11.39,0,0,1-4-8.91,12.75,12.75,0,0,1,1.49-6.47c.58-1.09,2.27-2.53,5-4.3.87-.53,2.46-.79,4.8-.79Z" transform="translate(-48.23 -73.35)"/> <path d="M460.94,111a10.78,10.78,0,0,1,8.8-4A12.11,12.11,0,0,1,476,108.6a9.13,9.13,0,0,1,3.79,4,20.07,20.07,0,0,1,1.72,8.18v2.74c-2.3.22-4.68.34-7.14.34-6.14,0-11.74-.1-16.84-.3.07-5.65,1.2-9.83,3.41-12.51Zm8.73,16.39c6.22,0,11.09-.15,14.59-.42a37.36,37.36,0,0,0,6.18-1.08l.16-2.92q0-9.27-5.12-14.41t-13.85-5.16a24.4,24.4,0,0,0-11.92,3.42q-6.13,3.42-8.39,7.42a28.65,28.65,0,0,0-3.47,14.41q0,10.89,6.15,17.24t16.16,6.37a33.85,33.85,0,0,0,8.93-1.19,35.86,35.86,0,0,0,8.44-3.58l1.58-4.16-.84-.74a27.21,27.21,0,0,1-6.73,3.45,21,21,0,0,1-6.82,1.15,16.16,16.16,0,0,1-12.38-5q-4.71-5-5-14.76Z" transform="translate(-48.23 -73.35)"/> <path d="M514.24,77.82q-.75,14.49-.74,26.22v25.43c0,10.08.2,15.82.63,17.17.23.68,1.3,1.13,3.24,1.33l4.17.44v2.83q-5.37-.3-10.25-.3-5.43,0-14.17.3v-2.83l4.2-.35c1.86-.16,2.93-.64,3.19-1.43.42-1.3.65-7.16.65-17.61V103.7l-.06-9.52L505,87.69c0-1.62-.17-2.61-.53-3-.53-.52-1.62-.79-3.29-.79h-4V81.1q10.2-.94,16.28-3.88l.84.6Z" transform="translate(-48.23 -73.35)"/> <path d="M538.42,79.45a7.88,7.88,0,0,1,4,6.87,7.72,7.72,0,0,1-1,4,7.86,7.86,0,0,1-2.9,2.91,7.93,7.93,0,0,1-7.92,0,8,8,0,0,1-2.89-2.91,7.95,7.95,0,0,1,0-7.93,8,8,0,0,1,2.89-2.9,7.93,7.93,0,0,1,7.92,0Zm-8.54-1.09a8.91,8.91,0,0,0-3.36,3.37,9.21,9.21,0,0,0,3.36,12.56,9.16,9.16,0,0,0,9.17,0,9.2,9.2,0,0,0,3.36-12.56,8.91,8.91,0,0,0-3.36-3.37,9.1,9.1,0,0,0-9.17,0Zm1.39,3.07c.09.07.12.29.12.68v7.42a1.33,1.33,0,0,1-.1.7,1.89,1.89,0,0,1-.76.15l-.37,0v.67h4.06v-.67l-.73-.07a.73.73,0,0,1-.48-.15,2,2,0,0,1-.09-.75V86.36h.61a2.09,2.09,0,0,1,1.35.32,6.76,6.76,0,0,1,1,2,6.2,6.2,0,0,0,1,2,1.53,1.53,0,0,0,1.09.39h1.37v-.75c-.57,0-.94-.06-1.1-.25a13.27,13.27,0,0,1-1-2A5.11,5.11,0,0,0,535.83,86a3.15,3.15,0,0,0,1.8-1,2.58,2.58,0,0,0,.61-1.73,2.4,2.4,0,0,0-.88-2,4.39,4.39,0,0,0-2.84-.75h-4.44v.76a4.15,4.15,0,0,1,1.19.13Zm1.65.55c0-.29.06-.48.17-.56a2,2,0,0,1,.92-.12,3.43,3.43,0,0,1,2.15.52,1.89,1.89,0,0,1,.63,1.54,1.93,1.93,0,0,1-.73,1.64,4.37,4.37,0,0,1-2.58.57l-.56,0V82Z" transform="translate(-48.23 -73.35)"/> </svg></a>
+        <p>The original gel technology. Engineered in Germany, made in Italy, loved by sleepers worldwide.</p>
         <div class="social">
-          <a href="#top" aria-label="Facebook"><svg viewBox="0 0 24 24"><path d="M14 8h3V4h-3a4 4 0 0 0-4 4v2H7v4h3v6h4v-6h3l1-4h-4V8z"/></svg></a>
-          <a href="#top" aria-label="Instagram"><svg viewBox="0 0 24 24"><rect x="4" y="4" width="16" height="16" rx="5"/><circle cx="12" cy="12" r="3.5"/><circle cx="17" cy="7" r=".8"/></svg></a>
-          <a href="#top" aria-label="LinkedIn"><svg viewBox="0 0 24 24"><path d="M6 9v10M6 5v.5M10 19v-6a3 3 0 0 1 6 0v6M10 9v10"/></svg></a>
+          <a href="https://www.facebook.com/technogel/" target="_blank" rel="noopener" aria-label="Facebook"><svg viewBox="0 0 24 24"><path d="M14 8h3V4h-3a4 4 0 0 0-4 4v2H7v4h3v6h4v-6h3l1-4h-4V8z"/></svg></a>
+          <a href="https://www.instagram.com/technogelworld" target="_blank" rel="noopener" aria-label="Instagram"><svg viewBox="0 0 24 24"><rect x="4" y="4" width="16" height="16" rx="5"/><circle cx="12" cy="12" r="3.6"/><circle cx="17.2" cy="6.8" r=".6"/></svg></a>
+          <a href="https://www.youtube.com/user/TechnogelWorld/videos" target="_blank" rel="noopener" aria-label="YouTube"><svg viewBox="0 0 24 24"><rect x="3" y="6" width="18" height="12" rx="4"/><path d="M10.5 9.5v5l4-2.5z"/></svg></a>
+          <a href="https://de.linkedin.com/company/technogelworld" target="_blank" rel="noopener" aria-label="LinkedIn"><svg viewBox="0 0 24 24"><path d="M6.5 10v8M6.5 6v.4M10.5 18v-8M10.5 13.5a3 3 0 0 1 6 0V18"/></svg></a>
+          <a href="https://www.pinterest.de/technogel/" target="_blank" rel="noopener" aria-label="Pinterest"><svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="8"/><path d="M11 9.5c2.5-1 5 .5 4.3 3-.5 1.8-2.6 2.3-3.5 1M11.5 11l-2 8"/></svg></a>
         </div>
       </div>
-      <div class="ftr__col"><p>Pillow Range</p><a href="#shop">Original</a><a href="#shop">Original Travel</a><a href="#shop">Vive</a><a href="#shop">Lab</a></div>
-      <div class="ftr__col"><p>Mattress &amp; Living</p><a href="#shop">Original Mattresses</a><a href="#shop">Living Seatpad</a><a href="#finder">Sleep quiz</a></div>
-      <div class="ftr__col"><p>B2B</p><a href="#b2b">Automotive</a><a href="#b2b">Medical</a><a href="#b2b">Footwear</a><a href="#b2b">Office</a><a href="#b2b">All industries</a></div>
-      <div class="ftr__col ftr__contact"><p>Technogel U.S., Inc.</p><span>Holiday Drive<br>Pittsburgh, PA 15220</span><a href="mailto:info@technogel.us">info@technogel.us</a><a href="#contact">Store locator</a></div>
+      <div class="ftr__col"><p>Shop</p><a href="#shop">Pillows</a><a href="#shop">Seat pads &amp; lumbar</a><a href="#shop">Travel &amp; kids</a><a href="#collections">Mattresses</a><a href="#finder">Pillow finder</a></div>
+      <div class="ftr__col"><p>Discover</p><a href="#technology">The gel</a><a href="#story">Our story</a><a href="#business">B2B solutions</a><a href="#locations">Store locator</a></div>
+      <div class="ftr__col"><p>Help</p><a href="https://technogelusa.com/policies/shipping-policy" target="_blank" rel="noopener">Shipping</a><a href="https://technogelusa.com/policies/refund-policy" target="_blank" rel="noopener">Returns &amp; refunds</a><a href="#story">Warranty</a><a href="mailto:orders@technogel.us">orders@technogel.us</a></div>
+      <div class="ftr__col"><p>Technogel U.S., Inc.</p><span>730 Holiday Dr., Suite 330<br>Pittsburgh, PA 15220</span><a href="tel:+14127220030">+1 412 722 0030</a><a href="mailto:info@technogel.us">info@technogel.us</a></div>
     </div>
+    <div class="ftr__big" aria-hidden="true"><svg class="logo-svg" role="img" aria-label="Technogel" fill="currentColor" fill-rule="evenodd" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 495.41 106.19"> <path d="M86.51,78.41q-.6,8.24-.6,17.32V127q0,17.43.87,19.22c.58,1.18,2.65,1.78,6.22,1.78h4.08v3.42c-6.44-.29-11.9-.45-16.36-.45s-9.93.16-16.26.45V148H69c2.4,0,4-.33,4.68-1s1.18-1.9,1.37-3.76q.54-6.42.54-16.55V95.4q0-9.25-.38-17H69.69q-13.51,0-14.88.64c-.9.41-1.51,2-1.79,4.87l-.77,7.31H48.83l.11-6.53q0-3.95-.71-11.35,29.58.45,34.78.45l30.3-.45q-1,9.27-1.19,17.88h-3.43l-.54-7.15c-.22-2.47-.54-3.93-.94-4.39a4.17,4.17,0,0,0-2.68-.84q-6-.43-13.74-.44Z" transform="translate(-48.23 -73.35)"/> <path d="M125.28,111a10.82,10.82,0,0,1,8.81-4,12.1,12.1,0,0,1,6.25,1.59,9.1,9.1,0,0,1,3.8,4,20.06,20.06,0,0,1,1.71,8.18v2.74c-2.29.22-4.67.34-7.13.34-6.15,0-11.75-.1-16.84-.3.06-5.65,1.2-9.83,3.4-12.51ZM134,127.42c6.22,0,11.09-.15,14.59-.42a37.47,37.47,0,0,0,6.19-1.08l.15-2.92q0-9.27-5.12-14.41T136,103.43a24.36,24.36,0,0,0-11.91,3.42q-6.14,3.42-8.4,7.42a28.65,28.65,0,0,0-3.46,14.41q0,10.89,6.14,17.24t16.16,6.37a33.73,33.73,0,0,0,8.93-1.19,35.86,35.86,0,0,0,8.44-3.58l1.58-4.16-.83-.74a27.56,27.56,0,0,1-6.73,3.45,21,21,0,0,1-6.82,1.15,16.16,16.16,0,0,1-12.38-5q-4.71-5-5-14.76Z" transform="translate(-48.23 -73.35)"/> <path d="M201.37,144.21l1.34,1.18-2,3.17a29.2,29.2,0,0,1-14.19,3.73,25.35,25.35,0,0,1-12.34-2.78,19.11,19.11,0,0,1-7.84-8A26.36,26.36,0,0,1,163.54,129a26.83,26.83,0,0,1,2.12-11.11,17.56,17.56,0,0,1,6-7.4,60.31,60.31,0,0,1,9.56-5.25,21.78,21.78,0,0,1,9.05-1.83,29.77,29.77,0,0,1,6.56.63,26,26,0,0,1,5.91,2.21,76.61,76.61,0,0,0-1.35,13.1h-3v-2.48a8.17,8.17,0,0,0-.91-4.49c-.62-.88-2-1.75-4.2-2.61a19.33,19.33,0,0,0-7.14-1.29c-4.47,0-7.92,1.37-10.34,4.08s-3.62,6.8-3.62,12.21q0,10.45,5.34,16.73a15.39,15.39,0,0,0,12.35,5.7,22.55,22.55,0,0,0,5.83-.77,26.7,26.7,0,0,0,5.68-2.24Z" transform="translate(-48.23 -73.35)"/> <path d="M226.83,112.85l6.45-5.7a13.14,13.14,0,0,1,4.45-2.92,15.56,15.56,0,0,1,5.3-.8,19.38,19.38,0,0,1,9.45,2.2,12.21,12.21,0,0,1,5.56,5.65c1,2.3,1.56,6.19,1.56,11.7l-.15,14.64a63.25,63.25,0,0,0,.38,7.82,2.79,2.79,0,0,0,.79,1.78,5.18,5.18,0,0,0,2.8.8l3.62.39v2.83q-4.71-.3-9.19-.3c-2.56,0-5.1.1-7.64.3q.9-12.39.9-24.41c0-5.36-.34-9-1-10.92a8.75,8.75,0,0,0-3.63-4.54,12,12,0,0,0-6.62-1.68,14.55,14.55,0,0,0-7.47,2,11.33,11.33,0,0,0-4.65,4.52q-.89,1.83-.89,8.7v8.61q0,11.76.55,13c.36.83,1.67,1.34,4,1.54l4.29.39v2.83q-7.69-.3-12.38-.3c-3.27,0-7.52.1-12.79.3v-2.83l3.09-.4a10.94,10.94,0,0,0,3.63-.81,3,3,0,0,0,1-2.16q.36-2.68.35-12V99.55q0-13.24-.68-14.84c-.3-.72-1.62-1.08-4-1.08h-3.38V80.8a66.07,66.07,0,0,0,12.28-2.21l4.06-1.37c.53,0,.79.35.79,1l-.16,2-.32,8.89c-.17,4.48-.27,8-.27,10.43v13.24Z" transform="translate(-48.23 -73.35)"/> <path d="M290.73,112.9l7.47-6.64a8.93,8.93,0,0,1,2.83-1.74,20.75,20.75,0,0,1,6.53-1.09,18.52,18.52,0,0,1,9.16,2.16,12.91,12.91,0,0,1,5.54,5.59q1.68,3.43,1.68,10.77l-.15,15.58c0,5.37.24,8.48.68,9.3.6,1,1.81,1.58,3.58,1.58h3.48v2.83c-3.47-.2-6.49-.3-9-.3s-5.13.1-8,.3q.9-9.62.9-26c0-4.41-.4-7.54-1.17-9.38a9.52,9.52,0,0,0-3.93-4.45,12.52,12.52,0,0,0-6.64-1.68,13.59,13.59,0,0,0-8.18,2.43,10.06,10.06,0,0,0-4.16,5.33q-.5,1.93-.49,10.1c0,6,0,11.63.15,16.81,0,1.54.26,2.51.7,2.92a6,6,0,0,0,4.09,1.13h3.54v2.83c-5.59-.2-10.05-.3-13.35-.3q-5.26,0-12,.3v-2.83h3.58c2.44,0,3.87-.57,4.28-1.71s.63-8,.63-20.54q0-8.46-.2-13.25a3,3,0,0,0-.8-2.18c-.46-.4-1.77-.59-3.91-.59h-3.58v-2.83a60.07,60.07,0,0,0,7.62-1.36,55.37,55.37,0,0,0,7.57-2.61,2,2,0,0,1,.85-.2q.78,0,.78,1.14l0,1.9-.1,6.72Z" transform="translate(-48.23 -73.35)"/> <path d="M347.44,114.27A11.75,11.75,0,0,1,352,109a12.52,12.52,0,0,1,6.92-2,13.18,13.18,0,0,1,7.81,2.49,17.07,17.07,0,0,1,5.64,8,35.26,35.26,0,0,1,2.13,12.92q0,9.24-3.62,13.78a11.52,11.52,0,0,1-9.48,4.55q-7.72,0-11.83-7.24t-4.11-17.42a23.86,23.86,0,0,1,2-9.78Zm-5.33,31.36q6.19,6.65,16.05,6.66a25.76,25.76,0,0,0,17.62-6.49q8.24-7.23,8.23-19.5,0-10.39-6.31-16.63t-16.82-6.24a26.43,26.43,0,0,0-12.95,3.13,22.3,22.3,0,0,0-8.86,8.63,24.46,24.46,0,0,0-3.16,12.35q0,11.43,6.2,18.09Z" transform="translate(-48.23 -73.35)"/> <path d="M421.39,129.47a9.92,9.92,0,0,1-7.62,3.15,9.73,9.73,0,0,1-7.81-3.75q-3.12-3.77-3.11-10.37,0-5.48,2.86-8.56a10.44,10.44,0,0,1,15.45.7q3.13,3.8,3.13,10c0,3.78-1,6.72-2.9,8.83Zm19.43-16.8a34.33,34.33,0,0,1,2.68-4.47l-.54-1a85.84,85.84,0,0,1-9.93.45H428.9a19.61,19.61,0,0,0-5.78-3.34,20.24,20.24,0,0,0-6.58-1,28.31,28.31,0,0,0-12.24,3,17.39,17.39,0,0,0-7.53,6.51,17.09,17.09,0,0,0-2.56,9.15,13.22,13.22,0,0,0,3.42,9.4c1.72,1.83,4.55,3.22,8.46,4.22L401.38,139a9.78,9.78,0,0,0-3.21,3,8.17,8.17,0,0,0-1.13,4,3.73,3.73,0,0,0,1.14,2.81c.75.74,2.46,1.54,5.1,2.42a57.56,57.56,0,0,1-8.59,4.89,14,14,0,0,0-2.86,8.09,13.52,13.52,0,0,0,5.47,10.9q5.49,4.41,15.64,4.42a33.89,33.89,0,0,0,14.76-3.07,23.37,23.37,0,0,0,9.76-8.13,18.9,18.9,0,0,0,3.36-10.6,16.5,16.5,0,0,0-1.47-7.09,10,10,0,0,0-3.55-4.41,11.61,11.61,0,0,0-6-1.26c-1.82,0-4.73.1-8.77.29-2.83.1-5,.16-6.51.16-3.94,0-6.56-.36-7.85-1.06a3.28,3.28,0,0,1-1.91-2.92,3.9,3.9,0,0,1,.85-2.3,21.16,21.16,0,0,1,4.07-3.55H412a23.06,23.06,0,0,0,10.66-2.51,19.12,19.12,0,0,0,7.6-6.64,15.43,15.43,0,0,0,2.66-8.54,16.35,16.35,0,0,0-1.14-5.24ZM422.45,152a22.7,22.7,0,0,1,5.2.35,7.14,7.14,0,0,1,3.82,3.11,10,10,0,0,1,1.61,5.64,13.16,13.16,0,0,1-2.3,7.29,15.82,15.82,0,0,1-6.45,5.55,21.59,21.59,0,0,1-9.63,2c-4.76,0-8.46-1.18-11.13-3.5a11.39,11.39,0,0,1-4-8.91,12.75,12.75,0,0,1,1.49-6.47c.58-1.09,2.27-2.53,5-4.3.87-.53,2.46-.79,4.8-.79Z" transform="translate(-48.23 -73.35)"/> <path d="M460.94,111a10.78,10.78,0,0,1,8.8-4A12.11,12.11,0,0,1,476,108.6a9.13,9.13,0,0,1,3.79,4,20.07,20.07,0,0,1,1.72,8.18v2.74c-2.3.22-4.68.34-7.14.34-6.14,0-11.74-.1-16.84-.3.07-5.65,1.2-9.83,3.41-12.51Zm8.73,16.39c6.22,0,11.09-.15,14.59-.42a37.36,37.36,0,0,0,6.18-1.08l.16-2.92q0-9.27-5.12-14.41t-13.85-5.16a24.4,24.4,0,0,0-11.92,3.42q-6.13,3.42-8.39,7.42a28.65,28.65,0,0,0-3.47,14.41q0,10.89,6.15,17.24t16.16,6.37a33.85,33.85,0,0,0,8.93-1.19,35.86,35.86,0,0,0,8.44-3.58l1.58-4.16-.84-.74a27.21,27.21,0,0,1-6.73,3.45,21,21,0,0,1-6.82,1.15,16.16,16.16,0,0,1-12.38-5q-4.71-5-5-14.76Z" transform="translate(-48.23 -73.35)"/> <path d="M514.24,77.82q-.75,14.49-.74,26.22v25.43c0,10.08.2,15.82.63,17.17.23.68,1.3,1.13,3.24,1.33l4.17.44v2.83q-5.37-.3-10.25-.3-5.43,0-14.17.3v-2.83l4.2-.35c1.86-.16,2.93-.64,3.19-1.43.42-1.3.65-7.16.65-17.61V103.7l-.06-9.52L505,87.69c0-1.62-.17-2.61-.53-3-.53-.52-1.62-.79-3.29-.79h-4V81.1q10.2-.94,16.28-3.88l.84.6Z" transform="translate(-48.23 -73.35)"/> <path d="M538.42,79.45a7.88,7.88,0,0,1,4,6.87,7.72,7.72,0,0,1-1,4,7.86,7.86,0,0,1-2.9,2.91,7.93,7.93,0,0,1-7.92,0,8,8,0,0,1-2.89-2.91,7.95,7.95,0,0,1,0-7.93,8,8,0,0,1,2.89-2.9,7.93,7.93,0,0,1,7.92,0Zm-8.54-1.09a8.91,8.91,0,0,0-3.36,3.37,9.21,9.21,0,0,0,3.36,12.56,9.16,9.16,0,0,0,9.17,0,9.2,9.2,0,0,0,3.36-12.56,8.91,8.91,0,0,0-3.36-3.37,9.1,9.1,0,0,0-9.17,0Zm1.39,3.07c.09.07.12.29.12.68v7.42a1.33,1.33,0,0,1-.1.7,1.89,1.89,0,0,1-.76.15l-.37,0v.67h4.06v-.67l-.73-.07a.73.73,0,0,1-.48-.15,2,2,0,0,1-.09-.75V86.36h.61a2.09,2.09,0,0,1,1.35.32,6.76,6.76,0,0,1,1,2,6.2,6.2,0,0,0,1,2,1.53,1.53,0,0,0,1.09.39h1.37v-.75c-.57,0-.94-.06-1.1-.25a13.27,13.27,0,0,1-1-2A5.11,5.11,0,0,0,535.83,86a3.15,3.15,0,0,0,1.8-1,2.58,2.58,0,0,0,.61-1.73,2.4,2.4,0,0,0-.88-2,4.39,4.39,0,0,0-2.84-.75h-4.44v.76a4.15,4.15,0,0,1,1.19.13Zm1.65.55c0-.29.06-.48.17-.56a2,2,0,0,1,.92-.12,3.43,3.43,0,0,1,2.15.52,1.89,1.89,0,0,1,.63,1.54,1.93,1.93,0,0,1-.73,1.64,4.37,4.37,0,0,1-2.58.57l-.56,0V82Z" transform="translate(-48.23 -73.35)"/> </svg></div>
     <div class="ftr__bot">
       <span>© 2026 Technogel. All rights reserved.</span>
-      <span class="ftr__links"><a href="#top">Imprint</a><a href="#top">Privacy Policy</a><a href="#top">Warranties</a><a href="#top">Distributors</a></span>
-      <span>🌐 US / English</span>
+      <span class="ftr__links"><a href="#top">Imprint</a><a href="#top">Privacy policy</a><a href="#top">Warranties</a><a href="#top">Distributors</a></span>
+      <span>US / English</span>
     </div>
   </div>
 </footer>
 
-<!-- Sticky mobile CTA -->
-<div class="mbar" id="mbar">
-  <a href="#finder" class="btn btn--ghost-dark">Sleep quiz</a>
-  <a href="#shop" class="btn btn--primary">Shop pillows</a>
+<!-- Sticky mobile buy bar -->
+<div class="buybar" id="buybar">
+  <img src="assets/img/p_contour.webp" alt="">
+  <div><b>Contour Pillow</b><span>$199 <s>$215</s> · 30-night trial</span></div>
+  <a class="btn btn--blue btn--sm" href="https://technogelusa.com/products/technogel-contour-cooling-gel-pillow" target="_blank" rel="noopener"><span>Shop</span></a>
 </div>
 
-<!-- Exit intent offer -->
-<div class="modal" id="offer" role="dialog" aria-modal="true" aria-labelledby="offerTitle" hidden>
-  <div class="modal__card">
-    <button class="modal__x" aria-label="Close">×</button>
-    <div class="modal__art" aria-hidden="true"><canvas id="gelModal"></canvas></div>
-    <div class="modal__body">
+<!-- Film modal -->
+<div class="modal modal--film" id="filmModal" hidden>
+  <button class="modal__x" aria-label="Close film">×</button>
+  <video id="filmVideo" controls playsinline preload="none" poster="assets/img/video_home.webp"><source src="assets/video/technogel-film.mp4" type="video/mp4"></video>
+</div>
+
+<!-- Exit offer -->
+<div class="modal modal--offer" id="offer" role="dialog" aria-modal="true" aria-labelledby="offerT" hidden>
+  <div class="offer">
+    <button class="modal__x" aria-label="Close offer">×</button>
+    <div class="offer__art"><img src="assets/img/col_original.webp" alt=""></div>
+    <div class="offer__body">
       <p class="kicker">Before you go</p>
-      <h3 id="offerTitle">Take 10% off your first Technogel® pillow</h3>
-      <p>Plus free US shipping and a 100-night trial. Your cooler nights start here.</p>
-      <form class="news-form news-form--stack" id="offerForm" novalidate>
-        <input type="email" required placeholder="Your email address" aria-label="Email address">
-        <button class="btn btn--primary btn--block" type="submit">Unlock my 10% off</button>
-      </form>
-      <p class="form__ok" role="status" hidden>Code sent! Check your inbox.</p>
-      <button class="btn btn--text modal__no">No thanks, I prefer to sleep hot</button>
+      <h3 id="offerT">Two pillows, <em>15% off.</em></h3>
+      <p>Bundle any two Technogel® pillows and save 15% on your order with free shipping and a 30-night trial.</p>
+      <button class="code code--lg" data-copy="BUNDLE15">BUNDLE15 <span>Copy code</span></button>
+      <a class="btn btn--blue btn--block" href="https://technogelusa.com/collections/all" target="_blank" rel="noopener"><span>Shop the bundle</span><i class="btn__arr">→</i></a>
+      <button class="offer__no">No thanks</button>
     </div>
   </div>
 </div>
 
+<div class="toast" id="toast" role="status" aria-live="polite"></div>
+
 <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/gsap.min.js"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/ScrollTrigger.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/lenis@1.1.13/dist/lenis.min.js"></script>
 <script src="script.js"></script>
+<script type="module" src="gel3d.js"></script>
 </body>
 </html>
