@@ -740,3 +740,13 @@ body.menu-open .header { background: var(--ink); }
 .notes-on .header__tel { display: none; }
 .menu-open .notes-toggle { display: none; }
 @media (max-width: 860px) { .note-pin { right: auto; left: 12px; } }
+
+/* Design version switch (presentation only) */
+.switch { position: fixed; left: 20px; top: calc(var(--hh) + 14px); z-index: 120; display: flex; padding: 4px; border-radius: 999px; background: var(--bone); box-shadow: 0 14px 34px -12px rgba(0,0,0,.7); }
+.switch a { padding: 9px 14px; border-radius: 999px; font-size: 12px; font-weight: 600; color: rgba(14,12,10,.6); }
+.switch a[aria-current="page"] { background: var(--ink); color: var(--bone); }
+.menu-open .switch { display: none; }
+@media (max-width: 860px) {
+  .switch { left: 12px; top: calc(var(--hh) + 2px); padding: 2px; }
+  .switch a { padding: 6px 10px; font-size: 10.5px; }
+}
