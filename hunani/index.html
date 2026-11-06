@@ -1,0 +1,488 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>HUNANI — Insulated Water Bottles | Cold 24h, Hot 12h</title>
+  <meta name="description" content="HUNANI insulated stainless steel water bottles. Ice-cold for 24 hours, hot for 12, leak-proof and built for life. Free shipping over $50 and a 30-day money-back guarantee.">
+  <meta name="theme-color" content="#0b2540">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Sora:wght@500;600;700;800&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+<!-- Reusable bottle drawing. Body colour comes from --c on the <svg> that uses it. -->
+<svg width="0" height="0" style="position:absolute" aria-hidden="true">
+  <defs>
+    <linearGradient id="shade" x1="0" x2="1" y1="0" y2="0">
+      <stop offset="0" stop-color="#000" stop-opacity=".28"/>
+      <stop offset=".18" stop-color="#fff" stop-opacity=".18"/>
+      <stop offset=".32" stop-color="#fff" stop-opacity=".02"/>
+      <stop offset=".75" stop-color="#000" stop-opacity=".06"/>
+      <stop offset="1" stop-color="#000" stop-opacity=".38"/>
+    </linearGradient>
+    <linearGradient id="capShade" x1="0" x2="1">
+      <stop offset="0" stop-color="#000" stop-opacity=".45"/>
+      <stop offset=".25" stop-color="#fff" stop-opacity=".12"/>
+      <stop offset="1" stop-color="#000" stop-opacity=".5"/>
+    </linearGradient>
+    <linearGradient id="steel" x1="0" x2="1">
+      <stop offset="0" stop-color="#7d8794"/>
+      <stop offset=".3" stop-color="#eef2f6"/>
+      <stop offset=".6" stop-color="#b9c2cc"/>
+      <stop offset="1" stop-color="#5f6874"/>
+    </linearGradient>
+    <symbol id="bottle" viewBox="0 0 200 540">
+      <!-- carry loop -->
+      <path d="M78 34 C78 -4 122 -4 122 34" fill="none" stroke="#1b1f24" stroke-width="11" stroke-linecap="round"/>
+      <!-- cap -->
+      <rect x="60" y="26" width="80" height="66" rx="16" fill="#1b1f24"/>
+      <rect x="60" y="26" width="80" height="66" rx="16" fill="url(#capShade)"/>
+      <rect x="60" y="80" width="80" height="4" fill="#000" opacity=".25"/>
+      <!-- steel ring -->
+      <rect x="66" y="92" width="68" height="18" rx="3" fill="url(#steel)"/>
+      <!-- body -->
+      <path d="M50 150 C50 118 70 110 100 110 C130 110 150 118 150 150 L150 496 C150 520 136 530 112 530 L88 530 C64 530 50 520 50 496 Z" fill="var(--c, #0f4c81)"/>
+      <path d="M50 150 C50 118 70 110 100 110 C130 110 150 118 150 150 L150 496 C150 520 136 530 112 530 L88 530 C64 530 50 520 50 496 Z" fill="url(#shade)"/>
+      <!-- highlight -->
+      <rect x="66" y="150" width="7" height="330" rx="3.5" fill="#fff" opacity=".28"/>
+      <!-- wordmark -->
+      <text x="100" y="330" text-anchor="middle" font-family="Sora, sans-serif" font-weight="700" font-size="15" letter-spacing="4" fill="#fff" opacity=".9">HUNANI</text>
+      <path d="M100 286 C94 294 91 299 91 303 a9 9 0 0 0 18 0 c0-4-3-9-9-17z" fill="#fff" opacity=".9"/>
+    </symbol>
+  </defs>
+</svg>
+
+<!-- Announcement bar -->
+<div class="announce" role="region" aria-label="Offer">
+  <div class="announce__track">
+    <span>Free shipping on orders over $50</span><span aria-hidden="true">•</span>
+    <span>30-day money-back guarantee</span><span aria-hidden="true">•</span>
+    <span>Bundle 2+ bottles &amp; save 15%</span><span aria-hidden="true">•</span>
+    <span>Lifetime warranty on every bottle</span>
+  </div>
+</div>
+
+<header class="nav" id="top">
+  <div class="container nav__inner">
+    <a href="#top" class="logo" aria-label="HUNANI home">
+      <svg viewBox="0 0 24 24" width="22" height="22" aria-hidden="true"><path d="M12 2.5C8 7.6 5.5 11.3 5.5 14.6a6.5 6.5 0 0 0 13 0c0-3.3-2.5-7-6.5-12.1z" fill="currentColor"/></svg>
+      HUNANI
+    </a>
+    <nav class="nav__links" aria-label="Main">
+      <a href="#why">Why HUNANI</a>
+      <a href="#shop">Shop</a>
+      <a href="#compare">Compare</a>
+      <a href="#reviews">Reviews</a>
+      <a href="#faq">FAQ</a>
+    </nav>
+    <div class="nav__actions">
+      <button class="cart-btn" type="button" aria-label="Cart, 0 items" id="cartBtn">
+        <svg viewBox="0 0 24 24" width="22" height="22" aria-hidden="true"><path d="M6 7h12l-1 13H7L6 7zm3 0a3 3 0 0 1 6 0" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linejoin="round"/></svg>
+        <span class="cart-count" id="cartCount">0</span>
+      </button>
+      <a href="#shop" class="btn btn--primary btn--sm nav__cta">Shop now</a>
+    </div>
+  </div>
+</header>
+
+<main>
+
+  <!-- HERO -->
+  <section class="hero">
+    <div class="hero__bg" aria-hidden="true">
+      <span class="blob blob--1"></span>
+      <span class="blob blob--2"></span>
+      <div class="bubbles" id="bubbles"></div>
+    </div>
+    <div class="container hero__grid">
+      <div class="hero__copy">
+        <a href="#reviews" class="rating-pill hero-reveal">
+          <span class="stars" aria-hidden="true">★★★★★</span>
+          <strong>4.9/5</strong> from 12,400+ happy hydrators
+        </a>
+        <h1 class="hero__title">
+          <span class="line"><span class="word">Ice-cold</span> <span class="word">for</span> <span class="word">24</span> <span class="word">hours.</span></span>
+          <span class="line"><span class="word grad">Built</span> <span class="word grad">for</span> <span class="word grad">a</span> <span class="word grad">lifetime.</span></span>
+        </h1>
+        <p class="hero__sub hero-reveal">The HUNANI bottle keeps water cold all day, coffee hot all morning, and plastic out of the ocean. Leak-proof, sweat-free and made from 18/8 stainless steel.</p>
+        <div class="hero__ctas hero-reveal">
+          <a href="#shop" class="btn btn--primary btn--lg magnetic">
+            Shop the bottle — from $34
+            <svg viewBox="0 0 24 24" width="18" height="18" aria-hidden="true"><path d="M5 12h14m-6-6 6 6-6 6" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>
+          </a>
+          <a href="#why" class="btn btn--ghost btn--lg">See why it's different</a>
+        </div>
+        <ul class="hero__trust hero-reveal">
+          <li><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M3 7h11v9H3zM14 10h4l3 3v3h-7z" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linejoin="round"/><circle cx="7" cy="17.5" r="1.8" fill="currentColor"/><circle cx="17" cy="17.5" r="1.8" fill="currentColor"/></svg>Free shipping $50+</li>
+          <li><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 3l8 3v6c0 4.5-3.4 8.2-8 9-4.6-.8-8-4.5-8-9V6z" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linejoin="round"/><path d="m8.5 12 2.5 2.5 4.5-5" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/></svg>Lifetime warranty</li>
+          <li><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M4 12a8 8 0 1 0 2.3-5.6M4 4v4h4" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg>30-day returns</li>
+        </ul>
+      </div>
+
+      <div class="hero__visual">
+        <div class="hero__ring" aria-hidden="true"></div>
+        <svg class="hero__bottle" style="--c:#0f4c81" role="img" aria-label="HUNANI insulated water bottle in Ocean blue"><use href="#bottle"/></svg>
+        <div class="float-badge float-badge--cold">
+          <span class="float-badge__icon">❄</span>
+          <div><strong>24h</strong><small>ice-cold</small></div>
+        </div>
+        <div class="float-badge float-badge--hot">
+          <span class="float-badge__icon">☕</span>
+          <div><strong>12h</strong><small>piping hot</small></div>
+        </div>
+        <div class="float-badge float-badge--leak">
+          <span class="float-badge__icon">✓</span>
+          <div><strong>100%</strong><small>leak-proof</small></div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- MARQUEE -->
+  <section class="marquee" aria-label="Highlights">
+    <div class="marquee__track">
+      <span>Double-wall vacuum</span><i>✦</i><span>BPA-free</span><i>✦</i><span>18/8 stainless steel</span><i>✦</i><span>Sweat-free grip</span><i>✦</i><span>Fits cup holders</span><i>✦</i><span>Dishwasher-safe lid</span><i>✦</i>
+      <span>Double-wall vacuum</span><i>✦</i><span>BPA-free</span><i>✦</i><span>18/8 stainless steel</span><i>✦</i><span>Sweat-free grip</span><i>✦</i><span>Fits cup holders</span><i>✦</i><span>Dishwasher-safe lid</span><i>✦</i>
+    </div>
+  </section>
+
+  <!-- STATS -->
+  <section class="stats">
+    <div class="container stats__grid">
+      <div class="stat"><strong><span class="count" data-to="24">0</span>h</strong><span>Cold retention</span></div>
+      <div class="stat"><strong><span class="count" data-to="12">0</span>h</strong><span>Hot retention</span></div>
+      <div class="stat"><strong><span class="count" data-to="1460">0</span></strong><span>Plastic bottles replaced / year*</span></div>
+      <div class="stat"><strong><span class="count" data-to="12400">0</span>+</strong><span>5-star customers</span></div>
+    </div>
+  </section>
+
+  <!-- WHY / FEATURES -->
+  <section class="section" id="why">
+    <div class="container">
+      <div class="section-head reveal">
+        <span class="eyebrow">Why HUNANI</span>
+        <h2>Every detail engineered<br>for how you actually drink.</h2>
+        <p>We obsessed over the small things — so your bottle never sweats in your bag, never leaks on your laptop, and never tastes like metal.</p>
+      </div>
+
+      <div class="bento">
+        <article class="tile tile--big tile--dark reveal-card">
+          <div class="tile__text">
+            <span class="tile__tag">TempLock™ insulation</span>
+            <h3>Double-wall vacuum keeps the outside cool and the inside exactly how you left it.</h3>
+            <p>Ice still rattling at 6pm. Coffee still steaming on your second meeting.</p>
+          </div>
+          <div class="temp-visual" aria-hidden="true">
+            <div class="temp-wall"><span></span><span></span></div>
+            <div class="temp-drops">
+              <i></i><i></i><i></i><i></i><i></i>
+            </div>
+          </div>
+        </article>
+        <article class="tile reveal-card">
+          <span class="tile__icon">💧</span>
+          <h3>Leak-proof lid</h3>
+          <p>Silicone-sealed, tested upside-down for 72 hours. Toss it in your bag with confidence.</p>
+        </article>
+        <article class="tile reveal-card">
+          <span class="tile__icon">🛡️</span>
+          <h3>Pure taste</h3>
+          <p>Food-grade 18/8 stainless steel. No plastic, no BPA, no metallic aftertaste.</p>
+        </article>
+        <article class="tile reveal-card">
+          <span class="tile__icon">✋</span>
+          <h3>Sweat-free grip</h3>
+          <p>Powder-coated finish that never drips condensation — or slips out of your hand.</p>
+        </article>
+        <article class="tile tile--accent reveal-card">
+          <span class="tile__icon">🚗</span>
+          <h3>Goes everywhere</h3>
+          <p>Slim base fits cup holders, bike cages and gym bag pockets.</p>
+        </article>
+      </div>
+    </div>
+  </section>
+
+  <!-- TEMPERATURE PROOF -->
+  <section class="section section--tint proof">
+    <div class="container proof__grid">
+      <div class="reveal">
+        <span class="eyebrow">The 24-hour test</span>
+        <h2>Fill it at 7am.<br>Still ice-cold at 7am.</h2>
+        <p>We filled a HUNANI and an ordinary bottle with ice water at 4°C and left them at room temperature. Here's how cold each was, hour by hour.</p>
+        <a href="#shop" class="btn btn--primary">Get yours today</a>
+      </div>
+      <div class="chart reveal-card" aria-label="Water temperature after hours at room temperature">
+        <div class="chart__row">
+          <div class="chart__label"><strong>HUNANI</strong><small>after 24h</small></div>
+          <div class="chart__bar"><span class="chart__fill chart__fill--brand" data-w="92"></span></div>
+          <div class="chart__val">6°C</div>
+        </div>
+        <div class="chart__row">
+          <div class="chart__label"><strong>Single-wall steel</strong><small>after 24h</small></div>
+          <div class="chart__bar"><span class="chart__fill chart__fill--mid" data-w="38"></span></div>
+          <div class="chart__val">19°C</div>
+        </div>
+        <div class="chart__row">
+          <div class="chart__label"><strong>Plastic bottle</strong><small>after 24h</small></div>
+          <div class="chart__bar"><span class="chart__fill chart__fill--low" data-w="18"></span></div>
+          <div class="chart__val">23°C</div>
+        </div>
+        <p class="chart__note">Bar length = how cold it stayed. Ambient 23°C, 750 ml bottles.</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- SHOP -->
+  <section class="section shop" id="shop">
+    <div class="container shop__grid">
+      <div class="shop__visual">
+        <div class="shop__stage">
+          <span class="shop__glow" id="shopGlow" aria-hidden="true"></span>
+          <svg class="shop__bottle" id="shopBottle" style="--c:#0f4c81" role="img" aria-label="Selected bottle colour"><use href="#bottle"/></svg>
+        </div>
+        <ul class="shop__perks">
+          <li>✓ Ships within 24h</li>
+          <li>✓ Free returns</li>
+          <li>✓ Lifetime warranty</li>
+        </ul>
+      </div>
+
+      <div class="shop__panel reveal">
+        <span class="badge-best">Bestseller</span>
+        <h2 class="shop__title">The HUNANI Bottle</h2>
+        <a href="#reviews" class="shop__rating"><span class="stars" aria-hidden="true">★★★★★</span> 4.9 · 12,400+ reviews</a>
+
+        <div class="price">
+          <span class="price__now" id="priceNow">$39</span>
+          <span class="price__was" id="priceWas">$49</span>
+          <span class="price__save" id="priceSave">Save 20%</span>
+        </div>
+
+        <fieldset class="opt">
+          <legend>Colour: <strong id="colorName">Ocean</strong></legend>
+          <div class="swatches" role="radiogroup" aria-label="Colour">
+            <button type="button" class="swatch is-active" role="radio" aria-checked="true" data-color="#0f4c81" data-name="Ocean" style="--s:#0f4c81" aria-label="Ocean"></button>
+            <button type="button" class="swatch" role="radio" aria-checked="false" data-color="#14171c" data-name="Midnight" style="--s:#14171c" aria-label="Midnight"></button>
+            <button type="button" class="swatch" role="radio" aria-checked="false" data-color="#7c9a82" data-name="Sage" style="--s:#7c9a82" aria-label="Sage"></button>
+            <button type="button" class="swatch" role="radio" aria-checked="false" data-color="#d8c3a5" data-name="Sand" style="--s:#d8c3a5" aria-label="Sand"></button>
+            <button type="button" class="swatch" role="radio" aria-checked="false" data-color="#e8664f" data-name="Coral" style="--s:#e8664f" aria-label="Coral"></button>
+            <button type="button" class="swatch" role="radio" aria-checked="false" data-color="#f2f2ee" data-name="Arctic" style="--s:#f2f2ee" aria-label="Arctic"></button>
+          </div>
+        </fieldset>
+
+        <fieldset class="opt">
+          <legend>Size: <strong id="sizeName">750 ml</strong></legend>
+          <div class="sizes" role="radiogroup" aria-label="Size">
+            <button type="button" class="size" role="radio" aria-checked="false" data-size="500 ml" data-price="34" data-was="42" data-scale=".86"><strong>500 ml</strong><small>$34</small></button>
+            <button type="button" class="size is-active" role="radio" aria-checked="true" data-size="750 ml" data-price="39" data-was="49" data-scale="1"><span class="size__tag">Most popular</span><strong>750 ml</strong><small>$39</small></button>
+            <button type="button" class="size" role="radio" aria-checked="false" data-size="1 L" data-price="44" data-was="55" data-scale="1.1"><strong>1 L</strong><small>$44</small></button>
+          </div>
+        </fieldset>
+
+        <fieldset class="opt">
+          <legend>Bundle &amp; save</legend>
+          <div class="bundles" role="radiogroup" aria-label="Quantity">
+            <label class="bundle"><input type="radio" name="qty" value="1"><span><strong>1 bottle</strong><small>Standard price</small></span></label>
+            <label class="bundle bundle--hot"><input type="radio" name="qty" value="2" checked><span><strong>2 bottles</strong><small>Save 15% · one for you, one to gift</small></span><em>Best value</em></label>
+            <label class="bundle"><input type="radio" name="qty" value="4"><span><strong>Family 4-pack</strong><small>Save 25%</small></span></label>
+          </div>
+        </fieldset>
+
+        <button type="button" class="btn btn--primary btn--xl btn--block" id="addToCart">
+          Add to cart — <span id="ctaTotal">$66.30</span>
+        </button>
+        <p class="stock"><span class="dot"></span> In stock — order in the next <strong id="countdown">03:59:00</strong> for same-day dispatch</p>
+
+        <div class="pay-row" aria-label="Accepted payments">
+          <span>VISA</span><span>Mastercard</span><span>AMEX</span><span>PayPal</span><span>Apple Pay</span>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- COMPARE -->
+  <section class="section section--tint" id="compare">
+    <div class="container">
+      <div class="section-head reveal">
+        <span class="eyebrow">Compare</span>
+        <h2>Not all bottles are created equal.</h2>
+      </div>
+      <div class="compare reveal-card">
+        <table>
+          <thead>
+            <tr><th scope="col"><span class="sr-only">Feature</span></th><th scope="col" class="is-brand">HUNANI</th><th scope="col">Plastic bottles</th><th scope="col">Cheap steel</th></tr>
+          </thead>
+          <tbody>
+            <tr><th scope="row">Cold for 24 hours</th><td class="is-brand yes">✓</td><td class="no">✕</td><td class="no">✕</td></tr>
+            <tr><th scope="row">Hot for 12 hours</th><td class="is-brand yes">✓</td><td class="no">✕</td><td class="no">✕</td></tr>
+            <tr><th scope="row">100% leak-proof</th><td class="is-brand yes">✓</td><td class="yes">✓</td><td class="no">✕</td></tr>
+            <tr><th scope="row">No metallic taste</th><td class="is-brand yes">✓</td><td class="yes">✓</td><td class="no">✕</td></tr>
+            <tr><th scope="row">BPA &amp; plastic-free</th><td class="is-brand yes">✓</td><td class="no">✕</td><td class="yes">✓</td></tr>
+            <tr><th scope="row">Lifetime warranty</th><td class="is-brand yes">✓</td><td class="no">✕</td><td class="no">✕</td></tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+  </section>
+
+  <!-- IMPACT -->
+  <section class="impact">
+    <div class="container impact__inner">
+      <div class="impact__wave" aria-hidden="true">
+        <svg viewBox="0 0 1440 120" preserveAspectRatio="none"><path class="wave1" d="M0 60 C240 120 480 0 720 60 C960 120 1200 0 1440 60 V120 H0Z"/></svg>
+      </div>
+      <span class="eyebrow eyebrow--light reveal">Our promise</span>
+      <h2 class="impact__title reveal">One HUNANI can replace<br><span class="big"><span class="count" data-to="1460">0</span></span><br>plastic bottles a year.</h2>
+      <p class="reveal">Every bottle you carry is one less in a landfill. That's hydration that's good for you — and for the planet.</p>
+    </div>
+  </section>
+
+  <!-- REVIEWS -->
+  <section class="section" id="reviews">
+    <div class="container">
+      <div class="section-head section-head--row reveal">
+        <div>
+          <span class="eyebrow">Reviews</span>
+          <h2>12,400+ people are drinking more water.</h2>
+        </div>
+        <div class="score">
+          <strong>4.9</strong>
+          <div><span class="stars" aria-hidden="true">★★★★★</span><small>Based on 12,418 verified reviews</small></div>
+        </div>
+      </div>
+      <div class="reviews">
+        <figure class="review reveal-card">
+          <span class="stars" aria-hidden="true">★★★★★</span>
+          <blockquote>“Left it in my car on a 35°C day and the ice was still there when I got back. I've bought three more for my family.”</blockquote>
+          <figcaption><span class="avatar">SM</span><div><strong>Sarah M.</strong><small>Verified buyer · 750 ml Ocean</small></div></figcaption>
+        </figure>
+        <figure class="review reveal-card">
+          <span class="stars" aria-hidden="true">★★★★★</span>
+          <blockquote>“Finally a bottle that doesn't leak in my laptop bag. Looks premium, feels premium. Worth every penny.”</blockquote>
+          <figcaption><span class="avatar">DK</span><div><strong>Daniel K.</strong><small>Verified buyer · 500 ml Midnight</small></div></figcaption>
+        </figure>
+        <figure class="review reveal-card">
+          <span class="stars" aria-hidden="true">★★★★★</span>
+          <blockquote>“I used to drink barely a litre a day. Having cold water on my desk all day changed that completely.”</blockquote>
+          <figcaption><span class="avatar">AR</span><div><strong>Aisha R.</strong><small>Verified buyer · 1 L Sage</small></div></figcaption>
+        </figure>
+      </div>
+    </div>
+  </section>
+
+  <!-- GUARANTEE -->
+  <section class="guarantee">
+    <div class="container guarantee__inner reveal">
+      <div class="seal" aria-hidden="true">
+        <svg viewBox="0 0 120 120"><defs><path id="circ" d="M60 60 m-44 0 a44 44 0 1 1 88 0 a44 44 0 1 1 -88 0"/></defs><text font-size="10.5" font-weight="700" letter-spacing="3" fill="currentColor"><textPath href="#circ">30-DAY GUARANTEE • LIFETIME WARRANTY •</textPath></text></svg>
+        <span>30</span>
+      </div>
+      <div>
+        <h2>Love it, or your money back.</h2>
+        <p>Try HUNANI for 30 days. If it's not the best bottle you've ever owned, send it back for a full refund — no questions, no hassle.</p>
+      </div>
+      <a href="#shop" class="btn btn--primary btn--lg">Try it risk-free</a>
+    </div>
+  </section>
+
+  <!-- FAQ -->
+  <section class="section" id="faq">
+    <div class="container faq">
+      <div class="section-head reveal">
+        <span class="eyebrow">FAQ</span>
+        <h2>Questions? Answered.</h2>
+      </div>
+      <div class="faq__list">
+        <details class="faq__item reveal-card" open>
+          <summary>How long does it really keep drinks cold or hot?</summary>
+          <p>Cold drinks stay cold for up to 24 hours and hot drinks stay hot for up to 12 hours, thanks to our double-wall vacuum insulation. Keep the lid closed for best results.</p>
+        </details>
+        <details class="faq__item reveal-card">
+          <summary>Is it dishwasher safe?</summary>
+          <p>The lid is top-rack dishwasher safe. We recommend hand-washing the bottle body to keep the powder-coat finish looking new for years.</p>
+        </details>
+        <details class="faq__item reveal-card">
+          <summary>Can I put carbonated drinks or juice in it?</summary>
+          <p>Yes. The 18/8 stainless steel won't absorb flavours or odours, so you can switch from sparkling water to iced tea without any aftertaste.</p>
+        </details>
+        <details class="faq__item reveal-card">
+          <summary>How fast is shipping?</summary>
+          <p>Orders placed before 3pm ship the same day. Most orders arrive within 2–5 business days. Shipping is free on orders over $50.</p>
+        </details>
+        <details class="faq__item reveal-card">
+          <summary>What does the lifetime warranty cover?</summary>
+          <p>If your HUNANI ever loses its insulation or develops a manufacturing defect, we'll replace it free of charge — for life.</p>
+        </details>
+      </div>
+    </div>
+  </section>
+
+  <!-- FINAL CTA -->
+  <section class="final">
+    <div class="container final__inner">
+      <div class="final__copy reveal">
+        <h2>Get 10% off your first bottle.</h2>
+        <p>Join 40,000+ subscribers for early access to new colours and hydration tips. No spam, ever.</p>
+        <form class="signup" id="signup" novalidate>
+          <label for="email" class="sr-only">Email address</label>
+          <input id="email" type="email" placeholder="Enter your email" autocomplete="email" required>
+          <button class="btn btn--light" type="submit">Get my 10% off</button>
+        </form>
+        <p class="signup__msg" id="signupMsg" role="status"></p>
+      </div>
+      <div class="final__bottles" aria-hidden="true">
+        <svg style="--c:#7c9a82"><use href="#bottle"/></svg>
+        <svg style="--c:#e8664f"><use href="#bottle"/></svg>
+        <svg style="--c:#f2f2ee"><use href="#bottle"/></svg>
+      </div>
+    </div>
+  </section>
+
+</main>
+
+<footer class="footer">
+  <div class="container footer__grid">
+    <div>
+      <a href="#top" class="logo logo--light">
+        <svg viewBox="0 0 24 24" width="22" height="22" aria-hidden="true"><path d="M12 2.5C8 7.6 5.5 11.3 5.5 14.6a6.5 6.5 0 0 0 13 0c0-3.3-2.5-7-6.5-12.1z" fill="currentColor"/></svg>
+        HUNANI
+      </a>
+      <p>Premium insulated bottles for people who go places.</p>
+    </div>
+    <div>
+      <h4>Shop</h4>
+      <a href="#shop">500 ml</a><a href="#shop">750 ml</a><a href="#shop">1 L</a><a href="#shop">Bundles</a>
+    </div>
+    <div>
+      <h4>Help</h4>
+      <a href="#faq">FAQ</a><a href="#faq">Shipping</a><a href="#faq">Returns</a><a href="#faq">Warranty</a>
+    </div>
+    <div>
+      <h4>Company</h4>
+      <a href="#why">Our story</a><a href="#reviews">Reviews</a><a href="#compare">Compare</a>
+    </div>
+  </div>
+  <div class="container footer__bottom">
+    <small>© 2026 HUNANI. All rights reserved.</small>
+    <small>*Based on 4 single-use bottles a day.</small>
+  </div>
+</footer>
+
+<!-- Sticky mobile buy bar -->
+<div class="sticky-buy" id="stickyBuy">
+  <svg class="sticky-buy__thumb" id="stickyThumb" style="--c:#0f4c81" aria-hidden="true"><use href="#bottle"/></svg>
+  <div class="sticky-buy__info"><strong>HUNANI Bottle</strong><small><span class="stars">★★★★★</span> 4.9 · from $34</small></div>
+  <a href="#shop" class="btn btn--primary btn--sm">Shop now</a>
+</div>
+
+<div class="toast" id="toast" role="status" aria-live="polite"></div>
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/gsap.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/ScrollTrigger.min.js"></script>
+<script src="script.js"></script>
+</body>
+</html>
