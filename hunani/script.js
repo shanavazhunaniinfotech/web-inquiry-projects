@@ -10,12 +10,15 @@
   var nav = $('.nav');
   var sticky = $('#stickyBuy');
   var shop = $('#shop');
+  var why = $('#why');
   function onScroll() {
     var y = window.scrollY;
     nav.classList.toggle('is-scrolled', y > 10);
     var r = shop.getBoundingClientRect();
     var inShop = r.top < window.innerHeight && r.bottom > 0;
-    sticky.classList.toggle('is-visible', y > 600 && !inShop);
+    var w = why.getBoundingClientRect();
+    var inWhy = w.top < window.innerHeight * 0.5 && w.bottom > window.innerHeight * 0.5;
+    sticky.classList.toggle('is-visible', y > 600 && !inShop && !inWhy);
   }
   window.addEventListener('scroll', onScroll, { passive: true });
   onScroll();
@@ -143,6 +146,7 @@
   }
 
   if (!hasGsap || reduce) { setFinalCounts(); return; }
+  document.documentElement.classList.add('has-gsap');
 
   /* =====================================================
      GSAP animations
@@ -203,9 +207,9 @@
     });
   }
 
-  // Hero bottle drifts as you scroll away
+  // Hero bottle sinks downward as you scroll away
   gsap.to('.hero__visual', {
-    yPercent: 18, rotate: 6, ease: 'none',
+    yPercent: 45, rotate: 8, ease: 'none',
     scrollTrigger: { trigger: '.hero', start: 'top top', end: 'bottom top', scrub: true }
   });
 
@@ -242,20 +246,62 @@
     scrollTrigger: { trigger: '.chart', start: 'top 80%', once: true }
   });
 
-  // Rising bubbles inside the insulation tile
-  $$('.temp-drops i').forEach(function (d, idx) {
-    gsap.set(d, { x: (idx - 2) * 14, scale: gsap.utils.random(0.4, 1), opacity: 0 });
-    gsap.timeline({ repeat: -1, delay: idx * 0.45 })
-      .fromTo(d, { y: 0 }, { y: -150, duration: 2.4, ease: 'sine.out' }, 0)
-      .to(d, { opacity: 0.9, duration: 0.6 }, 0)
-      .to(d, { opacity: 0, duration: 0.8 }, 1.6);
+  // Benefits scroll story: bottle drops in from the top, benefits reveal, bottle falls out the bottom
+  var whyBottle = $('#whyBottle');
+  var whySvg = $('svg', whyBottle);
+  var whyShadow = $('.why__shadow');
+  var hotspots = $$('.hotspot');
+  var benefits = $$('.benefit').sort(function (x, y) { return x.dataset.i - y.dataset.i; });
+  var stepEl = $('#whyStep');
+  var colors = ['#0f4c81', '#14171c', '#7c9a82', '#e8664f'];
+  var STEP = 1.8, FIRST = 1.8;
+
+  gsap.matchMedia().add({ desk: '(min-width: 901px)', mob: '(max-width: 900px)' }, function (ctx) {
+    var desk = ctx.conditions.desk;
+    gsap.set(benefits, {
+      autoAlpha: 0,
+      x: function (i, el) { return desk ? (el.closest('.why__col--left') ? -60 : 60) : 0; },
+      y: desk ? 0 : 40
+    });
+    gsap.set(hotspots, { autoAlpha: 0, scale: 0 });
+    gsap.set(whySvg, { '--c': colors[0] });
+
+    var tl = gsap.timeline({
+      defaults: { ease: 'power2.out' },
+      scrollTrigger: {
+        trigger: '.why', start: 'top top', end: 'bottom bottom', scrub: 0.8,
+        onUpdate: function () {
+          var n = Math.min(4, Math.max(1, Math.floor((tl.time() - FIRST) / STEP) + 1));
+          stepEl.textContent = '0' + n;
+        }
+      }
+    });
+
+    tl.fromTo(whyBottle, { yPercent: -170, rotate: -35 }, { yPercent: 0, rotate: 0, duration: 1.6 }, 0)
+      .fromTo(whyShadow, { scale: 0.2, opacity: 0 }, { scale: 1, opacity: 1, duration: 1.6 }, 0)
+      .to('.why__bar i', { width: '100%', ease: 'none', duration: STEP * 4 }, FIRST);
+
+    benefits.forEach(function (b, i) {
+      var t = FIRST + i * STEP;
+      if (!desk && i > 0) tl.to(benefits[i - 1], { autoAlpha: 0, y: -30, duration: 0.5 }, t);
+      tl.to(b, { autoAlpha: 1, x: 0, y: 0, duration: 0.8, ease: 'power3.out' }, t)
+        .to(hotspots[i], { autoAlpha: 1, scale: 1, duration: 0.5, ease: 'back.out(3)' }, t)
+        .to(whySvg, { '--c': colors[i], duration: 0.6 }, t)
+        .to(whyBottle, { rotate: i % 2 ? 5 : -5, duration: 0.8 }, t);
+      if (i > 0) tl.to(hotspots[i - 1], { autoAlpha: 0.35, scale: 0.6, duration: 0.4 }, t);
+    });
+
+    tl.to(whyBottle, { rotate: 0, duration: 0.5 }, FIRST + STEP * 4 - 0.3)
+      .to({}, { duration: 0.5 })
+      .to(whyBottle, { yPercent: 180, rotate: 20, duration: 1.4, ease: 'power2.in' })
+      .to(whyShadow, { scale: 0.2, opacity: 0, duration: 1.4, ease: 'power2.in' }, '<');
   });
 
-  // Shop bottle entrance
-  gsap.from('#shopBottle', {
-    y: 120, rotate: 10, opacity: 0, duration: 1.3, ease: 'expo.out',
-    scrollTrigger: { trigger: '.shop__stage', start: 'top 75%' }
-  });
+  // Shop bottle falls in from the top as the shop section scrolls in
+  gsap.fromTo('#shopBottle',
+    { yPercent: -120, rotate: -20 },
+    { yPercent: 0, rotate: 0, ease: 'power2.out',
+      scrollTrigger: { trigger: '.shop__stage', start: 'top bottom', end: 'center center', scrub: 0.8 } });
 
   // Marquee speeds up while scrolling
   var marquee = $('.marquee__track');
