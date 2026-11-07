@@ -771,3 +771,40 @@ body.menu-open .nav { color: #fff; background: transparent; box-shadow: none; ba
   .vcard__cap { top: 10px; right: 10px; }
   .vcard__play { bottom: 10px; top: auto; }
 }
+
+/* ==========================================================================
+   Real packaging renders
+   ========================================================================== */
+.front--img { background: transparent; border-radius: 0; overflow: visible; }
+.front--img::after { display: none; }
+.front--img img { width: 100%; height: 100%; object-fit: contain; user-select: none; -webkit-user-drag: none; }
+.bag3d { --h: calc(var(--w) * var(--ar, 1.745)); --d: calc(var(--w) * .16); }
+.bag3d .side { background: var(--acc); }
+.bag3d .side::before { background: linear-gradient(90deg, rgba(0,0,0,.28), rgba(0,0,0,0) 35%, rgba(0,0,0,0) 65%, rgba(0,0,0,.28)); }
+.bag3d .side__txt { color: #0f1712; font-size: 1.5em; }
+.bag3d .side__txt small { color: #0f1712; }
+.bag3d .back { border-radius: .4em; box-shadow: inset .6em 0 0 var(--acc), inset 0 -.6em 0 var(--acc); }
+.bag3d .top, .bag3d .bottom { background: #0d0d0d; }
+.bag--fine.bag3d .top, .bag--fine.bag3d .bottom { background: #e9e9e4; }
+.flat-bag, .mini-bag { height: auto; }
+.flat-bag .front, .mini-bag .front { position: relative; inset: auto; }
+.flat-bag .front img, .mini-bag .front img { height: auto; display: block; }
+.flat-bag { filter: drop-shadow(0 28px 26px rgba(0,0,0,.3)); }
+.mini-bag { --w: 26px; }
+.opt__in .mini-bag { --w: 30px; }
+.nav__menu .mini-bag { --w: 30px; }
+.flat-bag--xs { --w: 26px; filter: none; }
+.pcard__media .flat-bag { --w: 175px; }
+.summary__bag .flat-bag { --w: 112px; }
+.hero__main .bag3d { --w: clamp(190px, 18vw, 260px); }
+.hero__side .flat-bag { --w: clamp(130px, 13vw, 190px); }
+
+.pcard__seal { position: absolute; z-index: 2; right: 14px; top: 14px; width: 104px; height: auto; transform: rotate(8deg); }
+@media (max-width: 760px) {
+  .hero__main .bag3d { --w: 150px; }
+  .hero__side .flat-bag { --w: 100px; }
+  .spin__bag .bag3d--xl { --w: min(36vw, 170px); }
+  .pcard__media .flat-bag { --w: 150px; }
+  .summary__bag .flat-bag { --w: 82px; }
+  .pcard__seal { width: 84px; }
+}

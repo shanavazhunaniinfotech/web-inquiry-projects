@@ -16,41 +16,16 @@
   /* ------------------------------------------------------------------
      1. Packaging renderer
      ------------------------------------------------------------------ */
+  // Real packaging renders (transparent WebP, cropped to the bag)
   var VARIANTS = {
-    original: { cls: "", sub: "All Natural <b>Cat Litter</b>", tag: "", foot: "8 lb" },
-    lavender: { cls: "bag--lavender", sub: "Natural <b>Lavender Scent</b>", tag: "LAVENDER", foot: "8 lb" },
-    fine: { cls: "bag--fine", sub: "All Natural <b>Cat Litter</b>", tag: "FINE GRAIN", foot: "8 lb" }
+    original: { cls: "", img: "images/bag-original.webp", ar: 677 / 388, name: "Skoon Original" },
+    lavender: { cls: "bag--lavender", img: "images/bag-lavender.webp", ar: 675 / 385, name: "Skoon Natural Lavender" },
+    fine: { cls: "bag--fine", img: "images/bag-fine.webp", ar: 565 / 362, name: "Skoon Fine Grain" }
   };
 
-  var CAT_SVG =
-    '<svg viewBox="0 0 120 110" aria-hidden="true"><defs>' +
-    '<radialGradient id="cf{id}" cx="45%" cy="35%" r="70%"><stop offset="0" stop-color="#f1f1f1"/><stop offset=".6" stop-color="#c7c8ca"/><stop offset="1" stop-color="#8d8f93"/></radialGradient></defs>' +
-    '<ellipse cx="60" cy="88" rx="44" ry="24" fill="url(#cf{id})"/>' +
-    '<path d="M28 30 22 4l22 16M92 30l6-26-22 16" fill="#b9babd"/>' +
-    '<path d="M30 26 26 10l13 10M90 26l4-16-13 10" fill="#e9c6c9"/>' +
-    '<ellipse cx="60" cy="46" rx="36" ry="31" fill="url(#cf{id})"/>' +
-    '<path d="M44 26q4 6 0 12M60 22v12M76 26q-4 6 0 12" stroke="#9a9ca0" stroke-width="2" fill="none" stroke-linecap="round"/>' +
-    '<path d="M38 47q6 5 12 0M70 47q6 5 12 0" stroke="#2d2d2d" stroke-width="2.6" fill="none" stroke-linecap="round"/>' +
-    '<path d="M56 55h8l-4 4z" fill="#d48b93"/>' +
-    '<path d="M60 59q-3 5-9 4M60 59q3 5 9 4" stroke="#4a4a4a" stroke-width="1.8" fill="none" stroke-linecap="round"/>' +
-    '<path d="M24 54l18 2M24 61l18-1M96 54l-18 2M96 61l-18-1" stroke="#fff" stroke-width="1" opacity=".8"/>' +
-    '<ellipse cx="44" cy="100" rx="11" ry="7" fill="#e6e6e6"/><ellipse cx="76" cy="100" rx="11" ry="7" fill="#e6e6e6"/>' +
-    '</svg>';
-  var uid = 0;
-
-  function frontHTML(v) {
+  function frontHTML(v, alt) {
     var d = VARIANTS[v] || VARIANTS.original;
-    uid++;
-    return '<div class="face front">' +
-      '<div class="f-crimp"></div><div class="f-edge"></div>' +
-      (d.tag ? '<div class="f-tag">' + d.tag + '</div>' : "") +
-      '<div class="f-logo">Skoon</div>' +
-      '<div class="f-sub">' + d.sub + '</div>' +
-      '<div class="f-flag">ALL<br>NATURAL</div>' +
-      '<div class="f-icons"><i></i><i></i><i></i><i></i><i></i><i></i></div>' +
-      '<div class="f-cat">' + CAT_SVG.replace(/\{id\}/g, uid) + '</div>' +
-      '<div class="f-foot"><span>●</span> ' + d.foot + '</div>' +
-      '</div>';
+    return '<div class="face front front--img"><img src="' + d.img + '" alt="' + (alt ? d.name + ' 8 lb cat litter bag' : "") + '" width="400" height="' + Math.round(400 * d.ar) + '" draggable="false" decoding="async"></div>';
   }
   function backHTML(v) {
     var fine = v === "fine";
@@ -74,15 +49,14 @@
     $$("[data-bag3d]", root).forEach(function (el) {
       var v = el.getAttribute("data-bag3d");
       el.className = "bag3d bag " + (VARIANTS[v] || VARIANTS.original).cls + (el.classList.contains("bag3d--xl") ? " bag3d--xl" : "");
+      el.style.setProperty("--ar", (VARIANTS[v] || VARIANTS.original).ar);
       el.innerHTML = frontHTML(v) + backHTML(v) + sideHTML("side--r") + sideHTML("side--l") + '<div class="face top"></div><div class="face bottom"></div>';
     });
     $$("[data-bag-flat]", root).forEach(function (el) {
       var v = el.getAttribute("data-bag-flat");
       var keep = el.classList.contains("flat-bag--xs") ? " flat-bag--xs" : "";
       el.className = "flat-bag bag " + (VARIANTS[v] || VARIANTS.original).cls + keep;
-      el.innerHTML = frontHTML(v);
-      el.setAttribute("role", "img");
-      el.setAttribute("aria-label", "Skoon " + (v === "fine" ? "Fine Grain" : v === "lavender" ? "Natural Lavender" : "Original") + " cat litter bag");
+      el.innerHTML = frontHTML(v, !el.closest("[aria-hidden='true']"));
     });
     $$("[data-bag-mini]", root).forEach(function (el) {
       var v = el.getAttribute("data-bag-mini");
