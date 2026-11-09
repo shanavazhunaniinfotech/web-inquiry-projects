@@ -10,6 +10,8 @@
 window.INVENTORY = [
   {
     id: "sub-126610ln",
+    img: "1587836374828-4dbafa94cf0e",            // photo (Unsplash placeholder)
+    style: "dive",           // dress | sport | dive | chrono (used by the Watch Finder)
     brand: "Rolex",
     model: "Submariner Date",
     ref: "126610LN",
@@ -29,6 +31,8 @@ window.INVENTORY = [
   },
   {
     id: "dj41-126334",
+    img: "1594534475808-b18fc33b045e",            // photo (Unsplash placeholder)
+    style: "dress",           // dress | sport | dive | chrono (used by the Watch Finder)
     brand: "Rolex",
     model: "Datejust 41 “Wimbledon”",
     ref: "126334",
@@ -48,6 +52,8 @@ window.INVENTORY = [
   },
   {
     id: "speedy-310",
+    img: "1547996160-81dfa63595aa",            // photo (Unsplash placeholder)
+    style: "chrono",           // dress | sport | dive | chrono (used by the Watch Finder)
     brand: "Omega",
     model: "Speedmaster Moonwatch Professional",
     ref: "310.30.42.50.01.002",
@@ -67,6 +73,8 @@ window.INVENTORY = [
   },
   {
     id: "ro-15500st",
+    img: "1612817159949-195b6eb9e31a",            // photo (Unsplash placeholder)
+    style: "sport",           // dress | sport | dive | chrono (used by the Watch Finder)
     brand: "Audemars Piguet",
     model: "Royal Oak Selfwinding",
     ref: "15500ST.OO.1220ST.01",
@@ -86,6 +94,8 @@ window.INVENTORY = [
   },
   {
     id: "aquanaut-5167a",
+    img: "1620625515032-6ed0c1790c75",            // photo (Unsplash placeholder)
+    style: "sport",           // dress | sport | dive | chrono (used by the Watch Finder)
     brand: "Patek Philippe",
     model: "Aquanaut",
     ref: "5167A-001",
@@ -105,6 +115,8 @@ window.INVENTORY = [
   },
   {
     id: "santos-wssa0029",
+    img: "1619134778706-7015533a6150",            // photo (Unsplash placeholder)
+    style: "dress",           // dress | sport | dive | chrono (used by the Watch Finder)
     brand: "Cartier",
     model: "Santos de Cartier Medium",
     ref: "WSSA0029",
@@ -124,6 +136,8 @@ window.INVENTORY = [
   },
   {
     id: "bb58-79030n",
+    img: "1542496658-e33a6d0d50f6",            // photo (Unsplash placeholder)
+    style: "dive",           // dress | sport | dive | chrono (used by the Watch Finder)
     brand: "Tudor",
     model: "Black Bay Fifty-Eight",
     ref: "M79030N-0001",
@@ -143,6 +157,8 @@ window.INVENTORY = [
   },
   {
     id: "gmt-126710blro",
+    img: "1611591437281-460bfbe1220a",            // photo (Unsplash placeholder)
+    style: "sport",           // dress | sport | dive | chrono (used by the Watch Finder)
     brand: "Rolex",
     model: "GMT-Master II “Pepsi”",
     ref: "126710BLRO",
@@ -162,6 +178,8 @@ window.INVENTORY = [
   },
   {
     id: "smp-210",
+    img: "1614164185128-e4ec99c436d7",            // photo (Unsplash placeholder)
+    style: "dive",           // dress | sport | dive | chrono (used by the Watch Finder)
     brand: "Omega",
     model: "Seamaster Diver 300M",
     ref: "210.30.42.20.03.001",
@@ -181,6 +199,8 @@ window.INVENTORY = [
   },
   {
     id: "navitimer-b01",
+    img: "1539874754764-5a96559165b0",            // photo (Unsplash placeholder)
+    style: "chrono",           // dress | sport | dive | chrono (used by the Watch Finder)
     brand: "Breitling",
     model: "Navitimer B01 Chronograph 43",
     ref: "AB0138211C1A1",
