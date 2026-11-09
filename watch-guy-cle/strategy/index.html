@@ -5,167 +5,208 @@
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <title>Watch Guy CLE | Design Rationale &amp; Wix Plan</title>
   <meta name="robots" content="noindex, nofollow">
-  <meta name="theme-color" content="#0b0b0c">
+  <meta name="theme-color" content="#0d2b23">
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Bodoni+Moda:ital,opsz,wght@0,6..96,400;1,6..96,400&family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Instrument+Serif:ital@0;1&family=Geist:wght@300..700&family=Archivo:wdth,wght@100..125,500..700&family=Newsreader:ital,opsz,wght@1,6..72,300&display=swap" rel="stylesheet">
   <style>
-    :root { --ink:#0b0b0c; --ink2:#141416; --text:#f1ede6; --muted:#a39d93; --gold:#d6bc85; --gold2:#f0dcae; --line:rgba(241,237,230,.12); --serif:"Bodoni Moda",Georgia,serif; --sans:"Inter",system-ui,sans-serif; color-scheme: dark; }
+    :root { --em:#0d2b23; --iv:#f3eee4; --paper:#fbf8f2; --brass:#b48d55; --brass-d:#8a6a37; --ink:#16241f; --mute:#6f736b; --line:rgba(22,36,31,.12); --cog:#9a4f27; --serif:"Instrument Serif",Georgia,serif; --sans:"Geist",system-ui,sans-serif; }
     * { box-sizing: border-box; }
-    body { margin: 0; background: var(--ink); color: var(--text); font-family: var(--sans); line-height: 1.65; -webkit-font-smoothing: antialiased; }
-    a { color: var(--gold2); }
-    h1, h2, h3, p, ol, ul { margin: 0; }
-    .wrap { max-width: 1080px; margin: 0 auto; padding: 0 32px; }
-    @media (max-width: 700px) { .wrap { padding: 0 16px; } }
-    .top { position: sticky; top: 0; z-index: 5; background: rgba(11,11,12,.92); backdrop-filter: blur(12px); border-bottom: 1px solid var(--line); }
-    .top .wrap { display: flex; justify-content: space-between; align-items: center; height: 64px; gap: 12px; }
-    .logo { font-family: var(--serif); font-size: 1.2rem; letter-spacing: .16em; text-decoration: none; color: var(--text); }
-    .btn { display: inline-flex; align-items: center; min-height: 42px; padding: 0 20px; border-radius: 999px; background: linear-gradient(135deg,var(--gold2),var(--gold)); color: #17130a; font-weight: 700; font-size: .85rem; text-decoration: none; white-space: nowrap; }
-    .eyebrow { font-size: .72rem; font-weight: 700; letter-spacing: .22em; text-transform: uppercase; color: var(--gold); margin-bottom: 14px; }
-    h1 { font-family: var(--serif); font-weight: 500; font-size: clamp(2.4rem, 5.4vw, 4rem); line-height: 1.02; }
-    h1 em, h2 em { color: var(--gold2); }
-    h2 { font-family: var(--serif); font-weight: 500; font-size: clamp(1.9rem, 3.6vw, 2.7rem); line-height: 1.08; margin-bottom: 14px; }
-    .lead { color: #c9c3b8; font-size: 1.1rem; max-width: 62ch; margin-top: 20px; }
-    header.hero { padding: 80px 0 56px; border-bottom: 1px solid var(--line); }
-    section { padding: 72px 0; border-bottom: 1px solid var(--line); }
-    .muted { color: var(--muted); }
-    .grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 14px; margin-top: 32px; }
-    .grid > div { padding: 24px; border: 1px solid var(--line); border-radius: 14px; background: var(--ink2); }
-    .grid b { display: block; font-family: var(--serif); font-size: 1.35rem; font-weight: 600; color: var(--gold2); margin-bottom: 6px; }
-    .grid p { color: var(--muted); font-size: .93rem; }
-    @media (max-width: 860px) { .grid { grid-template-columns: 1fr; } }
-    ol.flow { list-style: none; padding: 0; margin-top: 32px; display: grid; gap: 10px; counter-reset: f; }
-    ol.flow li { counter-increment: f; display: grid; grid-template-columns: 52px 1fr; gap: 18px; padding: 20px 22px; border: 1px solid var(--line); border-radius: 14px; background: var(--ink2); }
-    ol.flow li::before { content: counter(f, decimal-leading-zero); font-family: var(--serif); font-size: 1.8rem; color: var(--gold); line-height: 1; }
-    ol.flow h3 { font-size: 1.02rem; margin-bottom: 4px; }
-    ol.flow p { color: var(--muted); font-size: .93rem; }
-    ol.flow p b { color: var(--text); font-weight: 600; }
-    @media (max-width: 560px) { ol.flow li { grid-template-columns: 1fr; gap: 6px; } }
-    table { width: 100%; border-collapse: collapse; margin-top: 28px; font-size: .93rem; }
-    th, td { text-align: left; padding: 14px 12px; border-bottom: 1px solid var(--line); vertical-align: top; }
-    th { font-size: .72rem; letter-spacing: .14em; text-transform: uppercase; color: var(--gold); font-weight: 700; }
-    td:first-child { font-weight: 600; width: 32%; }
-    td { color: #d6d0c5; }
-    @media (max-width: 640px) { table, tbody, tr, td { display: block; width: 100% !important; } thead { display: none; } tr { padding: 12px 0; border-bottom: 1px solid var(--line); } td { border: 0; padding: 2px 0; } }
-    .steps { margin-top: 24px; padding-left: 20px; display: grid; gap: 8px; color: #d6d0c5; }
+    body { margin: 0; background: var(--iv); color: var(--ink); font-family: var(--sans); line-height: 1.65; -webkit-font-smoothing: antialiased; }
+    a { color: inherit; }
+    h1, h2, h3, p, ul, ol { margin: 0; }
+    ul, ol { padding: 0; list-style: none; }
+    .wrap { max-width: 1120px; margin: 0 auto; padding: 0 32px; }
+    @media (max-width: 700px) { .wrap { padding: 0 18px; } }
+    .top { position: sticky; top: 0; z-index: 5; background: rgba(13,43,35,.95); color: var(--iv); backdrop-filter: blur(10px); }
+    .top .wrap { display: flex; justify-content: space-between; align-items: center; height: 62px; gap: 10px; }
+    .top b { font-family: var(--serif); font-weight: 400; font-size: 1.4rem; }
+    .top nav { display: flex; gap: 8px; }
+    .pill { display: inline-flex; align-items: center; min-height: 38px; padding: 0 16px; border-radius: 99px; border: 1px solid rgba(243,238,228,.3); font-size: .8rem; text-decoration: none; white-space: nowrap; }
+    .pill--b { background: var(--brass); border-color: var(--brass); color: #1a1408; }
+    .kick { font-size: .7rem; letter-spacing: .28em; text-transform: uppercase; color: var(--brass-d); margin-bottom: 16px; display: block; }
+    h1 { font-family: var(--serif); font-weight: 400; font-size: clamp(2.6rem, 6vw, 4.6rem); line-height: 1; }
+    h1 em, h2 em { font-style: italic; color: var(--brass-d); }
+    h2 { font-family: var(--serif); font-weight: 400; font-size: clamp(2rem, 4vw, 3.1rem); line-height: 1.05; margin-bottom: 14px; }
+    .lead { color: #3b4741; font-size: 1.08rem; font-weight: 300; max-width: 64ch; margin-top: 18px; }
+    header.hero { padding: 72px 0 56px; border-bottom: 1px solid var(--line); }
+    section { padding: 64px 0; border-bottom: 1px solid var(--line); }
+    .muted { color: var(--mute); }
+    .vs { display: grid; grid-template-columns: 1fr 1fr; gap: 18px; margin-top: 34px; }
+    .v { border-radius: 22px; overflow: hidden; border: 1px solid var(--line); background: var(--paper); display: flex; flex-direction: column; }
+    .v__head { padding: 30px 28px; }
+    .v--a .v__head { background: radial-gradient(70% 90% at 90% 0%, rgba(214,185,128,.2), transparent 60%), var(--em); color: var(--iv); }
+    .v--b .v__head { background: #f4f0ea; color: #121212; border-bottom: 2px solid #121212; }
+    .v__head small { font-size: .66rem; letter-spacing: .26em; text-transform: uppercase; opacity: .7; }
+    .v--a h3 { font-family: var(--serif); font-weight: 400; font-size: 2.6rem; line-height: 1; margin-top: 6px; }
+    .v--a h3 em { color: #d6b980; }
+    .v--b h3 { font-family: "Archivo", sans-serif; font-stretch: 125%; font-weight: 700; text-transform: uppercase; font-size: 2rem; line-height: 1; margin-top: 8px; letter-spacing: -.02em; }
+    .v--b h3 em { font-family: "Newsreader", serif; font-style: italic; font-weight: 300; text-transform: none; color: var(--cog); }
+    .sw { display: flex; gap: 6px; margin-top: 18px; }
+    .sw i { width: 34px; height: 34px; border-radius: 50%; border: 1px solid rgba(128,128,128,.4); }
+    .v--b .sw i { border-radius: 0; }
+    .v__body { padding: 24px 28px 28px; display: grid; gap: 12px; flex: 1; }
+    .v__body p { font-size: .93rem; color: #3b4741; }
+    .v__body b { color: var(--ink); }
+    .v__body .pill { justify-self: start; margin-top: auto; border-color: var(--ink); color: var(--ink); }
+    @media (max-width: 820px) { .vs { grid-template-columns: 1fr; } }
+    table { width: 100%; border-collapse: collapse; margin-top: 26px; font-size: .92rem; background: var(--paper); border-radius: 16px; overflow: hidden; }
+    th, td { text-align: left; padding: 14px 16px; border-bottom: 1px solid var(--line); vertical-align: top; }
+    th { font-size: .66rem; letter-spacing: .2em; text-transform: uppercase; color: var(--brass-d); font-weight: 600; background: #f6f1e7; }
+    td:first-child { font-weight: 600; width: 22%; }
+    @media (max-width: 760px) { table, tbody, tr, td { display: block; width: 100% !important; } thead { display: none; } tr { padding: 12px 14px; border-bottom: 1px solid var(--line); } td { border: 0; padding: 3px 0; } td[data-l]::before { content: attr(data-l) ": "; font-size: .66rem; letter-spacing: .14em; text-transform: uppercase; color: var(--brass-d); font-weight: 600; } }
+    .grid3 { display: grid; grid-template-columns: repeat(3, 1fr); gap: 14px; margin-top: 28px; }
+    .grid3 > div { padding: 24px; border-radius: 18px; background: var(--paper); border: 1px solid var(--line); }
+    .grid3 b { display: block; font-family: var(--serif); font-weight: 400; font-size: 1.5rem; margin-bottom: 6px; }
+    .grid3 p { color: var(--mute); font-size: .92rem; }
+    @media (max-width: 820px) { .grid3 { grid-template-columns: 1fr; } }
     .two { display: grid; grid-template-columns: 1fr 1fr; gap: 40px; }
-    @media (max-width: 860px) { .two { grid-template-columns: 1fr; gap: 28px; } }
-    .box { padding: 26px; border-radius: 14px; border: 1px solid rgba(200,169,106,.35); background: linear-gradient(135deg, rgba(200,169,106,.1), transparent); }
-    .box h3 { font-family: var(--serif); font-size: 1.5rem; font-weight: 600; margin-bottom: 8px; }
-    ul.ticks { list-style: none; padding: 0; display: grid; gap: 8px; margin-top: 14px; }
-    ul.ticks li { padding-left: 24px; position: relative; color: #d6d0c5; }
-    ul.ticks li::before { content: "✓"; position: absolute; left: 0; color: var(--gold); font-weight: 700; }
-    footer { padding: 48px 0 64px; text-align: center; }
+    @media (max-width: 820px) { .two { grid-template-columns: 1fr; gap: 28px; } }
+    .box { padding: 26px; border-radius: 20px; background: var(--em); color: var(--iv); }
+    .box h3 { font-family: var(--serif); font-weight: 400; font-size: 1.7rem; margin-bottom: 8px; }
+    .box ol { list-style: decimal; padding-left: 20px; display: grid; gap: 8px; margin-top: 12px; color: #c3c9bd; }
+    .box b { color: var(--iv); }
+    .ticks { display: grid; gap: 9px; margin-top: 14px; }
+    .ticks li { padding-left: 24px; position: relative; color: #3b4741; }
+    .ticks li::before { content: "✓"; position: absolute; left: 0; color: var(--brass); font-weight: 700; }
+    footer { padding: 46px 0 64px; display: flex; justify-content: center; gap: 10px; flex-wrap: wrap; }
+    footer .pill { border-color: var(--ink); }
   </style>
 </head>
 <body>
-  <div class="top"><div class="wrap"><a class="logo" href="../">WATCH GUY CLE</a><a class="btn" href="../">View the page</a></div></div>
+  <div class="top"><div class="wrap"><b>Watch Guy CLE</b><nav><a class="pill" href="../">Version A</a><a class="pill pill--b" href="../v2/">Version B</a></nav></div></div>
 
   <header class="hero">
     <div class="wrap">
-      <p class="eyebrow">Design rationale · Prepared for Jon Ibrahim</p>
-      <h1>A one-page site built to turn <em>browsers into buyers.</em></h1>
-      <p class="lead">Every section has one job: remove a reason not to reach out. Below is why the page is ordered the way it is, how it maps to your Wix account, and how you'll update inventory yourself.</p>
-      <p class="lead muted" style="font-size:.95rem">Tip: on the page, tap <b>Design notes</b> (bottom corner) to see these notes on top of each section.</p>
+      <span class="kick">Design rationale · Prepared for Jon Ibrahim</span>
+      <h1>Two directions. One goal: <em>turn browsers into buyers.</em></h1>
+      <p class="lead">Both versions share the same sections, content and conversion features, so you're choosing a look and feel, not a strategy. Each section has one job: remove a reason not to reach out. On either page, tap <b>Design notes</b> (bottom corner) to see the reasoning on top of every section, and use the A / B switch to flip between them.</p>
     </div>
   </header>
 
   <section>
     <div class="wrap">
-      <p class="eyebrow">The thinking</p>
-      <h2>Three questions every watch buyer asks</h2>
-      <p class="muted" style="max-width:64ch">Buying a $5k–$60k watch from an independent dealer comes down to trust. The design answers these three questions before the visitor has to ask them.</p>
-      <div class="grid">
-        <div><b>“Is it real?”</b><p>Authenticity guarantee in the top bar, hero, “Meet Jon” and FAQ, plus free photos and video of the serial on request.</p></div>
-        <div><b>“Is the price fair?”</b><p>Every price is shown openly (no “call for price”), with year, box and papers and condition next to it. “Make an offer” is a built-in option.</p></div>
-        <div><b>“Is it safe to buy?”</b><p>Meet in person in Cleveland or receive it fully insured with signature. A real person, a real face, real reviews.</p></div>
+      <span class="kick">The two directions</span>
+      <h2>Same story, <em>two personalities.</em></h2>
+      <div class="vs">
+        <div class="v v--a">
+          <div class="v__head"><small>Version A</small><h3>Maison <em>heritage luxury</em></h3><div class="sw"><i style="background:#0d2b23"></i><i style="background:#f3eee4"></i><i style="background:#b48d55"></i><i style="background:#16241f"></i></div></div>
+          <div class="v__body">
+            <p><b>Feel:</b> a heritage watch boutique. Deep emerald, warm ivory and brushed brass, the colours of fine watchmaking.</p>
+            <p><b>Type:</b> Instrument Serif (elegant, editorial) with Geist for clean, modern text.</p>
+            <p><b>Signature moments:</b> arched "boutique window" frames, a rotating authenticity seal, a certificate-of-inspection spotlight, the steps told on a watch dial whose hand sweeps as you scroll, a featured-story testimonial slider, and an Instagram profile card.</p>
+            <p><b>Best if:</b> Jon wants to feel established, trusted and classic, the way a high-end jeweller does.</p>
+            <a class="pill" href="../">Open Version A →</a>
+          </div>
+        </div>
+        <div class="v v--b">
+          <div class="v__head"><small>Version B</small><h3>Atelier <em>Swiss editorial</em></h3><div class="sw"><i style="background:#f4f0ea"></i><i style="background:#121212"></i><i style="background:#9a4f27"></i><i style="background:#e7e0d5"></i></div></div>
+          <div class="v__body">
+            <p><b>Feel:</b> a contemporary watch magazine or auction catalogue. Stone paper, ink black and a cognac-leather accent.</p>
+            <p><b>Type:</b> wide Archivo capitals for presence, Newsreader italic for warmth, Inter Tight for text.</p>
+            <p><b>Signature moments:</b> a magazine-cover hero with issue number and Cleveland coordinates, numbered catalogue lots, steps that slide past horizontally while the section stays pinned, a moving wall of reviews, a drag-to-scroll Reels strip, and big-type FAQ.</p>
+            <p><b>Best if:</b> Jon wants to feel modern, confident and Instagram-native, to appeal to a younger collector crowd.</p>
+            <a class="pill" href="../v2/">Open Version B →</a>
+          </div>
+        </div>
       </div>
     </div>
   </section>
 
   <section>
     <div class="wrap">
-      <p class="eyebrow">Section order</p>
-      <h2>Why each section sits where it does</h2>
-      <ol class="flow">
-        <li><div><h3>Cinematic hero, two clear doors</h3><p>A full-screen watch photo sells the feeling of ownership. The headline promises the outcome (the right watch, authentic, handed over in person). <b>Explore the collection</b> for browsers, <b>Chat on WhatsApp</b> for ready buyers. A glass “Just in” card puts a real, priced watch above the fold, and proof stats sit under the buttons.</p></div></li>
-        <li><div><h3>Trust bar + brand ticker</h3><p>Authenticity, meet-or-ship and a live Cleveland clock with “replies within the hour” in the header. A slow brand ticker answers “does he have Rolex?” instantly.</p></div></li>
-        <li><div><h3>Watch of the week (spotlight)</h3><p>One watch presented like a boutique window, with an animated ring, full specs and price. It gives undecided visitors an easy start, and the two highest-intent buttons on the page (<b>Reserve this watch</b>, <b>Request live video</b>) sit right beside the price.</p></div></li>
-        <li><div><h3>The collection</h3><p>Brand chips, price filter and sort that stay visible while scrolling. Every card shows year, box and papers, condition and price, with a ♥ to save, a one-tap WhatsApp that names the watch, and <b>Quick view</b> to see details without leaving the page. Sold pieces stay as proof and become “Find me one.”</p></div></li>
-        <li><div><h3>Watch Finder quiz</h3><p>Three taps (style, budget, who it's for) recommend real watches from the inventory, then capture a phone or email to “send me matches.” If nothing fits, it becomes a sourcing request. No visitor hits a dead end.</p></div></li>
-        <li><div><h3>Meet the Watch Guy</h3><p>A face, a first-person story and a signature, because at this price people buy from a person. Four promises each remove one fear: fakes, overpaying, scams, shipping risk.</p></div></li>
-        <li><div><h3>How it works</h3><p>Four steps along an animated gold line. It makes buying from an independent dealer feel short and safe, then offers a button at the moment of confidence.</p></div></li>
-        <li><div><h3>Sell or trade</h3><p>A second revenue stream and a sales tool (“trade your Tudor toward the Rolex”). Sellers become future inventory. Optional.</p></div></li>
-        <li><div><h3>Client stories + Instagram</h3><p>Reviews in clients' own words, then an Instagram strip that proves an active business and grows the following where repeat buyers watch for drops.</p></div></li>
-        <li><div><h3>FAQ</h3><p>Every objection (authenticity, viewing, payment, shipping, trade-ins, negotiation) answered openly.</p></div></li>
-        <li><div><h3>Contact: every channel</h3><p>WhatsApp, form (to Jon's email), Instagram, Facebook, email. The form's watch dropdown fills from inventory automatically.</p></div></li>
-        <li><div><h3>Footer: private new-arrivals list</h3><p>Captures visitors who aren't ready today, so Jon owns his buyer list instead of relying only on Instagram's algorithm.</p></div></li>
-      </ol>
+      <span class="kick">The thinking</span>
+      <h2>Three questions <em>every watch buyer asks</em></h2>
+      <p class="muted" style="max-width:64ch">Buying a $5k–$60k watch from an independent dealer is a trust decision. Every section answers one of these before the visitor has to ask.</p>
+      <div class="grid3">
+        <div><b>“Is it real?”</b><p>Authenticity guarantee in the top bar, hero, spotlight, Meet Jon and FAQ, plus live video of the serial on request.</p></div>
+        <div><b>“Is the price fair?”</b><p>Every price shown openly, with year, box and papers and condition beside it. “Make an offer” is built into every inquiry.</p></div>
+        <div><b>“Is it safe to buy?”</b><p>Meet in person in Cleveland or fully insured shipping. A real face, real reviews, a reply within the hour.</p></div>
+      </div>
     </div>
   </section>
 
   <section>
     <div class="wrap">
-      <p class="eyebrow">Conversion features</p>
-      <h2>Small details that add up to more inquiries</h2>
+      <span class="kick">Section order (identical in A and B)</span>
+      <h2>Why each section <em>sits where it does</em></h2>
       <table>
-        <thead><tr><th>Feature</th><th>Why it converts</th></tr></thead>
+        <thead><tr><th>Section</th><th>Its job</th><th>How A does it</th><th>How B does it</th></tr></thead>
         <tbody>
-          <tr><td>♥ Save + “Ask about all saved”</td><td>Visitors shortlist watches while browsing, then send Jon one WhatsApp message listing all of them. Multi-watch interest means a hotter lead and an easier upsell.</td></tr>
-          <tr><td>Quick view</td><td>Full specs, inquiry form and WhatsApp in a popup, so people never lose their place in the collection. Fewer clicks means more inquiries.</td></tr>
-          <tr><td>Inquiry options: Available? / Live video / Make an offer / See in person</td><td>Low-commitment starting points. “Live video” and “Make an offer” bring in buyers who would never send a blank message.</td></tr>
-          <tr><td>Watch Finder</td><td>Guided selling for first-time buyers, plus soft lead capture for people not ready to message yet.</td></tr>
-          <tr><td>Pre-written WhatsApp messages</td><td>Every WhatsApp button opens a chat that already names the watch, reference and price. Less typing, more messages.</td></tr>
-          <tr><td>Sticky mobile action bar</td><td>Most traffic comes from Instagram on phones. Watches, WhatsApp and Inquire stay one thumb-tap away.</td></tr>
-          <tr><td>Honest status badges</td><td>Available / On hold / Sold. Real urgency without fake timers. “On hold” becomes “Join waitlist.”</td></tr>
-          <tr><td>Premium motion, fast load</td><td>Smooth scrolling, cinematic reveals and parallax (GSAP), tuned so content is never hidden if scripts fail, and turned off for people who prefer reduced motion.</td></tr>
+          <tr><td>1 · Hero</td><td data-l="Job">Promise the outcome and split visitors: browse vs WhatsApp now. Proof above the fold.</td><td data-l="A">Emerald hero, arched photo, rotating seal, “Just in” card</td><td data-l="B">Magazine-cover headline, cinematic photo with issue no. + live clock</td></tr>
+          <tr><td>2 · Brands</td><td data-l="Job">“Does he have Rolex?” answered in one glance.</td><td data-l="A">Serif italic ticker</td><td data-l="B">Black band, wide capitals</td></tr>
+          <tr><td>3 · Watch of the week</td><td data-l="Job">An easy starting point, with the highest-intent buttons next to the price.</td><td data-l="A">Bezel frame + certificate of inspection</td><td data-l="B">Magazine spread with giant issue number</td></tr>
+          <tr><td>4 · Collection</td><td data-l="Job">Find a watch fast; inquire, WhatsApp, save or quick-view in one tap.</td><td data-l="A">Arched boutique cards</td><td data-l="B">Numbered catalogue lots</td></tr>
+          <tr><td>5 · Watch Finder</td><td data-l="Job">Guide undecided buyers and capture their contact.</td><td data-l="A">Quiz card with icon tiles</td><td data-l="B">Big typographic choices</td></tr>
+          <tr><td>6 · Meet Jon</td><td data-l="Job">People buy from people. 4 promises remove 4 fears.</td><td data-l="A">Arched portrait, roman numerals</td><td data-l="B">Full-width pull quote, numbered rows</td></tr>
+          <tr><td>7 · Simple &amp; safe</td><td data-l="Job">Show exactly what happens next so buying feels short and safe.</td><td data-l="A">Steps on a watch dial, hand sweeps on scroll</td><td data-l="B">Pinned section, steps slide horizontally</td></tr>
+          <tr><td>8 · Sell / trade</td><td data-l="Job">Second revenue stream; sellers become inventory.</td><td data-l="A">Photo + form card</td><td data-l="B">Black form card + giant “24h”</td></tr>
+          <tr><td>9 · Testimonials</td><td data-l="Job">Proof from real clients, linked to the watch they bought.</td><td data-l="A">One featured story at a time, auto-advancing</td><td data-l="B">Two moving rows: a wall of proof</td></tr>
+          <tr><td>10 · Instagram</td><td data-l="Job">Prove an active business and grow followers for new drops.</td><td data-l="A">Profile card + feed mosaic</td><td data-l="B">Drag-to-scroll Reels strip</td></tr>
+          <tr><td>11 · FAQ</td><td data-l="Job">Answer every objection openly.</td><td data-l="A">Numbered accordion + “Ask Jon” card</td><td data-l="B">Big-type accordion + WhatsApp pill</td></tr>
+          <tr><td>12 · Contact + footer</td><td data-l="Job">Every channel, zero friction; capture “not yet” visitors on a private list.</td><td data-l="A">Emerald contact, brass wordmark</td><td data-l="B">Giant “Let's talk”, channel rows</td></tr>
         </tbody>
       </table>
     </div>
   </section>
 
   <section>
+    <div class="wrap">
+      <span class="kick">Conversion features (both versions)</span>
+      <h2>Small details that <em>add up to more inquiries</em></h2>
+      <div class="grid3">
+        <div><b>Pre-written WhatsApp</b><p>Every WhatsApp button opens a chat that already names the watch, reference and price.</p></div>
+        <div><b>Save + ask about all</b><p>Shortlist with the heart, then send Jon one message listing every saved watch.</p></div>
+        <div><b>Quick view</b><p>Specs, inquiry form and WhatsApp in a popup, so nobody loses their place.</p></div>
+        <div><b>Low-commitment inquiries</b><p>Available? / Live video / Make an offer / See in person. Easier than writing a blank message.</p></div>
+        <div><b>Sticky mobile bar</b><p>Watches, WhatsApp and Inquire one thumb-tap away. Most traffic comes from Instagram on phones.</p></div>
+        <div><b>Honest urgency</b><p>Available / On hold / Sold badges. No fake timers. “On hold” becomes “Join waitlist”.</p></div>
+      </div>
+    </div>
+  </section>
+
+  <section>
     <div class="wrap two">
       <div>
-        <p class="eyebrow">Built in your Wix account</p>
-        <h2>You own everything</h2>
+        <span class="kick">Built in your Wix account</span>
+        <h2>You own <em>everything</em></h2>
         <ul class="ticks">
           <li>Built directly in <b>your</b> Wix account. You keep full ownership of the site, domain and content.</li>
-          <li>Inventory runs on a <b>Wix CMS collection</b> connected to the watch grid (a Wix repeater).</li>
-          <li>Forms use <b>Wix Forms</b>, so every inquiry lands in your email (and in the Wix inbox / app).</li>
+          <li>Inventory runs on a <b>Wix CMS collection</b> connected to the watch grid.</li>
+          <li>Forms use <b>Wix Forms</b>, so every inquiry lands in your email (and the Wix app).</li>
           <li>WhatsApp, Instagram and Facebook buttons link to your real accounts.</li>
-          <li>Mobile layout is tuned separately in the Wix mobile editor.</li>
+          <li>Mobile layout tuned separately in the Wix mobile editor.</li>
         </ul>
       </div>
       <div class="box">
         <h3>Updating inventory: 1-minute guide</h3>
-        <p class="muted">From the Wix dashboard or the Wix app on your phone → <b>CMS → Inventory</b>:</p>
-        <ol class="steps">
+        <p style="color:#c3c9bd">From the Wix dashboard or the Wix app on your phone → <b>CMS → Inventory</b>:</p>
+        <ol>
           <li><b>Add a watch:</b> “Add item”, fill in brand, model, reference, year, price, box &amp; papers, condition, then upload photos.</li>
-          <li><b>Edit:</b> click any field (price, description, photos) and change it. It's live right away.</li>
-          <li><b>Mark as sold:</b> switch Status to “Sold”. The card greys out and becomes “Find me one like this.”</li>
-          <li><b>Remove:</b> delete the item, or hide it to keep it for your records.</li>
+          <li><b>Edit:</b> change any field. It's live right away.</li>
+          <li><b>Mark as sold:</b> switch Status to “Sold”. The card turns into “Find me one like it.”</li>
+          <li><b>Feature it:</b> tick “Watch of the week”.</li>
+          <li><b>Remove:</b> delete the item, or hide it to keep your records.</li>
         </ol>
-        <p class="muted" style="margin-top:14px">No code, no developer. A short PDF and video walkthrough come with the handover.</p>
       </div>
     </div>
   </section>
 
   <section>
     <div class="wrap">
-      <p class="eyebrow">What we need from you</p>
-      <h2>To make it 100% yours</h2>
+      <span class="kick">What we need from you</span>
+      <h2>To make it <em>100% yours</em></h2>
       <ul class="ticks">
         <li>Your logo (the current mark is a placeholder)</li>
-        <li>Photos of your current watches (phone photos on a dark background are fine, we can guide you). The current photos are stock placeholders and don't match the exact models.</li>
+        <li>Photos of your watches (phone photos are fine, we'll guide you). Current photos are stock placeholders and don't match the exact models.</li>
         <li>A photo of you for “Meet the Watch Guy”</li>
         <li>Your WhatsApp number, Instagram / Facebook links and inquiry email</li>
-        <li>Real stats and reviews (watches sold, Google / Instagram reviews). The numbers shown are placeholders.</li>
+        <li>Real stats and reviews (watches sold, Google / Instagram reviews). Numbers shown are placeholders.</li>
         <li>Payment, shipping and return policies, to finalize the FAQ</li>
       </ul>
     </div>
   </section>
 
-  <footer><div class="wrap"><a class="btn" href="../">← Back to the page</a></div></footer>
+  <footer class="wrap"><a class="pill" href="../">← Version A · Maison</a><a class="pill" href="../v2/">Version B · Atelier →</a></footer>
 </body>
 </html>
