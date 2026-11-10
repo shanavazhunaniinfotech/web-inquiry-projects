@@ -39,6 +39,18 @@ window.MPYANA = {
   ],
 
   /* ---------------------------------------------------------------------
+     SERVICES DIAL (home page): what rotates inside the circle for each
+     service, every 7.5 seconds. Use { img, cap } for real work (add
+     `contain: true` for wide images) or { sketch, cap } for a style sketch.
+     --------------------------------------------------------------------- */
+  showcase: {
+    logo:     [{ img: "images/mr-mpyana-emblem.webp", cap: "Signature Emblem" }, { sketch: "circle", cap: "Style sketch" }, { img: "images/crop-monogram.webp", cap: "Monogram detail" }],
+    brand:    [{ img: "images/crop-wordmark.webp", contain: true, cap: "Split wordmark" }, { sketch: "word", cap: "Style sketch" }, { img: "images/mr-mpyana-emblem.webp", cap: "Signature Emblem" }],
+    gaming:   [{ img: "images/mr-mpyana-emblem.webp", cap: "Signature Emblem" }, { img: "images/crop-monogram.webp", cap: "Monogram detail" }, { sketch: "shield", cap: "Style sketch" }],
+    business: [{ sketch: "square", cap: "Style sketch" }, { sketch: "circle", cap: "Style sketch" }]
+  },
+
+  /* ---------------------------------------------------------------------
      PROJECTS
      To add a new logo: copy one block, change the values, drop the image
      in /images. Newest first. `featured: true` puts it on the home page.
@@ -58,7 +70,12 @@ window.MPYANA = {
       featured: true,
       size: "xl",
       summary: "The designer's own mark: a faceted M monogram set inside a shield and circular neon frame, with a split red-and-white wordmark. Built to read like a collectible: Version 06 / 1000, Limited Edition, Est. 2024.",
-      notes: ["Shield-framed M monogram", "Red / white split wordmark", "Neon glow on deep black", "Edition-style typography ring"]
+      notes: ["Shield-framed M monogram", "Red / white split wordmark", "Neon glow on deep black", "Edition-style typography ring"],
+      card: "A faceted M monogram locked in a neon shield and ring.",
+      detailCards: [
+        { title: "The Monogram", info: "Layered angular strokes form the M at the heart of the mark." },
+        { title: "Split Wordmark", info: "Red 'Mr', white 'Mpyana': two tones, one name." }
+      ]
     },
     { id: "slot-business", slot: true, title: "Business Logo", category: ["business"], size: "tall", glyph: "square" },
     { id: "slot-gaming",   slot: true, title: "Gaming Logo",   category: ["gaming"],   size: "sq",   glyph: "shield" },
