@@ -1,0 +1,429 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>SurGenTec® | Spine &amp; Orthopedic Medical Devices: Homepage Prototype V3</title>
+  <meta name="description" content="SurGenTec® homepage prototype, Version 3: a cinematic, solution-first experience for surgeons, value analysis committees and distributors.">
+  <meta name="robots" content="noindex, nofollow">
+  <meta name="theme-color" content="#07090d">
+  <link rel="icon" href="../images/mark.png">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Archivo:wdth,wght@62..125,200..800&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="style.css">
+  <script>document.documentElement.classList.add('js');</script>
+</head>
+<body class="t-dark">
+<a class="skip" href="#main">Skip to main content</a>
+
+<svg width="0" height="0" style="position:absolute" aria-hidden="true">
+  <defs>
+    <symbol id="i-arrow" viewBox="0 0 24 24"><path d="M4 12h15M13 6l6 6-6 6" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></symbol>
+    <symbol id="i-ext" viewBox="0 0 24 24"><path d="M7 17 17 7M9 7h8v8" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></symbol>
+    <symbol id="i-down" viewBox="0 0 24 24"><path d="M12 4v12M6 11l6 6 6-6M5 20h14" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></symbol>
+    <symbol id="i-close" viewBox="0 0 24 24"><path d="M6 6l12 12M18 6 6 18" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/></symbol>
+    <symbol id="i-search" viewBox="0 0 24 24"><circle cx="11" cy="11" r="6.5" fill="none" stroke="currentColor" stroke-width="1.5"/><path d="m16 16 4 4" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/></symbol>
+    <symbol id="i-play" viewBox="0 0 24 24"><path d="M9 7.5v9l7.5-4.5z" fill="currentColor"/></symbol>
+    <symbol id="i-check" viewBox="0 0 24 24"><path d="m5 12.5 4.5 4.5L19 7.5" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></symbol>
+    <symbol id="i-doc" viewBox="0 0 24 24"><path d="M7 3h7l5 5v13H7z M14 3v5h5 M10 13h6M10 16.5h6" fill="none" stroke="currentColor" stroke-width="1.4" stroke-linejoin="round"/></symbol>
+    <symbol id="i-code" viewBox="0 0 24 24"><path d="M5 4h14v16H5z M8.5 8h7M8.5 11.5h7M8.5 15h4" fill="none" stroke="currentColor" stroke-width="1.3" stroke-linejoin="round"/></symbol>
+    <symbol id="i-shield" viewBox="0 0 24 24"><path d="M12 3 5 6v5.5c0 4.3 3 8 7 9.5 4-1.5 7-5.2 7-9.5V6z M9 12l2.2 2.2L15.5 10" fill="none" stroke="currentColor" stroke-width="1.3" stroke-linejoin="round" stroke-linecap="round"/></symbol>
+    <symbol id="i-support" viewBox="0 0 24 24"><path d="M4 13v-1a8 8 0 0 1 16 0v1 M4 13h3v5H5a1 1 0 0 1-1-1z M20 13h-3v5h2a1 1 0 0 0 1-1z M17 18c0 1.5-2 2.5-4 2.5" fill="none" stroke="currentColor" stroke-width="1.3" stroke-linejoin="round" stroke-linecap="round"/></symbol>
+    <symbol id="i-chart" viewBox="0 0 24 24"><path d="M4 20h16M7 16v-4M11 16V8M15 16v-6M19 16V5" fill="none" stroke="currentColor" stroke-width="1.3" stroke-linecap="round"/></symbol>
+    <symbol id="i-in" viewBox="0 0 24 24"><path d="M4.5 9h3v10.5h-3zM6 4.2a1.75 1.75 0 1 1 0 3.5 1.75 1.75 0 0 1 0-3.5zM10 9h2.9v1.5c.5-.9 1.7-1.8 3.4-1.8 3 0 3.7 2 3.7 4.6v6.2h-3v-5.5c0-1.3 0-3-1.8-3s-2.1 1.4-2.1 2.9v5.6H10z" fill="currentColor"/></symbol>
+  </defs>
+</svg>
+
+<!-- Intro loader -->
+<div class="loader" id="loader" aria-hidden="true">
+  <img src="../images/mark.png" alt="" class="loader__mark">
+  <span class="loader__n mono" id="loaderN">000</span>
+  <span class="loader__line"><span id="loaderBar"></span></span>
+</div>
+
+<!-- ============ HEADER ============ -->
+<header class="hd" id="top">
+  <a class="hd__logo" href="#top" aria-label="SurGenTec home">
+    <img class="lg-light" src="../images/logo.png" alt="SurGenTec®" width="1874" height="281">
+    <img class="lg-dark" src="../images/logo-dark.png" alt="" width="1874" height="281" aria-hidden="true">
+  </a>
+  <p class="hd__where mono" aria-hidden="true"><span id="whereN">00</span><span class="hd__where-l"><span id="whereL">Introduction</span></span></p>
+  <nav class="hd__quick" aria-label="Quick links">
+    <a href="#solutions">Solutions</a><a href="#portfolio">Products</a><a href="#evidence">Evidence</a><a href="#reimbursement">Reimbursement</a><a href="#library">Resources</a>
+  </nav>
+  <div class="hd__right">
+    <a class="btn btn--accent btn--sm mag" href="#distributors"><span class="btn__t" data-t="Distributor inquiry">Distributor inquiry</span></a>
+    <button class="hd__menu mag" type="button" aria-expanded="false" aria-controls="menu"><span class="hd__menu-t">Menu</span><span class="hd__burger" aria-hidden="true"><i></i><i></i></span></button>
+  </div>
+</header>
+
+<!-- Fullscreen menu -->
+<div class="menu" id="menu" hidden data-lenis-prevent>
+  <div class="menu__bg" aria-hidden="true"></div>
+  <div class="menu__in">
+    <nav class="menu__main" aria-label="Main menu">
+      <a href="#solutions"><span class="mono">01</span>Clinical Solutions</a>
+      <a href="#portfolio"><span class="mono">02</span>Products</a>
+      <a href="#launch"><span class="mono">03</span>Product Launch</a>
+      <a href="#evidence"><span class="mono">04</span>Clinical Evidence</a>
+      <a href="#reimbursement"><span class="mono">05</span>Reimbursement</a>
+      <a href="#library"><span class="mono">06</span>Resources</a>
+      <a href="#about"><span class="mono">07</span>About</a>
+      <a href="#distributors"><span class="mono">08</span>Distributor Inquiry</a>
+    </nav>
+    <div class="menu__side">
+      <p class="mono menu__k">Solutions</p>
+      <ul class="menu__sol" id="menuSol"><!-- rendered --></ul>
+      <p class="mono menu__k">Coming soon</p>
+      <p class="menu__future">Patients · Find a Physician</p>
+      <p class="mono menu__k">Contact</p>
+      <p class="menu__contact"><a href="tel:+15619907882">(561) 990-7882</a><br><a href="mailto:customerservice@surgentec.com">customerservice@surgentec.com</a><br><a href="https://www.surgentec.com/international/" target="_blank" rel="noopener">International ↗</a></p>
+    </div>
+  </div>
+</div>
+
+<main id="main">
+
+<!-- ============ 00 HERO: aperture ============ -->
+<section class="hero" data-theme="dark" data-label="Introduction" data-n="00" aria-labelledby="heroTitle">
+  <div class="hero__pin">
+    <div class="hero__media" id="heroMedia">
+      <img src="../images/hero-spine.jpg" alt="" width="1600" height="870" fetchpriority="high">
+      <div class="hero__shade" aria-hidden="true"></div>
+    </div>
+    <div class="hero__float" aria-hidden="true">
+      <img class="fl fl--a" src="../images/p-tilink-p.png" alt="">
+      <img class="fl fl--b" src="../images/p-ion-c.png" alt="">
+      <img class="fl fl--c" src="../images/p-hydroputty.png" alt="">
+      <img class="fl fl--d" src="../images/p-ion-3d.png" alt="">
+    </div>
+    <h1 class="hero__title" id="heroTitle">
+      <span class="hl hl--1">Revolutionizing spine</span>
+      <span class="hl hl--2">and orthopedic</span>
+      <span class="hl hl--3">surgeries with</span>
+      <span class="hl hl--4">cutting-edge technology</span>
+    </h1>
+    <div class="hero__meta mono" aria-hidden="true">
+      <span>Spine &amp; orthopedic medical devices</span>
+      <span>Boca Raton, Florida</span>
+      <span>Est. 2016</span>
+    </div>
+    <div class="hero__end">
+      <p class="hero__lead">SurGenTec® is a privately owned medical device company, developing, and manufacturing innovative products with patient and surgeon safety at the heart of everything we do.</p>
+      <div class="hero__ctas">
+        <a class="btn btn--accent mag" href="#solutions"><span class="btn__t" data-t="Explore clinical solutions">Explore clinical solutions</span><i><svg><use href="#i-arrow"/></svg></i></a>
+        <a class="btn btn--ghost mag" href="#evidence"><span class="btn__t" data-t="Clinical evidence">Clinical evidence</span><i><svg><use href="#i-arrow"/></svg></i></a>
+      </div>
+    </div>
+    <div class="hero__scroll mono" aria-hidden="true"><span class="hero__scroll-line"></span>Scroll</div>
+  </div>
+</section>
+
+<!-- ============ 01 SOLUTIONS THEATRE ============ -->
+<section class="sol" id="solutions" data-theme="dark" data-label="Clinical solutions" data-n="01" aria-labelledby="solTitle">
+  <div class="wrap sol__intro">
+    <p class="kicker"><span class="mono">01</span>Clinical solutions</p>
+    <h2 class="h-split" id="solTitle" data-split>Start with the clinical need.</h2>
+    <p class="sol__aside"><span class="ph">[CLIENT-APPROVED CONTENT REQUIRED] Short introduction to SurGenTec's solution-based portfolio.</span></p>
+  </div>
+  <div class="theatre" id="theatre">
+    <ol class="theatre__rail" aria-label="Solutions" id="solRail"><!-- rendered --></ol>
+    <div class="theatre__scenes" id="solScenes"><!-- rendered --></div>
+  </div>
+</section>
+
+<!-- ============ 02 SPECIMEN WALL ============ -->
+<section class="wall" id="portfolio" data-theme="light" data-label="Products" data-n="02" aria-labelledby="wallTitle">
+  <div class="wall__pin">
+    <div class="wrap wall__head">
+      <div>
+        <p class="kicker"><span class="mono">02</span>The portfolio</p>
+        <h2 class="h-split" id="wallTitle" data-split>19 products. Five solutions.</h2>
+      </div>
+      <div class="wall__tools">
+        <div class="jump" id="wallJump" role="group" aria-label="Jump to a solution"><!-- rendered --></div>
+        <p class="wall__hint mono" aria-hidden="true">Scroll to browse · click to open</p>
+      </div>
+    </div>
+    <div class="wall__viewport" id="wallViewport">
+      <ol class="wall__track" id="wallTrack"><!-- rendered --></ol>
+    </div>
+    <div class="wrap wall__foot">
+      <span class="mono" id="wallCount">01 / 19</span>
+      <span class="wall__bar"><span id="wallBar"></span></span>
+    </div>
+  </div>
+</section>
+
+<!-- ============ 03 LAUNCH: exploded view ============ -->
+<section class="launch" id="launch" data-theme="dark" data-label="Product launch" data-n="03" aria-labelledby="launchTitle">
+  <div class="launch__pin">
+    <header class="launch__head wrap">
+      <p class="kicker kicker--red"><span class="mono">03</span>Product launch <span class="live" aria-hidden="true"></span></p>
+      <h2 id="launchTitle" class="launch__title"><span>BCOR<sup>™</sup></span><small>Bone Marrow Aspirate Kit</small></h2>
+      <p class="launch__tag">Aspirate quality starts at the needle</p>
+    </header>
+    <div class="explode" id="explode">
+      <svg class="explode__lines" viewBox="0 0 1000 600" preserveAspectRatio="none" aria-hidden="true">
+        <path d="M500 300 L300 120 L120 120"/><path d="M500 300 L700 120 L880 120"/>
+        <path d="M500 300 L300 480 L120 480"/><path d="M500 300 L700 480 L880 480"/>
+      </svg>
+      <div class="explode__core">
+        <div class="core__ring" aria-hidden="true"></div>
+        <div class="core__img">
+          <img class="is-on" src="../images/p-bcor.png" alt="BCOR™ needle tips" loading="lazy">
+          <img src="../images/bcor-3.jpg" alt="" loading="lazy">
+          <img src="../images/bcor-4.jpg" alt="" loading="lazy">
+          <img src="../images/bcor-2.jpg" alt="" loading="lazy">
+          <img src="../images/bcor-1.jpg" alt="" loading="lazy">
+        </div>
+      </div>
+      <article class="call call--1" data-i="1"><span class="mono">01</span><h3>CELLect Filtration Technology™</h3>
+        <p>Twelve total 200-micron slits provide 2.5x more surface area for marrow extraction than competitive needles<sup>1</sup>, designed to support reduced intake velocity, maintain marrow integrity, and filter bone spicules at the point of collection.</p>
+        <p>An inner and outer cannula provide double 200-micron filtration to further reduce aspirate contaminants. Two passes. Greater consistency.<sup>1</sup></p></article>
+      <article class="call call--2" data-i="2"><span class="mono">02</span><h3>Direct Syringe Connection</h3>
+        <p>Direct syringe attachment eliminates stylet exchanges required in conventional workflows. Fewer steps. Reduced connection points.<sup>1</sup></p></article>
+      <article class="call call--3" data-i="3"><span class="mono">03</span><h3>Bone Biopsy Capable</h3>
+        <p>One entry. Two samples. After aspiration, use the included drill and plunger to collect a cancellous bone core biopsy from the same access site.<sup>1</sup></p></article>
+      <article class="call call--4" data-i="4"><span class="mono">04</span><h3>Needle Relocation Sleeve</h3>
+        <p>Enables precise mechanical repositioning of the needle tip, supporting the recommended 2 mL draw protocol for each position and designed to minimize peripheral blood ingress across the full aspiration sequence.<sup>1</sup></p></article>
+    </div>
+    <div class="launch__foot wrap">
+      <div class="launch__cta">
+        <button class="btn btn--light mag" type="button" data-open-product="bcor"><span class="btn__t" data-t="Product details">Product details</span><i><svg><use href="#i-arrow"/></svg></i></button>
+        <button class="btn btn--ghost mag" type="button" data-video="BCOR™ product video"><span class="btn__t" data-t="Watch video">Watch video</span><i><svg><use href="#i-play"/></svg></i></button>
+      </div>
+      <div class="launch__fine">
+        <p><sup>1</sup> Data on file. Device specifications, aspirate surface area comparison, and filtration performance based on in vitro testing and engineering analysis; may not be representative of clinical performance.</p>
+        <p>All components are provided to the hospital sterilized and single use only. Refer to product labeling for complete indications, contraindications, warnings, and precautions.</p>
+        <p>Note: Regulatory submissions reference this device as the ALARA BMA Neuro Access Kit (510(k) K243945).</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ============ 04 EVIDENCE DECK ============ -->
+<section class="ev" id="evidence" data-theme="light" data-label="Clinical evidence" data-n="04" aria-labelledby="evTitle">
+  <div class="ev__pin wrap">
+    <div class="ev__left">
+      <p class="kicker"><span class="mono">04</span>Clinical evidence</p>
+      <h2 class="h-split" id="evTitle" data-split>Research &amp; data.</h2>
+      <p class="ev__aside"><span class="ph">[CLIENT-APPROVED CONTENT REQUIRED] Introduction to SurGenTec's clinical evidence.</span></p>
+      <ol class="ev__index" id="evIndex"><!-- rendered --></ol>
+    </div>
+    <div class="ev__deck" id="evDeck"><!-- rendered --></div>
+  </div>
+</section>
+
+<!-- ============ 05 REIMBURSEMENT ============ -->
+<section class="re" id="reimbursement" data-theme="dark" data-label="Reimbursement" data-n="05" aria-labelledby="reTitle">
+  <div class="wrap">
+    <div class="re__head">
+      <div>
+        <p class="kicker"><span class="mono">05</span>Reimbursement</p>
+        <h2 class="h-split" id="reTitle" data-split>Reimbursement, made findable.</h2>
+      </div>
+      <div class="re__aside">
+        <p><span class="ph">[CLIENT-APPROVED CONTENT REQUIRED] Overview of reimbursement support offered by SurGenTec.</span></p>
+        <a class="btn btn--light mag" href="#reimbursement" data-proto="Links to the Reimbursement page (Milestone 3 build)."><span class="btn__t" data-t="Reimbursement hub">Reimbursement hub</span><i><svg><use href="#i-arrow"/></svg></i></a>
+      </div>
+    </div>
+    <div class="panels" id="panels">
+      <article class="pnl is-open" tabindex="0"><span class="pnl__n mono">A</span><span class="pnl__ic"><svg><use href="#i-code"/></svg></span><h3>Coding &amp; billing guides</h3><div class="pnl__body"><span class="mono">For surgeons &amp; practice teams</span><p class="ph">[CLIENT-APPROVED CONTENT REQUIRED]</p></div></article>
+      <article class="pnl" tabindex="0"><span class="pnl__n mono">B</span><span class="pnl__ic"><svg><use href="#i-shield"/></svg></span><h3>Coverage &amp; payer information</h3><div class="pnl__body"><span class="mono">For hospitals</span><p class="ph">[CLIENT-APPROVED CONTENT REQUIRED]</p></div></article>
+      <article class="pnl" tabindex="0"><span class="pnl__n mono">C</span><span class="pnl__ic"><svg><use href="#i-chart"/></svg></span><h3>Value analysis materials</h3><div class="pnl__body"><span class="mono">For value analysis committees</span><p class="ph">[CLIENT-APPROVED CONTENT REQUIRED]</p></div></article>
+      <article class="pnl" tabindex="0"><span class="pnl__n mono">D</span><span class="pnl__ic"><svg><use href="#i-support"/></svg></span><h3>Reimbursement support</h3><div class="pnl__body"><span class="mono">For everyone</span><p class="ph">[CLIENT-APPROVED CONTENT REQUIRED]</p></div></article>
+    </div>
+  </div>
+</section>
+
+<!-- ============ 06 LIBRARY: command search ============ -->
+<section class="lib" id="library" data-theme="light" data-label="Resources" data-n="06" aria-labelledby="libTitle">
+  <div class="wrap">
+    <p class="kicker"><span class="mono">06</span>Resources library</p>
+    <h2 class="h-split" id="libTitle" data-split>Find any document.</h2>
+    <p class="lib__aside"><span class="ph">[CLIENT-APPROVED CONTENT REQUIRED] Short description of the resources library.</span></p>
+    <div class="cmd">
+      <label class="cmd__field">
+        <span class="sr-only">Search the resources library</span>
+        <svg aria-hidden="true"><use href="#i-search"/></svg>
+        <input id="libQ" type="search" placeholder="Search studies, white papers, products…" autocomplete="off">
+        <kbd aria-hidden="true">/</kbd>
+      </label>
+      <div class="cmd__bar">
+        <div class="cmd__tabs" id="libTabs" role="group" aria-label="Filter by type"><!-- rendered --></div>
+        <label class="cmd__sel"><span class="sr-only">Filter by solution</span><select id="libSol"><option value="all">All solutions</option></select></label>
+      </div>
+      <p class="cmd__count mono" id="libCount" aria-live="polite"></p>
+      <ul class="cmd__list" id="libList"><!-- rendered --></ul>
+      <p class="cmd__empty" id="libEmpty" hidden>No resources match. <button type="button" id="libReset">Clear filters</button></p>
+    </div>
+  </div>
+</section>
+
+<!-- ============ 07 ABOUT + SPINE TIMELINE ============ -->
+<section class="about" id="about" data-theme="light" data-label="About" data-n="07" aria-labelledby="aboutTitle">
+  <div class="wrap">
+    <p class="kicker"><span class="mono">07</span>About SurGenTec®</p>
+    <h2 class="about__lead" id="aboutTitle" data-lines>SurGenTec® is a privately owned medical device company, developing, and manufacturing innovative products with patient and surgeon safety at the heart of everything we do.</h2>
+    <div class="about__grid">
+      <figure class="about__fig"><img src="../images/hero-spine.jpg" alt="" loading="lazy"><figcaption class="mono">Headquartered in Boca Raton, Florida, USA</figcaption></figure>
+      <div class="about__txt">
+        <p>Our product development team is dedicated to creating intuitive solutions to improve the quality of life for patients. By collaborating with experienced surgeons, leading experts, and global distributors we are able to continuously improve the design and engineering of our products.</p>
+        <p>Our patented technologies deliver safe, cost effective and unique solutions which benefit healthcare providers as well as their patients. Pursuant to 35 U.S.C. § 287(a), SurGenTec’s products are covered by or for use under one or more of our filed U.S. Patents.</p>
+        <p>We believe in service to our patients, surgeons, and team by focusing on a family-style culture empowering everyone to perform their best within our community.</p>
+        <div class="about__award"><img src="../images/award-2018.png" alt="2018 Orthopedics This Week Spine Technology Awards" loading="lazy"><p><b>2018</b> SurGenTec wins 2018 Spine Tech Award: ALARA® access needle wins NASS award for best spine technology</p></div>
+      </div>
+    </div>
+
+    <div class="spine" id="spine">
+      <p class="mono spine__k">Our history</p>
+      <div class="spine__axis" aria-hidden="true"><span id="spineFill"></span></div>
+      <ol class="spine__list">
+        <li><b>2011</b><div><h3>Patents filed</h3><p>Patents filed for current product portfolio</p></div></li>
+        <li><b>2016</b><div><h3>SurGenTec® founded</h3><p>Founder Travis Greenhalgh created SurGenTec, a limited liability company in Boca Raton, Florida</p></div></li>
+        <li><b>2017</b><div><h3>GraftGun® market launch</h3><p>GraftGun® universal graft delivery system receives FDA 510K clearance</p></div><img src="../images/p-graftgun.png" alt="" loading="lazy"></li>
+        <li><b>2017</b><div><h3>ALARA® Needle market launch</h3><p>ALARA® access needle and radiation reduction handle released to market</p></div><img src="../images/p-alara.png" alt="" loading="lazy"></li>
+        <li><b>2018</b><div><h3>SurGenTec wins 2018 Spine Tech Award</h3><p>ALARA® access needle wins NASS award for best spine technology</p></div></li>
+        <li><b>2019</b><div><h3>ALARA Needle approved for neuromonitoring</h3><p>Neuromonitoring FDA indication granted enabling physicians to ensure safe trajectory before pedicle screws are placed</p></div></li>
+        <li><b>2020</b><div><h3>ViMax market release</h3><p>Partnership with Aziyo Biologics leads to the development of a flowable, viable fiber allograft</p></div><img src="../images/p-vimax.png" alt="" loading="lazy"></li>
+        <li><b>2020</b><div><h3>3D GraftRasp system launch</h3><p>3D GraftRasp system receives FDA 510K clearance</p></div><img src="../images/p-graftrasp.png" alt="" loading="lazy"></li>
+        <li><b>2020</b><div><h3>SurGenTec wins 2020 Spine Tech Award</h3><p>3D GraftRasp system wins award for best spine technology</p></div></li>
+        <li><b>2020</b><div><h3>OsteoFlo synthetic NanoPutty release</h3><p>First quadphasic synthetic bone graft gets FDA clearance</p></div><img src="../images/p-nanoputty.png" alt="" loading="lazy"></li>
+        <li><b>2022</b><div><h3>ION® facet screw release</h3><p>ION minimally invasive facet screw receives FDA 510K clearance</p></div><img src="../images/p-ion-c.png" alt="" loading="lazy"></li>
+        <li><b>2023</b><div><h3>TiLink-L system launch</h3><p>TiLink-L sacroiliac joint fusion system receives FDA 510K clearance</p></div><img src="../images/p-tilink-l.png" alt="" loading="lazy"></li>
+        <li><b>2023</b><div><h3>TiLink-P system launch</h3><p>TiLink-P sacroiliac joint fusion system receives FDA 510K clearance</p></div><img src="../images/p-tilink-p.png" alt="" loading="lazy"></li>
+        <li><b>2024</b><div><h3>OsteoFlo synthetic HydroPutty release</h3><p>OsteoFlo HydroPutty hydrophilic synthetic bone graft released to market</p></div><img src="../images/p-hydroputty.png" alt="" loading="lazy"></li>
+      </ol>
+    </div>
+  </div>
+</section>
+
+<!-- ============ 08 DISTRIBUTORS: sentence form ============ -->
+<section class="dist" id="distributors" data-theme="blue" data-label="Distributor inquiry" data-n="08" aria-labelledby="distTitle">
+  <canvas class="dist__net" id="net" aria-hidden="true"></canvas>
+  <div class="wrap dist__in">
+    <div class="dist__head">
+      <p class="kicker"><span class="mono">08</span>Distributor inquiry</p>
+      <h2 class="h-split" id="distTitle" data-split>Interested in becoming a distributor?</h2>
+      <p class="dist__lead">SurGenTec® proudly supports a growing global network of distributors and clinical partners across multiple countries. Our innovative spine and biologics technologies are now available in key international markets, helping physicians worldwide deliver safer, more effective patient care. With expanding regulatory approvals and dedicated regional partners, SurGenTec® continues to strengthen its global presence and advance healthcare one region at a time.</p>
+    </div>
+
+    <form class="say" id="sayForm" novalidate>
+      <p class="say__k mono">Distributor inquiry form · all fields required</p>
+      <p class="say__line">My name is
+        <span class="slot"><label class="sr-only" for="fName">Full name</label><input id="fName" name="name" autocomplete="name" placeholder="full name" required aria-describedby="eName"></span>
+        and I represent
+        <span class="slot"><label class="sr-only" for="fOrg">Organization</label><input id="fOrg" name="organization" autocomplete="organization" placeholder="organization" required aria-describedby="eOrg"></span>
+        in
+        <span class="slot"><label class="sr-only" for="fCountry">Country or region</label><input id="fCountry" name="country" autocomplete="country-name" list="countries" placeholder="country" required aria-describedby="eCountry"></span>.
+        You can reach me at
+        <span class="slot slot--wide"><label class="sr-only" for="fEmail">Work email</label><input id="fEmail" name="email" type="email" autocomplete="email" placeholder="work email" required aria-describedby="eEmail"></span>.
+      </p>
+      <datalist id="countries"><option value="United States"><option value="Canada"><option value="Mexico"><option value="Brazil"><option value="Colombia"><option value="United Kingdom"><option value="Germany"><option value="Italy"><option value="Spain"><option value="France"><option value="United Arab Emirates"><option value="Saudi Arabia"><option value="India"><option value="Australia"><option value="Japan"><option value="South Korea"></datalist>
+      <div class="say__errs" aria-live="polite"><p class="err" id="eName"></p><p class="err" id="eOrg"></p><p class="err" id="eCountry"></p><p class="err" id="eEmail"></p></div>
+      <fieldset class="say__chips">
+        <legend class="say__line say__line--s">I'm getting in touch about</legend>
+        <label><input type="radio" name="inquiry" value="New distribution partnership"><span>New distribution partnership</span></label>
+        <label><input type="radio" name="inquiry" value="Existing distributor"><span>Existing distributor</span></label>
+        <label><input type="radio" name="inquiry" value="Product information"><span>Product information</span></label>
+        <label><input type="radio" name="inquiry" value="Other"><span>Other</span></label>
+      </fieldset>
+      <p class="err" id="eType" aria-live="polite"></p>
+      <label class="say__msg"><span class="say__line say__line--s">Message</span><textarea id="fMsg" name="message" rows="3" placeholder="Territory, product interest and current portfolio are helpful." required aria-describedby="eMsg"></textarea></label>
+      <p class="err" id="eMsg"></p>
+      <div class="say__foot">
+        <p class="say__fine">Spam protection (Cloudflare Turnstile) and CRM routing will be connected in the WordPress build.</p>
+        <button class="btn btn--light btn--lg mag" type="submit"><span class="btn__t" data-t="Send inquiry">Send inquiry</span><i><svg><use href="#i-arrow"/></svg></i></button>
+      </div>
+      <p class="sr-only" id="sayStatus" role="status" aria-live="polite"></p>
+    </form>
+    <div class="say-done" id="sayDone" hidden tabindex="-1">
+      <span class="say-done__ic"><svg><use href="#i-check"/></svg></span>
+      <p class="mono">Inquiry received · Ref <span id="sayRef"></span></p>
+      <h3>Thank you, <span id="sayName"></span>.</h3>
+      <p class="ph">[CLIENT-APPROVED CONTENT REQUIRED] Confirmation message and expected response time.</p>
+      <button class="btn btn--ghost" type="button" id="sayAgain"><span class="btn__t" data-t="Send another inquiry">Send another inquiry</span></button>
+    </div>
+    <ul class="dist__contact">
+      <li><span class="mono">Visit</span>Surgentec, LLC · 911 Clint Moore Road, Boca Raton, FL 33487</li>
+      <li><span class="mono">Call</span><a href="tel:+15619907882">(561) 990-7882</a></li>
+      <li><span class="mono">Email</span><a href="mailto:customerservice@surgentec.com">customerservice@surgentec.com</a></li>
+    </ul>
+  </div>
+</section>
+</main>
+
+<!-- ============ FOOTER ============ -->
+<footer class="ft" data-theme="dark" data-label="SurGenTec®" data-n="09">
+  <a class="ft__band" href="#distributors" aria-label="Become a distributor">
+    <span class="ft__marq" aria-hidden="true"><span>Become a distributor <i>→</i> Become a distributor <i>→</i> Become a distributor <i>→</i> Become a distributor <i>→</i>&nbsp;</span><span>Become a distributor <i>→</i> Become a distributor <i>→</i> Become a distributor <i>→</i> Become a distributor <i>→</i>&nbsp;</span></span>
+  </a>
+  <div class="wrap ft__grid">
+    <div class="ft__brand">
+      <img src="../images/logo.png" alt="SurGenTec®" width="1874" height="281" loading="lazy">
+      <p>Revolutionizing spine and orthopedic surgeries with cutting-edge technology</p>
+    </div>
+    <nav aria-label="Clinical solutions"><p class="mono">Solutions</p><ul id="ftSol"></ul></nav>
+    <nav aria-label="Resources"><p class="mono">Resources</p><ul>
+      <li><a href="#evidence">Clinical Evidence</a></li><li><a href="#reimbursement">Reimbursement</a></li><li><a href="#library">Resources Library</a></li><li><a href="https://www.surgentec.com/videos/" target="_blank" rel="noopener">Videos ↗</a></li><li><a href="#launch">Product Launch</a></li></ul></nav>
+    <nav aria-label="Company"><p class="mono">Company</p><ul>
+      <li><a href="#about">About</a></li><li><a href="https://www.surgentec.com/news/" target="_blank" rel="noopener">News ↗</a></li><li><a href="https://www.surgentec.com/international/" target="_blank" rel="noopener">International ↗</a></li><li><a href="#distributors">Contact</a></li></ul></nav>
+    <address class="ft__addr"><p class="mono">Headquarters</p>Surgentec, LLC<br>911 Clint Moore Road<br>Boca Raton, FL 33487<br><a href="tel:+15619907882">(561) 990 7882</a><br><a href="mailto:customerservice@surgentec.com">customerservice@surgentec.com</a><br><a class="ft__in" href="https://www.linkedin.com/company/surgentecllc" target="_blank" rel="noopener" aria-label="SurGenTec on LinkedIn"><svg><use href="#i-in"/></svg></a></address>
+  </div>
+  <div class="wrap ft__bottom"><p>© 2025 SurGenTec® All Rights Reserved</p><p class="mono">Homepage prototype · Version 3</p><a class="mono ft__top" href="#top">Back to top ↑</a></div>
+</footer>
+
+<!-- Specimen viewer -->
+<dialog class="spec" id="spec" aria-labelledby="spName" data-lenis-prevent>
+  <div class="spec__in">
+    <div class="spec__media"><span class="spec__ring" aria-hidden="true"></span><img id="spImg" src="../images/p-tilink-p.png" alt=""></div>
+    <div class="spec__body">
+      <p class="mono spec__meta"><span id="spIdx">01 / 19</span><span id="spSol"></span></p>
+      <h2 id="spName"></h2>
+      <p class="spec__tag" id="spTag"></p>
+      <p class="spec__desc" id="spDesc"></p>
+      <ul class="spec__pts" id="spPts"></ul>
+      <div id="spEvWrap"><p class="mono spec__k">Research &amp; data</p><ul class="spec__ev" id="spEv"></ul></div>
+      <div class="spec__actions">
+        <a class="btn btn--accent" id="spLink" href="#" target="_blank" rel="noopener"><span class="btn__t" data-t="Full product page">Full product page</span><i><svg><use href="#i-ext"/></svg></i></a>
+        <a class="btn btn--ghost" id="spInq" href="#distributors"><span class="btn__t" data-t="Distributor inquiry">Distributor inquiry</span></a>
+      </div>
+      <p class="spec__fine">Product page opens the current surgentec.com page.</p>
+    </div>
+    <div class="spec__nav">
+      <button type="button" id="spPrev" aria-label="Previous product"><svg style="transform:scaleX(-1)"><use href="#i-arrow"/></svg></button>
+      <button type="button" id="spNext" aria-label="Next product"><svg><use href="#i-arrow"/></svg></button>
+      <button type="button" class="spec__x" data-close aria-label="Close product viewer"><svg><use href="#i-close"/></svg></button>
+    </div>
+  </div>
+</dialog>
+
+<dialog class="vid" id="vid" aria-labelledby="vidTitle">
+  <button class="spec__x vid__x" type="button" data-close aria-label="Close video"><svg><use href="#i-close"/></svg></button>
+  <div class="vid__screen"><span class="vid__play"><svg><use href="#i-play"/></svg></span><p id="vidTitle"></p><p class="ph">[CLIENT TO SUPPLY VIDEO EMBED]</p></div>
+</dialog>
+
+<div class="cursor" id="cursor" aria-hidden="true"><span class="cursor__label" id="cursorL"></span></div>
+<div class="grain" aria-hidden="true"></div>
+
+<button class="notes-btn" type="button" id="notesBtn" aria-expanded="false" aria-controls="notes">Prototype notes</button>
+<aside class="notes" id="notes" hidden aria-label="Prototype notes">
+  <div class="notes__head"><p class="mono">Prototype notes · V3</p><button type="button" id="notesX" aria-label="Close notes"><svg><use href="#i-close"/></svg></button></div>
+  <ul>
+    <li><b>Copy:</b> all product, company and evidence wording is taken word for word from SurGenTec's current published website. Nothing has been rewritten.</li>
+    <li><b>Placeholders:</b> anything marked <span class="ph">[CLIENT-APPROVED CONTENT REQUIRED]</span> needs regulatory-approved copy. Section headings without a placeholder are design labels, not claims, and can be replaced.</li>
+    <li><b>Solution names</b> are working titles taken from existing product names. The product grouping is provisional and should be confirmed against SurGenTec's sitemap.</li>
+    <li><b>Hero:</b> the X-ray "aperture" opens as you scroll; floating products are the featured product set.</li>
+    <li><b>GA4:</b> the form and PDF downloads push <code>generate_lead</code> / <code>file_download</code> events to <code>dataLayer</code>.</li>
+  </ul>
+  <label class="notes__tog"><input type="checkbox" id="phTog"> Highlight placeholders</label>
+</aside>
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/gsap.min.js" defer></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/ScrollTrigger.min.js" defer></script>
+<script src="https://cdn.jsdelivr.net/npm/lenis@1.1.13/dist/lenis.min.js" defer></script>
+<script src="script.js" defer></script>
+</body>
+</html>
