@@ -1,0 +1,259 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="robots" content="noindex, nofollow">
+  <title>Shopify Reference Build Plan · David Szekeres</title>
+  <meta name="description" content="Audit of 9 Shopify reference pages, a live buy box demo with Theme Editor controls, build plan and fixed quote.">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Sora:wght@500;600;700&family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap">
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <nav class="nav" aria-label="Sections">
+    <div class="nav__in">
+      <span class="nav__brand">Reference Build Plan</span>
+      <div class="nav__links">
+        <a href="#demo">Live demo</a>
+        <a href="#map">Section map</a>
+        <a href="#stores">Stores</a>
+        <a href="#decisions">Before we start</a>
+        <a href="#plan">Build order</a>
+        <a href="#quote">Quote</a>
+        <a href="#answers">Your 9 questions</a>
+      </div>
+    </div>
+  </nav>
+
+  <main class="wrap">
+    <header class="hero">
+      <span class="eyebrow">Shopify build audit · 9 reference pages</span>
+      <h1>Nine pages, one section library</h1>
+      <p class="lede">Hi David. Instead of sending another proposal, I studied all nine reference pages you sent and built the hardest part of one of them so you can try it yourself. This page has everything in one place: a working demo, what the nine pages share, what needs an app or Shopify Plus, the order I would build them in, a fixed quote, and answers to your nine questions.</p>
+      <div class="meta"><span>Prepared for <b>David Szekeres</b></span><span>By <b>Asiaben Hunani</b></span><span>11 November 2026</span></div>
+      <div class="hero__cta">
+        <a class="btn btn--solid" href="#demo">Try the live demo ↓</a>
+        <a class="btn btn--ghost" href="#quote">See the fixed quote</a>
+      </div>
+      <div class="findings">
+        <div class="finding"><span class="big">4</span><h3>Stores, 4 different themes</h3><p>Aurivita (Shrine PRO), Lymphoria (Denim), EverWell (Revive) and Resilia (Dawn). I rebuild the sections inside your theme, so you don't need to buy any of them.</p></div>
+        <div class="finding"><span class="big">8 of 9</span><h3>Pages use the same buy box</h3><p>Tiered bundles, per-unit price, savings badge and gift lines. Built once as one configurable section, it covers eight pages.</p></div>
+        <div class="finding"><span class="big">21</span><h3>Reusable section types</h3><p>The 120+ sections on the nine pages fit into 21 section types. That is why the later pages cost less.</p></div>
+        <div class="finding"><span class="big">0</span><h3>Paid apps required</h3><p>Resilia's buy box is custom code with no app, and so is mine. Subscriptions use whichever subscription app you already run.</p></div>
+      </div>
+    </header>
+
+    <section class="block" id="demo">
+      <div class="head">
+        <span class="eyebrow">Live demo · Reference P7, Resilia Oil of Oregano</span>
+        <h2>Try the buy box yourself</h2>
+        <p class="lede">This is the buy box from your Oregano reference, rebuilt and working. Click the bundle tiers, turn on the refill subscription, watch the gifts unlock, and press Add To Cart. Use the dark panel to change settings the way you would in the Shopify Theme Editor, and switch between Desktop and Mobile at the top of the preview.</p>
+      </div>
+
+      <div class="demo">
+        <aside class="editor" aria-label="Theme Editor settings (simulation)">
+          <div class="editor__title">Theme Editor <span>Bundle buy box</span></div>
+          <p class="editor__hint">Each control here is a real setting of the Shopify section. You change it in the Theme Editor, with no code.</p>
+
+          <fieldset>
+            <legend>Colors</legend>
+            <div class="swatches" role="group" aria-label="Accent color">
+              <button type="button" data-accent="#0f5a43" data-soft="#dff3ec" data-badge="#16956d" style="background:#0f5a43" aria-pressed="true" aria-label="Green"></button>
+              <button type="button" data-accent="#1f3a8a" data-soft="#e3e9fb" data-badge="#3355cc" style="background:#1f3a8a" aria-pressed="false" aria-label="Navy"></button>
+              <button type="button" data-accent="#7a2e4f" data-soft="#f6e6ee" data-badge="#a8416f" style="background:#7a2e4f" aria-pressed="false" aria-label="Plum"></button>
+              <button type="button" data-accent="#a14a1f" data-soft="#f8e9df" data-badge="#c8642e" style="background:#a14a1f" aria-pressed="false" aria-label="Rust"></button>
+              <button type="button" data-accent="#111111" data-soft="#efefef" data-badge="#333333" style="background:#111111" aria-pressed="false" aria-label="Black"></button>
+            </div>
+          </fieldset>
+
+          <fieldset>
+            <legend>Typography &amp; layout</legend>
+            <label><span class="row">Heading size, desktop <output id="o-hd">28px</output></span><input type="range" id="s-hd" min="20" max="44" value="28"></label>
+            <label><span class="row">Heading size, mobile <output id="o-hm">24px</output></span><input type="range" id="s-hm" min="16" max="36" value="24"></label>
+            <label><span class="row">Offer image, desktop <output id="o-id">120px</output></span><input type="range" id="s-id" min="60" max="170" value="120"></label>
+            <label><span class="row">Offer image, mobile <output id="o-im">84px</output></span><input type="range" id="s-im" min="50" max="120" value="84"></label>
+            <label><span class="row">Corner radius <output id="o-r">8px</output></span><input type="range" id="s-r" min="0" max="24" value="8"></label>
+          </fieldset>
+
+          <fieldset>
+            <legend>Content</legend>
+            <label>Heading<input type="text" id="s-title" value="A Calmer Gut Starts Here"></label>
+            <label>Savings badge text<input type="text" id="s-save" value="EARLY BLACK FRIDAY - Save [savings]"></label>
+            <label>Badge on offer 2<input type="text" id="s-badge" value="Most Popular"></label>
+            <label>Selected by default<select id="s-default"><option value="0">Buy One</option><option value="1" selected>Buy 2 Get 1 Free Gift</option><option value="2">Buy 3 Get 2 Free Gifts</option></select></label>
+            <label class="check"><input type="checkbox" id="s-subs" checked> Show refill subscription</label>
+            <label class="check"><input type="checkbox" id="s-gifts" checked> Show gifts unlocked box</label>
+            <label class="check"><input type="checkbox" id="s-delivery" checked> Show delivery estimate</label>
+          </fieldset>
+
+          <fieldset>
+            <legend>Blocks: offers (drag to reorder in Shopify)</legend>
+            <ul class="blocklist" id="blocklist"></ul>
+          </fieldset>
+
+          <button type="button" class="editor__reset" id="reset">Reset all settings</button>
+        </aside>
+
+        <div class="stage">
+          <div class="stage__bar">
+            <div class="device" role="group" aria-label="Preview size">
+              <button type="button" data-device="desktop" aria-pressed="true">Desktop</button>
+              <button type="button" data-device="mobile" aria-pressed="false">Mobile</button>
+            </div>
+            <span class="stage__note">Placeholder brand and artwork. Prices match the reference.</span>
+          </div>
+          <div class="frame" id="frame">
+            <div class="screen">
+              <div class="bb" id="bb">
+                <div class="bb__gallery">
+                  <div class="bb__main" id="bb-main"></div>
+                  <div class="bb__thumbs" id="bb-thumbs"></div>
+                </div>
+                <div class="bb__info">
+                  <div class="bb__rating"><span class="bb__stars" aria-label="Rated 4.9 out of 5">★★★★★</span><span class="bb__faces"><i style="background:#d9a77b"></i><i style="background:#8b5a3c"></i><i style="background:#f0c9a8"></i><i style="background:#5b3a29"></i><i style="background:#c98f6a"></i></span><span>4.9 · 12,400+ reviews</span></div>
+                  <p class="bb__eyebrow">Daily Digestive Support</p>
+                  <h3 class="bb__title" id="bb-title">A Calmer Gut Starts Here</h3>
+                  <p class="bb__sub">Made with oregano oil to support digestive wellness.†</p>
+                  <div class="bb__benefits" id="bb-benefits"></div>
+                  <div class="bb__pricebar"><span class="bb__price" id="bb-price"></span><s class="bb__compare" id="bb-compare"></s><span class="bb__save" id="bb-save"></span></div>
+                  <div class="bb__offers" id="bb-offers" role="radiogroup" aria-label="Choose your bundle"></div>
+                  <label class="bb__subs" id="bb-subs"><span><strong>Save More With Automatic Refills!</strong><small>Save 15% on every refill. Cancel anytime.</small></span><input type="checkbox" id="bb-sub"></label>
+                  <div class="bb__gifts" id="bb-gifts"><span class="bb__gifts-label">GIFTS UNLOCKED</span><div class="bb__giftlist" id="bb-giftlist"></div></div>
+                  <div class="bb__delivery" id="bb-delivery"><span class="bb__dot"></span>Order today for delivery by <strong id="bb-date"></strong></div>
+                  <button type="button" class="bb__atc" id="bb-atc"><span>Add To Cart</span><span class="bb__pill"><s id="bb-atc-c"></s><span id="bb-atc-p"></span></span><span aria-hidden="true">→</span></button>
+                  <p class="bb__note" id="bb-note"></p>
+                  <div class="bb__accs">
+                    <details class="bb__acc" open><summary>Description</summary><div>300mg oil of oregano with 200mg black seed oil in two easy-to-swallow daily softgels. Each accordion is a block: add, remove, reorder, and choose desktop-only or mobile-only.</div></details>
+                    <details class="bb__acc"><summary>About Your Free Gifts</summary><div>The bamboo-lid glass jar and the on-the-go case are added to the cart automatically when the tier unlocks them.</div></details>
+                    <details class="bb__acc"><summary>Benefits</summary><div>Digestion, immune support, healthy inflammatory response, steady energy.</div></details>
+                    <details class="bb__acc"><summary>Recommended Use</summary><div>Take 2 softgels daily with water, preferably with food.</div></details>
+                    <details class="bb__acc"><summary>Do You Offer a Guarantee?</summary><div>Yes, a 30-day risk-free trial.</div></details>
+                  </div>
+                </div>
+              </div>
+              <aside class="cart" id="cart" aria-label="Cart (demo)" aria-hidden="true">
+                <div class="cart__head">Your cart <button type="button" id="cart-close" aria-label="Close cart">×</button></div>
+                <div class="cart__items" id="cart-items"></div>
+                <div class="cart__foot">
+                  <div class="cart__total"><span>Subtotal</span><span id="cart-total"></span></div>
+                  <button type="button" class="cart__checkout">Checkout</button>
+                  <p class="cart__demo">Demo cart. In Shopify this opens your theme's real cart drawer with the right variant, subscription plan and gift products.</p>
+                </div>
+              </aside>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="head" style="margin-top:12px"><h3>What you just tried, and how it works in Shopify</h3></div>
+      <div class="mapping">
+        <div><b>Offer tiers are blocks</b><span>Add, remove or reorder tiers. Each one points at a product variant, so prices always come from Shopify and are never typed into the code.</span></div>
+        <div><b>Prices calculate themselves</b><span>Per-bag price, savings badge, compare-at price and button price all update from the selected variant.</span></div>
+        <div><b>Gifts unlock by tier</b><span>Each gift has an "unlocks from offer #" setting. It can add a real gift product to the cart, made free with an automatic discount.</span></div>
+        <div><b>Native subscriptions</b><span>The refill toggle reads Shopify selling plans, so it works with Shopify Subscriptions, Recharge, Loop or Skio.</span></div>
+        <div><b>Separate desktop and mobile settings</b><span>Heading size, image sizes, spacing and columns each have their own desktop and mobile setting, as you asked in your brief.</span></div>
+        <div><b>No app, no monthly fee</b><span>It's plain Liquid, CSS and JavaScript in one section file. It doesn't affect the rest of your theme.</span></div>
+      </div>
+    </section>
+
+    <section class="block" id="map">
+      <div class="head"><span class="eyebrow">Section map</span><h2>Which section appears on which page</h2>
+        <p class="lede">Each row is one Theme Editor section I would build once and reuse. A filled cell means the page uses it. The amber counts mark the three sections that repeat on almost every page.</p></div>
+      <div class="scroll"><table class="matrix"><thead><tr><th scope="col" class="corner">Section</th><th scope="col"><span class="pid">P1</span><span class="pname">Aurivita<br>Home (Cayenne)</span></th><th scope="col"><span class="pid">P2</span><span class="pname">Aurivita<br>Cayenne Pepper</span></th><th scope="col"><span class="pid">P3</span><span class="pname">Aurivita<br>Aged Garlic</span></th><th scope="col"><span class="pid">P4</span><span class="pname">Lymphoria<br>Home</span></th><th scope="col"><span class="pid">P5</span><span class="pname">EverWell<br>Home</span></th><th scope="col"><span class="pid">P6</span><span class="pname">Resilia<br>Home</span></th><th scope="col"><span class="pid">P7</span><span class="pname">Resilia<br>Oil of Oregano</span></th><th scope="col"><span class="pid">P8</span><span class="pname">Resilia<br>Aged Garlic</span></th><th scope="col"><span class="pid">P9</span><span class="pname">Resilia<br>Ceylon Cinnamon</span></th><th scope="col" class="n">Pages</th></tr></thead><tbody><tr><th scope="row">Announcement / countdown bar<small>Evergreen or fixed-date timer</small></th><td class="off">·</td><td class="on">●</td><td class="on">●</td><td class="on">●</td><td class="on">●</td><td class="on">●</td><td class="on">●</td><td class="on">●</td><td class="on">●</td><td class="n">8</td></tr><tr><th scope="row">Header + sticky nav, mobile drawer<small>One header per store, restyled</small></th><td class="on">●</td><td class="on">●</td><td class="on">●</td><td class="on">●</td><td class="on">●</td><td class="on">●</td><td class="on">●</td><td class="on">●</td><td class="on">●</td><td class="n">9</td></tr><tr><th scope="row">Buy box: tiered bundles + per-unit price<small>Built once, used 8 times</small></th><td class="on">●</td><td class="on">●</td><td class="on">●</td><td class="on">●</td><td class="on">●</td><td class="off">·</td><td class="on">●</td><td class="on">●</td><td class="on">●</td><td class="n">8</td></tr><tr><th scope="row">Gift unlock / free-gift lines<small>Needs automatic 'Buy X get Y' discount</small></th><td class="off">·</td><td class="on">●</td><td class="off">·</td><td class="off">·</td><td class="off">·</td><td class="off">·</td><td class="on">●</td><td class="on">●</td><td class="on">●</td><td class="n">4</td></tr><tr><th scope="row">Subscribe & save toggle<small>Native selling plans</small></th><td class="off">·</td><td class="on">●</td><td class="off">·</td><td class="off">·</td><td class="off">·</td><td class="off">·</td><td class="on">●</td><td class="on">●</td><td class="on">●</td><td class="n">4</td></tr><tr><th scope="row">Image gallery + thumbnails</th><td class="on">●</td><td class="on">●</td><td class="on">●</td><td class="off">·</td><td class="on">●</td><td class="off">·</td><td class="on">●</td><td class="on">●</td><td class="on">●</td><td class="n">7</td></tr><tr><th scope="row">Benefit icon grid / tags</th><td class="off">·</td><td class="on">●</td><td class="off">·</td><td class="off">·</td><td class="on">●</td><td class="off">·</td><td class="on">●</td><td class="on">●</td><td class="on">●</td><td class="n">5</td></tr><tr><th scope="row">Ingredient / compound cards<small>Slider on mobile</small></th><td class="on">●</td><td class="on">●</td><td class="off">·</td><td class="on">●</td><td class="on">●</td><td class="off">·</td><td class="on">●</td><td class="off">·</td><td class="off">·</td><td class="n">5</td></tr><tr><th scope="row">Clinical stats with counters<small>Animated count-up</small></th><td class="on">●</td><td class="off">·</td><td class="off">·</td><td class="on">●</td><td class="off">·</td><td class="on">●</td><td class="on">●</td><td class="off">·</td><td class="off">·</td><td class="n">4</td></tr><tr><th scope="row">Video testimonials slider<small>Click to play, muted autoplay</small></th><td class="on">●</td><td class="off">·</td><td class="off">·</td><td class="off">·</td><td class="on">●</td><td class="on">●</td><td class="on">●</td><td class="off">·</td><td class="off">·</td><td class="n">4</td></tr><tr><th scope="row">Review / testimonial slider<small>Static or from the review app</small></th><td class="on">●</td><td class="on">●</td><td class="off">·</td><td class="on">●</td><td class="off">·</td><td class="on">●</td><td class="on">●</td><td class="off">·</td><td class="off">·</td><td class="n">5</td></tr><tr><th scope="row">Image + text story rows<small>Left/right, separate mobile order</small></th><td class="on">●</td><td class="off">·</td><td class="on">●</td><td class="on">●</td><td class="off">·</td><td class="on">●</td><td class="off">·</td><td class="on">●</td><td class="on">●</td><td class="n">6</td></tr><tr><th scope="row">How it works / daily steps</th><td class="off">·</td><td class="on">●</td><td class="off">·</td><td class="off">·</td><td class="on">●</td><td class="off">·</td><td class="off">·</td><td class="off">·</td><td class="off">·</td><td class="n">2</td></tr><tr><th scope="row">'What to expect' timeline<small>Sticky / horizontal on desktop</small></th><td class="off">·</td><td class="on">●</td><td class="off">·</td><td class="off">·</td><td class="on">●</td><td class="off">·</td><td class="off">·</td><td class="on">●</td><td class="on">●</td><td class="n">4</td></tr><tr><th scope="row">Comparison table: us vs others</th><td class="on">●</td><td class="on">●</td><td class="off">·</td><td class="off">·</td><td class="off">·</td><td class="off">·</td><td class="on">●</td><td class="on">●</td><td class="on">●</td><td class="n">5</td></tr><tr><th scope="row">Scrolling marquee / ticker</th><td class="on">●</td><td class="on">●</td><td class="off">·</td><td class="on">●</td><td class="on">●</td><td class="off">·</td><td class="on">●</td><td class="off">·</td><td class="off">·</td><td class="n">5</td></tr><tr><th scope="row">Guarantee / risk-free banner</th><td class="on">●</td><td class="off">·</td><td class="off">·</td><td class="off">·</td><td class="on">●</td><td class="off">·</td><td class="on">●</td><td class="off">·</td><td class="off">·</td><td class="n">3</td></tr><tr><th scope="row">FAQ accordion (or tabs)<small>Tabs on P5</small></th><td class="on">●</td><td class="on">●</td><td class="off">·</td><td class="on">●</td><td class="on">●</td><td class="on">●</td><td class="off">·</td><td class="on">●</td><td class="on">●</td><td class="n">7</td></tr><tr><th scope="row">Sticky add-to-cart bar<small>Appears after the buy box scrolls away</small></th><td class="off">·</td><td class="on">●</td><td class="on">●</td><td class="off">·</td><td class="off">·</td><td class="off">·</td><td class="off">·</td><td class="off">·</td><td class="off">·</td><td class="n">2</td></tr><tr><th scope="row">Pop-up content (nutrition facts)</th><td class="on">●</td><td class="on">●</td><td class="off">·</td><td class="off">·</td><td class="off">·</td><td class="off">·</td><td class="off">·</td><td class="off">·</td><td class="off">·</td><td class="n">2</td></tr><tr><th scope="row">Footer: menus, newsletter, payment icons<small>Placeholders for legal pages</small></th><td class="on">●</td><td class="on">●</td><td class="on">●</td><td class="on">●</td><td class="on">●</td><td class="on">●</td><td class="on">●</td><td class="on">●</td><td class="on">●</td><td class="n">9</td></tr></tbody></table></div>
+    </section>
+
+    <section class="block" id="stores">
+      <div class="head"><span class="eyebrow">Stores</span><h2>What each reference store runs on</h2>
+        <p class="lede">Taken from each live page's source. Apps only matter where they change what the visitor sees.</p></div>
+      <div class="scroll">
+        <table class="stores" style="min-width:720px">
+          <thead><tr><th>Store</th><th>Theme</th><th>Apps that affect the page</th><th>What it means for the build</th></tr></thead>
+          <tbody>
+            <tr><td>Resilia<br><span class="mono">P6–P9</span></td><td>Dawn 15.4</td><td><span class="tag">custom buy box</span><span class="tag">Ryviu reviews</span><span class="tag">OptiMonk pop-ups</span><span class="tag">AfterSell</span><span class="tag">Intelligems</span></td><td>The buy box, gift unlock and refill toggle are hand-coded, so they can be matched 1:1 in native code (see the demo above). The "-skio" in the URLs is part of the product handle only; no Skio script loads. The mobile scratch-card pop-up comes from OptiMonk, so it can be rebuilt or left out.</td></tr>
+            <tr><td>Aurivita<br><span class="mono">P1–P3</span></td><td>Shrine PRO 1.3</td><td><span class="tag">Loop Subscriptions</span><span class="tag">Kaching Bundles</span><span class="tag">Judge.me / Loox</span><span class="tag">Intelligems</span></td><td>The German storefront mixes German and English text, so it needs Shopify translations (Translate &amp; Adapt is free). Several sections exist twice, once for desktop and once for mobile. I would turn each pair into one section with separate desktop and mobile settings.</td></tr>
+            <tr><td>Lymphoria<br><span class="mono">P4</span></td><td>Denim 16.2</td><td><span class="tag">Kaching Bundles</span><span class="tag">Judge.me</span><span class="tag">AfterSell</span></td><td>Home page with its own buy box near the bottom, a video hero and an ingredient story. Every custom section can be rebuilt in native code.</td></tr>
+            <tr><td>EverWell<br><span class="mono">P5</span></td><td>Revive 15.1</td><td><span class="tag">Kaching Bundles</span><span class="tag">Judge.me</span><span class="tag amber">sale countdown</span></td><td>Long landing page with a countdown, symptom grid, sticky timeline, full product section and FAQ tabs. The countdown can be evergreen (resets per visitor) or end on a fixed date, your choice.</td></tr>
+          </tbody>
+        </table>
+      </div>
+    </section>
+
+    <section class="block" id="decisions">
+      <div class="head"><span class="eyebrow">Before we start</span><h2>Things you should know up front</h2></div>
+      <ul class="list">
+        <li><b>Checkout</b><span>Changes to the checkout page itself need Shopify Plus (Checkout Extensibility). Cart, cart drawer and everything before checkout can be fully customized on any plan.</span></li>
+        <li><b>Free gifts</b><span>The gift tiers display natively. To make a gift free in the cart, add a "Buy X get Y" automatic discount in Shopify admin. It takes 5 minutes and I can set it up.</span></li>
+        <li><b>Subscriptions</b><span>The refill toggle reads Shopify selling plans, so it works with Shopify Subscriptions (free), Recharge, Loop or Skio. Tell me which one you use.</span></li>
+        <li><b>Reviews</b><span>Star ratings and review sliders can be static blocks you edit, or pull from your review app (Judge.me, Okendo, Loox…). Static blocks load faster and match the reference exactly.</span></li>
+        <li><b>Bundle apps</b><span>Kaching Bundles is installed on all four stores, but the buy boxes you see don't depend on it. I build bundles from your product variants, with no monthly fee.</span></li>
+        <li><b>Original content</b><span>As you asked, the first version of each page uses the reference text and images so you can compare it side by side. Replace them with your own before launch, because that content belongs to those brands.</span></li>
+      </ul>
+    </section>
+
+    <section class="block" id="plan">
+      <div class="head"><span class="eyebrow">Build order</span><h2>Shared sections first, then the pages that reuse them</h2></div>
+      <div class="phases">
+        <div class="phase"><span class="when">Week 1</span><div><h3>Oregano page + core library</h3><p>Buy box (shown above), gallery, header, footer, announcement bar, comparison table, FAQ, testimonial sliders.</p></div><span class="pages">P7</span></div>
+        <div class="phase"><span class="when">Week 2</span><div><h3>Rest of Resilia</h3><p>Garlic and Cinnamon share one template, so they mostly reuse library sections. Then the Resilia home page.</p></div><span class="pages">P8 · P9 · P6</span></div>
+        <div class="phase"><span class="when">Week 3</span><div><h3>Aurivita</h3><p>Cayenne first (timeline, steps, doctor review, sticky add-to-cart), then the home page and Garlic, which reuse them.</p></div><span class="pages">P2 · P1 · P3</span></div>
+        <div class="phase"><span class="when">Weeks 4–5</span><div><h3>Lymphoria and EverWell</h3><p>Video hero, ingredient story, symptom grid, sticky timeline, FAQ tabs, countdown.</p></div><span class="pages">P4 · P5</span></div>
+      </div>
+      <div class="callout"><h3>Every page comes with a match report</h3><p>Screenshots of the reference and my build side by side at desktop (1440px), tablet (768px) and mobile (390px) widths, so you can check the match in a minute instead of hunting for differences.</p></div>
+    </section>
+
+    <section class="block" id="quote">
+      <div class="head"><span class="eyebrow">Fixed quote</span><h2>Price per page</h2>
+        <p class="lede">Later pages cost less because they reuse sections that are already built. You can also start with P7 alone as a single milestone and decide on the rest after you've seen it.</p></div>
+      <div class="scroll">
+        <table class="quote" style="min-width:480px">
+          <thead><tr><th>Page</th><th>Price</th></tr></thead>
+          <tbody>
+            <tr><td>P7 Resilia Oil of Oregano<small>Includes the core section library</small></td><td>$350</td></tr>
+            <tr><td>P8 Resilia Aged Garlic</td><td>$200</td></tr>
+            <tr><td>P9 Resilia Ceylon Cinnamon<small>Same template as P8</small></td><td>$150</td></tr>
+            <tr><td>P6 Resilia Home</td><td>$300</td></tr>
+            <tr><td>P2 Aurivita Cayenne Pepper</td><td>$350</td></tr>
+            <tr><td>P1 Aurivita Home<small>Reuses most of P2</small></td><td>$250</td></tr>
+            <tr><td>P3 Aurivita Aged Garlic</td><td>$250</td></tr>
+            <tr><td>P4 Lymphoria Home</td><td>$350</td></tr>
+            <tr><td>P5 EverWell Home</td><td>$350</td></tr>
+          </tbody>
+          <tfoot><tr><td>All nine pages, fixed price</td><td>$2,550</td></tr></tfoot>
+        </table>
+      </div>
+    </section>
+
+    <section class="block" id="answers">
+      <div class="head"><span class="eyebrow">Your nine questions</span><h2>Answers</h2></div>
+      <div class="qa">
+        <div><span class="q">1 · Fixed price</span><p>$2,550 for all nine, or per page as listed above.</p></div>
+        <div><span class="q">2 · Included</span><p>Desktop and mobile recreation, header and footer, modular sections and blocks, all interactions, cart behavior, testing on Chrome, Safari, iOS and Android, and a match report for each page.</p></div>
+        <div><span class="q">3 · Delivery</span><p>P7 in 5 working days, then about 2 pages a week. All nine in about 5 weeks.</p></div>
+        <div><span class="q">4 · Revisions</span><p>2 rounds per page, plus unlimited fixes for anything that doesn't match the reference.</p></div>
+        <div><span class="q">5 · Animations</span><p>Yes, all of them: sliders, counters, marquees, sticky bars, accordions, tabs, GIFs, video and gift unlocks.</p></div>
+        <div><span class="q">6 · Theme Editor</span><p>Yes. Every section and repeated item is editable and reorderable, with separate desktop and mobile settings. You can try it in the demo above.</p></div>
+        <div><span class="q">7 · Paid apps</span><p>None required. You only need a subscription app if you sell subscriptions, and you can keep the one you use now.</p></div>
+        <div><span class="q">8 · Limits</span><p>The checkout page needs Shopify Plus. Third-party review or pop-up widgets look the way their app makes them look, unless I rebuild them as static sections.</p></div>
+        <div><span class="q">9 · Examples</span><p>The working buy box above, plus the Shopify stores in my proposal.</p></div>
+      </div>
+    </section>
+
+    <section class="block">
+      <div class="next">
+        <h2>Next step</h2>
+        <p>Reply on Upwork with the page you want first (I suggest P7, Oil of Oregano). I'll set up the milestone and send you the first preview within 5 working days.</p>
+        <ol>
+          <li>You choose P7 alone or all nine pages.</li>
+          <li>You add me as a collaborator on your Shopify store (or I build in a development store and transfer it).</li>
+          <li>I deliver P7 with its match report, you review it, and then we continue.</li>
+        </ol>
+      </div>
+    </section>
+
+    <footer class="foot">Audit based on the live reference pages as of 11 November 2026. Section counts come from each page's Shopify section list, and app names from the scripts each page loads. The demo uses placeholder branding.</footer>
+  </main>
+  <script src="script.js"></script>
+</body>
+</html>
