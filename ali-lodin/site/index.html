@@ -1,0 +1,202 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+  <meta name="robots" content="noindex, nofollow">
+  <title>The Family Table · Family-Owned Restaurant in San Clemente, CA</title>
+  <meta name="description" content="Family recipes cooked fresh daily in San Clemente, CA. See the menu, this week's specials and catering, then order online for pickup or delivery.">
+  <meta property="og:title" content="The Family Table · San Clemente">
+  <meta property="og:description" content="Family recipes cooked fresh daily. Order online for pickup or delivery.">
+  <meta property="og:type" content="restaurant">
+  <meta name="theme-color" content="#2d3a1f" id="theme-color">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,500;9..144,700;9..144,800&family=Inter+Tight:wght@400;500;600;700&display=swap">
+  <link rel="stylesheet" href="style.css">
+  <script type="application/ld+json" id="schema">{}</script>
+</head>
+<body data-cuisine="med">
+  <div class="ribbon">
+    <a href="../">← Proposal for Ali</a>
+    <span>Live demo · placeholder name, menu and photos</span>
+    <button type="button" id="seo-open">See the local SEO built in</button>
+  </div>
+
+  <header class="header" id="top">
+    <div class="wrap header__in">
+      <a class="logo" href="#top"><span class="logo__mark" aria-hidden="true"></span><span><b>The Family Table</b><small id="logo-sub">Mediterranean Kitchen · Since 1998</small></span></a>
+      <nav class="nav" aria-label="Main">
+        <a href="#story">Our Story</a><a href="#menu">Menu</a><a href="#specials">Specials</a><a href="#catering">Catering</a><a href="#reviews">Reviews</a><a href="#visit">Visit</a>
+      </nav>
+      <a class="btn btn--order" href="#order" data-order>Order Now</a>
+      <button class="burger" id="burger" aria-label="Open menu" aria-expanded="false"><i></i><i></i></button>
+    </div>
+    <nav class="mnav" id="mnav" aria-label="Mobile">
+      <a href="#story">Our Story</a><a href="#menu">Menu</a><a href="#specials">Weekly Specials</a><a href="#catering">Catering</a><a href="#reviews">Reviews</a><a href="#visit">Hours &amp; Location</a>
+    </nav>
+  </header>
+
+  <main>
+    <!-- Hero -->
+    <section class="hero">
+      <img class="hero__img" id="hero-img" src="../assets/med-hero.jpg" alt="Grilled chicken fresh from the grill">
+      <div class="hero__shade"></div>
+      <div class="wrap hero__in">
+        <p class="hero__kicker"><span class="dot" id="open-dot"></span><span id="open-status">Open today</span></p>
+        <h1 id="hero-title">Family recipes,<br><em>grilled fresh daily.</em></h1>
+        <p class="hero__sub" id="hero-sub">Three generations, one kitchen. Charcoal-grilled plates, warm pita and mezze made the way our grandmother taught us.</p>
+        <div class="hero__cta"><a class="btn btn--order btn--lg" href="#order" data-order>Order Now · Pickup or Delivery</a><a class="btn btn--ghost btn--lg" href="#menu">See the Menu</a></div>
+        <ul class="hero__facts"><li><b>4.8 ★</b> 620+ Google reviews</li><li><b>15 min</b> average pickup</li><li><b>Catering</b> for 10–200 guests</li></ul>
+      </div>
+    </section>
+
+    <!-- Story -->
+    <section class="story wrap" id="story">
+      <div class="story__photos">
+        <img src="../assets/chef.jpg" alt="Our kitchen during dinner service" loading="lazy">
+        <img src="../assets/interior.jpg" alt="Inside the dining room" loading="lazy">
+        <span class="story__badge"><b>25</b>years of<br>family cooking</span>
+      </div>
+      <div class="story__copy">
+        <p class="eyebrow">Our Story</p>
+        <h2 class="h2">From our family's table <em>to yours.</em></h2>
+        <p id="story-text">It started with a handful of family recipes and a small counter on the corner. Twenty-five years later, the same family still runs the kitchen, the sauces are still made every morning, and regulars still get greeted by name.</p>
+        <p>We cook what we'd serve at home: fresh ingredients, generous portions, and nothing from a freezer bag.</p>
+        <div class="story__stats"><div><b>3</b><span>generations in the kitchen</span></div><div><b>40+</b><span>dishes made from scratch</span></div><div><b>1</b><span>family, every single day</span></div></div>
+      </div>
+    </section>
+
+    <!-- Menu -->
+    <section class="menu" id="menu">
+      <div class="wrap">
+        <div class="sec-head"><p class="eyebrow">Menu Highlights</p><h2 class="h2">What our regulars <em>order again.</em></h2></div>
+        <div class="tabs" role="tablist" aria-label="Menu categories" id="menu-tabs"></div>
+        <div class="dishes" id="dishes"></div>
+        <div class="center"><a class="btn btn--order btn--lg" href="#order" data-order>Order the Full Menu Online</a></div>
+      </div>
+    </section>
+
+    <!-- Specials -->
+    <section class="specials" id="specials">
+      <div class="wrap specials__in">
+        <div class="special-card">
+          <img id="special-img" src="../assets/med-chicken.jpg" alt="" loading="lazy">
+          <div class="special-card__body">
+            <p class="eyebrow light" id="special-day">Today's Special</p>
+            <h2 class="h2 light" id="special-title">Lemon Chicken Tray</h2>
+            <p id="special-desc"></p>
+            <div class="special-card__row"><span class="price" id="special-price"></span><a class="btn btn--order" href="#order" data-order>Order Today's Special</a></div>
+          </div>
+        </div>
+        <div class="week">
+          <p class="eyebrow">Weekly Specials</p>
+          <h2 class="h2">Something new <em>every day.</em></h2>
+          <ol class="week__list" id="week"></ol>
+          <p class="note">Specials update every Monday. You'll change them yourself in two minutes from the editor.</p>
+        </div>
+      </div>
+    </section>
+
+    <!-- Catering -->
+    <section class="catering" id="catering">
+      <img class="catering__bg" src="../assets/spread.jpg" alt="" loading="lazy">
+      <div class="wrap catering__in">
+        <div class="catering__copy">
+          <p class="eyebrow light">Catering</p>
+          <h2 class="h2 light">Feed the whole party, <em>family style.</em></h2>
+          <p>Office lunches, birthdays, graduations and weddings. We deliver, set up, and leave you with the leftovers.</p>
+          <div class="packs" id="packs"></div>
+        </div>
+        <form class="cform" id="cform">
+          <h3>Get a catering quote</h3>
+          <label>Event date<input type="date" id="c-date" required></label>
+          <label>Number of guests<input type="number" id="c-guests" min="10" max="500" value="30" required></label>
+          <label>Package<select id="c-pack"></select></label>
+          <p class="cform__est">Estimated total <b id="c-est">$0</b></p>
+          <label>Name &amp; phone<input type="text" id="c-name" placeholder="Jane · (949) 555-0123" required></label>
+          <button class="btn btn--order btn--full" type="submit">Request a Quote</button>
+          <p class="cform__ok" id="c-ok" hidden>Thanks! We'll call you within 2 hours to confirm. (Demo form)</p>
+        </form>
+      </div>
+    </section>
+
+    <!-- Reviews -->
+    <section class="reviews wrap" id="reviews">
+      <div class="reviews__sum">
+        <p class="eyebrow">Google Reviews</p>
+        <div class="gscore"><b>4.8</b><span class="gstars">★★★★★</span><small>Based on 620+ reviews</small></div>
+        <div class="bars"><span>5<i style="--w:86%"></i></span><span>4<i style="--w:9%"></i></span><span>3<i style="--w:3%"></i></span><span>2<i style="--w:1%"></i></span><span>1<i style="--w:1%"></i></span></div>
+        <a class="btn btn--line" href="#reviews">Read all on Google</a>
+        <p class="note">Sample reviews. The live site shows your real Google reviews automatically.</p>
+      </div>
+      <div class="rgrid" id="rgrid"></div>
+    </section>
+
+    <!-- Visit -->
+    <section class="visit" id="visit">
+      <div class="wrap visit__in">
+        <div class="visit__info">
+          <p class="eyebrow">Visit Us</p>
+          <h2 class="h2">Find us in <em>San Clemente.</em></h2>
+          <address>123 Avenida Del Mar<br>San Clemente, CA 92672</address>
+          <p class="visit__phone">(949) 555-0123</p>
+          <table class="hours" id="hours"></table>
+          <div class="visit__cta"><a class="btn btn--order" href="#order" data-order>Order Now</a><a class="btn btn--line" href="https://maps.google.com/?q=San+Clemente+CA" target="_blank" rel="noopener">Get Directions</a></div>
+        </div>
+        <div class="map"><iframe title="Map of San Clemente, CA" src="https://maps.google.com/maps?q=Avenida%20Del%20Mar%2C%20San%20Clemente%2C%20CA&z=15&output=embed" loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe></div>
+      </div>
+    </section>
+
+    <!-- FAQ -->
+    <section class="faq wrap">
+      <div class="sec-head"><p class="eyebrow">Good to Know</p><h2 class="h2">Questions <em>we hear a lot.</em></h2></div>
+      <div class="faq__list" id="faq"></div>
+    </section>
+  </main>
+
+  <footer class="footer">
+    <div class="wrap footer__in">
+      <div><b class="footer__name">The Family Table</b><p>Family-owned restaurant in San Clemente, CA.<br>123 Avenida Del Mar · (949) 555-0123</p></div>
+      <a class="btn btn--order btn--lg" href="#order" data-order>Order Now</a>
+    </div>
+    <p class="wrap footer__small">© 2026 The Family Table · Demo by Ilizaben Meman · Photos: StockSnap &amp; rawpixel (CC0 public domain)</p>
+  </footer>
+
+  <!-- Mobile action bar -->
+  <div class="actionbar"><a href="#visit">Hours</a><a href="#visit">Directions</a><a class="actionbar__order" href="#order" data-order>Order Now</a></div>
+
+  <!-- Cuisine switcher -->
+  <div class="switcher" role="group" aria-label="Preview this site with your cuisine">
+    <span>Your cuisine?</span>
+    <button type="button" data-c="med" aria-pressed="true">Mediterranean</button>
+    <button type="button" data-c="ita" aria-pressed="false">Italian</button>
+    <button type="button" data-c="mex" aria-pressed="false">Mexican</button>
+  </div>
+
+  <!-- Order dialog -->
+  <dialog class="modal" id="order-modal">
+    <h3>This button opens your ordering page</h3>
+    <p>On the live site, every "Order Now" button goes straight to the online ordering page you already use (Toast, Square, ChowNow, DoorDash Storefront or similar). Visitors are never more than one tap away from ordering.</p>
+    <button class="btn btn--order" type="button" id="order-close">Got it</button>
+  </dialog>
+
+  <!-- SEO panel -->
+  <aside class="seo" id="seo" aria-label="Local SEO checklist" aria-hidden="true">
+    <div class="seo__head"><b>Local SEO built into this page</b><button type="button" id="seo-close" aria-label="Close">✕</button></div>
+    <ul class="seo__list">
+      <li><b>Search title &amp; description</b><span>"Family-Owned Restaurant in San Clemente, CA" targets local searches like "restaurant near me".</span></li>
+      <li><b>Restaurant schema (Google)</b><span>Name, address, phone, hours, cuisine, price range, menu and order link in Google's own format. Helps you show up in Maps and rich results.</span></li>
+      <li><b>FAQ schema</b><span>Your FAQ can show directly in Google search results.</span></li>
+      <li><b>Same name, address &amp; phone everywhere</b><span>Matches your Google Business Profile exactly, a key local ranking factor.</span></li>
+      <li><b>Fast &amp; mobile-first</b><span>Compressed images, lazy loading and a mobile action bar. Google ranks on the mobile version.</span></li>
+      <li><b>Alt text on every photo</b><span>Your dishes become searchable in Google Images.</span></li>
+      <li><b>Google Business setup tips</b><span>Included: categories, photos and review link to boost your Maps ranking.</span></li>
+    </ul>
+    <details><summary>See the schema code Google reads</summary><pre id="schema-view"></pre></details>
+  </aside>
+  <div class="scrim" id="scrim" hidden></div>
+
+  <script src="script.js"></script>
+</body>
+</html>
