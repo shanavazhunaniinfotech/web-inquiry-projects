@@ -290,3 +290,111 @@
   setDelivery();
   reset();
 })();
+
+/* ---------- Page: section map, hero fan, counters, reveal, nav ---------- */
+(function () {
+  'use strict';
+  var TYPES = {
+    ann: ['Announcement / countdown bar', 'chrome'], hdr: ['Header + sticky nav', 'chrome'], ftr: ['Footer', 'chrome'],
+    gal: ['Image gallery', 'commerce'], buy: ['Buy box: tiered bundles', 'commerce'], gift: ['Gift unlock', 'commerce'], sub: ['Subscribe & save', 'commerce'], sticky: ['Sticky add-to-cart', 'commerce'],
+    rev: ['Review slider', 'trust'], vid: ['Video testimonials', 'trust'], stat: ['Clinical stats + counters', 'trust'], cmp: ['Comparison table', 'trust'], guar: ['Guarantee banner', 'trust'],
+    story: ['Image + text story', 'content'], ing: ['Ingredient cards', 'content'], ben: ['Benefit icons', 'content'], how: ['How it works steps', 'content'], time: ['"What to expect" timeline', 'content'], mq: ['Marquee / ticker', 'content'], faq: ['FAQ accordion / tabs', 'content'], pop: ['Pop-up content', 'content']
+  };
+  var GROUPS = [['commerce', 'Commerce', 'var(--c-commerce)'], ['trust', 'Trust', 'var(--c-trust)'], ['content', 'Content', 'var(--c-content)'], ['chrome', 'Store chrome', 'var(--c-chrome)']];
+  var COLOR = { chrome: 'var(--c-chrome)', commerce: 'var(--c-commerce)', trust: 'var(--c-trust)', content: 'var(--c-content)' };
+  var PAGES = [
+    ['P1', 'Aurivita', 'Home', ['hdr', 'story', 'mq', 'ing', 'rev', 'vid', 'cmp', 'stat', 'gal', 'buy', 'faq', 'guar', 'pop', 'ftr']],
+    ['P2', 'Aurivita', 'Cayenne', ['ann', 'hdr', 'gal', 'buy', 'gift', 'sub', 'ben', 'rev', 'how', 'time', 'ing', 'cmp', 'mq', 'faq', 'pop', 'sticky', 'ftr']],
+    ['P3', 'Aurivita', 'Garlic', ['ann', 'hdr', 'gal', 'buy', 'story', 'story', 'story', 'sticky', 'ftr']],
+    ['P4', 'Lymphoria', 'Home', ['ann', 'hdr', 'story', 'mq', 'story', 'ing', 'stat', 'rev', 'story', 'buy', 'faq', 'ftr']],
+    ['P5', 'EverWell', 'Home', ['ann', 'hdr', 'ing', 'mq', 'ben', 'time', 'how', 'vid', 'gal', 'buy', 'guar', 'faq', 'ftr']],
+    ['P6', 'Resilia', 'Home', ['ann', 'hdr', 'story', 'story', 'stat', 'vid', 'rev', 'faq', 'ftr']],
+    ['P7', 'Resilia', 'Oregano', ['ann', 'hdr', 'mq', 'gal', 'buy', 'gift', 'sub', 'ben', 'vid', 'stat', 'ing', 'rev', 'cmp', 'guar', 'ftr']],
+    ['P8', 'Resilia', 'Garlic', ['ann', 'hdr', 'gal', 'buy', 'gift', 'sub', 'ben', 'story', 'story', 'story', 'time', 'cmp', 'story', 'faq', 'ftr']],
+    ['P9', 'Resilia', 'Cinnamon', ['ann', 'hdr', 'gal', 'buy', 'gift', 'sub', 'ben', 'story', 'story', 'story', 'time', 'cmp', 'story', 'faq', 'ftr']]
+  ];
+  var TALL = { buy: 1, gal: 1 };
+  function pagesUsing(key) { return PAGES.filter(function (p) { return p[3].indexOf(key) > -1; }).length; }
+
+  var stacks = document.getElementById('stacks');
+  var legend = document.getElementById('legend');
+  if (stacks && legend) {
+    stacks.innerHTML = PAGES.map(function (p) {
+      return '<div class="pg"><div class="pg__head"><b>' + p[0] + '</b>' + p[1] + '<br>' + p[2] + '</div><div class="pg__body">' +
+        p[3].map(function (k) {
+          return '<button type="button" class="sb' + (TALL[k] ? ' tall' : '') + '" data-k="' + k + '" style="background:' + COLOR[TYPES[k][1]] + '" aria-label="' + p[0] + ': ' + TYPES[k][0] + '" title="' + TYPES[k][0] + '"></button>';
+        }).join('') + '</div></div>';
+    }).join('');
+    legend.innerHTML = GROUPS.map(function (g) {
+      var keys = Object.keys(TYPES).filter(function (k) { return TYPES[k][1] === g[0]; });
+      return '<div class="legend__group"><h3><i style="background:' + g[2] + '"></i>' + g[1] + '</h3><div class="legend__chips">' +
+        keys.map(function (k) { return '<button type="button" class="lchip" data-k="' + k + '" aria-pressed="false">' + TYPES[k][0] + ' <small>' + pagesUsing(k) + '/9</small></button>'; }).join('') +
+        '</div></div>';
+    }).join('');
+    var n = document.getElementById('map-n'), label = document.getElementById('map-label');
+    var focus = function (k) {
+      stacks.querySelectorAll('.sb').forEach(function (b) { b.classList.toggle('hit', b.dataset.k === k); });
+      legend.querySelectorAll('.lchip').forEach(function (c) { c.setAttribute('aria-pressed', c.dataset.k === k); });
+      var c = pagesUsing(k);
+      n.textContent = c + ' / 9';
+      label.textContent = (c === 1 ? 'page uses ' : 'pages use ') + (k === 'buy' ? 'the buy box' : 'the “' + TYPES[k][0] + '” section') + (c > 1 ? ', so it\'s built once and reused.' : '.');
+    };
+    legend.addEventListener('click', function (e) { var c = e.target.closest('.lchip'); if (c) focus(c.dataset.k); });
+    stacks.addEventListener('click', function (e) { var b = e.target.closest('.sb'); if (b) focus(b.dataset.k); });
+    stacks.addEventListener('mouseover', function (e) { var b = e.target.closest('.sb'); if (b) focus(b.dataset.k); });
+    focus('buy');
+  }
+
+  /* Hero fan of nine pages */
+  var fan = document.getElementById('fan');
+  if (fan) {
+    var html = PAGES.map(function (p, i) {
+      var mid = (PAGES.length - 1) / 2, off = i - mid;
+      var r = (off * 9).toFixed(1) + 'deg', y = (Math.abs(off) * 6 - 40) + 'px';
+      return '<div class="fan__page" aria-hidden="true" style="--i:' + i + ';--r:' + r + ';--y:' + y + ';z-index:' + (10 - Math.abs(Math.round(off))) + '"><b><span>' + p[0] + '</span><span>' + p[1] + '</span></b>' +
+        p[3].map(function (k) { return '<i style="background:' + COLOR[TYPES[k][1]] + (TALL[k] ? ';flex-grow:2.2' : '') + '"></i>'; }).join('') + '</div>';
+    }).join('');
+    fan.insertAdjacentHTML('afterbegin', html);
+  }
+
+  var reduce = window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+
+  /* Count-up (values are already correct in the HTML) */
+  if (!reduce && 'IntersectionObserver' in window) {
+    var io = new IntersectionObserver(function (entries) {
+      entries.forEach(function (en) {
+        if (!en.isIntersecting) return;
+        io.unobserve(en.target);
+        var el = en.target, to = +el.dataset.count, t0 = null;
+        if (!to) return;
+        var step = function (t) { if (!t0) t0 = t; var k = Math.min(1, (t - t0) / 1100); el.textContent = Math.round(to * (1 - Math.pow(1 - k, 3))); if (k < 1) requestAnimationFrame(step); };
+        requestAnimationFrame(step);
+      });
+    }, { threshold: .6 });
+    document.querySelectorAll('[data-count]').forEach(function (el) { io.observe(el); });
+  }
+
+  /* Reveal on scroll (content stays visible; only slides up) */
+  if (!reduce && 'IntersectionObserver' in window) {
+    var ro = new IntersectionObserver(function (entries) {
+      entries.forEach(function (en) { if (en.isIntersecting) { en.target.classList.add('in'); ro.unobserve(en.target); } });
+    }, { rootMargin: '0px 0px -8% 0px' });
+    document.querySelectorAll('.reveal').forEach(function (el) {
+      var r = el.getBoundingClientRect();
+      if (r.top < window.innerHeight) el.classList.add('in'); else ro.observe(el);
+    });
+  } else {
+    document.querySelectorAll('.reveal').forEach(function (el) { el.classList.add('in'); });
+  }
+
+  /* Active nav link */
+  var links = [].slice.call(document.querySelectorAll('.nav__links a'));
+  if ('IntersectionObserver' in window) {
+    var no = new IntersectionObserver(function (entries) {
+      entries.forEach(function (en) {
+        if (en.isIntersecting) links.forEach(function (a) { a.classList.toggle('is-active', a.getAttribute('href') === '#' + en.target.id); });
+      });
+    }, { rootMargin: '-45% 0px -50% 0px' });
+    links.forEach(function (a) { var s = document.querySelector(a.getAttribute('href')); if (s) no.observe(s); });
+  }
+})();
