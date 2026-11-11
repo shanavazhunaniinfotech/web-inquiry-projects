@@ -405,3 +405,40 @@ button { font: inherit; }
 @media (prefers-reduced-motion: reduce) { *, *::before, *::after { animation: none !important; transition: none !important; scroll-behavior: auto !important; } }
 .footer__in > * { min-width: 0; }
 @media (max-width: 760px) { .newsletter, .footer__links { border-left: 0; padding-left: 0; } }
+
+/* ---------- Real photography ---------- */
+.gallery__main img, .gallery__thumbs img { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; }
+.gallery__thumbs button { position: relative; overflow: hidden; }
+.ov { position: absolute; z-index: 2; width: 34%; filter: drop-shadow(0 18px 24px rgba(0,0,0,.35)); }
+.ov svg { width: 100% !important; height: auto !important; display: block; }
+.ov--br { right: 8%; bottom: 7%; transform: rotate(4deg); }
+.ov--bl { left: 8%; bottom: 7%; transform: rotate(-5deg); }
+.gallery__thumbs .ov { width: 38%; }
+.vid__art img { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; }
+.vid__art::after { content: ""; position: absolute; inset: 0; background: linear-gradient(180deg, transparent 50%, rgba(0,0,0,.35)); }
+.vid__art svg { z-index: 1; width: 46% !important; bottom: 6% !important; }
+.faces i { background-size: cover; background-position: center; }
+.av { background-size: cover; background-position: center; }
+.face { width: 108px; height: 120px; }
+.face img { width: 100%; height: 100%; object-fit: cover; display: block; }
+.statband { background: linear-gradient(120deg, rgba(10,74,53,.92), rgba(15,106,75,.82)), url(../assets/leaves-dark.jpg) center / cover; }
+.c-oil { background: url(../assets/oil-drip.jpg) center / cover; }
+.c-seed { background: url(../assets/seeds-spoon.jpg) center / cover; }
+.c-tq { background: url(../assets/amber-jars.jpg) center / cover; }
+.c-carv { background: url(../assets/herbs-leafy.jpg) center / cover; }
+.rb-1 { background: url(../assets/yoga-arms.jpg) center / cover; }
+.rb-2 { background: url(../assets/run-feet.jpg) center / cover; }
+.rb-3 { background: url(../assets/meditate.jpg) center / cover; }
+.rb-4 { background: url(../assets/laptop.jpg) center / cover; }
+.r-1 { background: url(../assets/lab-woman.jpg) center 30% / cover; }
+.r-2 { background: url(../assets/breakfast.jpg) center / cover; }
+.r-3 { background: url(../assets/softgels-white.jpg) center / cover; }
+.r-4 { background: url(../assets/softgels-spill.jpg) center / cover; }
+.r-5 { background: url(../assets/basil.jpg) center / cover; }
+.risk__art { overflow: hidden; }
+.risk__art img { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; object-position: 50% 30%; -webkit-mask-image: linear-gradient(90deg, transparent, #000 25%); mask-image: linear-gradient(90deg, transparent, #000 25%); }
+@media (max-width: 760px) { .risk__art img { -webkit-mask-image: linear-gradient(180deg, transparent, #000 25%); mask-image: linear-gradient(180deg, transparent, #000 25%); } }
+.risk__badge { position: absolute; right: 8%; top: 12%; width: 96px; height: 96px; border-radius: 50%; background: var(--accent); color: #fff; font-size: 9px; letter-spacing: .08em; line-height: 1.2; display: flex; flex-direction: column; align-items: center; justify-content: center; text-align: center; box-shadow: 0 10px 24px rgba(0,0,0,.25); }
+.risk__badge b { font: 600 32px/1 var(--font-h); letter-spacing: 0; }
+.ov--hero { inset: 0; width: 100%; display: grid; place-items: center; background: linear-gradient(180deg, rgba(255,255,255,.35), rgba(255,255,255,.1)); }
+.ov--hero svg { width: 92% !important; }

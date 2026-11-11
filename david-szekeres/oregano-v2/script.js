@@ -33,9 +33,10 @@
 
   var VIEWS = [
     svg('0 0 140 175', pouch(10, 6, 1)),
-    svg('0 0 300 300', gel(150, 150, 2.6, -24) + gel(80, 90, 1.3, 20) + gel(220, 70, 1.1, -50) + gel(230, 230, 1.4, 35) + gel(70, 220, 1.2, -10)),
+    '<img class="stage__photo" src="../assets/softgels-close.jpg" alt="Close-up of golden oregano softgels">',
     svg('0 0 300 300', jar(30, 70, 1.25) + softCase(170, 90, 1.5) + truck(150, 230, .9))
   ];
+  var PEOPLE = ['w1', 'm3', 'w2', 'm1', 'w4', 'm2', 'w3', 'm4'];
   var SKIN = ['#e9b88e', '#c98f6a', '#8b5a3c', '#f0c9a8', '#5b3a29', '#d9a77b'];
   var BG = ['#d7dccb', '#c9d3d8', '#e8d9c3', '#d4cbd8', '#c6d6c0', '#e6d2c6', '#cfd6e2'];
 
@@ -167,17 +168,17 @@
 
   /* ---------- Inside the softgel ---------- */
   var C = [
-    { t: 'Oregano Oil', n: '300', u: 'mg', d: 'A concentrated 20:1 extract, equal to 6,000mg of fresh oregano herb in every serving. Used for over 2,000 years to support gut and immune health.†', bar: 100, note: '20:1 extract · 6,000mg herb equivalent' },
-    { t: 'Black Seed Oil', n: '200', u: 'mg', d: 'Cold-pressed from Nigella sativa seeds, a staple of traditional wellness from Egypt to India.', bar: 67, note: 'Cold-pressed · Nigella sativa' },
-    { t: 'Thymoquinone', n: 'TQ', u: '', d: "Black seed oil's signature active compound. It supports antioxidant activity and helps protect against everyday oxidative stress.†", bar: 45, note: 'Naturally occurring in black seed oil' },
-    { t: 'Carvacrol', n: '165', u: 'mg', d: "Oregano's most studied active compound. It supports the body's natural defenses and provides antioxidant support.†", bar: 55, note: '55% of the oregano oil · standardized' }
+    { t: 'Oregano Oil', img: 'oil-drip', n: '300', u: 'mg', d: 'A concentrated 20:1 extract, equal to 6,000mg of fresh oregano herb in every serving. Used for over 2,000 years to support gut and immune health.†', bar: 100, note: '20:1 extract · 6,000mg herb equivalent' },
+    { t: 'Black Seed Oil', img: 'seeds-spoon', n: '200', u: 'mg', d: 'Cold-pressed from Nigella sativa seeds, a staple of traditional wellness from Egypt to India.', bar: 67, note: 'Cold-pressed · Nigella sativa' },
+    { t: 'Thymoquinone', img: 'amber-jars', n: 'TQ', u: '', d: "Black seed oil's signature active compound. It supports antioxidant activity and helps protect against everyday oxidative stress.†", bar: 45, note: 'Naturally occurring in black seed oil' },
+    { t: 'Carvacrol', img: 'herbs-leafy', n: '165', u: 'mg', d: "Oregano's most studied active compound. It supports the body's natural defenses and provides antioxidant support.†", bar: 55, note: '55% of the oregano oil · standardized' }
   ];
   var tabs = $('#ctabs');
   tabs.innerHTML = C.map(function (c, i) { return '<button role="tab" aria-selected="' + (i === 0) + '" data-c="' + i + '">' + c.t + '</button>'; }).join('');
   function showC(i) {
     var c = C[i], body = $('.cinfo__body');
     $('#c-n').innerHTML = c.n + (c.u ? '<small>' + c.u + '</small>' : '');
-    $('#c-t').textContent = c.t; $('#c-d').textContent = c.d; $('#c-note').textContent = c.note;
+    $('#c-t').textContent = c.t; $('#c-img').src = '../assets/' + c.img + '.jpg'; $('#c-img').alt = c.t; $('#c-d').textContent = c.d; $('#c-note').textContent = c.note;
     $('#c-bar').style.width = c.bar + '%';
     body.classList.remove('swap'); void body.offsetWidth; body.classList.add('swap');
     $$('[role=tab]', tabs).forEach(function (b, j) { b.setAttribute('aria-selected', j === i); });
@@ -189,15 +190,15 @@
 
   /* ---------- 90-day journey ---------- */
   var J = [
-    { w: 'Week 1', d: 'Day 7', t: 'Your body meets oregano.', p: 'Two softgels with breakfast. Most people notice nothing dramatic yet, and that is normal. Consistency matters most this week.', l: ['Easy routine', 'No aftertaste'], pct: .08 },
-    { w: 'Week 2', d: 'Day 14', t: 'Digestion starts to settle.', p: 'Customers most often mention calmer meals and less bloating around the two-week mark.*', l: ['Calmer meals', 'Less bloating'], pct: .2 },
-    { w: 'Week 4', d: 'Day 30', t: 'A steadier everyday.', p: 'With a full month of daily use, many describe steadier energy and fewer afternoon crashes.*', l: ['Steady energy', 'Feeling regular'], pct: .45 },
-    { w: 'Week 12', d: 'Day 90', t: 'It just becomes you.', p: "By now it's part of the morning. Immune support through the seasons and a gut that feels like yours again.*", l: ['Seasonal support', 'Long-term routine', 'Clearer focus'], pct: 1 }
+    { w: 'Week 1', img: 'breakfast', d: 'Day 7', t: 'Your body meets oregano.', p: 'Two softgels with breakfast. Most people notice nothing dramatic yet, and that is normal. Consistency matters most this week.', l: ['Easy routine', 'No aftertaste'], pct: .08 },
+    { w: 'Week 2', img: 'meditate', d: 'Day 14', t: 'Digestion starts to settle.', p: 'Customers most often mention calmer meals and less bloating around the two-week mark.*', l: ['Calmer meals', 'Less bloating'], pct: .2 },
+    { w: 'Week 4', img: 'run-feet', d: 'Day 30', t: 'A steadier everyday.', p: 'With a full month of daily use, many describe steadier energy and fewer afternoon crashes.*', l: ['Steady energy', 'Feeling regular'], pct: .45 },
+    { w: 'Week 12', img: 'yoga-arms', d: 'Day 90', t: 'It just becomes you.', p: "By now it's part of the morning. Immune support through the seasons and a gut that feels like yours again.*", l: ['Seasonal support', 'Long-term routine', 'Clearer focus'], pct: 1 }
   ];
   var range = $('#j-range');
   function showJ(i) {
     var j = J[i], copy = $('.journey__copy');
-    $('#j-week').textContent = j.w; $('#j-day').textContent = j.d; $('#j-title').textContent = j.t; $('#j-text').textContent = j.p;
+    $('#j-week').textContent = j.w; $('#j-photo').style.backgroundImage = 'url(../assets/' + j.img + '.jpg)'; $('#j-day').textContent = j.d; $('#j-title').textContent = j.t; $('#j-text').textContent = j.p;
     $('#j-list').innerHTML = j.l.map(function (x) { return '<li>' + x + '</li>'; }).join('');
     $('#ring').style.strokeDashoffset = String(327 - 327 * j.pct);
     copy.classList.remove('swap'); void copy.offsetWidth; copy.classList.add('swap');
@@ -220,7 +221,7 @@
   /* ---------- Reviews ---------- */
   var CAP = ['Week 3 update', 'Honest review', 'My morning routine', 'Bloat check', 'Why I switched', 'Unboxing'];
   $('#reels').innerHTML = CAP.map(function (c, i) {
-    return '<button type="button" class="reel" style="background:' + BG[i % BG.length] + '" aria-label="Play video: ' + c + '"><span class="reel__face" style="background:' + SKIN[i % SKIN.length] + '"></span><span class="reel__body" style="background:' + ['#3d5a1f', '#f3a712', '#e9e2d6', '#9fb3c8', '#121410', '#7da23a'][i] + '"></span><span class="reel__time">0:' + (20 + i * 7) + '</span><span class="reel__play">' + c + '</span><span class="reel__bar"></span></button>';
+    return '<button type="button" class="reel" style="background:' + BG[i % BG.length] + '" aria-label="Play video: ' + c + '"><img class="reel__img" src="../assets/' + PEOPLE[i] + '.jpg" alt="" loading="lazy"><span class="reel__time">0:' + (20 + i * 7) + '</span><span class="reel__play">' + c + '</span><span class="reel__bar"></span></button>';
   }).join('');
   $('#reels').addEventListener('click', function (e) {
     var r = e.target.closest('.reel'); if (!r) return;
@@ -237,7 +238,7 @@
     { f: 'immune', h: 'The kids got sick, I didn’t.', p: "Can't promise it was this, but it's the first winter I made it through without a cold.", n: 'Sarah L.' }
   ];
   $('#masonry').innerHTML = R.map(function (r, i) {
-    return '<article class="rv' + (r.big ? ' big' : '') + '" data-f="' + r.f + '"><span class="rv__stars">★★★★★</span><h3>"' + r.h + '"</h3><p>' + r.p + '</p><div class="rv__by"><i style="background:' + SKIN[i % SKIN.length] + '"></i>' + r.n + '<em>✓ Verified</em></div></article>';
+    return '<article class="rv' + (r.big ? ' big' : '') + '" data-f="' + r.f + '"><span class="rv__stars">★★★★★</span><h3>"' + r.h + '"</h3><p>' + r.p + '</p><div class="rv__by"><i style="background-image:url(../assets/' + PEOPLE[i % PEOPLE.length] + '.jpg)"></i>' + r.n + '<em>✓ Verified</em></div></article>';
   }).join('');
   $$('[data-f]', $('.filters')).forEach(function (b) {
     b.addEventListener('click', function () {

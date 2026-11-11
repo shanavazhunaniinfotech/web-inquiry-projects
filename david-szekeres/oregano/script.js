@@ -43,13 +43,17 @@
     });
     return svg('0 0 300 300', out);
   }
+  var A = '../assets/';
+  function photo(name, alt, extra) { return '<img src="' + A + name + '.jpg" alt="' + (alt || '') + '" loading="lazy">' + (extra || ''); }
+  function ov(cls, inner) { return '<span class="ov ' + cls + '">' + inner + '</span>'; }
   var SLIDES = [
-    svg('0 0 300 300', pouch(150, 60, 1.05) + pouch(40, 90, 1.05) + jar(28, 190, .9) + badge),
-    infoSlide('Feel Better. Every Day.', ['Immune support†', 'Soothing gut support†', 'Steady energy support†', 'Healthy inflammation†'], '#0f5a43'),
-    infoSlide('Why Trust Us', ['Paleo-friendly', 'No artificial additives', 'Third-party tested', 'Gluten-free'], '#14684d'),
-    svg('0 0 300 300', '<rect width="300" height="300" fill="#f3efe6"/><text x="150" y="60" text-anchor="middle" font-family="Sora,sans-serif" font-size="16" font-weight="600" fill="#0f5a43">"The only supplement</text><text x="150" y="82" text-anchor="middle" font-family="Sora,sans-serif" font-size="16" font-weight="600" fill="#0f5a43">I actually feel working."</text>' + pouch(40, 110, .95) + '<circle cx="215" cy="190" r="48" fill="#e9b88e"/><path d="M160 300 Q215 220 270 300 Z" fill="#c98f6a"/>'),
-    svg('0 0 300 300', '<rect width="300" height="300" fill="#eaf1e4"/>' + jar(20, 30, .9) + pouch(160, 20, .7) + softCase(60, 170, 1) + pouch(170, 160, .7))
+    photo('herbs-board', 'Oil of Oregano pouches with the free bamboo jar', ov('ov--hero', svg('0 0 300 300', pouch(150, 60, 1.05) + pouch(40, 90, 1.05) + jar(28, 190, .9) + badge))),
+    photo('breakfast', 'Breakfast table with the daily softgels', ov('ov--br', svg('0 0 130 170', pouch(5, 5, 1)))),
+    photo('softgels-jar', 'Golden softgels spilling from a glass jar'),
+    photo('herbs-bowl', 'Fresh oregano and herbs with a mortar', ov('ov--bl', svg('0 0 130 170', pouch(5, 5, 1)))),
+    photo('yoga-arms', 'Woman stretching outdoors in the morning')
   ];
+  var PEOPLE = ['w1', 'm3', 'w2', 'm1', 'w4', 'm2', 'w3', 'm4'];
   function offerArt(units, extras) {
     var out = '';
     for (var i = 0; i < units; i++) out += pouch(4 + i * 30, 10, .42);
@@ -79,16 +83,12 @@
     var one = MQ.map(function (m) { return '<span>' + icon(m[0]) + m[1] + '</span>'; }).join('');
     t.innerHTML = one + one + one + one;
   });
-  $('#faces').innerHTML = SKIN.slice(0, 5).map(function (c) { return '<i style="background:' + c + '"></i>'; }).join('');
+  $('#faces').innerHTML = ['w1', 'm3', 'w2', 'm1', 'w4'].map(function (n) { return '<i style="background-image:url(../assets/' + n + '.jpg)"></i>'; }).join('');
   $('#benefits').innerHTML = [['leaf', 'Inflammation Support†'], ['heart', 'Metabolic Support†'], ['lungs', 'Immune Wellness†'], ['gut', 'Gut & Digestion†'], ['bolt', 'Daily Energy†'], ['shield', 'Cardiovascular Wellness†']].map(function (b) { return '<span>' + icon(b[0]) + b[1] + '</span>'; }).join('');
   $('#feel-pouch').innerHTML = svg('0 0 130 170', pouch(5, 5, 1));
   $('#cmp-pack').innerHTML = svg('0 0 130 170', pouch(5, 5, 1));
   $('#stock-banner').innerHTML = svg('0 0 400 190', pouch(40, 40, .95) + pouch(250, 40, .95) + pouch(135, 10, 1.1));
-  $('#risk-art').innerHTML = svg('0 0 300 380',
-    '<circle cx="150" cy="140" r="62" fill="#e9b88e"/><path d="M84 130 Q90 60 150 62 Q214 60 218 140 Q222 200 200 230 L200 140 Q150 110 100 140 L100 230 Q78 200 84 130 Z" fill="#3b2418"/>' +
-    '<circle cx="128" cy="142" r="5" fill="#2b1a10"/><circle cx="172" cy="142" r="5" fill="#2b1a10"/><path d="M128 172 Q150 192 172 172" stroke="#a5523a" stroke-width="5" fill="none" stroke-linecap="round"/>' +
-    '<path d="M40 380 Q60 250 150 240 Q240 250 260 380 Z" fill="#e2a982"/><path d="M70 300 Q60 230 90 200 L102 214 Q86 250 96 300 Z" fill="#e9b88e"/><ellipse cx="96" cy="196" rx="11" ry="7" fill="#f2c94c" transform="rotate(-30 96 196)"/>' +
-    '<g transform="translate(60 40)"><circle r="34" fill="#16956d"/><text y="-8" text-anchor="middle" font-family="Sora,sans-serif" font-size="7" fill="#fff">MONEY BACK</text><text y="12" text-anchor="middle" font-family="Sora,sans-serif" font-size="22" font-weight="700" fill="#fff">30</text><text y="24" text-anchor="middle" font-family="Sora,sans-serif" font-size="7" fill="#fff">DAYS</text></g>');
+  $('#risk-art').innerHTML = '<img src="../assets/w2.jpg" alt="Smiling customer" loading="lazy"><span class="risk__badge"><b>30</b>DAYS<br>MONEY BACK</span>';
 
   /* Gallery */
   var gMain = $('#g-main'), gThumbs = $('#g-thumbs');
@@ -104,7 +104,7 @@
   var CAPS = ['I used', 'This is why I regret', 'I got to a', 'My grandma', 'Week 3 update', 'Honest review'];
   function vid(i) {
     return '<button type="button" class="vid" aria-label="Play customer video ' + (i + 1) + '" style="background:' + BG[i % BG.length] + '">' +
-      '<span class="vid__art"><span class="vid__face" style="background:' + SKIN[i % SKIN.length] + '"></span>' + (i % 2 === 0 ? svg('0 0 130 170', pouch(5, 5, 1)) : '') + '</span>' +
+      '<span class="vid__art"><img src="' + A + PEOPLE[i % PEOPLE.length] + '.jpg" alt="" loading="lazy">' + (i % 2 === 0 ? svg('0 0 130 170', pouch(5, 5, 1)) : '') + '</span>' +
       '<span class="vid__play"></span><span class="vid__cap">' + CAPS[i % CAPS.length] + '</span><span class="vid__bar"></span></button>';
   }
   $('#ugc-row').innerHTML = [0, 1, 2, 3, 4].map(vid).join('');
@@ -121,7 +121,7 @@
 
   /* Face wall */
   var tiles = '';
-  for (var i = 0; i < 16; i++) tiles += '<span class="face" style="background:' + BG[i % BG.length] + '"><i style="background:' + SKIN[(i * 2) % SKIN.length] + '"></i><u style="background:' + ['#e9e2d6', '#9fb3c8', '#cdb79e', '#6f8f6a'][i % 4] + '"></u><em></em></span>';
+  for (var i = 0; i < 16; i++) tiles += '<span class="face"><img src="' + A + PEOPLE[i % PEOPLE.length] + '.jpg" alt="" loading="lazy"></span>';
   $('#facewall').innerHTML = tiles + tiles;
 
   /* ---------- Buy box (two synced instances) ---------- */
