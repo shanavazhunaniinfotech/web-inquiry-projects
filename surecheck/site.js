@@ -131,7 +131,7 @@
   };
   if (drawer) {
     const shops = $('#shops'), country = $('#country');
-    const render = () => { shops.innerHTML = SHOPS[country.value].map(n => `<a class="shop" href="where-to-buy.html"><span class="shop__logo">RETAILER LOGO</span><b>${n}</b><span>Shop now →</span></a>`).join(''); };
+    const render = () => { shops.innerHTML = SHOPS[country.value].map(n => `<a class="shop" href="${(root.dataset.base || '')}where-to-buy/"><span class="shop__logo">RETAILER LOGO</span><b>${n}</b><span>Shop now →</span></a>`).join(''); };
     country.addEventListener('change', render); render();
     let lastFocus = null;
     const open = p => { lastFocus = document.activeElement; $('#drProduct').textContent = p || ''; drawer.hidden = false; requestAnimationFrame(() => drawer.classList.add('is-open')); lenis && lenis.stop(); closeMenu(); setTimeout(() => $('.drawer__x').focus(), 60); };
