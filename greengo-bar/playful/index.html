@@ -1,0 +1,302 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>GreenGo Store – Matcha, Coffee Beans &amp; Merch To Go | Concept 1: Playful</title>
+<meta name="description" content="Homepage concept for the GreenGo online store: matcha, specialty coffee beans, GreenGo merch and brew gear from our partner Espresso Coffee Shop. Straight from Dubrovnik's Old Town.">
+<meta name="theme-color" content="#fff7e6">
+<link rel="icon" href="../assets/img/favicon.png">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Caveat:wght@700&family=Poppins:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+<div class="loader" aria-hidden="true">
+  <div class="loader__cup">
+    <svg viewBox="0 0 120 150"><defs><clipPath id="cupclip"><path d="M14 22h92l-11 118a8 8 0 0 1-8 7H33a8 8 0 0 1-8-7z"/></clipPath></defs>
+      <g clip-path="url(#cupclip)"><rect width="120" height="150" fill="#fff"/><rect class="loader__fill" x="0" y="150" width="120" height="150" fill="#60cda2"/>
+      <path class="loader__wave" d="M-120 150q15-10 30 0t30 0 30 0 30 0 30 0 30 0 30 0 30 0v12h-240z" fill="#60cda2"/></g>
+      <path d="M14 22h92l-11 118a8 8 0 0 1-8 7H33a8 8 0 0 1-8-7z" fill="none" stroke="#101010" stroke-width="6" stroke-linejoin="round"/>
+      <rect x="6" y="8" width="108" height="16" rx="8" fill="#101010"/></svg>
+  </div>
+  <p class="loader__txt">Pouring the good stuff <b class="loader__num">0</b>%</p>
+</div>
+
+<canvas id="stage" aria-hidden="true"></canvas>
+<div class="cursor" aria-hidden="true"><span></span></div>
+
+<div class="promo" role="note">
+  <div class="promo__track">
+    <span>Free shipping in Croatia over €50</span><i>✦</i><span>Plant milk? Same price. Always.</span><i>✦</i><span>No greenwashing</span><i>✦</i><span>The GreenGo store is open</span><i>✦</i>
+    <span>Free shipping in Croatia over €50</span><i>✦</i><span>Plant milk? Same price. Always.</span><i>✦</i><span>No greenwashing</span><i>✦</i><span>The GreenGo store is open</span><i>✦</i>
+  </div>
+</div>
+
+<header class="nav">
+  <a class="nav__logo" href="#top" aria-label="GreenGo home"><img src="../assets/logo.svg" alt="GreenGo" width="254" height="107"></a>
+  <nav class="nav__links" aria-label="Main">
+    <a href="#matcha" style="--c:var(--leaf)">Matcha</a>
+    <a href="#beans" style="--c:var(--coral)">Beans</a>
+    <a href="#merch" style="--c:var(--pink)">Merch</a>
+    <a href="#gear" style="--c:var(--cyan)">Brew gear <sup>↗</sup></a>
+    <a href="#visit" style="--c:var(--gold)">Our bar</a>
+  </nav>
+  <button class="nav__cart magnetic" type="button" data-cart-open aria-label="Open cart">
+    <svg viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 8h14l-1.2 11.2a2 2 0 0 1-2 1.8H8.2a2 2 0 0 1-2-1.8z"/><path d="M9 8V6a3 3 0 0 1 6 0v2"/></svg>
+    <span>Cart</span><b class="nav__count" data-cart-count>0</b>
+  </button>
+</header>
+
+<main id="top">
+
+  <!-- 1. HERO -->
+  <section class="hero" data-stage="hero" data-bg="#fff7e6">
+    <h1 class="hero__title" aria-label="Matcha, beans and merch to go">
+      <span class="hero__line" data-speed="-6">MATCHA,</span>
+      <span class="hero__line" data-speed="5">BEANS &amp;</span>
+      <span class="hero__line" data-speed="-4">MERCH</span>
+      <span class="hero__line" data-speed="7">TO GO!</span>
+    </h1>
+    <p class="hero__kicker">the search is over…</p>
+    <div class="hero__sticker" aria-hidden="true">
+      <svg viewBox="0 0 200 200"><defs><path id="circ" d="M100 100m-74 0a74 74 0 1 1 148 0a74 74 0 1 1-148 0"/></defs>
+        <circle cx="100" cy="100" r="98" fill="#f95844"/><g class="hero__spin"><text font-size="21" letter-spacing="3.4"><textPath href="#circ">NEW ✦ ONLINE STORE ✦ NOW OPEN ✦ SHIPS FROM DUBROVNIK ✦</textPath></text></g>
+        <text x="100" y="97" text-anchor="middle" class="st-big">SHOP</text><text x="100" y="128" text-anchor="middle" class="st-big">NOW</text></svg>
+    </div>
+    <div class="hero__foot">
+      <p class="hero__sub">The GreenGo store is open. Ceremonial matcha, specialty beans and merch, shipped from our little oasis in Dubrovnik's Old Town.</p>
+      <div class="hero__cta">
+        <a class="btn btn--ink magnetic" href="#shop"><span>Shop the store</span><i>→</i></a>
+        <a class="btn btn--ghost magnetic" href="#matcha"><span>Find your matcha</span></a>
+      </div>
+      <ul class="hero__trust">
+        <li><b>100%</b> vegan smoothies</li>
+        <li><b>€0</b> extra for plant milk</li>
+        <li><b>Loved</b> on Tripadvisor &amp; HappyCow</li>
+      </ul>
+    </div>
+    <div class="hero__scroll" aria-hidden="true"><span>Scroll</span><i></i></div>
+  </section>
+
+  <!-- 2. RIBBONS -->
+  <section class="ribbons" aria-hidden="true">
+    <div class="ribbon ribbon--a"><div class="ribbon__track" data-dir="1"></div></div>
+    <div class="ribbon ribbon--b"><div class="ribbon__track" data-dir="-1"></div></div>
+  </section>
+
+  <!-- 3. CATEGORY BENTO -->
+  <section class="shop" id="shop" data-stage="shop" data-bg="#fff7e6">
+    <div class="wrap">
+      <header class="head">
+        <p class="eyebrow">Four ways to get your green mood on</p>
+        <h2 class="display split">PICK YOUR POUR</h2>
+      </header>
+      <div class="bento">
+        <a class="tile tile--matcha" href="#matcha" data-tilt>
+          <span class="tile__tag">01</span>
+          <h3>Matcha</h3><p>Ceremonial tins, latte blends &amp; whisk kits</p>
+          <img class="tile__img" src="../assets/img/cups-matcha.webp" alt="GreenGo iced matcha drinks" loading="lazy">
+          <span class="tile__go">Shop matcha →</span>
+        </a>
+        <a class="tile tile--beans" href="#beans" data-tilt>
+          <span class="tile__tag">02</span>
+          <h3>Coffee beans</h3><p>The blends we pull every day in Old Town</p>
+          <img class="tile__img" src="../assets/img/cups-coffee.webp" alt="GreenGo specialty coffee cups" loading="lazy">
+          <span class="tile__go">Shop beans →</span>
+        </a>
+        <a class="tile tile--merch" href="#merch" data-tilt>
+          <span class="tile__tag">03</span>
+          <h3>Merch</h3><p>Totes, tees &amp; cups</p>
+          <img class="tile__img tile__img--photo" src="../assets/img/hero-l.webp" alt="Hand holding a GreenGo cup in Dubrovnik" loading="lazy">
+          <span class="tile__go">Shop merch →</span>
+        </a>
+        <a class="tile tile--gear" href="#gear" data-tilt>
+          <span class="tile__tag">04 · Partner</span>
+          <h3>Brew gear</h3><p>Machines &amp; tools from Espresso Coffee Shop</p>
+          <svg class="tile__icon" viewBox="0 0 120 120" fill="none" stroke="#101010" stroke-width="5" stroke-linecap="round" stroke-linejoin="round"><path d="M22 20h76v26H22zM30 46v52M90 46v52M18 98h84M46 46v10h28V46M52 56v8M68 56v8"/><path d="M48 98V82h24v16M44 82h32"/><circle cx="38" cy="33" r="4"/><circle cx="54" cy="33" r="4"/></svg>
+          <span class="tile__go">Browse at partner ↗</span>
+        </a>
+      </div>
+    </div>
+  </section>
+
+  <!-- 4. MATCHA -->
+  <section class="matcha" id="matcha" data-stage="matcha" data-bg="#b6f25f">
+    <div class="matcha__pin">
+      <div class="wrap matcha__grid">
+        <div class="matcha__copy">
+          <p class="eyebrow">Chapter green</p>
+          <h2 class="display matcha__title"><span>MATCHA</span><span>MADE YOU</span><span>LOOK.</span></h2>
+          <div class="steps">
+            <article class="step is-on"><b>1</b><h3>Sift</h3><p>Two scoops of stone-milled matcha. Bright green means fresh, never dull.</p></article>
+            <article class="step"><b>2</b><h3>Whisk</h3><p>Hot (not boiling) water and a fast zig-zag until it foams. Keep scrolling, you're whisking right now.</p></article>
+            <article class="step"><b>3</b><h3>Sip</h3><p>Top with oat, soy or dairy. Same matcha we pour into every Iced Matcha Latte at the bar.</p></article>
+          </div>
+          <div class="whiskbar"><i></i><span>Whisk-o-meter</span></div>
+        </div>
+      </div>
+    </div>
+    <div class="wrap">
+      <div class="matcha__shelf" data-stage="matcha-shelf">
+        <header class="head head--row">
+          <h3 class="display display--s">THE MATCHA SHELF</h3>
+          <p>From the bar menu: Matcha Latte €5.50 · Iced Matcha Latte €6.00 · Matcha Kiwi Lemonade €7.00. Now make them at home.</p>
+        </header>
+        <div class="grid grid--4" data-products="matcha"></div>
+      </div>
+    </div>
+  </section>
+
+  <!-- 5. BEANS -->
+  <section class="beans" id="beans" data-stage="beans" data-bg="#f95844">
+    <div class="wrap beans__intro">
+      <div class="beans__copy">
+        <p class="eyebrow">Fresh from the bar</p>
+        <h2 class="display split">BEANS WITH<br>BENEFITS</h2>
+        <p class="lead">The same specialty coffee behind every flat white, cold brew and Ocean Latte we serve. Whole bean or ground for how you brew.</p>
+        <ul class="ticks">
+          <li>Roasted in small batches</li><li>Ground to order</li><li>Decaf &amp; caffeine-free options</li>
+        </ul>
+        <a class="btn btn--ink magnetic" href="#beans-rail"><span>Meet the blends</span><i>→</i></a>
+      </div>
+    </div>
+    <div class="rail" id="beans-rail" data-stage="beans-rail">
+      <div class="rail__track" data-products="beans"></div>
+      <div class="rail__hint" aria-hidden="true">Keep scrolling · beans incoming →</div>
+    </div>
+  </section>
+
+  <!-- 6. MERCH -->
+  <section class="merch" id="merch" data-stage="merch" data-bg="#ffd800">
+    <div class="wrap">
+      <header class="head merch__head">
+        <p class="eyebrow">Wake up your green mood</p>
+        <h2 class="display split">WEAR IT. SIP IT.<br>STICK IT.</h2>
+        <p class="lead">GreenGo merch for the walk down Stradun and everywhere after. Pick a colour, we'll do the rest.</p>
+      </header>
+      <div class="wall" data-products="merch"></div>
+    </div>
+  </section>
+
+  <!-- 7. PARTNER GEAR -->
+  <section class="gear" id="gear" data-stage="gear" data-bg="#33def8">
+    <div class="wrap">
+      <header class="head gear__head">
+        <p class="eyebrow">Not ours, just really good</p>
+        <h2 class="display split">BREW GEAR FROM<br>OUR FRIENDS</h2>
+        <div class="partnerbar">
+          <span class="partnerbar__badge">Partner store</span>
+          <p><b>Espresso Coffee Shop</b> sells and ships everything in this section. Tapping a ticket opens their website in a new tab. GreenGo products stay in your GreenGo cart.</p>
+        </div>
+      </header>
+      <div class="tickets" data-gear></div>
+      <p class="gear__note">Brands like Rocket, Profitec, Victoria Arduino and La Marzocco, chosen by people who have sold coffee machines for over 25 years.</p>
+    </div>
+  </section>
+
+  <!-- 8. WHY -->
+  <section class="why" id="why" data-stage="why" data-bg="#fff7e6">
+    <div class="wrap">
+      <header class="head">
+        <p class="eyebrow">No greenwashing</p>
+        <h2 class="display split">JUST REAL GOODNESS</h2>
+        <p class="lead">Because when we feel good, we do good!</p>
+      </header>
+      <ul class="balls">
+        <li style="--c:var(--mint)"><svg viewBox="0 0 48 48"><path d="M10 38C10 20 22 10 40 8c0 18-8 30-24 30M10 42c4-12 10-18 18-22"/></svg><b>Plant-based</b><span>at heart</span></li>
+        <li style="--c:var(--coral)"><svg viewBox="0 0 48 48"><path d="M14 18l10-6 10 6v12l-10 6-10-6zM14 18l10 6 10-6M24 24v12M8 40L40 8"/></svg><b>No added</b><span>sugar options</span></li>
+        <li style="--c:var(--cyan)"><svg viewBox="0 0 48 48"><path d="M16 8h16v8l4 6v20H12V22l4-6zM16 16h16M20 32c0-5 3-8 8-8 0 5-3 8-8 8z"/></svg><b>Plant milk</b><span>same price</span></li>
+        <li style="--c:var(--pink)"><svg viewBox="0 0 48 48"><path d="M24 42V14M24 20c-6 0-8-4-8-8 6 0 8 4 8 8zM24 28c6 0 8-4 8-8-6 0-8 4-8 8zM24 34c-6 0-8-4-8-8 6 0 8 4 8 8zM8 40L40 8"/></svg><b>Gluten-free</b><span>friendly</span></li>
+        <li style="--c:var(--lime)"><svg viewBox="0 0 48 48"><path d="M6 14h22v18H6zM28 20h8l6 6v6H28M14 38a4 4 0 1 0 0-.1M34 38a4 4 0 1 0 0-.1"/></svg><b>Shipped</b><span>from Dubrovnik</span></li>
+      </ul>
+    </div>
+  </section>
+
+  <!-- 9. RESET KIT -->
+  <section class="kit" id="kit" data-stage="kit" data-bg="#101010">
+    <div class="wrap kit__grid">
+      <div class="kit__copy">
+        <p class="eyebrow">Already a GreenGo classic</p>
+        <h2 class="display split">A ONE-DAY RESET.<br>A FRESH START.</h2>
+        <p class="lead">Six 330 ml cold-pressed juices, numbered for the day. Add the 1-Day Reset Kit to the same cart as your matcha and beans.</p>
+        <div class="kit__buy">
+          <span class="price price--xl">€35<small>,00</small></span>
+          <button class="btn btn--lime magnetic" type="button" data-add="kit"><span>Add the kit</span><i>+</i></button>
+        </div>
+      </div>
+      <div class="flow" aria-label="The six juices in the kit">
+        <div class="flow__ring"></div>
+        <div class="flow__nav"><button type="button" data-flow="-1" aria-label="Previous juice">←</button><p class="flow__label"></p><button type="button" data-flow="1" aria-label="Next juice">→</button></div>
+      </div>
+    </div>
+  </section>
+
+  <!-- 10. VISIT -->
+  <section class="visit" id="visit" data-stage="visit" data-bg="#60cda2">
+    <div class="wrap visit__grid">
+      <figure class="visit__photo"><img src="../assets/img/shop.webp" alt="The GreenGo bar in a stone doorway in Dubrovnik's Old Town" loading="lazy"></figure>
+      <div class="visit__copy">
+        <p class="eyebrow">In Old Town</p>
+        <h2 class="display split">A LITTLE<br>OASIS</h2>
+        <p class="lead">In Old Town, GreenGo is a little oasis offering a healthy, plant-based twist on the city's food scene. Order online, or come say hi.</p>
+        <address>Getaldićeva ul. 12, 20000 Dubrovnik<br><a href="tel:+385953710406">+385 95 3710406</a></address>
+        <div class="visit__links">
+          <a class="chip" href="https://maps.app.goo.gl/AHN6r7dQi6Sd5xns6?g_st=ipc" target="_blank" rel="noopener">Get directions ↗</a>
+          <a class="chip" href="https://www.instagram.com/greengodubrovnik" target="_blank" rel="noopener">@greengodubrovnik ↗</a>
+          <a class="chip" href="https://www.tripadvisor.co.uk/Restaurant_Review-g295371-d27801838-Reviews-GreenGo_Juices_Smoothies_Coffee_To_Go-Dubrovnik_Dubrovnik_Neretva_County_Dalmati.html" target="_blank" rel="noopener">Tripadvisor ↗</a>
+          <a class="chip" href="https://www.happycow.net/reviews/greengo-juices-smoothies-and-coffee-to-go-dubrovnik-413424" target="_blank" rel="noopener">HappyCow ↗</a>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- 11. FINAL CTA -->
+  <section class="outro" data-stage="outro" data-bg="#fff7e6">
+    <h2 class="outro__title" aria-label="Go green. Go."><span>GO GREEN.</span><span>GO.</span></h2>
+    <div class="outro__box">
+      <p>Get 10% off your first order and first dibs on new drops.</p>
+      <form class="news" novalidate>
+        <label class="sr" for="em">Email address</label>
+        <input id="em" type="email" placeholder="you@email.com" autocomplete="email" required>
+        <button class="btn btn--ink magnetic" type="submit"><span>Count me in</span></button>
+      </form>
+      <a class="btn btn--coral magnetic" href="#shop"><span>Start shopping</span><i>→</i></a>
+    </div>
+  </section>
+</main>
+
+<footer class="foot">
+  <img src="../assets/logo.svg" alt="GreenGo" width="254" height="107">
+  <p>GreenGo – Smoothies &amp; Coffees To-Go · Getaldićeva ul. 12, Dubrovnik</p>
+  <p class="foot__small">Homepage concept 1 of 2 · store products and prices are placeholders for the design.</p>
+</footer>
+
+<a class="mbar" href="#shop"><span>Shop the store</span><i>→</i></a>
+
+<aside class="cart" aria-label="Shopping cart" aria-hidden="true">
+  <div class="cart__veil" data-cart-close></div>
+  <div class="cart__panel" role="dialog" aria-modal="true" aria-label="Your cart">
+    <header><h2>YOUR CART</h2><button type="button" data-cart-close aria-label="Close cart">✕</button></header>
+    <div class="ship"><p class="ship__txt"></p><div class="ship__bar"><i></i></div></div>
+    <ul class="cart__list"></ul>
+    <p class="cart__empty">Nothing here yet. Your matcha is feeling lonely.</p>
+    <footer>
+      <div class="cart__sum"><span>Subtotal</span><b data-cart-total>€0.00</b></div>
+      <button class="btn btn--ink" type="button" data-checkout><span>Checkout</span><i>→</i></button>
+      <small>Partner gear is bought on espressocoffeeshop.com and never appears in this cart.</small>
+    </footer>
+  </div>
+</aside>
+<div class="toast" role="status" aria-live="polite"></div>
+
+<script src="../assets/vendor/three.min.js"></script>
+<script src="../assets/vendor/gsap.min.js"></script>
+<script src="../assets/vendor/ScrollTrigger.min.js"></script>
+<script src="../assets/vendor/lenis.min.js"></script>
+<script src="../assets/gg3d.js"></script>
+<script src="script.js"></script>
+</body>
+</html>

@@ -1,0 +1,32 @@
+/* GreenGo – chooser page for the two concepts */
+@font-face { font-family: "GG Display"; src: url(assets/CosplayCulture-Mod.woff2) format("woff2"); font-display: swap; }
+*, *::before, *::after { box-sizing: border-box; }
+body { margin: 0; min-height: 100svh; display: flex; flex-direction: column; background: #101010; color: #fff7e6; font: 400 16px/1.5 Poppins, system-ui, sans-serif; -webkit-font-smoothing: antialiased; }
+img { display: block; max-width: 100%; height: auto; }
+a { color: inherit; text-decoration: none; }
+h1, h2, p { margin: 0; }
+.bar { display: flex; align-items: center; justify-content: space-between; gap: 16px; padding: 16px clamp(16px, 4vw, 48px); }
+.bar img { height: 44px; width: auto; }
+.bar p { font-size: .8rem; letter-spacing: .14em; text-transform: uppercase; opacity: .7; text-align: right; }
+.duo { flex: 1; display: flex; gap: 10px; padding: 0 10px 10px; }
+.side { flex: 1; min-width: 0; border-radius: 28px; padding: clamp(18px, 2.4vw, 36px); display: flex; flex-direction: column; gap: clamp(18px, 2.4vw, 32px); transition: flex .7s cubic-bezier(.2, 1, .3, 1), transform .5s; overflow: hidden; }
+.side__shot { border-radius: 16px; overflow: hidden; aspect-ratio: 16 / 10; transition: transform .8s cubic-bezier(.2, 1, .3, 1); }
+.side__shot img { width: 100%; height: 100%; object-fit: cover; object-position: top; }
+.side__txt { margin-top: auto; display: grid; gap: 12px; justify-items: start; }
+.side__n { font-size: .78rem; font-weight: 600; letter-spacing: .16em; text-transform: uppercase; }
+.side p { max-width: 30em; }
+.side__go { font-weight: 600; padding: .9em 1.4em; border-radius: 999px; transition: transform .3s; }
+.side:hover .side__go { transform: translateX(6px); }
+.side--a { background: #fff7e6; color: #101010; }
+.side--a .side__shot { border: 3px solid #101010; box-shadow: 7px 7px 0 #101010; transform: rotate(-1.5deg); }
+.side--a h1 { font: 400 clamp(2.8rem, 6vw, 6.4rem)/.86 "GG Display", Impact, sans-serif; }
+.side--a .side__go { background: #101010; color: #fff7e6; box-shadow: 4px 4px 0 #f95844; }
+.side--a:hover .side__shot { transform: rotate(0deg) scale(1.02); }
+.side--b { background: #0e1711; border: 1px solid rgba(239, 230, 214, .18); color: #efe6d6; }
+.side--b .side__shot { border-radius: 4px; }
+.side--b h2 { font: 300 clamp(2.6rem, 5.6vw, 6rem)/.92 Fraunces, serif; letter-spacing: -.04em; }
+.side--b h2 em { color: #b6f25f; }
+.side--b .side__go { border: 1px solid currentColor; }
+.side--b:hover .side__shot { transform: scale(1.03); }
+@media (hover: hover) and (min-width: 861px) { .duo:hover .side { flex: .8; } .duo .side:hover { flex: 1.2; } }
+@media (max-width: 860px) { .duo { flex-direction: column; } .bar p { font-size: .68rem; } }
