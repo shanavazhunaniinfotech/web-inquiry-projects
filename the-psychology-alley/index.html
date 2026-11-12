@@ -4,21 +4,32 @@
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
   <meta name="robots" content="noindex, nofollow">
-  <title>The Psychology Alley · Clinical Psychologists in Sydney CBD &amp; Telehealth</title>
-  <meta name="description" content="A small team of clinical psychologists in Sydney CBD helping adults with anxiety, low mood, BPD, trauma and relationship difficulties. In person and telehealth. Medicare rebates available.">
-  <meta name="theme-color" content="#24433a">
+  <title>The Psychology Alley · Clinical Psychology in Sydney CBD &amp; Telehealth</title>
+  <meta name="description" content="Clinical psychology in Sydney CBD, founded by Dr Heather Gan. Warm, collaborative and culturally informed therapy for adults. In person and telehealth. Medicare rebates available.">
+  <meta name="theme-color" content="#583b1f">
+  <link rel="icon" href="images/logo-icon.webp">
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,400;0,9..144,500;0,9..144,600;1,9..144,400&family=DM+Sans:opsz,wght@9..40,400;9..40,500;9..40,600;9..40,700&display=swap">
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600&family=Cormorant+Garamond:ital,wght@1,500;1,600&display=swap">
+  <link rel="preload" as="image" href="images/hero.jpg">
   <link rel="stylesheet" href="style.css">
 </head>
 <body>
 <a class="skip" href="#main">Skip to content</a>
 
+<!-- Preloader -->
+<div class="loader" id="loader" aria-hidden="true">
+  <div class="loader__in">
+    <span class="loader__icon"></span>
+    <span class="loader__bar"><i></i></span>
+  </div>
+</div>
+<div class="progress" aria-hidden="true"><i id="progress"></i></div>
+
 <!-- ============ Concept chrome (not part of the client site) ============ -->
 <div class="concept-bar" role="region" aria-label="Concept notes">
   <span class="concept-bar__tag">Homepage concept</span>
-  <span class="concept-bar__txt">Built for The Psychology Alley · placeholder photos &amp; copy marked <em>[confirm]</em></span>
+  <span class="concept-bar__txt">Redesign of thepsychologyalley.com.au · your logo, colours, photos &amp; copy · items marked <em>[confirm]</em> need your input</span>
   <button class="concept-bar__btn" id="notesToggle" aria-pressed="false">
     <span class="dot" aria-hidden="true"></span> Why this layout? <span class="hide-sm">Show CRO notes</span>
   </button>
@@ -26,14 +37,11 @@
 
 <!-- ============ Header ============ -->
 <header class="hdr" id="hdr" data-cro="1">
-  <div class="wrap hdr__in">
-    <a class="logo" href="#top" aria-label="The Psychology Alley home">
-      <svg viewBox="0 0 40 40" aria-hidden="true"><path d="M8 33V15a12 12 0 0 1 24 0v18" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round"/><path d="M14 33V17a6 6 0 0 1 12 0v16" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" opacity=".55"/><circle cx="20" cy="9" r="1.8" fill="var(--clay)"/></svg>
-      <span>The Psychology<br><b>Alley</b></span>
-    </a>
+  <div class="hdr__in">
+    <a class="logo" href="#top" aria-label="The Psychology Alley home"><span class="logo__img"></span></a>
     <nav class="nav" aria-label="Main">
       <a href="#help">What we help with</a>
-      <a href="#team">Our psychologists</a>
+      <a href="#team">Our team</a>
       <a href="#fees">Fees &amp; rebates</a>
       <a href="#how">How it works</a>
       <a href="#faq">FAQs</a>
@@ -43,51 +51,53 @@
         <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M6.6 10.8a15.1 15.1 0 0 0 6.6 6.6l2.2-2.2a1 1 0 0 1 1-.25 11.4 11.4 0 0 0 3.6.57 1 1 0 0 1 1 1V20a1 1 0 0 1-1 1A17 17 0 0 1 3 4a1 1 0 0 1 1-1h3.5a1 1 0 0 1 1 1c0 1.25.2 2.45.57 3.57a1 1 0 0 1-.25 1L6.6 10.8z" fill="currentColor"/></svg>
         <span>(02) 9085 5864</span>
       </a>
-      <button class="btn btn--clay btn--sm" data-open-match data-track="cta_header">Find my psychologist</button>
+      <button class="btn btn--brown btn--sm" data-open-match data-track="cta_header"><span>Find my psychologist</span></button>
       <button class="burger" id="burger" aria-label="Open menu" aria-expanded="false" aria-controls="mnav"><i></i><i></i></button>
     </div>
   </div>
-  <nav class="mnav" id="mnav" aria-label="Mobile">
-    <a href="#help">What we help with</a>
-    <a href="#team">Our psychologists</a>
-    <a href="#fees">Fees &amp; rebates</a>
-    <a href="#how">How it works</a>
-    <a href="#faq">FAQs</a>
-    <a href="#visit">Location &amp; telehealth</a>
-    <button class="btn btn--clay btn--block" data-open-match>Find my psychologist</button>
-    <a class="mnav__call" href="tel:0290855864">Call (02) 9085 5864</a>
-  </nav>
 </header>
+<nav class="mnav" id="mnav" aria-label="Mobile" hidden>
+  <a href="#help"><small>01</small>What we help with</a>
+  <a href="#team"><small>02</small>Our team</a>
+  <a href="#fees"><small>03</small>Fees &amp; rebates</a>
+  <a href="#how"><small>04</small>How it works</a>
+  <a href="#faq"><small>05</small>FAQs</a>
+  <a href="#visit"><small>06</small>Location &amp; telehealth</a>
+  <div class="mnav__foot">
+    <button class="btn btn--cream btn--block" data-open-match><span>Find my psychologist</span></button>
+    <a class="mnav__call" href="tel:0290855864">or call (02) 9085 5864</a>
+  </div>
+</nav>
 
 <main id="main">
 
 <!-- ============ HERO ============ -->
 <section class="hero" id="top" data-cro="2">
-  <div class="wrap hero__grid">
-    <div class="hero__copy">
-      <p class="eyebrow reveal"><span class="pulse" aria-hidden="true"></span> Now welcoming new adult clients</p>
-      <h1 class="reveal">Find the right psychologist, <em>without the guesswork.</em></h1>
-      <p class="lead reveal">A small team of clinical psychologists in Sydney CBD and online, helping adults with anxiety, low mood, BPD, trauma and relationship difficulties. We'll match you with the right psychologist, so you don't have to work it out alone.</p>
-      <div class="hero__ctas reveal">
-        <button class="btn btn--clay btn--lg" data-open-match data-track="cta_hero">Find my psychologist <span class="btn__sub">2-minute questionnaire</span></button>
-        <a class="btn btn--ghost btn--lg" href="#fees" data-track="cta_hero_fees">See fees &amp; rebates</a>
+  <div class="hero__frame">
+    <div class="hero__bg"><img src="images/hero.jpg" alt="Sunlit consulting room with a leather sofa" width="2200" height="923" fetchpriority="high"></div>
+    <div class="hero__veil" aria-hidden="true"></div>
+    <div class="wrap hero__grid">
+      <div class="hero__copy">
+        <p class="pill" data-hero><span class="pulse" aria-hidden="true"></span> Now welcoming new adult clients</p>
+        <h1 class="hero__h1" data-split-lines>Clinical psychology in Sydney CBD, <em>with the right fit.</em></h1>
+        <p class="hero__lead" data-hero>Warm, collaborative and culturally informed therapy for adults navigating complex emotional and relational difficulties. Tell us what's going on and we'll match you with the right psychologist.</p>
+        <div class="hero__ctas" data-hero>
+          <button class="btn btn--brown btn--lg" data-open-match data-track="cta_hero" data-magnetic><span>Find my psychologist</span><i class="btn__arr" aria-hidden="true"></i></button>
+          <a class="btn btn--glass btn--lg" href="#fees" data-track="cta_hero_fees"><span>See fees &amp; rebates</span></a>
+        </div>
+        <ul class="hero__facts" data-hero aria-label="Key facts">
+          <li><b>$149.05</b><span>Medicare rebate per session*</span></li>
+          <li><b>No referral</b><span>needed to start</span></li>
+          <li><b>In person</b><span>or telehealth</span></li>
+        </ul>
+        <p class="hero__fn" data-hero>*With a GP Mental Health Care Plan, per clinical psychologist session.</p>
       </div>
-      <ul class="hero__facts reveal" aria-label="Key facts">
-        <li><b>$149.05</b><span>Medicare rebate per session*</span></li>
-        <li><b>No referral</b><span>needed to start</span></li>
-        <li><b>In person</b><span>or telehealth</span></li>
-      </ul>
-      <p class="hero__fn reveal">*With a GP Mental Health Care Plan, per clinical psychologist session.</p>
-    </div>
 
-    <!-- Hero step-1 of the matcher: start the journey without leaving the page -->
-    <div class="hero__card reveal" aria-labelledby="quickTitle">
-      <div class="hero__photo">
-        <img src="https://images.unsplash.com/photo-1583847268964-b28dc8f51f92?w=1100&q=70&auto=format&fit=crop" alt="Calm consulting room with a soft sofa, plants and natural light" width="1100" height="733" fetchpriority="high">
-        <span class="ph-tag">Placeholder: your Elizabeth St room</span>
-      </div>
-      <div class="quick">
-        <p class="quick__step">Step 1 of 4</p>
+      <div class="quick" id="quick" aria-labelledby="quickTitle">
+        <div class="quick__top">
+          <p class="quick__step">Step 1 of 4 · takes 2 minutes</p>
+          <span class="quick__dots" aria-hidden="true"><i class="on"></i><i></i><i></i><i></i></span>
+        </div>
         <h2 id="quickTitle" class="quick__title">What would you like support with?</h2>
         <div class="chips" id="heroChips">
           <button class="chip" data-concern="anxiety">Anxiety &amp; worry</button>
@@ -99,200 +109,196 @@
           <button class="chip" data-concern="burnout">Stress &amp; burnout</button>
           <button class="chip" data-concern="unsure">Not sure yet</button>
         </div>
-        <button class="btn btn--forest btn--block" id="heroNext" data-track="match_start_hero">Continue <span aria-hidden="true">→</span></button>
+        <button class="btn btn--brown btn--block" id="heroNext" data-track="match_start_hero"><span>Continue</span><i class="btn__arr" aria-hidden="true"></i></button>
         <p class="quick__note"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 2 4 5v6c0 5 3.4 9.7 8 11 4.6-1.3 8-6 8-11V5l-8-3z" fill="none" stroke="currentColor" stroke-width="2"/></svg> Private &amp; confidential · no commitment</p>
       </div>
     </div>
   </div>
 </section>
 
-<!-- ============ TRUST BAR ============ -->
-<section class="trust" aria-label="Registrations and values" data-cro="3">
+<!-- ============ TRUST LOGOS ============ -->
+<section class="trust" aria-label="Registrations and memberships" data-cro="3">
   <div class="wrap trust__in">
-    <div class="trust__item"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 2 4 5v6c0 5 3.4 9.7 8 11 4.6-1.3 8-6 8-11V5l-8-3z"/><path d="m8.5 12 2.5 2.5 4.5-5" class="tick"/></svg><span><b>AHPRA-registered</b> clinical psychologists</span></div>
-    <div class="trust__item"><svg viewBox="0 0 24 24" aria-hidden="true"><rect x="3" y="5" width="18" height="14" rx="2"/><path d="M3 10h18" class="tick"/></svg><span><b>Medicare</b> &amp; private health rebates</span></div>
-    <div class="trust__item"><svg viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="12" r="9"/><path d="M3 12h18M12 3c3 3.5 3 14.5 0 18M12 3c-3 3.5-3 14.5 0 18" class="tick"/></svg><span><b>Culturally responsive</b> · Mandarin spoken</span></div>
-    <div class="trust__item"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 21s-7-4.4-7-10a4 4 0 0 1 7-2.6A4 4 0 0 1 19 11c0 5.6-7 10-7 10z"/></svg><span><b>LGBTQIA+</b> affirming</span></div>
-    <div class="trust__item"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M4 19V5l8 4 8-4v14l-8 4-8-4z"/></svg><span><b>Evidence-based</b> therapies</span></div>
+    <p class="trust__label">Registered &amp;<br>recognised by</p>
+    <ul class="trust__logos">
+      <li><img src="images/logo-pba.webp" alt="Psychology Board of Australia, Ahpra" width="360" height="116" loading="lazy"></li>
+      <li><img src="images/logo-medicare.webp" alt="Medicare" width="272" height="67" loading="lazy"></li>
+      <li><img src="images/logo-acpa.webp" alt="Australian Clinical Psychology Association" width="360" height="72" loading="lazy"></li>
+      <li><img src="images/logo-pacifica.webp" alt="Pacifica Congress" width="343" height="231" loading="lazy" class="tall"></li>
+      <li><img src="images/logo-frwn.webp" alt="Family Report Writers Network" width="256" height="123" loading="lazy" class="tall"></li>
+    </ul>
+  </div>
+  <div class="marquee" aria-hidden="true">
+    <div class="marquee__track" id="marquee">
+      <span>LGBTQIA+ affirming</span><i></i><span>Culturally responsive</span><i></i><span>Evidence-based</span><i></i><span>Mandarin spoken</span><i></i><span>Telehealth across Australia</span><i></i><span>Opposite Hyde Park</span><i></i>
+      <span>LGBTQIA+ affirming</span><i></i><span>Culturally responsive</span><i></i><span>Evidence-based</span><i></i><span>Mandarin spoken</span><i></i><span>Telehealth across Australia</span><i></i><span>Opposite Hyde Park</span><i></i>
+    </div>
+  </div>
+</section>
+
+<!-- ============ STATEMENT ============ -->
+<section class="state" id="about" data-cro="4">
+  <div class="wrap state__in">
+    <p class="kicker" data-anim>About The Psychology Alley</p>
+    <p class="state__txt" id="stateTxt">What began as a solo private practice has grown into a small, intentional team of psychologists. We believe meaningful psychological support begins with <em>the right fit</em>, and that the therapeutic relationship is at the heart of lasting change.</p>
+    <ul class="stats">
+      <li data-anim><b><span data-count="50">50</span> min</b><span>standard sessions, in person or online</span></li>
+      <li data-anim><b>$<span data-count="149.05" data-dec="2">149.05</span></b><span>Medicare rebate with a Mental Health Care Plan</span></li>
+      <li data-anim><b><span data-count="10">10</span></b><span>rebated sessions each calendar year</span></li>
+      <li data-anim><b><span data-count="2">2</span> min</b><span>walk from St James Station</span></li>
+    </ul>
   </div>
 </section>
 
 <!-- ============ WHAT WE HELP WITH ============ -->
-<section class="sec" id="help" data-cro="4">
-  <div class="wrap">
-    <div class="sec__head">
-      <p class="kicker">What we help with</p>
-      <h2>You don't need a diagnosis to start. <em>Start with what you're feeling.</em></h2>
-      <p class="sec__sub">Choose what sounds closest. We'll show you who on our team works with it.</p>
+<section class="sec help" id="help" data-cro="5">
+  <div class="wrap help__grid">
+    <div class="help__side">
+      <p class="kicker" data-anim>What we help with</p>
+      <h2 data-split>You don't need a diagnosis to start. <em>Start with what you're feeling.</em></h2>
+      <p class="sec__sub" data-anim>Choose what sounds closest. We'll use it to match you with the right psychologist.</p>
+      <div class="arch help__arch" aria-hidden="true">
+        <img src="images/dbt.jpg" alt="" data-k="anxiety" class="on" loading="lazy">
+        <img src="images/blog-not-myself.jpg" alt="" data-k="mood" loading="lazy">
+        <img src="images/hands.jpg" alt="" data-k="emotions" loading="lazy">
+        <img src="images/therapy.jpg" alt="" data-k="trauma" loading="lazy">
+        <img src="images/blog-individual-therapy.jpg" alt="" data-k="relationships" loading="lazy">
+        <img src="images/schema.jpg" alt="" data-k="identity" loading="lazy">
+        <img src="images/cbt.jpg" alt="" data-k="burnout" loading="lazy">
+        <img src="images/reports.jpg" alt="" data-k="unsure" loading="lazy">
+      </div>
     </div>
-    <div class="concerns">
-      <button class="concern" data-open-match="anxiety"><span class="concern__ic" aria-hidden="true"><svg viewBox="0 0 24 24"><path d="M3 12c2-3 4-3 6 0s4 3 6 0 4-3 6 0"/><path d="M3 17c2-3 4-3 6 0s4 3 6 0 4-3 6 0" opacity=".5"/><path d="M3 7c2-3 4-3 6 0s4 3 6 0 4-3 6 0" opacity=".5"/></svg></span><h3>Anxiety &amp; constant worry</h3><p>Racing thoughts, panic, social anxiety, or a sense of dread that won't switch off.</p><span class="concern__go">Find support →</span></button>
-      <button class="concern" data-open-match="mood"><span class="concern__ic" aria-hidden="true"><svg viewBox="0 0 24 24"><path d="M7 18a5 5 0 0 1 .5-10 6 6 0 0 1 11.3 2A4 4 0 0 1 18 18z"/><path d="M9 21v-1M13 21v-1M17 21v-1"/></svg></span><h3>Low mood &amp; feeling flat</h3><p>"Why don't I feel like myself anymore?" Depression, emptiness, losing interest.</p><span class="concern__go">Find support →</span></button>
-      <button class="concern" data-open-match="emotions"><span class="concern__ic" aria-hidden="true"><svg viewBox="0 0 24 24"><path d="M12 3v18M5 8c3 0 4 8 7 8s4-8 7-8"/></svg></span><h3>Intense emotions &amp; BPD</h3><p>Emotions that feel overwhelming, unstable relationships, fear of abandonment.</p><span class="concern__go">Find support →</span></button>
-      <button class="concern" data-open-match="trauma"><span class="concern__ic" aria-hidden="true"><svg viewBox="0 0 24 24"><path d="M12 21V11"/><path d="M12 11c0-4 3-7 8-7 0 5-3 8-8 7z"/><path d="M12 14c0-3-2-5-6-5 0 4 2 6 6 5z"/></svg></span><h3>Trauma &amp; complex PTSD</h3><p>The past still showing up in the present: in your body, sleep or relationships.</p><span class="concern__go">Find support →</span></button>
-      <button class="concern" data-open-match="relationships"><span class="concern__ic" aria-hidden="true"><svg viewBox="0 0 24 24"><circle cx="9" cy="12" r="5"/><circle cx="15" cy="12" r="5"/></svg></span><h3>Relationship difficulties</h3><p>Repeating patterns, conflict, ADHD in relationships, even if your partner won't attend.</p><span class="concern__go">Find support →</span></button>
-      <button class="concern" data-open-match="identity"><span class="concern__ic" aria-hidden="true"><svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="9"/><path d="M3 12h18M12 3c3 3.5 3 14.5 0 18M12 3c-3 3.5-3 14.5 0 18"/></svg></span><h3>Cultural identity</h3><p>Living between cultures, family expectations, belonging, and being a migrant or third-culture kid.</p><span class="concern__go">Find support →</span></button>
-      <button class="concern" data-open-match="burnout"><span class="concern__ic" aria-hidden="true"><svg viewBox="0 0 24 24"><path d="M12 3c1 4 5 5 5 10a5 5 0 0 1-10 0c0-2 1-3 2-4 0 2 1 3 2 3 0-3-1-6 1-9z"/></svg></span><h3>Stress &amp; burnout</h3><p>Exhausted, irritable and stretched thin at work or at home.</p><span class="concern__go">Find support →</span></button>
-      <button class="concern concern--alt" data-open-match="unsure"><span class="concern__ic" aria-hidden="true"><svg viewBox="0 0 24 24"><path d="M9 9a3 3 0 1 1 4 2.8c-.7.3-1 1-1 1.7V15"/><circle cx="12" cy="18.5" r=".6" fill="currentColor"/><circle cx="12" cy="12" r="9.5"/></svg></span><h3>Something harder to name</h3><p>Not sure what's wrong, only that something needs to change. That's a good place to start.</p><span class="concern__go">Talk it through with us →</span></button>
-    </div>
-    <p class="scope-note"><b>Please note:</b> we work with adults (18+). We don't currently offer couples therapy or eating-disorder treatment. <a href="#faq">See what we don't offer</a> and we'll help point you elsewhere.</p>
+    <ul class="help__list" id="helpList">
+      <li><button class="row" data-open-match="anxiety"><span class="row__n">01</span><span class="row__b"><b>Anxiety &amp; constant worry</b><small>Racing thoughts, panic, social anxiety, or a sense of dread that won't switch off.</small></span><i class="row__arr" aria-hidden="true"></i></button></li>
+      <li><button class="row" data-open-match="mood"><span class="row__n">02</span><span class="row__b"><b>Low mood &amp; feeling flat</b><small>"Why don't I feel like myself anymore?" Emptiness, disconnection, losing interest.</small></span><i class="row__arr" aria-hidden="true"></i></button></li>
+      <li><button class="row" data-open-match="emotions"><span class="row__n">03</span><span class="row__b"><b>Intense emotions &amp; BPD</b><small>Emotions that feel overwhelming, unstable relationships, fear of abandonment.</small></span><i class="row__arr" aria-hidden="true"></i></button></li>
+      <li><button class="row" data-open-match="trauma"><span class="row__n">04</span><span class="row__b"><b>Trauma &amp; complex PTSD</b><small>The past still showing up in the present: in your body, sleep or relationships.</small></span><i class="row__arr" aria-hidden="true"></i></button></li>
+      <li><button class="row" data-open-match="relationships"><span class="row__n">05</span><span class="row__b"><b>Relationship difficulties</b><small>Repeating patterns, conflict, ADHD in relationships, even if your partner won't attend.</small></span><i class="row__arr" aria-hidden="true"></i></button></li>
+      <li><button class="row" data-open-match="identity"><span class="row__n">06</span><span class="row__b"><b>Cultural identity</b><small>Living between cultures, family expectations and belonging.</small></span><i class="row__arr" aria-hidden="true"></i></button></li>
+      <li><button class="row" data-open-match="burnout"><span class="row__n">07</span><span class="row__b"><b>Stress &amp; burnout</b><small>Exhausted, irritable and stretched thin at work or at home.</small></span><i class="row__arr" aria-hidden="true"></i></button></li>
+      <li><button class="row row--alt" data-open-match="unsure"><span class="row__n">08</span><span class="row__b"><b>Something harder to name</b><small>You don't need to have everything figured out before you reach out.</small></span><i class="row__arr" aria-hidden="true"></i></button></li>
+    </ul>
   </div>
+  <div class="wrap"><p class="scope-note" data-anim><b>Please note:</b> we work with adults (18+). We don't currently offer couples therapy or eating-disorder treatment. <a href="#faq">See what we don't offer</a> and we'll help point you elsewhere.</p></div>
 </section>
 
 <!-- ============ HOW IT WORKS ============ -->
-<section class="sec sec--forest" id="how" data-cro="5">
+<section class="sec how" id="how" data-cro="6">
   <div class="wrap">
-    <div class="sec__head sec__head--light">
-      <p class="kicker">How it works</p>
-      <h2>From first click to first session in <em>three simple steps.</em></h2>
+    <div class="sec__head sec__head--center">
+      <p class="kicker" data-anim>How it works</p>
+      <h2 data-split>From first click to first session, <em>in three steps.</em></h2>
     </div>
-    <ol class="steps">
-      <li class="step">
+    <div class="steps">
+      <div class="steps__line" aria-hidden="true"><i id="stepsLine"></i></div>
+      <article class="step">
         <span class="step__n">1</span>
         <p class="step__time">2 minutes</p>
         <h3>Tell us what's going on</h3>
-        <p>Answer a few short questions about what you'd like help with, how you'd like to attend and when suits you. No account and no payment.</p>
-      </li>
-      <li class="step">
+        <p>Answer a few short questions about what you'd like help with, how you'd like to attend and when suits you. No account, no payment.</p>
+      </article>
+      <article class="step">
         <span class="step__n">2</span>
         <p class="step__time">Within 1 business day <em class="confirm">[confirm]</em></p>
-        <h3>A short, free intake call</h3>
-        <p>We call you at a time you choose for about 15 minutes <em class="confirm">[confirm]</em>, to check we're the right fit and answer your questions.</p>
-      </li>
-      <li class="step">
+        <h3>A brief intake call</h3>
+        <p>We call you at a time you choose to make sure our service is suitable for your needs, and to answer your questions.</p>
+      </article>
+      <article class="step">
         <span class="step__n">3</span>
         <p class="step__time">Matched &amp; booked</p>
         <h3>Your first session</h3>
-        <p>We match you with the right psychologist and confirm your appointment in Halaxy, with reminders sent to your phone.</p>
-      </li>
-    </ol>
-    <div class="how__cta">
-      <button class="btn btn--clay btn--lg" data-open-match data-track="cta_how">Start step 1 now</button>
+        <p>We match you with the right psychologist and confirm your appointment, with reminders sent to your phone.</p>
+      </article>
+    </div>
+    <div class="how__cta" data-anim>
+      <button class="btn btn--brown btn--lg" data-open-match data-track="cta_how" data-magnetic><span>Start step 1 now</span><i class="btn__arr" aria-hidden="true"></i></button>
       <p>Prefer to talk? Call <a href="tel:0290855864">(02) 9085 5864</a> · Existing client? <a href="https://www.halaxy.com/book/the-psychology-alley/location/944251" target="_blank" rel="noopener">Book online in Halaxy</a></p>
     </div>
   </div>
 </section>
 
 <!-- ============ TEAM ============ -->
-<section class="sec" id="team" data-cro="6">
+<section class="sec team" id="team" data-cro="7">
   <div class="wrap">
-    <div class="sec__head sec__head--row">
-      <div>
-        <p class="kicker">Our psychologists</p>
-        <h2>A small team, <em>chosen for fit.</em></h2>
-        <p class="sec__sub">Filter by what matters to you. Each profile shows focus areas, availability and fees, so there are no surprises.</p>
+    <div class="lead">
+      <div class="lead__media">
+        <div class="arch lead__arch"><span class="lead__glow" aria-hidden="true"></span><img src="images/dr-heather-gan.webp" alt="Dr Heather Gan, Clinical Psychologist and founder of The Psychology Alley" width="760" height="1255" loading="lazy" id="heatherImg"></div>
+        <span class="float float--1"><b>PhD</b> Clinical Psychology</span>
+        <span class="float float--2"><b>English</b> &amp; Mandarin</span>
+        <span class="float float--3"><span class="live"></span> Mon · Thu · Fri</span>
       </div>
-      <div class="filters" role="group" aria-label="Filter psychologists">
-        <button class="filt is-on" data-filter="all">All</button>
-        <button class="filt" data-filter="telehealth">Telehealth</button>
-        <button class="filt" data-filter="afterhours">After 5pm</button>
-        <button class="filt" data-filter="mandarin">Mandarin</button>
-        <button class="filt" data-filter="lower">Lower fee</button>
+      <div class="lead__body">
+        <p class="kicker" data-anim>Meet our team</p>
+        <h2 data-split>Dr Heather Gan</h2>
+        <p class="lead__role" data-anim>Founder · Clinical Psychologist</p>
+        <p class="lead__bio" data-anim>Born and raised in Singapore and clinically trained in Australia, Heather has built a practice grounded in cultural understanding, depth-oriented psychological work and a genuine warmth for the people she works with. She is particularly attuned to the experiences of people from Asian and cross-cultural backgrounds.</p>
+        <blockquote class="lead__quote" data-anim>“My goal is to help clients understand how their past influences the present, and to learn skills to create the life they want to live.”</blockquote>
+        <ul class="tags" data-anim><li>Anxiety disorders</li><li>Borderline personality disorder</li><li>Cultural identity</li></ul>
+        <dl class="meta" data-anim>
+          <div><dt>Approach</dt><dd>CBT · DBT · ACT · Schema Therapy</dd></div>
+          <div><dt>Sessions</dt><dd>In person (Sydney CBD) &amp; telehealth</dd></div>
+          <div><dt>Fee</dt><dd>$311 · <b>$161.95 after Medicare</b></dd></div>
+          <div><dt>Registration</dt><dd>Psychology Board of Australia PSY0002270793</dd></div>
+        </dl>
+        <div class="lead__ctas" data-anim>
+          <button class="btn btn--brown" data-open-match data-clinician="Dr Heather Gan" data-track="cta_clinician" data-magnetic><span>Request Dr Gan</span><i class="btn__arr" aria-hidden="true"></i></button>
+          <a class="link link--arrow" href="https://thepsychologyalley.com.au/psychologist-about" target="_blank" rel="noopener">Read full profile</a>
+        </div>
       </div>
     </div>
 
-    <div class="team" id="teamGrid">
-      <article class="doc" data-tags="telehealth afterhours mandarin" data-id="heather">
-        <div class="doc__top">
-          <div class="avatar" style="--h:150"><span>HG</span><small>Photo</small></div>
-          <div>
-            <h3>Dr Heather Gan</h3>
-            <p class="doc__role">Clinical Psychologist · Founder</p>
-            <p class="doc__reg">PhD (Clin Psych) · AHPRA PSY0002270793</p>
+    <div class="crew">
+      <div class="crew__head">
+        <h3 data-anim>A growing team, <em>supported by experienced clinical supervisors.</em></h3>
+        <p data-anim>Excellent psychologists never stop learning. Our team works alongside senior clinical psychologists who provide supervision, consultation and reflective practice.</p>
+      </div>
+      <div class="crew__grid">
+        <article class="mate">
+          <div class="arch mate__arch"><img src="images/emilie.webp" alt="Emilie Hauser, Clinical Psychologist" width="480" height="615" loading="lazy"></div>
+          <div class="mate__b">
+            <h4>Emilie Hauser</h4>
+            <p class="mate__role">Clinical Psychologist · Board Approved Supervisor</p>
+            <p>Attachment-based and family systems work, CBT, ACT and DBT, across public and private mental health.</p>
+            <a class="link link--arrow" href="https://thepsychologyalley.com.au/psychologist-emilie" target="_blank" rel="noopener">About Emilie</a>
           </div>
-        </div>
-        <p class="doc__bio">Warm, collaborative and culturally informed. Helps adults understand how the past shapes the present, and build skills for the life they want.</p>
-        <ul class="tags"><li>Anxiety</li><li>BPD &amp; emotions</li><li>Cultural identity</li><li>Relationships</li></ul>
-        <dl class="doc__meta">
-          <div><dt>Approaches</dt><dd>CBT · DBT · ACT · Schema</dd></div>
-          <div><dt>Available</dt><dd>Mon, Thu, Fri · In person &amp; telehealth</dd></div>
-          <div><dt>Languages</dt><dd>English, conversational Mandarin</dd></div>
-          <div><dt>Fee</dt><dd>$311 · <b>$161.95 after Medicare</b></dd></div>
-        </dl>
-        <div class="doc__avail"><span class="live"></span> Next intake: this week <em class="confirm">[confirm]</em></div>
-        <button class="btn btn--forest btn--block" data-open-match data-clinician="Dr Heather Gan" data-track="cta_clinician">Request Dr Gan</button>
-      </article>
-
-      <article class="doc" data-tags="telehealth afterhours" data-id="emilie">
-        <div class="doc__top">
-          <div class="avatar" style="--h:25"><span>E</span><small>Photo</small></div>
-          <div>
-            <h3>Emilie <span class="confirm">[surname]</span></h3>
-            <p class="doc__role">Clinical Psychologist · Board Approved Supervisor</p>
-            <p class="doc__reg">AHPRA registered <span class="confirm">[reg no.]</span></p>
+        </article>
+        <article class="mate">
+          <div class="arch mate__arch mate__arch--lav"><img src="images/ana.webp" alt="Ana, Clinical Psychologist" width="480" height="743" loading="lazy"></div>
+          <div class="mate__b">
+            <h4>Ana</h4>
+            <p class="mate__role">Clinical Psychologist · Board Approved Supervisor</p>
+            <p>Complex trauma, personality disorders and interpersonal difficulties. CBT, DBT, Schema Therapy and EMDR.</p>
+            <a class="link link--arrow" href="https://thepsychologyalley.com.au/psychologist-ana" target="_blank" rel="noopener">About Ana</a>
           </div>
-        </div>
-        <p class="doc__bio">Experienced clinician and supervisor with a special interest in young adults and family relationships. <em class="confirm">[confirm focus]</em></p>
-        <ul class="tags"><li>Anxiety</li><li>Low mood</li><li>Family &amp; relationships</li></ul>
-        <dl class="doc__meta">
-          <div><dt>Approaches</dt><dd>CBT · ACT <em class="confirm">[confirm]</em></dd></div>
-          <div><dt>Available</dt><dd><span class="confirm">[days]</span> · telehealth</dd></div>
-          <div><dt>Languages</dt><dd>English</dd></div>
-          <div><dt>Fee</dt><dd>$311 · <b>$161.95 after Medicare</b></dd></div>
-        </dl>
-        <div class="doc__avail"><span class="live"></span> Taking new clients <em class="confirm">[confirm]</em></div>
-        <button class="btn btn--forest btn--block" data-open-match data-clinician="Emilie" data-track="cta_clinician">Request Emilie</button>
-      </article>
-
-      <article class="doc" data-tags="telehealth" data-id="ana">
-        <div class="doc__top">
-          <div class="avatar" style="--h:200"><span>A</span><small>Photo</small></div>
-          <div>
-            <h3>Ana <span class="confirm">[surname]</span></h3>
-            <p class="doc__role">Clinical Psychologist · Board Approved Supervisor</p>
-            <p class="doc__reg">AHPRA registered <span class="confirm">[reg no.]</span></p>
+        </article>
+        <article class="mate mate--soon">
+          <div class="arch mate__arch mate__arch--dash"><span>+</span></div>
+          <div class="mate__b">
+            <h4>Our team is growing</h4>
+            <p class="mate__role">Registrars &amp; registered psychologists <em class="confirm">[confirm]</em></p>
+            <p>A lower-fee option at $250 per session ($148.45 after Medicare), with full clinical supervision.</p>
+            <button class="link link--arrow" data-open-match data-clinician="Registrar" data-track="cta_clinician">Ask about availability</button>
           </div>
-        </div>
-        <p class="doc__bio">Brings broad public and private mental health experience to complex presentations, with a calm, structured style. <em class="confirm">[confirm focus]</em></p>
-        <ul class="tags"><li>Trauma</li><li>Complex PTSD</li><li>Low mood</li></ul>
-        <dl class="doc__meta">
-          <div><dt>Approaches</dt><dd>TF-CBT · STAIR · DBT <em class="confirm">[confirm]</em></dd></div>
-          <div><dt>Available</dt><dd><span class="confirm">[days]</span> · in person &amp; telehealth</dd></div>
-          <div><dt>Languages</dt><dd>English</dd></div>
-          <div><dt>Fee</dt><dd>$311 · <b>$161.95 after Medicare</b></dd></div>
-        </dl>
-        <div class="doc__avail"><span class="live"></span> Taking new clients <em class="confirm">[confirm]</em></div>
-        <button class="btn btn--forest btn--block" data-open-match data-clinician="Ana" data-track="cta_clinician">Request Ana</button>
-      </article>
-
-      <article class="doc doc--soon" data-tags="telehealth afterhours lower" data-id="registrar">
-        <div class="doc__top">
-          <div class="avatar avatar--dash"><span>+</span></div>
-          <div>
-            <h3>Clinical Psychology Registrar</h3>
-            <p class="doc__role">Supervised by our clinical psychologists</p>
-            <p class="doc__reg">AHPRA registered</p>
-          </div>
-        </div>
-        <p class="doc__bio">A lower-fee option with full clinical supervision. Great if cost matters and you'd like to start sooner.</p>
-        <ul class="tags"><li>Anxiety</li><li>Low mood</li><li>Stress &amp; burnout</li></ul>
-        <dl class="doc__meta">
-          <div><dt>Approaches</dt><dd>CBT · ACT</dd></div>
-          <div><dt>Available</dt><dd>Incl. after 5pm</dd></div>
-          <div><dt>Languages</dt><dd>English</dd></div>
-          <div><dt>Fee</dt><dd>$250 · <b>$148.45 after Medicare</b></dd></div>
-        </dl>
-        <div class="doc__avail"><span class="live"></span> Shortest wait</div>
-        <button class="btn btn--forest btn--block" data-open-match data-clinician="Registrar" data-track="cta_clinician">Request a registrar</button>
-      </article>
+        </article>
+      </div>
+      <p class="team__note" data-anim>Not sure who to choose? <button class="link" data-open-match>Let us match you</button>. It takes 2 minutes.</p>
     </div>
-    <p class="team__note">Not sure who to choose? <button class="link" data-open-match>Let us match you</button>. It takes 2 minutes.</p>
   </div>
 </section>
 
 <!-- ============ FEES ============ -->
-<section class="sec sec--sand" id="fees" data-cro="7">
-  <div class="wrap fees">
+<section class="sec fees" id="fees" data-cro="8">
+  <div class="wrap fees__grid">
     <div class="fees__copy">
-      <p class="kicker">Fees &amp; rebates</p>
-      <h2>Clear fees, <em>before you book.</em></h2>
-      <p class="sec__sub">Sessions are 50 minutes. With a Mental Health Care Plan from your GP, you can claim up to 10 Medicare-rebated sessions each calendar year. You don't need a plan to get started. You can add it later.</p>
-      <ul class="ticks">
-        <li>Rebate paid back to your card on the spot (in most cases) <em class="confirm">[confirm]</em></li>
+      <p class="kicker" data-anim>Fees &amp; rebates</p>
+      <h2 data-split>Clear fees, <em>before you book.</em></h2>
+      <p class="sec__sub" data-anim>Sessions are 50 minutes. With a Mental Health Care Plan from your GP you can claim up to 10 Medicare-rebated sessions each calendar year. A plan is not required to start therapy.</p>
+      <ul class="ticks" data-anim>
+        <li>Fees include card processing, paid at the start or end of your session</li>
         <li>Private health extras may apply (not with Medicare for the same session)</li>
         <li>In person in Sydney CBD or telehealth, same fee</li>
       </ul>
-      <button class="link link--arrow" data-modal="mhcp">How do I get a Mental Health Care Plan?</button>
+      <button class="link link--arrow link--light" data-modal="mhcp" data-anim>How do I get a Mental Health Care Plan?</button>
     </div>
 
     <div class="calc" aria-labelledby="calcTitle">
@@ -313,204 +319,232 @@
         <div><span>Medicare rebate</span><b id="cReb">−$149.05</b></div>
         <div class="calc__total"><span>You pay</span><b id="cNet">$161.95</b></div>
       </div>
-      <button class="btn btn--clay btn--block" data-open-match data-track="cta_fees">Find my psychologist</button>
-      <p class="calc__fine">Fees include card surcharges. Cancellations within 48 hours may incur a fee. Reports are not Medicare rebatable.</p>
+      <button class="btn btn--brown btn--block" data-open-match data-track="cta_fees"><span>Find my psychologist</span><i class="btn__arr" aria-hidden="true"></i></button>
+      <p class="calc__fine">Family Court and single expert reports are billed separately and are not Medicare rebatable.</p>
     </div>
   </div>
 </section>
 
-<!-- ============ FIRST SESSION ============ -->
-<section class="sec" id="expect" data-cro="8">
-  <div class="wrap expect">
-    <figure class="expect__img">
-      <img src="https://images.unsplash.com/photo-1586023492125-27b2c045efd7?w=900&q=70&auto=format&fit=crop" alt="A comfortable armchair in a softly lit room" loading="lazy" width="900" height="1000">
-      <figcaption class="ph-tag">Placeholder photo</figcaption>
-    </figure>
-    <div>
-      <p class="kicker">Your first session</p>
-      <h2>Nervous about starting? <em>That's completely normal.</em></h2>
-      <p class="sec__sub">Knowing what will happen makes it easier. Here's what your first appointment looks like.</p>
-      <ul class="timeline">
-        <li><b>Before</b><span>You'll get a confirmation and a short online intake form, so you don't repeat your story on the day.</span></li>
-        <li><b>Arriving</b><span>Level 7, St James Trust Building, opposite Hyde Park. Or join telehealth from anywhere private.</span></li>
-        <li><b>The 50 minutes</b><span>We talk about what's brought you here, what you'd like to change, and how therapy works. You set the pace.</span></li>
-        <li><b>After</b><span>You'll leave with a shared plan, and you decide whether to continue. No lock-in.</span></li>
-      </ul>
-      <div class="assure">
-        <div><b>Confidential</b><span>What you share stays private, within legal limits we'll explain.</span></div>
-        <div><b>Your choice</b><span>Not the right fit? We'll help you change psychologist.</span></div>
+<!-- ============ FIRST SESSION (horizontal) ============ -->
+<section class="expect" id="expect" data-cro="9">
+  <div class="expect__pin">
+    <div class="wrap expect__head">
+      <div>
+        <p class="kicker" data-anim>Your first session</p>
+        <h2 data-split>Starting therapy takes courage. <em>Here's what to expect.</em></h2>
       </div>
+      <p class="expect__hint" aria-hidden="true"><span>Scroll</span><i></i></p>
+    </div>
+    <div class="expect__track" id="expectTrack">
+      <article class="xcard">
+        <div class="xcard__img"><img src="images/cbt.jpg" alt="Writing in a notebook beside a cup of tea" loading="lazy"></div>
+        <div class="xcard__b"><span class="xcard__n">01</span><h3>Before</h3><p>You'll get a confirmation and a short online intake form, so you don't have to repeat your story on the day.</p></div>
+      </article>
+      <article class="xcard">
+        <div class="xcard__img"><img src="images/schema.jpg" alt="Two armchairs in a warm, softly lit consulting room" loading="lazy"></div>
+        <div class="xcard__b"><span class="xcard__n">02</span><h3>Arriving</h3><p>Level 7, St James Trust Building, opposite Hyde Park. Look for the door labelled "The Psychology Alley". Or join by telehealth from anywhere private.</p></div>
+      </article>
+      <article class="xcard">
+        <div class="xcard__img"><img src="images/dbt.jpg" alt="Hands resting calmly in a lap" loading="lazy"></div>
+        <div class="xcard__b"><span class="xcard__n">03</span><h3>The 50 minutes</h3><p>Your first appointment is an initial assessment. We talk about what's brought you here and what you'd like to change. You set the pace.</p></div>
+      </article>
+      <article class="xcard">
+        <div class="xcard__img"><img src="images/reports.jpg" alt="A calm, minimalist living space" loading="lazy"></div>
+        <div class="xcard__b"><span class="xcard__n">04</span><h3>After</h3><p>You'll leave with a shared understanding and a plan that fits your life. You decide whether to continue. There's no lock-in.</p></div>
+      </article>
+      <article class="xcard xcard--cta">
+        <div class="xcard__b"><h3>Confidential, and <em>always your choice.</em></h3><p>What you share stays private, within legal limits we explain in your first session.</p><button class="btn btn--cream" data-open-match data-track="cta_expect"><span>Find my psychologist</span><i class="btn__arr" aria-hidden="true"></i></button></div>
+      </article>
     </div>
   </div>
 </section>
 
 <!-- ============ APPROACHES ============ -->
-<section class="sec sec--tint" id="approaches" data-cro="9">
+<section class="sec appr" id="approaches" data-cro="10">
   <div class="wrap">
-    <div class="sec__head">
-      <p class="kicker">How we work</p>
-      <h2>Evidence-based therapies, <em>explained simply.</em></h2>
+    <div class="sec__head sec__head--row">
+      <div><p class="kicker" data-anim>How we work</p><h2 data-split>Evidence-based therapies, <em>explained simply.</em></h2></div>
     </div>
-    <div class="tabs" role="tablist" aria-label="Therapies">
-      <button role="tab" aria-selected="true" aria-controls="tp" data-t="0">CBT</button>
-      <button role="tab" aria-selected="false" aria-controls="tp" data-t="1">DBT</button>
-      <button role="tab" aria-selected="false" aria-controls="tp" data-t="2">Schema</button>
-      <button role="tab" aria-selected="false" aria-controls="tp" data-t="3">ACT</button>
-      <button role="tab" aria-selected="false" aria-controls="tp" data-t="4">STAIR &amp; TF-CBT</button>
-      <button role="tab" aria-selected="false" aria-controls="tp" data-t="5">Motivational Interviewing</button>
-    </div>
-    <div class="tabpanel" id="tp" role="tabpanel" aria-live="polite">
-      <div class="tabpanel__txt">
-        <h3 id="tpTitle">Cognitive Behavioural Therapy</h3>
-        <p id="tpBody">Notice the link between thoughts, feelings and actions, and change the patterns that keep you stuck. Practical and structured.</p>
-        <p class="tabpanel__for"><b>Often helpful for:</b> <span id="tpFor">anxiety, low mood, panic, worry</span></p>
+    <div class="appr__grid">
+      <div class="tabs" role="tablist" aria-label="Therapies">
+        <button role="tab" aria-selected="true" aria-controls="tp" data-t="0"><small>01</small>Cognitive Behavioural Therapy</button>
+        <button role="tab" aria-selected="false" aria-controls="tp" data-t="1"><small>02</small>Dialectical Behaviour Therapy</button>
+        <button role="tab" aria-selected="false" aria-controls="tp" data-t="2"><small>03</small>Schema Therapy</button>
+        <button role="tab" aria-selected="false" aria-controls="tp" data-t="3"><small>04</small>Acceptance &amp; Commitment Therapy</button>
+        <button role="tab" aria-selected="false" aria-controls="tp" data-t="4"><small>05</small>STAIR &amp; Trauma-Focused CBT</button>
+        <button role="tab" aria-selected="false" aria-controls="tp" data-t="5"><small>06</small>Motivational Interviewing</button>
       </div>
-      <a class="link link--arrow" id="tpLink" href="https://thepsychologyalley.com.au/cbt" target="_blank" rel="noopener">Read more about CBT</a>
+      <div class="tabpanel" id="tp" role="tabpanel" aria-live="polite">
+        <div class="tabpanel__img"><img id="tpImg" src="images/cbt.jpg" alt="" loading="lazy"></div>
+        <div class="tabpanel__txt">
+          <h3 id="tpTitle">Cognitive Behavioural Therapy</h3>
+          <p id="tpBody">Notice the link between thoughts, feelings and actions, and change the patterns that keep you stuck. Practical and structured.</p>
+          <p class="tabpanel__for"><b>Often used for:</b> <span id="tpFor">anxiety, low mood, panic, worry</span></p>
+          <a class="link link--arrow" id="tpLink" href="https://thepsychologyalley.com.au/cbt" target="_blank" rel="noopener">Read more about CBT</a>
+        </div>
+      </div>
     </div>
   </div>
 </section>
 
 <!-- ============ VISIT ============ -->
-<section class="sec" id="visit" data-cro="10">
-  <div class="wrap visit">
-    <div class="visit__card">
-      <img src="https://images.unsplash.com/photo-1506973035872-a4ec16b8e8d9?w=900&q=70&auto=format&fit=crop" alt="Sydney harbour and city skyline" loading="lazy" width="900" height="600">
-      <div class="visit__body">
-        <p class="kicker">In person · Sydney CBD</p>
-        <h3>Suite 713, 185 Elizabeth Street</h3>
-        <p>St James Trust Building, opposite Hyde Park</p>
-        <ul class="mini">
-          <li><b>2 min</b> walk from St James Station</li>
-          <li><b>7 min</b> from Town Hall</li>
-          <li>Parking at St James &amp; Wilson Liverpool St</li>
-        </ul>
-        <a class="link link--arrow" href="https://maps.google.com/?q=185+Elizabeth+Street+Sydney+NSW+2000" target="_blank" rel="noopener" data-track="click_directions">Get directions</a>
-      </div>
+<section class="sec visit-sec" id="visit" data-cro="11">
+  <div class="wrap">
+    <div class="sec__head">
+      <p class="kicker" data-anim>Visit us or meet online</p>
+      <h2 data-split>Opposite Hyde Park, <em>or wherever you feel comfortable.</em></h2>
     </div>
-    <div class="visit__card visit__card--tele">
-      <div class="tele-ill" aria-hidden="true">
-        <div class="tele-ill__screen"><span></span><span></span></div>
-        <div class="tele-ill__base"></div>
+    <div class="visit">
+      <div class="visit__card">
+        <div class="visit__img"><img src="images/hands.jpg" alt="Two hands reaching towards each other" loading="lazy"></div>
+        <div class="visit__body">
+          <p class="kicker">In person · Sydney CBD</p>
+          <h3>Suite 713, 185 Elizabeth Street</h3>
+          <p>St James Trust Building, Level 7, opposite Hyde Park</p>
+          <ul class="mini">
+            <li><b>2–3 min</b> walk from St James Station</li>
+            <li><b>7–10 min</b> from Town Hall Station &amp; Light Rail</li>
+            <li>Parking at St James Car Park &amp; Wilson, Liverpool St</li>
+          </ul>
+          <a class="link link--arrow" href="https://maps.google.com/?q=185+Elizabeth+Street+Sydney+NSW+2000" target="_blank" rel="noopener" data-track="click_directions">Get directions</a>
+        </div>
       </div>
-      <div class="visit__body">
-        <p class="kicker">Telehealth · Across Australia</p>
-        <h3>Therapy from wherever you feel comfortable</h3>
-        <p>Same psychologists, same fees, same Medicare rebates. A secure video link is sent before your session.</p>
-        <ul class="mini">
-          <li>No downloads needed</li>
-          <li>Great for busy schedules &amp; regional clients</li>
-        </ul>
+      <div class="visit__card">
+        <div class="visit__img visit__img--tele" aria-hidden="true">
+          <div class="tele"><div class="tele__screen"><span></span><span><img src="images/dr-heather-gan.webp" alt=""></span></div><div class="tele__base"></div></div>
+        </div>
+        <div class="visit__body">
+          <p class="kicker">Telehealth · across Australia</p>
+          <h3>Therapy from wherever you feel comfortable</h3>
+          <p>Same psychologists, same fees, same Medicare rebates. A secure video link is sent before your session.</p>
+          <ul class="mini">
+            <li>No downloads needed</li>
+            <li>Suits busy schedules and regional clients</li>
+          </ul>
+        </div>
       </div>
-    </div>
-    <div class="hours">
-      <h3>Opening hours</h3>
-      <dl>
-        <div><dt>Mon</dt><dd>11:00am – 6:30pm</dd></div>
-        <div><dt>Tue – Wed</dt><dd>By appointment <em class="confirm">[confirm]</em></dd></div>
-        <div><dt>Thu</dt><dd>11:00am – 6:30pm</dd></div>
-        <div><dt>Fri</dt><dd>11:00am – 6:30pm</dd></div>
-        <div><dt>Sat – Sun</dt><dd>Closed</dd></div>
-      </dl>
-      <p id="openNow" class="open-now"></p>
+      <div class="hours">
+        <h3>Opening hours</h3>
+        <dl>
+          <div><dt>Monday</dt><dd>11:00am – 6:30pm</dd></div>
+          <div><dt>Tue – Wed</dt><dd>By appointment <em class="confirm">[confirm]</em></dd></div>
+          <div><dt>Thursday</dt><dd>11:00am – 6:30pm</dd></div>
+          <div><dt>Friday</dt><dd>11:00am – 6:30pm</dd></div>
+          <div><dt>Sat – Sun</dt><dd>Closed</dd></div>
+        </dl>
+        <p id="openNow" class="open-now"></p>
+        <a class="btn btn--cream btn--block" href="tel:0290855864" data-track="click_phone"><span>Call (02) 9085 5864</span></a>
+      </div>
     </div>
   </div>
 </section>
 
 <!-- ============ FAQ ============ -->
-<section class="sec sec--sand" id="faq" data-cro="11">
+<section class="sec faq-sec" id="faq" data-cro="12">
   <div class="wrap faq">
-    <div>
-      <p class="kicker">FAQs</p>
-      <h2>Questions people ask <em>before they reach out.</em></h2>
-      <p class="sec__sub">Can't see yours? Call <a href="tel:0290855864">(02) 9085 5864</a> or email <a href="mailto:info@thepsychologyalley.com">info@thepsychologyalley.com</a>.</p>
+    <div class="faq__side">
+      <p class="kicker" data-anim>FAQs</p>
+      <h2 data-split>Questions people ask <em>before they reach out.</em></h2>
+      <p class="sec__sub" data-anim>Can't see yours? Call <a href="tel:0290855864">(02) 9085 5864</a> or email <a href="mailto:info@thepsychologyalley.com">info@thepsychologyalley.com</a>.</p>
     </div>
-    <div class="acc">
-      <details open><summary>Do I need a referral or a diagnosis?</summary><p>No. You can start without either. A Mental Health Care Plan from your GP is only needed if you'd like to claim the Medicare rebate, and you can get one after you start.</p></details>
-      <details><summary>How soon can I be seen?</summary><p>We aim to call you within one business day of your enquiry and offer a first appointment within <span class="confirm">[X]</span> weeks. Registrars usually have the shortest wait.</p></details>
-      <details><summary>How do I know which psychologist is right for me?</summary><p>Tell us what's going on in the short questionnaire. We'll suggest a psychologist based on their experience, your availability and your budget, and confirm it with you on the intake call.</p></details>
-      <details><summary>What's the difference between a clinical psychologist and a registrar?</summary><p>Clinical psychologists have completed advanced training in assessing and treating complex mental health difficulties. Registrars are fully registered psychologists completing that training under supervision, at a lower fee and Medicare rebate.</p></details>
-      <details><summary>What's your cancellation policy?</summary><p>Please give at least 48 hours' notice. Cancellations within 24–48 hours are charged at 50%, and within 24 hours at the full fee. <em class="confirm">[confirm: current site wording conflicts]</em></p></details>
-      <details><summary>What don't you offer?</summary><p>We work with adults (18+) and don't currently provide couples therapy, eating-disorder treatment, or therapy for people involved in active court proceedings. We're happy to suggest other services.</p></details>
-      <details><summary>Is it confidential?</summary><p>Yes. Your information is kept private, except in rare situations such as serious risk of harm or a court subpoena. We'll explain these in your first session.</p></details>
+    <div class="acc" id="acc">
+      <div class="acc__item is-open"><button class="acc__q" aria-expanded="true">Do I need a referral or a diagnosis?<i aria-hidden="true"></i></button><div class="acc__a"><p>No. You can start without either. A Mental Health Care Plan from your GP is only needed if you'd like to claim the Medicare rebate.</p></div></div>
+      <div class="acc__item"><button class="acc__q" aria-expanded="false">How soon can I be seen?<i aria-hidden="true"></i></button><div class="acc__a"><p>We aim to call you within one business day of your enquiry <em class="confirm">[confirm]</em> and offer a first appointment within <span class="confirm">[X]</span> weeks.</p></div></div>
+      <div class="acc__item"><button class="acc__q" aria-expanded="false">How do I know which psychologist is right for me?<i aria-hidden="true"></i></button><div class="acc__a"><p>Tell us what's going on in the short questionnaire. We'll suggest a psychologist based on their experience, your availability and your budget, and confirm it with you on the intake call.</p></div></div>
+      <div class="acc__item"><button class="acc__q" aria-expanded="false">What can I expect at my first appointment?<i aria-hidden="true"></i></button><div class="acc__a"><p>Your first appointment is an initial assessment, which may take one to two sessions. We'll talk about what's brought you here, and explain confidentiality and consent.</p></div></div>
+      <div class="acc__item"><button class="acc__q" aria-expanded="false">What's your cancellation policy?<i aria-hidden="true"></i></button><div class="acc__a"><p>Please give at least 48 hours' notice. Cancellations within 24–48 hours are charged at 50%. <em class="confirm">[confirm: the current site wording conflicts]</em></p></div></div>
+      <div class="acc__item"><button class="acc__q" aria-expanded="false">What don't you offer?<i aria-hidden="true"></i></button><div class="acc__a"><p>We work with adults and don't currently provide couples therapy, eating-disorder treatment, or therapy for people involved in court cases. We're happy to suggest other services.</p></div></div>
+      <div class="acc__item"><button class="acc__q" aria-expanded="false">Is therapy confidential?<i aria-hidden="true"></i></button><div class="acc__a"><p>Yes. Your information is kept private, except in rare situations such as a serious risk of harm or a court subpoena. We'll explain these in your first session.</p></div></div>
     </div>
   </div>
 </section>
 
 <!-- ============ SOFT CONVERSION ============ -->
-<section class="sec soft" data-cro="12">
-  <div class="wrap soft__in">
+<section class="soft" data-cro="13">
+  <div class="soft__in">
+    <span class="soft__icon" aria-hidden="true"></span>
     <div class="soft__copy">
       <p class="kicker">Not ready to book yet?</p>
-      <h2>Get our free guide: <em>"Starting therapy, without the overwhelm."</em></h2>
-      <p>A gentle 5-page guide: how to choose a psychologist, how Medicare plans work, and what to say in your first session.</p>
+      <h2>Get our free guide, <em>“Starting therapy, without the overwhelm.”</em> <span class="confirm">[new]</span></h2>
+      <p>How to choose a psychologist, how Medicare plans work, and what to say in your first session.</p>
     </div>
     <form class="soft__form" id="guideForm" novalidate>
       <label for="gEmail" class="sr">Email address</label>
       <input id="gEmail" type="email" placeholder="Your email" autocomplete="email" required>
-      <button class="btn btn--forest" type="submit">Send me the guide</button>
+      <button class="btn btn--brown" type="submit"><span>Send me the guide</span></button>
       <p class="soft__fine">One email. No spam. Unsubscribe any time.</p>
       <p class="soft__ok" id="guideOk" hidden>Thanks. Your guide is on its way.</p>
     </form>
   </div>
 </section>
 
-<!-- ============ RESOURCES ============ -->
-<section class="sec" id="blog" data-cro="13">
+<!-- ============ BLOG ============ -->
+<section class="sec blog" id="blog" data-cro="14">
   <div class="wrap">
     <div class="sec__head sec__head--row">
-      <div><p class="kicker">From our psychologists</p><h2>Reading for <em>when you're not sure yet.</em></h2></div>
-      <a class="link link--arrow" href="https://thepsychologyalley.com.au/psych-blog" target="_blank" rel="noopener">All articles</a>
+      <div><p class="kicker" data-anim>From the Psych Blog</p><h2 data-split>Read more <em>about mental health.</em></h2></div>
+      <a class="link link--arrow" href="https://thepsychologyalley.com.au/psych-blog" target="_blank" rel="noopener" data-anim>All articles</a>
     </div>
     <div class="posts">
-      <a class="post" href="https://thepsychologyalley.com.au/psych-blog" target="_blank" rel="noopener"><span class="post__tag">Getting started</span><h3>Do I need a diagnosis before starting therapy?</h3><span class="post__read">4 min read</span></a>
-      <a class="post" href="https://thepsychologyalley.com.au/psych-blog" target="_blank" rel="noopener"><span class="post__tag">Low mood</span><h3>Why don't I feel like myself anymore?</h3><span class="post__read">6 min read</span></a>
-      <a class="post" href="https://thepsychologyalley.com.au/psych-blog" target="_blank" rel="noopener"><span class="post__tag">Relationships</span><h3>Can individual therapy help if my partner won't attend?</h3><span class="post__read">5 min read</span></a>
+      <a class="post" href="https://thepsychologyalley.com.au/psych-blog/do-i-need-a-diagnosis-before-starting-therapy" target="_blank" rel="noopener"><div class="post__img"><img src="images/blog-diagnosis.jpg" alt="" loading="lazy"></div><span class="post__tag">Getting started</span><h3>Do I need a diagnosis before starting therapy?</h3></a>
+      <a class="post" href="https://thepsychologyalley.com.au/psych-blog/why-dont-i-feel-like-myself-anymore" target="_blank" rel="noopener"><div class="post__img"><img src="images/blog-not-myself.jpg" alt="" loading="lazy"></div><span class="post__tag">Low mood</span><h3>Why don't I feel like myself anymore?</h3></a>
+      <a class="post" href="https://thepsychologyalley.com.au/psych-blog/can-individual-therapy-help-with-relationship-problems" target="_blank" rel="noopener"><div class="post__img"><img src="images/blog-individual-therapy.jpg" alt="" loading="lazy"></div><span class="post__tag">Relationships</span><h3>Can individual therapy help if my partner doesn't attend?</h3></a>
+      <a class="post" href="https://thepsychologyalley.com.au/psych-blog/adhd-and-relationships" target="_blank" rel="noopener"><div class="post__img"><img src="images/blog-adhd-relationships.jpg" alt="" loading="lazy"></div><span class="post__tag">ADHD</span><h3>ADHD and relationships: why communication can become so difficult</h3></a>
     </div>
   </div>
 </section>
 
 <!-- ============ FINAL CTA ============ -->
-<section class="final" data-cro="14">
+<section class="final" data-cro="15">
+  <div class="final__bg"><img src="images/therapy.jpg" alt="" loading="lazy" id="finalImg"></div>
+  <div class="final__veil" aria-hidden="true"></div>
   <div class="wrap final__in">
-    <h2>Taking the first step is often the hardest part. <em>We'll make the rest easy.</em></h2>
-    <div class="final__ctas">
-      <button class="btn btn--clay btn--lg" data-open-match data-track="cta_final">Find my psychologist</button>
-      <a class="btn btn--line btn--lg" href="tel:0290855864" data-track="click_phone">Call (02) 9085 5864</a>
+    <span class="final__icon" aria-hidden="true"></span>
+    <h2 data-split>We are ready <em>when you are.</em></h2>
+    <p class="final__sub" data-anim>You do not need to have everything figured out before you reach out. Many people come to us unsure of where to begin, and that is perfectly fine.</p>
+    <div class="final__ctas" data-anim>
+      <button class="btn btn--cream btn--lg" data-open-match data-track="cta_final" data-magnetic><span>Find my psychologist</span><i class="btn__arr" aria-hidden="true"></i></button>
+      <a class="btn btn--line btn--lg" href="tel:0290855864" data-track="click_phone"><span>Call (02) 9085 5864</span></a>
     </div>
-    <p>2-minute questionnaire · free intake call · no commitment</p>
+    <p class="final__fine" data-anim>2-minute questionnaire · brief intake call · no commitment</p>
   </div>
 </section>
 
 </main>
 
 <!-- ============ FOOTER ============ -->
-<footer class="ftr" data-cro="15">
+<footer class="ftr" data-cro="16">
   <div class="wrap">
     <div class="crisis" role="note">
-      <b>Need urgent help?</b> We are not an emergency service. If you or someone else is in danger, call <a href="tel:000">000</a>. For 24/7 support: Lifeline <a href="tel:131114">13 11 14</a> · Suicide Call Back Service <a href="tel:1300659467">1300 659 467</a> · 1800RESPECT <a href="tel:1800737732">1800 737 732</a>
+      <b>Need urgent help?</b> We are not an emergency service. If anyone's life is in immediate danger, call <a href="tel:000">000</a>. For 24/7 support: Lifeline <a href="tel:131114">13 11 14</a> · Suicide Call Back Service <a href="tel:1300659467">1300 659 467</a> · 1800RESPECT <a href="tel:1800737732">1800 737 732</a>
     </div>
     <div class="ftr__grid">
       <div>
-        <a class="logo logo--light" href="#top"><svg viewBox="0 0 40 40" aria-hidden="true"><path d="M8 33V15a12 12 0 0 1 24 0v18" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round"/><path d="M14 33V17a6 6 0 0 1 12 0v16" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" opacity=".55"/><circle cx="20" cy="9" r="1.8" fill="var(--clay)"/></svg><span>The Psychology<br><b>Alley</b></span></a>
+        <a class="logo logo--light" href="#top" aria-label="The Psychology Alley home"><span class="logo__img"></span></a>
         <p class="ftr__vals">LGBTQIA+ affirming · Culturally responsive · Evidence-based</p>
+        <div class="social">
+          <a href="https://www.instagram.com/thepsychologyalley" target="_blank" rel="noopener" aria-label="Instagram"><svg viewBox="0 0 24 24"><rect x="3" y="3" width="18" height="18" rx="5"/><circle cx="12" cy="12" r="4"/><circle cx="17.3" cy="6.7" r=".8" fill="currentColor"/></svg></a>
+          <a href="https://www.facebook.com/thepsychologyalley/" target="_blank" rel="noopener" aria-label="Facebook"><svg viewBox="0 0 24 24"><path d="M14 8h3V4h-3a4 4 0 0 0-4 4v3H7v4h3v6h4v-6h3l1-4h-4V8z"/></svg></a>
+          <a href="https://www.linkedin.com/company/thepsychologyalley/" target="_blank" rel="noopener" aria-label="LinkedIn"><svg viewBox="0 0 24 24"><rect x="3" y="3" width="18" height="18" rx="3"/><path d="M8 10v7M8 7v.1M12 17v-4a2 2 0 0 1 4 0v4M12 10v7"/></svg></a>
+        </div>
       </div>
-      <div><h4>Visit</h4><p>Suite 713, 185 Elizabeth St<br>Sydney NSW 2000</p><p><a href="tel:0290855864">(02) 9085 5864</a><br><a href="mailto:info@thepsychologyalley.com">info@thepsychologyalley.com</a></p></div>
-      <div><h4>Explore</h4><ul><li><a href="#team">Our psychologists</a></li><li><a href="#fees">Fees &amp; rebates</a></li><li><a href="#approaches">Therapies</a></li><li><a href="#faq">FAQs</a></li><li><a href="https://thepsychologyalley.com.au/single-expert-reports-family-court" target="_blank" rel="noopener">Family &amp; expert reports</a></li></ul></div>
-      <div><h4>For professionals</h4><ul><li><a href="https://thepsychologyalley.com.au/join-our-team" target="_blank" rel="noopener">Join our team</a></li><li><a href="#">GP referrals <em class="confirm">[new]</em></a></li><li><a href="https://www.halaxy.com/book/the-psychology-alley/location/944251" target="_blank" rel="noopener">Existing clients: book online</a></li></ul></div>
+      <div><h4>Visit</h4><p>Suite 713, 185 Elizabeth Street<br>Sydney NSW 2000</p><p><a href="tel:0290855864">(02) 9085 5864</a><br><a href="mailto:info@thepsychologyalley.com">info@thepsychologyalley.com</a></p></div>
+      <div><h4>Explore</h4><ul><li><a href="#team">Our team</a></li><li><a href="#fees">Fees &amp; rebates</a></li><li><a href="#approaches">Therapies</a></li><li><a href="#faq">FAQs</a></li><li><a href="https://thepsychologyalley.com.au/single-expert-reports-family-court" target="_blank" rel="noopener">Single expert reports</a></li><li><a href="https://thepsychologyalley.com.au/psych-blog" target="_blank" rel="noopener">Blog</a></li></ul></div>
+      <div><h4>More</h4><ul><li><a href="https://www.halaxy.com/book/the-psychology-alley/location/944251" target="_blank" rel="noopener">Existing clients: book online</a></li><li><a href="https://thepsychologyalley.com.au/join-our-team" target="_blank" rel="noopener">Join our team</a></li><li><a href="https://thepsychologyalley.com.au/resources" target="_blank" rel="noopener">Resources</a></li><li><a href="https://thepsychologyalley.com.au/privacy-policy" target="_blank" rel="noopener">Privacy policy</a></li><li><a href="https://thepsychologyalley.com.au/acceptable-behaviour-policy" target="_blank" rel="noopener">Acceptable behaviour policy</a></li></ul></div>
     </div>
-    <p class="aoc">The Psychology Alley acknowledges the Gadigal people of the Eora Nation, the Traditional Custodians of the land on which we work, and pays respect to Elders past and present.</p>
-    <div class="ftr__base"><span>© 2026 The Psychology Alley</span><span>Medicare provider · Psychology Board of Australia · ACPA member</span><span><a href="https://thepsychologyalley.com.au/privacy-policy" target="_blank" rel="noopener">Privacy</a></span></div>
+    <p class="aoc">The Psychology Alley acknowledges the Gadigal people of the Eora Nation, the Traditional Custodians of the land on which we work, and pays respect to Elders past and present. <em class="confirm">[new]</em></p>
+    <div class="ftr__base"><span>Copyright © The Psychology Alley 2026. All rights reserved.</span><span>Medicare provider 6112135F · Psychology Board of Australia PSY0002270793</span></div>
   </div>
 </footer>
 
 <!-- ============ STICKY MOBILE CTA ============ -->
-<div class="mbar" id="mbar" data-cro="16">
+<div class="mbar" id="mbar" data-cro="17">
   <a class="mbar__call" href="tel:0290855864" aria-label="Call us" data-track="click_phone"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M6.6 10.8a15.1 15.1 0 0 0 6.6 6.6l2.2-2.2a1 1 0 0 1 1-.25 11.4 11.4 0 0 0 3.6.57 1 1 0 0 1 1 1V20a1 1 0 0 1-1 1A17 17 0 0 1 3 4a1 1 0 0 1 1-1h3.5a1 1 0 0 1 1 1c0 1.25.2 2.45.57 3.57a1 1 0 0 1-.25 1L6.6 10.8z" fill="currentColor"/></svg></a>
-  <button class="btn btn--clay" data-open-match data-track="cta_sticky_mobile">Find my psychologist</button>
+  <button class="btn btn--brown" data-open-match data-track="cta_sticky_mobile"><span>Find my psychologist</span><i class="btn__arr" aria-hidden="true"></i></button>
 </div>
 
 <!-- ============ MATCHER (guided intake) ============ -->
-<div class="match" id="match" role="dialog" aria-modal="true" aria-labelledby="mTitle" hidden data-cro="17">
+<div class="match" id="match" role="dialog" aria-modal="true" aria-labelledby="mTitle" hidden data-cro="18" data-lenis-prevent>
   <div class="match__scrim" data-close></div>
   <div class="match__panel">
     <div class="match__top">
@@ -519,7 +553,6 @@
       <button class="match__x" data-close aria-label="Close">×</button>
     </div>
     <form id="mForm" novalidate>
-      <!-- Step 1 -->
       <section class="mstep" data-step="1">
         <h2 id="mTitle">What would you like support with?</h2>
         <p class="mstep__sub">Choose any that apply. There's no wrong answer.</p>
@@ -538,7 +571,6 @@
           <b>You deserve support right now.</b> We can't provide crisis care. Please call <a href="tel:000">000</a> if you are in danger, or Lifeline on <a href="tel:131114">13 11 14</a> (24/7), or text <a href="sms:0477131114">0477 13 11 14</a>.
         </div>
       </section>
-      <!-- Step 2 -->
       <section class="mstep" data-step="2" hidden>
         <h2>How would you like to attend?</h2>
         <div class="opts" data-group="mode">
@@ -553,7 +585,6 @@
           <button type="button" class="chip" data-v="flexible">Flexible</button>
         </div>
       </section>
-      <!-- Step 3 -->
       <section class="mstep" data-step="3" hidden>
         <h2>A few preferences</h2>
         <p class="mstep__sub">Optional, but they help us match you well.</p>
@@ -572,11 +603,10 @@
           <button type="button" class="chip" data-v="lgbtqia">LGBTQIA+ affirming</button>
         </div>
       </section>
-      <!-- Step 4 -->
       <section class="mstep" data-step="4" hidden>
         <h2>Your suggested match</h2>
         <div class="result" id="mResult"></div>
-        <h3 class="mstep__h3">Where should we call you for your free intake chat?</h3>
+        <h3 class="mstep__h3">Where should we call you for your intake chat?</h3>
         <div class="fields">
           <label><span>First name</span><input name="name" autocomplete="given-name" required></label>
           <label><span>Mobile</span><input name="phone" type="tel" autocomplete="tel" inputmode="tel" required></label>
@@ -589,7 +619,6 @@
         </div>
         <p class="ferr" id="mErr" hidden>Please add your name, a mobile or email, and tick the consent box.</p>
       </section>
-      <!-- Done -->
       <section class="mstep mstep--done" data-step="5" hidden>
         <div class="done-ic" aria-hidden="true"><svg viewBox="0 0 52 52"><circle cx="26" cy="26" r="24"/><path d="m15 27 7 7 15-16"/></svg></div>
         <h2>Thank you, <span id="dName">there</span>. You've taken the first step.</h2>
@@ -597,14 +626,14 @@
         <ol class="next">
           <li><b>Within 1 business day</b> we'll call you from (02) 9085 5864. <em class="confirm">[confirm]</em></li>
           <li><b>On the call</b> we'll confirm your match and answer any questions.</li>
-          <li><b>Your first session</b> is booked in Halaxy, with a reminder by SMS.</li>
+          <li><b>Your first session</b> is booked, with a reminder by SMS.</li>
         </ol>
         <p class="mstep__sub">Want a head start? <button type="button" class="link" data-modal="mhcp">Ask your GP for a Mental Health Care Plan</button></p>
       </section>
 
       <div class="match__nav">
-        <button type="button" class="btn btn--ghost" id="mBack">Back</button>
-        <button type="button" class="btn btn--clay" id="mNext">Continue</button>
+        <button type="button" class="btn btn--ghost" id="mBack"><span>Back</span></button>
+        <button type="button" class="btn btn--brown" id="mNext"><span>Continue</span></button>
       </div>
       <p class="match__trust"><svg viewBox="0 0 24 24" aria-hidden="true"><rect x="5" y="11" width="14" height="10" rx="2"/><path d="M8 11V8a4 4 0 0 1 8 0v3"/></svg> Your answers are confidential and go straight to our intake team.</p>
     </form>
@@ -612,28 +641,28 @@
 </div>
 
 <!-- MHCP explainer modal -->
-<div class="modal" id="mhcpModal" role="dialog" aria-modal="true" aria-labelledby="mhcpT" hidden>
+<div class="modal" id="mhcpModal" role="dialog" aria-modal="true" aria-labelledby="mhcpT" hidden data-lenis-prevent>
   <div class="match__scrim" data-close-modal></div>
   <div class="modal__panel">
     <button class="match__x" data-close-modal aria-label="Close">×</button>
     <h2 id="mhcpT">Getting a Mental Health Care Plan</h2>
     <ol class="next">
-      <li>Book a <b>longer appointment</b> (20+ min) with your GP and say it's for a Mental Health Care Plan.</li>
-      <li>Your GP will ask a few questions and may give you a referral to <b>The Psychology Alley</b>.</li>
-      <li>Send us the referral (email or upload). We'll add it to your file before your session.</li>
-      <li>Claim up to <b>10 rebated sessions</b> each calendar year. Your GP reviews after 6.</li>
+      <li>Book a <b>longer appointment</b> with your GP and say it's for a Mental Health Care Plan.</li>
+      <li>Your GP will ask a few questions and can address the referral to <b>The Psychology Alley</b>.</li>
+      <li>Send us the referral by email. We'll add it to your file before your session.</li>
+      <li>Claim up to <b>10 rebated sessions</b> each calendar year. Your GP reviews after the first 6.</li>
     </ol>
-    <p class="mstep__sub">You can start therapy before you have a plan. Rebates apply from the date of the referral.</p>
+    <p class="mstep__sub">A plan is not required to start therapy.</p>
   </div>
 </div>
 
 <!-- ============ CRO NOTES (concept chrome) ============ -->
-<aside class="notes" id="notes" aria-label="CRO notes" hidden>
+<aside class="notes" id="notes" aria-label="CRO notes" hidden data-lenis-prevent>
   <div class="notes__head">
     <div><p class="notes__k">Why this layout?</p><h2>CRO rationale, section by section</h2></div>
     <button class="match__x" id="notesClose" aria-label="Close notes">×</button>
   </div>
-  <p class="notes__intro">Each numbered pin on the page matches a note here. Click a pin or a note to jump to it. Below that: the tracking events this page sends (live), so you can see how each improvement will be measured.</p>
+  <p class="notes__intro">Each numbered pin on the page matches a note here. Click a pin or a note to jump to it. Below: the tracking events this page sends (live), so you can see how each improvement will be measured.</p>
   <ol class="notes__list" id="notesList"></ol>
   <div class="notes__events">
     <h3>Live tracking events (GA4 / GTM)</h3>
@@ -643,6 +672,9 @@
 <div class="pop" id="pop" role="tooltip" hidden></div>
 <div class="toast" id="toast" aria-live="polite"></div>
 
+<script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/gsap.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/ScrollTrigger.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/lenis@1.1.14/dist/lenis.min.js"></script>
 <script src="script.js"></script>
 </body>
 </html>

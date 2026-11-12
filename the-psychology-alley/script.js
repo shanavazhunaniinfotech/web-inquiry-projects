@@ -1,8 +1,14 @@
-/* The Psychology Alley · homepage concept */
+/* The Psychology Alley · homepage concept v2 */
 (function () {
   'use strict';
   var $ = function (s, c) { return (c || document).querySelector(s); };
   var $$ = function (s, c) { return Array.prototype.slice.call((c || document).querySelectorAll(s)); };
+  var root = document.documentElement;
+  var reduced = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+  var hasGsap = !!(window.gsap && window.ScrollTrigger) && !reduced;
+  var fine = window.matchMedia('(hover: hover) and (pointer: fine)').matches;
+  var gsap = window.gsap, ST = window.ScrollTrigger;
+  if (hasGsap) gsap.registerPlugin(ST);
 
   /* ---------- Tracking (GA4 / GTM dataLayer) ---------- */
   window.dataLayer = window.dataLayer || [];
@@ -13,8 +19,7 @@
     if (evLog) {
       var first = evLog.querySelector('.muted'); if (first) first.remove();
       var li = document.createElement('li');
-      var p = params ? ' ' + JSON.stringify(params) : '';
-      li.textContent = new Date().toLocaleTimeString('en-AU', { hour12: false }) + '  ' + name + p;
+      li.textContent = new Date().toLocaleTimeString('en-AU', { hour12: false }) + '  ' + name + (params ? ' ' + JSON.stringify(params) : '');
       evLog.prepend(li);
     }
     if (document.body.classList.contains('notes-on')) {
@@ -28,34 +33,222 @@
     if (t) track(t.getAttribute('data-track'), t.dataset.clinician ? { clinician: t.dataset.clinician } : null);
   });
 
-  /* ---------- Header + mobile nav + sticky bar ---------- */
-  var hdr = $('#hdr'), mbar = $('#mbar'), burger = $('#burger'), mnav = $('#mnav');
-  var hero = $('.hero'), final = $('.final');
+  /* ---------- Smooth scroll (Lenis) ---------- */
+  var lenis = null;
+  if (hasGsap && window.Lenis) {
+    try {
+      lenis = new window.Lenis({ duration: 1.1, smoothWheel: true });
+      lenis.on('scroll', ST.update);
+      gsap.ticker.add(function (t) { lenis.raf(t * 1000); });
+      gsap.ticker.lagSmoothing(0);
+    } catch (e) { lenis = null; }
+  }
+  function scrollToEl(el, offset) {
+    if (!el) return;
+    if (lenis) lenis.scrollTo(el, { offset: offset == null ? -96 : offset, duration: 1.2 });
+    else window.scrollTo({ top: el.getBoundingClientRect().top + window.scrollY + (offset == null ? -96 : offset), behavior: reduced ? 'auto' : 'smooth' });
+  }
+  var locks = 0;
+  function lock(on) {
+    locks = Math.max(0, locks + (on ? 1 : -1));
+    var l = locks > 0;
+    root.style.overflow = l ? 'hidden' : '';
+    if (lenis) { if (l) lenis.stop(); else lenis.start(); }
+  }
+  document.addEventListener('click', function (e) {
+    var a = e.target.closest('a[href^="#"]'); if (!a) return;
+    var id = a.getAttribute('href'); if (id.length < 2) return;
+    var el = $(id); if (!el) return;
+    e.preventDefault(); closeNav(); scrollToEl(el, id === '#top' ? -200 : -90);
+  });
+
+  /* ---------- Header, mobile nav, sticky bar, progress ---------- */
+  var hdr = $('#hdr'), mbar = $('#mbar'), burger = $('#burger'), mnav = $('#mnav'), prog = $('#progress');
+  var hero = $('.hero'), final = $('.final'), lastY = 0;
+  mnav.removeAttribute('hidden');
   function onScroll() {
     var y = window.scrollY;
-    hdr.classList.toggle('is-scrolled', y > 8);
+    hdr.classList.toggle('is-scrolled', y > 40);
+    var navOpen = mnav.classList.contains('open');
+    if (!navOpen) hdr.classList.toggle('is-hidden', y > 500 && y > lastY + 2 ? true : (y < lastY - 2 ? false : hdr.classList.contains('is-hidden')));
+    lastY = y;
     var heroBottom = hero.offsetTop + hero.offsetHeight - 200;
     var finalTop = final.getBoundingClientRect().top;
     mbar.classList.toggle('show', y > heroBottom && finalTop > window.innerHeight * .6);
+    var max = root.scrollHeight - window.innerHeight;
+    if (prog) prog.style.transform = 'scaleX(' + (max > 0 ? Math.min(1, y / max) : 0) + ')';
   }
   window.addEventListener('scroll', onScroll, { passive: true }); onScroll();
+  function closeNav() {
+    if (!mnav.classList.contains('open')) return;
+    mnav.classList.remove('open'); burger.setAttribute('aria-expanded', 'false'); burger.setAttribute('aria-label', 'Open menu'); lock(false);
+  }
   burger.addEventListener('click', function () {
-    var open = burger.getAttribute('aria-expanded') !== 'true';
-    burger.setAttribute('aria-expanded', open); mnav.classList.toggle('open', open);
+    if (mnav.classList.contains('open')) return closeNav();
+    mnav.classList.add('open'); burger.setAttribute('aria-expanded', 'true'); burger.setAttribute('aria-label', 'Close menu');
+    hdr.classList.remove('is-hidden'); lock(true); track('mobile_menu_open');
   });
-  $$('a', mnav).forEach(function (a) { a.addEventListener('click', function () { burger.setAttribute('aria-expanded', 'false'); mnav.classList.remove('open'); }); });
 
-  /* ---------- Reveal on scroll ---------- */
-  var revealEls = $$('.reveal');
-  $$('.concern, .doc, .step, .post, .visit__card, .hours, .acc details, .timeline li').forEach(function (el, i) {
-    el.classList.add('reveal'); el.style.transitionDelay = (i % 4) * 70 + 'ms'; revealEls.push(el);
+  /* ---------- Text splitting ---------- */
+  function splitWords(el, cls) {
+    var out = [];
+    function wrap(word, em) {
+      var o = document.createElement('span'); o.className = cls === 'w' ? 'w' : 'sw';
+      if (cls === 'w') { o.textContent = word; if (em) { var e1 = document.createElement('em'); e1.appendChild(o); out.push(o); return e1; } out.push(o); return o; }
+      var i = document.createElement('span');
+      if (em) { var e2 = document.createElement('em'); e2.textContent = word; i.appendChild(e2); } else i.textContent = word;
+      o.appendChild(i); out.push(i); return o;
+    }
+    var frag = document.createDocumentFragment();
+    Array.prototype.slice.call(el.childNodes).forEach(function (n) {
+      var em = n.nodeType === 1 && n.tagName === 'EM';
+      if (n.nodeType === 3 || em) {
+        n.textContent.split(/(\s+)/).forEach(function (p) {
+          if (!p) return;
+          if (/^\s+$/.test(p)) frag.appendChild(document.createTextNode(' ')); else frag.appendChild(wrap(p, em));
+        });
+      } else frag.appendChild(n);
+    });
+    el.setAttribute('aria-label', el.textContent.replace(/\s+/g, ' ').trim());
+    el.innerHTML = ''; el.appendChild(frag);
+    return out;
+  }
+
+  /* ---------- Animations ---------- */
+  function finishLoad() { root.classList.add('loaded'); }
+  if (!hasGsap) { finishLoad(); }
+  else {
+    // hero intro
+    var h1Words = splitWords($('.hero__h1'));
+    gsap.set(h1Words, { yPercent: 115 });
+    gsap.set('[data-hero]', { y: 26, autoAlpha: 0 });
+    gsap.set('#quick', { y: 70, autoAlpha: 0, rotate: 2 });
+    gsap.set('#heroChips .chip', { scale: .7, autoAlpha: 0 });
+    gsap.set('.hero__bg img', { scale: 1.22 });
+    gsap.set('.hdr__in', { y: -90, autoAlpha: 0 });
+    var intro = gsap.timeline({ defaults: { ease: 'power4.out' } });
+    intro.to('.loader__bar i', { scaleX: 1, duration: .8, ease: 'power2.inOut' })
+      .to('.loader__in', { autoAlpha: 0, y: -20, duration: .35, ease: 'power2.in' })
+      .to('#loader', { yPercent: -100, duration: .85, ease: 'power4.inOut', onComplete: finishLoad })
+      .to('.hero__bg img', { scale: 1, duration: 2.4, ease: 'power3.out' }, '-=.75')
+      .to('.hdr__in', { y: 0, autoAlpha: 1, duration: 1 }, '-=2.1')
+      .to(h1Words, { yPercent: 0, duration: 1.15, stagger: .055 }, '-=2.05')
+      .to('[data-hero]', { y: 0, autoAlpha: 1, duration: .9, stagger: .09 }, '-=1.45')
+      .to('#quick', { y: 0, autoAlpha: 1, rotate: 0, duration: 1.2 }, '-=1.5')
+      .to('#heroChips .chip', { scale: 1, autoAlpha: 1, duration: .5, stagger: .045, ease: 'back.out(2)' }, '-=.8');
+
+    // hero parallax
+    gsap.to('.hero__bg', { yPercent: 9, ease: 'none', scrollTrigger: { trigger: '.hero', start: 'top top', end: 'bottom top', scrub: true } });
+
+    // headings: word reveal
+    $$('[data-split]').forEach(function (el) {
+      var w = splitWords(el);
+      gsap.from(w, { yPercent: 115, duration: 1, stagger: .045, ease: 'power4.out', scrollTrigger: { trigger: el, start: 'top 88%', once: true } });
+    });
+
+    // generic fade-up
+    ST.batch('[data-anim]', { start: 'top 90%', once: true, onEnter: function (els) { gsap.to(els, { y: 0, autoAlpha: 1, duration: .9, stagger: .09, ease: 'power3.out', overwrite: true }); } });
+    gsap.set('[data-anim]', { y: 28, autoAlpha: 0 });
+
+    // grouped staggers
+    [['.trust__logos li', '.trust', 24], ['.help__list li', '.help__list', 40], ['.step', '.steps', 60], ['.mate', '.crew__grid', 50],
+     ['.visit > *', '.visit', 50], ['.acc__item', '.acc', 30], ['.post', '.posts', 50], ['.tabs button', '.tabs', 20]].forEach(function (g) {
+      if (!$(g[1])) return;
+      gsap.from(g[0], { y: g[2], autoAlpha: 0, duration: .95, stagger: .08, ease: 'power3.out', scrollTrigger: { trigger: g[1], start: 'top 86%', once: true } });
+    });
+    gsap.from('.calc', { y: 80, autoAlpha: 0, rotate: 3, duration: 1.2, ease: 'power4.out', scrollTrigger: { trigger: '.calc', start: 'top 88%', once: true } });
+    gsap.from('.tabpanel', { y: 60, autoAlpha: 0, duration: 1.1, ease: 'power4.out', scrollTrigger: { trigger: '.appr__grid', start: 'top 82%', once: true } });
+    gsap.from('.soft__in', { scale: .94, autoAlpha: 0, duration: 1.1, ease: 'power3.out', scrollTrigger: { trigger: '.soft', start: 'top 88%', once: true } });
+
+    // statement: words light up as you scroll
+    var sw = splitWords($('#stateTxt'), 'w');
+    gsap.to(sw, { opacity: 1, stagger: .1, ease: 'none', scrollTrigger: { trigger: '#stateTxt', start: 'top 82%', end: 'bottom 52%', scrub: .6 } });
+
+    // counters
+    $$('[data-count]').forEach(function (el) {
+      var end = parseFloat(el.dataset.count), dec = +el.dataset.dec || 0, o = { v: 0 };
+      ST.create({ trigger: el, start: 'top 92%', once: true, onEnter: function () {
+        gsap.to(o, { v: end, duration: 1.8, ease: 'power3.out', onUpdate: function () { el.textContent = o.v.toFixed(dec); } });
+      } });
+    });
+
+    // marquee with scroll-velocity boost
+    var mq = gsap.to('#marquee', { xPercent: -50, repeat: -1, duration: 34, ease: 'none' });
+    ST.create({ onUpdate: function (s) {
+      var v = Math.min(6, 1 + Math.abs(s.getVelocity()) / 400);
+      gsap.to(mq, { timeScale: v * (s.direction < 0 ? -1 : 1), duration: .3, overwrite: true });
+      gsap.to(mq, { timeScale: s.direction < 0 ? -1 : 1, duration: 1.2, delay: .3 });
+    } });
+
+    // steps line
+    gsap.to('#stepsLine', { scaleX: 1, ease: 'none', scrollTrigger: { trigger: '.steps', start: 'top 78%', end: 'top 30%', scrub: .6 } });
+
+    // Heather: arch reveal, portrait parallax, floating chips
+    gsap.fromTo('.lead__arch', { clipPath: 'inset(100% 0% 0% 0% round 999px 999px 22px 22px)' }, { clipPath: 'inset(0% 0% 0% 0% round 999px 999px 22px 22px)', duration: 1.5, ease: 'power4.inOut', scrollTrigger: { trigger: '.lead', start: 'top 78%', once: true } });
+    gsap.fromTo('#heatherImg', { yPercent: 9 }, { yPercent: -3, ease: 'none', scrollTrigger: { trigger: '.lead', start: 'top bottom', end: 'bottom top', scrub: true } });
+    gsap.from('.float', { scale: 0, autoAlpha: 0, duration: .8, stagger: .15, ease: 'back.out(1.8)', delay: .7, scrollTrigger: { trigger: '.lead', start: 'top 70%', once: true } });
+    $$('.float').forEach(function (f, i) { gsap.to(f, { y: i % 2 ? 10 : -10, duration: 2.6 + i * .4, yoyo: true, repeat: -1, ease: 'sine.inOut' }); });
+
+    // image parallax
+    $$('.visit__img:not(.visit__img--tele) img').forEach(function (im) {
+      gsap.fromTo(im, { yPercent: -12 }, { yPercent: 0, ease: 'none', scrollTrigger: { trigger: im.parentNode, start: 'top bottom', end: 'bottom top', scrub: true } });
+    });
+    gsap.fromTo('#finalImg', { yPercent: -8, scale: 1.1 }, { yPercent: 8, scale: 1, ease: 'none', scrollTrigger: { trigger: '.final', start: 'top bottom', end: 'bottom top', scrub: true } });
+    gsap.from('.final__icon', { rotate: -180, scale: 0, duration: 1.2, ease: 'back.out(1.6)', scrollTrigger: { trigger: '.final', start: 'top 70%', once: true } });
+
+    // fees + final: rounded sections scale in
+    ['.fees', '.final'].forEach(function (s) {
+      gsap.from(s, { scale: .94, borderRadius: 60, ease: 'none', scrollTrigger: { trigger: s, start: 'top bottom', end: 'top 35%', scrub: true } });
+    });
+
+    // first session: pinned horizontal scroll (desktop)
+    var mm = gsap.matchMedia();
+    mm.add('(min-width: 981px)', function () {
+      gsap.to('.hero__grid', { yPercent: -6, autoAlpha: .2, ease: 'none', scrollTrigger: { trigger: '.hero', start: '55% top', end: 'bottom top', scrub: true } });
+      var track = $('#expectTrack');
+      var dist = function () { return Math.max(0, track.scrollWidth - window.innerWidth); };
+      var tw = gsap.to(track, { x: function () { return -dist(); }, ease: 'none',
+        scrollTrigger: { trigger: '.expect', start: 'top top', end: function () { return '+=' + dist(); }, pin: '.expect__pin', scrub: .8, invalidateOnRefresh: true, anticipatePin: 1 } });
+      $$('.xcard__img img', track).forEach(function (im) {
+        gsap.fromTo(im, { xPercent: -6, scale: 1.14 }, { xPercent: 6, scale: 1.14, ease: 'none', scrollTrigger: { trigger: im, containerAnimation: tw, start: 'left right', end: 'right left', scrub: true } });
+      });
+      root.classList.add('h-pin');
+      return function () { root.classList.remove('h-pin'); };
+    });
+    mm.add('(max-width: 980px)', function () {
+      gsap.from('.xcard', { x: 60, autoAlpha: 0, duration: .9, stagger: .1, ease: 'power3.out', scrollTrigger: { trigger: '#expectTrack', start: 'top 86%', once: true } });
+    });
+
+    // magnetic buttons
+    if (fine) $$('[data-magnetic]').forEach(function (b) {
+      b.addEventListener('mousemove', function (e) {
+        var r = b.getBoundingClientRect();
+        gsap.to(b, { x: (e.clientX - r.left - r.width / 2) * .25, y: (e.clientY - r.top - r.height / 2) * .35, duration: .4, ease: 'power3.out' });
+      });
+      b.addEventListener('mouseleave', function () { gsap.to(b, { x: 0, y: 0, duration: .7, ease: 'elastic.out(1,.45)' }); });
+    });
+    // quick card: gentle tilt
+    var quick = $('#quick');
+    if (fine && quick) {
+      quick.addEventListener('mousemove', function (e) {
+        var r = quick.getBoundingClientRect();
+        gsap.to(quick, { rotateY: ((e.clientX - r.left) / r.width - .5) * 5, rotateX: -((e.clientY - r.top) / r.height - .5) * 5, transformPerspective: 900, duration: .5, ease: 'power2.out' });
+      });
+      quick.addEventListener('mouseleave', function () { gsap.to(quick, { rotateX: 0, rotateY: 0, duration: .8, ease: 'power3.out' }); });
+    }
+
+    window.addEventListener('load', function () { ST.refresh(); });
+    if (document.fonts && document.fonts.ready) document.fonts.ready.then(function () { ST.refresh(); });
+    setTimeout(finishLoad, 4000);
+  }
+
+  /* ---------- What we help with: image follows the hovered row ---------- */
+  var archImgs = $$('.help__arch img');
+  $$('#helpList .row').forEach(function (r) {
+    var k = r.getAttribute('data-open-match');
+    var on = function () { archImgs.forEach(function (im) { im.classList.toggle('on', im.dataset.k === k); }); };
+    r.addEventListener('mouseenter', on); r.addEventListener('focus', on);
   });
-  if ('IntersectionObserver' in window) {
-    var io = new IntersectionObserver(function (es) {
-      es.forEach(function (e) { if (e.isIntersecting) { e.target.classList.add('in'); io.unobserve(e.target); } });
-    }, { rootMargin: '0px 0px -8% 0px' });
-    revealEls.forEach(function (el) { io.observe(el); });
-  } else revealEls.forEach(function (el) { el.classList.add('in'); });
 
   /* ---------- Hero quick-start chips ---------- */
   var heroSel = new Set();
@@ -63,24 +256,18 @@
     c.addEventListener('click', function () {
       var v = c.dataset.concern;
       if (heroSel.has(v)) heroSel.delete(v); else heroSel.add(v);
-      c.classList.toggle('is-on');
+      c.classList.toggle('is-on'); c.setAttribute('aria-pressed', c.classList.contains('is-on'));
       if (heroSel.size === 1 && c.classList.contains('is-on')) track('match_hero_chip', { concern: v });
     });
   });
-  $('#heroNext').addEventListener('click', function () {
-    openMatch({ concerns: Array.from(heroSel), step: heroSel.size ? 2 : 1 });
-  });
+  $('#heroNext').addEventListener('click', function () { openMatch({ concerns: Array.from(heroSel), step: heroSel.size ? 2 : 1 }); });
 
   /* ---------- Matcher ---------- */
   var CLIN = [
-    { id: 'heather', name: 'Dr Heather Gan', role: 'Clinical Psychologist · Founder', ini: 'HG', h: 150, fee: 'clinical',
-      concerns: ['anxiety', 'emotions', 'identity', 'relationships', 'mood', 'unsure'], modes: ['inperson', 'telehealth'], times: ['day', 'afterhours'], mandarin: true, culture: true },
-    { id: 'emilie', name: 'Emilie', role: 'Clinical Psychologist', ini: 'E', h: 25, fee: 'clinical',
-      concerns: ['anxiety', 'mood', 'relationships', 'burnout', 'unsure'], modes: ['telehealth'], times: ['day', 'afterhours'] },
-    { id: 'ana', name: 'Ana', role: 'Clinical Psychologist', ini: 'A', h: 200, fee: 'clinical',
-      concerns: ['trauma', 'mood', 'emotions', 'unsure'], modes: ['inperson', 'telehealth'], times: ['day'] },
-    { id: 'registrar', name: 'Clinical Psychology Registrar', role: 'Supervised · lower fee', ini: '+', h: 100, fee: 'lower',
-      concerns: ['anxiety', 'mood', 'burnout', 'relationships', 'unsure'], modes: ['inperson', 'telehealth'], times: ['day', 'afterhours'], soonest: true }
+    { id: 'heather', name: 'Dr Heather Gan', role: 'Clinical Psychologist · Founder', img: 'images/dr-heather-gan.webp', price: '$161.95',
+      concerns: ['anxiety', 'emotions', 'identity', 'relationships', 'trauma'], modes: ['inperson', 'telehealth'], times: ['day', 'afterhours'], mandarin: true, culture: true },
+    { id: 'team', name: 'Next available psychologist', role: 'Registrar / Registered Psychologist', ini: '+', price: '$148.45',
+      concerns: ['anxiety', 'mood', 'burnout', 'relationships', 'unsure'], modes: ['inperson', 'telehealth'], times: ['day', 'afterhours'], lower: true, soonest: true }
   ];
   var LABEL = { anxiety: 'anxiety', mood: 'low mood', emotions: 'intense emotions', trauma: 'trauma', relationships: 'relationships', identity: 'cultural identity', burnout: 'burnout', unsure: 'working out what\'s going on' };
 
@@ -90,11 +277,12 @@
   function reset() { state = { concern: [], mode: [], time: [], mhcp: [], priority: [], pick: null }; }
   reset();
   try { var saved = JSON.parse(localStorage.getItem('tpa_match') || 'null'); if (saved && saved.concern) state = Object.assign(state, saved); } catch (e) {}
+  function save() { try { localStorage.setItem('tpa_match', JSON.stringify(state)); } catch (e) {} }
 
   function syncChips() {
     $$('[data-group]', form).forEach(function (g) {
       var key = g.dataset.group;
-      $$('[data-v]', g).forEach(function (b) { b.classList.toggle('is-on', state[key].indexOf(b.dataset.v) > -1); b.setAttribute('aria-pressed', state[key].indexOf(b.dataset.v) > -1); });
+      $$('[data-v]', g).forEach(function (b) { var on = state[key].indexOf(b.dataset.v) > -1; b.classList.toggle('is-on', on); b.setAttribute('aria-pressed', on); });
     });
   }
   $$('[data-group]', form).forEach(function (g) {
@@ -104,36 +292,34 @@
       var v = b.dataset.v, arr = state[key], i = arr.indexOf(v);
       if (multi) { if (i > -1) arr.splice(i, 1); else arr.push(v); }
       else { state[key] = i > -1 ? [] : [v]; }
+      state.pick = key === 'pick' ? state.pick : state.pick;
       syncChips(); save();
-      if (!multi && key === 'mode' && state.mode.length) { /* auto-advance feel */ }
     });
   });
-  function save() { try { localStorage.setItem('tpa_match', JSON.stringify(state)); } catch (e) {} }
 
   function score(c) {
     var s = 0, why = [];
     var hits = state.concern.filter(function (k) { return c.concerns.indexOf(k) > -1; });
-    s += hits.length * 3; if (hits.length) why.push('Works with ' + hits.map(function (k) { return LABEL[k]; }).join(', '));
-    var m = state.mode[0];
-    if (m && m !== 'either') { if (c.modes.indexOf(m) > -1) s += 2; else s -= 4; }
-    if (state.time.indexOf('afterhours') > -1) { if (c.times.indexOf('afterhours') > -1) { s += 2; why.push('After-5pm sessions'); } else s -= 2; }
-    if (state.priority.indexOf('lower') > -1 && c.fee === 'lower') { s += 3; why.push('Lower fee'); }
-    if (state.priority.indexOf('soonest') > -1 && c.soonest) { s += 2; why.push('Shortest wait'); }
-    if (state.priority.indexOf('mandarin') > -1) { if (c.mandarin) { s += 4; why.push('Speaks Mandarin'); } else s -= 1; }
-    if (state.priority.indexOf('culture') > -1 && c.culture) { s += 2; why.push('Culturally informed focus'); }
+    s += hits.length * 3; if (hits.length) why.push('Works with ' + hits.slice(0, 2).map(function (k) { return LABEL[k]; }).join(' & '));
+    if (state.time.indexOf('afterhours') > -1 && c.times.indexOf('afterhours') > -1) why.push('After-5pm sessions');
+    if (state.priority.indexOf('lower') > -1 && c.lower) { s += 4; why.unshift('Lower fee'); }
+    if (state.priority.indexOf('soonest') > -1 && c.soonest) { s += 3; why.unshift('Shortest wait'); }
+    if (state.priority.indexOf('mandarin') > -1) { if (c.mandarin) { s += 6; why.unshift('Speaks Mandarin'); } else s -= 2; }
+    if (state.priority.indexOf('culture') > -1 && c.culture) { s += 3; why.unshift('Culturally informed'); }
+    if (c.id === 'heather') s += .5;
     return { c: c, s: s, why: why };
   }
-  function renderResult() {
-    var ranked = CLIN.map(score).sort(function (a, b) { return b.s - a.s; }).slice(0, 2);
-    if (!state.pick) state.pick = ranked[0].c.id;
+  function renderResult(keepPick) {
+    var ranked = CLIN.map(score).sort(function (a, b) { return b.s - a.s; });
+    if (!keepPick || !state.pick) state.pick = ranked[0].c.id;
     var html = ranked.map(function (r, i) {
       var c = r.c;
       return '<button type="button" class="rcard' + (state.pick === c.id ? ' is-on' : '') + '" data-pick="' + c.id + '">' +
-        '<span class="avatar" style="--h:' + c.h + '"><span>' + c.ini + '</span></span>' +
-        '<span><h4>' + c.name + '</h4><p>' + c.role + ' · ' + (c.fee === 'lower' ? '$148.45' : '$161.95') + ' after Medicare</p>' +
+        '<span class="rcard__av">' + (c.img ? '<img src="' + c.img + '" alt="">' : c.ini) + '</span>' +
+        '<span><h4>' + c.name + '</h4><p>' + c.role + ' · ' + c.price + ' after Medicare</p>' +
         (r.why.length ? '<span class="rcard__why">✓ ' + r.why.slice(0, 2).join(' · ') + '</span>' : '') + '</span>' +
         (i === 0 ? '<span class="rcard__badge">Best match</span>' : '') + '</button>';
-    }).join('') + '<button type="button" class="rcard' + (state.pick === 'any' ? ' is-on' : '') + '" data-pick="any"><span class="avatar avatar--dash"><span>?</span></span><span><h4>No preference</h4><p>Our intake team will match you on the call</p></span></button>';
+    }).join('') + '<button type="button" class="rcard' + (state.pick === 'any' ? ' is-on' : '') + '" data-pick="any"><span class="rcard__av">?</span><span><h4>No preference</h4><p>Our intake team will match you on the call</p></span></button>';
     $('#mResult').innerHTML = html;
   }
   $('#mResult').addEventListener('click', function (e) {
@@ -143,14 +329,15 @@
     track('match_select_clinician', { clinician: state.pick });
   });
 
+  var requested = null;
   function show(n) {
     cur = n;
     steps.forEach(function (s) { var on = +s.dataset.step === n; s.hidden = !on; if (on) { s.classList.remove('anim'); void s.offsetWidth; s.classList.add('anim'); } });
-    var pct = Math.min(n, 4) / 4 * 100; bar.style.width = (n === 5 ? 100 : pct) + '%';
+    bar.style.width = (n >= 5 ? 100 : n / 4 * 100) + '%';
     count.textContent = n === 5 ? 'All done' : 'Step ' + n + ' of 4';
     back.style.visibility = n > 1 && n < 5 ? 'visible' : 'hidden';
-    next.textContent = n === 4 ? 'Request my free intake call' : n === 5 ? 'Close' : 'Continue';
-    if (n === 4) renderResult();
+    next.firstElementChild.textContent = n === 4 ? 'Request my intake call' : n === 5 ? 'Close' : 'Continue';
+    if (n === 4) { if (requested) state.pick = requested; renderResult(!!requested); }
     $('#mErr').hidden = true;
     var h = steps[n - 1].querySelector('h2'); if (h) { h.setAttribute('tabindex', '-1'); h.focus({ preventScroll: true }); }
     $('.match__panel').scrollTop = 0;
@@ -158,19 +345,20 @@
   }
   function openMatch(opts) {
     opts = opts || {};
-    if (opts.concerns && opts.concerns.length) { state.concern = opts.concerns.slice(); }
-    if (opts.clinician) { state.pick = { 'Dr Heather Gan': 'heather', 'Emilie': 'emilie', 'Ana': 'ana', 'Registrar': 'registrar' }[opts.clinician] || null; }
+    closeNav();
+    if (opts.concerns && opts.concerns.length) state.concern = opts.concerns.slice();
+    requested = opts.clinician ? ({ 'Dr Heather Gan': 'heather', 'Registrar': 'team' }[opts.clinician] || null) : null;
     syncChips();
     lastFocus = document.activeElement;
-    match.hidden = false; document.body.style.overflow = 'hidden';
+    match.hidden = false; lock(true);
     if (!started) { started = true; track('match_start', { source: opts.source || 'cta' }); }
     show(opts.step || 1);
   }
   function closeMatch() {
-    match.hidden = true; document.body.style.overflow = '';
+    match.hidden = true; lock(false);
     if (cur < 5) track('match_abandon', { step: cur });
     if (cur === 5) { reset(); form.reset(); try { localStorage.removeItem('tpa_match'); } catch (e) {} started = false; }
-    if (lastFocus) lastFocus.focus();
+    if (lastFocus && lastFocus.focus) lastFocus.focus({ preventScroll: true });
   }
   window.openMatch = openMatch;
 
@@ -178,8 +366,7 @@
     var t = e.target.closest('[data-open-match]'); if (!t) return;
     e.preventDefault();
     var v = t.getAttribute('data-open-match');
-    burger.setAttribute('aria-expanded', 'false'); mnav.classList.remove('open');
-    openMatch({ concerns: v ? [v] : null, step: v ? 2 : (t.dataset.clinician ? 2 : 1), clinician: t.dataset.clinician, source: t.dataset.track || (v ? 'concern_' + v : 'cta') });
+    openMatch({ concerns: v ? [v] : null, step: v ? 2 : 1, clinician: t.dataset.clinician, source: t.dataset.track || (v ? 'concern_' + v : 'cta') });
   });
   $$('[data-close]', match).forEach(function (b) { b.addEventListener('click', closeMatch); });
   back.addEventListener('click', function () { if (cur > 1) show(cur - 1); });
@@ -188,7 +375,7 @@
     if (cur < 4) { track('match_step_complete', { step: cur }); show(cur + 1); return; }
     if (cur === 4) {
       var f = form.elements, ok = true;
-      ['name'].forEach(function (k) { var bad = !f[k].value.trim(); f[k].classList.toggle('is-err', bad); if (bad) ok = false; });
+      var noName = !f.name.value.trim(); f.name.classList.toggle('is-err', noName); if (noName) ok = false;
       var hasContact = f.phone.value.trim() || /\S+@\S+\.\S+/.test(f.email.value);
       f.phone.classList.toggle('is-err', !hasContact); f.email.classList.toggle('is-err', !hasContact);
       if (!hasContact) ok = false;
@@ -196,7 +383,7 @@
       if (!ok) { $('#mErr').hidden = false; track('match_form_error'); return; }
       $('#dName').textContent = f.name.value.trim().split(' ')[0];
       track('generate_lead', { form: 'guided_intake', clinician: state.pick, concerns: state.concern.join(','), mode: state.mode[0] || 'any' });
-      /* Production: POST to Halaxy enquiry / Squarespace form block / Zapier webhook */
+      /* Production: POST to a Squarespace form block / Halaxy enquiry via Zapier webhook */
       show(5); return;
     }
     closeMatch();
@@ -205,15 +392,18 @@
 
   /* modals + focus trap + esc */
   var mhcpModal = $('#mhcpModal');
+  function closeMhcp() { if (mhcpModal.hidden) return; mhcpModal.hidden = true; lock(false); }
   document.addEventListener('click', function (e) {
-    var t = e.target.closest('[data-modal="mhcp"]'); if (t) { mhcpModal.hidden = false; track('mhcp_explainer_open'); mhcpModal.querySelector('.match__x').focus(); }
-    if (e.target.closest('[data-close-modal]')) mhcpModal.hidden = true;
+    var t = e.target.closest('[data-modal="mhcp"]');
+    if (t && mhcpModal.hidden) { mhcpModal.hidden = false; lock(true); track('mhcp_explainer_open'); mhcpModal.querySelector('.match__x').focus(); }
+    if (e.target.closest('[data-close-modal]')) closeMhcp();
   });
   document.addEventListener('keydown', function (e) {
     if (e.key === 'Escape') {
-      if (!mhcpModal.hidden) { mhcpModal.hidden = true; return; }
-      if (!match.hidden) closeMatch();
-      else if (!$('#notes').hidden) toggleNotes(false);
+      if (!mhcpModal.hidden) return closeMhcp();
+      if (!match.hidden) return closeMatch();
+      if (mnav.classList.contains('open')) return closeNav();
+      if (!$('#notes').hidden) toggleNotes(false);
     }
     if (e.key === 'Tab' && !match.hidden && mhcpModal.hidden) {
       var f = $$('button:not([disabled]), input, select, textarea, a[href]', $('.match__panel')).filter(function (x) { return x.offsetParent !== null; });
@@ -223,50 +413,65 @@
     }
   });
 
-  /* ---------- Team filters ---------- */
-  $$('.filt').forEach(function (b) {
-    b.addEventListener('click', function () {
-      $$('.filt').forEach(function (x) { x.classList.toggle('is-on', x === b); });
-      var f = b.dataset.filter;
-      $$('.doc').forEach(function (d) { d.classList.toggle('is-dim', f !== 'all' && d.dataset.tags.split(' ').indexOf(f) < 0); });
-      track('team_filter', { filter: f });
-    });
-  });
-
   /* ---------- Fee calculator ---------- */
   var FEES = { clinical: { std: 311, ah: 326, reb: 149.05 }, registrar: { std: 250, ah: 265, reb: 101.55 } };
-  function money(n) { return '$' + n.toFixed(2); }
-  function calc() {
-    var tier = $('input[name=tier]:checked').value, time = $('input[name=time]:checked').value, m = $('#mhcp').checked;
-    var fee = FEES[tier][time], reb = m ? FEES[tier].reb : 0;
-    $('#cFee').textContent = money(fee);
-    $('#cReb').textContent = m ? '−' + money(reb) : '$0.00';
-    $('#cNet').textContent = money(fee - reb);
+  var shown = { fee: 311, reb: 149.05, net: 161.95 };
+  function paint() {
+    $('#cFee').textContent = '$' + shown.fee.toFixed(2);
+    $('#cReb').textContent = shown.reb > 0.004 ? '−$' + shown.reb.toFixed(2) : '$0.00';
+    $('#cNet').textContent = '$' + shown.net.toFixed(2);
   }
-  $$('.calc input').forEach(function (i) { i.addEventListener('change', function () { calc(); track('fee_calc_change', { tier: $('input[name=tier]:checked').value, time: $('input[name=time]:checked').value, mhcp: $('#mhcp').checked }); }); });
-  calc();
+  function calc(animate) {
+    var tier = $('input[name=tier]:checked').value, time = $('input[name=time]:checked').value, m = $('#mhcp').checked;
+    var fee = FEES[tier][time], reb = m ? FEES[tier].reb : 0, tgt = { fee: fee, reb: reb, net: fee - reb };
+    if (hasGsap && animate) gsap.to(shown, Object.assign({ duration: .7, ease: 'power3.out', onUpdate: paint, overwrite: true }, tgt));
+    else { shown = tgt; paint(); }
+  }
+  $$('.calc input').forEach(function (i) { i.addEventListener('change', function () { calc(true); track('fee_calc_change', { tier: $('input[name=tier]:checked').value, time: $('input[name=time]:checked').value, mhcp: $('#mhcp').checked }); }); });
+  calc(false);
 
   /* ---------- Therapy tabs ---------- */
   var TH = [
-    ['Cognitive Behavioural Therapy', 'Notice the link between thoughts, feelings and actions, and change the patterns that keep you stuck. Practical and structured.', 'anxiety, low mood, panic, worry', 'cbt', 'CBT'],
-    ['Dialectical Behaviour Therapy', 'Skills for riding out intense emotions, tolerating distress and improving relationships, balancing acceptance with change.', 'BPD, intense emotions, self-harm urges, relationship instability', 'dbt', 'DBT'],
-    ['Schema Therapy', 'Understand the deep, long-standing patterns formed earlier in life, and how they still shape how you feel and relate today.', 'long-standing patterns, BPD, chronic low mood', 'schema-therapy', 'Schema Therapy'],
-    ['Acceptance & Commitment Therapy', 'Make room for difficult thoughts and feelings, and move towards what matters to you, rather than fighting yourself.', 'anxiety, burnout, chronic stress, life transitions', 'act', 'ACT'],
-    ['STAIR & Trauma-Focused CBT', 'A phased, paced approach: first building emotional and relationship skills, then gently working through traumatic memories.', 'complex PTSD, childhood trauma, trauma-related shame', 'psych-blog/stair-therapy', 'STAIR'],
-    ['Motivational Interviewing', 'A collaborative conversation to explore mixed feelings about change and strengthen your own reasons for it.', 'ambivalence, habits, substance use, readiness for change', 'motivational-interviewing', 'Motivational Interviewing']
+    ['Cognitive Behavioural Therapy', 'Notice the link between thoughts, feelings and actions, and change the patterns that keep you stuck. Practical and structured.', 'anxiety, low mood, panic, worry', 'cbt', 'CBT', 'cbt.jpg'],
+    ['Dialectical Behaviour Therapy', 'Skills for riding out intense emotions, tolerating distress and improving relationships, balancing acceptance with change.', 'BPD, intense emotions, relationship instability', 'dbt', 'DBT', 'dbt.jpg'],
+    ['Schema Therapy', 'Understand the deep, long-standing patterns formed earlier in life, and how they still shape how you feel and relate today.', 'long-standing patterns, BPD, chronic low mood', 'schema-therapy', 'Schema Therapy', 'schema.jpg'],
+    ['Acceptance & Commitment Therapy', 'Make room for difficult thoughts and feelings, and move towards what matters to you, rather than fighting yourself.', 'anxiety, burnout, chronic stress, life transitions', 'act', 'ACT', 'therapy.jpg'],
+    ['STAIR & Trauma-Focused CBT', 'A phased, paced approach: first building emotional and relationship skills, then gently working through traumatic memories.', 'complex PTSD, childhood trauma', 'psych-blog/stair-therapy', 'STAIR', 'hands.jpg'],
+    ['Motivational Interviewing', 'A collaborative conversation to explore mixed feelings about change and strengthen your own reasons for it.', 'ambivalence, habits, readiness for change', 'motivational-interviewing', 'Motivational Interviewing', 'reports.jpg']
   ];
-  $$('.tabs [role=tab]').forEach(function (t, i, all) {
+  TH.forEach(function (d) { var im = new Image(); im.src = 'images/' + d[5]; });
+  var tabs = $$('.tabs [role=tab]');
+  function setTab(d) {
+    $('#tpTitle').textContent = d[0]; $('#tpBody').textContent = d[1]; $('#tpFor').textContent = d[2];
+    var l = $('#tpLink'); l.href = 'https://thepsychologyalley.com.au/' + d[3]; l.textContent = 'Read more about ' + d[4];
+    $('#tpImg').src = 'images/' + d[5];
+  }
+  tabs.forEach(function (t, i) {
     t.addEventListener('click', function () {
-      all.forEach(function (x) { x.setAttribute('aria-selected', x === t); });
+      if (t.getAttribute('aria-selected') === 'true') return;
+      tabs.forEach(function (x) { x.setAttribute('aria-selected', x === t); });
       var d = TH[+t.dataset.t];
-      $('#tpTitle').textContent = d[0]; $('#tpBody').textContent = d[1]; $('#tpFor').textContent = d[2];
-      var l = $('#tpLink'); l.href = 'https://thepsychologyalley.com.au/' + d[3]; l.textContent = 'Read more about ' + d[4];
-      var p = $('.tabpanel__txt'); p.classList.remove('fade'); void p.offsetWidth; p.classList.add('fade');
+      if (hasGsap) {
+        gsap.timeline()
+          .to(['.tabpanel__txt', '#tpImg'], { autoAlpha: 0, y: 12, duration: .22, ease: 'power2.in', onComplete: function () { setTab(d); } })
+          .fromTo('#tpImg', { scale: 1.12, autoAlpha: 0, y: 0 }, { scale: 1, autoAlpha: 1, duration: .9, ease: 'power3.out' })
+          .fromTo('.tabpanel__txt', { autoAlpha: 0, y: 16 }, { autoAlpha: 1, y: 0, duration: .6, ease: 'power3.out' }, '<.1');
+      } else setTab(d);
       track('therapy_tab', { therapy: d[4] });
     });
     t.addEventListener('keydown', function (e) {
-      var k = e.key === 'ArrowRight' ? 1 : e.key === 'ArrowLeft' ? -1 : 0; if (!k) return;
-      var n = all[(i + k + all.length) % all.length]; n.focus(); n.click();
+      var k = (e.key === 'ArrowDown' || e.key === 'ArrowRight') ? 1 : (e.key === 'ArrowUp' || e.key === 'ArrowLeft') ? -1 : 0; if (!k) return;
+      e.preventDefault(); var n = tabs[(i + k + tabs.length) % tabs.length]; n.focus(); n.click();
+    });
+  });
+
+  /* ---------- FAQ accordion ---------- */
+  $$('.acc__q').forEach(function (q) {
+    q.addEventListener('click', function () {
+      var it = q.parentNode, open = !it.classList.contains('is-open');
+      $$('.acc__item').forEach(function (x) { x.classList.remove('is-open'); x.firstElementChild.setAttribute('aria-expanded', 'false'); });
+      if (open) { it.classList.add('is-open'); q.setAttribute('aria-expanded', 'true'); track('faq_open', { q: q.textContent.trim() }); }
+      if (hasGsap) setTimeout(function () { ST.refresh(); }, 550);
     });
   });
 
@@ -277,10 +482,9 @@
       var parts = new Intl.DateTimeFormat('en-AU', { timeZone: 'Australia/Sydney', weekday: 'short', hour: 'numeric', minute: 'numeric', hour12: false }).formatToParts(new Date());
       var g = function (t) { return (parts.find(function (p) { return p.type === t; }) || {}).value; };
       var day = g('weekday'), mins = (+g('hour') % 24) * 60 + +g('minute');
-      var openDay = ['Mon', 'Thu', 'Fri'].indexOf(day) > -1;
-      if (openDay && mins >= 660 && mins < 1110) { el.textContent = 'Open now · until 6:30pm'; el.style.setProperty('--c', '#5fd398'); }
-      else { el.textContent = 'Closed now · enquire online any time, 24/7'; }
-    } catch (e) { el.textContent = 'Enquire online any time, 24/7'; }
+      if (['Mon', 'Thu', 'Fri'].indexOf(day) > -1 && mins >= 660 && mins < 1110) { el.textContent = 'Open now · until 6:30pm'; el.style.setProperty('--c', '#8fd07c'); }
+      else el.textContent = 'Closed now · enquire online any time';
+    } catch (e) { el.textContent = 'Enquire online any time'; }
   })();
 
   /* ---------- Lead magnet ---------- */
@@ -296,80 +500,84 @@
   /* ---------- Scroll depth ---------- */
   var depths = [25, 50, 75, 90], hit = {};
   window.addEventListener('scroll', function () {
-    var p = (window.scrollY + innerHeight) / document.documentElement.scrollHeight * 100;
+    var p = (window.scrollY + innerHeight) / root.scrollHeight * 100;
     depths.forEach(function (d) { if (p >= d && !hit[d]) { hit[d] = 1; track('scroll_depth', { percent: d }); } });
   }, { passive: true });
 
   /* ================= CRO NOTES (concept chrome) ================= */
   var NOTES = {
-    1: ['Sticky header: 5 links + one CTA',
-      'Visitors in distress scan, they don\'t browse. We cut the menu from ~17 links to 5 that answer the real questions (who, how much, how). The phone number stays visible because many people would rather call.',
-      'Current site: long Therapies drop-down, a leftover shopping-cart icon, and four different labels for the same booking button.',
+    1: ['Floating header: 5 links, one action',
+      'Visitors in distress scan, they don\'t browse. The menu goes from about 17 links to the 5 questions people actually have (what, who, how much, how). The phone number stays visible for people who would rather call, and the header tucks away while reading and returns the moment you scroll up.',
+      'Current site: long Therapies drop-down, a leftover shopping-cart icon, and six different labels for the same booking button.',
       'KPI: header CTA click-through, phone clicks'],
-    2: ['Hero: a clear promise, and step 1 starts right here',
-      'The headline speaks to the visitor\'s real worry ("which psychologist is right for me?"). The first question of the matcher sits in the hero, so starting feels effortless. A small first "yes" (foot-in-the-door) lifts form starts. Fees, rebate and "no referral needed" answer the top three objections above the fold.',
-      'Current hero: a single "Book an appointment" button that leads to a form, with no idea what happens next.',
+    2: ['Hero: your photo, your H1, and step 1 starts here',
+      'Your own banner photo and "Clinical psychology in Sydney CBD" heading stay (protects SEO), but the message now answers the visitor\'s real worry: "will I find the right person?" The first question of the matcher sits in the hero, so starting takes one tap. Rebate, "no referral needed" and telehealth answer the top three objections before any scrolling.',
+      'Current hero: one "Book an appointment" button leading to a blank form, with no idea what happens next.',
       'KPI: hero chip interaction rate, match_start'],
-    3: ['Trust bar, AHPRA-compliant',
-      'No testimonials are allowed, so trust comes from verifiable facts: registration, Medicare, values and language. These are placed directly under the hero, where people make the "is this legit?" judgement.',
-      'Currently these logos only appear in the footer.',
+    3: ['Trust logos, AHPRA-compliant',
+      'Testimonials aren\'t allowed, so trust comes from verifiable facts: your real Ahpra, Medicare, ACPA, Pacifica Congress and FRWN logos, directly under the hero where people make the "is this legitimate?" judgement. The moving line repeats your values in your own words.',
+      'These logos currently sit in the footer and on the About page only.',
       'KPI: bounce rate, scroll past hero'],
-    4: ['Start with feelings, not therapy names',
-      'People search for "anxiety" or "I don\'t feel like myself", not for "Schema Therapy". Each card opens the matcher with that concern pre-filled, which skips a step. The "Something harder to name" card catches unsure visitors, and the scope note filters out poor fits early.',
-      'Current homepage leads with CBT/DBT/Schema cards, which is clinician language.',
-      'KPI: concern card clicks → match_start'],
-    5: ['How it works: removes fear of the unknown',
-      'The current enquiry → intake call → booking process is not a weakness when it\'s explained. Framing the intake as a free, short call that gets you the right match turns friction into reassurance. Timing on each step sets expectations.',
-      'Current site never explains what happens after you click "Book".',
+    4: ['Your story, in two sentences',
+      'Your existing "About" copy, cut to the part that matters to a new client: a small, intentional team and "the right fit". The words light up as you scroll so people actually read it. Four facts underneath answer practical questions at a glance.',
+      'Current: two paragraphs of small text between the hero and services.',
+      'KPI: scroll depth, time on page'],
+    5: ['Start with feelings, not therapy names',
+      'People search for "anxiety" or "I don\'t feel like myself", not "Schema Therapy". Each row opens the matcher with that concern pre-filled (one step skipped). "Something harder to name" catches unsure visitors, and the scope note filters out poor fits early, which saves your intake team time.',
+      'Current homepage leads with CBT / DBT / Schema cards, which is clinician language.',
+      'KPI: concern clicks → match_start'],
+    6: ['How it works: removes fear of the unknown',
+      'Your enquiry → intake call → booking process is not a weakness once it is explained. Framing the intake call as the step that gets you the right match turns friction into reassurance, and a time on each step sets expectations.',
+      'The current site never explains what happens after you click "Book".',
       'KPI: CTA clicks from this section'],
-    6: ['Team cards built for choosing',
-      'This is the shift from solo to group practice. Each card answers: what do they help with, when are they available, and what will it cost me? Filters (telehealth, after 5pm, Mandarin, lower fee) mirror real decision criteria. "Request" buttons pre-select the clinician in the matcher.',
-      'Current homepage shows only one psychologist; the team page has no surnames, availability or fees.',
-      'KPI: clinician CTA clicks, filter usage'],
-    7: ['Interactive fee & rebate calculator',
-      'Cost uncertainty is the No.1 silent reason people leave private-practice sites. Showing the out-of-pocket amount ($161.95, not just $311) reframes the price. The registrar tier gives a lower-cost path instead of losing the visitor.',
-      'Fees are currently only on a separate page, not the homepage.',
+    7: ['Team: Heather leads, and the group practice is visible',
+      'Heather\'s real photo, bio, quote, focus areas, fee after Medicare and registration number sit together, so a visitor can decide without opening another page. Emilie and Ana are shown honestly as clinical supervisors (which signals quality), and the third card is ready for each new psychologist as the team grows.',
+      'Current homepage shows one photo and a name. Fees, availability and focus areas are on other pages.',
+      'KPI: clinician CTA clicks'],
+    8: ['Interactive fee & rebate calculator',
+      'Cost uncertainty is the main silent reason people leave private-practice sites. Showing the out-of-pocket amount ($161.95, not just $311) reframes the price, and the registrar tier offers a lower-cost path instead of losing the visitor.',
+      'Fees are currently on a separate page, not the homepage.',
       'KPI: fee_calc_change → match_start rate'],
-    8: ['What to expect in session one',
-      'First-time therapy clients are anxious about the unknown. A plain timeline (before, arriving, the 50 minutes, after) and "no lock-in" reassurance lower the emotional barrier, without making clinical outcome claims.',
-      'Current site has this buried in FAQs.',
-      'KPI: time on page, scroll depth'],
-    9: ['Therapies, explained in plain language',
-      'Kept for informed visitors and for SEO (links preserve your existing therapy pages and URLs), but moved below the decision-making content so it doesn\'t delay action.',
-      'Current: 8-item drop-down, some therapy pages filed under /blog.',
-      'KPI: therapy_tab views (content interest)'],
-    10: ['Location & telehealth side by side',
-      'Practical details remove last-minute doubts: nearest station, parking, and that telehealth carries the same fees and rebates. A live "open now" indicator shows the practice is active.',
-      'Current hours omit Tue/Wed, which creates ambiguity.',
-      'KPI: directions clicks, telehealth enquiries'],
-    11: ['FAQ: objection handling before the final ask',
-      'Ordered by what stops people booking: referral, wait time, choosing a psychologist, cost, cancellation. Placing it just before the final CTA resolves the last doubts at the moment of decision.',
+    9: ['What to expect in session one',
+      'First-time clients are anxious about the unknown. A simple four-part walkthrough (before, arriving, the 50 minutes, after) lowers the emotional barrier without making any clinical outcome claims. The sideways scroll keeps it short and keeps people engaged.',
+      'This information is currently buried in the FAQ page.',
+      'KPI: scroll depth, cta_expect clicks'],
+    10: ['Therapies, explained in plain language',
+      'Kept for informed visitors and for SEO (every link goes to your existing therapy page, so URLs are preserved), but placed after the decision-making content so it doesn\'t delay action.',
+      'Current: 8-item drop-down, with some therapy pages filed under the blog.',
+      'KPI: therapy_tab views'],
+    11: ['Location & telehealth side by side',
+      'Practical details remove last-minute doubts: nearest station, parking, and that telehealth has the same fees and rebates. A live "open now" line shows the practice is active.',
+      'Current hours omit Tuesday and Wednesday, which looks ambiguous.',
+      'KPI: directions clicks, phone clicks'],
+    12: ['FAQ: objection handling before the final ask',
+      'Ordered by what stops people booking: referral, wait time, choosing a psychologist, the first session, cancellation. Placed just before the final CTA so the last doubts are resolved at the moment of decision.',
       'Current FAQ page is titled "FAQs for Psychologists", has a contradictory cancellation policy and leftover template text.',
-      'KPI: FAQ opens → match_start'],
-    12: ['Soft conversion for "not ready yet" visitors',
-      'Most first-time visitors won\'t enquire on visit one. A free guide captures their email, so the practice can gently nurture them (via your marketing team) instead of losing them to Google.',
+      'KPI: faq_open → match_start'],
+    13: ['Soft conversion for "not ready yet" visitors',
+      'Most first-time visitors won\'t enquire on visit one. A free guide captures their email so your marketing team can follow up gently, instead of losing them to Google.',
       'There is currently no option except "book now".',
       'KPI: guide sign-ups, email → enquiry rate'],
-    13: ['Articles that answer pre-booking questions',
-      'Keeps your SEO content working on the homepage, but only articles that move people towards booking. The current homepage has duplicate excerpts.',
-      '',
+    14: ['Your blog, working for bookings',
+      'Your four latest articles with their real images and links. They answer pre-booking questions and keep your SEO content on the homepage.',
+      'Two of the current homepage cards show the same excerpt.',
       'KPI: article clicks, returning visitors'],
-    14: ['Final CTA: same label, every time',
-      'One consistent action ("Find my psychologist") repeated through the page lowers cognitive load. Phone is the alternative for people who prefer to talk.',
-      'Currently: Book / Make / Schedule / Request an appointment, six labels for one action.',
-      'KPI: final CTA click rate'],
-    15: ['Footer: safety and respect',
-      'Crisis lines in the footer on every page (duty of care, and expected by AHPRA-aware visitors). Also an Acknowledgement of Country, a GP referral link for a referral channel, and existing-client Halaxy booking separated from new enquiries.',
-      'Crisis lines are currently only on the booking page, and there is no Acknowledgement of Country.',
+    15: ['Final CTA in your own words',
+      '"We are ready when you are" is your line from the team page. One consistent action label through the whole page lowers the mental load, and phone is the alternative for people who prefer to talk.',
+      'Currently: Book / Make / Schedule / Request an appointment.',
+      'KPI: cta_final click rate'],
+    16: ['Footer: safety and respect',
+      'Crisis lines on every page (duty of care), an Acknowledgement of Country, your registration numbers, and existing-client Halaxy booking kept separate from new enquiries.',
+      'Crisis lines are currently only on the booking page.',
       'KPI: n/a (trust & safety)'],
-    16: ['Sticky mobile action bar',
-      'Most first visits happen on mobile. After the hero, a thumb-reach bar keeps "Call" and "Find my psychologist" one tap away, and hides at the final CTA so it doesn\'t double up.',
+    17: ['Sticky mobile action bar',
+      'Most first visits happen on a phone. After the hero, a thumb-reach bar keeps "Call" and "Find my psychologist" one tap away, and hides at the final CTA so it never doubles up.',
       '',
       'KPI: cta_sticky_mobile, mobile conversion rate'],
-    17: ['The guided matcher (the core of this redesign)',
-      '4 short steps instead of one long form: concerns → attendance & time → preferences → suggested match + contact. Progress bar, saved progress, a "help right now" safety exit, and a clear "what happens next" screen. It feeds the intake call with everything needed, so your team can match faster. In production it posts to a Squarespace form / Halaxy enquiry via Zapier.',
-      'Current flow: generic enquiry form → wait → intake call → match. No expectation-setting.',
-      'KPI: match_start → generate_lead completion rate, step drop-off']
+    18: ['The guided matcher (the core of this redesign)',
+      'Four short steps instead of one long form: concerns → attendance & time → preferences → suggested match + contact. It has a progress bar, saved progress, a "help right now" safety exit and a clear "what happens next" screen. Your team starts every intake call already knowing what the person needs. In Squarespace this is built with a form block or embedded form that feeds Halaxy.',
+      'Current flow: generic enquiry form → wait → intake call → match.',
+      'KPI: match_start → generate_lead rate, step drop-off']
   };
 
   var notesOn = false, pinsLayer = null, pop = $('#pop');
@@ -380,22 +588,22 @@
   }).join('');
 
   function placePins() {
-    if (pinsLayer) pinsLayer.remove();
+    if (pinsLayer) { pinsLayer.remove(); pinsLayer = null; }
     if (!notesOn) return;
     pinsLayer = document.createElement('div');
     $$('[data-cro]').forEach(function (el) {
       var n = el.getAttribute('data-cro');
-      if (el.hidden || el.offsetParent === null && getComputedStyle(el).position !== 'fixed') return;
-      if (el.id === 'mbar' && getComputedStyle(el).display === 'none') return;
+      if (el.hidden) return;
+      var cs = getComputedStyle(el);
+      if (cs.display === 'none') return;
       var r = el.getBoundingClientRect();
       var pin = document.createElement('button');
       pin.className = 'pin'; pin.textContent = n; pin.dataset.n = n; pin.setAttribute('aria-label', 'CRO note ' + n + ': ' + NOTES[n][0]);
-      if (el.id === 'mbar') { pin.style.position = 'fixed'; pin.style.bottom = '64px'; pin.style.right = '16px'; }
+      if (el.id === 'mbar') { pin.style.position = 'fixed'; pin.style.bottom = '84px'; pin.style.right = '18px'; }
+      else if (el.id === 'hdr') { pin.style.position = 'fixed'; pin.style.top = 'calc(var(--bar) + 8px)'; pin.style.left = (r.left + r.width / 2 - 17) + 'px'; pin.style.zIndex = 55; }
       else {
-        var top = r.top + window.scrollY + (el.id === 'hdr' ? 4 : 18);
-        var left = Math.min(r.left + window.scrollX + (el.id === 'hdr' ? r.width / 2 : 18), document.documentElement.clientWidth - 44);
-        if (el.id === 'hdr') { pin.style.position = 'fixed'; pin.style.top = (r.top + 18) + 'px'; } else pin.style.top = top + 'px';
-        pin.style.left = left + 'px';
+        pin.style.top = (r.top + window.scrollY + (el.classList.contains('hero') ? 128 : 22)) + 'px';
+        pin.style.left = Math.min(Math.max(r.left, 0) + 22, root.clientWidth - 48) + 'px';
       }
       pinsLayer.appendChild(pin);
     });
@@ -409,6 +617,7 @@
     notesEl.hidden = !(on && wide);
     document.body.classList.toggle('notes-docked', on && wide);
     pop.hidden = true;
+    if (hasGsap) ST.refresh();
     placePins();
     if (on) track('cro_notes_open');
   }
@@ -418,13 +627,16 @@
     if (notesOn && window.innerWidth <= 1300) notesEl.hidden = false;
   });
   $('#notesClose').addEventListener('click', function () { toggleNotes(false); });
-  window.addEventListener('resize', function () { clearTimeout(placePins.t); placePins.t = setTimeout(placePins, 150); });
-  window.addEventListener('load', placePins);
+  window.addEventListener('resize', function () { clearTimeout(placePins.t); placePins.t = setTimeout(placePins, 200); });
+  if (hasGsap) ST.addEventListener('refresh', function () { clearTimeout(placePins.t); placePins.t = setTimeout(placePins, 50); });
 
   function goTo(n) {
-    if (n === '17') { openMatch({ source: 'cro_note' }); return; }
+    if (n === '18') { openMatch({ source: 'cro_note' }); return; }
     var el = $('[data-cro="' + n + '"]');
-    if (el) el.scrollIntoView({ behavior: 'smooth', block: 'start' });
+    if (!el) return;
+    if (n === '1' || n === '2') return scrollToEl(document.body, 0);
+    var top = 0, pinSpacer = el.closest('.pin-spacer');
+    scrollToEl(pinSpacer || el, -70);
   }
   document.addEventListener('click', function (e) {
     var pin = e.target.closest('.pin');
@@ -432,21 +644,21 @@
       e.stopPropagation();
       var n = NOTES[pin.dataset.n];
       $$('li', list).forEach(function (li) { li.classList.toggle('is-hl', li.dataset.n === pin.dataset.n); });
-      var hl = list.querySelector('.is-hl'); if (!notesEl.hidden && hl) hl.scrollIntoView({ block: 'nearest', behavior: 'smooth' });
+      var hl = list.querySelector('.is-hl');
+      if (!notesEl.hidden && hl) notesEl.scrollTo({ top: hl.offsetTop - 90, behavior: 'smooth' });
       pop.innerHTML = '<h4>' + pin.dataset.n + '. ' + n[0] + '</h4><p>' + n[1] + '</p><span class="kpi">' + n[3] + '</span>';
       pop.hidden = false;
       var r = pin.getBoundingClientRect(), pw = Math.min(320, window.innerWidth - 32);
       var x = Math.max(16, Math.min(r.left, window.innerWidth - pw - 16 - (notesEl.hidden ? 0 : 420)));
-      var y = r.bottom + 10; if (y + 220 > window.innerHeight) y = Math.max(56, r.top - 230);
+      var y = r.bottom + 10; if (y + 240 > window.innerHeight) y = Math.max(56, r.top - 250);
       pop.style.left = x + 'px'; pop.style.top = y + 'px';
       return;
     }
     if (!e.target.closest('.pop')) pop.hidden = true;
     var li = e.target.closest('#notesList li');
-    if (li) { goTo(li.dataset.n); if (window.innerWidth <= 880) notesEl.hidden = true; }
+    if (li) { if (window.innerWidth <= 1300) notesEl.hidden = true; goTo(li.dataset.n); }
   });
   window.addEventListener('scroll', function () { pop.hidden = true; }, { passive: true });
 
-  // Deep link: ?notes=1 opens notes
-  if (/[?&]notes=1/.test(location.search)) setTimeout(function () { toggleNotes(true); if (window.innerWidth <= 1300) notesEl.hidden = false; }, 400);
+  if (/[?&]notes=1/.test(location.search)) setTimeout(function () { toggleNotes(true); if (window.innerWidth <= 1300) notesEl.hidden = false; }, 2600);
 })();
