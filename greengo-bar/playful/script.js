@@ -13,70 +13,38 @@
   var INK = '#101010', CREAM = '#fff7e6', LOGO = '../assets/logo-black.svg';
   var euro = function (n) { return '€' + n.toFixed(2); };
 
-  /* ---------- store data (placeholder products for the concept) ---------- */
-  var S = 'stroke="' + INK + '" stroke-width="5" stroke-linejoin="round" stroke-linecap="round"';
-  var logoImg = function (x, y, w) { return '<image href="' + LOGO + '" x="' + x + '" y="' + y + '" width="' + w + '" height="' + (w * 0.4213).toFixed(1) + '"/>'; };
-  var txt = function (y, t, size) { return '<text x="100" y="' + y + '" text-anchor="middle" font-family="GG Display, sans-serif" font-size="' + (size || 16) + '" fill="' + INK + '">' + t + '</text>'; };
-  var ART = {
-    tin: function (c, label) {
-      return '<svg viewBox="0 0 200 220"><g ' + S + '><rect x="44" y="62" width="112" height="146" rx="12" fill="' + CREAM + '"/><rect x="38" y="34" width="124" height="38" rx="10" fill="' + INK + '"/><circle cx="100" cy="128" r="36" fill="' + c + '"/></g>' + logoImg(72, 116, 56) + txt(192, label) + '</svg>';
-    },
-    pouch: function (c, label) {
-      return '<svg viewBox="0 0 200 220"><g ' + S + '><path d="M52 44h96l12 150a12 12 0 0 1-12 14H52a12 12 0 0 1-12-14z" fill="' + CREAM + '"/><path d="M50 30h100v22H50z" fill="' + INK + '"/><rect x="62" y="92" width="76" height="60" rx="12" fill="' + c + '"/></g>' + logoImg(72, 110, 56) + txt(188, label) + '</svg>';
-    },
-    kit: function (c) {
-      return '<svg viewBox="0 0 200 220"><g ' + S + '><path d="M22 122h126a63 62 0 0 1-126 0z" fill="' + CREAM + '"/><ellipse cx="85" cy="122" rx="63" ry="13" fill="#89b647"/><path d="M150 26l16 8-34 66-16-8z" fill="#e5b96a"/><path d="M116 92l-22 30M124 96l-14 34M132 100l-6 36" fill="none"/><rect x="134" y="140" width="52" height="68" rx="8" fill="' + c + '"/><rect x="130" y="126" width="60" height="20" rx="6" fill="' + INK + '"/></g>' + logoImg(141, 166, 38) + '</svg>';
-    },
-    bag: function (c, label) {
-      return '<svg viewBox="0 0 200 240"><g ' + S + '><path d="M48 50h104l12 164a10 10 0 0 1-10 12H46a10 10 0 0 1-10-12z" fill="' + CREAM + '"/><path d="M44 26h112v28H44z" fill="' + INK + '"/><rect x="58" y="96" width="84" height="76" rx="12" fill="' + c + '"/><circle cx="100" cy="76" r="6" fill="' + INK + '"/></g>' + logoImg(68, 108, 64) + '<text x="100" y="158" text-anchor="middle" font-family="GG Display, sans-serif" font-size="13" fill="' + INK + '">' + label + '</text>' + txt(204, '250 G', 15) + '</svg>';
-    },
-    tote: function (c) {
-      return '<svg viewBox="0 0 200 220"><g ' + S + '><path d="M66 82V44a34 34 0 0 1 68 0v38" fill="none"/><path data-tint d="M34 78h132l-8 128H42z" fill="' + c + '"/></g>' + logoImg(58, 118, 84) + '</svg>';
-    },
-    tee: function (c) {
-      return '<svg viewBox="0 0 200 220"><g ' + S + '><path data-tint d="M70 30c8 12 52 12 60 0l48 22-16 40-22-10v116H60V82l-22 10-16-40z" fill="' + c + '"/></g>' + logoImg(66, 96, 68) + '</svg>';
-    },
-    cap: function (c) {
-      return '<svg viewBox="0 0 200 220"><g ' + S + '><path data-tint d="M34 140a66 70 0 0 1 132 0z" fill="' + c + '"/><path d="M100 140h84c8 0 10 18-6 20l-78-2z" fill="' + INK + '"/><circle cx="100" cy="72" r="6" fill="' + INK + '"/></g>' + logoImg(66, 96, 60) + '</svg>';
-    },
-    cup: function (c) {
-      return '<svg viewBox="0 0 200 220"><g ' + S + '><path data-tint d="M52 56h96l-12 148a8 8 0 0 1-8 8H72a8 8 0 0 1-8-8z" fill="' + c + '"/><rect x="42" y="34" width="116" height="24" rx="10" fill="' + INK + '"/><path d="M60 108h80l-3 44H63z" fill="' + CREAM + '"/><rect x="84" y="20" width="32" height="14" rx="5" fill="' + INK + '"/></g>' + logoImg(72, 118, 56) + '</svg>';
-    },
-    stickers: function (c) {
-      return '<svg viewBox="0 0 200 220"><g ' + S + '><circle data-tint cx="78" cy="84" r="52" fill="' + c + '" transform="rotate(-12 78 84)"/><rect x="92" y="112" width="92" height="56" rx="14" fill="#fff" transform="rotate(8 138 140)"/><path d="M52 150l10 22 24 2-18 16 6 24-22-12-20 14 4-24-18-16 24-4z" fill="#ffd800"/></g>' + logoImg(48, 72, 60) + '<g transform="rotate(8 138 140)">' + logoImg(108, 126, 60) + '</g></svg>';
-    }
-  };
+  /* ---------- store data: names and bar prices from greengo.bar; retail pack prices are proposed ---------- */
+  var PIMG = '../assets/img/products/', GIMG = '../assets/img/partner/', ECS = 'https://www.espressocoffeeshop.com/en/';
   var DATA = {
     matcha: [
-      { id: 'm1', name: 'Ceremonial Matcha', meta: '30 g tin · first harvest, stone-milled', price: 24, c: '#89b647', badge: 'Bestseller', art: 'tin', label: 'CEREMONIAL' },
-      { id: 'm2', name: 'Everyday Latte Matcha', meta: '100 g pouch · made for milk', price: 19, c: '#60cda2', art: 'pouch', label: 'LATTE GRADE' },
-      { id: 'm3', name: 'Hojicha Powder', meta: '50 g tin · roasted green tea', price: 14, c: '#e5c70c', art: 'tin', label: 'HOJICHA' },
-      { id: 'm4', name: 'Matcha Starter Kit', meta: 'Tin + bamboo whisk + bowl', price: 49, was: 57, c: '#c0679c', badge: 'Save €8', art: 'kit' }
+      { id: 'm1', name: 'Ceremonial Matcha', meta: 'Single origin · gold award · 40 g', price: 24, c: '#89b647', badge: 'Gold award', img: 'p-matcha', alt: 'GreenGo ceremonial matcha pouch' },
+      { id: 'm2', name: 'Hojicha', meta: 'Roasted green tea · 50 g', price: 14, c: '#e5c70c', img: 'p-hojicha', alt: 'GreenGo hojicha roasted green tea pouch' },
+      { id: 'm3', name: 'Golden Milk Mix', meta: 'For your milk of choice · 150 g', price: 12, c: '#ffd800', img: 'p-golden', alt: 'GreenGo golden milk mix jar' },
+      { id: 'm4', name: 'Chai Latte Mix', meta: 'Black tea with spices · 200 g', price: 13, c: '#c0679c', img: 'p-chai', alt: 'GreenGo chai latte mix tub' }
     ],
     beans: [
-      { id: 'b1', name: 'Old Town Espresso', meta: '250 g · our house espresso', notes: ['Dark chocolate', 'Hazelnut', 'Caramel'], roast: 4, price: 12.5, c: '#f95844', label: 'ESPRESSO' },
-      { id: 'b2', name: 'Ocean Blend', meta: '250 g · bright filter roast', notes: ['Stone fruit', 'Honey', 'Citrus'], roast: 2, price: 13.5, c: '#33def8', label: 'OCEAN' },
-      { id: 'b3', name: 'Cold Brew Crew', meta: '250 g · built for slow steeping', notes: ['Cocoa', 'Brown sugar', 'Silky'], roast: 3, price: 12.5, c: '#60cda2', label: 'COLD BREW' },
-      { id: 'b4', name: 'Decaf, Not Sorry', meta: '250 g · all taste, no buzz', notes: ['Milk chocolate', 'Almond', 'Sweet'], roast: 3, price: 13, c: '#c0679c', label: 'DECAF' },
-      { id: 'b5', name: 'Barley & Chicory', meta: '250 g · our caffeine-free option', notes: ['Toasty', 'Malty', 'Zero caffeine'], roast: 5, price: 9, c: '#ffd800', label: 'CAFFEINE-FREE' }
+      { id: 'b1', name: 'Specialty Coffee Beans', meta: '250 g · whole beans', notes: ['Double Espresso €3.50', 'Flat White €5.00', 'Cappuccino €5.00'], price: 12.5, c: '#f95844', img: 'p-beans', alt: 'GreenGo specialty coffee beans bag with a to-go cup' },
+      { id: 'b2', name: 'Decaf Coffee Beans', meta: '250 g · whole beans', notes: ['Decaf, any coffee +€0.50', 'Latte €5.00'], price: 13, c: '#c0679c', img: 'p-decaf', alt: 'GreenGo decaf coffee beans bag' },
+      { id: 'b3', name: 'Cold Brew Coffee', meta: '250 g · for slow steeping', notes: ['Cold Brew €6.00', 'Ocean Latte €6.50'], price: 12.5, c: '#60cda2', img: 'p-coldbrew', alt: 'GreenGo cold brew coffee bag' },
+      { id: 'b4', name: 'Barley Chicory', meta: '250 g · our caffeine-free option', notes: ['Caffeine-free', 'Milk of choice, same price'], price: 9, c: '#ffd800', img: 'p-barley', alt: 'GreenGo barley chicory pouch' }
     ],
     merch: [
-      { id: 'x1', name: 'Oasis Tote', meta: 'Heavy organic cotton', price: 18, art: 'tote', colors: ['#60cda2', '#fff7e6', '#f95844', '#101010'] },
-      { id: 'x2', name: 'Green Mood Tee', meta: 'Unisex · S–XXL', price: 28, art: 'tee', colors: ['#fff7e6', '#b6f25f', '#c0679c', '#33def8'] },
-      { id: 'x3', name: 'To-Go Cup', meta: 'Reusable · 350 ml', price: 16, art: 'cup', colors: ['#60cda2', '#c0679c', '#ffd800', '#f95844'], cup: true },
-      { id: 'x4', name: 'Old Town Cap', meta: 'One size, adjustable', price: 22, art: 'cap', colors: ['#f95844', '#60cda2', '#ffd800', '#fff7e6'] },
-      { id: 'x5', name: 'Sticker Pack', meta: '6 vinyl stickers', price: 6, art: 'stickers', colors: ['#c0679c', '#33def8', '#b6f25f', '#f95844'] }
+      { id: 'x1', name: 'GreenGo Tote Bag', meta: 'Cotton canvas', price: 18, c: '#60cda2', img: 'p-tote', alt: 'Canvas tote bag with the GreenGo logo' },
+      { id: 'x2', name: 'GreenGo T-Shirt', meta: 'Unisex · S–XXL', price: 28, c: '#33def8', img: 'p-tee', alt: 'White t-shirt with the GreenGo logo' },
+      { id: 'x3', name: 'GreenGo To-Go Cup', meta: '350 ml · with lid', price: 16, c: '#b6f25f', img: 'p-cup', alt: 'To-go cup with the GreenGo logo' },
+      { id: 'x4', name: 'GreenGo Cap', meta: 'One size, adjustable', price: 22, c: '#f95844', img: 'p-cap', alt: 'White cap with the GreenGo logo' },
+      { id: 'x5', name: 'GreenGo Enamel Mug', meta: '350 ml', price: 14, c: '#c0679c', img: 'p-mug', alt: 'Enamel mug with the GreenGo logo' }
     ],
     gear: [
-      { name: 'Espresso machines', desc: 'Home and prosumer machines, from single boiler to dual boiler.', d: 'M10 10h44v16H10zM14 26v30M50 26v30M8 56h48M24 26v6h16v-6M26 56V46h12v10' },
-      { name: 'Coffee grinders', desc: 'Single-dose and on-demand grinders for espresso and filter.', d: 'M18 8h28l-6 18H24zM24 26h16v10H24zM20 36h24v20H20zM44 44h8M32 8V4' },
-      { name: 'Tampers & tools', desc: 'Tampers, distributors, knock boxes and barista essentials.', d: 'M26 6h12v22H26zM16 28h32v8H16zM12 44h40v10H12zM22 36v8M42 36v8' },
-      { name: 'Kettles & drippers', desc: 'Gooseneck kettles, drippers, servers and paper filters.', d: 'M14 28h28v24a4 4 0 0 1-4 4H18a4 4 0 0 1-4-4zM42 34h6c6 0 6 12 0 12h-6M14 34C4 30 6 14 16 12M18 28v-6h20v6' },
-      { name: 'Milk jugs', desc: 'Pitchers for silky microfoam and cleaner latte art.', d: 'M16 14h26l6 8v30a4 4 0 0 1-4 4H20a4 4 0 0 1-4-4zM16 14l-6-4M48 28h4c6 0 6 14 0 14h-4' },
-      { name: 'Cleaning & care', desc: 'Descalers, brushes and tablets to keep every shot tasting right.', d: 'M24 6h16v10H24zM20 16h24v16H20zM26 32v24M32 32v24M38 32v24M20 56h24' }
+      { name: 'Rocket Appartamento TCA', kind: 'Espresso machine', price: '€1,237.71', img: 'rocket-appartamento', url: 'espresso-machines/941-1233-rocket-appartamento-tca-espresso-machine.html' },
+      { name: 'Rancilio Silvia V6', kind: 'Espresso machine', price: '€516.39', img: 'rancilio-silvia', url: 'espresso-machines/68-696-0-rancilio-silvia-coffee-machine.html' },
+      { name: 'Eureka Mignon Specialità', kind: 'Coffee grinder', price: '€336.07', img: 'eureka-mignon', url: 'coffee-grinders/55-658-0-eureka-mignon-specialita--coffee-grinder.html' },
+      { name: 'Fellow Stagg EKG Pro', kind: 'Electric kettle', price: '€163.93', img: 'fellow-stagg', url: 'accessories/1018-1245-fellow-stagg-ekg-pro-electric-kettle.html' },
+      { name: 'Acaia Pearl 2021', kind: 'Coffee scale', price: '€158.20', img: 'acaia-pearl', url: 'accessories/456-1013-0-acaia-pearl-2021-scale.html' },
+      { name: 'Rancilio Bottomless Portafilter', kind: 'Accessory', price: '€35.25', img: 'rancilio-portafilter', url: 'accessories/298-0-rancilio-bottomless-portafilter.html' }
     ],
     kit: { id: 'kit', name: '1-Day Reset Kit', meta: 'Six 330 ml cold-pressed juices', price: 35, c: '#b6f25f' },
-    juices: [['Zingy lime-green', '#b6f25f'], ['Sunny yellow', '#ffd800'], ['Deep green', '#89b647'], ['Bright orange', '#ff9d2e'], ['Ruby red', '#f95844'], ['Minty aqua', '#60cda2']]
+    juices: [['Clean Hydrator', '#b6f25f'], ['Digestive Booster', '#ffd800'], ['Vitality Oxygenator', '#89b647'], ['Anti-Inflammatory Energy', '#ff9d2e'], ['Circulation Flow', '#f95844'], ['Closing Ritual', '#60cda2']]
   };
   var INDEX = {};
   ['matcha', 'beans', 'merch'].forEach(function (k) { DATA[k].forEach(function (p) { INDEX[p.id] = p; }); });
@@ -84,27 +52,26 @@
 
   /* ---------- render products ---------- */
   function render() {
+    var photo = function (p) { return '<img src="' + PIMG + p.img + '.webp" alt="' + p.alt + '" loading="lazy" width="1100" height="1100">'; };
     $('[data-products="matcha"]').innerHTML = DATA.matcha.map(function (p) {
       return '<article class="card" style="--c:' + p.c + '">' + (p.badge ? '<span class="card__badge">' + p.badge + '</span>' : '') +
-        '<div class="card__art">' + ART[p.art](p.c, p.label) + '</div><div class="card__body"><h4>' + p.name + '</h4><p class="card__meta">' + p.meta + '</p>' +
-        '<div class="card__row"><span class="price">' + euro(p.price) + (p.was ? '<s>' + euro(p.was) + '</s>' : '') + '</span><button class="add" type="button" data-add="' + p.id + '">Add <span>+</span></button></div></div></article>';
+        '<div class="card__art">' + photo(p) + '</div><div class="card__body"><h4>' + p.name + '</h4><p class="card__meta">' + p.meta + '</p>' +
+        '<div class="card__row"><span class="price">' + euro(p.price) + '</span><button class="add" type="button" data-add="' + p.id + '">Add <span>+</span></button></div></div></article>';
     }).join('');
     $('[data-products="beans"]').innerHTML = DATA.beans.map(function (p, i) {
-      var dots = ''; for (var k = 1; k <= 5; k++) dots += '<i class="' + (k <= p.roast ? 'on' : '') + '"></i>';
-      return '<article class="bcard" style="--c:' + p.c + '"><div class="bcard__art"><span class="bcard__no">0' + (i + 1) + '</span>' + ART.bag(p.c, p.label) + '</div>' +
-        '<h4>' + p.name + '</h4><p class="bcard__meta">' + p.meta + '</p><ul class="notes">' + p.notes.map(function (n) { return '<li>' + n + '</li>'; }).join('') + '</ul>' +
-        '<div class="roast">Roast ' + dots + '</div><div class="grind" role="group" aria-label="Grind"><button type="button" class="on">Whole bean</button><button type="button">Espresso</button><button type="button">Filter</button></div>' +
+      return '<article class="bcard" style="--c:' + p.c + '"><div class="bcard__art"><span class="bcard__no">0' + (i + 1) + '</span>' + photo(p) + '</div>' +
+        '<h4>' + p.name + '</h4><p class="bcard__meta">' + p.meta + '</p><p class="bcard__bar">At the bar</p><ul class="notes">' + p.notes.map(function (n) { return '<li>' + n + '</li>'; }).join('') + '</ul>' +
+        '<div class="grind" role="group" aria-label="Grind"><button type="button" class="on">Whole bean</button><button type="button">Espresso</button><button type="button">Filter</button></div>' +
         '<div class="card__row"><span class="price">' + euro(p.price) + '</span><button class="add" type="button" data-add="' + p.id + '">Add to cart <span>+</span></button></div></article>';
     }).join('');
     var rots = [-4, 3, -2, 5, -3];
     $('[data-products="merch"]').innerHTML = DATA.merch.map(function (p, i) {
-      return '<article class="pola" style="--rot:' + rots[i] + 'deg" data-id="' + p.id + '"><div class="pola__art">' + ART[p.art](p.colors[0]) + '</div><h4>' + p.name + '</h4><p class="pola__meta">' + p.meta + '</p>' +
-        '<div class="sw" role="group" aria-label="Colour">' + p.colors.map(function (c, k) { return '<button type="button" class="' + (k ? '' : 'on') + '" style="--s:' + c + '" data-sw="' + c + '" aria-label="Colour ' + (k + 1) + '"></button>'; }).join('') + '</div>' +
+      return '<article class="pola" style="--rot:' + rots[i] + 'deg" data-id="' + p.id + '"><div class="pola__art">' + photo(p) + '</div><h4>' + p.name + '</h4><p class="pola__meta">' + p.meta + '</p>' +
         '<div class="pola__row"><span class="price">' + euro(p.price) + '</span><button class="add" type="button" data-add="' + p.id + '">Add <span>+</span></button></div></article>';
     }).join('');
     $('[data-gear]').innerHTML = DATA.gear.map(function (g) {
-      return '<a class="ticket" href="https://www.espressocoffeeshop.com/" target="_blank" rel="noopener" aria-label="' + g.name + ' at Espresso Coffee Shop (opens partner website)"><span class="ticket__ico"><svg viewBox="0 0 64 64"><path d="' + g.d + '"/></svg></span>' +
-        '<span><h4>' + g.name + '</h4><p>' + g.desc + '</p><span class="ticket__ext">Opens espressocoffeeshop.com</span></span><span class="ticket__arrow">↗</span></a>';
+      return '<a class="ticket" href="' + ECS + g.url + '" target="_blank" rel="noopener" aria-label="' + g.name + ' at Espresso Coffee Shop (opens partner website)"><span class="ticket__ico"><img src="' + GIMG + g.img + '.webp" alt="' + g.name + '" loading="lazy" width="900" height="900"></span>' +
+        '<span><h4>' + g.name + '</h4><p>' + g.kind + ' · ' + g.price + ' + VAT</p><span class="ticket__ext">Opens espressocoffeeshop.com</span></span><span class="ticket__arrow">↗</span></a>';
     }).join('');
     var seg = '<span>MATCHA <b>✦</b> COFFEE BEANS <b>✦</b> MERCH <b>✦</b> BREW GEAR <b>✦</b> JUICE KITS <b>✦</b></span>';
     $$('.ribbon__track').forEach(function (t) { t.innerHTML = seg + seg + seg + seg; });
@@ -136,7 +103,7 @@
   }
 
   /* ---------- cart ---------- */
-  var cart = {}, FREE = 50;
+  var cart = {};
   var cartEl = $('.cart'), toastT;
   function toast(msg) {
     var t = $('.toast'); t.textContent = msg; t.classList.add('is-on');
@@ -146,20 +113,17 @@
     var ids = Object.keys(cart), total = 0, count = 0;
     $('.cart__list').innerHTML = ids.map(function (id) {
       var p = INDEX[id], q = cart[id]; total += p.price * q; count += q;
-      return '<li><span class="dot" style="--c:' + (p.c || p.colors[0]) + '">' + q + '</span><div><h4>' + p.name + '</h4><small>' + p.meta + '</small><br><span class="qty"><button type="button" data-q="-1" data-id="' + id + '" aria-label="Remove one">−</button>' + q + '<button type="button" data-q="1" data-id="' + id + '" aria-label="Add one">+</button></span></div><b>' + euro(p.price * q) + '</b></li>';
+      return '<li><span class="dot" style="--c:' + p.c + '">' + q + '</span><div><h4>' + p.name + '</h4><small>' + p.meta + '</small><br><span class="qty"><button type="button" data-q="-1" data-id="' + id + '" aria-label="Remove one">−</button>' + q + '<button type="button" data-q="1" data-id="' + id + '" aria-label="Add one">+</button></span></div><b>' + euro(p.price * q) + '</b></li>';
     }).join('');
     $('.cart__empty').style.display = ids.length ? 'none' : 'block';
     $('[data-cart-total]').textContent = euro(total);
     $$('[data-cart-count]').forEach(function (e) { e.textContent = count; });
-    var left = FREE - total;
-    $('.ship__txt').textContent = total === 0 ? 'Free shipping in Croatia from ' + euro(FREE) + '.' : left > 0 ? 'You are ' + euro(left) + ' away from free shipping.' : 'Free shipping unlocked. Nice.';
-    $('.ship__bar i').style.width = clamp(total / FREE * 100, 0, 100) + '%';
   }
   function openCart(o) { cartEl.classList.toggle('is-open', o); cartEl.setAttribute('aria-hidden', o ? 'false' : 'true'); }
   function addToCart(id, btn) {
     cart[id] = (cart[id] || 0) + 1; drawCart();
     var p = INDEX[id], target = $('.nav__cart').getBoundingClientRect(), from = btn.getBoundingClientRect();
-    var dot = document.createElement('i'); dot.className = 'fly'; dot.style.background = p.c || p.colors[0];
+    var dot = document.createElement('i'); dot.className = 'fly'; dot.style.background = p.c;
     document.body.appendChild(dot);
     gsap.set(dot, { x: from.left + from.width / 2 - 23, y: from.top - 10 });
     gsap.to(dot, { x: target.left + target.width / 2 - 23, duration: 0.75, ease: 'power1.in' });
@@ -173,23 +137,17 @@
     if (window.gg3dBurst) window.gg3dBurst();
   }
   document.addEventListener('click', function (e) {
-    var t = e.target.closest('[data-add],[data-cart-open],[data-cart-close],[data-q],[data-checkout],[data-sw],.grind button');
+    var t = e.target.closest('[data-add],[data-cart-open],[data-cart-close],[data-q],[data-checkout],.grind button');
     if (!t) return;
     if (t.hasAttribute('data-add')) addToCart(t.getAttribute('data-add'), t);
     else if (t.hasAttribute('data-cart-open')) openCart(true);
     else if (t.hasAttribute('data-cart-close')) openCart(false);
     else if (t.hasAttribute('data-q')) { var id = t.getAttribute('data-id'); cart[id] += +t.getAttribute('data-q'); if (cart[id] <= 0) delete cart[id]; drawCart(); }
     else if (t.hasAttribute('data-checkout')) toast(Object.keys(cart).length ? 'Demo only: this is where WooCommerce checkout opens.' : 'Add something tasty first.');
-    else if (t.hasAttribute('data-sw')) {
-      var card = t.closest('.pola'), c = t.getAttribute('data-sw');
-      $$('.sw button', card).forEach(function (b) { b.classList.toggle('on', b === t); });
-      $$('[data-tint]', card).forEach(function (n) { n.setAttribute('fill', c); });
-      gsap.fromTo($('.pola__art svg', card), { scale: 0.8, rotation: -14 }, { scale: 1, rotation: 0, duration: 0.7, ease: 'elastic.out(1,0.45)' });
-      if (window.gg3dTint) window.gg3dTint(c);
-    } else { $$('button', t.parentNode).forEach(function (b) { b.classList.toggle('on', b === t); }); }
+    else { $$('button', t.parentNode).forEach(function (b) { b.classList.toggle('on', b === t); }); }
   });
   document.addEventListener('keydown', function (e) { if (e.key === 'Escape') openCart(false); });
-  $('.news').addEventListener('submit', function (e) { e.preventDefault(); var v = $('#em').value.trim(); toast(/^\S+@\S+\.\S+$/.test(v) ? 'You are in. 10% code is on its way (demo).' : 'Pop in a valid email first.'); });
+  $('.news').addEventListener('submit', function (e) { e.preventDefault(); var v = $('#em').value.trim(); toast(/^\S+@\S+\.\S+$/.test(v) ? 'You are in. See you in your inbox.' : 'Pop in a valid email first.'); });
 
   /* ---------- 3D stage ---------- */
   var whiskP = 0, pointer = { x: 0, y: 0 }, intro = { v: 0 }, stageTops = [];
@@ -253,7 +211,7 @@
       x.lineWidth = 10; x.strokeStyle = INK; x.stroke();
       if (logo) x.drawImage(logo, w / 2 - 200, h * 0.5 - 150, 400, 168);
       x.fillStyle = INK; x.textAlign = 'center';
-      x.font = '70px "GG Display", sans-serif'; x.fillText('OLD TOWN', w / 2, h * 0.5 + 90); x.fillText('ESPRESSO', w / 2, h * 0.5 + 160);
+      x.font = '70px "GG Display", sans-serif'; x.fillText('SPECIALTY', w / 2, h * 0.5 + 90); x.fillText('COFFEE', w / 2, h * 0.5 + 160);
       x.font = '600 34px Poppins, sans-serif'; x.fillText('SPECIALTY COFFEE · 250 G', w / 2, h * 0.86);
       x.font = '54px "GG Display", sans-serif'; x.fillText('BEANS WITH BENEFITS', w / 2, h * 0.93);
     });
@@ -302,9 +260,9 @@
     };
 
     /* floating beans + confetti drops */
-    var NB = lite ? 26 : 50, ND = lite ? 12 : 24, dummy = new T.Object3D();
-    var beans = new T.InstancedMesh(GG3D.beanGeometry(), std({ color: 0x4d2713, roughness: 0.36, envMapIntensity: 0.55 }), NB);
-    var drops = new T.InstancedMesh(new T.SphereGeometry(1, 18, 14), std({ roughness: 0.2, envMapIntensity: 1 }), ND);
+    var NB = lite ? 5 : 10, ND = lite ? 3 : 6, dummy = new T.Object3D();
+    var beans = new T.InstancedMesh(GG3D.beanGeometry(), std({ color: 0x4d2713, roughness: 0.36, envMapIntensity: 0.55, transparent: true, opacity: 0.34, depthWrite: false }), NB);
+    var drops = new T.InstancedMesh(new T.SphereGeometry(1, 18, 14), std({ roughness: 0.2, envMapIntensity: 1, transparent: true, opacity: 0.4, depthWrite: false }), ND);
     var bd = [], dd = [], rnd = function (a, b) { return a + Math.random() * (b - a); };
     for (var i = 0; i < NB; i++) bd.push({ x: rnd(-1, 1), y: rnd(-1, 1), z: rnd(-10, 2), s: rnd(0.13, 0.3), r: [rnd(0, 6), rnd(0, 6), rnd(0, 6)], v: [rnd(-0.6, 0.6), rnd(-0.6, 0.6), rnd(-0.6, 0.6)], d: rnd(0.3, 1), kick: 0 });
     for (i = 0; i < ND; i++) { dd.push({ x: rnd(-1, 1), y: rnd(-1, 1), z: rnd(-8, 2), s: rnd(0.07, 0.2), d: rnd(0.4, 1.1), ph: rnd(0, 6) }); drops.setColorAt(i, new T.Color(PAL[i % PAL.length])); }
@@ -396,8 +354,11 @@
     });
 
     /* background colour per section */
-    $$('[data-bg]').forEach(function (sec) {
-      ScrollTrigger.create({ trigger: sec, start: 'top 55%', end: 'bottom 55%', refreshPriority: -1, onToggle: function (s) { if (s.isActive) gsap.to(document.body, { backgroundColor: sec.getAttribute('data-bg'), duration: 0.7, overwrite: 'auto' }); } });
+    var bgSecs = $$('[data-bg]'), setBg = function (c) { gsap.to(document.body, { backgroundColor: c, duration: 0.7, overwrite: 'auto' }); };
+    bgSecs.forEach(function (sec, i) {
+      ScrollTrigger.create({ trigger: sec, start: 'top 55%', refreshPriority: -1,
+        onEnter: function () { setBg(sec.getAttribute('data-bg')); },
+        onLeaveBack: function () { if (i) setBg(bgSecs[i - 1].getAttribute('data-bg')); } });
     });
 
     /* hero */
@@ -474,7 +435,7 @@
 
     /* kit coverflow */
     var ring = $('.flow__ring'), rot = { v: 40 }, cur = 0, items;
-    ring.innerHTML = DATA.juices.map(function (j, i) { return '<figure class="flow__item" style="--c:' + j[1] + '"><img src="../assets/img/juice' + (i + 1) + '.webp" alt="Cold-pressed juice ' + (i + 1) + ' of 6" loading="lazy"><b>N°' + (i + 1) + '</b></figure>'; }).join('');
+    ring.innerHTML = DATA.juices.map(function (j, i) { return '<figure class="flow__item" style="--c:' + j[1] + '"><img src="../assets/img/juice' + (i + 1) + '.webp" alt="' + j[0] + ', cold-pressed juice ' + (i + 1) + ' of 6" loading="lazy"><b>0' + (i + 1) + ' · ' + j[0] + '</b></figure>'; }).join('');
     items = $$('.flow__item');
     function layFlow() {
       var rad = small() ? 175 : clamp(innerWidth * 0.2, 230, 320);
@@ -511,8 +472,13 @@
     if (!reduce) gsap.to(oc, { y: -14, duration: 0.9, ease: 'sine.inOut', yoyo: true, repeat: -1, stagger: { each: 0.09, repeat: -1, yoyo: true } });
     gsap.from('.outro__box', { y: 120, rotation: 6, opacity: 0, duration: 0.9, ease: 'back.out(1.6)', scrollTrigger: { trigger: '.outro__box', start: 'top 96%' } });
 
+    /* footer */
+    gsap.from('.foot__rainbow i', { scaleX: 0, duration: 0.7, ease: 'back.out(1.6)', stagger: 0.07, scrollTrigger: { trigger: '.foot', start: 'top 92%' } });
+    gsap.from('.foot__top > *', { y: 60, opacity: 0, duration: 0.8, ease: 'back.out(1.5)', stagger: 0.09, scrollTrigger: { trigger: '.foot__top', start: 'top 92%' } });
+    gsap.fromTo('.foot__big', { xPercent: -4 }, { xPercent: -46, ease: 'none', scrollTrigger: { trigger: '.foot', start: 'top bottom', end: 'bottom bottom', scrub: 0.6 } });
+
     /* mobile bar */
-    ScrollTrigger.create({ trigger: '.shop', start: 'top 60%', endTrigger: '.outro', end: 'top 60%', refreshPriority: -1, onToggle: function (s) { $('.mbar').classList.toggle('is-on', s.isActive); } });
+    ScrollTrigger.create({ trigger: '.shop', start: 'top 60%', endTrigger: '.foot', end: 'top 85%', refreshPriority: -1, onToggle: function (s) { $('.mbar').classList.toggle('is-on', s.isActive); } });
 
     /* magnetic buttons + cursor */
     if (!touch) {

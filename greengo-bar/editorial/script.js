@@ -13,48 +13,48 @@
   var euro = function (n) { return '€' + n.toFixed(2); };
   var EXPO = 'expo.out', INOUT = 'power4.inOut';
 
-  /* ---------- store data (placeholder products for the concept) ---------- */
+  /* ---------- store data: names and bar prices from greengo.bar; retail pack prices are proposed ---------- */
+  var PIMG = '../assets/img/products/', GIMG = '../assets/img/partner/', ECS = 'https://www.espressocoffeeshop.com/en/';
   var MATCHA = [
-    { id: 'm1', name: 'Ceremonial Matcha', tag: 'Bestseller', d: '30 g tin. First harvest, stone-milled.', price: 24 },
-    { id: 'm2', name: 'Everyday Latte Matcha', d: '100 g pouch. Made for milk and ice.', price: 19 },
-    { id: 'm3', name: 'Hojicha Powder', d: '50 g tin. Roasted green tea, low caffeine.', price: 14 },
-    { id: 'm4', name: 'The Matcha Starter Kit', tag: 'Set', d: 'Tin, bamboo whisk and bowl.', price: 49, was: 57 }
+    { id: 'm1', name: 'Ceremonial Matcha', tag: 'Gold award', d: 'Single origin. 40 g pouch.', price: 24, img: 'p-matcha' },
+    { id: 'm2', name: 'Hojicha', d: 'Roasted green tea. 50 g pouch.', price: 14, img: 'p-hojicha' },
+    { id: 'm3', name: 'Golden Milk Mix', d: 'For your milk of choice. 150 g jar.', price: 12, img: 'p-golden' },
+    { id: 'm4', name: 'Chai Latte Mix', d: 'Black tea with spices. 200 g tub.', price: 13, img: 'p-chai' }
   ];
   var BEANS = [
-    { id: 'b1', tab: 'Espresso', name: 'Old Town Espresso', meta: 'N°1 — House espresso', notes: 'Dark chocolate, hazelnut, caramel', bars: [0.9, 0.7, 0.3], price: 12.5, c: '#f95844' },
-    { id: 'b2', tab: 'Filter', name: 'Ocean Blend', meta: 'N°2 — Bright filter roast', notes: 'Stone fruit, honey, citrus', bars: [0.45, 0.75, 0.85], price: 13.5, c: '#33def8' },
-    { id: 'b4', tab: 'Decaf', name: 'Decaf, Not Sorry', meta: 'N°3 — All taste, no buzz', notes: 'Milk chocolate, almond, sweet', bars: [0.7, 0.8, 0.35], price: 13, c: '#c0679c' },
-    { id: 'b5', tab: 'Caffeine-free', name: 'Barley & Chicory', meta: 'N°4 — Our caffeine-free option', notes: 'Toasty, malty, zero caffeine', bars: [0.8, 0.5, 0.15], price: 9, c: '#e5c70c' }
+    { id: 'b1', tab: 'Espresso', name: 'Specialty Coffee Beans', lab: 'SPECIALTY COFFEE', meta: 'N°1 — Whole beans, 250 g', notes: 'Antioxidant-rich, to uplift your mood and sharpen your focus', rows: [['Double Espresso', '€3.50', 0.5], ['Flat White', '€5.00', 0.72], ['Cappuccino', '€5.00', 0.72]], price: 12.5, c: '#f95844', img: 'p-beans' },
+    { id: 'b2', tab: 'Decaf', name: 'Decaf Coffee Beans', lab: 'DECAF', meta: 'N°2 — Whole beans, 250 g', notes: 'Every coffee on our menu, without the caffeine', rows: [['Decaf, any coffee', '+ €0.50', 0.08], ['Latte', '€5.00', 0.72], ['Americano', '€3.50', 0.5]], price: 13, c: '#c0679c', img: 'p-decaf' },
+    { id: 'b3', tab: 'Cold brew', name: 'Cold Brew Coffee', lab: 'COLD BREW', meta: 'N°3 — For slow steeping, 250 g', notes: 'Chilled cold brew, vibrant and refreshing', rows: [['Cold Brew', '€6.00', 0.86], ['Ocean Latte', '€6.50', 0.93], ['Freddo Espresso', '€4.50', 0.64]], price: 12.5, c: '#33def8', img: 'p-coldbrew' },
+    { id: 'b4', tab: 'Caffeine-free', name: 'Barley Chicory', lab: 'CAFFEINE-FREE', meta: 'N°4 — Our caffeine-free option, 250 g', notes: 'Roasted barley and chicory, zero caffeine', rows: [['Caffeine', 'None', 0.02], ['Milk of choice', 'Same price', 1], ['Flavoured', '+ €1.00', 0.15]], price: 9, c: '#e5c70c', img: 'p-barley' }
   ];
-  var L = '<image href="../assets/logo-black.svg" ';
   var OBJECTS = [
-    { id: 'x3', name: 'The To-Go Cup', meta: 'Reusable, 350 ml', price: 16, c: '#60cda2', art: '<path d="M58 62h84l-11 150a8 8 0 0 1-8 7H77a8 8 0 0 1-8-7z"/><rect x="48" y="40" width="104" height="22" rx="8"/><path d="M86 40V28h28v12M66 116h68M70 160h60"/>' + L + 'x="76" y="126" width="48" height="20"/>' },
-    { id: 'x1', name: 'Oasis Tote', meta: 'Heavy organic cotton', price: 18, c: '#f6f0e4', art: '<path d="M70 84V52a30 30 0 0 1 60 0v32M36 84h128l-8 132H44z"/><path d="M36 84l8 132M164 84l-8 132" opacity=".4"/>' + L + 'x="62" y="128" width="76" height="32"/>' },
-    { id: 'x2', name: 'Green Mood Tee', meta: 'Unisex, S to XXL', price: 28, c: '#b6f25f', art: '<path d="M72 34c8 12 48 12 56 0l48 22-16 40-22-10v126H62V86L40 96 24 56z"/><path d="M72 34c4 18 52 18 56 0"/>' + L + 'x="70" y="102" width="60" height="25"/>' },
-    { id: 'x4', name: 'Old Town Cap', meta: 'One size, adjustable', price: 22, c: '#f95844', art: '<path d="M36 150a64 68 0 0 1 128 0zM100 150h82c8 0 10 16-6 18l-76-2M100 82v68M68 94c6 16 8 36 8 56M132 94c-6 16-8 36-8 56"/><circle cx="100" cy="80" r="4"/>' + L + 'x="78" y="108" width="44" height="18"/>' },
-    { id: 'x5', name: 'Sticker Pack', meta: 'Six vinyl stickers', price: 6, c: '#c0679c', art: '<circle cx="82" cy="96" r="50"/><rect x="92" y="128" width="88" height="54" rx="12" transform="rotate(8 136 155)"/><path d="M58 164l9 20 22 2-17 15 6 22-20-12-19 13 4-22-17-15 22-3z"/>' + L + 'x="54" y="84" width="56" height="23"/>' }
+    { id: 'x3', name: 'GreenGo To-Go Cup', meta: '350 ml, with lid', price: 16, c: '#60cda2', img: 'p-cup', alt: 'To-go cup with the GreenGo logo' },
+    { id: 'x1', name: 'GreenGo Tote Bag', meta: 'Cotton canvas', price: 18, c: '#f6f0e4', img: 'p-tote', alt: 'Canvas tote bag with the GreenGo logo' },
+    { id: 'x2', name: 'GreenGo T-Shirt', meta: 'Unisex, S to XXL', price: 28, c: '#b6f25f', img: 'p-tee', alt: 'White t-shirt with the GreenGo logo' },
+    { id: 'x4', name: 'GreenGo Cap', meta: 'One size, adjustable', price: 22, c: '#f95844', img: 'p-cap', alt: 'White cap with the GreenGo logo' },
+    { id: 'x5', name: 'GreenGo Enamel Mug', meta: '350 ml', price: 14, c: '#c0679c', img: 'p-mug', alt: 'Enamel mug with the GreenGo logo' }
   ];
   var MACHINES = [
-    { name: 'Espresso machines', d: 'Single boiler to dual boiler, for the home bar.', art: '<path d="M40 30h120v34H40zM48 64v64M152 64v64M30 128h140M74 64v12h52V64M84 76v10M116 76v10M78 128v-18h44v18M72 110h56"/><circle cx="60" cy="47" r="6"/><circle cx="82" cy="47" r="6"/><path d="M140 40v14M132 47h16"/><path class="dim" d="M30 144h140M30 139v10M170 139v10"/>' },
-    { name: 'Coffee grinders', d: 'Single-dose and on-demand, espresso to filter.', art: '<path d="M66 20h68l-12 36H78zM78 56h44v20H78zM70 76h60v52H70zM60 128h80M130 96h16v10M100 20v-8M84 12h32"/><circle cx="100" cy="102" r="10"/><path class="dim" d="M50 20v108M45 20h10M45 128h10"/>' },
-    { name: 'Tampers & tools', d: 'Tampers, distributors, knock boxes, scales.', art: '<path d="M58 22h28v40H58zM46 62h52v12H46zM40 74h64v14H40zM120 96h44v32h-44zM112 128h60M128 96V84h28v12"/><circle cx="72" cy="22" r="14"/><path class="dim" d="M40 102h64M40 97v10M104 97v10"/>' },
-    { name: 'Kettles & drippers', d: 'Gooseneck kettles, drippers, servers, filters.', art: '<path d="M60 60h64v58a8 8 0 0 1-8 8H68a8 8 0 0 1-8-8zM124 72h10c16 0 16 34 0 34h-10M60 76C34 70 36 34 62 28M70 60V48h44v12M84 48v-8h16v8"/><path class="dim" d="M60 140h64M60 135v10M124 135v10"/>' },
-    { name: 'Milk jugs', d: 'Pitchers for silky microfoam and clean latte art.', art: '<path d="M64 30h60l14 18v70a8 8 0 0 1-8 8H72a8 8 0 0 1-8-8zM64 30l-14-8M138 62h8c16 0 16 36 0 36h-8M64 86h74"/><path class="dim" d="M40 30v96M35 30h10M35 126h10"/>' },
-    { name: 'Cleaning & care', d: 'Descalers, brushes and tablets for a clean shot.', art: '<path d="M52 24h34v20H52zM44 44h50v34H44zM56 78v50M69 78v50M82 78v50M44 128h50M118 60h40v68h-40zM126 60V44h24v16M126 86h24M126 100h24"/><path class="dim" d="M44 142h114M44 137v10M158 137v10"/>' }
+    { name: 'Rocket Appartamento TCA', kind: 'Espresso machine', price: '€1,237.71', img: 'rocket-appartamento', url: 'espresso-machines/941-1233-rocket-appartamento-tca-espresso-machine.html' },
+    { name: 'Rancilio Silvia V6', kind: 'Espresso machine', price: '€516.39', img: 'rancilio-silvia', url: 'espresso-machines/68-696-0-rancilio-silvia-coffee-machine.html' },
+    { name: 'Eureka Mignon Specialità', kind: 'Coffee grinder', price: '€336.07', img: 'eureka-mignon', url: 'coffee-grinders/55-658-0-eureka-mignon-specialita--coffee-grinder.html' },
+    { name: 'Fellow Stagg EKG Pro', kind: 'Electric kettle', price: '€163.93', img: 'fellow-stagg', url: 'accessories/1018-1245-fellow-stagg-ekg-pro-electric-kettle.html' },
+    { name: 'Acaia Pearl 2021', kind: 'Coffee scale', price: '€158.20', img: 'acaia-pearl', url: 'accessories/456-1013-0-acaia-pearl-2021-scale.html' },
+    { name: 'Rancilio Bottomless Portafilter', kind: 'Accessory', price: '€35.25', img: 'rancilio-portafilter', url: 'accessories/298-0-rancilio-bottomless-portafilter.html' }
   ];
   var INDEX = {};
   MATCHA.concat(BEANS, OBJECTS).forEach(function (p) { INDEX[p.id] = p; });
 
   function render() {
     $('[data-list="matcha"]').innerHTML = MATCHA.map(function (p, i) {
-      return '<article class="prow"><span class="prow__n">1.' + (i + 1) + '</span><h3 class="prow__t">' + p.name + (p.tag ? '<small>' + p.tag + '</small>' : '') + '</h3><p class="prow__d">' + p.d + '</p><span class="prow__p">' + (p.was ? '<s>' + euro(p.was) + '</s>' : '') + euro(p.price) + '</span><button class="prow__add" type="button" data-add="' + p.id + '" data-cur="Add">Add to bag</button></article>';
+      return '<article class="prow"><figure class="prow__n"><img src="' + PIMG + p.img + '.webp" alt="GreenGo ' + p.name + '" loading="lazy" width="1100" height="1100"><figcaption>1.' + (i + 1) + '</figcaption></figure><h3 class="prow__t">' + p.name + (p.tag ? '<small>' + p.tag + '</small>' : '') + '</h3><p class="prow__d">' + p.d + '</p><span class="prow__p">' + euro(p.price) + '</span><button class="prow__add" type="button" data-add="' + p.id + '" data-cur="Add">Add to bag</button></article>';
     }).join('');
     $('.tabs').innerHTML = BEANS.map(function (b, i) { return '<button type="button" role="tab" aria-selected="' + (i === 0) + '" data-bean="' + i + '">' + b.tab + '</button>'; }).join('');
     $('[data-list="objects"]').innerHTML = OBJECTS.map(function (o, i) {
-      return '<article class="obj" style="--c:' + o.c + '"><div class="obj__plate"><span class="obj__no">' + (i + 1) + '</span><span class="obj__tag">GreenGo object 3.' + (i + 1) + '</span><svg viewBox="0 0 200 240">' + o.art + '</svg></div><div class="obj__row"><div><h3>' + o.name + '</h3><p class="obj__meta">' + o.meta + '</p></div><span class="obj__p">' + euro(o.price) + '</span></div><button class="obj__add" type="button" data-add="' + o.id + '" data-cur="Add">Add to bag</button></article>';
+      return '<article class="obj" style="--c:' + o.c + '"><div class="obj__plate"><img src="' + PIMG + o.img + '.webp" alt="' + o.alt + '" loading="lazy" width="1100" height="1100"><span class="obj__no">' + (i + 1) + '</span><span class="obj__tag">GreenGo object 3.' + (i + 1) + '</span></div><div class="obj__row"><div><h3>' + o.name + '</h3><p class="obj__meta">' + o.meta + '</p></div><span class="obj__p">' + euro(o.price) + '</span></div><button class="obj__add" type="button" data-add="' + o.id + '" data-cur="Add">Add to bag</button></article>';
     }).join('');
     $('[data-list="machines"]').innerHTML = MACHINES.map(function (m, i) {
-      return '<a class="sheet" href="https://www.espressocoffeeshop.com/" target="_blank" rel="noopener" data-cur="Open ↗" aria-label="' + m.name + ' at Espresso Coffee Shop, opens the partner website"><div class="sheet__top"><span>Fig. 4.' + (i + 1) + '</span><span>Partner</span></div><svg viewBox="0 0 200 160">' + m.art + '</svg><h3>' + m.name + '</h3><p>' + m.d + '</p><div class="sheet__go"><span>View at Espresso Coffee Shop</span><i>↗</i></div></a>';
+      return '<a class="sheet" href="' + ECS + m.url + '" target="_blank" rel="noopener" data-cur="Open ↗" aria-label="' + m.name + ' at Espresso Coffee Shop, opens the partner website"><div class="sheet__top"><span>Fig. 4.' + (i + 1) + '</span><span>Partner</span></div><figure class="sheet__ph"><img src="' + GIMG + m.img + '.webp" alt="' + m.name + '" loading="lazy" width="900" height="900"></figure><h3>' + m.name + '</h3><p>' + m.kind + ' · ' + m.price + ' + VAT</p><div class="sheet__go"><span>View at Espresso Coffee Shop</span><i>↗</i></div></a>';
     }).join('');
   }
 
@@ -95,7 +95,11 @@
     $$('.tabs button').forEach(function (bt, k) { bt.setAttribute('aria-selected', k === i); });
     var fill = function () {
       $('.roastcard__meta').textContent = b.meta; $('.roastcard__name').textContent = b.name; $('.roastcard__notes').textContent = b.notes; $('.roastcard .pill__p').textContent = euro(b.price);
-      $$('.bars i').forEach(function (el, k) { gsap.to(el, { scaleX: b.bars[k], duration: 1.2, ease: EXPO, delay: 0.08 * k }); });
+      var ph = $('.roastcard__img img'); ph.src = PIMG + b.img + '.webp'; ph.alt = 'GreenGo ' + b.name;
+      $$('.bars div').forEach(function (row, k) {
+        $('dt', row).textContent = b.rows[k][0]; $('span', row).textContent = b.rows[k][1];
+        gsap.to($('i', row), { scaleX: b.rows[k][2], duration: 1.2, ease: EXPO, delay: 0.08 * k });
+      });
     };
     if (quiet) { fill(); return; }
     gsap.timeline().to(card.children, { y: -14, opacity: 0, duration: 0.25, stagger: 0.03, ease: 'power2.in' }).add(fill).fromTo(card.children, { y: 22, opacity: 0 }, { y: 0, opacity: 1, duration: 0.8, stagger: 0.06, ease: EXPO });
@@ -156,7 +160,7 @@
       if (img.white) x.drawImage(img.white, w / 2 - 150, 74, 300, 126);
       x.textAlign = 'center'; x.fillStyle = '#b6f25f'; x.font = 'italic 300 84px Fraunces, serif'; x.fillText('Ceremonial Matcha', w / 2, 300);
       x.fillStyle = '#efe6d6'; x.font = '500 26px Oswald, sans-serif';
-      x.fillText('S T O N E - M I L L E D   ·   3 0  G', w / 2, 372);
+      x.fillText('S I N G L E   O R I G I N   ·   G O L D   A W A R D', w / 2, 372);
       x.font = 'italic 300 70px Fraunces, serif'; x.fillStyle = 'rgba(182,242,95,.5)';
       x.fillText('slowly.', w * 0.08, 270); x.fillText('slowly.', w * 0.92, 270);
     });
@@ -168,7 +172,7 @@
       var words = bean.name.split(' '), l1 = words.slice(0, Math.ceil(words.length / 2)).join(' '), l2 = words.slice(Math.ceil(words.length / 2)).join(' ');
       x.font = 'italic 300 92px Fraunces, serif'; x.fillText(l1, w / 2, h * 0.66); x.fillText(l2, w / 2, h * 0.745);
       x.font = '500 30px Oswald, sans-serif'; x.fillStyle = bean.c;
-      x.fillText(bean.notes.toUpperCase().split('').join(' ').slice(0, 54), w / 2, h * 0.83);
+      x.fillText(bean.lab.split('').join(' '), w / 2, h * 0.83);
       x.fillStyle = '#efe6d6'; x.fillText('2 5 0  G   ·   W H O L E   B E A N', w / 2, h * 0.9);
     });
     var cupTex = GG3D.canvasTex(1536, 640, function (x, w, h) {
@@ -384,19 +388,17 @@
       var track = $('.gallery__track'), dist = function () { return Math.max(0, track.scrollWidth - innerWidth); };
       var tw = gsap.to(track, { x: function () { return -dist(); }, ease: 'none', scrollTrigger: { trigger: '.gallery', start: 'top 6%', end: function () { return '+=' + dist() * 1.15; }, pin: true, scrub: 0.8, invalidateOnRefresh: true,
         onUpdate: function (s) { $('.gallery__bar i').style.transform = 'scaleX(' + s.progress + ')'; gsap.to('.obj__plate', { skewX: clamp(s.getVelocity() / -400, -7, 7), duration: 0.4, overwrite: true, ease: 'power3.out', onComplete: function () { gsap.to('.obj__plate', { skewX: 0, duration: 1.1, ease: EXPO }); } }); } } });
-      $$('.obj__plate svg').forEach(function (svg) { gsap.fromTo(svg, { xPercent: 22 }, { xPercent: -22, ease: 'none', scrollTrigger: { trigger: svg, containerAnimation: tw, start: 'left right', end: 'right left', scrub: true } }); });
+      $$('.obj__plate').forEach(function (pl) { gsap.fromTo($('img', pl), { xPercent: 7 }, { xPercent: -7, ease: 'none', scrollTrigger: { trigger: pl, containerAnimation: tw, start: 'left right', end: 'right left', scrub: true } }); });
     });
     gsap.from('.obj', { opacity: 0, y: 80, duration: 1.2, ease: EXPO, stagger: 0.08, scrollTrigger: { trigger: '.gallery', start: 'top 88%' } });
 
     /* 04 machines: line drawings draw themselves */
     gsap.from('.notice', { opacity: 0, y: 30, duration: 1.1, ease: EXPO, scrollTrigger: { trigger: '.notice', start: 'top 90%' } });
     $$('.sheet').forEach(function (s, i) {
-      var paths = $$('svg path:not(.dim), svg circle', s);
-      paths.forEach(function (p) { var len = p.getTotalLength ? p.getTotalLength() : 300; p.style.strokeDasharray = len; p.style.strokeDashoffset = len; });
-      var draw = function () { return gsap.fromTo(paths, { strokeDashoffset: function (k, el) { return parseFloat(el.style.strokeDasharray); } }, { strokeDashoffset: 0, duration: 1.8, ease: INOUT, stagger: 0.12, overwrite: true }); };
-      ScrollTrigger.create({ trigger: s, start: 'top 88%', once: true, onEnter: function () { gsap.delayedCall((i % 3) * 0.15, draw); } });
-      gsap.from(s, { opacity: 0, duration: 1, delay: (i % 3) * 0.12, scrollTrigger: { trigger: s, start: 'top 90%' } });
-      if (!touch) s.addEventListener('mouseenter', draw);
+      var d = (i % 3) * 0.12;
+      gsap.from(s, { opacity: 0, duration: 1, delay: d, scrollTrigger: { trigger: s, start: 'top 90%' } });
+      gsap.fromTo($('.sheet__ph', s), { clipPath: 'inset(100% 0% 0% 0%)' }, { clipPath: 'inset(0% 0% 0% 0%)', duration: 1.5, ease: INOUT, delay: d, scrollTrigger: { trigger: s, start: 'top 88%' } });
+      gsap.from($('.sheet__ph img', s), { scale: 1.35, duration: 1.9, ease: EXPO, delay: d, scrollTrigger: { trigger: s, start: 'top 88%' } });
     });
 
     /* footnotes */
@@ -415,6 +417,11 @@
     /* closing */
     gsap.from('.fin__title .ln > span', { yPercent: 112, duration: 1.6, ease: EXPO, stagger: 0.14, scrollTrigger: { trigger: '.fin', start: 'top 60%' } });
     gsap.from('.fin__row .pill', { opacity: 0, y: 30, duration: 1, ease: EXPO, stagger: 0.07, scrollTrigger: { trigger: '.fin__row', start: 'top 96%' } });
+
+    /* footer */
+    gsap.from(lines('.end__say'), { yPercent: 110, duration: 1.4, ease: EXPO, stagger: 0.1, scrollTrigger: { trigger: '.end', start: 'top 85%' } });
+    gsap.from('.end__grid > *', { opacity: 0, y: 40, duration: 1.1, ease: EXPO, stagger: 0.08, scrollTrigger: { trigger: '.end__grid', start: 'top 92%' } });
+    gsap.fromTo('.end__mark img', { yPercent: 60 }, { yPercent: 0, ease: 'none', scrollTrigger: { trigger: '.end__mark', start: 'top bottom', end: 'bottom bottom', scrub: 0.6 } });
 
     /* cursor + magnetic */
     if (!touch) {
