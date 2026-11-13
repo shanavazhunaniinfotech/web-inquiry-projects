@@ -142,21 +142,6 @@
       title: "Incredible value, fast shipping", text: "Saved almost $60 on Versace Eros versus the mall. Shipped the same day I ordered. Fresh, sweet, lasts through a night out. 25 years in business and it shows." }
   ];
 
-  /* ===================================================
-     Announcement bar rotation
-     =================================================== */
-  (function announce() {
-    const msgs = $$(".announce__msg");
-    let i = 0;
-    setInterval(() => {
-      const cur = msgs[i];
-      cur.classList.remove("is-active");
-      cur.classList.add("is-leaving");
-      setTimeout(() => cur.classList.remove("is-leaving"), 650);
-      i = (i + 1) % msgs.length;
-      msgs[i].classList.add("is-active");
-    }, 4000);
-  })();
 
   /* Header state on scroll */
   const onScroll = () => document.body.classList.toggle("scrolled", window.scrollY > 40);
