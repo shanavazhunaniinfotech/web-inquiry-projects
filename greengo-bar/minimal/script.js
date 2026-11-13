@@ -59,7 +59,7 @@
     return '<div class="mini"><img src="' + P + p.img + '.webp" alt="GreenGo ' + p.name + '" loading="lazy" width="1100" height="1100"><div><b>' + p.name + '</b><small>' + p.meta + '</small></div><div class="mini__r"><span>' + euro(p.price) + '</span><button class="plus" type="button" data-add="' + p.id + '" aria-label="Add ' + p.name + ' to cart">+</button></div></div>';
   }).join('');
   $('[data-list="coffee"]').innerHTML = COFFEE.map(prod).join('');
-  $('[data-list="merch"]').innerHTML = MERCH.map(prod).join('');
+  $('[data-list="merch"]').innerHTML = MERCH.map(prod).join('').replace(/ loading="lazy"/g, '');
   $('[data-list="juices"]').innerHTML = JUICES.map(function (j, i) {
     return '<li class="step"><div class="step__img"><img src="../assets/img/juice' + (i + 1) + '.webp" alt="' + j[0] + ' cold-pressed juice" loading="lazy" width="512" height="512"></div><span class="step__n">0' + (i + 1) + '</span><h3>' + j[0] + '</h3><p>' + j[1] + '</p></li>';
   }).join('');
@@ -144,8 +144,10 @@
   document.addEventListener('click', function (e) {
     var a = e.target.closest('a[href^="#"]'); if (!a) return;
     var el = $(a.getAttribute('href')); if (!el) return;
-    e.preventDefault(); openCart(false); nav.classList.remove('is-open');
-    var y = a.getAttribute('href') === '#top' ? 0 : el.getBoundingClientRect().top + scrollY - 90;
+    e.preventDefault(); openCart(false);
+    var shift = nav.classList.contains('is-open') ? $('.drawer').offsetHeight : 0;
+    nav.classList.remove('is-open'); $('.nav__menu').setAttribute('aria-expanded', 'false');
+    var y = a.getAttribute('href') === '#top' ? 0 : el.getBoundingClientRect().top + scrollY - shift - 90;
     if (lenis) lenis.scrollTo(y, { duration: 1.4 }); else scrollTo({ top: y, behavior: reduce ? 'auto' : 'smooth' });
   });
 
