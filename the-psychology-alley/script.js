@@ -1,4 +1,4 @@
-/* The Psychology Alley · homepage concept v3 */
+/* The Psychology Alley · homepage concept v4 */
 (function () {
   'use strict';
   var $ = function (s, c) { return (c || document).querySelector(s); };
@@ -100,37 +100,6 @@
   });
   window.addEventListener('resize', function () { if (window.innerWidth > 1100) closeNav(); });
 
-  /* ---------- Word splitting ---------- */
-  function splitWords(el, mode) {
-    var words = [];
-    function make(word, em) {
-      if (mode === 'fade') {
-        var s = document.createElement('span'); s.className = 'w'; s.textContent = word; words.push(s);
-        if (em) { var e = document.createElement('em'); e.appendChild(s); return e; }
-        return s;
-      }
-      var o = document.createElement('span'); o.className = 'sw';
-      var i = document.createElement('span');
-      if (em) { var e2 = document.createElement('em'); e2.textContent = word; i.appendChild(e2); } else i.textContent = word;
-      o.appendChild(i); words.push(i); return o;
-    }
-    var label = el.textContent.replace(/\s+/g, ' ').trim();
-    var frag = document.createDocumentFragment();
-    Array.prototype.slice.call(el.childNodes).forEach(function (n) {
-      var em = n.nodeType === 1 && n.tagName === 'EM';
-      if (n.nodeType === 3 || em) {
-        n.textContent.split(/(\s+)/).forEach(function (p) {
-          if (!p) return;
-          if (/^\s+$/.test(p)) frag.appendChild(document.createTextNode(' ')); else frag.appendChild(make(p, em));
-        });
-      } else frag.appendChild(n);
-    });
-    el.innerHTML = ''; el.appendChild(frag);
-    if (!el.hasAttribute('aria-label')) el.setAttribute('aria-label', label);
-    $$('.sw, .w', el).forEach(function (s) { s.setAttribute('aria-hidden', 'true'); });
-    return words;
-  }
-
   /* ---------- Intro + hero ---------- */
   var intro = $('#intro');
   var firstVisit = !root.classList.contains('seen');
@@ -139,18 +108,19 @@
   function heroIn(tl) {
     var lines = $$('#heroH1 .ln').map(function (ln) { var s = document.createElement('span'); while (ln.firstChild) s.appendChild(ln.firstChild); ln.appendChild(s); return s; });
     gsap.set(lines, { yPercent: 108 });
-    gsap.set('[data-h]', { y: 24, autoAlpha: 0 });
-    gsap.set('.hero__arch', { clipPath: 'inset(100% 0% 0% 0% round 999px 999px 22px 22px)' });
-    gsap.set('.hero__arch img', { scale: 1.3 });
-    gsap.set(['.badge-spin', '.founder'], { autoAlpha: 0, scale: .6 });
-    gsap.set('.hdr__in', { y: -24, autoAlpha: 0 });
-    tl.to('.hdr__in', { y: 0, autoAlpha: 1, duration: .9, ease: 'power3.out' }, 0)
-      .to(lines, { yPercent: 0, duration: 1.25, stagger: .1, ease: 'expo.out' }, .05)
-      .to('.hero__arch', { clipPath: 'inset(0% 0% 0% 0% round 999px 999px 22px 22px)', duration: 1.5, ease: 'expo.inOut' }, .1)
-      .to('.hero__arch img', { scale: 1, duration: 2.2, ease: 'expo.out' }, .3)
-      .to('[data-h]', { y: 0, autoAlpha: 1, duration: 1, stagger: .07, ease: 'power3.out' }, .45)
-      .to(['.badge-spin', '.founder'], { autoAlpha: 1, scale: 1, duration: .9, stagger: .12, ease: 'back.out(1.7)' }, 1.05)
-      .from('#heroChips .chip', { y: 14, autoAlpha: 0, duration: .6, stagger: .04, ease: 'power3.out' }, .8);
+    gsap.set('[data-h]', { y: 22, autoAlpha: 0 });
+    gsap.set('#heroImg', { scale: 1.18 });
+    gsap.set('#quick', { y: 50, autoAlpha: 0 });
+    gsap.set('#heroChips .chip', { y: 12, autoAlpha: 0 });
+    gsap.set('.hero__bar', { y: 30, autoAlpha: 0 });
+    gsap.set('.hdr__in', { y: -20, autoAlpha: 0 });
+    tl.to('#heroImg', { scale: 1, duration: 2.4, ease: 'expo.out' }, 0)
+      .to('.hdr__in', { y: 0, autoAlpha: 1, duration: .9, ease: 'power3.out' }, .1)
+      .to(lines, { yPercent: 0, duration: 1.2, stagger: .1, ease: 'expo.out' }, .15)
+      .to('[data-h]', { y: 0, autoAlpha: 1, duration: .9, stagger: .07, ease: 'power3.out' }, .5)
+      .to('#quick', { y: 0, autoAlpha: 1, duration: 1.1, ease: 'expo.out' }, .55)
+      .to('#heroChips .chip', { y: 0, autoAlpha: 1, duration: .5, stagger: .035, ease: 'power3.out' }, .8)
+      .to('.hero__bar', { y: 0, autoAlpha: 1, duration: .9, ease: 'power3.out' }, .9);
   }
 
   if (!hasGsap) {
@@ -159,11 +129,11 @@
     var tl = gsap.timeline({ paused: true });
     if (firstVisit && intro) {
       var cnt = $('#introCount'), o = { v: 0 };
-      tl.to(o, { v: 100, duration: 1.05, ease: 'power2.inOut', onUpdate: function () { cnt.textContent = Math.round(o.v); } })
-        .to('.intro__mid', { autoAlpha: 0, y: -16, duration: .35, ease: 'power2.in' })
-        .to('.intro__panel--a', { yPercent: -101, duration: 1, ease: 'expo.inOut' }, '>-.05')
-        .to('.intro__panel--b', { yPercent: 101, duration: 1, ease: 'expo.inOut', onComplete: function () { intro.classList.add('done'); } }, '<');
-      var h = gsap.timeline(); heroIn(h); tl.add(h, '-=.75');
+      tl.to(o, { v: 100, duration: 1, ease: 'power2.inOut', onUpdate: function () { cnt.textContent = Math.round(o.v); } })
+        .to('.intro__mid', { autoAlpha: 0, y: -16, duration: .3, ease: 'power2.in' })
+        .to('.intro__panel--a', { yPercent: -101, duration: .95, ease: 'expo.inOut' }, '>-.05')
+        .to('.intro__panel--b', { yPercent: 101, duration: .95, ease: 'expo.inOut', onComplete: function () { intro.classList.add('done'); } }, '<');
+      var h = gsap.timeline(); heroIn(h); tl.add(h, '-=.7');
     } else { if (intro) intro.classList.add('done'); heroIn(tl); }
     tl.play();
     setTimeout(function () { if (intro) intro.classList.add('done'); if (tl.progress() < 1) tl.progress(1); }, 6000);
@@ -171,127 +141,80 @@
 
   /* ---------- Scroll animations ---------- */
   if (hasGsap) {
-    // headings: words rise
-    $$('[data-split]').forEach(function (el) {
-      var w = splitWords(el);
-      gsap.set(w, { yPercent: 110 });
-      ST.create({ trigger: el, start: 'top 90%', once: true, onEnter: function () { gsap.to(w, { yPercent: 0, duration: 1.15, stagger: .05, ease: 'expo.out' }); } });
-    });
-    // generic reveal (batch; fires even if user jumps past)
-    gsap.set('[data-r]', { y: 34, autoAlpha: 0 });
-    var reveal = function (els) { gsap.to(els, { y: 0, autoAlpha: 1, duration: 1, stagger: .08, ease: 'power3.out', overwrite: true }); };
+    // generic reveal
+    gsap.set('[data-r]', { y: 30, autoAlpha: 0 });
+    var reveal = function (els) { gsap.to(els, { y: 0, autoAlpha: 1, duration: .95, stagger: .08, ease: 'power3.out', overwrite: true }); };
     ST.batch('[data-r]', { start: 'top 92%', once: true, onEnter: reveal, onEnterBack: reveal });
-    // safety net: once scrolling settles, reveal anything in view that is still hidden (e.g. after jumps)
+
+    // card grids rise in with a stagger
+    [['#helpCards .ccard', '#helpCards'], ['#xTrack .xcard', '#xTrack'], ['.trust__logos li', '.trust']].forEach(function (g) {
+      gsap.set(g[0], { y: 50, autoAlpha: 0 });
+      ST.create({ trigger: g[1], start: 'top 90%', once: true, onEnter: function () { gsap.to(g[0], { y: 0, autoAlpha: 1, duration: 1, stagger: .07, ease: 'power3.out' }); } });
+    });
+
+    // image reveals (clip from bottom + settle)
+    $$('.img-reveal').forEach(function (box) {
+      var im = box.querySelector('img');
+      gsap.set(box, { clipPath: 'inset(100% 0% 0% 0%)' });
+      gsap.set(im, { scale: 1.2 });
+      ST.create({ trigger: box, start: 'top 88%', once: true, onEnter: function () {
+        gsap.to(box, { clipPath: 'inset(0% 0% 0% 0%)', duration: 1.4, ease: 'expo.inOut' });
+        gsap.to(im, { scale: 1, duration: 1.8, ease: 'expo.out' });
+      } });
+    });
+
+    var mm = gsap.matchMedia();
+    mm.add('(min-width: 901px)', function () {
+      gsap.to('#heroImg', { yPercent: 10, ease: 'none', scrollTrigger: { trigger: '.hero', start: 'top top', end: 'bottom top', scrub: true } });
+      gsap.fromTo('.about__portrait', { y: 60 }, { y: -30, ease: 'none', scrollTrigger: { trigger: '.about', start: 'top bottom', end: 'bottom top', scrub: true } });
+      gsap.fromTo('#finalImg', { yPercent: -8 }, { yPercent: 8, ease: 'none', scrollTrigger: { trigger: '.final', start: 'top bottom', end: 'bottom top', scrub: true } });
+    });
+
+    // steps: connecting line draws as you scroll
+    var stepsEl = $('#steps');
+    if (stepsEl) {
+      var line = document.createElement('span'); line.className = 'steps__line'; line.setAttribute('aria-hidden', 'true'); stepsEl.appendChild(line);
+      gsap.to(line, { scaleY: 1, ease: 'none', scrollTrigger: { trigger: stepsEl, start: 'top 75%', end: 'bottom 55%', scrub: .6 } });
+    }
+
+    gsap.from('.final__icon', { rotate: -120, scale: 0, duration: 1.2, ease: 'back.out(1.6)', scrollTrigger: { trigger: '.final', start: 'top 75%', once: true } });
+
+    // safety net: when scrolling settles, reveal anything in view that is still hidden (e.g. after jumps)
     var sweep = function () {
       var vh = window.innerHeight, late = [];
-      $$('[data-r], .rows li, .trust__logos li').forEach(function (el) {
+      $$('[data-r], #helpCards .ccard, #xTrack .xcard, .trust__logos li').forEach(function (el) {
         var r = el.getBoundingClientRect();
         if (r.top < vh * .98 && r.bottom > 0 && parseFloat(getComputedStyle(el).opacity) < .05 && !gsap.isTweening(el)) late.push(el);
       });
       if (late.length) gsap.to(late, { y: 0, autoAlpha: 1, duration: .8, stagger: .05, ease: 'power3.out', overwrite: true });
-      $$('[data-split]').forEach(function (h) {
-        var r = h.getBoundingClientRect(); if (r.top > vh || r.bottom < 0) return;
-        var w = $$('.sw > span', h).filter(function (x) { return !gsap.isTweening(x) && Math.abs(gsap.getProperty(x, 'yPercent')) > 50; });
-        if (w.length) gsap.to(w, { yPercent: 0, duration: 1, stagger: .04, ease: 'expo.out' });
+      $$('.img-reveal').forEach(function (box) {
+        var r = box.getBoundingClientRect();
+        if (r.top < vh && r.bottom > 0 && !gsap.isTweening(box) && /inset\(100%/.test(box.style.clipPath)) {
+          gsap.to(box, { clipPath: 'inset(0% 0% 0% 0%)', duration: 1.2, ease: 'expo.inOut' });
+          gsap.to(box.querySelector('img'), { scale: 1, duration: 1.4, ease: 'expo.out' });
+        }
       });
     };
     var sweepT; window.addEventListener('scroll', function () { clearTimeout(sweepT); sweepT = setTimeout(sweep, 450); }, { passive: true });
     setTimeout(sweep, 3000);
 
-    // rows
-    gsap.from('.rows li', { y: 40, autoAlpha: 0, duration: .9, stagger: .06, ease: 'power3.out', scrollTrigger: { trigger: '.rows', start: 'top 88%', once: true } });
-    gsap.from('.trust__logos li', { y: 20, autoAlpha: 0, duration: .8, stagger: .08, ease: 'power3.out', scrollTrigger: { trigger: '.trust', start: 'top 92%', once: true } });
-
-    // manifesto: words light up
-    var mw = splitWords($('#maniTxt'), 'fade');
-    gsap.to(mw, { opacity: 1, stagger: .1, ease: 'none', scrollTrigger: { trigger: '#maniTxt', start: 'top 80%', end: 'bottom 45%', scrub: .5 } });
-    gsap.from('.pimg', { scale: 0, duration: .9, ease: 'back.out(1.6)', stagger: .2, scrollTrigger: { trigger: '#maniTxt', start: 'top 75%', once: true } });
-
-    var mm = gsap.matchMedia();
-    mm.add('(min-width: 901px)', function () {
-      // expanding room
-      var rt = gsap.timeline({ scrollTrigger: { trigger: '#room', start: 'top top', end: 'bottom bottom', scrub: .6 } });
-      rt.fromTo('#roomFrame', { clipPath: 'inset(12% 30% 12% 30% round 999px 999px 24px 24px)' }, { clipPath: 'inset(0% 0% 0% 0% round 0px 0px 0px 0px)', ease: 'none', duration: 1 })
-        .fromTo('#roomImg', { scale: 1.25 }, { scale: 1, ease: 'none', duration: 1 }, 0)
-        .to('#roomCap', { opacity: 1, duration: .25 }, .7);
-      // hero arch parallax
-      gsap.to('.hero__arch img', { yPercent: 8, ease: 'none', scrollTrigger: { trigger: '.hero', start: 'top top', end: 'bottom top', scrub: true } });
-      // stacking cards recede
-      var cards = $$('.scard');
-      cards.forEach(function (c, i) {
-        if (i === cards.length - 1) return;
-        gsap.to(c, { scale: .94, ease: 'none', scrollTrigger: { trigger: cards[i + 1], start: 'top 85%', end: 'top 30%', scrub: true } });
-      });
-      // Heather
-      gsap.fromTo('#leadArch', { clipPath: 'inset(100% 0% 0% 0% round 999px 999px 22px 22px)' }, { clipPath: 'inset(0% 0% 0% 0% round 999px 999px 22px 22px)', duration: 1.6, ease: 'expo.inOut', scrollTrigger: { trigger: '.lead', start: 'top 80%', once: true } });
-      gsap.fromTo('#heatherImg', { yPercent: 6 }, { yPercent: -4, ease: 'none', scrollTrigger: { trigger: '.lead', start: 'top bottom', end: 'bottom top', scrub: true } });
-      return function () { gsap.set(['#roomFrame', '#roomImg', '#roomCap', '.scard', '#leadArch', '#heatherImg'], { clearProps: 'all' }); };
-    });
-    mm.add('(max-width: 900px)', function () { root.classList.add('no-room'); return function () { root.classList.remove('no-room'); }; });
-
-    gsap.from('.final__icon', { rotate: -120, scale: 0, duration: 1.2, ease: 'back.out(1.6)', scrollTrigger: { trigger: '.final', start: 'top 75%', once: true } });
-    gsap.from('.ftr__logo', { yPercent: 40, autoAlpha: 0, duration: 1.4, ease: 'expo.out', scrollTrigger: { trigger: '.ftr__mark', start: 'top 95%', once: true } });
-
     // magnetic buttons
     if (fine) $$('[data-magnetic]').forEach(function (b) {
       var xT = gsap.quickTo(b, 'x', { duration: .5, ease: 'power3' }), yT = gsap.quickTo(b, 'y', { duration: .5, ease: 'power3' });
-      b.addEventListener('mousemove', function (e) { var r = b.getBoundingClientRect(); xT((e.clientX - r.left - r.width / 2) * .22); yT((e.clientY - r.top - r.height / 2) * .32); });
+      b.addEventListener('mousemove', function (e) { var r = b.getBoundingClientRect(); xT((e.clientX - r.left - r.width / 2) * .2); yT((e.clientY - r.top - r.height / 2) * .3); });
       b.addEventListener('mouseleave', function () { xT(0); yT(0); });
     });
 
     var refresh = function () { ST.refresh(); };
     window.addEventListener('load', refresh);
     if (document.fonts && document.fonts.ready) document.fonts.ready.then(refresh);
-    $$('img[loading="lazy"]').forEach(function (im) { if (!im.complete) im.addEventListener('load', function () { clearTimeout(refresh.t); refresh.t = setTimeout(refresh, 200); }, { once: true }); });
-  } else {
-    root.classList.add('no-room');
   }
 
-  /* ---------- Cursor + list image preview (desktop) ---------- */
-  if (fine && hasGsap) {
-    var curEl = $('#cursor'), curL = $('#cursorLabel'), pv = $('#preview'), pvIn = $('#previewIn');
-    var cx = gsap.quickTo(curEl, 'x', { duration: .25, ease: 'power3' }), cy = gsap.quickTo(curEl, 'y', { duration: .25, ease: 'power3' });
-    var px = gsap.quickTo(pv, 'x', { duration: .7, ease: 'power3' }), py = gsap.quickTo(pv, 'y', { duration: .7, ease: 'power3' });
-    window.addEventListener('mousemove', function (e) {
-      curEl.classList.add('on'); cx(e.clientX); cy(e.clientY);
-      px(e.clientX + 70); py(e.clientY - 150);
-    }, { passive: true });
-    document.addEventListener('mouseleave', function () { curEl.classList.remove('on'); });
-    document.addEventListener('mouseover', function (e) {
-      var t = e.target.closest('[data-cursor]');
-      curEl.classList.toggle('big', !!t); curL.textContent = t ? t.getAttribute('data-cursor') : '';
-      curEl.classList.toggle('hide', !t && !!e.target.closest('a,button,input,select,textarea,label,.notes,.match,.modal'));
-    });
-    var pvShown = false, pvSrc = '';
-    $$('.row[data-img]').forEach(function (r) {
-      r.addEventListener('mouseenter', function () {
-        var src = r.getAttribute('data-img');
-        if (src !== pvSrc) {
-          pvSrc = src;
-          var im = new Image(); im.src = src; im.alt = ''; pvIn.appendChild(im);
-          gsap.fromTo(im, { clipPath: 'inset(100% 0 0 0)' }, { clipPath: 'inset(0% 0 0 0)', duration: .6, ease: 'expo.out' });
-          var olds = pvIn.querySelectorAll('img'); if (olds.length > 3) olds[0].remove();
-        }
-        if (!pvShown) { pvShown = true; gsap.to(pv, { opacity: 1, scale: 1, rotate: -4, duration: .5, ease: 'power3.out' }); }
-      });
-    });
-    $('#rows').addEventListener('mouseleave', function () { pvShown = false; gsap.to(pv, { opacity: 0, scale: .6, rotate: 0, duration: .4, ease: 'power3.in' }); });
-  }
-
-  /* ---------- First session story (desktop sticky image) ---------- */
-  var sSteps = $$('.sstep'), sImgs = $$('.story__arch img'), sDots = $$('.story__dots i');
-  if ('IntersectionObserver' in window) {
-    var sio = new IntersectionObserver(function (es) {
-      es.forEach(function (e) {
-        if (!e.isIntersecting) return;
-        var i = +e.target.dataset.s;
-        sSteps.forEach(function (s) { s.classList.toggle('is-on', s === e.target); });
-        sImgs.forEach(function (im) { im.classList.toggle('on', +im.dataset.s === i); });
-        sDots.forEach(function (d, k) { d.classList.toggle('on', k === i); });
-      });
-    }, { rootMargin: '-45% 0px -45% 0px' });
-    sSteps.forEach(function (s) { sio.observe(s); });
-  }
+  /* ---------- First-session carousel buttons (tablet/mobile) ---------- */
+  var xt = $('#xTrack');
+  function xStep(d) { var c = xt.querySelector('.xcard'); var w = c ? c.getBoundingClientRect().width + 16 : 300; xt.scrollBy({ left: d * w, behavior: 'smooth' }); }
+  $('#xPrev').addEventListener('click', function () { xStep(-1); });
+  $('#xNext').addEventListener('click', function () { xStep(1); track('expect_carousel_next'); });
 
   /* ---------- Accordions (FAQ + therapies) ---------- */
   $$('.acc').forEach(function (acc) {
@@ -510,24 +433,24 @@
       'Visitors in distress scan, they don\'t browse. The menu goes from about 17 links to the 5 questions people actually have. The header stays on screen the whole time (it never hides), so "Find my psychologist" and the phone number are always one tap away.',
       'Current site: long Therapies drop-down, a leftover shopping-cart icon, and six different labels for the same booking button.',
       'KPI: header CTA click-through, phone clicks'],
-    2: ['Hero: your H1, a face, and step 1 starts here',
-      'Your "Clinical psychology in Sydney CBD" heading stays (protects SEO), finished with your own idea of "the right fit". The first question of the matcher sits right in the hero, so starting takes one tap. Heather\'s face (trust), the rebate, "no referral needed", telehealth and Mandarin answer the top objections before any scrolling.',
+    2: ['Hero: a full-screen photo of your room, and step 1 starts here',
+      'Your own banner photo fills the screen, so visitors immediately see the calm space they will walk into. Your "Clinical psychology in Sydney CBD" heading stays (protects SEO). The first question of the matcher sits in the hero card, so starting takes one tap, and the fact bar answers the top objections (rebate, no referral, telehealth, location) before any scrolling.',
       'Current hero: one "Book an appointment" button leading to a blank form, with no idea what happens next.',
       'KPI: hero chip interaction rate, match_start'],
     3: ['Trust logos, AHPRA-compliant',
       'Testimonials aren\'t allowed, so trust comes from verifiable facts: your real Ahpra, Medicare, ACPA, Pacifica Congress and FRWN logos, directly under the hero where people make the "is this legitimate?" judgement.',
       'These logos currently sit only in the footer and the About page.',
       'KPI: bounce rate, scroll past hero'],
-    4: ['Your story, then your room',
-      'Your own About copy, cut to the part that matters to a new client. The words light up as you scroll, so people actually read it. Then your banner photo opens up from your logo\'s arch shape to full screen: it shows the calm space they\'ll walk into, which makes the first visit feel less unknown.',
-      'Current: two paragraphs of small text, and the banner only appears behind the hero heading.',
-      'KPI: scroll depth, time on page'],
+    4: ['About: a face, a room and three values',
+      'Instead of paragraphs, visitors see Heather and the consulting room, one sentence about the practice, and three values they can scan in seconds (culturally responsive, LGBTQIA+ affirming, evidence-based). Then two clear next steps.',
+      'Current: two paragraphs of small text between the hero and services.',
+      'KPI: scroll depth, "Meet our team" clicks'],
     5: ['Start with feelings, not therapy names',
-      'People search for "anxiety" or "I don\'t feel like myself", not "Schema Therapy". Every row opens the matcher with that concern already filled in (one step skipped). "Something harder to name" catches unsure visitors, and the scope note filters out poor fits early, which saves your intake team time.',
+      'People search for "anxiety" or "I don\'t feel like myself", not "Schema Therapy". Eight photo cards, each opening the matcher with that concern already filled in (one step skipped). The last card catches unsure visitors, and the scope note filters out poor fits early, saving your intake team time.',
       'Current homepage leads with CBT / DBT / Schema cards: clinician language.',
-      'KPI: concern clicks → match_start'],
+      'KPI: concern card clicks → match_start'],
     6: ['How it works: removes fear of the unknown',
-      'Your enquiry → intake call → booking process is not a weakness once it\'s explained. Framing the intake call as the step that gets you the right match turns friction into reassurance. The cards stack as you scroll, so each step gets full attention.',
+      'Three simple steps with icons, next to a real photo of a session. Explaining the enquiry → intake call → booking process turns friction into reassurance, and a time on each step sets expectations. The connecting line draws as you scroll.',
       'The current site never explains what happens after you click "Book".',
       'KPI: CTA clicks from this section'],
     7: ['Team: Heather leads, the group practice is visible',
@@ -539,13 +462,13 @@
       'Fees are currently on a separate page, not the homepage.',
       'KPI: fee_calc_change → match_start rate'],
     9: ['What to expect in session one',
-      'First-time clients are anxious about the unknown. Four calm steps (before, arriving, the 50 minutes, after) with the image changing as you read lower the emotional barrier, without any clinical outcome claims.',
+      'First-time clients are anxious about the unknown. Four photo cards (before, arriving, the 50 minutes, after) plus three reassurances (confidential, your pace, no lock-in) lower the emotional barrier without clinical outcome claims. On phones it becomes a swipeable carousel.',
       'This information is currently buried in the FAQ page.',
       'KPI: scroll depth, cta_expect clicks'],
     10: ['Therapies, explained in plain language',
-      'Kept for informed visitors and for SEO (every link goes to your existing therapy page, so URLs are preserved), but placed after the decision-making content so it doesn\'t delay action.',
+      'Six photo cards, each with a plain-English description and what it is often used for. Kept for informed visitors and for SEO (every card links to your existing therapy page, so URLs are preserved), placed after the decision-making content so it doesn\'t delay action.',
       'Current: 8-item drop-down, with some therapy pages filed under the blog.',
-      'KPI: therapy_open'],
+      'KPI: therapy card clicks'],
     11: ['Location & telehealth side by side',
       'Practical details remove last-minute doubts: nearest station, parking, and that telehealth has the same fees and rebates. A live "open now" line shows the practice is active.',
       'Current hours omit Tuesday and Wednesday, which looks ambiguous.',
