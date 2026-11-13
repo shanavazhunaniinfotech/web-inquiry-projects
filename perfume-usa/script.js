@@ -327,7 +327,7 @@
     function tick(now) {
       const dt = Math.min(64, now - last) / 1000;
       last = now;
-      if (!st.paused && !st.drag && !reduce) st.x += speed * dt;
+      if (!st.paused && !st.drag) st.x += speed * (reduce ? 0.6 : 1) * dt;
       if (st.extra) {
         const step = st.extra * 0.12;
         st.x += step; st.extra -= step;
