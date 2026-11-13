@@ -271,6 +271,7 @@
   }).join("");
 
   function showCard(animate) {
+    if (!cardEl) return;
     const p = byId(SHOW[showState.i].id), sizes = p.types[showState.type], s = sizes[showState.size];
     const html = `
       <div class="sc__top"><span class="sc__brand">${p.brand}</span><span class="sc__rating"><svg><use href="#i-star"/></svg>${p.rating} · ${p.reviews.toLocaleString()} reviews</span></div>
@@ -316,7 +317,7 @@
     if (pos === "1") showGo(showState.i + 1); else if (pos === "2") showGo(showState.i + 2); else if (pos === "-1") showGo(showState.i - 1);
     else if (pos === "0") openQV(SHOW[showState.i].id);
   });
-  cardEl.addEventListener("click", e => {
+  if (cardEl) cardEl.addEventListener("click", e => {
     const t = e.target.closest("[data-st]"), s = e.target.closest("[data-ss]"), add = e.target.closest("[data-sadd]");
     if (t) { showState.type = t.dataset.st; const n = byId(SHOW[showState.i].id).types[showState.type].length; if (showState.size >= n) showState.size = n - 1; showCard(false); }
     if (s) { showState.size = +s.dataset.ss; showCard(false); }
@@ -341,9 +342,9 @@
       const r = showEl.getBoundingClientRect(), px = (e.clientX - r.left) / r.width - .5, py = (e.clientY - r.top) / r.height - .5;
       slidesEl.style.transform = `rotateY(${px * 8}deg) rotateX(${-py * 6}deg)`;
       glow.style.translate = `${px * 60}px ${py * 50}px`;
-      cardEl.style.translate = `${px * -14}px ${py * -10}px`;
+      if (cardEl) cardEl.style.translate = `${px * -14}px ${py * -10}px`;
     });
-    showEl.addEventListener("mouseleave", () => { slidesEl.style.transform = ""; glow.style.translate = ""; cardEl.style.translate = ""; });
+    showEl.addEventListener("mouseleave", () => { slidesEl.style.transform = ""; glow.style.translate = ""; if (cardEl) cardEl.style.translate = ""; });
   }
   showGo(0, true);
 
