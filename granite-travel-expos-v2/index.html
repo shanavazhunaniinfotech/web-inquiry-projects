@@ -1,0 +1,604 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Granite Travel Trade Expos · Now Boarding 2027</title>
+  <meta name="description" content="Now boarding: Canada's boutique travel trade expos. 14 cities, Spring & Fall 2027 — connecting global travel suppliers with top-performing travel advisors.">
+  <meta name="theme-color" content="#0d1014">
+  <link rel="icon" href="images/gtte-mark.svg" type="image/svg+xml">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,300..800&family=IBM+Plex+Mono:wght@400;500;600&family=Caveat:wght@500;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="style.css">
+</head>
+<body class="is-loading">
+
+  <!-- Loader: split-flap -->
+  <div class="loader" id="loader" aria-hidden="true">
+    <div class="loader__board" id="loaderBoard"></div>
+    <div class="loader__sub">Granite Travel Trade Expos · Gate 2027</div>
+  </div>
+
+  <div class="cursor" id="cursor" aria-hidden="true"><span id="cursorLabel"></span></div>
+  <div class="noise" aria-hidden="true"></div>
+
+  <!-- Floating nav -->
+  <header class="nav" id="nav">
+    <a class="nav__logo" href="#top" aria-label="Granite Travel Trade Expos — home"><img src="images/gtte-logo-white.svg" alt="Granite Travel Trade Expos" width="150" height="50"></a>
+    <nav class="nav__links" aria-label="Primary">
+      <a href="#route" data-i18n="nav.route">Route</a>
+      <a href="#passport" data-i18n="nav.why">Why Granite</a>
+      <a href="#cabin" data-i18n="nav.voices">Voices</a>
+      <a href="#ticket" data-i18n="nav.exhibit">Exhibit</a>
+      <a href="#agents" data-i18n="nav.agents">Advisors</a>
+      <a href="#postcards" data-i18n="nav.gallery">Gallery</a>
+    </nav>
+    <div class="nav__right">
+      <div class="lang" role="group" aria-label="Language">
+        <button data-lang="en" class="is-on" aria-pressed="true">EN</button>
+        <button data-lang="es" aria-pressed="false">ES</button>
+        <button data-lang="fr" aria-pressed="false">FR</button>
+      </div>
+      <a href="#ticket" class="pill pill--amber nav__cta"><span data-i18n="cta.pass">Get your pass</span></a>
+      <button class="burger" id="burger" aria-label="Menu" aria-expanded="false"><i></i><i></i></button>
+    </div>
+  </header>
+
+  <div class="menu" id="menu" aria-hidden="true">
+    <div class="menu__board">
+      <a href="#route"><em>01</em><b data-i18n="nav.route">Route</b><span>14 STOPS</span></a>
+      <a href="#passport"><em>02</em><b data-i18n="nav.why">Why Granite</b><span>PASSPORT</span></a>
+      <a href="#cabin"><em>03</em><b data-i18n="nav.voices">Voices</b><span>ON BOARD</span></a>
+      <a href="#ticket"><em>04</em><b data-i18n="nav.exhibit">Exhibit</b><span>PASS</span></a>
+      <a href="#agents"><em>05</em><b data-i18n="nav.agents">Advisors</b><span>FREE</span></a>
+      <a href="#postcards"><em>06</em><b data-i18n="nav.gallery">Gallery</b><span>PHOTOS</span></a>
+      <a href="#final"><em>07</em><b data-i18n="nav.contact">Contact</b><span>CALL</span></a>
+    </div>
+  </div>
+
+  <main id="top">
+
+    <!-- ============ HERO: DEPARTURE BOARD ============ -->
+    <section class="hero" id="hero">
+      <div class="hero__bg" aria-hidden="true"><img src="images/DSC_1908.jpg" alt=""></div>
+      <div class="hero__inner">
+        <div class="hero__top">
+          <p class="mono hero__kicker"><span class="blink"></span><span data-i18n="hero.kicker">Now boarding · Spring &amp; Fall 2027</span></p>
+          <h1 class="hero__title">
+            <span class="hero__line" data-i18n="hero.l1">Canada's travel trade</span>
+            <span class="hero__line hero__line--accent"><span data-i18n="hero.l2">lands in</span> <span class="hero__flapword" id="heroWord" aria-label="from your city"></span></span>
+          </h1>
+        </div>
+
+        <div class="board" id="board" role="table" aria-label="2027 expo departures">
+          <div class="board__head" role="row">
+            <span role="columnheader" data-i18n="b.time">Date</span>
+            <span role="columnheader" data-i18n="b.dest">Destination</span>
+            <span role="columnheader" class="hide-s" data-i18n="b.flight">Flight</span>
+            <span role="columnheader" class="hide-s" data-i18n="b.gate">Gate</span>
+            <span role="columnheader" data-i18n="b.status">Status</span>
+          </div>
+          <div class="board__rows" id="boardRows"></div>
+          <div class="board__foot mono">
+            <span><span data-i18n="b.local">Toronto</span> <b id="clock">--:--</b></span>
+            <span class="board__page" id="boardPage">1/3</span>
+            <span><span data-i18n="b.next">Next departure</span> <b id="nextIn">—</b></span>
+          </div>
+        </div>
+
+        <div class="hero__bottom">
+          <p class="hero__lead" data-i18n="hero.lead">Boutique expos that fly global destinations, resorts, cruise lines and tour operators directly to the top-performing travel advisors in Canada's most influential secondary markets.</p>
+          <div class="hero__ctas">
+            <a href="#ticket" class="pill pill--amber pill--lg magnet"><span data-i18n="cta.exhibitor">Exhibitor boarding pass</span><i class="ar"></i></a>
+            <a href="#agents" class="pill pill--line pill--lg magnet"><span data-i18n="cta.advisor">I'm a travel advisor</span><i class="ar"></i></a>
+          </div>
+        </div>
+      </div>
+      <div class="hero__strip mono" aria-hidden="true">
+        <div class="hero__strip-track" id="strip"></div>
+      </div>
+    </section>
+
+    <!-- ============ ROUTE: PINNED FLIGHT PATH ============ -->
+    <section class="route" id="route">
+      <div class="route__sticky">
+        <div class="route__panel">
+          <p class="mono kicker"><span data-i18n="route.kicker">The 2027 route</span> · <span id="legName">Leg 1</span></p>
+          <div class="route__city" id="routeCity" aria-live="polite"></div>
+          <div class="route__meta mono">
+            <span id="routeDate">APR 05 2027</span>
+            <span id="routeCode">YXU</span>
+          </div>
+          <div class="route__count">
+            <b id="stopNum">01</b><span>/ 14 <span data-i18n="route.stops">stops</span></span>
+          </div>
+          <p class="route__leg" id="legText"></p>
+          <div class="route__bar"><i id="routeBar"></i></div>
+          <p class="route__hint mono" data-i18n="route.hint">Scroll to fly the tour ↓</p>
+        </div>
+        <div class="route__map">
+          <svg id="routeSvg" viewBox="0 0 1000 560" role="img" aria-label="Schematic route map of the 14 expo cities across Canada"></svg>
+        </div>
+      </div>
+    </section>
+
+    <!-- ============ STATS: FLIGHT INFO ============ -->
+    <section class="info">
+      <div class="wrap info__grid">
+        <div class="info__item rv"><span class="mono" data-i18n="st.k1">Destinations</span><b><span class="cnt" data-to="14">0</span></b><small data-i18n="st.v1">curated Canadian cities</small></div>
+        <div class="info__item rv"><span class="mono" data-i18n="st.k2">Advisors on board</span><b><span class="cnt" data-to="1500">0</span>+</b><small data-i18n="st.v2">in a single series</small></div>
+        <div class="info__item rv"><span class="mono" data-i18n="st.k3">Exhibitors</span><b><span class="cnt" data-to="80">0</span>+</b><small data-i18n="st.v3">global brands in 2026</small></div>
+        <div class="info__item rv"><span class="mono" data-i18n="st.k4">Flight time</span><b>4<em>h</em></b><small data-i18n="st.v4">of face time, every expo</small></div>
+      </div>
+    </section>
+
+    <!-- ============ PASSPORT ============ -->
+    <section class="passport" id="passport">
+      <div class="wrap">
+        <div class="head">
+          <p class="mono kicker rv" data-i18n="pp.kicker">Boutique by design · Powerful by impact</p>
+          <h2 class="h2 rv" data-i18n-html="pp.title">We're not the biggest show in the country. <span class="hl">That's the point.</span></h2>
+          <p class="lede rv" data-i18n="pp.lede">When suppliers show up in an advisor's own community, it's noticed. It's appreciated. And it converts. Flip through the passport.</p>
+        </div>
+
+        <div class="book rv" id="book" data-cursor="Flip">
+          <div class="book__spine" aria-hidden="true"></div>
+          <!-- static left page (inside cover) -->
+          <div class="book__left">
+            <div class="idpage">
+              <div class="idpage__head mono"><span>PASSPORT · PASSEPORT · PASAPORTE</span><span>CAN</span></div>
+              <div class="idpage__body">
+                <div class="idpage__photo"><img src="images/DSC_4665.jpg" alt="" loading="lazy"></div>
+                <dl class="idpage__data mono">
+                  <dt data-i18n="pp.holder">Holder</dt><dd id="ppHolder">YOUR BRAND</dd>
+                  <dt data-i18n="pp.type">Type</dt><dd data-i18n="pp.typev">Global travel supplier</dd>
+                  <dt data-i18n="pp.valid">Valid</dt><dd>SPRING + FALL 2027</dd>
+                  <dt data-i18n="pp.issued">Issued by</dt><dd>GRANITE PRODUCTIONS</dd>
+                </dl>
+              </div>
+              <img class="idpage__logo" src="images/gtte-logo-ink.svg" alt="" width="150">
+              <p class="idpage__mrz mono">P&lt;CANGRANITE&lt;&lt;TRAVEL&lt;TRADE&lt;EXPOS&lt;&lt;&lt;&lt;&lt;&lt;<br>2027&lt;14&lt;CITIES&lt;&lt;FACE&lt;TO&lt;FACE&lt;&lt;&lt;&lt;&lt;&lt;&lt;08</p>
+            </div>
+          </div>
+          <div class="book__pages" id="pages">
+            <div class="page" style="--z:4">
+              <div class="page__face page__front">
+                <div class="stamp stamp--red" style="--rot:-8deg"><svg viewBox="0 0 200 200"><defs><path id="c1" d="M100,100 m-72,0 a72,72 0 1,1 144,0 a72,72 0 1,1 -144,0"/></defs><circle cx="100" cy="100" r="92"/><circle cx="100" cy="100" r="58"/><text><textPath href="#c1">FACE TO FACE · GRANITE · 2027 ·</textPath></text></svg><b>01</b></div>
+                <h3 data-i18n="pp.p1">Meaningful, face-to-face conversations</h3>
+                <p data-i18n="pp.p1t">Unhurried one-on-one time at your table — not a three-minute pitch in an aisle of thousands.</p>
+                <span class="page__no mono">02</span>
+              </div>
+              <div class="page__face page__back"><img src="images/DSC_1908.jpg" alt="Advisors meeting exhibitors in Ottawa" loading="lazy"><span class="page__cap mono">FALL 2025 · OTTAWA</span><span class="page__no mono">03</span></div>
+            </div>
+            <div class="page" style="--z:3">
+              <div class="page__face page__front">
+                <div class="stamp stamp--blue" style="--rot:6deg"><svg viewBox="0 0 200 200"><rect x="10" y="40" width="180" height="120" rx="14"/><rect x="22" y="52" width="156" height="96" rx="8"/></svg><b>EDU</b><small>APPROVED</small></div>
+                <h3 data-i18n="pp.p2">Stronger product education</h3>
+                <p data-i18n="pp.p2t">Structured supplier presentations put your story in front of a seated, attentive room of advisors.</p>
+                <span class="page__no mono">04</span>
+              </div>
+              <div class="page__face page__back"><img src="images/DSC_4933.jpg" alt="Supplier presentation in a hangar in Hamilton" loading="lazy"><span class="page__cap mono">FALL 2025 · HAMILTON</span><span class="page__no mono">05</span></div>
+            </div>
+            <div class="page" style="--z:2">
+              <div class="page__face page__front">
+                <div class="stamp stamp--green" style="--rot:-4deg"><svg viewBox="0 0 200 200"><polygon points="100,8 190,60 190,140 100,192 10,140 10,60"/><polygon points="100,26 172,68 172,132 100,174 28,132 28,68"/></svg><b>REL</b><small>ENTRY</small></div>
+                <h3 data-i18n="pp.p3">Deeper relationship building</h3>
+                <p data-i18n="pp.p3t">Networking dinners and toasts turn first meetings into long-term selling partners.</p>
+                <span class="page__no mono">06</span>
+              </div>
+              <div class="page__face page__back"><img src="images/DSC_5482.jpg" alt="Trade show floor beneath a vintage aircraft" loading="lazy"><span class="page__cap mono">FALL 2025 · HAMILTON</span><span class="page__no mono">07</span></div>
+            </div>
+            <div class="page" style="--z:1">
+              <div class="page__face page__front">
+                <div class="stamp stamp--red" style="--rot:10deg"><svg viewBox="0 0 200 200"><defs><path id="c4" d="M100,100 m-72,0 a72,72 0 1,1 144,0 a72,72 0 1,1 -144,0"/></defs><circle cx="100" cy="100" r="92" stroke-dasharray="6 5"/><circle cx="100" cy="100" r="58"/><text><textPath href="#c4">SALES MOMENTUM · BOOKED ·</textPath></text></svg><b>$</b></div>
+                <h3 data-i18n="pp.p4">Real sales momentum</h3>
+                <p data-i18n="pp.p4t">Advisors leave with product knowledge they can book the very next morning.</p>
+                <span class="page__no mono">08</span>
+              </div>
+              <div class="page__face page__back page__back--note">
+                <p class="mono kicker" data-i18n="pp.lim">Limited by design</p>
+                <ul>
+                  <li data-i18n="pp.l1">Presentation spots are limited</li>
+                  <li data-i18n="pp.l2">Vendor space is capped per market</li>
+                  <li data-i18n="pp.l3">Category-exclusive sponsorships on request</li>
+                </ul>
+                <a href="#ticket" class="pill pill--ink"><span data-i18n="pp.early">Secure your place early</span><i class="ar"></i></a>
+                <span class="page__no mono">09</span>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="book__ctrl">
+          <button class="round" id="bookPrev" aria-label="Previous page"><i class="ar ar--l"></i></button>
+          <span class="mono" id="bookPage">1 / 5</span>
+          <button class="round" id="bookNext" aria-label="Next page"><i class="ar"></i></button>
+        </div>
+        <div class="passport-m" id="passportM" aria-hidden="true"></div>
+      </div>
+    </section>
+
+    <!-- ============ CLOCK: ONE EVENING ============ -->
+    <section class="clock" id="evening">
+      <div class="clock__sticky">
+        <div class="wrap clock__grid">
+          <div class="clock__face-wrap">
+            <svg class="clock__face" viewBox="0 0 400 400" aria-hidden="true">
+              <circle cx="200" cy="200" r="190" class="cf-rim"/>
+              <g id="ticks"></g>
+              <path id="arcFill" class="cf-arc" d=""/>
+              <line id="hourHand" class="cf-hour" x1="200" y1="200" x2="200" y2="110"/>
+              <line id="minHand" class="cf-min" x1="200" y1="200" x2="200" y2="62"/>
+              <circle cx="200" cy="200" r="9" class="cf-pin"/>
+            </svg>
+            <div class="clock__digital mono" id="clockDigital">4:00 PM</div>
+          </div>
+          <div class="clock__copy">
+            <p class="mono kicker" data-i18n="ck.kicker">Tonight's itinerary</p>
+            <h2 class="h2" data-i18n-html="ck.title">One evening. <span class="hl">Three acts.</span></h2>
+            <ol class="acts" id="acts">
+              <li class="act" data-from="16" data-to="18"><span class="mono">16:00 — 18:00</span><b data-i18n="ck.a1">Supplier Presentations</b><p data-i18n="ck.a1t">Seated, moderated sessions with video. Each supplier owns the room.</p></li>
+              <li class="act" data-from="18" data-to="19.5"><span class="mono">18:00 — 19:30</span><b data-i18n="ck.a2">Supplier Trade Show</b><p data-i18n="ck.a2t">Draped tables, printed signage, brochures and promos — unrushed conversations.</p></li>
+              <li class="act" data-from="19.5" data-to="20"><span class="mono">19:30 — 20:00</span><b data-i18n="ck.a3">Light Dinner &amp; Prize Giveaways</b><p data-i18n="ck.a3t">A networking dinner and prize draws that send every advisor home happy.</p></li>
+            </ol>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ============ CABIN: WINDOW TESTIMONIALS ============ -->
+    <section class="cabin" id="cabin">
+      <div class="wrap head head--split">
+        <div>
+          <p class="mono kicker rv" data-i18n="cb.kicker">In-flight entertainment</p>
+          <h2 class="h2 rv" data-i18n-html="cb.title">Window seats with <span class="hl">the best views.</span></h2>
+        </div>
+        <p class="lede rv" data-i18n="cb.lede">Five exhibitors, five quick clips filmed on the expo floor. Lift a shade — tap to watch.</p>
+      </div>
+      <div class="fuselage" id="fuselage" data-cursor="Drag">
+        <div class="fuselage__track" id="windows">
+          <button class="win" data-video="zp0zezI4tuI" aria-label="Play: Jose Cervera, BlueBay Hotels & Resorts">
+            <span class="win__frame"><span class="win__glass"><img src="images/yt-zp0zezI4tuI.jpg" alt="" draggable="false"><span class="win__shade"><i></i></span><span class="win__play">▶</span></span></span>
+            <span class="win__tag"><em class="mono">SEAT 12A</em><b>Jose Cervera</b><small>BlueBay Hotels &amp; Resorts</small></span>
+          </button>
+          <button class="win" data-video="xg_gZBNSCDA" aria-label="Play: Nicole Perez, Princess Hotels & Resorts">
+            <span class="win__frame"><span class="win__glass"><img src="images/yt-xg_gZBNSCDA.jpg" alt="" draggable="false"><span class="win__shade"><i></i></span><span class="win__play">▶</span></span></span>
+            <span class="win__tag"><em class="mono">SEAT 13A</em><b>Nicole Perez</b><small>Princess Hotels &amp; Resorts</small></span>
+          </button>
+          <button class="win" data-video="KSQx12RlJkE" aria-label="Play: Herbert Byaruhanga, Bird Uganda Safaris">
+            <span class="win__frame"><span class="win__glass"><img src="images/yt-KSQx12RlJkE.jpg" alt="" draggable="false"><span class="win__shade"><i></i></span><span class="win__play">▶</span></span></span>
+            <span class="win__tag"><em class="mono">SEAT 14A</em><b>Herbert Byaruhanga</b><small>Bird Uganda Safaris</small></span>
+          </button>
+          <button class="win" data-video="WwtXEpUUTTE" aria-label="Play: Luis Chaverri, Amstar DMC">
+            <span class="win__frame"><span class="win__glass"><img src="images/yt-WwtXEpUUTTE.jpg" alt="" draggable="false"><span class="win__shade"><i></i></span><span class="win__play">▶</span></span></span>
+            <span class="win__tag"><em class="mono">SEAT 15A</em><b>Luis Chaverri</b><small>Amstar DMC</small></span>
+          </button>
+          <button class="win" data-video="PEZIhQZDFyU" aria-label="Play: Gavin Jimenez, Sirenis Hotels & Resorts">
+            <span class="win__frame"><span class="win__glass"><img src="images/yt-PEZIhQZDFyU.jpg" alt="" draggable="false"><span class="win__shade"><i></i></span><span class="win__play">▶</span></span></span>
+            <span class="win__tag"><em class="mono">SEAT 16A</em><b>Gavin Jimenez</b><small>Sirenis Hotels &amp; Resorts</small></span>
+          </button>
+        </div>
+      </div>
+
+      <div class="wrap">
+        <div class="pa rv" id="pa">
+          <div class="pa__head mono"><span class="pa__ding" aria-hidden="true">◉ ◉</span><span data-i18n="cb.pa">Passenger announcement</span><span class="pa__nav" id="paNav"></span></div>
+          <p class="pa__text" id="paText" aria-live="polite"></p>
+          <p class="pa__who mono" id="paWho"></p>
+        </div>
+      </div>
+    </section>
+
+    <!-- ============ TICKET BUILDER ============ -->
+    <section class="ticket-sec" id="ticket">
+      <div class="wrap">
+        <div class="head head--split">
+          <div>
+            <p class="mono kicker rv" data-i18n="tk.kicker">2027 Exhibitor registration</p>
+            <h2 class="h2 rv" data-i18n-html="tk.title">Print your <span class="hl">boarding pass.</span></h2>
+          </div>
+          <p class="lede rv" data-i18n="tk.lede">Choose your stops and watch your fare drop. Frequent-flyer status unlocks automatically — Platinum exhibits from just $1,116 CAD per expo.</p>
+        </div>
+
+        <div class="tb">
+          <div class="tb__controls rv">
+            <div class="ctl">
+              <label class="ctl__label mono" for="brand">01 · <span data-i18n="tk.brand">Name on the pass</span></label>
+              <input class="ctl__input" id="brand" maxlength="28" placeholder="Your brand" data-i18n-ph="tk.brandph" autocomplete="organization">
+            </div>
+            <div class="ctl">
+              <span class="ctl__label mono">02 · <span data-i18n="tk.class">Cabin class</span></span>
+              <div class="cls">
+                <label><input type="radio" name="cls" value="ex" checked><span><b data-i18n="tk.c1">Exhibitor</b><em>$1,395 / expo</em><small data-i18n="tk.c1t">Table, signage, dinner, web logo</small></span></label>
+                <label><input type="radio" name="cls" value="pr"><span><b data-i18n="tk.c2">Presenter</b><em data-i18n="tk.wait">Waitlist</em><small data-i18n="tk.c2t">Sold out · join the waitlist</small></span></label>
+              </div>
+            </div>
+            <div class="ctl">
+              <span class="ctl__label mono">03 · <span data-i18n="tk.stops">Select your stops</span>
+                <span class="ctl__quick"><button type="button" data-pick="spring" data-i18n="tk.sp">Spring</button><button type="button" data-pick="fall" data-i18n="tk.fa">Fall</button><button type="button" data-pick="all" data-i18n="tk.all">All 14</button><button type="button" data-pick="none" data-i18n="tk.clr">Clear</button></span>
+              </span>
+              <div class="stops" id="stops"></div>
+            </div>
+            <div class="ctl">
+              <span class="ctl__label mono">04 · <span data-i18n="tk.status">Frequent-flyer status</span></span>
+              <div class="ff" id="ff">
+                <div class="ff__track"><i id="ffFill"></i>
+                  <span style="--p:28.57%" data-t="4"><em class="ff__lbl">SILVER −10%</em></span>
+                  <span style="--p:64.28%" data-t="9"><em class="ff__lbl">GOLD −15%</em></span>
+                  <span style="--p:85.71%" data-t="12"><em class="ff__lbl">PLATINUM −20%</em></span>
+                </div>
+                <p class="ff__msg mono" id="ffMsg"></p>
+              </div>
+            </div>
+            <label class="hst mono"><input type="checkbox" id="hst" checked><i></i><span data-i18n="tk.hst">Add 13% HST (Canadian billing address)</span></label>
+          </div>
+
+          <!-- the ticket -->
+          <div class="pass-wrap rv">
+            <div class="pass" id="pass">
+              <div class="pass__main">
+                <div class="pass__top">
+                  <img src="images/gtte-logo-ink.svg" alt="Granite Travel Trade Expos" width="130">
+                  <span class="mono pass__type" data-i18n="tk.bp">Boarding pass · Exhibitor</span>
+                </div>
+                <div class="pass__name">
+                  <span class="mono" data-i18n="tk.pax">Passenger</span>
+                  <b id="pName">YOUR BRAND</b>
+                </div>
+                <div class="pass__route">
+                  <div><span class="mono" data-i18n="tk.from">From</span><b id="pFrom">———</b><small id="pFromC">—</small></div>
+                  <div class="pass__plane" aria-hidden="true"><svg viewBox="0 0 24 24"><path d="M21 16v-2l-8-5V3.5a1.5 1.5 0 0 0-3 0V9l-8 5v2l8-2.5V19l-2 1.5V22l3.5-1 3.5 1v-1.5L13 19v-5.5z"/></svg><i></i></div>
+                  <div><span class="mono" data-i18n="tk.to">To</span><b id="pTo">———</b><small id="pToC">—</small></div>
+                </div>
+                <div class="pass__codes mono" id="pCodes"></div>
+                <div class="pass__grid mono">
+                  <div><span data-i18n="tk.stopsS">Stops</span><b id="pStops">0</b></div>
+                  <div><span data-i18n="tk.classS">Class</span><b id="pClass">EXHIBITOR</b></div>
+                  <div><span data-i18n="tk.statusS">Status</span><b id="pTier">—</b></div>
+                  <div><span data-i18n="tk.dates">Dates</span><b id="pDates">—</b></div>
+                </div>
+                <div class="pass__fare mono">
+                  <div><span data-i18n="tk.base">Base fare</span><b id="fBase">$0</b></div>
+                  <div class="save"><span data-i18n="tk.disc">Status discount</span><b id="fDisc">−$0</b></div>
+                  <div><span data-i18n="tk.tax">HST</span><b id="fTax">$0</b></div>
+                </div>
+              </div>
+              <div class="pass__stub" id="stub" data-cursor="Tear">
+                <div class="pass__perf" aria-hidden="true"></div>
+                <span class="mono" data-i18n="tk.total">Total CAD</span>
+                <b class="pass__total" id="fTotal">$0</b>
+                <span class="mono pass__per"><span data-i18n="tk.per">per expo</span> <b id="fPer">—</b></span>
+                <span class="mono pass__dep"><span data-i18n="tk.dep">50% deposit</span> <b id="fDep">$0</b></span>
+                <svg class="pass__barcode" id="barcode" viewBox="0 0 120 40" preserveAspectRatio="none" aria-hidden="true"></svg>
+                <span class="mono pass__tear" data-i18n="tk.tear">← drag to tear &amp; check in</span>
+              </div>
+            </div>
+            <button class="pill pill--amber pill--lg pill--block magnet" id="checkin" disabled><span data-i18n="tk.checkin">Check in &amp; register</span><i class="ar"></i></button>
+            <p class="fine" data-i18n="tk.fine">Remaining 50% due 90 days before each series. Every space: custom colour signage · direct access to local advisors · networking dinner · logo on the website · 6–8 ft draped table.</p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ============ AGENTS: LUGGAGE TAG ============ -->
+    <section class="agents" id="agents">
+      <div class="wrap agents__grid">
+        <div class="agents__copy">
+          <p class="mono kicker rv" data-i18n="ag.kicker">Calling all travel advisors</p>
+          <h2 class="h2 rv" data-i18n-html="ag.title">Your flight is free. <span class="hl">The perks are real.</span></h2>
+          <p class="lede rv" data-i18n="ag.lede">Learn from the brands you sell, meet their sales leaders one-on-one, enjoy dinner on us — and maybe go home with a prize.</p>
+          <ul class="perks">
+            <li class="rv"><span class="mono">A</span><b>$20</b><p data-i18n="ag.p1">Mastercard gift card for the first 50 advisors at every expo</p></li>
+            <li class="rv"><span class="mono">B</span><b>80+</b><p data-i18n="ag.p2">Destinations, resorts, cruise lines &amp; tour operators</p></li>
+            <li class="rv"><span class="mono">C</span><b data-i18n="ag.free">Free</b><p data-i18n="ag.p3">Presentations, dinner and prize draws included</p></li>
+          </ul>
+          <div class="opens rv">
+            <p class="mono kicker" data-i18n="ag.window">Advisor registration opens 5 weeks before each expo</p>
+            <div class="opens__row">
+              <div class="opens__flap" id="opensFlap"></div>
+              <p id="opensTxt"></p>
+            </div>
+            <form class="notify" id="notify" novalidate>
+              <label class="sr-only" for="nEmail">Email</label>
+              <input id="nEmail" type="email" placeholder="you@agency.com" data-i18n-ph="ag.ph">
+              <button class="pill pill--ink" type="submit"><span data-i18n="ag.notify">Notify me</span></button>
+            </form>
+          </div>
+        </div>
+        <div class="agents__tag">
+          <div class="tagrig" id="tagrig">
+            <svg class="tagrig__string" id="tagString" viewBox="0 0 400 200" aria-hidden="true"><path id="stringPath" d=""/></svg>
+            <div class="tag" id="tag" data-cursor="Swing" tabindex="0" aria-label="Luggage tag: $20 gift card for the first 50 advisors at every expo">
+              <span class="tag__hole"></span>
+              <div class="tag__img"><img src="images/mastercard-princess.jpg" alt="$20 gift card sponsored by Princess Hotels & Resorts" draggable="false"></div>
+              <div class="tag__body">
+                <span class="mono" data-i18n="ag.tag1">Priority · First 50</span>
+                <b>$20</b>
+                <small data-i18n="ag.tag2">Mastercard gift card at every 2027 expo</small>
+                <div class="tag__code mono">GTTE · 2027 · ADV</div>
+              </div>
+            </div>
+          </div>
+          <p class="mono agents__hint" data-i18n="ag.hint">Grab the tag and give it a swing</p>
+        </div>
+      </div>
+    </section>
+
+    <!-- ============ BAGGAGE CAROUSEL: PARTNERS ============ -->
+    <section class="baggage" id="partners">
+      <div class="wrap head head--center">
+        <p class="mono kicker rv" data-i18n="bg.kicker">Baggage claim · 2026 title sponsors</p>
+        <div class="firstclass">
+          <div class="fc rv"><span class="mono" data-i18n="bg.s1">Hotel &amp; Resort Sponsor</span><img src="images/bahia-principe.png" alt="Bahia Principe Hotels & Resorts" loading="lazy"></div>
+          <div class="fc rv"><span class="mono" data-i18n="bg.s2">Gift Card Sponsor</span><img src="images/princess.jpg" alt="Princess Hotels & Resorts" loading="lazy"></div>
+          <div class="fc rv"><span class="mono" data-i18n="bg.s3">Arctic Experience Partner</span><img src="images/kl-arctic.jpg" alt="Kakslauttanen Arctic Resort" loading="lazy"></div>
+        </div>
+        <h2 class="h2 h2--sm rv" data-i18n-html="bg.title">Some of the brands that <span class="hl">travel with us.</span></h2>
+      </div>
+      <div class="belt" id="belt" data-cursor="Spin">
+        <div class="belt__stage" id="beltStage">
+          <div class="belt__track"></div>
+        </div>
+        <div class="belt__sign mono"><span>CAROUSEL</span><b>2027</b></div>
+      </div>
+      <p class="mono belt__hint" data-i18n="bg.hint">Drag the carousel to spin it</p>
+    </section>
+
+    <!-- ============ POSTCARDS ============ -->
+    <section class="postcards" id="postcards">
+      <div class="wrap head head--split">
+        <div>
+          <p class="mono kicker rv" data-i18n="pc.kicker">Granite Productions · past events</p>
+          <h2 class="h2 rv" data-i18n-html="pc.title">Postcards from <span class="hl">the road.</span></h2>
+        </div>
+        <div class="pc__side rv">
+          <p class="lede" data-i18n="pc.lede">Galas, conferences, launches and expos — produced in-house, captured by our own media team. Drag them around. Tap to flip.</p>
+          <div class="pc__btns">
+            <button class="pill pill--ink" id="shuffle"><span data-i18n="pc.shuffle">Shuffle the pile</span></button>
+            <a class="pill pill--line-ink" href="https://graniteproductions.pixieset.com/" target="_blank" rel="noopener"><span data-i18n="pc.all">All galleries</span><i class="ar ar--out"></i></a>
+          </div>
+        </div>
+      </div>
+      <div class="table-top" id="pile"></div>
+    </section>
+
+    <!-- ============ NEWSSTAND ============ -->
+    <section class="news" id="news">
+      <div class="ticker mono" aria-hidden="true"><div class="ticker__track" id="ticker"></div></div>
+      <div class="wrap">
+        <div class="head head--split">
+          <h2 class="h2 rv" data-i18n-html="nw.title">Read all <span class="hl">about it.</span></h2>
+          <a class="pill pill--line-ink rv" href="https://granitetravelexpos.com/in-the-news/" target="_blank" rel="noopener"><span data-i18n="nw.all">All press releases</span><i class="ar ar--out"></i></a>
+        </div>
+        <div class="papers">
+          <a class="paper rv" href="https://www.travelpress.com/granite-travel-trade-expos-opens-advisor-registration-for-fall-2026-events/" target="_blank" rel="noopener"><span class="paper__mast"><img src="images/press-travelpress.jpg" alt="" loading="lazy"><b>Travel Press</b></span><h3>Granite Travel Trade Expos opens advisor registration for Fall 2026 events</h3><span class="paper__cols"></span><span class="mono paper__read"><span data-i18n="nw.read">Read article</span> ↗</span></a>
+          <a class="paper rv" href="https://www.travelweek.ca/news/events-news/granite-travel-trade-expos-opens-registration-for-fall-2026-series/" target="_blank" rel="noopener"><span class="paper__mast"><img src="images/press-travelweek.jpg" alt="" loading="lazy"><b>Travelweek</b></span><h3>Granite Travel Trade Expos opens registration for Fall 2026 series</h3><span class="paper__cols"></span><span class="mono paper__read"><span data-i18n="nw.read">Read article</span> ↗</span></a>
+          <a class="paper rv" href="https://openjaw.com/buzz-board/2026/09/01/registration-now-open-for-granite-travel-trade-expos-fall-2026-series/" target="_blank" rel="noopener"><span class="paper__mast"><img src="images/press-openjaw.jpg" alt="" loading="lazy"><b>OpenJaw</b></span><h3>Registration now open for Granite Travel Trade Expos Fall 2026 series</h3><span class="paper__cols"></span><span class="mono paper__read"><span data-i18n="nw.read">Read article</span> ↗</span></a>
+          <a class="paper rv" href="https://www.paxnews.com/news/events/granite-travel-trade-expos-opens-registration-fall-2026-series" target="_blank" rel="noopener"><span class="paper__mast"><img src="images/press-pax.jpg" alt="" loading="lazy"><b>PAX News</b></span><h3>Granite Travel Trade Expos opens registration for fall 2026 series</h3><span class="paper__cols"></span><span class="mono paper__read"><span data-i18n="nw.read">Read article</span> ↗</span></a>
+        </div>
+      </div>
+    </section>
+
+    <!-- ============ CREW ============ -->
+    <section class="crew" id="crew">
+      <div class="wrap">
+        <div class="head head--center">
+          <p class="mono kicker rv" data-i18n="cr.kicker">Your crew today</p>
+          <h2 class="h2 rv" data-i18n-html="cr.title">Flown by people who <span class="hl">live travel.</span></h2>
+        </div>
+        <div class="badges" id="badges">
+          <div class="badge rv" tabindex="0"><span class="badge__clip"></span><div class="badge__in"><div class="badge__f"><span class="badge__ini">BD</span><b>Bradley Dean</b><small data-i18n="cr.r1">Managing Director</small><span class="badge__crew mono">CREW · 001</span></div><div class="badge__b"><p data-i18n="cr.b1">Co-founded Quadra Innovations and Granite Productions in 2010, and launched Granite Travel Trade Expos in 2023.</p><span class="badge__crew mono">CREW · 001</span></div></div></div>
+          <div class="badge rv" tabindex="0"><span class="badge__clip"></span><div class="badge__in"><div class="badge__f"><span class="badge__ini">JL</span><b>Jason Lee</b><small data-i18n="cr.r2">Creative Director</small><span class="badge__crew mono">CREW · 002</span></div><div class="badge__b"><p data-i18n="cr.b2">20+ years in tech, from Adobe Acrobat to 360° photography — he captures every expo's photo and video.</p><span class="badge__crew mono">CREW · 002</span></div></div></div>
+          <div class="badge rv" tabindex="0"><span class="badge__clip"></span><div class="badge__in"><div class="badge__f"><span class="badge__ini">SB</span><b>Sal Buccellato</b><small data-i18n="cr.r3">Emcee &amp; Expo Ambassador</small><span class="badge__crew mono">CREW · 003</span></div><div class="badge__b"><p data-i18n="cr.b3">30+ years in the travel trade, including National Sales Director for Bahia Principe Hotels in Canada.</p><span class="badge__crew mono">CREW · 003</span></div></div></div>
+          <div class="badge rv" tabindex="0"><span class="badge__clip"></span><div class="badge__in"><div class="badge__f"><span class="badge__ini">RM</span><b>Rick McCauley</b><small data-i18n="cr.r4">Sales</small><span class="badge__crew mono">CREW · 004</span></div><div class="badge__b"><p data-i18n="cr.b4">40+ years across tour operators and hotels, including 16 years leading Barceló's Canadian market.</p><span class="badge__crew mono">CREW · 004</span></div></div></div>
+          <div class="badge rv" tabindex="0"><span class="badge__clip"></span><div class="badge__in"><div class="badge__f"><span class="badge__ini">AP</span><b>Alexander Portman</b><small data-i18n="cr.r5">Events Consultant</small><span class="badge__crew mono">CREW · 005</span></div><div class="badge__b"><p data-i18n="cr.b5">An international perspective shaped across healthcare, technology, education, travel and philanthropy.</p><span class="badge__crew mono">CREW · 005</span></div></div></div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ============ FINAL CALL ============ -->
+    <section class="final" id="final">
+      <div class="wrap">
+        <div class="final__board" id="finalBoard" aria-label="Final call"></div>
+        <h2 class="final__title" data-i18n-html="fn.title">Build relationships. <span class="hl">Drive business growth.</span></h2>
+        <div class="final__ctas">
+          <a href="#ticket" class="pill pill--amber pill--lg magnet"><span data-i18n="cta.exhibitor">Exhibitor boarding pass</span><i class="ar"></i></a>
+          <a href="#agents" class="pill pill--line pill--lg magnet"><span data-i18n="cta.advisor">I'm a travel advisor</span><i class="ar"></i></a>
+        </div>
+        <div class="final__grid">
+          <form class="announce" id="announce" novalidate>
+            <p class="mono kicker" data-i18n="fn.kicker">Boarding announcements</p>
+            <h3 data-i18n="fn.h">Be first to hear about future expos.</h3>
+            <div class="announce__row">
+              <label class="sr-only" for="aEmail">Email</label>
+              <input id="aEmail" type="email" placeholder="Email address" data-i18n-ph="fn.ph">
+              <button class="pill pill--amber" type="submit"><span data-i18n="fn.join">Join</span></button>
+            </div>
+            <div class="toggle2" role="radiogroup">
+              <label><input type="radio" name="int" checked><span data-i18n="fn.sup">I'm a supplier</span></label>
+              <label><input type="radio" name="int"><span data-i18n="fn.agt">I'm an advisor</span></label>
+            </div>
+            <p class="announce__msg mono" id="aMsg" role="status"></p>
+          </form>
+          <div class="bases">
+            <div class="base"><span class="mono">HOME BASE · YYZ</span><b>Toronto</b><p>140 Yonge Street, Suite 200<br>Toronto, ON M5C 1X6</p></div>
+            <div class="base"><span class="mono">HOME BASE · OAKVILLE</span><b>Oakville</b><p>710 Dorval Drive, Suite 200<br>Oakville, ON L6K 3X9</p></div>
+            <div class="base base--wide"><span class="mono">BRADLEY DEAN · PARTNER</span><a href="tel:+14165655212">416.565.5212</a><a href="mailto:info@graniteproductions.ca">info@graniteproductions.ca</a></div>
+            <div class="socials">
+              <a href="https://www.instagram.com/granitetravelexpos" target="_blank" rel="noopener" aria-label="Instagram"><svg viewBox="0 0 24 24"><rect x="3" y="3" width="18" height="18" rx="5"/><circle cx="12" cy="12" r="4"/><circle cx="17.5" cy="6.5" r="1" fill="currentColor"/></svg></a>
+              <a href="https://www.facebook.com/sharer/sharer.php?u=https%3A%2F%2Fgranitetravelexpos.com" target="_blank" rel="noopener" aria-label="Share on Facebook"><svg viewBox="0 0 24 24"><path d="M14 8h3V4h-3a4 4 0 0 0-4 4v3H7v4h3v6h4v-6h3l1-4h-4V8z"/></svg></a>
+              <a href="https://www.linkedin.com/sharing/share-offsite/?url=https%3A%2F%2Fgranitetravelexpos.com" target="_blank" rel="noopener" aria-label="Share on LinkedIn"><svg viewBox="0 0 24 24"><path d="M4 9h4v11H4zM6 3.5a2 2 0 1 1 0 4 2 2 0 0 1 0-4zM10 9h4v1.6c.6-1 2-1.9 3.6-1.9 3 0 3.9 2 3.9 5V20h-4v-5.4c0-1.4-.3-2.5-1.8-2.5s-1.7 1.1-1.7 2.4V20h-4z"/></svg></a>
+            </div>
+          </div>
+        </div>
+      </div>
+      <footer class="foot">
+        <div class="wrap foot__row mono">
+          <img src="images/gp-logo-white.svg" alt="Granite Productions" width="130">
+          <span>© 2026 Granite Travel Trade Expos · A Granite Productions Inc. event</span>
+          <a href="#top" data-i18n="ft.top">Back to gate ↑</a>
+        </div>
+      </footer>
+    </section>
+  </main>
+
+  <div class="dock" id="dock">
+    <a href="#ticket" class="pill pill--amber"><span data-i18n="cta.pass">Get your pass</span></a>
+    <a href="#agents" class="pill pill--line"><span data-i18n="nav.agents">Advisors</span></a>
+  </div>
+
+  <!-- Seatback video modal -->
+  <div class="modal" id="vModal" role="dialog" aria-modal="true" aria-label="Video testimonial" hidden>
+    <div class="modal__bg" data-close></div>
+    <div class="seatback">
+      <div class="seatback__bar mono"><span>◉ NOW PLAYING</span><span id="vTitle"></span><button data-close aria-label="Close video">✕</button></div>
+      <div class="seatback__screen" id="vFrame"></div>
+      <div class="seatback__btns mono"><span>GRANITE IN-FLIGHT</span><span>CH 2027</span></div>
+    </div>
+  </div>
+
+  <!-- Check-in modal -->
+  <div class="modal" id="ciModal" role="dialog" aria-modal="true" aria-labelledby="ciTitle" hidden>
+    <div class="modal__bg" data-close></div>
+    <div class="checkin">
+      <button class="checkin__x" data-close aria-label="Close">✕</button>
+      <p class="mono kicker" data-i18n="ci.kicker">Online check-in</p>
+      <h3 id="ciTitle" data-i18n="ci.title">Confirm your boarding pass</h3>
+      <div class="ci__steps mono" id="ciSteps"><span class="is-on">1 · <span data-i18n="ci.s1">Passenger</span></span><span>2 · <span data-i18n="ci.s2">Payment</span></span><span>3 · <span data-i18n="ci.s3">Board</span></span></div>
+      <form id="ciForm" novalidate>
+        <div class="ci__panel is-on" data-step="1">
+          <div class="ci__grid">
+            <label class="fld"><span data-i18n="ci.company">Company *</span><input id="cCompany" required></label>
+            <label class="fld"><span data-i18n="ci.contact">Contact person *</span><input id="cContact" required></label>
+            <label class="fld"><span>Email *</span><input id="cEmail" type="email" required></label>
+            <label class="fld"><span data-i18n="ci.phone">Telephone *</span><input id="cPhone" type="tel" required></label>
+            <label class="fld"><span data-i18n="ci.city">City *</span><input id="cCity" required></label>
+            <label class="fld"><span data-i18n="ci.country">Country *</span><select id="cCountry"><option>Canada</option><option>United States</option><option>Mexico</option><option>Dominican Republic</option><option>Jamaica</option><option>Other</option></select></label>
+          </div>
+        </div>
+        <div class="ci__panel" data-step="2">
+          <div class="ci__seg"><span class="mono" data-i18n="ci.cur">Currency</span><label><input type="radio" name="cur" value="CAD" checked><span>CAD</span></label><label><input type="radio" name="cur" value="USD"><span>USD</span></label></div>
+          <div class="ci__seg"><span class="mono" data-i18n="ci.amt">Pay now</span><label><input type="radio" name="amt" value="dep" checked><span data-i18n="ci.dep">50% deposit</span></label><label><input type="radio" name="amt" value="full"><span data-i18n="ci.full">Full amount</span></label></div>
+          <div class="ci__seg"><span class="mono" data-i18n="ci.method">Method</span><label><input type="radio" name="pm" value="cc" checked><span data-i18n="ci.cc">Card +3%</span></label><label><input type="radio" name="pm" value="wire"><span data-i18n="ci.wire">Wire</span></label><label><input type="radio" name="pm" value="eft"><span>EFT</span></label></div>
+          <label class="ci__terms"><input type="checkbox" id="cTerms"><span data-i18n="ci.terms">I agree to the payment terms &amp; cancellation policy.</span></label>
+          <p class="ci__due mono"><span data-i18n="ci.due">Due today</span> <b id="cDue">$0</b></p>
+        </div>
+        <div class="ci__panel ci__done" data-step="3">
+          <div class="printer"><div class="printer__slot"></div><div class="printer__paper" id="printed"></div></div>
+          <h4 data-i18n="ci.done">Boarding pass issued. See you on the tour.</h4>
+          <p data-i18n="ci.donet">This is a design prototype — on the live site, your registration and payment link would be emailed instantly.</p>
+        </div>
+        <div class="ci__foot" id="ciFoot">
+          <button type="button" class="pill pill--line-ink" id="ciBack"><span data-i18n="ci.back">Back</span></button>
+          <button type="button" class="pill pill--amber" id="ciNext"><span id="ciNextTxt" data-i18n="ci.next">Continue</span><i class="ar"></i></button>
+        </div>
+      </form>
+    </div>
+  </div>
+
+  <div class="toast mono" id="toast" role="status" aria-live="polite"></div>
+
+  <script src="https://unpkg.com/lenis@1.1.13/dist/lenis.min.js"></script>
+  <script src="script.js"></script>
+</body>
+</html>
