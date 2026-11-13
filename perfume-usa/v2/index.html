@@ -9,7 +9,7 @@
   <meta name="theme-color" content="#31013a">
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Bodoni+Moda:ital,opsz,wght@0,6..96,400..700;1,6..96,400..700&family=DM+Sans:opsz,wght@9..40,300..700&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,400..800;1,9..144,400..800&family=DM+Sans:opsz,wght@9..40,300..700&display=swap" rel="stylesheet">
   <link rel="preconnect" href="https://images.unsplash.com">
   <link rel="stylesheet" href="style.css">
 </head>
@@ -126,73 +126,59 @@
 
 <main id="top">
 
-<!-- ================= Hero ================= -->
-<section class="hero">
-  <div class="hero__bg" aria-hidden="true">
-    <span class="hero__orb hero__orb--1"></span><span class="hero__orb hero__orb--2"></span>
-    <span class="hero__word" data-parallax="-0.15">Since 2000</span>
+<!-- ================= Hero: animated product showcase ================= -->
+<section class="show" id="hero" aria-roledescription="carousel" aria-label="Featured fragrances">
+  <div class="show__bg" aria-hidden="true">
+    <span class="show__glow" id="showGlow"></span>
+    <span class="show__glow show__glow--2"></span>
+    <div class="show__word"><div class="show__word-track" id="showWord"></div></div>
   </div>
-  <div class="wrap hero__grid">
-    <div class="hero__copy">
-      <a href="#reviews" class="hero__proof" data-anim="fade">
-        <span class="hero__avatars">
+
+  <div class="wrap show__grid">
+    <div class="show__copy">
+      <p class="show__eyebrow" data-anim="fade"><span class="show__pulse"></span>Holiday Sale ends in <span class="show__timer" data-countdown><b data-h>00</b>:<b data-m>00</b>:<b data-s>00</b></span></p>
+      <h1 class="show__title" data-split>Designer fragrance. <em>Authentic.</em> Up to <em>70% off.</em></h1>
+      <p class="show__sub" data-anim="fade">The same Chanel, Dior and YSL bottles sold at department stores, sourced through authorized channels and priced for real life.</p>
+      <div class="show__ctas" data-anim="fade">
+        <a href="#deals" class="btn btn--white btn--xl magnetic"><span>Shop the Holiday Sale</span><svg><use href="#i-arrow"/></svg></a>
+        <a href="#families" class="btn btn--ghost btn--xl magnetic"><span>Find Your Scent</span></a>
+      </div>
+      <a href="#reviews" class="show__proof" data-anim="fade">
+        <span class="show__avatars">
           <img src="https://images.unsplash.com/photo-1438761681033-6461ffad8d80?w=80&h=80&q=70&auto=format&fit=crop&crop=faces" alt="">
           <img src="https://images.unsplash.com/photo-1500648767791-00dcc994a43e?w=80&h=80&q=70&auto=format&fit=crop&crop=faces" alt="">
           <img src="https://images.unsplash.com/photo-1494790108377-be9c29b29330?w=80&h=80&q=70&auto=format&fit=crop&crop=faces" alt="">
+          <img src="https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?w=80&h=80&q=70&auto=format&fit=crop&crop=faces" alt="">
         </span>
-        <span><span class="stars"><svg><use href="#i-star"/></svg><svg><use href="#i-star"/></svg><svg><use href="#i-star"/></svg><svg><use href="#i-star"/></svg><svg><use href="#i-star"/></svg></span> <b>4.9</b> from 12,480 verified buyers</span>
+        <span><span class="stars"><svg><use href="#i-star"/></svg><svg><use href="#i-star"/></svg><svg><use href="#i-star"/></svg><svg><use href="#i-star"/></svg><svg><use href="#i-star"/></svg></span><b>4.9/5</b> from 12,480 verified buyers</span>
       </a>
-      <h1 class="hero__title" data-split>Designer fragrance. <em>Authentic.</em> Up to 70% off.</h1>
-      <p class="hero__sub" data-anim="fade">The same Chanel, Dior and YSL bottles sold at department stores, sourced through authorized channels and priced for real life. Trusted by 2 million customers since 2000.</p>
-      <div class="hero__ctas" data-anim="fade">
-        <a href="#deals" class="btn btn--plum btn--xl magnetic"><span>Shop the Holiday Sale</span><svg><use href="#i-arrow"/></svg></a>
-        <a href="#best" class="btn btn--line btn--xl magnetic"><span>Best Sellers</span></a>
-      </div>
-      <div class="hero__quick" data-anim="fade">
-        <span>Popular:</span>
-        <a href="#best" class="chip">Bleu de Chanel</a><a href="#best" class="chip">Black Opium</a><a href="#best" class="chip">Versace Eros</a><a href="#best" class="chip">La Vie Est Belle</a>
-      </div>
-      <ul class="hero__usps" data-anim="fade">
-        <li><svg><use href="#i-shield"/></svg><span><b>100% Authentic</b>or your money back</span></li>
-        <li><svg><use href="#i-truck"/></svg><span><b>Free shipping</b>on orders $59+</span></li>
-        <li><svg><use href="#i-return"/></svg><span><b>30-day returns</b>hassle-free</span></li>
-      </ul>
     </div>
 
-    <div class="hero__visual">
-      <div class="arch arch--main" data-reveal-img>
-        <img src="https://images.unsplash.com/photo-1592914610354-fd354ea45e48?w=1100&q=80&auto=format&fit=crop" alt="Chanel Coco Mademoiselle on black silk">
-      </div>
-      <div class="arch arch--small" data-reveal-img>
-        <img src="https://images.unsplash.com/photo-1600612253971-422e7f7faeb6?w=600&q=80&auto=format&fit=crop" alt="YSL Black Opium">
-      </div>
-      <svg class="hero__ring" viewBox="0 0 200 200" aria-hidden="true">
-        <defs><path id="heroRing" d="M100,100 m-80,0 a80,80 0 1,1 160,0 a80,80 0 1,1 -160,0"/></defs>
-        <text><textPath href="#heroRing">AUTHENTIC · DESIGNER · FRAGRANCE · SINCE 2000 · </textPath></text>
+    <div class="show__stage" id="showStage">
+      <svg class="show__ring" viewBox="0 0 200 200" aria-hidden="true">
+        <defs><path id="showRing" d="M100,100 m-82,0 a82,82 0 1,1 164,0 a82,82 0 1,1 -164,0"/></defs>
+        <text><textPath href="#showRing">100% AUTHENTIC · FACTORY SEALED · SINCE 2000 · </textPath></text>
       </svg>
-
-      <article class="deal" id="heroDeal">
-        <div class="deal__head">
-          <span class="deal__label"><svg><use href="#i-fire"/></svg>Deal of the Day</span>
-          <span class="deal__timer" data-countdown><b data-h>00</b>:<b data-m>00</b>:<b data-s>00</b></span>
-        </div>
-        <div class="deal__body">
-          <img src="https://images.unsplash.com/photo-1523293182086-7651a899d37f?w=240&h=240&q=75&auto=format&fit=crop" alt="Bleu de Chanel">
-          <div>
-            <small>Chanel</small>
-            <strong>Bleu de Chanel EDP</strong>
-            <div class="deal__price"><b>$121.00</b><s>$155.00</s><em>-22%</em></div>
-          </div>
-        </div>
-        <div class="deal__stock"><span>Only <b>9 left</b> at this price</span><div class="bar"><i style="width:22%"></i></div></div>
-        <button class="btn btn--plum btn--block" type="button" data-qv="bleu"><span>Choose Size &amp; Add</span><svg><use href="#i-arrow"/></svg></button>
-      </article>
-
-      <div class="float-chip float-chip--a"><svg><use href="#i-verified"/></svg><span><b>Verified Authentic</b>Sourced direct</span></div>
-      <div class="float-chip float-chip--b"><b>18,000+</b><span>fragrances in stock</span></div>
+      <div class="show__slides" id="showSlides"></div>
+      <article class="show__card" id="showCard" aria-live="polite"></article>
+      <div class="show__badge" id="showBadge" aria-hidden="true"><span>Up to</span><b>-22%</b></div>
     </div>
   </div>
-  <a href="#brands" class="hero__scroll" aria-label="Scroll down"><span></span>Scroll</a>
+
+  <div class="wrap show__controls">
+    <div class="show__thumbs" id="showThumbs" role="tablist" aria-label="Choose fragrance"></div>
+    <div class="show__arrows">
+      <button class="show__arrow" type="button" aria-label="Previous fragrance" data-show="-1"><svg><use href="#i-left"/></svg></button>
+      <button class="show__arrow" type="button" aria-label="Next fragrance" data-show="1"><svg><use href="#i-right"/></svg></button>
+    </div>
+  </div>
+
+  <div class="show__ticker" aria-hidden="true">
+    <div class="show__ticker-track">
+      <span><svg><use href="#i-shield"/></svg>100% authentic or your money back</span><i>✦</i><span><svg><use href="#i-truck"/></svg>Free US shipping over $59</span><i>✦</i><span><svg><use href="#i-clock"/></svg>Order by 2pm ET, ships same day</span><i>✦</i><span><svg><use href="#i-return"/></svg>30-day easy returns</span><i>✦</i><span><svg><use href="#i-tag"/></svg>Extra 15% off with code SINCE2000</span><i>✦</i><span><svg><use href="#i-star"/></svg>Rated 4.9 by 12,480 buyers</span><i>✦</i>
+      <span><svg><use href="#i-shield"/></svg>100% authentic or your money back</span><i>✦</i><span><svg><use href="#i-truck"/></svg>Free US shipping over $59</span><i>✦</i><span><svg><use href="#i-clock"/></svg>Order by 2pm ET, ships same day</span><i>✦</i><span><svg><use href="#i-return"/></svg>30-day easy returns</span><i>✦</i><span><svg><use href="#i-tag"/></svg>Extra 15% off with code SINCE2000</span><i>✦</i><span><svg><use href="#i-star"/></svg>Rated 4.9 by 12,480 buyers</span><i>✦</i>
+    </div>
+  </div>
 </section>
 
 <!-- ================= Brand marquee ================= -->

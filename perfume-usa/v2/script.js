@@ -83,7 +83,7 @@
   });
 
   /* ================= Reveal on scroll ================= */
-  $$(".hero [data-anim]").forEach((el, i) => el.style.setProperty("--d", 250 + i * 110 + "ms"));
+  $$(".show [data-anim]").forEach((el, i) => el.style.setProperty("--d", 500 + i * 120 + "ms"));
   const io = new IntersectionObserver(entries => entries.forEach(en => {
     if (!en.isIntersecting) return;
     en.target.classList.add("is-in");
@@ -251,6 +251,102 @@
     setTimeout(() => { $("small", b).textContent = "Copy"; }, 2000);
   }));
 
+  /* ================= Showcase hero ================= */
+  const SHOW = [
+    { id: "bleu", tint: "#2b3a8f", img: IMG.bleu },
+    { id: "coco-mlle", tint: "#a8566c", img: IMG.cocoMlleDark },
+    { id: "opium", tint: "#5d4c72", img: IMG.opium },
+    { id: "eros", tint: "#16706f", img: IMG.eros },
+    { id: "lavie", tint: "#b8607e", img: IMG.lavie }
+  ];
+  const showEl = $(".show"), slidesEl = $("#showSlides"), thumbsEl = $("#showThumbs"), cardEl = $("#showCard");
+  const showState = { i: 0, type: null, size: 1 };
+  slidesEl.innerHTML = SHOW.map((s, i) => {
+    const p = byId(s.id);
+    return `<div class="sl" data-i="${i}" role="group" aria-label="${p.brand} ${p.name}"><img src="${U(s.img, 900)}" alt="${p.brand} ${p.name}" ${i ? 'loading="lazy"' : ""}><span class="sl__tag">Next · ${p.name}</span></div>`;
+  }).join("");
+  thumbsEl.innerHTML = SHOW.map((s, i) => {
+    const p = byId(s.id);
+    return `<button class="show__thumb" type="button" role="tab" data-i="${i}" aria-label="${p.name}"><img src="${U(s.img, 120, 120)}" alt=""><b>${p.name}</b><i></i></button>`;
+  }).join("");
+
+  function showCard(animate) {
+    const p = byId(SHOW[showState.i].id), sizes = p.types[showState.type], s = sizes[showState.size];
+    const html = `
+      <div class="sc__top"><span class="sc__brand">${p.brand}</span><span class="sc__rating"><svg><use href="#i-star"/></svg>${p.rating} · ${p.reviews.toLocaleString()} reviews</span></div>
+      <h2 class="sc__name">${p.name}</h2>
+      <p class="sc__notes">${p.notes.split(".")[0]}.</p>
+      <div class="sc__types">${Object.keys(p.types).map(k => `<button type="button" class="${k === showState.type ? "is-on" : ""}" data-st="${k}">${k}</button>`).join("")}</div>
+      <div class="sc__sizes">${sizes.map((x, i) => `<button type="button" class="${i === showState.size ? "is-on" : ""}" data-ss="${i}">${x.s}</button>`).join("")}</div>
+      <div class="sc__price"><b>${money(s.p)}</b><s>${money(s.r)}</s><em>Save ${offPct(s)}%</em></div>
+      <div class="sc__buy"><button class="btn btn--plum" type="button" data-sadd><svg><use href="#i-bag"/></svg><span>Add to Bag</span></button><button class="sc__qv" type="button" aria-label="Quick view ${p.name}" data-qv="${p.id}"><svg><use href="#i-eye"/></svg></button></div>
+      <p class="sc__stock"><svg><use href="#i-fire"/></svg>${p.stock ? `Only ${p.stock} left at this price` : `${p.sold} sold in the last 24 hours`}</p>`;
+    if (!animate) { cardEl.innerHTML = html; return; }
+    cardEl.classList.add("is-swap");
+    setTimeout(() => { cardEl.innerHTML = html; cardEl.classList.add("is-swap"); void cardEl.offsetWidth; cardEl.classList.remove("is-swap"); }, 380);
+  }
+  function showGo(n, first) {
+    const N = SHOW.length;
+    showState.i = (n + N) % N;
+    const p = byId(SHOW[showState.i].id);
+    showState.type = Object.keys(p.types)[0]; showState.size = 1;
+    $$(".sl", slidesEl).forEach((el, i) => {
+      const d = (i - showState.i + N) % N;
+      el.dataset.pos = d === 0 ? "0" : d === 1 ? "1" : d === 2 ? "2" : d === N - 1 ? "-1" : "far";
+    });
+    $$(".show__thumb", thumbsEl).forEach((t, i) => {
+      t.classList.remove("is-on"); t.classList.toggle("is-done", i < showState.i); t.setAttribute("aria-selected", i === showState.i);
+    });
+    const on = $$(".show__thumb", thumbsEl)[showState.i]; void on.offsetWidth; on.classList.add("is-on");
+    showEl.style.setProperty("--tint", SHOW[showState.i].tint);
+    const word = $("#showWord");
+    const fill = () => { const t = `<span>${p.name}</span>`.repeat(3); word.innerHTML = t + t; };
+    if (first) fill(); else { word.classList.add("is-swap"); setTimeout(() => { fill(); word.classList.remove("is-swap"); }, 500); }
+    const badge = $("#showBadge");
+    $("b", badge).textContent = `-${bestOff(p)}%`;
+    badge.classList.remove("pop"); void badge.offsetWidth; badge.classList.add("pop");
+    showCard(!first);
+  }
+  thumbsEl.addEventListener("click", e => { const t = e.target.closest(".show__thumb"); if (t) showGo(+t.dataset.i); });
+  thumbsEl.addEventListener("animationend", e => { if (e.animationName === "fill") showGo(showState.i + 1); });
+  $$("[data-show]").forEach(b => b.addEventListener("click", () => showGo(showState.i + +b.dataset.show)));
+  slidesEl.addEventListener("click", e => {
+    const sl = e.target.closest(".sl"); if (!sl) return;
+    const pos = sl.dataset.pos;
+    if (pos === "1") showGo(showState.i + 1); else if (pos === "2") showGo(showState.i + 2); else if (pos === "-1") showGo(showState.i - 1);
+    else if (pos === "0") openQV(SHOW[showState.i].id);
+  });
+  cardEl.addEventListener("click", e => {
+    const t = e.target.closest("[data-st]"), s = e.target.closest("[data-ss]"), add = e.target.closest("[data-sadd]");
+    if (t) { showState.type = t.dataset.st; const n = byId(SHOW[showState.i].id).types[showState.type].length; if (showState.size >= n) showState.size = n - 1; showCard(false); }
+    if (s) { showState.size = +s.dataset.ss; showCard(false); }
+    if (add) { addToCart(SHOW[showState.i].id, showState.type, showState.size, 1); open("cart"); }
+  });
+  /* pause on hover / when out of view / tab hidden */
+  const stage = $("#showStage");
+  stage.addEventListener("mouseenter", () => showEl.classList.add("is-paused"));
+  stage.addEventListener("mouseleave", () => showEl.classList.remove("is-paused"));
+  new IntersectionObserver(([en]) => showEl.classList.toggle("is-out", !en.isIntersecting), { threshold: .2 }).observe(showEl);
+  const syncPause = () => showEl.classList.toggle("is-paused", document.hidden || showEl.classList.contains("is-out") || stage.matches(":hover"));
+  document.addEventListener("visibilitychange", syncPause);
+  new MutationObserver(syncPause).observe(showEl, { attributes: true, attributeFilter: ["class"] });
+  /* swipe */
+  let ssx = null;
+  stage.addEventListener("touchstart", e => { ssx = e.touches[0].clientX; }, { passive: true });
+  stage.addEventListener("touchend", e => { if (ssx === null) return; const dx = e.changedTouches[0].clientX - ssx; if (Math.abs(dx) > 40) showGo(showState.i + (dx < 0 ? 1 : -1)); ssx = null; });
+  /* pointer parallax */
+  if (fine) {
+    const glow = $("#showGlow");
+    showEl.addEventListener("mousemove", e => {
+      const r = showEl.getBoundingClientRect(), px = (e.clientX - r.left) / r.width - .5, py = (e.clientY - r.top) / r.height - .5;
+      slidesEl.style.transform = `rotateY(${px * 8}deg) rotateX(${-py * 6}deg)`;
+      glow.style.translate = `${px * 60}px ${py * 50}px`;
+      cardEl.style.translate = `${px * -14}px ${py * -10}px`;
+    });
+    showEl.addEventListener("mouseleave", () => { slidesEl.style.transform = ""; glow.style.translate = ""; cardEl.style.translate = ""; });
+  }
+  showGo(0, true);
+
   /* ================= Statement highlight ================= */
   const st = $("#statement");
   (function splitStatement() {
@@ -348,15 +444,17 @@
     });
 
     /* Parallax */
+    ScrollTrigger.matchMedia({ "(min-width: 1025px)": function () {
+      gsap.to(".show__copy", { y: -90, opacity: .25, ease: "none", scrollTrigger: { trigger: ".show", start: "top top", end: "bottom top", scrub: true } });
+      gsap.to(".show__stage", { y: 70, scale: .93, ease: "none", scrollTrigger: { trigger: ".show", start: "top top", end: "bottom top", scrub: true } });
+    } });
+    gsap.to(".show__word", { xPercent: -12, ease: "none", scrollTrigger: { trigger: ".show", start: "top top", end: "bottom top", scrub: true } });
     $$("[data-parallax-img]").forEach(img => {
       gsap.fromTo(img, { yPercent: -6 }, { yPercent: 6, ease: "none", scrollTrigger: { trigger: img.parentElement, start: "top bottom", end: "bottom top", scrub: true } });
     });
     $$("[data-parallax]").forEach(el => {
       gsap.to(el, { yPercent: parseFloat(el.dataset.parallax) * 100, ease: "none", scrollTrigger: { trigger: el.closest("section"), start: "top top", end: "bottom top", scrub: true } });
     });
-    gsap.to(".deal", { y: -40, ease: "none", scrollTrigger: { trigger: ".hero", start: "top top", end: "bottom top", scrub: true } });
-    gsap.to(".arch--small", { y: -70, ease: "none", scrollTrigger: { trigger: ".hero", start: "top top", end: "bottom top", scrub: true } });
-    gsap.to(".hero__ring", { y: 60, ease: "none", scrollTrigger: { trigger: ".hero", start: "top top", end: "bottom top", scrub: true } });
     /* brand marquee skews with scroll velocity */
     let skewTo = gsap.quickTo(".brandline__track", "skewX", { duration: .5, ease: "power3" });
     ScrollTrigger.create({ onUpdate: self => skewTo(Math.max(-8, Math.min(8, self.getVelocity() / -300))) });
