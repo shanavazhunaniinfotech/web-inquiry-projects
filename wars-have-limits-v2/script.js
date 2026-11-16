@@ -335,8 +335,27 @@
     $$('.donut circle[data-d]', el).forEach(c => c.setAttribute('stroke-dasharray', `${c.dataset.d - 0.6} ${100 - c.dataset.d + 0.6}`));
     io.unobserve(el);
   }), { threshold: 0.12, rootMargin: '0px 0px -6% 0px' });
-  $$('.rv, .reveal-img, [data-viz], .feature, .scard, .hero__facts, .mission').forEach(el => io.observe(el));
+  $$('.rv, .reveal-img, [data-viz], .feature, .scard, .mission').forEach(el => io.observe(el));
 
   /* stagger siblings */
   $$('.goals, .team, .cost__stats, .acts, #jlist').forEach(g => [...g.children].forEach((c, i) => (c.style.transitionDelay = i * 90 + 'ms')));
+
+  /* ---------- Hero slideshow ---------- */
+  const hero = $('.hero'), slides = $$('.hs'), dots = $$('.hdot'), cap = $('#heroCap');
+  const caps = ['Campaign image — the human cost of war', 'Placeholder — families rebuilding after conflict', 'Placeholder — civilian voices, in their own words'];
+  const HDUR = 7000; let hi = 0, ht, hLeft = HDUR, hStart = 0;
+  hero.style.setProperty('--hdur', HDUR / 1000 + 's');
+  function heroGo(n) {
+    hi = (n + slides.length) % slides.length;
+    slides.forEach((s, i) => s.classList.toggle('is-on', i === hi));
+    dots.forEach((d, i) => { d.classList.remove('is-on'); void d.offsetWidth; d.classList.toggle('is-on', i === hi); d.setAttribute('aria-selected', i === hi); });
+    cap.style.opacity = 0; setTimeout(() => { cap.textContent = caps[hi]; cap.style.opacity = 1; }, 250);
+    hLeft = HDUR; heroTimer();
+  }
+  function heroTimer() { clearTimeout(ht); if (reduce) return; hStart = Date.now(); ht = setTimeout(() => heroGo(hi + 1), hLeft); }
+  dots.forEach(d => d.addEventListener('click', () => heroGo(+d.dataset.i)));
+  $('.hcard').addEventListener('mouseenter', () => { clearTimeout(ht); hLeft -= Date.now() - hStart; hero.classList.add('is-paused'); });
+  $('.hcard').addEventListener('mouseleave', () => { hero.classList.remove('is-paused'); heroTimer(); });
+  heroTimer();
+  $('#heroCard').addEventListener('click', () => openStory(1));
 })();
