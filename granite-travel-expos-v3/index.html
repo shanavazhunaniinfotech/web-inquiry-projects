@@ -1,0 +1,415 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Granite Travel Trade Expos · The World, in Your City</title>
+  <meta name="description" content="Granite Travel Trade Expos bring global travel suppliers from 20+ countries to top-performing travel advisors in 14 Canadian cities. Spring & Fall 2027.">
+  <meta name="theme-color" content="#f3f2ee">
+  <link rel="icon" href="images/gtte-mark.svg" type="image/svg+xml">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Archivo:ital,wdth,wght@0,62..125,100..900;1,62..125,100..900&family=Fragment+Mono&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="style.css">
+</head>
+<body class="is-loading">
+
+  <div class="loader" id="loader" aria-hidden="true">
+    <div class="loader__word" id="loaderWord">GRANITE</div>
+    <div class="loader__row mono"><span>Granite Travel Trade Expos</span><span id="loaderPct">000</span><span>2027</span></div>
+    <div class="loader__bar"><i id="loaderBar"></i></div>
+  </div>
+
+  <div class="cursor" id="cursor" aria-hidden="true"><span id="cursorTxt"></span></div>
+  <div class="gridlines" aria-hidden="true"><i></i><i></i><i></i><i></i><i></i><i></i></div>
+
+  <!-- ========= NAV ========= -->
+  <header class="nav" id="nav">
+    <a href="#top" class="nav__logo" aria-label="Granite Travel Trade Expos — home"><img src="images/gtte-logo-ink.svg" alt="Granite Travel Trade Expos" width="150" height="50"></a>
+    <nav class="nav__idx mono" aria-label="Primary">
+      <a href="#world"><sup>01</sup><span data-i18n="nav.world">World</span></a>
+      <a href="#sides"><sup>02</sup><span data-i18n="nav.sides">Sides</span></a>
+      <a href="#tour"><sup>03</sup><span data-i18n="nav.tour">Tour</span></a>
+      <a href="#voices"><sup>04</sup><span data-i18n="nav.voices">Voices</span></a>
+      <a href="#price"><sup>05</sup><span data-i18n="nav.price">Exhibit</span></a>
+      <a href="#advisors"><sup>06</sup><span data-i18n="nav.adv">Advisors</span></a>
+      <a href="#gallery"><sup>07</sup><span data-i18n="nav.gallery">Gallery</span></a>
+    </nav>
+    <div class="nav__r">
+      <div class="lang mono" role="group" aria-label="Language">
+        <button data-lang="en" class="on" aria-pressed="true">EN</button><button data-lang="es" aria-pressed="false">ES</button><button data-lang="fr" aria-pressed="false">FR</button>
+      </div>
+      <a href="#price" class="btn btn--ink nav__cta"><span data-i18n="cta.exhibit">Exhibit 2027</span></a>
+      <button class="burger" id="burger" aria-label="Menu" aria-expanded="false"><i></i><i></i></button>
+    </div>
+  </header>
+  <div class="menu" id="menu" aria-hidden="true">
+    <nav class="menu__list">
+      <a href="#world"><sup class="mono">01</sup><span data-i18n="nav.world">World</span></a>
+      <a href="#sides"><sup class="mono">02</sup><span data-i18n="nav.sides">Sides</span></a>
+      <a href="#tour"><sup class="mono">03</sup><span data-i18n="nav.tour">Tour</span></a>
+      <a href="#voices"><sup class="mono">04</sup><span data-i18n="nav.voices">Voices</span></a>
+      <a href="#price"><sup class="mono">05</sup><span data-i18n="nav.price">Exhibit</span></a>
+      <a href="#advisors"><sup class="mono">06</sup><span data-i18n="nav.adv">Advisors</span></a>
+      <a href="#gallery"><sup class="mono">07</sup><span data-i18n="nav.gallery">Gallery</span></a>
+      <a href="#contact"><sup class="mono">08</sup><span data-i18n="nav.contact">Contact</span></a>
+    </nav>
+  </div>
+
+  <main id="top">
+
+    <!-- ========= HERO / GLOBE ========= -->
+    <section class="hero" id="world">
+      <div class="hero__copy">
+        <p class="label mono"><span class="sq"></span><span data-i18n="hero.label">(01) Spring &amp; Fall 2027 — 14 Canadian cities</span></p>
+        <h1 class="hero__title">
+          <span class="stretch" data-i18n="hero.t1">The world,</span>
+          <span class="stretch stretch--red" data-i18n="hero.t2">in your city.</span>
+        </h1>
+        <p class="hero__lead" data-i18n="hero.lead">Granite Travel Trade Expos fly destinations, resorts, cruise lines and tour operators from more than twenty countries straight to the top-performing travel advisors in Canada's most influential secondary markets.</p>
+        <div class="hero__ctas">
+          <a href="#price" class="btn btn--red btn--lg magnet"><span data-i18n="cta.exhibit2">Exhibit in 2027</span><i class="ar"></i></a>
+          <a href="#advisors" class="btn btn--line btn--lg magnet"><span data-i18n="cta.adv">I'm a travel advisor</span><i class="ar"></i></a>
+        </div>
+      </div>
+      <div class="globe" id="globeWrap" data-cursor="Spin">
+        <canvas id="globe" aria-label="Interactive globe showing exhibitors from around the world flying to 14 Canadian expo cities" role="img"></canvas>
+        <div class="globe__tip" id="globeTip" hidden></div>
+        <p class="globe__hint mono" data-i18n="hero.hint">Drag to spin · hover a red origin</p>
+      </div>
+      <div class="hero__stats">
+        <div><b class="cnt" data-to="20">0</b><b>+</b><span data-i18n="hero.s1">countries &amp; territories exhibiting</span></div>
+        <div><b class="cnt" data-to="80">0</b><b>+</b><span data-i18n="hero.s2">global exhibitors in 2026</span></div>
+        <div><b class="cnt" data-to="1500">0</b><b>+</b><span data-i18n="hero.s3">advisors in a single series</span></div>
+        <div><b class="cnt" data-to="14">0</b><span data-i18n="hero.s4">cities on the 2027 tour</span></div>
+      </div>
+      <div class="hero__feed mono" aria-live="off"><span class="dot"></span><span id="feed">LIVE — Jamaica → London, ON</span></div>
+    </section>
+
+    <!-- ========= KINETIC MANIFESTO ========= -->
+    <section class="kinetic" id="kinetic">
+      <div class="kinetic__sticky">
+        <p class="label mono"><span class="sq"></span><span data-i18n="k.label">(02) Boutique by design</span></p>
+        <div class="kinetic__lines" id="kLines">
+          <span class="kl" data-i18n="k.l1">Not the</span>
+          <span class="kl kl--out" data-i18n="k.l2">biggest.</span>
+          <span class="kl kl--red" data-i18n="k.l3">On purpose.</span>
+        </div>
+        <p class="kinetic__p" id="kP" data-i18n="k.p">When suppliers show up in an advisor's own community, it's noticed. It's appreciated. And it converts.</p>
+      </div>
+    </section>
+
+    <section class="benefits">
+      <ol class="rows" id="rows">
+        <li class="row rv" data-img="images/DSC_1908.jpg"><span class="row__n mono">01</span><h3 data-i18n="b.1">Face-to-face conversations</h3><p data-i18n="b.1t">Unhurried one-on-one time at your table — not a three-minute pitch in an aisle of thousands.</p></li>
+        <li class="row rv" data-img="images/DSC_4665.jpg"><span class="row__n mono">02</span><h3 data-i18n="b.2">Stronger product education</h3><p data-i18n="b.2t">Structured presentations in front of a seated, attentive room of advisors.</p></li>
+        <li class="row rv" data-img="images/DSC_5482.jpg"><span class="row__n mono">03</span><h3 data-i18n="b.3">Deeper relationships</h3><p data-i18n="b.3t">Networking dinners turn first meetings into long-term selling partners.</p></li>
+        <li class="row rv" data-img="images/DSC_4933.jpg"><span class="row__n mono">04</span><h3 data-i18n="b.4">Real sales momentum</h3><p data-i18n="b.4t">Advisors leave with product knowledge they can book the very next morning.</p></li>
+      </ol>
+      <div class="rows__img" id="rowsImg" aria-hidden="true"><img id="rowsImgEl" src="images/DSC_1908.jpg" alt=""></div>
+    </section>
+
+    <!-- ========= SPLIT: CHOOSE YOUR SIDE ========= -->
+    <section class="sides" id="sides">
+      <div class="sides__head">
+        <p class="label mono"><span class="sq"></span><span data-i18n="sd.label">(03) Two sides, one room</span></p>
+        <h2 class="h2" data-i18n-html="sd.title">Which side <em>are you on?</em></h2>
+      </div>
+      <div class="split" id="split" style="--x:50%">
+        <div class="split__pane split__pane--a">
+          <img src="images/DSC_1908.jpg" alt="" class="split__bg">
+          <div class="split__in">
+            <span class="mono split__tag" data-i18n="sd.aTag">For exhibitors</span>
+            <h3 data-i18n="sd.aT">Meet the advisors who actually sell you.</h3>
+            <ul>
+              <li data-i18n="sd.a1">Direct access to engaged local advisors</li>
+              <li data-i18n="sd.a2">Custom colour-printed signage</li>
+              <li data-i18n="sd.a3">Networking dinner participation</li>
+              <li data-i18n="sd.a4">Logo on the website · 6–8 ft draped table</li>
+            </ul>
+            <a href="#price" class="btn btn--white"><span data-i18n="sd.aC">Build your tour</span><i class="ar"></i></a>
+          </div>
+        </div>
+        <div class="split__pane split__pane--b">
+          <img src="images/DSC_4665.jpg" alt="" class="split__bg">
+          <div class="split__in">
+            <span class="mono split__tag" data-i18n="sd.bTag">For travel advisors</span>
+            <h3 data-i18n="sd.bT">The world's best suppliers, a short drive away.</h3>
+            <ul>
+              <li data-i18n="sd.b1">Free to attend — dinner on us</li>
+              <li data-i18n="sd.b2">$20 Mastercard for the first 50 advisors</li>
+              <li data-i18n="sd.b3">Product training from 80+ brands</li>
+              <li data-i18n="sd.b4">Prize giveaways every evening</li>
+            </ul>
+            <a href="#advisors" class="btn btn--ink"><span data-i18n="sd.bC">Get notified</span><i class="ar"></i></a>
+          </div>
+        </div>
+        <div class="split__handle" id="splitHandle" role="slider" tabindex="0" aria-label="Drag to compare exhibitor and advisor benefits" aria-valuemin="0" aria-valuemax="100" aria-valuenow="50">
+          <span class="split__knob"><i class="ar ar--l"></i><i class="ar"></i></span>
+          <span class="split__lbl split__lbl--l mono" data-i18n="sd.l">Exhibitors</span>
+          <span class="split__lbl split__lbl--r mono" data-i18n="sd.r">Advisors</span>
+        </div>
+      </div>
+    </section>
+
+    <!-- ========= TOUR: HORIZONTAL ========= -->
+    <section class="tour" id="tour">
+      <div class="tour__sticky">
+        <div class="tour__top">
+          <p class="label mono"><span class="sq sq--w"></span><span data-i18n="t.label">(04) The 2027 tour</span></p>
+          <div class="ruler mono" id="ruler" aria-hidden="true"></div>
+        </div>
+        <div class="tour__track" id="tourTrack">
+          <div class="tcard tcard--intro">
+            <h2 class="h2" data-i18n-html="t.title">Fourteen cities. <em>Two seasons.</em></h2>
+            <p data-i18n="t.p">Strategically selected markets where advisors actively sell — and where suppliers rarely get the room to themselves.</p>
+            <span class="mono tour__hint" data-i18n="t.hint">Scroll — the tour moves sideways →</span>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ========= EVENING SCRUBBER ========= -->
+    <section class="evening" id="evening">
+      <div class="evening__head">
+        <p class="label mono"><span class="sq"></span><span data-i18n="e.label">(05) One evening</span></p>
+        <h2 class="h2" data-i18n-html="e.title">Drag through <em>the night.</em></h2>
+      </div>
+      <div class="stage" id="stage">
+        <img src="images/DSC_4665.jpg" alt="Supplier presentation" class="stage__img on">
+        <img src="images/DSC_1908.jpg" alt="Supplier trade show" class="stage__img">
+        <img src="images/st-kitts-event.jpg" alt="Dinner and prize giveaways" class="stage__img">
+        <div class="stage__info">
+          <span class="mono stage__time" id="stTime">4:00 PM</span>
+          <h3 id="stTitle" data-i18n="e.a1">Supplier Presentations</h3>
+          <p id="stText" data-i18n="e.a1t">Seated, moderated sessions with video — every supplier owns the room for their story.</p>
+        </div>
+      </div>
+      <div class="scrub" id="scrub">
+        <div class="scrub__track" id="scrubTrack">
+          <span class="scrub__seg" style="--w:50%" data-i18n="e.s1">Presentations</span>
+          <span class="scrub__seg" style="--w:37.5%" data-i18n="e.s2">Trade show</span>
+          <span class="scrub__seg" style="--w:12.5%" data-i18n="e.s3">Dinner</span>
+          <i class="scrub__fill" id="scrubFill"></i>
+          <button class="scrub__knob" id="scrubKnob" role="slider" aria-label="Time of evening" aria-valuemin="16" aria-valuemax="20" aria-valuenow="16"><span class="mono" id="scrubLbl">4:00</span></button>
+        </div>
+        <div class="scrub__ticks mono"><span>4 PM</span><span>5</span><span>6</span><span>7</span><span>8 PM</span></div>
+      </div>
+    </section>
+
+    <!-- ========= VOICES: SWIPE DECK ========= -->
+    <section class="voices" id="voices">
+      <div class="voices__grid">
+        <div class="voices__copy">
+          <p class="label mono"><span class="sq sq--w"></span><span data-i18n="v.label">(06) Voices from the floor</span></p>
+          <h2 class="h2" data-i18n-html="v.title">Swipe through <em>the proof.</em></h2>
+          <p class="voices__p" data-i18n="v.p">Five exhibitors on camera, four in writing. Fling a card away to see the next — tap a video to play it right there.</p>
+          <div class="deck__ctrl">
+            <button class="round round--w" id="dPrev" aria-label="Previous card"><i class="ar ar--l"></i></button>
+            <span class="mono" id="dCount">01 / 09</span>
+            <button class="round round--w" id="dNext" aria-label="Next card"><i class="ar"></i></button>
+          </div>
+        </div>
+        <div class="deck" id="deck" data-cursor="Fling"></div>
+      </div>
+    </section>
+
+    <!-- ========= PRICE EQUALIZER ========= -->
+    <section class="price" id="price">
+      <div class="price__head">
+        <p class="label mono"><span class="sq"></span><span data-i18n="p.label">(07) 2027 exhibitor registration</span></p>
+        <h2 class="h2" data-i18n-html="p.title">More stops, <em>lower fare.</em></h2>
+        <p class="price__lead" data-i18n="p.lead">Tap cities to build your tour and watch the equalizer drop. 4–8 expos save 10%, 9–11 save 15%, 12–14 save 20% — as low as $1,116 CAD per expo.</p>
+      </div>
+      <div class="eq">
+        <div class="eq__left">
+          <div class="eq__bars" id="eqBars" aria-hidden="true"></div>
+          <div class="eq__cities" id="eqCities"></div>
+          <div class="eq__quick mono">
+            <button data-pick="spring" data-i18n="p.sp">Spring</button><button data-pick="fall" data-i18n="p.fa">Fall</button><button data-pick="all" data-i18n="p.all">All 14</button><button data-pick="none" data-i18n="p.clr">Clear</button>
+          </div>
+        </div>
+        <aside class="eq__sum" aria-live="polite">
+          <div class="eq__pkg">
+            <label><input type="radio" name="pkg" value="ex" checked><span><b data-i18n="p.ex">Exhibit-only</b><em class="mono">$1,395</em></span></label>
+            <label><input type="radio" name="pkg" value="pr"><span><b data-i18n="p.pr">Presentation + Exhibit</b><em class="mono" data-i18n="p.wait">Waitlist</em></span></label>
+          </div>
+          <span class="mono eq__k" data-i18n="p.total">Total (CAD)</span>
+          <div class="odo" id="odo" aria-label="$0"></div>
+          <div class="eq__rows mono">
+            <div><span data-i18n="p.n">Expos</span><b id="sN">0</b></div>
+            <div><span data-i18n="p.tier">Discount</span><b id="sPct">—</b></div>
+            <div><span data-i18n="p.per">Per expo</span><b id="sPer">—</b></div>
+            <div><span data-i18n="p.save">You save</span><b id="sSave" class="save">$0</b></div>
+            <div><span data-i18n="p.dep">50% deposit</span><b id="sDep">$0</b></div>
+          </div>
+          <label class="tgl mono"><input type="checkbox" id="hst" checked><i></i><span data-i18n="p.hst">Include 13% HST</span></label>
+          <button class="btn btn--red btn--lg btn--block magnet" id="regOpen" disabled><span data-i18n="p.cta">Register these expos</span><i class="ar"></i></button>
+          <p class="eq__fine" data-i18n="p.fine">50% deposit on registration · balance due 90 days before each series · category-exclusive sponsorships on request.</p>
+        </aside>
+      </div>
+    </section>
+
+    <!-- ========= ADVISORS: SCRATCH ========= -->
+    <section class="advisors" id="advisors">
+      <div class="adv__grid">
+        <div class="adv__copy">
+          <p class="label mono label--w"><span class="sq sq--w"></span><span data-i18n="a.label">(08) Calling all travel advisors</span></p>
+          <h2 class="h2" data-i18n-html="a.title">Free to attend. <em>Scratch for the perk.</em></h2>
+          <p class="adv__p" data-i18n="a.p">Learn from the brands you sell, meet their sales leaders one-on-one, enjoy dinner on us — and the first 50 advisors at every expo go home with a gift card.</p>
+          <div class="adv__count">
+            <div class="mono adv__k" data-i18n="a.opens">Advisor registration opens 5 weeks before each expo</div>
+            <div class="adv__days"><b id="advDays">000</b><span id="advTxt"></span></div>
+            <form class="notify" id="notify" novalidate>
+              <label class="sr-only" for="nEmail">Email</label>
+              <input id="nEmail" type="email" placeholder="you@agency.com" data-i18n-ph="a.ph">
+              <button class="btn btn--white" type="submit"><span data-i18n="a.notify">Notify me</span></button>
+            </form>
+          </div>
+        </div>
+        <div class="scratch">
+          <div class="scratch__card" id="scratchCard" data-cursor="Scratch">
+            <img src="images/mastercard-princess.jpg" alt="$20 gift card sponsored by Princess Hotels & Resorts" draggable="false">
+            <canvas id="scratchCv" aria-hidden="true"></canvas>
+            <div class="scratch__won mono" id="scratchWon" data-i18n="a.won">First 50 advisors · every expo</div>
+          </div>
+          <div class="scratch__meta mono"><span id="scratchPct" data-i18n="a.scr">Scratch the card ↑</span><button id="scratchReset" data-i18n="a.again">Reset</button></div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ========= PARTNERS: MAGNET FIELD ========= -->
+    <section class="partners" id="partners">
+      <div class="partners__head">
+        <p class="label mono"><span class="sq"></span><span data-i18n="pt.label">(09) 2026 title sponsors &amp; partners</span></p>
+        <div class="sponsors">
+          <div class="spon"><span class="mono" data-i18n="pt.s1">Hotel &amp; Resort Sponsor</span><img src="images/bahia-principe.png" alt="Bahia Principe Hotels & Resorts" loading="lazy"></div>
+          <div class="spon"><span class="mono" data-i18n="pt.s2">Gift Card Sponsor</span><img src="images/princess.jpg" alt="Princess Hotels & Resorts" loading="lazy"></div>
+          <div class="spon"><span class="mono" data-i18n="pt.s3">Arctic Experience Partner</span><img src="images/kl-arctic.jpg" alt="Kakslauttanen Arctic Resort" loading="lazy"></div>
+        </div>
+      </div>
+      <div class="field" id="field" data-cursor="Push"></div>
+      <p class="field__hint mono" data-i18n="pt.hint">Move through the field — the brands make room for you.</p>
+    </section>
+
+    <!-- ========= GALLERY: INFINITE CANVAS ========= -->
+    <section class="gallery" id="gallery">
+      <div class="gallery__head">
+        <p class="label mono label--w"><span class="sq sq--w"></span><span data-i18n="g.label">(10) Granite Productions</span></p>
+        <h2 class="h2" data-i18n-html="g.title">An endless <em>event archive.</em></h2>
+        <a class="btn btn--white" href="https://graniteproductions.pixieset.com/" target="_blank" rel="noopener"><span data-i18n="g.all">Full galleries</span><i class="ar ar--out"></i></a>
+      </div>
+      <div class="canvas" id="canvas" data-cursor="Drag"><div class="canvas__plane" id="plane"></div></div>
+      <p class="canvas__hint mono" data-i18n="g.hint">Drag in any direction · tap to open</p>
+    </section>
+
+    <!-- ========= PRESS ========= -->
+    <section class="press" id="press">
+      <p class="label mono press__label"><span class="sq"></span><span data-i18n="pr.label">(11) In the news</span></p>
+      <div class="press__list" id="pressList">
+        <a href="https://www.travelpress.com/granite-travel-trade-expos-opens-advisor-registration-for-fall-2026-events/" target="_blank" rel="noopener" data-img="images/press-travelpress.jpg"><span class="mono">Travel Press</span><b>Opens advisor registration for Fall 2026 events</b><i class="ar ar--out"></i></a>
+        <a href="https://www.travelweek.ca/news/events-news/granite-travel-trade-expos-opens-registration-for-fall-2026-series/" target="_blank" rel="noopener" data-img="images/press-travelweek.jpg"><span class="mono">Travelweek</span><b>Opens registration for Fall 2026 series</b><i class="ar ar--out"></i></a>
+        <a href="https://openjaw.com/buzz-board/2026/09/01/registration-now-open-for-granite-travel-trade-expos-fall-2026-series/" target="_blank" rel="noopener" data-img="images/press-openjaw.jpg"><span class="mono">OpenJaw</span><b>Registration now open for the Fall 2026 series</b><i class="ar ar--out"></i></a>
+        <a href="https://www.paxnews.com/news/events/granite-travel-trade-expos-opens-registration-fall-2026-series" target="_blank" rel="noopener" data-img="images/press-pax.jpg"><span class="mono">PAX News</span><b>Granite opens registration for fall 2026</b><i class="ar ar--out"></i></a>
+      </div>
+      <div class="press__float" id="pressFloat" aria-hidden="true"><img id="pressImg" alt="" src="images/press-pax.jpg"></div>
+    </section>
+
+    <!-- ========= TEAM ========= -->
+    <section class="team" id="team">
+      <p class="label mono"><span class="sq"></span><span data-i18n="tm.label">(12) The people behind it</span></p>
+      <ul class="team__list">
+        <li><button aria-expanded="false"><b class="stretchy">Bradley Dean</b><span class="mono" data-i18n="tm.r1">Managing Director</span></button><p data-i18n="tm.b1">Co-founded Quadra Innovations and Granite Productions in 2010 and launched Granite Travel Trade Expos in 2023.</p></li>
+        <li><button aria-expanded="false"><b class="stretchy">Jason Lee</b><span class="mono" data-i18n="tm.r2">Creative Director</span></button><p data-i18n="tm.b2">20+ years in tech, from Adobe Acrobat to 360° photography — he captures every expo's photo and video for exhibitors.</p></li>
+        <li><button aria-expanded="false"><b class="stretchy">Sal Buccellato</b><span class="mono" data-i18n="tm.r3">Emcee &amp; Expo Ambassador</span></button><p data-i18n="tm.b3">30+ years in the travel trade, including National Sales Director, Canada for Bahia Principe Hotels.</p></li>
+        <li><button aria-expanded="false"><b class="stretchy">Rick McCauley</b><span class="mono" data-i18n="tm.r4">Sales</span></button><p data-i18n="tm.b4">40+ years across tour operators and hotels, including 16 years managing the Canadian market for Barceló.</p></li>
+        <li><button aria-expanded="false"><b class="stretchy">Alexander Portman</b><span class="mono" data-i18n="tm.r5">Events Consultant</span></button><p data-i18n="tm.b5">An international perspective built across healthcare, technology, education, tourism and philanthropy.</p></li>
+      </ul>
+    </section>
+
+    <!-- ========= FINAL ========= -->
+    <section class="final" id="contact">
+      <div class="final__top">
+        <h2 class="h2 final__h" data-i18n-html="f.title">Build relationships. <em>Drive business growth.</em></h2>
+        <div class="final__ctas">
+          <a href="#price" class="btn btn--red btn--lg magnet"><span data-i18n="cta.exhibit2">Exhibit in 2027</span><i class="ar"></i></a>
+          <a href="#advisors" class="btn btn--white btn--lg magnet"><span data-i18n="cta.adv">I'm a travel advisor</span><i class="ar"></i></a>
+        </div>
+      </div>
+      <div class="final__grid">
+        <form class="nl" id="nl" novalidate>
+          <span class="mono label--w" data-i18n="f.nlk">Mailing list</span>
+          <h3 data-i18n="f.nlh">Hear about future events first.</h3>
+          <div class="nl__row"><label class="sr-only" for="nlEmail">Email</label><input id="nlEmail" type="email" placeholder="Email address" data-i18n-ph="f.ph"><button class="btn btn--red" type="submit"><span data-i18n="f.join">Join</span></button></div>
+          <div class="nl__opt mono"><label><input type="radio" name="int" checked><span data-i18n="f.sup">Becoming a supplier</span></label><label><input type="radio" name="int"><span data-i18n="f.agt">Attending as an advisor</span></label></div>
+          <p class="nl__msg mono" id="nlMsg" role="status"></p>
+        </form>
+        <div class="offices">
+          <div><span class="mono">Toronto</span><p>140 Yonge Street, Suite 200<br>Toronto, ON M5C 1X6</p></div>
+          <div><span class="mono">Oakville</span><p>710 Dorval Drive, Suite 200<br>Oakville, ON L6K 3X9</p></div>
+          <div class="offices__c"><span class="mono">Bradley Dean — Partner</span><a href="tel:+14165655212">416.565.5212</a><a href="mailto:info@graniteproductions.ca">info@graniteproductions.ca</a></div>
+          <div class="socials mono">
+            <a href="https://www.instagram.com/granitetravelexpos" target="_blank" rel="noopener">Instagram ↗</a>
+            <a href="https://www.facebook.com/sharer/sharer.php?u=https%3A%2F%2Fgranitetravelexpos.com" target="_blank" rel="noopener">Facebook ↗</a>
+            <a href="https://www.linkedin.com/sharing/share-offsite/?url=https%3A%2F%2Fgranitetravelexpos.com" target="_blank" rel="noopener">LinkedIn ↗</a>
+          </div>
+        </div>
+      </div>
+      <div class="word" id="word" aria-label="Granite"></div>
+      <footer class="foot mono">
+        <img src="images/gp-logo-white.svg" alt="Granite Productions" width="120">
+        <span>© 2026 Granite Travel Trade Expos · A Granite Productions Inc. event</span>
+        <a href="#top" data-i18n="f.top">Back to top ↑</a>
+      </footer>
+    </section>
+  </main>
+
+  <div class="dock" id="dock"><a href="#price" class="btn btn--red"><span data-i18n="cta.exhibit">Exhibit 2027</span></a><a href="#advisors" class="btn btn--line"><span data-i18n="nav.adv">Advisors</span></a></div>
+
+  <!-- lightbox -->
+  <div class="lb" id="lb" hidden><button class="lb__x" data-close aria-label="Close">✕</button><img id="lbImg" alt=""><p class="mono" id="lbCap"></p></div>
+
+  <!-- registration drawer -->
+  <div class="drawer" id="drawer" hidden>
+    <div class="drawer__bg" data-close></div>
+    <aside class="drawer__panel" role="dialog" aria-modal="true" aria-labelledby="drTitle">
+      <button class="drawer__x" data-close aria-label="Close">✕</button>
+      <span class="mono label" data-i18n="r.label">2027 exhibitor registration</span>
+      <h3 id="drTitle" data-i18n="r.title">Secure your place</h3>
+      <div class="dr__steps mono" id="drSteps"><span class="on">01 <span data-i18n="r.s1">Company</span></span><span>02 <span data-i18n="r.s2">Payment</span></span><span>03 <span data-i18n="r.s3">Done</span></span></div>
+      <div class="dr__sum mono" id="drSum"></div>
+      <form id="drForm" novalidate>
+        <div class="dr__p on" data-step="1">
+          <label class="f"><span data-i18n="r.company">Company name *</span><input id="rCo" required></label>
+          <label class="f"><span data-i18n="r.contact">Contact person *</span><input id="rCt" required></label>
+          <label class="f"><span>Email *</span><input id="rEm" type="email" required></label>
+          <label class="f"><span data-i18n="r.phone">Telephone *</span><input id="rPh" type="tel" required></label>
+          <label class="f"><span data-i18n="r.country">Country *</span><select id="rCy"><option>Canada</option><option>United States</option><option>Mexico</option><option>Dominican Republic</option><option>Jamaica</option><option>Other</option></select></label>
+        </div>
+        <div class="dr__p" data-step="2">
+          <div class="seg"><span class="mono" data-i18n="r.cur">Currency</span><label><input type="radio" name="cur" value="CAD" checked><span>CAD</span></label><label><input type="radio" name="cur" value="USD"><span>USD</span></label></div>
+          <div class="seg"><span class="mono" data-i18n="r.amt">Pay now</span><label><input type="radio" name="amt" value="dep" checked><span data-i18n="r.dep">50% deposit</span></label><label><input type="radio" name="amt" value="full"><span data-i18n="r.full">Full amount</span></label></div>
+          <div class="seg"><span class="mono" data-i18n="r.method">Method</span><label><input type="radio" name="pm" value="cc" checked><span data-i18n="r.cc">Card +3%</span></label><label><input type="radio" name="pm" value="wire"><span data-i18n="r.wire">Wire</span></label><label><input type="radio" name="pm" value="eft"><span>EFT</span></label></div>
+          <label class="chk"><input type="checkbox" id="rTerms"><span data-i18n="r.terms">I agree to the payment terms &amp; cancellation policy.</span></label>
+          <p class="dr__due mono"><span data-i18n="r.due">Due today</span><b id="rDue">$0</b></p>
+        </div>
+        <div class="dr__p dr__done" data-step="3">
+          <div class="dr__globe">✓</div>
+          <h4 data-i18n="r.done">You're on the 2027 tour.</h4>
+          <p data-i18n="r.donet">This is a design prototype — on the live site, your registration and payment link would be emailed instantly.</p>
+        </div>
+        <div class="dr__foot" id="drFoot">
+          <button type="button" class="btn btn--line-ink" id="drBack"><span data-i18n="r.back">Back</span></button>
+          <button type="button" class="btn btn--red" id="drNext"><span id="drNextTxt" data-i18n="r.next">Continue</span><i class="ar"></i></button>
+        </div>
+      </form>
+    </aside>
+  </div>
+
+  <div class="toast mono" id="toast" role="status" aria-live="polite"></div>
+
+  <script src="https://unpkg.com/lenis@1.1.13/dist/lenis.min.js"></script>
+  <script src="globe-data.js"></script>
+  <script src="script.js"></script>
+</body>
+</html>
