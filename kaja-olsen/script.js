@@ -45,18 +45,20 @@
     var base = 'https://' + host;
     $('#fail').hidden = true; $('#report').hidden = true; $('#go').disabled = true;
     progress(4, 'Connecting to ' + host + '…');
-    var api = make(base, true), root;
+    var api = make(base, true), root, T;
     get(api('', {})).catch(function () { api = make(base, false); return get(api('', {})); })
       .then(function (r) {
         root = r.json || {};
         var ns = root.namespaces || [];
         if (ns.indexOf('wp/v2') === -1) throw new Error('nowp');
+        T = types(ns);
         progress(12, 'Reading categories…');
-        return pageAll(api, 'wp/v2/product_cat', { _fields: 'id,name,slug,parent,count,link', hide_empty: 'false' }, 'Categories read:', 12, 35)
+        return pageAll(api, 'wp/v2/' + T.tax, { _fields: 'id,name,slug,parent,count,link', hide_empty: 'false' }, 'Categories read:', 12, 35)
           .catch(function (e) { e.where = 'cats'; throw e; });
       })
       .then(function (cats) {
-        return pageAll(api, 'wp/v2/product', { _fields: 'id,title,product_cat,link', status: 'publish' }, 'Products read:', 35, 95)
+        var f = {}; f._fields = 'id,title,link,' + T.field;
+        return pageAll(api, 'wp/v2/' + T.type, f, (T.woo ? 'Products' : 'Posts') + ' read:', 35, 95)
           .then(function (prods) { return { cats: cats, prods: prods }; })
           .catch(function () { return { cats: cats, prods: null }; });
       })
@@ -66,7 +68,7 @@
         render({
           site: decode(root.name) || host, host: host,
           cats: res.cats.items.map(function (c) { return { id: c.id, name: decode(c.name), slug: c.slug, parent: c.parent, count: c.count, link: c.link }; }),
-          prods: res.prods ? res.prods.items.map(function (p) { return { id: p.id, title: decode(p.title && p.title.rendered), cats: p.product_cat || [], link: p.link }; }) : null,
+          prods: res.prods ? res.prods.items.map(function (p) { return { id: p.id, title: decode(p.title && p.title.rendered), cats: p[T.field] || [], link: p.link }; }) : null,
           capped: res.prods && res.prods.capped,
           elementor: ns.indexOf('elementor/v1') > -1, elementorPro: ns.indexOf('elementor-pro/v1') > -1, woo: ns.some(function (n) { return /^wc\//.test(n); })
         });
@@ -81,7 +83,180 @@
       .then(function () { $('#go').disabled = false; setTimeout(function () { $('#progress').hidden = true; }, 600); });
   }
 
-  /* ---------- Analysis ---------- */
+  function types(ns) {
+    var woo = ns.some(function (n) { return /^wc\//.test(n); });
+    return woo ? { woo: true, tax: 'product_cat', type: 'product', field: 'product_cat' } : { woo: false, tax: 'categories', type: 'posts', field: 'categories' };
+  }
+
+  /* ---------- Check ONE messy page (primary) ---------- */
+  var PALETTE = ['#2ec4b6', '#14213d', '#ff9f1c', '#e71d36', '#8e7dbe', '#5fa8d3', '#7cb518', '#b5838d', '#6c757d', '#f4a261'];
+  var lastPage = null;
+
+  function checkPage(raw) {
+    var clean = raw.trim().replace(/^https?:\/\//i, '').replace(/[?#].*$/, '');
+    var host = clean.replace(/\/.*$/, ''), path = clean.slice(host.length) || '/';
+    if (!host) return;
+    var base = 'https://' + host, segs = path.split('/').filter(Boolean);
+    $('#fail').hidden = true; $('#report').hidden = true; $('#pageDiag').hidden = true; $('#go').disabled = true;
+    progress(5, 'Connecting to ' + host + '…');
+    var api = make(base, true), root, T, ns, cats = [];
+    get(api('', {})).catch(function () { api = make(base, false); return get(api('', {})); })
+      .then(function (r) {
+        root = r.json || {}; ns = root.namespaces || [];
+        if (ns.indexOf('wp/v2') === -1) throw new Error('nowp');
+        T = types(ns);
+        progress(20, 'Reading categories…');
+        return pageAll(api, 'wp/v2/' + T.tax, { _fields: 'id,name,slug,parent,count', hide_empty: 'false' }, 'Categories read:', 20, 45).then(function (c) { cats = c.items; }, function () { cats = []; });
+      })
+      .then(function () {
+        var ctx = { api: api, T: T, ns: ns, cats: cats, host: host, path: path, site: decode(root.name) || host, elementor: ns.indexOf('elementor/v1') > -1, elementorPro: ns.indexOf('elementor-pro/v1') > -1 };
+        var ai = segs.indexOf('product-category') > -1 ? segs.indexOf('product-category') : segs.indexOf('category');
+        if (ai > -1 && segs.length > ai + 1) return archiveCheck(ctx, segs[segs.length - 1], segs[ai] === 'product-category' ? 'product_cat' : 'categories');
+        return contentCheck(ctx, segs.length ? segs[segs.length - 1] : '');
+      })
+      .then(function (res) { progress(100, 'Done'); renderPage(res); })
+      .catch(function (e) {
+        $('#progress').hidden = true;
+        $('#failText').textContent = e && e.message === 'nowp' ? 'This doesn\'t look like a WordPress site, or its public data is switched off.' : e && e.message === 'nopage' ? 'We couldn\'t find that page in the site\'s public data. Check the link, or paste the exact page address (not the homepage).' : 'The site blocked the check from outside (a security plugin or firewall) or didn\'t answer in time.';
+        $('#fail').hidden = false;
+      })
+      .then(function () { $('#go').disabled = false; setTimeout(function () { $('#progress').hidden = true; }, 600); });
+  }
+
+  function catTools(cats) {
+    var byId = {}, bySlug = {};
+    cats.forEach(function (c) { byId[c.id] = c; bySlug[c.slug] = c; });
+    function top(c) { var n = 0; while (c && c.parent && byId[c.parent] && n++ < 20) c = byId[c.parent]; return c; }
+    return { byId: byId, bySlug: bySlug, top: top, name: function (c) { return c ? decode(c.name) : 'Unknown'; } };
+  }
+
+  function archiveCheck(ctx, slug, tax) {
+    var api = ctx.api, CT = catTools(ctx.cats), term = CT.bySlug[slug];
+    progress(55, 'Reading the "' + slug + '" category page…');
+    var termP = term ? Promise.resolve(term) : get(api('wp/v2/' + tax, { slug: slug, _fields: 'id,name,slug,parent,count' })).then(function (r) { if (!r.json.length) throw new Error('nopage'); return r.json[0]; });
+    return termP.then(function (t) {
+      term = t;
+      var kids = ctx.cats.filter(function (c) { return c.parent === t.id; });
+      var type = tax === 'product_cat' ? 'product' : 'posts', field = tax;
+      var q = { _fields: 'id,title,' + field, per_page: 100 }; q[field] = t.id;
+      return get(api('wp/v2/' + type, q)).then(function (r) { return { kids: kids, items: r.json, total: r.total }; });
+    }).then(function (x) {
+      var field = tax, inTree = {};
+      (function mark(id) { inTree[id] = 1; ctx.cats.forEach(function (c) { if (c.parent === id) mark(c.id); }); })(term.id);
+      var items = x.items.map(function (p) { return { title: decode(p.title && p.title.rendered), cats: p[field] || [] }; });
+      var outside = items.filter(function (p) { return p.cats.some(function (id) { return !inTree[id] && CT.byId[id] && CT.byId[id].slug !== 'uncategorized'; }); });
+      var parentOnly = x.kids.length ? items.filter(function (p) { return !p.cats.some(function (id) { return inTree[id] && id !== term.id; }); }) : [];
+      var causes = [];
+      if (x.kids.length && tax === 'product_cat') causes.push({ sev: 'warn', title: 'Likely: subcategories and products shown in one list', why: 'This category has ' + x.kids.length + ' subcategories. If WooCommerce is set to "Show subcategories & products", their tiles appear mixed in with the products. That is the classic "products and categories mixed" look. We confirm the setting once logged in.', items: x.kids.map(function (c) { return 'Subcategory: ' + decode(c.name); }), min: 20 });
+      if (outside.length) causes.push({ sev: 'warn', title: outside.length + ' products are also filed in unrelated categories', why: 'They appear here and in other sections, so this page shows things that don\'t belong.', items: outside.map(function (p) { return p.title + ' → also in ' + p.cats.filter(function (id) { return !inTree[id]; }).map(function (id) { return CT.name(CT.byId[id]); }).join(', '); }), min: Math.min(40, 3 * outside.length) });
+      if (parentOnly.length) causes.push({ sev: 'warn', title: parentOnly.length + ' products are only in the main category', why: 'They show here but in none of the subcategories, so the subcategory pages look incomplete.', items: parentOnly.map(function (p) { return p.title; }), min: Math.min(30, 2 * parentOnly.length) });
+      if (ctx.elementorPro) causes.push({ sev: 'info', title: 'Elementor Pro archive template', why: 'Category pages are often styled with an Elementor Pro template. Its display conditions and product query are checked once logged in.', items: [], min: 30 });
+      if (!causes.some(function (c) { return c.sev !== 'info'; })) causes.push({ sev: 'info', title: 'The category data for this page looks clean', why: 'So the mix most likely comes from the page template or widget settings, checked once logged in.', items: [], min: 30 });
+      var grid = gridFromItems('Products on this category page', items, CT);
+      if (x.kids.length && tax === 'product_cat') grid.flags.push(x.kids.length + ' subcategories may mix in');
+      return { ctx: ctx, title: decode(term.name), kind: 'Category page', grids: [grid], causes: causes };
+    });
+  }
+
+  function contentCheck(ctx, slug) {
+    var api = ctx.api, T = ctx.T;
+    progress(55, 'Reading the page…');
+    var tries = slug ? [['pages', slug], ['posts', slug]].concat(T.woo ? [['product', slug]] : []) : [['pages', 'home'], ['pages', 'shop']];
+    function next(i) {
+      if (i >= tries.length) return Promise.reject(new Error('nopage'));
+      return get(api('wp/v2/' + tries[i][0], { slug: tries[i][1], _fields: 'id,title,content,link' })).then(function (r) { return r.json && r.json.length ? r.json[0] : next(i + 1); }, function () { return next(i + 1); });
+    }
+    return next(0).then(function (pg) {
+      var CT = catTools(ctx.cats), doc = new DOMParser().parseFromString((pg.content && pg.content.rendered) || '', 'text/html');
+      var widgets = [].slice.call(doc.querySelectorAll('[data-widget_type]')).map(function (w) { return w.getAttribute('data-widget_type'); });
+      var gridEls = [].slice.call(doc.querySelectorAll('[data-widget_type]')).filter(function (w) { return /product|loop|posts|archive|categor|portfolio/i.test(w.getAttribute('data-widget_type')); });
+      if (!gridEls.length) gridEls = [].slice.call(doc.querySelectorAll('ul.products'));
+      var grids = [], seen = {}, causes = [], dupe = {};
+      gridEls.forEach(function (el, gi) {
+        var items = [].slice.call(el.querySelectorAll('li.product, li.product-category, .e-loop-item, article')).map(function (it) {
+          var cls = [].slice.call(it.classList), cs = [];
+          cls.forEach(function (c) { var m = c.match(/^(?:product_cat|category)-(.+)$/); if (m && CT.bySlug[m[1]]) cs.push(CT.bySlug[m[1]].id); });
+          var t = it.querySelector('h2, h3, .woocommerce-loop-product__title, .elementor-heading-title');
+          var title = t ? t.textContent.trim() : 'Item';
+          var isCat = it.classList.contains('product-category');
+          if (!isCat) { dupe[title] = (dupe[title] || 0) + 1; }
+          return { title: title, cats: cs, isCat: isCat };
+        });
+        var label = (el.getAttribute('data-widget_type') || 'Product list').replace('.default', '').replace(/-/g, ' ');
+        var g = gridFromItems('Grid ' + (gi + 1) + ' · ' + label, items.filter(function (i) { return !i.isCat; }), CT);
+        var tiles = items.filter(function (i) { return i.isCat; }).length, prods = items.length - tiles;
+        if (tiles && prods) { g.flags.push(tiles + ' category tiles mixed with ' + prods + ' products'); causes.push({ sev: 'bad', title: 'Category tiles and products are in the same grid', why: 'One grid lists both categories and products. This is set either in the WooCommerce catalogue setting or in the widget itself.', items: [label], min: 20 }); }
+        if (g.sections >= 3) causes.push({ sev: 'warn', title: label + ' pulls products from ' + g.sections + ' different sections', why: 'The widget is probably set to "All products" or "Latest" instead of one category, or products are filed in several categories.', items: g.segs.map(function (s) { return s.label + ': ' + s.n; }), min: 30 });
+        var many = items.filter(function (i) { return i.cats.length >= 4; });
+        if (many.length) causes.push({ sev: 'warn', title: many.length + ' products in this grid sit in 4+ categories', why: 'Over-filed products appear in grids where they don\'t belong.', items: many.map(function (i) { return i.title; }), min: Math.min(30, 3 * many.length) });
+        grids.push(g);
+      });
+      var dupes = Object.keys(dupe).filter(function (k) { return dupe[k] > 1; });
+      if (dupes.length) causes.push({ sev: 'warn', title: dupes.length + ' products appear more than once on this page', why: 'Two grids on the page overlap, so shoppers see the same items twice.', items: dupes, min: 15 });
+      if (!gridEls.length) causes.push({ sev: 'info', title: 'No product grid in the page content', why: 'The page itself has no product or category widget, so the mixed list comes from a theme or Elementor template, a shortcode or a header/footer section. We check that once logged in.', items: widgets.length ? ['Widgets on page: ' + Array.from(new Set(widgets)).join(', ')] : [], min: 45 });
+      if (ctx.elementorPro) causes.push({ sev: 'info', title: 'Elementor Pro templates', why: 'Global templates and display conditions can override this page. Checked once logged in.', items: [], min: 20 });
+      if (!causes.some(function (c) { return c.sev !== 'info'; }) && gridEls.length) causes.unshift({ sev: 'info', title: 'The grids on this page look consistent in the public data', why: 'So the mix most likely comes from the widget query settings or caching, checked once logged in.', items: [], min: 30 });
+      return { ctx: ctx, title: decode(pg.title && pg.title.rendered) || slug, kind: 'Page', grids: grids, causes: causes, widgets: widgets.length };
+    });
+  }
+
+  function gridFromItems(name, items, CT) {
+    var by = {};
+    items.forEach(function (it) {
+      var tops = {}; it.cats.forEach(function (id) { var t = CT.top(CT.byId[id]); if (t && t.slug !== 'uncategorized') tops[t.id] = t; });
+      var keys = Object.keys(tops);
+      if (!keys.length) by['?'] = (by['?'] || 0) + 1;
+      keys.forEach(function (k) { by[k] = (by[k] || 0) + 1; });
+    });
+    var segs = Object.keys(by).map(function (k, i) { return { label: k === '?' ? 'No category' : CT.name(CT.byId[k]), n: by[k], color: k === '?' ? '#cbd2dd' : PALETTE[i % PALETTE.length] }; }).sort(function (a, b) { return b.n - a.n; });
+    return { name: name, total: items.length, segs: segs, sections: segs.filter(function (s) { return s.label !== 'No category'; }).length, flags: [] };
+  }
+
+  function renderPage(r) {
+    lastPage = r;
+    var order = { bad: 0, warn: 1, info: 2 };
+    r.causes.sort(function (a, b) { return order[a.sev] - order[b.sev]; });
+    var minutes = 45 + r.causes.reduce(function (s, c) { return s + c.min; }, 0) + 30 + 10;
+    var lo = Math.max(1.5, Math.ceil(minutes / 30) / 2), hi = Math.ceil(lo * 1.3 * 2) / 2, days = Math.max(1, Math.ceil(hi / 6));
+    var real = r.causes.filter(function (c) { return c.sev !== 'info'; });
+    $('#pdSite').textContent = r.ctx.site + ' · ' + r.ctx.host + r.ctx.path;
+    $('#pdTitle').textContent = real.length ? '"' + r.title + '": ' + real.length + ' likely cause' + (real.length > 1 ? 's' : '') + ' found' : '"' + r.title + '": nothing wrong in the public data';
+    $('#pdSub').textContent = real.length ? 'Below: why it looks mixed, what each grid is really showing, and the clean-up plan.' : 'The cause is inside the Elementor or WooCommerce settings, which we check once logged in.';
+    $('#pdHours').textContent = lo + '–' + hi + ' h';
+    $('#pdDays').textContent = 'Same working day' + (days > 1 ? ' (' + days + ' days for bigger fixes)' : '') + ' once we have access';
+    $('#pd-type').textContent = r.kind; $('#pd-builder').textContent = r.ctx.elementorPro ? 'Elementor Pro' : r.ctx.elementor ? 'Elementor' : 'Not detected';
+    $('#pd-grids').textContent = r.grids.length; $('#pd-site').textContent = r.ctx.T.woo ? 'WooCommerce' : 'WordPress posts';
+    $('#pdCauses').innerHTML = r.causes.map(function (c) {
+      return '<details class="issue ' + c.sev + '"' + (c.sev === 'bad' ? ' open' : '') + '><summary><span class="ic">' + (c.sev === 'info' ? 'i' : '!') + '</span><span><b>' + esc(c.title) + '</b><span class="why">' + esc(c.why) + '</span></span><span class="n">' + (c.items.length || '–') + '</span></summary>' + (c.items.length ? '<div class="list">' + c.items.slice(0, 60).map(function (t) { return '<span class="chip">' + esc(t) + '</span>'; }).join('') + '</div>' : '') + '</details>';
+    }).join('');
+    $('#pdGridHead').hidden = !r.grids.length;
+    $('#pdGridList').innerHTML = r.grids.map(function (g) {
+      return '<div class="grid"><div class="grid__top"><b>' + esc(g.name) + g.flags.map(function (f) { return '<span class="flag">' + esc(f) + '</span>'; }).join('') + '</b><span>' + g.total + ' items · ' + g.sections + ' section' + (g.sections === 1 ? '' : 's') + '</span></div>' +
+        '<div class="stack">' + g.segs.map(function (s) { return '<i style="width:' + (100 * s.n / Math.max(1, g.segs.reduce(function (a, b) { return a + b.n; }, 0))) + '%;background:' + s.color + '" title="' + esc(s.label) + '"></i>'; }).join('') + '</div>' +
+        '<div class="legend">' + g.segs.map(function (s) { return '<span><i style="background:' + s.color + '"></i>' + esc(s.label) + ' · ' + s.n + '</span>'; }).join('') + '</div></div>';
+    }).join('');
+    var steps = [['Backup and find the exact cause', 'Check the page, its widgets/template and category settings.', 45]].concat(r.causes.map(function (c) { return [c.sev === 'info' ? c.title : 'Fix: ' + c.title, '', c.min]; }), [['Test on desktop, tablet and mobile', '', 30], ['Short summary for your client', '', 10]]);
+    $('#pdSteps').innerHTML = steps.map(function (s) { return '<li><span><b>' + esc(s[0]) + '</b>' + (s[1] ? '<small>' + esc(s[1]) + '</small>' : '') + '</span><span class="t">' + s[2] + ' min</span></li>'; }).join('') + '<li class="total"><span><b>Total</b><small>Fixed price, agreed before starting</small></span><span class="t">' + lo + '–' + hi + ' h</span></li>';
+    $('#pageDiag').hidden = false;
+    $('#pageDiag').scrollIntoView({ behavior: 'smooth', block: 'start' });
+  }
+
+  $('#pdCopy').addEventListener('click', function () {
+    if (!lastPage) return;
+    var r = lastPage, L = ['PAGE CHECK: ' + r.title + ' (' + r.ctx.host + r.ctx.path + ')', ''];
+    r.causes.forEach(function (c) { L.push('- ' + c.title + ': ' + c.why); c.items.slice(0, 6).forEach(function (t) { L.push('    · ' + t); }); });
+    r.grids.forEach(function (g) { L.push('', g.name + ': ' + g.segs.map(function (s) { return s.label + ' ' + s.n; }).join(', ')); });
+    L.push('', 'ESTIMATED FIX TIME: ' + $('#pdHours').textContent + ', ' + $('#pdDays').textContent.toLowerCase() + '.');
+    var txt = L.join('\n');
+    if (navigator.clipboard && navigator.clipboard.writeText) navigator.clipboard.writeText(txt).then(function () { toast('Findings copied'); }, function () { prompt('Copy:', txt); }); else prompt('Copy:', txt);
+  });
+  $('#fullScan').addEventListener('click', function () {
+    if (!lastPage) return;
+    if (lastPage.demo) { $('#pageDiag').hidden = true; runDemo(); return; }
+    scan(lastPage.ctx.host);
+  });
+
+  /* ---------- Analysis (whole site) ---------- */
   function analyse(d) {
     var byId = {}; d.cats.forEach(function (c) { byId[c.id] = c; c.kids = []; c.found = 0; c.flags = []; });
     d.cats.forEach(function (c) { if (c.parent && byId[c.parent]) byId[c.parent].kids.push(c); });
@@ -230,7 +405,23 @@
     d.cats.forEach(function (c) { c.count = (counts[c.id] || 0) + (c.slug === 'sale' ? 3 : 0); });
     $('#fail').hidden = true; render(d); toast('Example scan of a messy demo shop');
   }
-  $('#demo').addEventListener('click', runDemo); $('#demo2').addEventListener('click', runDemo);
-  $('#scanForm').addEventListener('submit', function (e) { e.preventDefault(); scan($('#url').value); });
-  var qp = new URLSearchParams(location.search).get('site'); if (qp) { $('#url').value = qp; scan(qp); }
+  function pageDemo() {
+    $('#fail').hidden = true; $('#report').hidden = true;
+    renderPage({
+      demo: true, title: 'Lighting', kind: 'Category page',
+      ctx: { site: 'Nordic Living (example)', host: 'example-shop.com', path: '/product-category/lighting/', elementor: true, elementorPro: true, T: { woo: true } },
+      grids: [{ name: 'Products on this category page', total: 11, sections: 4, flags: ['subcategories mixed in'], segs: [{ label: 'Lighting', n: 8, color: PALETTE[0] }, { label: 'Furniture', n: 3, color: PALETTE[1] }, { label: 'Sale', n: 2, color: PALETTE[2] }, { label: 'Decor', n: 1, color: PALETTE[3] }] }],
+      causes: [
+        { sev: 'bad', title: 'Subcategories and products shown in one list', why: 'This category page lists its subcategory tiles mixed in with the products (WooCommerce "Show subcategories & products"). That is the classic "products and categories mixed" look.', items: ['Subcategory: Lamps', 'Subcategory: Pendants', 'Subcategory: lamps (duplicate)'], min: 20 },
+        { sev: 'warn', title: '4 products are also filed in unrelated categories', why: 'They appear here and in other sections, so this page shows things that don\'t belong.', items: ['Rattan Lounge Chair → also in Sofas, Outdoor', 'Nest Side Table → also in Tables, Cushions, Rugs & Mats, Outdoor, Sale', 'Linen Pendant → also in lamps (duplicate category)', 'Ceramic Lamp → only in the duplicate "lamps" category'], min: 12 },
+        { sev: 'warn', title: '2 products are only in the main category', why: 'They show here but in none of the subcategories, so the subcategory pages look incomplete.', items: ['Arc Floor Lamp', 'Dome Table Lamp'], min: 4 },
+        { sev: 'info', title: 'Elementor Pro archive template', why: 'Category pages are often styled with an Elementor Pro template. Its display conditions and product query are checked once logged in.', items: [], min: 30 }
+      ]
+    });
+    toast('Example check of a messy demo category page');
+  }
+  $('#demo').addEventListener('click', pageDemo); $('#demo2').addEventListener('click', pageDemo);
+  $('#scanForm').addEventListener('submit', function (e) { e.preventDefault(); checkPage($('#url').value); });
+  var qs = new URLSearchParams(location.search), qp = qs.get('page') || qs.get('site');
+  if (qp) { $('#url').value = qp; checkPage(qp); }
 })();
