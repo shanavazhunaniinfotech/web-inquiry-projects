@@ -1,0 +1,111 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+  <meta name="robots" content="noindex, nofollow">
+  <title>Pixel Match Proof</title>
+  <meta name="description" content="Your design sample rebuilt in code and overlaid on your own image, with hover states working and every measurement checked.">
+  <meta name="theme-color" content="#15171c">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400;500;600&family=IBM+Plex+Sans:wght@400;500;600;700&display=swap">
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <header class="hero">
+    <div class="wrap">
+      <p class="kind"><span>PROOF</span>Pixel match check · prepared for Elliot, QMS Audits Pty Ltd</p>
+      <h1>Your design sample, rebuilt in code and <em>checked against your own image.</em></h1>
+      <p class="lede">You attached one screen with your job post. Before quoting, I built that screen as a real web page and placed it on top of your image, so you can check the match yourself instead of taking my word for it.</p>
+      <ul class="facts">
+        <li><b>±2px</b><span>largest position difference on any element</span></li>
+        <li><b>5 / 5</b><span>colours matched exactly</span></li>
+        <li><b>2</b><span>hover states from your note, working</span></li>
+      </ul>
+    </div>
+  </header>
+
+  <main>
+    <section class="sec wrap" id="overlay">
+      <p class="eyebrow">01 · Overlay check</p>
+      <h2>Your image and my code, on top of each other.</h2>
+      <p class="sub">Drag the slider. <b>Swipe</b> reveals one over the other. <b>Fade</b> blends them. <b>Difference</b> turns everything that matches black, so only real differences light up.</p>
+
+      <div class="tools" role="group" aria-label="Overlay mode">
+        <button type="button" class="mode on" data-mode="swipe">Swipe</button>
+        <button type="button" class="mode" data-mode="fade">Fade</button>
+        <button type="button" class="mode" data-mode="diff">Difference</button>
+        <label class="range"><span id="lblA">Your image</span><input id="mix" type="range" min="0" max="100" value="50" aria-label="Overlay position"><span id="lblB">My code</span></label>
+      </div>
+
+      <div class="viewer" id="viewer">
+        <div class="stage" id="stage">
+          <img src="assets/your-sample.png" alt="Your attached design sample" width="1183" height="883">
+          <div class="code" id="code"><iframe src="sample/?state=sample" title="My code version of your sample" width="1183" height="883" scrolling="no" loading="eager"></iframe></div>
+          <div class="handle" id="handle" aria-hidden="true"></div>
+        </div>
+      </div>
+      <p class="cap">Shown at 1183px wide, the same width as the preview in your screenshot. The code version has the two hover states switched on so it matches your image.</p>
+    </section>
+
+    <section class="sec sec--soft" id="hover">
+      <div class="wrap">
+        <p class="eyebrow">02 · Your hover states</p>
+        <h2>"Different button styles are hover states." <em>Built that way.</em></h2>
+        <div class="hovers">
+          <article><i style="--c:#1d9bc1"></i><i style="--c:#775172"></i><h3>Buttons</h3><p>Blue <code>#1D9BC1</code> by default, purple <code>#775172</code> on hover, as the "Book now for $199" button shows in your sample.</p></article>
+          <article><i style="--c:#1d9bc1"></i><i style="--c:#775172"></i><h3>Feature cards</h3><p>On hover the card grows by 7.5%, and its border, icon and text turn purple, as the "100% Online" card shows in your sample.</p></article>
+        </div>
+        <p class="sub">Try them on the live version below: hover on desktop, tap on a phone.</p>
+        <div class="viewer viewer--live" id="live">
+          <div class="stage" id="liveStage"><iframe src="sample/" title="Live version, hover the buttons and cards" width="1183" height="883" scrolling="no"></iframe></div>
+        </div>
+        <p class="cap"><a href="sample/" target="_blank" rel="noopener">Open the live version in its own tab ↗</a> to see how it reflows on smaller screens.</p>
+      </div>
+    </section>
+
+    <section class="sec wrap" id="audit">
+      <p class="eyebrow">03 · Measured check</p>
+      <h2>Every element, measured against your image.</h2>
+      <p class="sub">Positions and sizes are in pixels, read from your screenshot and from a screenshot of my build at the same width.</p>
+      <div class="tablewrap">
+        <table class="audit">
+          <thead><tr><th scope="col">#</th><th scope="col">Element</th><th scope="col">Your image</th><th scope="col">My build</th><th scope="col">Result</th></tr></thead>
+          <tbody id="auditBody"></tbody>
+        </table>
+      </div>
+    </section>
+
+    <section class="sec sec--soft" id="noticed">
+      <div class="wrap">
+        <p class="eyebrow">04 · What I noticed</p>
+        <h2>Things to confirm against your Figma file.</h2>
+        <ol class="notes">
+          <li><b>The font.</b> Your sample uses a rounded geometric typeface. I matched it with Outfit, the closest free font, which is why letter shapes differ slightly in Difference mode. The real font name comes from your Figma file.</li>
+          <li><b>Pills on two lines.</b> "Child Care", "Aged Care" and "Health Care" wrap onto two lines, while the other five pills stay on one. If your Figma shows them on one line, that's a difference to fix.</li>
+          <li><b>The hovered card is taller.</b> "100% Online. Study Anywhere" runs to four lines, so that card is taller than the others when hovered. Worth checking that this is intended.</li>
+          <li><b>Mobile.</b> Your sample shows desktop only. I would match mobile to your Figma mobile frames rather than guess. The live version reflows for now.</li>
+          <li><b>Illustration.</b> The chef here is cut from your screenshot. In the real build it comes straight from Figma as a sharp SVG.</li>
+        </ol>
+      </div>
+    </section>
+
+    <section class="sec wrap" id="signoff">
+      <p class="eyebrow">05 · How each Shopify page gets signed off</p>
+      <h2>The same check, for every page, desktop and mobile.</h2>
+      <ol class="flow">
+        <li><span>1</span><b>Export</b><small>Desktop and mobile frames, plus every hover variant, exported from your Figma file.</small></li>
+        <li><span>2</span><b>Build</b><small>Each section built as a Shopify theme section, so text and images stay editable in the theme editor.</small></li>
+        <li><span>3</span><b>Overlay</b><small>Every section overlaid on its Figma frame at desktop and mobile width. Tolerance ±2px.</small></li>
+        <li><span>4</span><b>States</b><small>Hover, focus and active states checked against your Figma variants.</small></li>
+        <li><span>5</span><b>Sign-off</b><small>You get a measured sheet like the one above for each page before it goes live.</small></li>
+      </ol>
+      <div class="next"><h3>To quote a fixed price</h3><p>Two answers are enough: how many page templates are in your Figma file, and whether the site starts from an existing Shopify theme. A view-only Figma link lets me check the font and mobile frames too.</p></div>
+    </section>
+  </main>
+
+  <footer class="wrap foot">Prepared by Asiaben Hunani for Elliot · November 2026 · Built from the single sample image attached to the job post.</footer>
+  <script src="script.js"></script>
+</body>
+</html>
