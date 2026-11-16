@@ -1,0 +1,89 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+  <meta name="robots" content="noindex, nofollow">
+  <title>WooCommerce Category Doctor</title>
+  <meta name="description" content="Paste a WooCommerce shop address. Get a full scan of its categories and products, what's causing the mess, and how long the clean-up takes.">
+  <meta name="theme-color" content="#14213d">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Schibsted+Grotesk:wght@400;500;600;700;800&family=DM+Mono:wght@400;500&display=swap">
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <header class="hero">
+    <div class="wrap">
+      <p class="kind"><span>TOOL</span>Category Doctor for WooCommerce + Elementor</p>
+      <h1>Find out why the categories are a mess, <em>and how long the fix takes.</em></h1>
+      <p class="lede">Paste the shop address. We scan every category and product through the site's public data (no login needed), list exactly what's wrong, and estimate the clean-up time.</p>
+      <form class="scan" id="scanForm">
+        <label for="url" class="sr">Shop website address</label>
+        <div class="scan__field"><span>https://</span><input id="url" placeholder="clientshop.com" autocomplete="off" inputmode="url" required></div>
+        <button class="btn btn--go" type="submit" id="go">Scan the shop</button>
+      </form>
+      <p class="alt">No address to hand? <button type="button" class="link" id="demo">See an example scan</button></p>
+    </div>
+  </header>
+
+  <main class="wrap">
+    <section class="progress" id="progress" hidden aria-live="polite">
+      <div class="bar"><i id="pbar"></i></div>
+      <p id="ptext">Starting…</p>
+    </section>
+
+    <section class="fail card" id="fail" hidden>
+      <h2>We couldn't read this shop from outside</h2>
+      <p id="failText"></p>
+      <p>That's fine. Send the link in the chat and we'll run the same scan from our side, or <button type="button" class="link" id="demo2">see an example scan</button>.</p>
+    </section>
+
+    <div id="report" hidden>
+      <section class="summary card">
+        <div class="summary__head">
+          <div><p class="site" id="siteName"></p><h2 id="verdict"></h2><p class="muted" id="verdictSub"></p></div>
+          <div class="time"><span>Estimated fix time</span><b id="hours"></b><small id="days"></small></div>
+        </div>
+        <dl class="kpis">
+          <div><dt>Categories</dt><dd id="k-cats"></dd></div>
+          <div><dt>Products scanned</dt><dd id="k-prods"></dd></div>
+          <div><dt>Problems found</dt><dd id="k-issues"></dd></div>
+          <div><dt>Page builder</dt><dd id="k-builder"></dd></div>
+        </dl>
+        <div class="actions"><button class="btn btn--ink" type="button" id="copy">Copy report for your client</button><button class="btn btn--line" type="button" id="dl">Download report (.txt)</button></div>
+      </section>
+
+      <section class="card">
+        <h2 class="h">What's causing the mess</h2>
+        <p class="muted">Ordered by impact. Click a problem to see the exact categories or products.</p>
+        <div class="issues" id="issues"></div>
+      </section>
+
+      <section class="two">
+        <div class="card">
+          <h2 class="h">Category tree</h2>
+          <p class="muted">As the shop has it set up. <span class="dot bad"></span> problem · <span class="dot warn"></span> check · <span class="dot ok"></span> fine</p>
+          <ul class="tree" id="tree"></ul>
+        </div>
+        <div class="card">
+          <h2 class="h">Look up a product</h2>
+          <p class="muted">See which categories a product is filed in.</p>
+          <input class="search" id="search" placeholder="Type a product name…" autocomplete="off">
+          <ul class="results" id="results"></ul>
+        </div>
+      </section>
+
+      <section class="card plan">
+        <h2 class="h">Clean-up plan &amp; timeframe</h2>
+        <ol class="steps" id="steps"></ol>
+        <p class="note">Time is estimated from the problems found in the public data. Elementor archive templates and display conditions are checked once logged in, and are included in the estimate.</p>
+      </section>
+    </div>
+  </main>
+
+  <footer class="wrap foot">Read-only scan. It uses the same public data the shop already shares (WordPress REST API) and changes nothing. Built by soheb lohiya.</footer>
+  <div class="toast" id="toast" role="status" aria-live="polite"></div>
+  <script src="script.js"></script>
+</body>
+</html>
