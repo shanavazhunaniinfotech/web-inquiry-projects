@@ -1,0 +1,90 @@
+<!doctype html>
+<html lang="en-AU">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+  <meta name="robots" content="noindex, nofollow">
+  <title>CAND Can Studio</title>
+  <meta name="description" content="Working prototype: design a custom aluminium can in real 3D, check if your artwork is print-ready, see the price and share your design.">
+  <meta name="theme-color" content="#121212">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Instrument+Serif:ital@0;1&family=Inter+Tight:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap">
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <div class="note"><span class="kind">FEATURE PROTOTYPE</span><span>Working 3D can studio + print-ready artwork checker, built for CAND by Ilizaben Meman</span></div>
+
+  <header class="top">
+    <div class="wrap top__in">
+      <span class="logo">CAND<i>.</i></span>
+      <span class="top__tag">Can Studio</span>
+      <div class="top__act"><button class="btn btn--line" type="button" id="share">Copy share link</button><button class="btn btn--ink" type="button" id="proof">Download proof</button></div>
+    </div>
+  </header>
+
+  <main class="studio wrap">
+    <section class="stage" aria-label="3D can preview">
+      <div class="stage__view" id="view">
+        <canvas id="gl" aria-label="Rotatable 3D preview of your can"></canvas>
+        <canvas id="flat" class="flat" hidden aria-label="Flat print template with bleed, safe zone and seam"></canvas>
+        <p class="stage__fallback" id="nogl" hidden>3D preview needs WebGL. The print template view still works.</p>
+        <div class="stage__hint" id="hint">Drag to rotate · scroll or pinch to zoom</div>
+        <div class="stage__spec" id="spec"></div>
+      </div>
+      <div class="stage__bar">
+        <div class="seg" role="group" aria-label="View"><button type="button" data-v="3d" aria-pressed="true">3D can</button><button type="button" data-v="flat" aria-pressed="false">Print template</button></div>
+        <div class="seg" role="group" aria-label="Spin"><button type="button" id="spin" aria-pressed="true">Auto-spin</button></div>
+      </div>
+    </section>
+
+    <aside class="panel" aria-label="Design options">
+      <div class="group">
+        <h2>1 · Artwork</h2>
+        <div class="seg seg--full" role="group" aria-label="Artwork mode"><button type="button" data-m="logo" aria-pressed="true">Logo on colour</button><button type="button" data-m="wrap" aria-pressed="false">Full-wrap artwork</button></div>
+        <label class="upload"><input type="file" id="file" accept="image/png,image/jpeg,image/svg+xml,image/webp"><b>Upload logo or artwork</b><small>PNG, JPG, SVG · we check it instantly</small></label>
+        <label class="field">Brand name <span class="hintx">(used if no logo)</span><input id="brand" value="Tidal Brewing" maxlength="22"></label>
+        <label class="field">Line 2<input id="sub" value="Pacific Pale Ale · 4.5%" maxlength="34"></label>
+        <label class="field field--range">Logo size<input type="range" id="lsize" min="20" max="90" value="58"></label>
+      </div>
+
+      <div class="group">
+        <h2>2 · Can</h2>
+        <div class="sizes" id="sizes" role="radiogroup" aria-label="Can size"></div>
+        <div class="seg seg--full" role="group" aria-label="Finish" id="finish"><button type="button" data-f="matte" aria-pressed="true">Matte</button><button type="button" data-f="gloss" aria-pressed="false">Gloss</button><button type="button" data-f="metal" aria-pressed="false">Metallic</button></div>
+        <div class="colours" id="colours" role="radiogroup" aria-label="Can colour"></div>
+      </div>
+
+      <div class="group check">
+        <h2>3 · Print-ready check</h2>
+        <ul id="checks" class="checks"><li class="info"><b>Upload artwork to check it</b><span>We compare it to the exact printable area of the can you picked.</span></li></ul>
+        <p class="area mono" id="areaSpec"></p>
+      </div>
+
+      <div class="group price">
+        <h2>4 · Price</h2>
+        <div class="qty" id="qty" role="radiogroup" aria-label="Quantity"></div>
+        <div class="total"><div><span>Per can</span><b id="per">$0.00</b></div><div><span>Total (ex GST)</span><b id="tot">$0</b></div></div>
+        <button class="btn btn--accent btn--full" type="button" id="order">Approve &amp; order <span id="ordQty"></span></button>
+        <p class="micro">Free digital proof within 24 h · Pay after you approve · No setup fees</p>
+      </div>
+    </aside>
+  </main>
+
+  <section class="why wrap">
+    <h2>Why this matters for CAND</h2>
+    <div class="why__grid">
+      <div><b>Fewer bad files</b><span>Most print delays come from artwork that is too small, the wrong shape or has text over the seam. The checker catches it before the order, not after.</span></div>
+      <div><b>Real can sizes</b><span>Each size uses its own printable area, so the preview and the checker match what actually prints.</span></div>
+      <div><b>Faster sign-off</b><span>Customers download a proof or send a share link to their team, then approve without a sales call.</span></div>
+      <div><b>Built to scale</b><span>Sizes, finishes, prices and currencies are simple settings, ready for new markets.</span></div>
+    </div>
+    <p class="fine">Prototype. Can dimensions are typical industry sizes and prices are illustrative; both are set to CAND's real specs in the build. Your uploads stay in your browser.</p>
+  </section>
+
+  <div class="toast" id="toast" role="status" aria-live="polite"></div>
+
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
+  <script src="script.js"></script>
+</body>
+</html>
