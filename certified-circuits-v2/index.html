@@ -1,0 +1,672 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Certified Circuits | Weekly Circuits, Training Gear &amp; Sessions</title>
+  <meta name="description" content="Military-style endurance calisthenics from Manchester. New circuits every Wednesday and Saturday, heavyweight training gear, and coached Saturday sessions.">
+  <meta name="theme-color" content="#f5f3ee">
+  <link rel="icon" type="image/png" href="images/logo.png">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Anton&family=Inter+Tight:wght@400;500;600;700;800&family=JetBrains+Mono:wght@400;600&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+  <div class="loader" aria-hidden="true">
+    <div class="loader__word"><span>C</span><span>E</span><span>R</span><span>T</span><span>I</span><span>F</span><span>I</span><span>E</span><span>D</span></div>
+  </div>
+
+  <div class="progress" aria-hidden="true"><span></span></div>
+  <div class="cursor" aria-hidden="true"><span></span></div>
+
+  <!-- Announcement -->
+  <div class="announce" role="region" aria-label="Announcements">
+    <div class="announce__slides">
+      <p class="is-active"><span class="pulse"></span> Circuit #005 is live — <strong>£3.99 for</strong> <strong class="mono js-countdown">--:--:--</strong>, then £5.99</p>
+      <p>Members save <strong>10% on everything</strong> + every circuit as it drops · <a href="#club">Join for £15/mo →</a></p>
+      <p>New here? <a href="#free">Get Circuit #002 free</a> — all 3 editions + scoring sheet</p>
+    </div>
+  </div>
+
+  <!-- Header -->
+  <header class="header" id="top">
+    <div class="header__inner">
+      <button class="icon-btn header__burger" aria-label="Open menu" aria-expanded="false"><span></span><span></span></button>
+      <a href="#top" class="header__logo" aria-label="Certified Circuits home"><img src="images/logo.png" alt="Certified Circuits" width="52" height="45"></a>
+      <nav class="header__nav" aria-label="Main">
+        <div class="has-mega">
+          <a href="#shop" class="nav-link">Shop <svg viewBox="0 0 24 24" width="12" height="12" fill="none" stroke="currentColor" stroke-width="2.4"><path d="m6 9 6 6 6-6"/></svg></a>
+          <div class="mega">
+            <div class="mega__inner">
+              <div class="mega__col">
+                <span class="mono">Circuits</span>
+                <a href="#drop">This week's drop <em>New</em></a>
+                <a href="#bestsellers" data-tab-link="circuits">All weekly circuits</a>
+                <a href="#bestsellers" data-tab-link="circuits">4-Week Engine Bundle</a>
+                <a href="#free">Free starter circuit</a>
+              </div>
+              <div class="mega__col">
+                <span class="mono">Apparel</span>
+                <a href="#bestsellers" data-tab-link="apparel">T-shirts</a>
+                <a href="#bestsellers" data-tab-link="apparel">Training vests</a>
+                <a href="#bestsellers" data-tab-link="apparel">Shorts</a>
+                <a href="#bestsellers" data-tab-link="apparel">Caps &amp; beanies</a>
+              </div>
+              <div class="mega__col">
+                <span class="mono">Equipment</span>
+                <a href="#bestsellers" data-tab-link="equipment">Resistance bands</a>
+                <a href="#bestsellers" data-tab-link="equipment">Liquid chalk</a>
+                <a href="#bestsellers" data-tab-link="equipment">Bags</a>
+                <a href="#kit">Build your kit</a>
+              </div>
+              <a href="#look" class="mega__feature">
+                <img src="images/members-club.webp" alt="" loading="lazy">
+                <span><small class="mono">Shop the look</small>Training Vest — £25</span>
+              </a>
+            </div>
+          </div>
+        </div>
+        <a href="#drop" class="nav-link">Weekly Circuits</a>
+        <a href="#club" class="nav-link">Members Club</a>
+        <a href="#sessions" class="nav-link">Sessions</a>
+        <a href="https://www.certifiedcircuits.co.uk/pages/scoreboard" class="nav-link">Scoreboard</a>
+      </nav>
+      <div class="header__actions">
+        <button class="icon-btn js-open-search" aria-label="Search">
+          <svg viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" stroke-width="1.9"><circle cx="11" cy="11" r="7"/><path d="m20 20-3.5-3.5"/></svg>
+        </button>
+        <a href="https://www.certifiedcircuits.co.uk/account/login" class="icon-btn hide-sm" aria-label="Account">
+          <svg viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" stroke-width="1.9"><circle cx="12" cy="8" r="4"/><path d="M4 21c1.5-4 4.5-6 8-6s6.5 2 8 6"/></svg>
+        </a>
+        <button class="icon-btn cart-btn js-open-cart" aria-label="Open cart">
+          <svg viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" stroke-width="1.9"><path d="M5 7h14l-1.2 12.2a1 1 0 0 1-1 .8H7.2a1 1 0 0 1-1-.8L5 7Z"/><path d="M9 7V5a3 3 0 0 1 6 0v2"/></svg>
+          <span class="cart-count js-cart-count">0</span>
+        </button>
+        <a href="#club" class="btn btn--ink btn--sm hide-md magnetic"><span>Join the Club</span></a>
+      </div>
+    </div>
+  </header>
+
+  <!-- Mobile drawer menu -->
+  <div class="mnav" aria-hidden="true">
+    <nav>
+      <a href="#drop">This week's drop</a>
+      <a href="#shop">Shop by category</a>
+      <a href="#bestsellers">Best sellers</a>
+      <a href="#kit">Build your kit</a>
+      <a href="#club">Members Club</a>
+      <a href="#sessions">Saturday Sessions</a>
+      <a href="#faq">FAQ</a>
+    </nav>
+    <a href="#free" class="btn btn--cyan btn--block">Get Circuit #002 free</a>
+  </div>
+
+  <main>
+
+    <!-- ================= HERO ================= -->
+    <section class="hero">
+      <div class="container hero__grid">
+        <div class="hero__copy">
+          <p class="kicker reveal"><span class="kicker__dot"></span>Manchester · Live on TikTok · 500k+ views</p>
+          <h1 class="hero__title">
+            <span class="ln"><span>No shortcuts.</span></span>
+            <span class="ln"><span>Just the <span class="rotator" aria-label="work"><span class="rotator__track"><b>work.</b><b>pull.</b><b>push.</b><b>pursue.</b><b>work.</b></span></span></span></span>
+          </h1>
+          <p class="hero__lead reveal" data-d="2">Military-style endurance calisthenics. Weekly circuits straight from our TikTok lives, heavyweight gear built for the session, and a coached Saturday in Manchester.</p>
+          <div class="hero__ctas reveal" data-d="3">
+            <a href="#drop" class="btn btn--ink btn--lg magnetic"><span>Shop this week's drop</span>
+              <svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="2.2"><path d="M5 12h14M13 6l6 6-6 6"/></svg></a>
+            <a href="#free" class="btn btn--line btn--lg"><span>Get a free circuit</span></a>
+          </div>
+          <div class="hero__proof reveal" data-d="4">
+            <div class="avatars" aria-hidden="true">
+              <img src="images/tee-classic.webp" alt=""><img src="images/vest-black.webp" alt=""><img src="images/tee-white.webp" alt=""><img src="images/beanie-studio.webp" alt="">
+            </div>
+            <p><strong>500k+ views</strong> on TikTok<br><span>Two new circuits every week</span></p>
+          </div>
+        </div>
+
+        <div class="hero__bento">
+          <figure class="tile tile--main mask-reveal" data-cursor="Shop">
+            <img src="images/outdoor-pullup.webp" alt="Athlete in a white Certified Circuits tee doing pull-ups" fetchpriority="high">
+            <button class="hotspot" style="--x:58%;--y:46%" data-product="box-tee" data-variant="white" aria-label="Shop the Oversized Box T-Shirt"><span></span></button>
+            <div class="tile__label">
+              <span class="mono">Worn in the session</span>
+              <strong>Oversized Box T-Shirt</strong>
+              <span>£44.00</span>
+            </div>
+          </figure>
+
+          <a href="#drop" class="tile tile--drop reveal" data-d="2">
+            <span class="badge badge--cyan">New drop</span>
+            <img src="images/circuit-005.webp" alt="Circuit #005 Pull, Pump and Pause" loading="eager">
+            <div class="tile__foot">
+              <div><span class="mono">#005 · Outdoor</span><strong>Pull, Pump &amp; Pause</strong></div>
+              <span class="price-pill">£3.99</span>
+            </div>
+          </a>
+
+          <div class="tile tile--stat reveal" data-d="3">
+            <span class="mono">Members Club</span>
+            <strong class="tile__big"><span>£15</span><small>/mo</small></strong>
+            <p>Every circuit + 10% off the shop</p>
+            <a href="#club" class="arrow-link">See plans <i>→</i></a>
+          </div>
+        </div>
+      </div>
+
+      <!-- Trust strip -->
+      <div class="container">
+        <ul class="trust">
+          <li class="reveal"><span class="trust__ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M7 3h7l5 5v13H7z"/><path d="M14 3v5h5M12 11v6m-3-3 3 3 3-3"/></svg></span><div><strong>Instant PDF download</strong><span>Straight to your inbox</span></div></li>
+          <li class="reveal" data-d="1"><span class="trust__ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M4 20V10M10 20V4M16 20v-7M22 20H2"/></svg></span><div><strong>3 editions, every circuit</strong><span>Foundation to Certified</span></div></li>
+          <li class="reveal" data-d="2"><span class="trust__ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="m12 3 2.6 5.3 5.9.9-4.3 4.1 1 5.8L12 16.4 6.8 19.1l1-5.8L3.5 9.2l5.9-.9z"/></svg></span><div><strong>Members save 10%</strong><span>On every order</span></div></li>
+          <li class="reveal" data-d="3"><span class="trust__ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><rect x="3" y="6" width="18" height="13" rx="2"/><path d="M3 10h18M7 15h4"/></svg></span><div><strong>Pay your way</strong><span>Klarna · Apple Pay · PayPal</span></div></li>
+        </ul>
+      </div>
+    </section>
+
+    <!-- ================= MARQUEE ================= -->
+    <div class="ticker" aria-hidden="true">
+      <div class="ticker__track js-ticker">
+        <span>Weekly circuits</span><img src="images/circuit-005.webp" alt=""><span>Training apparel</span><img src="images/tee-box-front.webp" alt=""><span>Equipment</span><img src="images/bands-alt.webp" alt=""><span>Members Club</span><img src="images/vest-black.webp" alt=""><span>Saturday sessions</span><img src="images/session-rings.webp" alt="">
+        <span>Weekly circuits</span><img src="images/circuit-005.webp" alt=""><span>Training apparel</span><img src="images/tee-box-front.webp" alt=""><span>Equipment</span><img src="images/bands-alt.webp" alt=""><span>Members Club</span><img src="images/vest-black.webp" alt=""><span>Saturday sessions</span><img src="images/session-rings.webp" alt="">
+      </div>
+    </div>
+
+    <!-- ================= CATEGORIES ================= -->
+    <section class="section cats" id="shop">
+      <div class="container">
+        <div class="head">
+          <div>
+            <p class="kicker reveal"><span class="kicker__dot"></span>Shop by category</p>
+            <h2 class="h2 split">Everything you need to <span class="hl">train Certified.</span></h2>
+          </div>
+          <a href="https://www.certifiedcircuits.co.uk/collections/all" class="arrow-link reveal">Shop everything <i>→</i></a>
+        </div>
+
+        <div class="cats__grid">
+          <a href="#drop" class="cat cat--a reveal" data-cursor="Shop">
+            <div class="cat__img"><img src="images/circuit-005.webp" alt="" loading="lazy"></div>
+            <div class="cat__body"><span class="mono">From £3.99 · Instant PDF</span><h3>Weekly Circuits</h3></div>
+            <span class="cat__go">→</span>
+          </a>
+          <a href="#bestsellers" data-tab-link="apparel" class="cat cat--b reveal" data-d="1" data-cursor="Shop">
+            <div class="cat__img"><img src="images/tee-box-back.webp" alt="" loading="lazy"></div>
+            <div class="cat__body"><span class="mono">Tees · Vests · Shorts</span><h3>Apparel</h3></div>
+            <span class="cat__go">→</span>
+          </a>
+          <a href="#bestsellers" data-tab-link="equipment" class="cat cat--c reveal" data-d="2" data-cursor="Shop">
+            <div class="cat__img"><img src="images/bands-bag.webp" alt="" loading="lazy"></div>
+            <div class="cat__body"><span class="mono">Bands · Chalk · Bags</span><h3>Equipment</h3></div>
+            <span class="cat__go">→</span>
+          </a>
+          <a href="#club" class="cat cat--d cat--dark reveal" data-d="1" data-cursor="Join">
+            <div class="cat__img"><img src="images/members-club.webp" alt="" loading="lazy"></div>
+            <div class="cat__body"><span class="mono">£15/month · Cancel any time</span><h3>Members Club</h3></div>
+            <span class="cat__go">→</span>
+          </a>
+          <a href="#sessions" class="cat cat--e reveal" data-d="2" data-cursor="Book">
+            <div class="cat__img"><img src="images/session-rings.webp" alt="" loading="lazy"></div>
+            <div class="cat__body"><span class="mono">£8 · Saturdays 10am</span><h3>Sessions</h3></div>
+            <span class="cat__go">→</span>
+          </a>
+        </div>
+      </div>
+    </section>
+
+    <!-- ================= DROP SPOTLIGHT ================= -->
+    <section class="section drop" id="drop">
+      <div class="container drop__grid">
+        <div class="drop__gallery">
+          <div class="drop__main mask-reveal">
+            <img src="images/circuit-005.webp" alt="Circuit #005 Pull, Pump and Pause workout poster" class="js-drop-main" loading="lazy">
+            <span class="badge badge--ink drop__flag">Drop #005</span>
+          </div>
+          <div class="drop__thumbs" role="tablist" aria-label="Product images">
+            <button class="is-active" data-src="images/circuit-005.webp" aria-label="Poster"><img src="images/circuit-005.webp" alt=""></button>
+            <button data-src="images/outdoor-pullup.webp" aria-label="Outdoor session"><img src="images/outdoor-pullup.webp" alt=""></button>
+            <button data-src="images/session-rings.webp" aria-label="Group session"><img src="images/session-rings.webp" alt=""></button>
+          </div>
+        </div>
+
+        <div class="drop__info">
+          <p class="kicker reveal"><span class="kicker__dot kicker__dot--live"></span>This week's drop · Outdoor</p>
+          <h2 class="h2 split">Pull, Pump &amp; Pause</h2>
+          <p class="drop__desc reveal">A two-stage bodyweight and bar circuit built around descending pull-and-press ladders, Australian rows, two-pump burpees and lateral squat control. The final pause burpees reward pacing, grip discipline and repeatable movement quality.</p>
+
+          <div class="drop__price reveal">
+            <div class="drop__now"><span class="drop__amt">£3.99</span><s>£5.99</s><span class="badge badge--cyan">Drop-day price</span></div>
+            <div class="timer" aria-label="Time left at drop-day price">
+              <div><b class="js-t-d">00</b><span>days</span></div>
+              <div><b class="js-t-h">00</b><span>hrs</span></div>
+              <div><b class="js-t-m">00</b><span>min</span></div>
+              <div><b class="js-t-s">00</b><span>sec</span></div>
+            </div>
+          </div>
+
+          <fieldset class="editions reveal">
+            <legend class="mono">Edition — <span class="js-ed-name">Standard</span> <small>(all 3 included in the PDF)</small></legend>
+            <label><input type="radio" name="ed" value="Foundation"><span><b>Foundation</b><small>Build control</small></span></label>
+            <label><input type="radio" name="ed" value="Standard" checked><span><b>Standard</b><small>Increase density</small></span></label>
+            <label><input type="radio" name="ed" value="Certified"><span><b>Certified</b><small>Own the full test</small></span></label>
+          </fieldset>
+
+          <div class="drop__buy reveal">
+            <button class="btn btn--ink btn--lg btn--grow js-add" data-product="c005"><span>Add to cart — £3.99</span></button>
+            <a href="#club" class="drop__alt">Or get it free with the <strong>Members Club</strong> →</a>
+          </div>
+
+          <ul class="drop__perks reveal">
+            <li>Instant PDF download</li>
+            <li>Target times + scoring sheet</li>
+            <li>Watch the live before you buy</li>
+          </ul>
+
+          <div class="acc reveal">
+            <details>
+              <summary>What's inside <span class="pm"></span></summary>
+              <p>The full circuit in Foundation, Standard and Certified editions, movement standards, target times and a scoring sheet for the public scoreboard.</p>
+            </details>
+            <details>
+              <summary>Equipment needed <span class="pm"></span></summary>
+              <p>A pull-up bar and space to move. Bands, a weighted vest or a dip belt let you scale up or down.</p>
+            </details>
+            <details>
+              <summary>Strengthens <span class="pm"></span></summary>
+              <p>Lats, upper back, biceps, forearms, chest, shoulders, triceps, quads, glutes, adductors and core.</p>
+            </details>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ================= BEST SELLERS ================= -->
+    <section class="section best" id="bestsellers">
+      <div class="container">
+        <div class="head">
+          <div>
+            <p class="kicker reveal"><span class="kicker__dot"></span>Best sellers</p>
+            <h2 class="h2 split">Built for the session. <span class="hl">Worn after it.</span></h2>
+          </div>
+          <div class="best__ctrl">
+            <div class="seg reveal" role="tablist" aria-label="Product category">
+              <button role="tab" aria-selected="true" data-tab="apparel">Apparel</button>
+              <button role="tab" aria-selected="false" data-tab="equipment">Equipment</button>
+              <button role="tab" aria-selected="false" data-tab="circuits">Circuits</button>
+              <span class="seg__pill" aria-hidden="true"></span>
+            </div>
+            <div class="arrows reveal">
+              <button class="js-prev" aria-label="Previous"><svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="2"><path d="M19 12H5M11 6l-6 6 6 6"/></svg></button>
+              <button class="js-next" aria-label="Next"><svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 12h14M13 6l6 6-6 6"/></svg></button>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="rail js-rail" tabindex="0" aria-label="Products"></div>
+      <div class="container"><div class="rail__bar"><span class="js-rail-bar"></span></div></div>
+    </section>
+
+    <!-- ================= SHOP THE LOOK ================= -->
+    <section class="section look" id="look">
+      <div class="container look__grid">
+        <div class="look__imgs">
+          <figure class="look__img look__img--a mask-reveal" data-speed="-0.05">
+            <img src="images/members-club.webp" alt="Two athletes wearing Certified Circuits training vests" loading="lazy">
+            <button class="hotspot" style="--x:30%;--y:56%" data-product="vest" data-variant="black" aria-label="Shop the Training Vest"><span></span></button>
+          </figure>
+          <figure class="look__img look__img--b mask-reveal" data-speed="0.07">
+            <img src="images/beanie.webp" alt="Coach wearing the Certified Circuits beanie outdoors" loading="lazy">
+            <button class="hotspot" style="--x:52%;--y:22%" data-product="beanie" aria-label="Shop the Cuffed Beanie"><span></span></button>
+          </figure>
+        </div>
+        <div class="look__copy">
+          <p class="kicker reveal"><span class="kicker__dot"></span>Shop the look</p>
+          <h2 class="h2 split">Same kit we <span class="hl">train in.</span></h2>
+          <p class="reveal">Tap the hotspots. Everything here is worn in the park every Saturday, then washed and worn again.</p>
+          <ul class="look__list js-look-list">
+            <li class="reveal" data-product="vest"><img src="images/vest-black.webp" alt=""><div><strong>Training Vest</strong><span>Black · £25.00</span></div><button class="mini-add js-add" data-product="vest" aria-label="Add Training Vest">+</button></li>
+            <li class="reveal" data-d="1" data-product="shorts"><img src="images/shorts.webp" alt=""><div><strong>Training Shorts</strong><span>Black · £30.00</span></div><button class="mini-add js-add" data-product="shorts" aria-label="Add Training Shorts">+</button></li>
+            <li class="reveal" data-d="2" data-product="beanie"><img src="images/beanie-product.webp" alt=""><div><strong>Cuffed Beanie</strong><span>Black · £15.00</span></div><button class="mini-add js-add" data-product="beanie" aria-label="Add Cuffed Beanie">+</button></li>
+          </ul>
+          <div class="look__total reveal">
+            <div><span class="mono">Complete look</span><strong>£70.00</strong><small>Members pay £63.00</small></div>
+            <button class="btn btn--ink js-add-look"><span>Add all 3 to cart</span></button>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ================= BUILD YOUR KIT ================= -->
+    <section class="section kit" id="kit">
+      <div class="container">
+        <div class="head head--center">
+          <p class="kicker reveal"><span class="kicker__dot"></span>Build your kit</p>
+          <h2 class="h2 split">Kit out for your <span class="hl">first session.</span></h2>
+          <p class="head__sub reveal">Pick a top, add your equipment and a circuit pack. Your total updates as you go.</p>
+        </div>
+
+        <div class="kit__grid">
+          <div class="kit__steps">
+            <div class="kit__step reveal">
+              <div class="kit__label"><span class="kit__n">1</span><h3>Pick a top</h3></div>
+              <div class="kit__opts" data-group="top" data-single>
+                <button class="opt is-on" data-product="classic-tee"><img src="images/tee-classic.webp" alt=""><span>Classic Tee<b>£25</b></span></button>
+                <button class="opt" data-product="box-tee"><img src="images/tee-box-front.webp" alt=""><span>Box Tee<b>£44</b></span></button>
+                <button class="opt" data-product="vest"><img src="images/vest-black.webp" alt=""><span>Vest<b>£25</b></span></button>
+              </div>
+            </div>
+            <div class="kit__step reveal">
+              <div class="kit__label"><span class="kit__n">2</span><h3>Add bottoms</h3></div>
+              <div class="kit__opts" data-group="bottom">
+                <button class="opt is-on" data-product="shorts"><img src="images/shorts.webp" alt=""><span>Training Shorts<b>£30</b></span></button>
+              </div>
+            </div>
+            <div class="kit__step reveal">
+              <div class="kit__label"><span class="kit__n">3</span><h3>Equipment</h3></div>
+              <div class="kit__opts" data-group="equip">
+                <button class="opt is-on" data-product="bands"><img src="images/bands-alt.webp" alt=""><span>Bands Set<b>£30</b></span></button>
+                <button class="opt" data-product="chalk-250"><img src="images/chalk.webp" alt=""><span>Chalk 250ml<b>£13.99</b></span></button>
+                <button class="opt" data-product="holdall"><img src="images/holdall.webp" alt=""><span>Holdall<b>£35</b></span></button>
+              </div>
+            </div>
+            <div class="kit__step reveal">
+              <div class="kit__label"><span class="kit__n">4</span><h3>Circuit pack</h3></div>
+              <div class="kit__opts" data-group="pack" data-single data-optional>
+                <button class="opt is-on" data-product="bundle"><img src="images/circuit-001.webp" alt=""><span>4-Week Bundle<b>£11.99</b></span></button>
+                <button class="opt" data-product="c005"><img src="images/circuit-005.webp" alt=""><span>Circuit #005<b>£3.99</b></span></button>
+              </div>
+            </div>
+          </div>
+
+          <aside class="kit__summary reveal">
+            <div class="kit__stack js-kit-stack" aria-hidden="true"></div>
+            <span class="mono">Your kit</span>
+            <ul class="kit__lines js-kit-lines"></ul>
+            <div class="kit__total">
+              <span>Total</span>
+              <strong class="js-kit-total">£0.00</strong>
+            </div>
+            <div class="kit__member">
+              <span class="badge badge--cyan">Members</span>
+              <span>pay <strong class="js-kit-member">£0.00</strong> — save <strong class="js-kit-save">£0.00</strong></span>
+            </div>
+            <button class="btn btn--ink btn--block btn--lg js-add-kit"><span>Add kit to cart</span></button>
+            <p class="kit__fine">Sizes picked in the cart. 10% member discount applies automatically at checkout.</p>
+          </aside>
+        </div>
+      </div>
+    </section>
+
+    <!-- ================= MEMBERS CLUB ================= -->
+    <section class="section club" id="club">
+      <div class="container">
+        <div class="head head--center">
+          <p class="kicker reveal"><span class="kicker__dot"></span>Certified Members Club</p>
+          <h2 class="h2 split">Never miss a circuit. <span class="hl">Never pay full price.</span></h2>
+          <p class="head__sub reveal">Buying circuits one at a time on drop day costs £207.48 a year. The Club is £150 — with the full archive and 10% off the shop on top.</p>
+        </div>
+
+        <div class="plans">
+          <article class="plan reveal">
+            <span class="mono plan__name">Pay as you go</span>
+            <div class="plan__price"><strong>£3.99</strong><span>/circuit<br>on drop day</span></div>
+            <p class="plan__desc">Buy the circuits you want, when you want. £5.99 after drop day.</p>
+            <ul class="plan__list">
+              <li>Instant PDF, 3 editions</li>
+              <li>Scoring sheet + target times</li>
+              <li class="off">Full archive</li>
+              <li class="off">Monthly bonus programme</li>
+              <li class="off">10% off the shop</li>
+            </ul>
+            <a href="#drop" class="btn btn--line btn--block"><span>Shop circuits</span></a>
+          </article>
+
+          <article class="plan plan--feature reveal" data-d="1">
+            <span class="plan__ribbon">Most popular</span>
+            <span class="mono plan__name">Monthly</span>
+            <div class="plan__price"><strong>£15</strong><span>/month<br>cancel any time</span></div>
+            <p class="plan__desc">All 8 new circuits every month — worth £31.92 bought one by one.</p>
+            <ul class="plan__list">
+              <li>Every circuit as it drops</li>
+              <li>The full archive</li>
+              <li>Monthly exclusive bonus programme</li>
+              <li>Early access to apparel drops</li>
+              <li>10% off everything + sessions</li>
+            </ul>
+            <a href="https://www.certifiedcircuits.co.uk/products/certified-members-club-monthly-membership" class="btn btn--cyan btn--block btn--lg magnetic"><span>Join monthly</span></a>
+          </article>
+
+          <article class="plan plan--dark reveal" data-d="2">
+            <span class="plan__ribbon plan__ribbon--light">2 months free</span>
+            <span class="mono plan__name">Annual</span>
+            <div class="plan__price"><strong>£150</strong><span>/year<br>+ welcome gift</span></div>
+            <p class="plan__desc">The best value. Everything in monthly, paid once, with a welcome gift.</p>
+            <ul class="plan__list">
+              <li>Everything in Monthly</li>
+              <li>2 months free (£30 saved)</li>
+              <li>Welcome gift</li>
+              <li>Full archive from day one</li>
+              <li>10% off everything + sessions</li>
+            </ul>
+            <a href="https://www.certifiedcircuits.co.uk/pages/certified-members-club" class="btn btn--light btn--block"><span>Go annual</span></a>
+          </article>
+        </div>
+        <p class="club__fine reveal">Cancel any time from your account. You keep access until the end of the period you've paid for.</p>
+      </div>
+    </section>
+
+    <!-- ================= STORY / PROOF ================= -->
+    <section class="story">
+      <div class="container story__grid">
+        <div class="story__copy">
+          <p class="kicker reveal"><span class="kicker__dot"></span>Why Certified</p>
+          <h2 class="h2 split">Tested on the bars. <span class="hl">Live.</span> Every week.</h2>
+          <p class="reveal">Certified Circuits started with outdoor circuit training shared live on TikTok. Every session is weighted, resistance-led and built on one standard: no shortcuts, no excuses. The shop puts the same programmes and kit into your hands.</p>
+          <div class="stats">
+            <div class="reveal"><strong data-count="500" data-suffix="k+">0</strong><span>TikTok views</span></div>
+            <div class="reveal" data-d="1"><strong data-count="52">0</strong><span>circuits a year</span></div>
+            <div class="reveal" data-d="2"><strong data-count="3">0</strong><span>editions each</span></div>
+            <div class="reveal" data-d="3"><strong data-count="12">0</strong><span>spots per session</span></div>
+          </div>
+          <div class="story__social reveal">
+            <a href="https://www.tiktok.com/@certifiedcircuits" class="chip-link">TikTok <i>↗</i></a>
+            <a href="https://www.youtube.com/@CertifiedCircuits_uk?sub_confirmation=1" class="chip-link">YouTube <i>↗</i></a>
+            <a href="https://www.instagram.com/certified_circuits" class="chip-link">Instagram <i>↗</i></a>
+          </div>
+        </div>
+        <div class="story__media">
+          <a href="https://www.youtube.com/@CertifiedCircuits_uk" class="story__video mask-reveal" data-cursor="Play">
+            <img src="images/live-session.webp" alt="Coach briefing athletes before an outdoor circuit" loading="lazy">
+            <span class="play"><svg viewBox="0 0 24 24"><path d="M8 5v14l11-7z" fill="currentColor"/></svg></span>
+            <span class="story__tag"><span class="pulse pulse--red"></span> Watch a full session, uncut</span>
+          </a>
+          <figure class="story__photo mask-reveal" data-speed="0.08"><img src="images/team-bars.webp" alt="The Certified Circuits crew at the outdoor bars" loading="lazy"></figure>
+        </div>
+      </div>
+    </section>
+
+    <!-- ================= SESSIONS ================= -->
+    <section class="section sessions" id="sessions">
+      <div class="container">
+        <div class="sess">
+          <div class="sess__img mask-reveal"><img src="images/session-rings.webp" alt="Ring push-ups at a Saturday session in Cringle Park" loading="lazy"></div>
+          <div class="sess__body">
+            <p class="kicker kicker--light reveal"><span class="kicker__dot"></span>Train with us in Manchester</p>
+            <h2 class="sess__title split">Saturday. 10:00 sharp. Cringle Park.</h2>
+            <div class="sess__next reveal">
+              <div><span class="mono">Next session</span><strong class="js-next-sat">Saturday</strong></div>
+              <div class="sess__spots"><span class="mono">Spots</span><strong>12 max</strong></div>
+              <div><span class="mono">Price</span><strong>£8</strong></div>
+            </div>
+            <ul class="sess__facts reveal">
+              <li>Arrive 9:45am for the brief and warm-up</li>
+              <li>Davenhill Road entrance, Burnage M19 2QP · free parking</li>
+              <li>All levels — every movement scales</li>
+              <li>Bring water, running trainers and a towel</li>
+            </ul>
+            <div class="sess__cta reveal">
+              <a href="https://www.certifiedcircuits.co.uk/products/outdoor-group-circuit-saturday" class="btn btn--cyan btn--lg magnetic"><span>Book your spot — £8</span></a>
+              <a href="mailto:certifiedcircuits88@gmail.com?subject=1-to-1%20coaching" class="arrow-link arrow-link--light">1-to-1 coaching <i>→</i></a>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ================= FAQ ================= -->
+    <section class="section faq" id="faq">
+      <div class="container faq__grid">
+        <div class="faq__side">
+          <p class="kicker reveal"><span class="kicker__dot"></span>FAQ</p>
+          <h2 class="h2 split">Good <span class="hl">questions.</span></h2>
+          <div class="help reveal">
+            <img src="images/logo.png" alt="">
+            <div><strong>Still need help?</strong><span>We reply to every message.</span></div>
+            <a href="mailto:certifiedcircuits88@gmail.com" class="btn btn--ink btn--sm"><span>Email us</span></a>
+          </div>
+        </div>
+        <div class="faq__list">
+          <details class="reveal" open><summary>How do I get the circuit after I buy it?<span class="pm"></span></summary><p>Instantly. You get an email with your download link straight after checkout, and you can re-download it any time from your account.</p></details>
+          <details class="reveal"><summary>I'm a beginner. Can I do these?<span class="pm"></span></summary><p>Yes. Every circuit comes in Foundation, Standard and Certified editions. Start on Foundation, scale movements with bands, and move up when you're ready.</p></details>
+          <details class="reveal"><summary>What kit do I need?<span class="pm"></span></summary><p>Outdoor circuits need a pull-up bar and space to run. Gym circuits use a barbell or dumbbells. Bands, a weighted vest or a dip belt let you scale either way.</p></details>
+          <details class="reveal"><summary>Does the 10% member discount apply to gear?<span class="pm"></span></summary><p>Yes — 10% off everything in the shop, applied automatically at checkout, including Saturday session bookings.</p></details>
+          <details class="reveal"><summary>Can I cancel the Members Club?<span class="pm"></span></summary><p>Any time, from your account. You keep access until the end of the period you've paid for.</p></details>
+          <details class="reveal"><summary>Do sessions run in bad weather?<span class="pm"></span></summary><p>We run in all weather unless it's unsafe. If we cancel, you'll be moved to the next date or refunded. Can't make it? Email us 24 hours before and we'll move you.</p></details>
+        </div>
+      </div>
+    </section>
+
+    <!-- ================= FREE CIRCUIT ================= -->
+    <section class="free" id="free">
+      <div class="container">
+        <div class="free__card">
+          <div class="free__sheets" aria-hidden="true">
+            <img src="images/circuit-003.webp" alt="" class="fs fs--1" loading="lazy">
+            <img src="images/circuit-004.webp" alt="" class="fs fs--2" loading="lazy">
+            <img src="images/circuit-002.webp" alt="" class="fs fs--3" loading="lazy">
+            <span class="free__stamp">FREE</span>
+          </div>
+          <div class="free__copy">
+            <p class="kicker reveal"><span class="kicker__dot"></span>Free starter circuit</p>
+            <h2 class="h2 split">Try one on us. <span class="hl">Circuit #002.</span></h2>
+            <p class="reveal">Pull, Push and Pursue — the exact session we run live on TikTok, in all three editions, with the scoring sheet and target times.</p>
+            <form class="signup reveal js-signup" novalidate>
+              <label for="free-email" class="sr-only">Email address</label>
+              <input type="email" id="free-email" placeholder="Your email address" autocomplete="email" required>
+              <button class="btn btn--ink" type="submit"><span>Send me the workout</span></button>
+              <div class="signup__ok" role="status"><b>✓</b> Check your inbox — Circuit #002 is on its way.</div>
+            </form>
+            <p class="free__fine reveal">One email with your download, then circuit drops and session times. Unsubscribe any time.</p>
+          </div>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <!-- ================= FOOTER ================= -->
+  <footer class="footer">
+    <div class="container">
+      <div class="footer__big split-chars" aria-hidden="true">CERTIFIED</div>
+      <div class="footer__grid">
+        <div class="footer__brand">
+          <img src="images/logo.png" alt="Certified Circuits" width="72" height="63">
+          <p>Military-style endurance calisthenics. Houldsworth Mill, Stockport · Trains in Cringle Park, Burnage.</p>
+          <a href="mailto:certifiedcircuits88@gmail.com" class="arrow-link">certifiedcircuits88@gmail.com</a>
+        </div>
+        <div class="footer__col"><span class="mono">Shop</span><a href="#drop">Weekly Circuits</a><a href="https://www.certifiedcircuits.co.uk/collections/apparel">Apparel</a><a href="https://www.certifiedcircuits.co.uk/collections/training-equipment">Equipment</a><a href="#kit">Build your kit</a></div>
+        <div class="footer__col"><span class="mono">Train</span><a href="#club">Members Club</a><a href="#sessions">Sessions</a><a href="https://www.certifiedcircuits.co.uk/pages/scoreboard">Scoreboard</a><a href="https://www.certifiedcircuits.co.uk/blogs/news">Blog</a></div>
+        <div class="footer__col"><span class="mono">Help</span><a href="#faq">FAQ</a><a href="https://www.certifiedcircuits.co.uk/policies/shipping-policy">Shipping</a><a href="https://www.certifiedcircuits.co.uk/policies/refund-policy">Refunds</a><a href="https://www.certifiedcircuits.co.uk/pages/contact">Contact</a></div>
+        <div class="footer__col"><span class="mono">Follow</span><a href="https://www.tiktok.com/@certifiedcircuits">TikTok</a><a href="https://www.youtube.com/@CertifiedCircuits_uk">YouTube</a><a href="https://www.instagram.com/certified_circuits">Instagram</a></div>
+      </div>
+      <div class="footer__bottom">
+        <span>© 2026 Certified Circuits</span>
+        <span class="pays"><i>Visa</i><i>Mastercard</i><i>Amex</i><i>PayPal</i><i>Apple Pay</i><i>Google Pay</i><i>Klarna</i></span>
+        <a href="#top" class="arrow-link">Back to top <i>↑</i></a>
+      </div>
+    </div>
+  </footer>
+
+  <!-- ================= OVERLAYS ================= -->
+  <div class="scrim js-scrim"></div>
+
+  <aside class="cart" aria-label="Cart" aria-hidden="true">
+    <div class="cart__head">
+      <h3>Your cart <span class="js-cart-count-2">(0)</span></h3>
+      <button class="icon-btn js-close" aria-label="Close cart"><svg viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" stroke-width="2"><path d="M6 6l12 12M18 6 6 18"/></svg></button>
+    </div>
+    <div class="cart__club js-cart-club">
+      <span class="badge badge--cyan">Members</span>
+      <p>Join the Club and save <strong class="js-club-save">£0.00</strong> on this order.</p>
+      <a href="#club" class="js-close-link">Join →</a>
+    </div>
+    <ul class="cart__items js-cart-items"></ul>
+    <div class="cart__empty js-cart-empty">
+      <img src="images/logo.png" alt="">
+      <p>Your cart is empty.</p>
+      <a href="#drop" class="btn btn--ink js-close-link"><span>Shop this week's drop</span></a>
+    </div>
+    <div class="cart__up js-cart-up">
+      <span class="mono">Complete your kit</span>
+      <div class="js-cart-up-list"></div>
+    </div>
+    <div class="cart__foot">
+      <div class="cart__sub"><span>Subtotal</span><strong class="js-cart-sub">£0.00</strong></div>
+      <a href="https://www.certifiedcircuits.co.uk/cart" class="btn btn--cyan btn--block btn--lg"><span>Checkout securely</span></a>
+      <p class="cart__pay">Klarna · Apple Pay · Google Pay · PayPal · Cards</p>
+    </div>
+  </aside>
+
+  <div class="qv" role="dialog" aria-modal="true" aria-label="Quick view" aria-hidden="true">
+    <button class="icon-btn qv__close js-close" aria-label="Close"><svg viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" stroke-width="2"><path d="M6 6l12 12M18 6 6 18"/></svg></button>
+    <div class="qv__img"><img class="js-qv-img" src="images/logo.png" alt=""></div>
+    <div class="qv__body">
+      <span class="mono js-qv-cat">Apparel</span>
+      <h3 class="js-qv-name">Product</h3>
+      <p class="qv__price js-qv-price">£0.00</p>
+      <div class="qv__swatches js-qv-sw"></div>
+      <div class="qv__sizes js-qv-sizes"></div>
+      <button class="btn btn--ink btn--block btn--lg js-qv-add"><span>Add to cart</span></button>
+      <p class="qv__fine">Members pay <strong class="js-qv-member">£0.00</strong></p>
+    </div>
+  </div>
+
+  <div class="search" role="dialog" aria-modal="true" aria-label="Search" aria-hidden="true">
+    <div class="container">
+      <div class="search__bar">
+        <svg viewBox="0 0 24 24" width="22" height="22" fill="none" stroke="currentColor" stroke-width="1.9"><circle cx="11" cy="11" r="7"/><path d="m20 20-3.5-3.5"/></svg>
+        <input type="search" class="js-search-input" placeholder="Search circuits, tees, bands…" aria-label="Search products">
+        <button class="icon-btn js-close" aria-label="Close search"><svg viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" stroke-width="2"><path d="M6 6l12 12M18 6 6 18"/></svg></button>
+      </div>
+      <div class="search__chips"><span class="mono">Popular</span><button>Vest</button><button>Circuit</button><button>Bands</button><button>Chalk</button></div>
+      <div class="search__results js-search-results"></div>
+    </div>
+  </div>
+
+  <div class="exit" role="dialog" aria-modal="true" aria-label="Free circuit offer" aria-hidden="true">
+    <button class="icon-btn exit__close js-close" aria-label="Close"><svg viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" stroke-width="2"><path d="M6 6l12 12M18 6 6 18"/></svg></button>
+    <img src="images/circuit-002.webp" alt="" class="exit__img">
+    <div class="exit__body">
+      <span class="badge badge--cyan">Before you go</span>
+      <h3>Take Circuit #002 free.</h3>
+      <p>All 3 editions, target times and the scoring sheet. Straight to your inbox.</p>
+      <form class="signup signup--stack js-signup" novalidate>
+        <input type="email" placeholder="Your email address" aria-label="Email address" required>
+        <button class="btn btn--ink btn--block" type="submit"><span>Send it to me</span></button>
+        <div class="signup__ok" role="status"><b>✓</b> Sent. See you on the board.</div>
+      </form>
+    </div>
+  </div>
+
+  <div class="toast" role="status" aria-live="polite"><img class="js-toast-img" src="images/logo.png" alt=""><div><strong class="js-toast-name">Added</strong><span>Added to your cart</span></div><button class="js-open-cart">View</button></div>
+
+  <div class="mbar">
+    <a href="#drop" class="btn btn--ink"><span>Shop the drop</span></a>
+    <button class="btn btn--line js-open-cart"><span>Cart · <b class="js-cart-count">0</b></span></button>
+  </div>
+
+  <script src="script.js"></script>
+</body>
+</html>
