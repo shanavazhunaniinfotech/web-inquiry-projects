@@ -141,167 +141,30 @@
   tide($('.cta__tide'), { lines: 20, top: .55, bottom: 1.05, alpha: .4 });
 
   /* =========================================================
-     HERO — "The Ripple Effect"
-     water canvas + 3D orbit of media placements + stone drops
+     HERO — "One stone, endless ripples" (lightweight)
+     All ripple motion is CSS (transform/opacity only); JS only
+     handles the one-time intro, tap ripples and scroll fade.
      ========================================================= */
   const hero = $('.hero');
-  hero.style.touchAction = 'pan-y';
-  let heroVisible = true;
-  new IntersectionObserver(([en]) => { heroVisible = en.isIntersecting; }).observe(hero);
+  const waterEl = $('.hero__water');
+  new IntersectionObserver(([en]) => hero.classList.toggle('is-off', !en.isIntersecting)).observe(hero);
 
-  /* --- water canvas --- */
-  const water = $('.hero__water'), wctx = water.getContext('2d');
-  let ww = 0, wh = 0, wt = 0;
-  const ripples = [];
-  const sizeWater = () => {
-    const dpr = Math.min(devicePixelRatio || 1, 2);
-    ww = water.clientWidth; wh = water.clientHeight;
-    water.width = ww * dpr; water.height = wh * dpr;
-    wctx.setTransform(dpr, 0, 0, dpr, 0, 0);
+  const tapRing = (x, y, delay) => {
+    if (reduce || waterEl.querySelectorAll('.rw--tap').length > 3) return;
+    const ring = document.createElement('span');
+    ring.className = 'rw rw--tap';
+    ring.style.left = x + 'px'; ring.style.top = y + 'px';
+    if (delay) ring.style.animationDelay = delay + 's';
+    ring.addEventListener('animationend', () => ring.remove());
+    waterEl.appendChild(ring);
   };
-  sizeWater();
-  const addRipple = (x, y, size) => {
-    const big = size === 'big', small = size === 'small';
-    ripples.push({ x, y, r: 0, max: big ? 460 : small ? 70 : 170 + Math.random() * 110, sp: big ? 3.4 : small ? 1.1 : 1.7, w: big ? 1.7 : small ? .6 : 1.1, rings: small ? 1 : 3 });
-    if (ripples.length > 46) ripples.shift();
-  };
-  gsap.ticker.add(() => {
-    if (!heroVisible) return;
-    wt += reduce ? 0 : .01;
-    wctx.clearRect(0, 0, ww, wh);
-    const hz = wh * .34;
-    for (let i = 0; i < 24; i++) {
-      const p = ((i + (wt * .5) % 1) / 24);
-      const y = hz + Math.pow(p, 2.1) * (wh - hz + 60);
-      wctx.beginPath();
-      for (let x = 0; x <= ww + 24; x += 24) {
-        const yy = y + Math.sin(x * .005 + wt * 2 + i * 1.7) * (1 + p * 7);
-        x === 0 ? wctx.moveTo(x, yy) : wctx.lineTo(x, yy);
-      }
-      wctx.strokeStyle = i % 5 === 0 ? `rgba(233,223,204,${.02 + p * .1})` : `rgba(124,198,190,${.025 + p * .13})`;
-      wctx.lineWidth = .5 + p * .9;
-      wctx.stroke();
-    }
-    for (let k = ripples.length - 1; k >= 0; k--) {
-      const r = ripples[k];
-      r.r += r.sp * (1 + (1 - r.r / r.max) * .8);
-      const life = 1 - r.r / r.max;
-      if (life <= 0) { ripples.splice(k, 1); continue; }
-      for (let j = 0; j < r.rings; j++) {
-        const rr = r.r - j * 20; if (rr <= 0) continue;
-        wctx.beginPath();
-        wctx.ellipse(r.x, r.y, rr, rr * .33, 0, 0, Math.PI * 2);
-        wctx.strokeStyle = j === 0 ? `rgba(233,223,204,${life * .6})` : `rgba(124,198,190,${life * .45 / j})`;
-        wctx.lineWidth = r.w * (1.3 - j * .3);
-        wctx.stroke();
-      }
-    }
+  hero.addEventListener('click', (e) => {
+    if (e.target.closest('a, button')) return;
+    const w = waterEl.getBoundingClientRect();
+    tapRing(e.clientX - w.left, e.clientY - w.top);
   });
 
-  /* --- 3D orbit --- */
-  const ocards = $$('.ocard'), N = ocards.length;
-  const orbitIn = { v: 0 };
-  let rot = 0, speed = .14, targetSpeed = .14, spinBoost = 0, dragV = 0, tilt = 0, tiltTarget = 0, exitP = 0, R = 600;
-  const layoutHero = () => {
-    sizeWater();
-    const w = hero.clientWidth, mobile = w < 901;
-    R = mobile ? Math.min(w * .5, 300) : Math.min(w * .41, 650);
-    if (mobile) {
-      const h = hero.getBoundingClientRect(), t = $('.hero__title').getBoundingClientRect(), l = $('.hero__lead').getBoundingClientRect();
-      hero.style.setProperty('--oy', ((t.bottom + l.top) / 2 - h.top) + 'px');
-    } else hero.style.setProperty('--oy', '46%');
-  };
-  layoutHero();
-  window.addEventListener('resize', layoutHero);
-  if (document.fonts && document.fonts.ready) document.fonts.ready.then(layoutHero);
-  gsap.ticker.add(() => {
-    if (!heroVisible) return;
-    spinBoost *= .955; dragV *= .93;
-    speed += (targetSpeed - speed) * .04;
-    tilt += (tiltTarget - tilt) * .05;
-    if (!reduce) rot += speed + spinBoost * .25 + dragV;
-    const k = orbitIn.v, Rr = R * (.3 + .7 * k) * (1 + exitP * 1.1), vy = .1 + tilt;
-    for (let i = 0; i < N; i++) {
-      const a = (rot + i * 360 / N) * Math.PI / 180, s = Math.sin(a), c = Math.cos(a), d = (c + 1) / 2;
-      const el = ocards[i];
-      el.style.transform = `translate3d(${(s * Rr).toFixed(1)}px,${(c * Rr * vy).toFixed(1)}px,${(c * Rr * .5).toFixed(1)}px) rotateY(${(s * -30).toFixed(1)}deg)`;
-      el.style.opacity = (k * (1 - exitP) * (.14 + .86 * Math.pow(d, 1.7))).toFixed(3);
-      el.style.zIndex = Math.round(d * 100);
-    }
-  });
-
-  /* --- live signals --- */
-  const sig = { homes: 78269, leads: 1284 };
-  const sigEls = { homes: $('[data-sig="homes"]'), leads: $('[data-sig="leads"]') };
-  const callsEl = $('[data-calls]'); let calls = 38;
-  const bump = (key, n) => {
-    const o = { v: sig[key] }; sig[key] += n;
-    gsap.to(o, { v: sig[key], duration: .9, ease: 'power2.out', onUpdate: () => { sigEls[key].textContent = Math.round(o.v).toLocaleString('en-US'); } });
-    sigEls[key].classList.add('bump'); setTimeout(() => sigEls[key].classList.remove('bump'), 800);
-    if (key === 'leads') { calls++; callsEl.textContent = calls; }
-  };
-
-  /* --- stone drops --- */
-  const dropsEl = $('.hero__drops');
-  const TAGS = [['+1 call tracked', 'leads'], ['Guide delivered · Branford', 'homes'], ['+1 QR scan · Guilford', 'leads'], ['Ad seen · East Haven', 'homes'], ['Offer code redeemed', 'leads'], ['New lead · Branford', 'leads'], ['+1 booked job', 'leads']];
-  let tagN = 0;
-  const drop = (x, y, user) => {
-    addRipple(x, y, user ? 'big' : 'mid');
-    setTimeout(() => addRipple(x, y, 'mid'), 220);
-    spinBoost += user ? 4 : 1.2;
-    if (dropsEl.children.length > 3) return;
-    const [txt, key] = TAGS[tagN++ % TAGS.length];
-    const t = document.createElement('span');
-    t.className = 'dtag'; t.innerHTML = `<i></i>${txt}`;
-    t.style.left = x + 'px'; t.style.top = y + 'px';
-    dropsEl.appendChild(t);
-    gsap.set(t, { xPercent: -50, yPercent: -100 });
-    gsap.timeline({ onComplete: () => t.remove() })
-      .fromTo(t, { opacity: 0, scale: .5, y: 10 }, { opacity: 1, scale: 1, y: -26, duration: .7, ease: 'back.out(2.2)' })
-      .to(t, { y: -100, opacity: 0, duration: 1.3, ease: 'power2.in' }, '+=1.2');
-    bump(key, key === 'homes' ? 4 + Math.floor(Math.random() * 12) : 1);
-  };
-  let autoTimer = null;
-  const startAuto = () => {
-    if (reduce || autoTimer) return;
-    autoTimer = setInterval(() => {
-      if (!heroVisible || document.hidden || exitP > .4) return;
-      const w = hero.clientWidth, h = hero.clientHeight;
-      drop(w * (.08 + Math.random() * .84), h * (.56 + Math.random() * .3), false);
-    }, 2300);
-  };
-
-  /* --- pointer: light, tilt, drag-to-spin, click-to-drop, trails --- */
-  let down = null, moved = 0, lastTrail = 0;
-  hero.addEventListener('pointermove', (e) => {
-    const r = hero.getBoundingClientRect(), x = e.clientX - r.left, y = e.clientY - r.top;
-    hero.style.setProperty('--mx', x + 'px'); hero.style.setProperty('--my', y + 'px');
-    if (e.pointerType === 'mouse') {
-      targetSpeed = .14 + (x / r.width - .5) * .7;
-      tiltTarget = (y / r.height - .5) * .1;
-      const now = performance.now();
-      if (now - lastTrail > 110 && !down) { lastTrail = now; addRipple(x, y, 'small'); }
-    }
-    if (down) {
-      const dx = e.clientX - down.x; moved += Math.abs(dx);
-      dragV = dx * .09; rot += dx * .22; down.x = e.clientX;
-    }
-  });
-  hero.addEventListener('pointerdown', (e) => {
-    if (e.target.closest('a, button, .hero__signals')) return;
-    down = { x: e.clientX }; moved = 0;
-  });
-  window.addEventListener('pointerup', (e) => {
-    if (!down) return;
-    down = null;
-    if (moved < 8 && !e.target.closest('a, button, .hero__signals') && hero.contains(e.target)) {
-      const r = hero.getBoundingClientRect();
-      drop(e.clientX - r.left, e.clientY - r.top, true);
-    }
-  });
-  hero.addEventListener('mouseleave', () => { targetSpeed = .14; tiltTarget = 0; });
-
-  /* --- headline split into letters --- */
+  /* headline: words kept whole, letters split for the intro */
   $$('.hero__title .ln__in').forEach((line) => {
     const walk = (node) => Array.from(node.childNodes).forEach((n) => {
       if (n.nodeType === 3) {
@@ -318,25 +181,22 @@
     });
     walk(line);
   });
-  if (finePointer) {
-    $$('.hero__title .ch').forEach((ch) => { ch.style.pointerEvents = 'auto'; ch.addEventListener('mouseenter', () => gsap.fromTo(ch, { y: 0, rotate: 0 }, { y: -22, rotate: gsap.utils.random(-8, 8), duration: .3, yoyo: true, repeat: 1, ease: 'power2.out' })); });
-  }
 
-  /* --- scroll exit --- */
-  ScrollTrigger.create({ trigger: hero, start: 'top top', end: 'bottom top', scrub: true, onUpdate: (s) => { exitP = s.progress; } });
-  gsap.to('.hero__title', { scale: 1.16, y: -50, opacity: 0, ease: 'none', scrollTrigger: { trigger: hero, start: 'top top', end: '75% top', scrub: true } });
-  gsap.to('.hero__eyebrow, .hero__foot, .hero__bar', { opacity: 0, y: -40, ease: 'none', scrollTrigger: { trigger: hero, start: '5% top', end: '55% top', scrub: true } });
+  /* scroll: content lifts away, water fades */
+  gsap.to('.hero__content', { y: -90, opacity: 0, ease: 'none', scrollTrigger: { trigger: hero, start: 'top top', end: '70% top', scrub: true } });
+  gsap.to('.hero__water, .hero__glow, .hero__bar', { opacity: 0, ease: 'none', scrollTrigger: { trigger: hero, start: '10% top', end: '80% top', scrub: true } });
 
   /* ---------- preloader → hero intro ---------- */
+  gsap.set('.stone', { xPercent: -50, yPercent: -78 });
   const heroIntro = gsap.timeline({ paused: true })
-    .from('.hero__title .ch', { yPercent: 120, rotateX: -90, opacity: 0, duration: 1.4, stagger: .04, ease: 'expo.out' })
-    .to(orbitIn, { v: 1, duration: 2.6, ease: 'expo.out' }, 0)
-    .add(() => { spinBoost = 16; drop(hero.clientWidth / 2, hero.clientHeight * .64, true); }, .05)
-    .from('.hero__eyebrow', { y: 20, opacity: 0, duration: .8 }, .2)
-    .from('.hero__lead > *, .hero__signals', { y: 40, opacity: 0, duration: 1, stagger: .1, ease: 'power3.out' }, .6)
-    .from('.hero__bar', { opacity: 0, y: 20, duration: .8 }, .9)
-    .from('.hdr', { y: -40, opacity: 0, duration: .9, ease: 'power3.out', clearProps: 'transform,opacity' }, .2)
-    .add(() => { layoutHero(); startAuto(); }, 1.2);
+    .from('.hero__title .ch', { yPercent: 110, duration: 1.2, stagger: .03, ease: 'expo.out' })
+    .from('.hero__eyebrow', { y: 16, opacity: 0, duration: .8 }, .15)
+    .from('.stone', { y: -220, opacity: 0, duration: .9, ease: 'power3.in' }, .1)
+    .add(() => { tapRing(0, 0); tapRing(0, 0, .35); }, 1)
+    .from('.hero__glow', { opacity: 0, scale: .6, duration: 1.6, ease: 'power2.out' }, .9)
+    .from('.hero__sub, .hero__ctas', { y: 24, opacity: 0, duration: 1, stagger: .1, ease: 'power3.out' }, .55)
+    .from('.hero__bar', { opacity: 0, y: 16, duration: .8 }, .9)
+    .from('.hdr', { y: -40, opacity: 0, duration: .9, ease: 'power3.out', clearProps: 'transform,opacity' }, .2);
 
   const finishLoad = () => {
     body.classList.remove('is-loading');
@@ -656,7 +516,7 @@
     document.documentElement.classList.add('has-notes');
     const NOTES = [
       ['Preloader — the stone drop', 'A stone dropping into water and rippling outward is the brand story in two seconds: one placement, spreading reach. It also gives fonts and images time to load so the hero lands polished.'],
-      ['Hero — "The Ripple Effect"', 'One big idea: drop one stone and the ripples spread. That is what Beachstone does for a local business. Ten real placements (the Guide, direct mail, a social ad, ROI and call tracking, QR scans, the coverage map) orbit the headline in 3D, so visitors see the whole service mix in five seconds. Visitors can drag to spin it, and each click drops a stone that ripples and shows a "+1 call tracked" style tag while the live signal counters tick up. Without reading a word, they learn targeted reach that is measured.'],
+      ['Hero — "One stone, endless ripples"', 'A deliberately calm, minimal hero. One idea: a single Beachstone (the logo mark) drops into the water and its ripples spread outward. That is exactly what one well-placed ad does for a local business. Large, confident type and generous space say "established agency". Tapping the water sends out another ripple. All motion is pure CSS and pauses when off screen, so it stays smooth on every device.'],
       ['Marquee band', 'A tilted, scroll-reactive band breaks the page rhythm and repeats the three towns and three values. Speeds up as you scroll for energy.'],
       ['Manifesto (About)', 'Words fill in as you read — it slows the visitor down on the one paragraph that explains who Beachstone is. Inline image pills keep it human without a generic "text + photo" layout.'],
       ['Services index', 'A large editorial index (like top agencies use) instead of icon cards. Hover shows a photo that follows the cursor; click expands details. Scannable for busy owners, rich for the curious.'],
