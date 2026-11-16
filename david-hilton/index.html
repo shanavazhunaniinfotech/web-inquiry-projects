@@ -1,0 +1,108 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+  <meta name="robots" content="noindex, nofollow">
+  <title>Coaching Platform Blueprint</title>
+  <meta name="description" content="Platform recommendation, client journey from discovery to booking, membership vs course, and a live cost calculator for a wellness coaching business.">
+  <meta name="theme-color" content="#1f2a24">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=DM+Serif+Display:ital@0;1&family=Outfit:wght@400;500;600;700&display=swap">
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <header class="hero">
+    <div class="wrap">
+      <p class="kind"><span>PLAN</span>Coaching Platform Blueprint · prepared for David Hilton</p>
+      <h1>The best platform for your wellness coaching business, <em>and the journey from first visit to booked client.</em></h1>
+      <p class="lede">Your post asked for a platform recommendation and a smooth path from discovery to booking. This page answers both, with real costs you can adjust.</p>
+      <div class="answer">
+        <div><span class="answer__k">Recommendation</span><b>Wix, with Bookings, Pricing Plans and Online Programs</b><small>One login, one bill: website, 1:1 sessions, membership and courses in the same place.</small></div>
+        <a class="btn" href="#calc">See the cost comparison ↓</a>
+      </div>
+      <nav class="toc" aria-label="Sections"><a href="#journey">1 · Client journey</a><a href="#model">2 · Membership or course</a><a href="#platform">3 · Platform fit</a><a href="#calc">4 · Cost calculator</a><a href="#launch">5 · Launch plan</a></nav>
+    </div>
+  </header>
+
+  <main>
+    <section class="sec wrap" id="journey">
+      <p class="eyebrow">1 · Client journey</p>
+      <h2>From stranger to booked client, <em>step by step.</em></h2>
+      <p class="sub">Tap a step to see what the client experiences, which tool runs it and what happens automatically.</p>
+      <ol class="path" id="path" role="tablist" aria-label="Journey steps"></ol>
+      <div class="stage" id="stage" role="tabpanel" aria-live="polite"></div>
+    </section>
+
+    <section class="sec sec--tint" id="model">
+      <div class="wrap">
+        <p class="eyebrow">2 · Membership or course?</p>
+        <h2>You don't have to choose. <em>Combine them.</em></h2>
+        <div class="models">
+          <article class="model"><h3>Course only</h3><ul><li class="plus">Simple to sell, one-off payment</li><li class="plus">Build once, sell many times</li><li class="minus">Income stops after each sale</li><li class="minus">Lower completion without support</li></ul></article>
+          <article class="model"><h3>Membership only</h3><ul><li class="plus">Recurring monthly income</li><li class="plus">Ongoing relationship and results</li><li class="minus">Needs fresh content every month</li><li class="minus">Members leave if value feels thin</li></ul></article>
+          <article class="model model--rec"><span class="tag">Recommended</span><h3>Course inside a membership, plus 1:1</h3><ul><li class="plus">Signature course included in the membership</li><li class="plus">Monthly live call keeps members engaged</li><li class="plus">1:1 coaching as the premium tier</li><li class="plus">Three price points for three types of client</li></ul></article>
+        </div>
+        <div class="ladder" aria-label="Offer ladder">
+          <div><span>Free</span><b>Wellness assessment</b><small>builds your email list</small></div>
+          <div><span>$$</span><b>Membership + course</b><small>recurring income</small></div>
+          <div><span>$$$</span><b>1:1 coaching</b><small>premium, booked via calendar</small></div>
+        </div>
+      </div>
+    </section>
+
+    <section class="sec wrap" id="platform">
+      <p class="eyebrow">3 · Platform fit</p>
+      <h2>How the main options compare <em>for a coaching business.</em></h2>
+      <div class="tablewrap">
+        <table class="fit">
+          <thead><tr><th scope="col">What you need</th><th scope="col" class="win"><span class="rec">Recommended</span>Wix</th><th scope="col">Kajabi</th><th scope="col">Teachable</th><th scope="col">WordPress + plugins</th></tr></thead>
+          <tbody id="fitBody"></tbody>
+        </table>
+      </div>
+      <p class="note">Ratings reflect a typical wellness coaching setup (marketing site + 1:1 bookings + membership/course). Kajabi and Teachable are excellent course platforms but need an extra booking tool and give less control over the marketing website.</p>
+    </section>
+
+    <section class="sec sec--ink" id="calc">
+      <div class="wrap">
+        <p class="eyebrow eyebrow--light">4 · Cost calculator</p>
+        <h2>What each platform costs <em>at your numbers.</em></h2>
+        <p class="sub sub--light">Move the sliders to match your plans. Costs update live and include platform fees, card fees and the extra tools each option needs.</p>
+        <div class="calc">
+          <div class="calc__in">
+            <label>Members<output id="o-mem">40</output><input type="range" id="mem" min="0" max="500" step="5" value="40"></label>
+            <label>Membership price per month<output id="o-mprice">$39</output><input type="range" id="mprice" min="9" max="149" step="1" value="39"></label>
+            <label>Course sales per month<output id="o-course">6</output><input type="range" id="course" min="0" max="100" value="6"></label>
+            <label>Course price<output id="o-cprice">$297</output><input type="range" id="cprice" min="47" max="997" step="10" value="297"></label>
+            <label>1:1 sessions per month<output id="o-sess">20</output><input type="range" id="sess" min="0" max="120" value="20"></label>
+            <label>Session price<output id="o-sprice">$120</output><input type="range" id="sprice" min="40" max="400" step="5" value="120"></label>
+          </div>
+          <div class="calc__out">
+            <p class="rev">Monthly revenue <b id="rev">$0</b></p>
+            <div class="bars" id="bars"></div>
+            <p class="save" id="save"></p>
+          </div>
+        </div>
+        <p class="note note--light">Approximate prices checked November 2026, annual billing: Wix Business ~$39/mo · Kajabi Basic ~$143/mo · Teachable Builder ~$69/mo · WordPress hosting + course + booking plugins ~$55/mo plus ~2 h/mo upkeep. Card processing ~2.9% + $0.30 on all. A separate booking tool (~$12/mo) is added for Kajabi and Teachable. Confirm current prices before signing up.</p>
+      </div>
+    </section>
+
+    <section class="sec wrap" id="launch">
+      <p class="eyebrow">5 · Launch plan</p>
+      <h2>Live in three weeks, <em>in three phases.</em></h2>
+      <div class="phases">
+        <article><span>Week 1</span><h3>Get booked</h3><ul><li>Home, About, Coaching, Contact pages</li><li>Free discovery call booking with intake form</li><li>Automatic confirmation and reminder emails</li></ul></article>
+        <article><span>Week 2</span><h3>Get paid on repeat</h3><ul><li>Membership plans with monthly billing</li><li>Members area and signature course</li><li>Welcome email sequence</li></ul></article>
+        <article><span>Week 3</span><h3>Grow</h3><ul><li>Free wellness assessment to grow your list</li><li>Testimonials, blog and basic SEO</li><li>Training video so you can update everything</li></ul></article>
+      </div>
+      <div class="next">
+        <div><h3>Next step</h3><p>Tell me your coaching niche, your offers and your preferred platform, and I'll turn this blueprint into your actual site plan with fixed pricing per phase.</p></div>
+      </div>
+    </section>
+  </main>
+
+  <footer class="wrap foot">Prepared by Ilizaben Meman for David Hilton · November 2026 · Prices are third-party estimates for planning only.</footer>
+  <script src="script.js"></script>
+</body>
+</html>
