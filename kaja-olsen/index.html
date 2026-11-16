@@ -4,7 +4,7 @@
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
   <meta name="robots" content="noindex, nofollow">
-  <title>WooCommerce Category Doctor</title>
+  <title>Category Doctor</title>
   <meta name="description" content="Paste a WooCommerce shop address. Get a full scan of its categories and products, what's causing the mess, and how long the clean-up takes.">
   <meta name="theme-color" content="#14213d">
   <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -15,15 +15,15 @@
 <body>
   <header class="hero">
     <div class="wrap">
-      <p class="kind"><span>TOOL</span>Category Doctor for WooCommerce + Elementor</p>
-      <h1>Find out why the categories are a mess, <em>and how long the fix takes.</em></h1>
-      <p class="lede">Paste the shop address. We scan every category and product through the site's public data (no login needed), list exactly what's wrong, and estimate the clean-up time.</p>
+      <p class="kind"><span>TOOL</span>Category Doctor for Elementor + WooCommerce</p>
+      <h1>Why are products and categories mixed on this page, <em>and how long is the fix?</em></h1>
+      <p class="lede">Paste the link of the page that looks messy. We read that page and its categories through the site's public data (no login needed), show what each grid is really pulling in, the likely cause, and the clean-up time.</p>
       <form class="scan" id="scanForm">
-        <label for="url" class="sr">Shop website address</label>
-        <div class="scan__field"><span>https://</span><input id="url" placeholder="clientshop.com" autocomplete="off" inputmode="url" required></div>
-        <button class="btn btn--go" type="submit" id="go">Scan the shop</button>
+        <label for="url" class="sr">Link of the messy page</label>
+        <div class="scan__field"><span>https://</span><input id="url" placeholder="clientsite.com/the-messy-page/" autocomplete="off" inputmode="url" required></div>
+        <button class="btn btn--go" type="submit" id="go">Check this page</button>
       </form>
-      <p class="alt">No address to hand? <button type="button" class="link" id="demo">See an example scan</button></p>
+      <p class="alt">No link to hand? <button type="button" class="link" id="demo">See an example check</button></p>
     </div>
   </header>
 
@@ -34,9 +34,29 @@
     </section>
 
     <section class="fail card" id="fail" hidden>
-      <h2>We couldn't read this shop from outside</h2>
+      <h2>We couldn't read this page from outside</h2>
       <p id="failText"></p>
-      <p>That's fine. Send the link in the chat and we'll run the same scan from our side, or <button type="button" class="link" id="demo2">see an example scan</button>.</p>
+      <p>That's fine. Send the link in the chat and we'll run the same check from our side, or <button type="button" class="link" id="demo2">see an example check</button>.</p>
+    </section>
+
+    <section class="card pagediag" id="pageDiag" hidden>
+      <div class="summary__head">
+        <div><p class="site" id="pdSite"></p><h2 id="pdTitle"></h2><p class="muted" id="pdSub"></p></div>
+        <div class="time"><span>Estimated fix time</span><b id="pdHours"></b><small id="pdDays"></small></div>
+      </div>
+      <dl class="kpis">
+        <div><dt>Page type</dt><dd id="pd-type"></dd></div>
+        <div><dt>Built with</dt><dd id="pd-builder"></dd></div>
+        <div><dt>Grids on page</dt><dd id="pd-grids"></dd></div>
+        <div><dt>Site type</dt><dd id="pd-site"></dd></div>
+      </dl>
+      <h3 class="sub">Why it looks mixed</h3>
+      <div class="issues" id="pdCauses"></div>
+      <h3 class="sub" id="pdGridHead">What each grid is pulling in</h3>
+      <div class="grids" id="pdGridList"></div>
+      <h3 class="sub">Clean-up plan</h3>
+      <ol class="steps" id="pdSteps"></ol>
+      <div class="actions"><button class="btn btn--ink" type="button" id="pdCopy">Copy findings for your client</button><button class="btn btn--line" type="button" id="fullScan">Also scan all categories on the site</button></div>
     </section>
 
     <div id="report" hidden>
