@@ -1,0 +1,109 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+  <meta name="robots" content="noindex, nofollow">
+  <title>Titan Sport Site Check</title>
+  <meta name="description" content="A check of the Titan Sport store: what works, what stops orders reaching you, and how to fix it.">
+  <meta name="theme-color" content="#111111">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Unbounded:wght@500;700;800&family=Manrope:wght@400;500;600;700;800&family=JetBrains+Mono:wght@400;500;700&display=swap">
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <header class="hero">
+    <div class="wrap">
+      <p class="kind"><span>SITE CHECK</span>TITAN SPORT · titansportuz.netlify.app · checked 16 November 2026</p>
+      <h1>You asked for the downsides. <em>The biggest one: orders never reach you.</em></h1>
+      <p class="lede">Your store looks finished: Uzbek language, a barbell builder, an advisor quiz, a cart and checkout. But when a customer orders, the order stays on the customer's own phone. You never see it. Below is the test, every problem I found, and how to fix each one.</p>
+      <div class="score">
+        <div><b>3</b><span>critical</span></div>
+        <div><b>3</b><span>important</span></div>
+        <div><b>1</b><span>to check</span></div>
+        <div class="good"><b>6</b><span>already good</span></div>
+      </div>
+    </div>
+  </header>
+
+  <main>
+    <section class="sec wrap" id="trace">
+      <p class="eyebrow">01 · The order test</p>
+      <h2>I placed a test order on your site. Here is where it went.</h2>
+      <p class="sub">Press the button to replay it step by step.</p>
+      <button class="btn" id="play" type="button">▶ Replay the test order</button>
+      <ol class="trace" id="steps">
+        <li data-s="ok"><span class="dot"></span><div><b>Customer fills in name, phone and address</b><small>Checkout form works.</small></div></li>
+        <li data-s="ok"><span class="dot"></span><div><b>Customer sees "Thank you, our manager will call you soon"</b><small class="uz">"Rahmat! Buyurtmangiz muvaffaqiyatli qabul qilindi. Menejerimiz tez orada telefoningizga qo'ng'iroq qiladi."</small></div></li>
+        <li data-s="warn"><span class="dot"></span><div><b>Order is saved in the customer's own browser</b><small>It is stored on their phone or computer only (browser storage).</small></div></li>
+        <li data-s="bad"><span class="dot"></span><div><b>Sent to your server</b><small>Nothing is sent. Network requests after pressing order: <code>0</code>.</small></div></li>
+        <li data-s="bad"><span class="dot"></span><div><b>Shows in your admin panel</b><small>No. Your admin only shows orders saved in your own browser, so you see the 2 sample orders, not real ones.</small></div></li>
+        <li data-s="bad"><span class="dot"></span><div><b>Arrives in your Telegram @titansport_admin</b><small>No. The Telegram option opens the customer's "share" screen. It doesn't send to you unless they pick your chat themselves.</small></div></li>
+        <li data-s="bad"><span class="dot"></span><div><b>You call the customer</b><small>You can't. You never received the order, but the customer is waiting for your call.</small></div></li>
+      </ol>
+      <p class="verdict" id="verdict" hidden>Result: the customer believes the order is placed. You never hear about it.</p>
+    </section>
+
+    <section class="sec sec--paper" id="findings">
+      <div class="wrap">
+        <p class="eyebrow">02 · Everything I found</p>
+        <h2>Ranked by how much it costs you.</h2>
+        <div class="finds" id="finds"></div>
+      </div>
+    </section>
+
+    <section class="sec wrap" id="fix">
+      <p class="eyebrow">03 · What it should look like</p>
+      <h2>An order that lands on your phone in a second.</h2>
+      <p class="sub">A demo of the fix: fill in the form and watch the order arrive in a private Telegram chat that only you and your staff see. (Demo only: nothing is sent.)</p>
+      <div class="demo">
+        <form class="order" id="order">
+          <label>Product<select id="prod"></select></label>
+          <label>Quantity<input id="qty" type="number" min="1" max="20" value="1"></label>
+          <label>Name<input id="nm" value="Aziz" autocomplete="off"></label>
+          <label>Phone<input id="ph" value="+998 90 000 00 00" autocomplete="off"></label>
+          <label>Payment<select id="pay"><option>Cash on delivery</option><option>Payme</option><option>Click</option></select></label>
+          <button class="btn" type="submit">Place order</button>
+        </form>
+        <div class="phone" aria-live="polite">
+          <div class="phone__top"><b>TITAN SPORT · Orders</b><small>private chat · bot</small></div>
+          <div class="phone__chat" id="chat"><p class="empty">Orders will appear here.</p></div>
+        </div>
+      </div>
+    </section>
+
+    <section class="sec sec--paper" id="ways">
+      <div class="wrap">
+        <p class="eyebrow">04 · Two ways to fix it</p>
+        <h2>Keep your site, or move to WooCommerce.</h2>
+        <div class="ways">
+          <article>
+            <span class="tag">A · Keep this site</span>
+            <h3>Add the missing back end</h3>
+            <ul><li>Orders and contact messages go to your Telegram and are saved safely online</li><li>A real admin login, so only you can change products and prices</li><li>Price changes show for every customer, not only on your device</li><li>Payme and Click payments connected</li></ul>
+            <p class="fit"><b>Best if:</b> you want to keep the exact design you built and launch fast.</p>
+          </article>
+          <article class="rec">
+            <span class="tag">B · WordPress + WooCommerce</span>
+            <h3>A full store system</h3>
+            <ul><li>Orders, stock, customers and discounts built in</li><li>Payme and Click both offer WooCommerce plugins</li><li>Telegram message for every new order</li><li>Your current design and Uzbek text carried over</li></ul>
+            <p class="fit"><b>Best if:</b> you will add many products and want to manage everything yourself for years.</p>
+          </article>
+        </div>
+        <div class="host">
+          <h3>Your hosting question</h3>
+          <p>Netlify is not what stops the orders. It is fine for the site as it is now, and Vercel or Cloudflare Pages are good free options too. What's missing is a back end that receives orders. If you choose WooCommerce (option B), use WordPress hosting such as Hostinger or SiteGround.</p>
+        </div>
+        <div class="next">
+          <h3>Fix first: today's two problems</h3>
+          <p>Before anything else, the order problem and the visible admin password should be fixed. That can be a small fixed-price first step, and the rest can follow once you choose A or B.</p>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <footer class="wrap foot">Checked by Riyaz Lohiya · Read-only check: one test order was placed with test details, and it never left the test browser.</footer>
+  <script src="script.js"></script>
+</body>
+</html>
