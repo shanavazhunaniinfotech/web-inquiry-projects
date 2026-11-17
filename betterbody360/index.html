@@ -4,570 +4,668 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <title>BetterBody360 | A Better Approach to Better Health</title>
-  <meta name="description" content="Physician-guided weight loss, hormone and healthy-aging therapies, paired with 1:1 coaching and the Coaching360 health app. Licensed providers and pharmacies in all 50 states.">
-  <meta name="theme-color" content="#0A1E3F">
+  <meta name="description" content="Physician-guided weight loss, hormone and healthy-aging treatments, paired with 1:1 coaching and the Coaching360 health app. Licensed providers and pharmacies in all 50 states.">
+  <meta name="theme-color" content="#050D1F">
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,400;0,9..144,600;1,9..144,400;1,9..144,600&family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,500;12..96,600;12..96,700;12..96,800&family=Fraunces:ital,opsz,wght@1,9..144,300;1,9..144,400;1,9..144,500&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+  <link rel="preload" as="image" href="https://images.unsplash.com/photo-1594381898411-846e7d193883?w=1000&h=1000&fit=crop&crop=faces">
   <link rel="stylesheet" href="style.css">
 </head>
-<body>
+<body class="is-loading">
 
 <a class="skip" href="#main">Skip to content</a>
 
-<!-- 1. Offer bar -->
+<!-- Loader -->
+<div class="loader" id="loader" aria-hidden="true">
+  <div class="loader__ring">
+    <svg viewBox="0 0 200 200"><circle cx="100" cy="100" r="90" class="loader__track"/><circle cx="100" cy="100" r="90" class="loader__bar" id="loaderBar"/></svg>
+    <span class="loader__num"><b id="loaderNum">0</b>°</span>
+  </div>
+  <p class="loader__txt">A better approach to better health</p>
+</div>
+
+<!-- Offer bar -->
 <div class="promo" data-note="1">
-  <div class="promo__inner">
-    <span class="promo__tag">Limited time</span>
-    <span><strong>20% off your first 3 months</strong> of any program</span>
-    <span class="promo__sep" aria-hidden="true">·</span>
-    <span class="promo__timer" aria-live="off">Ends in <b id="cd">--:--:--</b></span>
-    <a href="#goals" class="promo__link">Claim offer →</a>
+  <div class="promo__track">
+    <span><b>New members:</b> 20% off your first 3 months</span>
+    <span class="promo__dot"></span>
+    <span class="promo__timer">Offer ends in <b id="cd" class="mono">--:--:--</b></span>
+    <a href="#goals" class="promo__link">Claim my 20% <i>→</i></a>
   </div>
 </div>
 
-<!-- 2. Header -->
+<!-- Header -->
 <header class="nav" id="nav">
   <div class="nav__inner">
     <a href="index.html" class="logo" aria-label="BetterBody360 home">
-      <span class="logo__mark" aria-hidden="true">
-        <svg viewBox="0 0 40 40"><circle cx="20" cy="20" r="16" fill="none" stroke="currentColor" stroke-width="3" stroke-dasharray="80 21" stroke-linecap="round"/><circle cx="20" cy="20" r="6" fill="#F06A1D"/></svg>
-      </span>
-      <span class="logo__text">BetterBody<b>360</b><small>Health &amp; Wellness</small></span>
+      <span class="logo__mark" aria-hidden="true"><svg viewBox="0 0 40 40"><circle cx="20" cy="20" r="16" fill="none" stroke="currentColor" stroke-width="3.2" stroke-dasharray="80 21" stroke-linecap="round"/><circle cx="20" cy="20" r="6" fill="#F06A1D"/></svg></span>
+      <span class="logo__text">BetterBody<b>360</b></span>
     </a>
     <nav class="nav__links" aria-label="Main">
+      <a href="#method">The 360 Method</a>
       <a href="#products">Treatments</a>
       <a href="#coaching">Coaching360</a>
-      <a href="#how">How it works</a>
-      <a href="#reviews">Results</a>
-      <a href="#partner">Brand Partners</a>
-      <a href="#faq">FAQ</a>
+      <a href="#results">Results</a>
+      <a href="#partner">Partners</a>
     </nav>
     <div class="nav__actions">
       <a href="#" class="nav__login">Log in</a>
-      <a href="#" class="nav__cart" aria-label="Cart, 0 items">
-        <svg viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M3 4h2l2.4 11.2a2 2 0 0 0 2 1.6h7.7a2 2 0 0 0 2-1.5L21 8H6.2"/><circle cx="10" cy="20" r="1.3"/><circle cx="18" cy="20" r="1.3"/></svg>
-        <span class="nav__count">0</span>
-      </a>
-      <a href="#goals" class="btn btn--orange btn--sm nav__cta">Start free assessment</a>
+      <a href="#" class="nav__cart" aria-label="Cart, 0 items"><svg viewBox="0 0 24 24" width="19" height="19" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M3 4h2l2.4 11.2a2 2 0 0 0 2 1.6h7.7a2 2 0 0 0 2-1.5L21 8H6.2"/><circle cx="10" cy="20" r="1.3"/><circle cx="18" cy="20" r="1.3"/></svg><span>0</span></a>
+      <a href="#goals" class="btn btn--orange btn--sm nav__cta magnetic"><span>Start free assessment</span></a>
       <button class="nav__burger" aria-label="Open menu" aria-expanded="false" aria-controls="mnav"><span></span><span></span></button>
     </div>
   </div>
-  <div class="mnav" id="mnav" hidden>
-    <a href="#products">Treatments</a>
-    <a href="#coaching">Coaching360</a>
-    <a href="#how">How it works</a>
-    <a href="#reviews">Results</a>
-    <a href="#partner">Become a Brand Partner</a>
-    <a href="#faq">FAQ</a>
-    <a href="#">Log in</a>
-    <a href="#goals" class="btn btn--orange">Start free assessment</a>
-  </div>
 </header>
+<div class="mnav" id="mnav" hidden>
+  <nav>
+    <a href="#method"><i>01</i>The 360 Method</a>
+    <a href="#products"><i>02</i>Treatments</a>
+    <a href="#coaching"><i>03</i>Coaching360</a>
+    <a href="#results"><i>04</i>Results</a>
+    <a href="#partner"><i>05</i>Become a Brand Partner</a>
+    <a href="#faq"><i>06</i>FAQ</a>
+  </nav>
+  <a href="#goals" class="btn btn--orange btn--lg btn--block"><span>Start free assessment</span></a>
+  <a href="#" class="mnav__login">Log in to my account</a>
+</div>
 
 <main id="main">
 
-<!-- 3. Hero -->
+<!-- HERO -->
 <section class="hero" data-note="2">
-  <div class="hero__bg" aria-hidden="true"></div>
-  <div class="wrap hero__grid">
+  <div class="hero__glow" id="heroGlow" aria-hidden="true"></div>
+  <div class="hero__grid-bg" aria-hidden="true"></div>
+  <div class="wrap hero__inner">
     <div class="hero__copy">
-      <div class="pill reveal">
-        <span class="stars" aria-hidden="true">★★★★★</span>
-        <span>5.0 member rating · Licensed in all 50 states</span>
+      <p class="hero__eyebrow fx-up"><span class="live"></span>Physician-led · Coaching-powered · All 50 states</p>
+      <h1 class="hero__title">
+        <span class="line"><span class="fx-line">A better approach</span></span>
+        <span class="line"><span class="fx-line">to <em>better health.</em></span></span>
+      </h1>
+      <p class="hero__sub fx-up">Doctor-prescribed weight loss, hormone and healthy-aging treatments, plus a personal coach and a health app that make the results last. One plan, all of you. <b>360°.</b></p>
+      <div class="hero__ctas fx-up">
+        <a href="#goals" class="btn btn--orange btn--xl magnetic"><span>Find my treatment</span><i class="btn__arrow">→</i></a>
+        <a href="#method" class="btn btn--glass btn--xl magnetic"><span class="play" aria-hidden="true">▶</span><span>See how it works</span></a>
       </div>
-      <h1 class="hero__title reveal">A better approach to <em>better health.</em></h1>
-      <p class="hero__sub reveal">Physician-guided weight loss, hormone and healthy-aging treatments, paired with <strong>1:1 coaching</strong> and a health app that keeps you on track. One plan. Every angle. <span class="o">360°.</span></p>
-      <div class="hero__ctas reveal">
-        <a href="#goals" class="btn btn--orange btn--lg">Find my treatment <span class="arr">→</span></a>
-        <a href="#how" class="btn btn--ghost btn--lg">See how it works</a>
-      </div>
-      <ul class="hero__micro reveal">
-        <li><i class="chk"></i>Free 3-minute online assessment</li>
-        <li><i class="chk"></i>Licensed US physicians</li>
-        <li><i class="chk"></i>Discreet delivery to your door</li>
+      <ul class="hero__micro fx-up">
+        <li>Free 3-min assessment</li>
+        <li>No insurance needed</li>
+        <li>Discreet delivery</li>
       </ul>
-      <div class="hero__proof reveal">
-        <div class="avatars" aria-hidden="true">
-          <img src="https://images.unsplash.com/photo-1494790108377-be9c29b29330?w=96&h=96&fit=crop" alt="">
-          <img src="https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?w=96&h=96&fit=crop" alt="">
-          <img src="https://images.unsplash.com/photo-1438761681033-6461ffad8d80?w=96&h=96&fit=crop" alt="">
-          <img src="https://images.unsplash.com/photo-1500648767791-00dcc994a43e?w=96&h=96&fit=crop" alt="">
-        </div>
-        <p><strong>“Knowledgeable, responsive and genuinely interested in helping me reach my goals.”</strong><span>Jen S., verified member</span></p>
-      </div>
     </div>
 
-    <div class="hero__visual">
-      <div class="ring" aria-hidden="true">
-        <svg viewBox="0 0 200 200"><defs><path id="circ" d="M100,100 m-82,0 a82,82 0 1,1 164,0 a82,82 0 1,1 -164,0"/></defs><text><textPath href="#circ">NUTRITION • EXERCISE • HORMONES • BLOOD WORK • COACHING • RECOVERY • </textPath></text></svg>
-      </div>
-      <figure class="hero__photo">
-        <img src="https://images.unsplash.com/photo-1594381898411-846e7d193883?w=900&h=1100&fit=crop&crop=faces" alt="Confident, healthy woman after a workout" fetchpriority="high">
+    <div class="orb" id="orb">
+      <div class="orb__halo" aria-hidden="true"></div>
+      <svg class="orb__rings" viewBox="0 0 600 600" aria-hidden="true">
+        <defs>
+          <linearGradient id="og" x1="0" x2="1"><stop offset="0" stop-color="#F06A1D"/><stop offset="1" stop-color="#FFB27A" stop-opacity="0"/></linearGradient>
+          <path id="orbText" d="M300,300 m-262,0 a262,262 0 1,1 524,0 a262,262 0 1,1 -524,0"/>
+        </defs>
+        <g class="r1"><circle cx="300" cy="300" r="286" fill="none" stroke="rgba(255,255,255,.08)"/><circle cx="300" cy="300" r="286" fill="none" stroke="url(#og)" stroke-width="2" stroke-dasharray="420 1380" stroke-linecap="round"/><circle cx="300" cy="14" r="6" fill="#F06A1D"/></g>
+        <g class="r2"><text class="orb__txt"><textPath href="#orbText">NUTRITION · EXERCISE · HORMONES · BLOOD WORK · SLEEP · RECOVERY · COACHING · HEALTHY AGING · </textPath></text></g>
+        <g class="r3"><circle cx="300" cy="300" r="236" fill="none" stroke="rgba(255,255,255,.14)" stroke-dasharray="2 9"/><circle cx="64" cy="300" r="4" fill="#fff"/></g>
+      </svg>
+      <figure class="orb__photo">
+        <img src="https://images.unsplash.com/photo-1594381898411-846e7d193883?w=1000&h=1000&fit=crop&crop=faces" alt="Strong, healthy woman after a workout" fetchpriority="high">
       </figure>
-      <div class="float float--score">
-        <div class="gauge"><svg viewBox="0 0 64 64"><circle cx="32" cy="32" r="27" class="gauge__bg"/><circle cx="32" cy="32" r="27" class="gauge__fg"/></svg><b>82</b></div>
+      <div class="glass glass--score">
+        <div class="ring-mini"><svg viewBox="0 0 64 64"><circle cx="32" cy="32" r="27" class="rm-bg"/><circle cx="32" cy="32" r="27" class="rm-fg" id="heroGauge"/></svg><b id="heroScore">82</b></div>
         <div><small>Health Score</small><strong>+14 this month</strong></div>
       </div>
-      <div class="float float--rx">
-        <span class="float__icon">✓</span>
-        <div><small>Physician review</small><strong>Approved · Shipping today</strong></div>
+      <div class="glass glass--rx">
+        <span class="tick">✓</span>
+        <div><small>Licensed physician</small><strong>Plan approved</strong></div>
       </div>
-      <div class="float float--coach">
+      <div class="glass glass--coach">
         <img src="https://images.unsplash.com/photo-1559839734-2b71ea197ec2?w=80&h=80&fit=crop&crop=faces" alt="">
-        <div><small>Your coach</small><strong>“Great week! Down 2.4 lb 🎉”</strong></div>
+        <div><small>Coach Sarah · now</small><strong>Down 2.4 lb this week. Proud of you!</strong></div>
       </div>
+    </div>
+  </div>
+
+  <div class="wrap hero__foot">
+    <div class="hero__proof">
+      <div class="avatars" aria-hidden="true">
+        <img src="https://images.unsplash.com/photo-1494790108377-be9c29b29330?w=96&h=96&fit=crop&crop=faces" alt="">
+        <img src="https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?w=96&h=96&fit=crop&crop=faces" alt="">
+        <img src="https://images.unsplash.com/photo-1438761681033-6461ffad8d80?w=96&h=96&fit=crop&crop=faces" alt="">
+      </div>
+      <p><span class="stars">★★★★★</span> <b>5.0</b> from verified members</p>
+    </div>
+    <a href="#statement" class="scrollcue" aria-label="Scroll down"><span></span>Scroll</a>
+    <div class="hero__badges"><span>LegitScript certified</span><span>HIPAA compliant</span></div>
+  </div>
+</section>
+
+<!-- Credentials marquee -->
+<section class="cred" aria-label="Credentials" data-note="3">
+  <div class="cred__track">
+    <div class="cred__set">
+      <span class="cred__item">LegitScript Certified</span><span class="cred__star">✦</span>
+      <span class="cred__item cred__item--o">HIPAA Compliant</span><span class="cred__star">✦</span>
+      <span class="cred__item">Licensed US Physicians</span><span class="cred__star">✦</span>
+      <span class="cred__item cred__item--o">Pharmacies in all 50 States</span><span class="cred__star">✦</span>
+      <span class="cred__item">Powered by BelugaHealth</span><span class="cred__star">✦</span>
+    </div>
+    <div class="cred__set" aria-hidden="true">
+      <span class="cred__item">LegitScript Certified</span><span class="cred__star">✦</span>
+      <span class="cred__item cred__item--o">HIPAA Compliant</span><span class="cred__star">✦</span>
+      <span class="cred__item">Licensed US Physicians</span><span class="cred__star">✦</span>
+      <span class="cred__item cred__item--o">Pharmacies in all 50 States</span><span class="cred__star">✦</span>
+      <span class="cred__item">Powered by BelugaHealth</span><span class="cred__star">✦</span>
     </div>
   </div>
 </section>
 
-<!-- 4. Trust strip -->
-<section class="trust" aria-label="Credentials" data-note="3">
-  <div class="wrap trust__row">
-    <div class="trust__item"><span class="badge-ic">
-      <svg viewBox="0 0 32 32"><path d="M16 2l12 7v14l-12 7-12-7V9z" fill="#0A1E3F"/><path d="M11 16.5l3.2 3.2L21 13" stroke="#19A974" stroke-width="2.6" fill="none" stroke-linecap="round"/></svg></span><div><strong>LegitScript</strong><span>Certified</span></div></div>
-    <div class="trust__item"><span class="badge-ic">
-      <svg viewBox="0 0 32 32"><rect x="6" y="13" width="20" height="15" rx="3" fill="#0A1E3F"/><path d="M11 13V9a5 5 0 0 1 10 0v4" stroke="#0A1E3F" stroke-width="2.6" fill="none"/><circle cx="16" cy="20" r="2.2" fill="#fff"/></svg></span><div><strong>HIPAA</strong><span>Compliant &amp; secure</span></div></div>
-    <div class="trust__item"><span class="badge-ic">
-      <svg viewBox="0 0 32 32"><circle cx="16" cy="11" r="5" fill="#0A1E3F"/><path d="M6 28c0-6 4.5-9 10-9s10 3 10 9" fill="#0A1E3F"/><path d="M21 22h6M24 19v6" stroke="#F06A1D" stroke-width="2.4" stroke-linecap="round"/></svg></span><div><strong>Licensed US physicians</strong><span>via BelugaHealth</span></div></div>
-    <div class="trust__item"><span class="badge-ic">
-      <svg viewBox="0 0 32 32"><path d="M3 12l6-4 5 2 6-3 9 3-1 9-5 5-6-1-4 3-6-3-3-6z" fill="#0A1E3F"/><text x="16" y="19" font-size="8" font-weight="800" text-anchor="middle" fill="#fff">50</text></svg></span><div><strong>All 50 states</strong><span>Licensed pharmacies</span></div></div>
-  </div>
-</section>
-
-<!-- 5. Goal selector -->
-<section class="goals" id="goals" data-note="4">
+<!-- Statement -->
+<section class="statement" id="statement" data-note="4">
   <div class="wrap">
-    <header class="sec-head">
-      <span class="eyebrow">Step 1 · Start with your goal</span>
-      <h2>What would you like to <em>improve</em> first?</h2>
-      <p>Pick a goal and we’ll show you the treatments most members start with. Your physician makes the final call.</p>
-    </header>
-
-    <div class="goals__grid" role="tablist" aria-label="Health goals">
-      <button class="goal is-active" role="tab" aria-selected="true" data-goal="weight">
-        <img src="https://images.unsplash.com/photo-1571019613454-1cb2f99b2d8b?w=500&h=360&fit=crop" alt="">
-        <span class="goal__label">Lose weight</span><span class="goal__arrow">→</span>
-      </button>
-      <button class="goal" role="tab" aria-selected="false" data-goal="body">
-        <img src="https://images.unsplash.com/photo-1541534741688-6078c6bfb5c5?w=500&h=360&fit=crop" alt="">
-        <span class="goal__label">Build lean muscle</span><span class="goal__arrow">→</span>
-      </button>
-      <button class="goal" role="tab" aria-selected="false" data-goal="hormone">
-        <img src="https://images.unsplash.com/photo-1552674605-db6ffd4facb5?w=500&h=360&fit=crop" alt="">
-        <span class="goal__label">Energy &amp; hormones</span><span class="goal__arrow">→</span>
-      </button>
-      <button class="goal" role="tab" aria-selected="false" data-goal="aging">
-        <img src="https://images.unsplash.com/photo-1544367567-0f2fcb009e0b?w=500&h=360&fit=crop" alt="">
-        <span class="goal__label">Age well</span><span class="goal__arrow">→</span>
-      </button>
-      <button class="goal" role="tab" aria-selected="false" data-goal="nutrition">
-        <img src="https://images.unsplash.com/photo-1512621776951-a57141f2eefd?w=500&h=360&fit=crop" alt="">
-        <span class="goal__label">Daily nutrition</span><span class="goal__arrow">→</span>
-      </button>
-      <button class="goal" role="tab" aria-selected="false" data-goal="skin">
-        <img src="https://images.unsplash.com/photo-1494790108377-be9c29b29330?w=500&h=660&fit=crop&crop=faces" alt="">
-        <span class="goal__label">Skin &amp; hair</span><span class="goal__arrow">→</span>
-      </button>
-    </div>
-
-    <div class="match" id="match" aria-live="polite">
-      <div class="match__left">
-        <span class="match__kicker">Your starting plan</span>
-        <h3 id="matchTitle">Physician-guided weight loss</h3>
-        <p id="matchText">Clinically guided GLP-1 therapy to reduce appetite and improve metabolic health, with a coach and app that help you keep the weight off.</p>
-        <ul class="match__list" id="matchList"></ul>
-      </div>
-      <div class="match__right">
-        <div class="match__plus" id="matchProducts"></div>
-        <a href="#" class="btn btn--orange btn--lg btn--block">Start my free assessment <span class="arr">→</span></a>
-        <p class="match__fine">Takes about 3 minutes · No commitment · 20% off your first 3 months</p>
-      </div>
+    <span class="kicker">Why 360°</span>
+    <p class="statement__text" id="statementText">Most programs hand you a prescription and wish you luck. BetterBody360 gives you a physician, a pharmacy, a personal coach and a health app, all working together so your results actually last.</p>
+    <div class="statement__pills">
+      <span>Physician</span><span class="plus">+</span>
+      <span>Pharmacy</span><span class="plus">+</span>
+      <span>Coach</span><span class="plus">+</span>
+      <span>App</span><span class="plus">=</span>
+      <span class="is-o">360°</span>
     </div>
   </div>
 </section>
 
-<!-- 6. Products -->
-<section class="products" id="products" data-note="5">
+<!-- Goal selector -->
+<section class="goals" id="goals" data-note="5">
   <div class="wrap">
-    <header class="sec-head sec-head--row">
+    <header class="head head--split">
       <div>
-        <span class="eyebrow">Treatments</span>
-        <h2>Clinically guided. <em>Delivered to you.</em></h2>
-        <p>Science-backed, doctor-prescribed treatments from licensed US pharmacies.</p>
+        <span class="kicker">Step 1 · Start with your goal</span>
+        <h2 class="h2">What do you want to <em>change first?</em></h2>
       </div>
-      <div class="tabs" role="tablist" aria-label="Filter treatments">
-        <button class="tab is-active" data-filter="all">All</button>
-        <button class="tab" data-filter="weight">Weight loss</button>
-        <button class="tab" data-filter="hormone">Hormones</button>
-        <button class="tab" data-filter="aging">Healthy aging</button>
-        <button class="tab" data-filter="nutrition">Nutrition</button>
-        <button class="tab" data-filter="skin">Skin &amp; hair</button>
-      </div>
+      <p>Choose a goal to see the plan most members start with. A licensed physician makes the final call, so you never have to guess.</p>
     </header>
 
-    <div class="pgrid" id="pgrid">
-      <article class="pcard" data-cat="weight body">
-        <span class="pcard__flag">Most popular</span>
-        <div class="pcard__media tone-blue"><div class="vial"><i></i><b>Tirzepatide</b><small>Rx only</small></div></div>
-        <div class="pcard__body">
-          <span class="pcard__cat">Weight loss · GLP-1 + GIP</span>
-          <h3>Tirzepatide</h3>
-          <p>Dual-action therapy that curbs appetite and supports steady, sustainable weight loss.</p>
-          <ul class="pcard__ticks"><li>Weekly dosing</li><li>Coaching included</li></ul>
-          <div class="pcard__cta"><a href="#" class="btn btn--navy btn--sm">See pricing</a><a href="#" class="link">Learn more →</a></div>
-        </div>
-      </article>
-      <article class="pcard" data-cat="weight body">
-        <div class="pcard__media tone-sky"><div class="vial"><i></i><b>Semaglutide</b><small>Rx only</small></div></div>
-        <div class="pcard__body">
-          <span class="pcard__cat">Weight loss · GLP-1</span>
-          <h3>Semaglutide</h3>
-          <p>Physician-guided GLP-1 that reduces cravings and improves metabolic health.</p>
-          <ul class="pcard__ticks"><li>Weekly dosing</li><li>Coaching included</li></ul>
-          <div class="pcard__cta"><a href="#" class="btn btn--navy btn--sm">See pricing</a><a href="#" class="link">Learn more →</a></div>
-        </div>
-      </article>
-      <article class="pcard" data-cat="hormone body">
-        <div class="pcard__media tone-navy"><div class="vial vial--dark"><i></i><b>Testosterone</b><small>Rx only</small></div></div>
-        <div class="pcard__body">
-          <span class="pcard__cat">Hormone health</span>
-          <h3>Testosterone</h3>
-          <p>Optimize key hormones for energy, mood, libido, strength and overall well-being.</p>
-          <ul class="pcard__ticks"><li>Lab-guided dosing</li><li>Ongoing monitoring</li></ul>
-          <div class="pcard__cta"><a href="#" class="btn btn--navy btn--sm">See pricing</a><a href="#" class="link">Learn more →</a></div>
-        </div>
-      </article>
-      <article class="pcard" data-cat="aging body">
-        <div class="pcard__media tone-mint"><div class="vial"><i></i><b>Sermorelin</b><small>Rx only</small></div></div>
-        <div class="pcard__body">
-          <span class="pcard__cat">Body composition · Peptide</span>
-          <h3>Sermorelin</h3>
-          <p>Stimulates natural growth hormone to support recovery, sleep and lean muscle.</p>
-          <ul class="pcard__ticks"><li>Better sleep &amp; recovery</li><li>Lean mass support</li></ul>
-          <div class="pcard__cta"><a href="#" class="btn btn--navy btn--sm">See pricing</a><a href="#" class="link">Learn more →</a></div>
-        </div>
-      </article>
-      <article class="pcard" data-cat="aging">
-        <div class="pcard__media tone-peach"><div class="vial"><i></i><b>NAD+</b><small>Rx only</small></div></div>
-        <div class="pcard__body">
-          <span class="pcard__cat">Healthy aging</span>
-          <h3>NAD+</h3>
-          <p>Supports cellular energy, DNA repair and mental clarity for healthy aging.</p>
-          <ul class="pcard__ticks"><li>Cellular energy</li><li>Mental clarity</li></ul>
-          <div class="pcard__cta"><a href="#" class="btn btn--navy btn--sm">See pricing</a><a href="#" class="link">Learn more →</a></div>
-        </div>
-      </article>
-      <article class="pcard" data-cat="aging">
-        <div class="pcard__media tone-sky"><div class="vial"><i></i><b>Glutathione</b><small>Rx only</small></div></div>
-        <div class="pcard__body">
-          <span class="pcard__cat">Healthy aging · Antioxidant</span>
-          <h3>Glutathione</h3>
-          <p>The body’s master antioxidant, supporting detoxification and immune function.</p>
-          <ul class="pcard__ticks"><li>Detox support</li><li>Immune support</li></ul>
-          <div class="pcard__cta"><a href="#" class="btn btn--navy btn--sm">See pricing</a><a href="#" class="link">Learn more →</a></div>
-        </div>
-      </article>
-      <article class="pcard" data-cat="nutrition">
-        <span class="pcard__flag pcard__flag--alt">No prescription</span>
-        <div class="pcard__media tone-blue"><div class="jar"><i></i><b>Perfect360<sup>®</sup></b><small>Daily Essentials</small></div></div>
-        <div class="pcard__body">
-          <span class="pcard__cat">Daily nutrition · Supplement</span>
-          <h3>Perfect360<sup>®</sup></h3>
-          <p>All-in-one daily formula: methylated vitamins, minerals, electrolytes, creatine and amino acids.</p>
-          <ul class="pcard__ticks"><li>One scoop a day</li><li>Ships in 48 hrs</li></ul>
-          <div class="pcard__cta"><a href="#" class="btn btn--orange btn--sm">Add to cart</a><a href="#" class="link">Learn more →</a></div>
-        </div>
-      </article>
-      <article class="pcard" data-cat="skin">
-        <div class="pcard__media tone-peach"><div class="jar jar--wide"><i></i><b>GHK-Cu</b><small>Cream</small></div></div>
-        <div class="pcard__body">
-          <span class="pcard__cat">Skin, hair &amp; joints · Peptide</span>
-          <h3>GHK-Cu Cream</h3>
-          <p>Topical copper peptide for healthier-looking skin, hair and overall appearance.</p>
-          <ul class="pcard__ticks"><li>Topical, daily use</li><li>Skin &amp; hair support</li></ul>
-          <div class="pcard__cta"><a href="#" class="btn btn--navy btn--sm">See pricing</a><a href="#" class="link">Learn more →</a></div>
-        </div>
-      </article>
-    </div>
+    <div class="goals__wrap">
+      <ol class="goals__list" role="tablist" aria-label="Health goals">
+        <li><button class="goal is-active" role="tab" aria-selected="true" data-goal="weight"><i>01</i><span>Lose weight</span><em>GLP-1 · Coaching</em><b>→</b></button></li>
+        <li><button class="goal" role="tab" aria-selected="false" data-goal="body"><i>02</i><span>Build lean muscle</span><em>Peptides · Nutrition</em><b>→</b></button></li>
+        <li><button class="goal" role="tab" aria-selected="false" data-goal="hormone"><i>03</i><span>Energy &amp; hormones</span><em>Hormone therapy</em><b>→</b></button></li>
+        <li><button class="goal" role="tab" aria-selected="false" data-goal="aging"><i>04</i><span>Age well</span><em>NAD+ · Glutathione</em><b>→</b></button></li>
+        <li><button class="goal" role="tab" aria-selected="false" data-goal="nutrition"><i>05</i><span>Daily nutrition</span><em>No prescription</em><b>→</b></button></li>
+        <li><button class="goal" role="tab" aria-selected="false" data-goal="skin"><i>06</i><span>Skin &amp; hair</span><em>GHK-Cu peptide</em><b>→</b></button></li>
+      </ol>
 
-    <div class="products__foot">
-      <p><span class="dot"></span>Not sure which is right for you? A licensed physician will recommend the best fit.</p>
-      <a href="#goals" class="btn btn--ghost">Help me choose</a>
+      <div class="plan" id="plan" aria-live="polite">
+        <div class="plan__media">
+          <img id="planImg" src="https://images.unsplash.com/photo-1571019613454-1cb2f99b2d8b?w=1000&h=700&fit=crop" alt="">
+          <span class="plan__tag" id="planTag">Most chosen goal</span>
+        </div>
+        <div class="plan__body">
+          <span class="plan__kicker">Your starting plan</span>
+          <h3 id="planTitle">Physician-guided weight loss</h3>
+          <p id="planText">GLP-1 therapy to quiet cravings and improve metabolic health, with a coach and app that help you keep the weight off.</p>
+          <ul class="plan__items" id="planItems"></ul>
+          <a href="#" class="btn btn--orange btn--lg btn--block magnetic"><span>Start my free assessment</span><i class="btn__arrow">→</i></a>
+          <p class="plan__fine"><span>About 3 minutes</span><span>HIPAA-secure</span><span>20% off 3 months</span></p>
+        </div>
+      </div>
     </div>
   </div>
 </section>
 
-<!-- 7. How it works -->
-<section class="how" id="how" data-note="6">
+<!-- 360 Method -->
+<section class="method" id="method" data-note="6">
   <div class="wrap">
-    <header class="sec-head sec-head--light">
-      <span class="eyebrow eyebrow--light">How it works</span>
-      <h2>From sign-up to your door, <em>in days, not weeks.</em></h2>
+    <header class="head head--center head--dark">
+      <span class="kicker kicker--o">The 360 Method</span>
+      <h2 class="h2">Four steps. <em>One complete you.</em></h2>
+      <p>From your first click to your goal, every part of your health is covered, and you’re never doing it alone.</p>
     </header>
-    <ol class="steps">
-      <li class="step">
-        <span class="step__n">01</span>
-        <div class="step__ic">🎯</div>
-        <h3>Choose your goal</h3>
-        <p>Pick the treatment or program that fits your goals, then complete a short online health questionnaire.</p>
-        <span class="step__time">~3 minutes</span>
-      </li>
-      <li class="step">
-        <span class="step__n">02</span>
-        <div class="step__ic">🩺</div>
-        <h3>Licensed physician review</h3>
-        <p>A licensed US physician reviews your information and decides whether the treatment is right for you.</p>
-        <span class="step__time">Usually within 24–48 hrs</span>
-      </li>
-      <li class="step">
-        <span class="step__n">03</span>
-        <div class="step__ic">📦</div>
-        <h3>Delivered to your door</h3>
-        <p>If prescribed, a licensed pharmacy ships your treatment discreetly, with free, trackable delivery.</p>
-        <span class="step__time">Discreet packaging</span>
-      </li>
-      <li class="step step--hl">
-        <span class="step__n">04</span>
-        <div class="step__ic">📈</div>
-        <h3>Coached to your goal</h3>
-        <p>Your Coaching360 coach and app track progress, adjust your plan and keep you accountable.</p>
-        <span class="step__time">Ongoing support</span>
-      </li>
-    </ol>
-    <div class="how__cta">
-      <a href="#goals" class="btn btn--orange btn--lg">Start my free assessment <span class="arr">→</span></a>
-      <span>No insurance needed · HIPAA-secure</span>
+  </div>
+  <div class="wrap method__grid">
+    <div class="method__sticky">
+      <div class="dial" id="dial">
+        <svg viewBox="0 0 400 400" aria-hidden="true">
+          <circle cx="200" cy="200" r="170" class="dial__bg"/>
+          <circle cx="200" cy="200" r="170" class="dial__seg" data-seg="0"/>
+          <circle cx="200" cy="200" r="170" class="dial__seg" data-seg="1"/>
+          <circle cx="200" cy="200" r="170" class="dial__seg" data-seg="2"/>
+          <circle cx="200" cy="200" r="170" class="dial__seg" data-seg="3"/>
+          <circle cx="200" cy="200" r="138" class="dial__inner"/>
+        </svg>
+        <div class="dial__labels" aria-hidden="true"><span>Assess</span><span>Treat</span><span>Coach</span><span>Track</span></div>
+        <div class="dial__center">
+          <span class="dial__n" id="dialN">01</span>
+          <span class="dial__label" id="dialLabel">Assess</span>
+          <span class="dial__time" id="dialTime">~3 minutes</span>
+        </div>
+      </div>
+    </div>
+    <div class="method__steps">
+      <article class="mstep is-active" data-step="0" data-label="Assess" data-time="~3 minutes">
+        <span class="mstep__n">01 · Assess</span>
+        <h3>Tell us your goals</h3>
+        <p>Pick your goal and complete a short online health questionnaire from your phone, in minutes. No waiting rooms.</p>
+        <div class="mstep__img"><img src="https://images.unsplash.com/photo-1434494878577-86c23bcb06b9?w=900&h=560&fit=crop" alt="Person checking health data on a smartwatch" loading="lazy"></div>
+      </article>
+      <article class="mstep" data-step="1" data-label="Treat" data-time="24–48 hr review">
+        <span class="mstep__n">02 · Treat</span>
+        <h3>A licensed physician reviews</h3>
+        <p>A licensed US physician reviews your information and, if appropriate, prescribes your treatment. A licensed pharmacy ships it discreetly to your door.</p>
+        <div class="mstep__img"><img src="https://images.unsplash.com/photo-1576091160399-112ba8d25d1d?w=900&h=560&fit=crop" alt="Physician reviewing a patient file on a phone" loading="lazy"></div>
+      </article>
+      <article class="mstep" data-step="2" data-label="Coach" data-time="1:1, ongoing">
+        <span class="mstep__n">03 · Coach</span>
+        <h3>Your coach builds the plan</h3>
+        <p>Your Coaching360 coach builds a plan around nutrition, exercise, sleep and supplements, so the medication isn’t doing all the work.</p>
+        <div class="mstep__img"><img src="https://images.unsplash.com/photo-1571019614242-c5c5dee9f50b?w=900&h=560&fit=crop" alt="Coach training a client" loading="lazy"></div>
+      </article>
+      <article class="mstep" data-step="3" data-label="Track" data-time="Every day">
+        <span class="mstep__n">04 · Track</span>
+        <h3>See your progress, every day</h3>
+        <p>The Coaching360 app syncs with 50+ health apps, tracks your metrics and nudges you daily. Monthly check-ins keep you moving toward your goal.</p>
+        <div class="mstep__img"><img src="https://images.unsplash.com/photo-1552674605-db6ffd4facb5?w=900&h=560&fit=crop" alt="Friends running together at sunrise" loading="lazy"></div>
+      </article>
+      <div class="method__cta">
+        <a href="#goals" class="btn btn--orange btn--xl magnetic"><span>Start step 1, free</span><i class="btn__arrow">→</i></a>
+        <span>No insurance needed · HIPAA-secure</span>
+      </div>
     </div>
   </div>
 </section>
 
-<!-- 8. Coaching360 -->
-<section class="coach" id="coaching" data-note="7">
+<!-- Treatments rail -->
+<section class="products" id="products" data-note="7">
+  <div class="wrap">
+    <header class="head head--split">
+      <div>
+        <span class="kicker">Treatments</span>
+        <h2 class="h2">Clinically guided. <em>Delivered to you.</em></h2>
+      </div>
+      <div class="chips" role="group" aria-label="Filter treatments">
+        <button class="chip is-active" data-filter="all">All</button>
+        <button class="chip" data-filter="weight">Weight loss</button>
+        <button class="chip" data-filter="hormone">Hormones</button>
+        <button class="chip" data-filter="aging">Healthy aging</button>
+        <button class="chip" data-filter="nutrition">Nutrition</button>
+        <button class="chip" data-filter="skin">Skin &amp; hair</button>
+      </div>
+    </header>
+  </div>
+
+  <div class="rail" id="rail" tabindex="0" aria-label="Treatments, scroll sideways">
+    <article class="pc" data-cat="weight body" style="--c1:#2A63C9;--c2:#0A1E3F">
+      <span class="pc__flag">Most popular</span>
+      <div class="pc__stage"><div class="pc__glow"></div><div class="vial"><i></i><b>Tirzepatide</b><small>Rx only</small></div></div>
+      <div class="pc__body">
+        <span class="pc__cat">Weight loss · GLP-1 + GIP</span>
+        <h3>Tirzepatide</h3>
+        <p>Dual-action therapy that curbs appetite for steady, sustainable weight loss.</p>
+        <ul><li>Weekly dosing</li><li>Coaching included</li></ul>
+        <div class="pc__cta"><a href="#" class="btn btn--ink btn--sm"><span>See pricing</span></a><a href="#" class="ulink">Learn more</a></div>
+      </div>
+    </article>
+    <article class="pc" data-cat="weight body" style="--c1:#3B82F6;--c2:#0E2A5C">
+      <div class="pc__stage"><div class="pc__glow"></div><div class="vial"><i></i><b>Semaglutide</b><small>Rx only</small></div></div>
+      <div class="pc__body">
+        <span class="pc__cat">Weight loss · GLP-1</span>
+        <h3>Semaglutide</h3>
+        <p>Physician-guided GLP-1 that reduces cravings and improves metabolic health.</p>
+        <ul><li>Weekly dosing</li><li>Coaching included</li></ul>
+        <div class="pc__cta"><a href="#" class="btn btn--ink btn--sm"><span>See pricing</span></a><a href="#" class="ulink">Learn more</a></div>
+      </div>
+    </article>
+    <article class="pc" data-cat="hormone body" style="--c1:#F06A1D;--c2:#6B2304">
+      <div class="pc__stage"><div class="pc__glow"></div><div class="vial"><i></i><b>Testosterone</b><small>Rx only</small></div></div>
+      <div class="pc__body">
+        <span class="pc__cat">Hormone health</span>
+        <h3>Testosterone</h3>
+        <p>Optimize key hormones for energy, mood, libido, strength and overall well-being.</p>
+        <ul><li>Lab-guided dosing</li><li>Ongoing monitoring</li></ul>
+        <div class="pc__cta"><a href="#" class="btn btn--ink btn--sm"><span>See pricing</span></a><a href="#" class="ulink">Learn more</a></div>
+      </div>
+    </article>
+    <article class="pc" data-cat="aging body" style="--c1:#1FA97A;--c2:#0B3B33">
+      <div class="pc__stage"><div class="pc__glow"></div><div class="vial"><i></i><b>Sermorelin</b><small>Rx only</small></div></div>
+      <div class="pc__body">
+        <span class="pc__cat">Body composition · Peptide</span>
+        <h3>Sermorelin</h3>
+        <p>Stimulates natural growth hormone to support recovery, sleep and lean muscle.</p>
+        <ul><li>Sleep &amp; recovery</li><li>Lean mass support</li></ul>
+        <div class="pc__cta"><a href="#" class="btn btn--ink btn--sm"><span>See pricing</span></a><a href="#" class="ulink">Learn more</a></div>
+      </div>
+    </article>
+    <article class="pc" data-cat="aging" style="--c1:#8B5CF6;--c2:#2A1660">
+      <div class="pc__stage"><div class="pc__glow"></div><div class="vial"><i></i><b>NAD+</b><small>Rx only</small></div></div>
+      <div class="pc__body">
+        <span class="pc__cat">Healthy aging</span>
+        <h3>NAD+</h3>
+        <p>Supports cellular energy, DNA repair and mental clarity for healthy aging.</p>
+        <ul><li>Cellular energy</li><li>Mental clarity</li></ul>
+        <div class="pc__cta"><a href="#" class="btn btn--ink btn--sm"><span>See pricing</span></a><a href="#" class="ulink">Learn more</a></div>
+      </div>
+    </article>
+    <article class="pc" data-cat="aging" style="--c1:#14B8C4;--c2:#0B3A4A">
+      <div class="pc__stage"><div class="pc__glow"></div><div class="vial"><i></i><b>Glutathione</b><small>Rx only</small></div></div>
+      <div class="pc__body">
+        <span class="pc__cat">Healthy aging · Antioxidant</span>
+        <h3>Glutathione</h3>
+        <p>The body’s master antioxidant, supporting detoxification and immune function.</p>
+        <ul><li>Detox support</li><li>Immune support</li></ul>
+        <div class="pc__cta"><a href="#" class="btn btn--ink btn--sm"><span>See pricing</span></a><a href="#" class="ulink">Learn more</a></div>
+      </div>
+    </article>
+    <article class="pc" data-cat="nutrition" style="--c1:#F59E0B;--c2:#6B3304">
+      <span class="pc__flag pc__flag--g">No prescription</span>
+      <div class="pc__stage"><div class="pc__glow"></div><div class="jar"><i></i><b>Perfect360<sup>®</sup></b><small>Daily Essentials</small></div></div>
+      <div class="pc__body">
+        <span class="pc__cat">Daily nutrition · Supplement</span>
+        <h3>Perfect360<sup>®</sup></h3>
+        <p>All-in-one daily formula: methylated vitamins, minerals, electrolytes, creatine and amino acids.</p>
+        <ul><li>One scoop a day</li><li>Ships fast</li></ul>
+        <div class="pc__cta"><a href="#" class="btn btn--orange btn--sm"><span>Add to cart</span></a><a href="#" class="ulink">Learn more</a></div>
+      </div>
+    </article>
+    <article class="pc" data-cat="skin" style="--c1:#E7849A;--c2:#5A1E2E">
+      <div class="pc__stage"><div class="pc__glow"></div><div class="jar jar--wide"><i></i><b>GHK-Cu</b><small>Cream</small></div></div>
+      <div class="pc__body">
+        <span class="pc__cat">Skin, hair &amp; joints · Peptide</span>
+        <h3>GHK-Cu Cream</h3>
+        <p>Topical copper peptide for healthier-looking skin, hair and overall appearance.</p>
+        <ul><li>Topical, daily</li><li>Skin &amp; hair</li></ul>
+        <div class="pc__cta"><a href="#" class="btn btn--ink btn--sm"><span>See pricing</span></a><a href="#" class="ulink">Learn more</a></div>
+      </div>
+    </article>
+    <a href="#goals" class="pc pc--help" data-cat="all">
+      <span class="pc__q">?</span>
+      <h3>Not sure which is right for you?</h3>
+      <p>Pick your goal and a licensed physician will recommend the best fit for you.</p>
+      <span class="btn btn--orange btn--sm"><span>Help me choose →</span></span>
+    </a>
+  </div>
+  <div class="wrap rail__ctl">
+    <div class="rail__bar"><span id="railBar"></span></div>
+    <div class="rail__btns">
+      <button class="rbtn" id="railPrev" aria-label="Previous treatments">←</button>
+      <button class="rbtn" id="railNext" aria-label="Next treatments">→</button>
+    </div>
+  </div>
+</section>
+
+<!-- Coaching360 -->
+<section class="coach" id="coaching" data-note="8">
+  <div class="wrap">
+    <header class="head head--split head--dark">
+      <div>
+        <span class="kicker kicker--o">Coaching360<sup>®</sup></span>
+        <h2 class="h2">Treatment gets you started. <em>Coaching gets you there.</em></h2>
+      </div>
+      <p>Medication alone isn’t a plan. Coaching360 pairs you with a personal coach and an app that bring nutrition, exercise, sleep, blood work and hormones together in one place.</p>
+    </header>
+  </div>
   <div class="wrap coach__grid">
-    <div class="coach__visual">
-      <div class="phone">
-        <div class="phone__notch"></div>
-        <div class="phone__screen">
-          <div class="app__top"><span>Good morning, Jen</span><span class="app__bell">●</span></div>
-          <div class="app__score">
-            <svg viewBox="0 0 120 120"><circle cx="60" cy="60" r="50" class="app__ringbg"/><circle cx="60" cy="60" r="50" class="app__ring"/></svg>
-            <div><b id="appScore">82</b><small>Health Score</small></div>
+    <div class="coach__feats">
+      <article class="cf is-active" data-screen="0">
+        <span class="cf__n">01</span>
+        <div><h3>1:1 personal coaching</h3><p>Virtual sessions and unlimited messaging with a coach who knows your goals, your numbers and your schedule.</p></div>
+      </article>
+      <article class="cf" data-screen="1">
+        <span class="cf__n">02</span>
+        <div><h3>Health dashboard</h3><p>Weight, body fat, activity, sleep and labs in one live dashboard. Syncs with 50+ health and fitness apps.</p></div>
+      </article>
+      <article class="cf" data-screen="2">
+        <span class="cf__n">03</span>
+        <div><h3>Health assessment</h3><p>A complete picture of where you are today, from metabolic health to hormones, and what to improve first.</p></div>
+      </article>
+      <article class="cf" data-screen="3">
+        <span class="cf__n">04</span>
+        <div><h3>Personal plan + daily nudges</h3><p>Clear steps for nutrition, exercise and supplements, with daily notifications and monthly check-ins that keep you consistent.</p></div>
+      </article>
+      <div class="coach__cta">
+        <a href="#" class="btn btn--orange btn--lg magnetic"><span>Explore Coaching360</span><i class="btn__arrow">→</i></a>
+        <a href="#" class="ulink ulink--light">Programs &amp; pricing</a>
+      </div>
+    </div>
+
+    <div class="coach__device">
+      <div class="device">
+        <div class="phone" id="phone">
+          <div class="phone__island"></div>
+          <div class="screens">
+            <div class="scr is-active" data-s="0">
+              <div class="scr__head"><img src="https://images.unsplash.com/photo-1559839734-2b71ea197ec2?w=80&h=80&fit=crop&crop=faces" alt=""><div><b>Coach Sarah</b><small>● Online</small></div></div>
+              <div class="bub bub--in">Morning Jen! You hit your protein goal 5 days in a row 🎉</div>
+              <div class="bub bub--out">Thanks! Way more energy this week.</div>
+              <div class="bub bub--in">Love it. Let’s add a strength session on Thursday. Plan updated 💪</div>
+              <div class="bub bub--card"><small>Plan updated</small><b>+ Strength · Thu 7:00 AM</b></div>
+              <div class="scr__input">Message your coach…</div>
+            </div>
+            <div class="scr" data-s="1">
+              <div class="scr__top"><span>Dashboard</span><span class="o">This month</span></div>
+              <div class="app-score"><svg viewBox="0 0 120 120"><circle cx="60" cy="60" r="50" class="as-bg"/><circle cx="60" cy="60" r="50" class="as-fg"/></svg><div><b>82</b><small>Health Score</small></div></div>
+              <div class="app-metrics"><div><small>Weight</small><b>142 lb</b><em>↓ 6.4</em></div><div><small>Body fat</small><b>21%</b><em>↓ 2.1</em></div><div><small>Steps</small><b>7,842</b><em>↑ 12%</em></div></div>
+              <div class="app-bars" aria-hidden="true"><i style="--h:38%"></i><i style="--h:52%"></i><i style="--h:46%"></i><i style="--h:64%"></i><i style="--h:58%"></i><i style="--h:76%"></i><i style="--h:90%"></i></div>
+              <div class="app-sync">Synced with <i>Apple Health</i><i>Fitbit</i><i>+48</i></div>
+            </div>
+            <div class="scr" data-s="2">
+              <div class="scr__top"><span>Health assessment</span><span class="o">Complete</span></div>
+              <div class="asm">
+                <div class="asm__row"><span>Metabolic health</span><div class="bar"><i style="--w:72%"></i></div></div>
+                <div class="asm__row"><span>Hormones</span><div class="bar"><i style="--w:58%"></i></div></div>
+                <div class="asm__row"><span>Sleep &amp; recovery</span><div class="bar"><i style="--w:64%"></i></div></div>
+                <div class="asm__row"><span>Cardio health</span><div class="bar"><i style="--w:81%"></i></div></div>
+                <div class="asm__row"><span>Body composition</span><div class="bar"><i style="--w:49%"></i></div></div>
+              </div>
+              <div class="asm__note"><b>Top opportunity: body composition</b>Your plan focuses on protein, strength and sleep.</div>
+            </div>
+            <div class="scr" data-s="3">
+              <div class="scr__top"><span>Today’s plan</span><span class="o">3 of 5 done</span></div>
+              <ul class="todo">
+                <li class="done">Drink 80 oz water</li>
+                <li class="done">Hit 120 g protein</li>
+                <li class="done">Perfect360® daily scoop</li>
+                <li>Strength, 30 min</li>
+                <li>Lights out by 10:30</li>
+              </ul>
+              <div class="notif"><b>BetterBody360 · now</b>12-day streak! Keep it going 🔥</div>
+            </div>
           </div>
-          <div class="app__metrics">
-            <div><small>Weight</small><b>142 lb</b><em>↓ 6.4</em></div>
-            <div><small>Body fat</small><b>21%</b><em>↓ 2.1</em></div>
-            <div><small>Steps</small><b>7,842</b><em>↑ 12%</em></div>
-          </div>
-          <div class="app__bars" aria-hidden="true"><i style="--h:40%"></i><i style="--h:55%"></i><i style="--h:48%"></i><i style="--h:66%"></i><i style="--h:60%"></i><i style="--h:78%"></i><i style="--h:88%"></i></div>
-          <div class="app__msg"><img src="https://images.unsplash.com/photo-1559839734-2b71ea197ec2?w=60&h=60&fit=crop&crop=faces" alt=""><p><b>Coach Sarah</b>Protein goal hit 5 days in a row. Let’s add one strength session this week 💪</p></div>
         </div>
-      </div>
-      <div class="coach__chip coach__chip--a">🔗 Syncs with 50+ health apps</div>
-      <div class="coach__chip coach__chip--b">💬 Unlimited messaging</div>
-    </div>
-
-    <div class="coach__copy">
-      <span class="eyebrow">Coaching360<sup>®</sup></span>
-      <h2>Treatment gets you started. <em>Coaching gets you there.</em></h2>
-      <p class="lead">Medication alone isn’t a plan. Coaching360 pairs you with a personal coach and an app that brings nutrition, exercise, sleep, blood work and hormones into one place, so results last.</p>
-      <div class="feats">
-        <div class="feat"><span>01</span><h4>1:1 personal coach</h4><p>Virtual sessions with a coach who knows your goals.</p></div>
-        <div class="feat"><span>02</span><h4>Health assessment</h4><p>A deep look at where you are today, and what to improve.</p></div>
-        <div class="feat"><span>03</span><h4>Personalized plan</h4><p>Clear steps for nutrition, exercise, supplements and goals.</p></div>
-        <div class="feat"><span>04</span><h4>Health dashboard</h4><p>Track weight, body fat, activity and progress in real time.</p></div>
-        <div class="feat"><span>05</span><h4>Daily notifications</h4><p>Small nudges that keep you consistent every day.</p></div>
-        <div class="feat"><span>06</span><h4>Monthly check-ins</h4><p>Re-assess, adjust and keep moving forward.</p></div>
-      </div>
-      <div class="coach__ctas">
-        <a href="#" class="btn btn--navy btn--lg">Explore Coaching360</a>
-        <a href="#" class="link">See programs &amp; pricing →</a>
+        <div class="device__chip device__chip--a">50+ apps synced</div>
+        <div class="device__chip device__chip--b">Unlimited messaging</div>
       </div>
     </div>
   </div>
 
-  <div class="marquee" aria-label="Coaching focus areas">
-    <div class="marquee__track">
-      <span>Weight loss</span><span>Lean muscle mass</span><span>Body composition</span><span>Nutrition</span><span>Supplements &amp; peptides</span><span>Exercise &amp; activity</span><span>Metabolic health</span><span>Cardiovascular health</span><span>Hormonal health</span><span>Blood work &amp; metrics</span><span>Sleep &amp; recovery</span><span>Reduce health risks</span><span>Healthy aging</span><span>Overall wellness</span>
+  <div class="focus" aria-label="Coaching focus areas">
+    <div class="focus__row">
+      <div class="focus__set"><span>Weight loss</span><span>Lean muscle mass</span><span>Body composition</span><span>Nutrition</span><span>Supplements &amp; peptides</span><span>Exercise &amp; activity</span><span>Metabolic health</span></div>
+      <div class="focus__set" aria-hidden="true"><span>Weight loss</span><span>Lean muscle mass</span><span>Body composition</span><span>Nutrition</span><span>Supplements &amp; peptides</span><span>Exercise &amp; activity</span><span>Metabolic health</span></div>
     </div>
-  </div>
-
-  <div class="wrap">
-    <div class="guarantee" data-note="8">
-      <div class="seal" aria-hidden="true">
-        <svg viewBox="0 0 120 120"><defs><path id="seal" d="M60,60 m-44,0 a44,44 0 1,1 88,0 a44,44 0 1,1 -88,0"/></defs><circle cx="60" cy="60" r="56" fill="#F06A1D"/><circle cx="60" cy="60" r="33" fill="#0A1E3F"/><text font-size="9.5" font-weight="800" letter-spacing="2.4" fill="#fff"><textPath href="#seal">RESULTS GUARANTEED • RESULTS GUARANTEED • </textPath></text><path d="M47 61l9 9 18-19" stroke="#fff" stroke-width="6" fill="none" stroke-linecap="round" stroke-linejoin="round"/></svg>
-      </div>
-      <div>
-        <span class="eyebrow eyebrow--orange">The Coaching360 guarantee</span>
-        <h3>Your goals. Our commitment.</h3>
-        <p>If you don’t reach the goals we agree on together, we keep coaching you <strong>at no additional cost</strong> until you do.</p>
-      </div>
-      <a href="#" class="btn btn--orange btn--lg">See programs</a>
+    <div class="focus__row focus__row--rev">
+      <div class="focus__set"><span>Cardiovascular health</span><span>Hormonal health</span><span>Blood work &amp; metrics</span><span>Sleep &amp; recovery</span><span>Reduce health risks</span><span>Healthy aging</span><span>Overall wellness</span></div>
+      <div class="focus__set" aria-hidden="true"><span>Cardiovascular health</span><span>Hormonal health</span><span>Blood work &amp; metrics</span><span>Sleep &amp; recovery</span><span>Reduce health risks</span><span>Healthy aging</span><span>Overall wellness</span></div>
     </div>
   </div>
 </section>
 
-<!-- 9. Comparison -->
-<section class="compare" data-note="9">
+<!-- Guarantee -->
+<section class="guarantee" data-note="9">
+  <div class="wrap guarantee__inner">
+    <div class="seal" aria-hidden="true">
+      <svg viewBox="0 0 200 200"><defs><path id="sealP" d="M100,100 m-78,0 a78,78 0 1,1 156,0 a78,78 0 1,1 -156,0"/></defs><text class="seal__t"><textPath href="#sealP">RESULTS GUARANTEED ✦ RESULTS GUARANTEED ✦ </textPath></text></svg>
+      <span class="seal__c"><svg viewBox="0 0 40 40"><path d="M10 21l7 7 14-15" fill="none" stroke="currentColor" stroke-width="4.5" stroke-linecap="round" stroke-linejoin="round"/></svg></span>
+    </div>
+    <div class="guarantee__copy">
+      <span class="kicker kicker--ink">The Coaching360 guarantee</span>
+      <h2>Your goals. <em>Our commitment.</em></h2>
+      <p>If you don’t reach the goals we set together, we keep coaching you <b>at no additional cost</b> until you do.</p>
+    </div>
+    <a href="#" class="btn btn--ink btn--xl magnetic"><span>See programs</span><i class="btn__arrow">→</i></a>
+  </div>
+</section>
+
+<!-- Compare -->
+<section class="compare" data-note="10">
   <div class="wrap">
-    <header class="sec-head">
-      <span class="eyebrow">Why BetterBody360</span>
-      <h2>More than a prescription. <em>A complete plan.</em></h2>
+    <header class="head head--center">
+      <span class="kicker">Why BetterBody360</span>
+      <h2 class="h2">More than a prescription. <em>A complete plan.</em></h2>
     </header>
-    <div class="table" role="table" aria-label="Comparison">
-      <div class="trow trow--head" role="row">
+    <div class="ctable" role="table" aria-label="Comparison of BetterBody360, typical telehealth and going it alone">
+      <div class="crow crow--head" role="row">
         <span role="columnheader"></span>
-        <span role="columnheader" class="us"><b>BetterBody360</b></span>
+        <span role="columnheader" class="us"><span>BetterBody<b>360</b></span></span>
         <span role="columnheader">Typical telehealth</span>
         <span role="columnheader">Going it alone</span>
       </div>
-      <div class="trow" role="row"><span role="cell">Licensed US physician review</span><span role="cell" class="us y">✓</span><span role="cell" class="y">✓</span><span role="cell" class="n">✕</span></div>
-      <div class="trow" role="row"><span role="cell">Licensed pharmacy, delivered to you</span><span role="cell" class="us y">✓</span><span role="cell" class="y">✓</span><span role="cell" class="n">✕</span></div>
-      <div class="trow" role="row"><span role="cell">1:1 personal health coach</span><span role="cell" class="us y">✓</span><span role="cell" class="n">✕</span><span role="cell" class="n">✕</span></div>
-      <div class="trow" role="row"><span role="cell">Nutrition, exercise &amp; sleep plan</span><span role="cell" class="us y">✓</span><span role="cell" class="m">Sometimes</span><span role="cell" class="n">✕</span></div>
-      <div class="trow" role="row"><span role="cell">Health app syncing 50+ apps</span><span role="cell" class="us y">✓</span><span role="cell" class="n">✕</span><span role="cell" class="n">✕</span></div>
-      <div class="trow" role="row"><span role="cell">Results guarantee</span><span role="cell" class="us y">✓</span><span role="cell" class="n">✕</span><span role="cell" class="n">✕</span></div>
+      <div class="crow" role="row"><span role="cell">Licensed US physician review</span><span role="cell" class="us"><i class="y"></i></span><span role="cell"><i class="y y--g"></i></span><span role="cell"><i class="n"></i></span></div>
+      <div class="crow" role="row"><span role="cell">Licensed pharmacy, delivered to you</span><span role="cell" class="us"><i class="y"></i></span><span role="cell"><i class="y y--g"></i></span><span role="cell"><i class="n"></i></span></div>
+      <div class="crow" role="row"><span role="cell">1:1 personal health coach</span><span role="cell" class="us"><i class="y"></i></span><span role="cell"><i class="n"></i></span><span role="cell"><i class="n"></i></span></div>
+      <div class="crow" role="row"><span role="cell">Nutrition, exercise &amp; sleep plan</span><span role="cell" class="us"><i class="y"></i></span><span role="cell"><small>Sometimes</small></span><span role="cell"><i class="n"></i></span></div>
+      <div class="crow" role="row"><span role="cell">Health app syncing 50+ apps</span><span role="cell" class="us"><i class="y"></i></span><span role="cell"><i class="n"></i></span><span role="cell"><i class="n"></i></span></div>
+      <div class="crow" role="row"><span role="cell">Results guarantee</span><span role="cell" class="us"><i class="y"></i></span><span role="cell"><i class="n"></i></span><span role="cell"><i class="n"></i></span></div>
     </div>
   </div>
 </section>
 
-<!-- 10. Testimonials -->
-<section class="reviews" id="reviews" data-note="10">
+<!-- Results -->
+<section class="results" id="results" data-note="11">
   <div class="wrap">
-    <header class="sec-head sec-head--row">
+    <header class="head head--split">
       <div>
-        <span class="eyebrow">Real members. Real results.</span>
-        <h2>People who chose a <em>better approach.</em></h2>
+        <span class="kicker">Real members. Real results.</span>
+        <h2 class="h2">People who chose a <em>better approach.</em></h2>
       </div>
-      <div class="rating">
-        <b>5.0</b>
-        <div><span class="stars">★★★★★</span><small>Average member rating</small></div>
-      </div>
+      <div class="score"><b>5.0</b><div><span class="stars">★★★★★</span><small>Average rating from verified members</small></div></div>
     </header>
-    <div class="rgrid">
-      <figure class="rcard rcard--feature">
-        <img src="https://images.unsplash.com/photo-1494790108377-be9c29b29330?w=800&h=900&fit=crop&crop=faces" alt="Julie M., BetterBody360 member">
-        <figcaption>
-          <span class="stars">★★★★★</span>
-          <blockquote>“BetterBody360 was knowledgeable about health and weight loss and helped me understand the best approach for reaching my goals.”</blockquote>
-          <cite><b>Julie M.</b> · Weight loss program</cite>
-        </figcaption>
-      </figure>
-      <figure class="rcard">
-        <span class="stars">★★★★★</span>
-        <blockquote>“The entire process was simple and straightforward. I had several questions before getting started and the team was patient, knowledgeable and incredibly helpful.”</blockquote>
-        <cite><img src="https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?w=80&h=80&fit=crop&crop=faces" alt=""><span><b>Matt D.</b>Verified member</span></cite>
-      </figure>
-      <figure class="rcard">
-        <span class="stars">★★★★★</span>
-        <blockquote>“The BetterBody360 team was knowledgeable, responsive and genuinely interested in helping me reach my goals.”</blockquote>
-        <cite><img src="https://images.unsplash.com/photo-1438761681033-6461ffad8d80?w=80&h=80&fit=crop&crop=faces" alt=""><span><b>Jen S.</b>Verified member</span></cite>
-      </figure>
-      <div class="rcard rcard--stat">
-        <div class="stat"><b data-count="50">0</b><span>states with licensed doctors &amp; pharmacies</span></div>
-        <div class="stat"><b data-count="50" data-suffix="+">0</b><span>health &amp; fitness apps sync with Coaching360</span></div>
-        <div class="stat"><b data-count="100" data-suffix="%">0</b><span>commitment: we coach until you hit your goals</span></div>
+
+    <div class="tslider" id="tslider">
+      <div class="tslider__media">
+        <img class="is-active" src="https://images.unsplash.com/photo-1494790108377-be9c29b29330?w=900&h=1000&fit=crop&crop=faces" alt="Julie M." loading="lazy">
+        <img src="https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?w=900&h=1000&fit=crop&crop=faces" alt="Matt D." loading="lazy">
+        <img src="https://images.unsplash.com/photo-1438761681033-6461ffad8d80?w=900&h=1000&fit=crop&crop=faces" alt="Jen S." loading="lazy">
+        <span class="tslider__badge">✓ Verified member</span>
+      </div>
+      <div class="tslider__body">
+        <span class="tslider__q" aria-hidden="true">“</span>
+        <div class="quotes">
+          <figure class="quote is-active"><span class="stars">★★★★★</span><blockquote>BetterBody360 was knowledgeable about health and weight loss and helped me understand the best approach for reaching my goals.</blockquote><figcaption><b>Julie M.</b> · Weight loss program</figcaption></figure>
+          <figure class="quote"><span class="stars">★★★★★</span><blockquote>The entire process was simple and straightforward. I had several questions before getting started and the team was patient, knowledgeable and incredibly helpful.</blockquote><figcaption><b>Matt D.</b> · Verified member</figcaption></figure>
+          <figure class="quote"><span class="stars">★★★★★</span><blockquote>The BetterBody360 team was knowledgeable, responsive and genuinely interested in helping me reach my goals.</blockquote><figcaption><b>Jen S.</b> · Verified member</figcaption></figure>
+        </div>
+        <div class="tslider__nav">
+          <button class="tdot is-active" data-i="0" aria-label="Show testimonial 1"><span></span></button>
+          <button class="tdot" data-i="1" aria-label="Show testimonial 2"><span></span></button>
+          <button class="tdot" data-i="2" aria-label="Show testimonial 3"><span></span></button>
+        </div>
       </div>
     </div>
-    <p class="fine">Individual results vary. Testimonials reflect individual experiences. Photos are illustrative placeholders.</p>
+
+    <div class="stats">
+      <div class="stat"><b><span data-count="50">50</span></b><p>States with licensed doctors &amp; pharmacies</p></div>
+      <div class="stat"><b><span data-count="50">50</span>+</b><p>Health &amp; fitness apps sync with Coaching360</p></div>
+      <div class="stat"><b><span data-count="360">360</span>°</b><p>Nutrition, exercise, hormones, blood work &amp; coaching</p></div>
+      <div class="stat"><b><span data-count="100">100</span>%</b><p>Commitment: we coach until you reach your goals</p></div>
+    </div>
+    <p class="fine">Individual results vary. Testimonials reflect individual experiences. Photos are placeholders.</p>
   </div>
 </section>
 
-<!-- 11. Brand partner -->
-<section class="partner" id="partner" data-note="11">
+<!-- Brand Partner -->
+<section class="partner" id="partner" data-note="12">
+  <div class="partner__bg" aria-hidden="true"><img src="https://images.unsplash.com/photo-1574680096145-d05b474e2155?w=1600&h=1000&fit=crop" alt="" loading="lazy"></div>
   <div class="wrap partner__grid">
     <div class="partner__copy">
-      <span class="eyebrow eyebrow--orange">Become a Brand Partner</span>
-      <h2>You market. <em>We handle everything else.</em></h2>
-      <p class="lead">Build your own health and wellness business with a personalized BetterBody360 website. Earn commissions on every qualifying sale, with no inventory and no monthly fees.</p>
-      <ol class="pstep">
-        <li><b>1</b><div><h4>Apply</h4><p>Short application. Approved partners get a personalized site.</p></div></li>
-        <li><b>2</b><div><h4>Market</h4><p>Share your website with your clients, followers and community.</p></div></li>
-        <li><b>3</b><div><h4>Earn</h4><p>Commissions on product and program sales, plus referral bonuses.</p></div></li>
+      <span class="kicker kicker--o">Become a Brand Partner</span>
+      <h2 class="h2">You market. <em>We handle everything else.</em></h2>
+      <p class="lead">Build your own health and wellness business with a personalized BetterBody360 website. No inventory, no monthly fees, just commissions on every qualifying sale.</p>
+      <ol class="psteps">
+        <li><b>01</b><h4>Apply</h4><p>Short application. Approved partners get a personalized site.</p></li>
+        <li><b>02</b><h4>Market</h4><p>Share your site with your clients, followers and community.</p></li>
+        <li><b>03</b><h4>Earn</h4><p>Commissions on sales, plus bonuses for referring partners.</p></li>
       </ol>
       <div class="partner__ctas">
-        <a href="#" class="btn btn--orange btn--lg">Apply to become a partner</a>
-        <a href="#" class="btn btn--ghost-light btn--lg">Book a consultation</a>
+        <a href="#" class="btn btn--orange btn--lg magnetic"><span>Apply to become a partner</span><i class="btn__arrow">→</i></a>
+        <a href="#" class="btn btn--glass btn--lg"><span>Book a consultation</span></a>
       </div>
       <p class="partner__fine">One-time <b>$99</b> setup fee if approved · No membership, technology or doctor fees</p>
     </div>
-    <div class="partner__card">
+    <div class="earn">
       <h4>What we handle for you</h4>
-      <ul>
-        <li><i class="chk chk--light"></i>Licensed providers in all 50 states</li>
-        <li><i class="chk chk--light"></i>Clinical oversight &amp; prescriptions</li>
-        <li><i class="chk chk--light"></i>Pharmacy fulfillment &amp; delivery</li>
-        <li><i class="chk chk--light"></i>Telehealth infrastructure</li>
-        <li><i class="chk chk--light"></i>Customer &amp; partner support</li>
+      <ul class="earn__list">
+        <li>Licensed providers in all 50 states</li>
+        <li>Clinical oversight &amp; prescriptions</li>
+        <li>Pharmacy fulfillment &amp; delivery</li>
+        <li>Telehealth infrastructure</li>
+        <li>Customer &amp; partner support</li>
       </ul>
-      <div class="earn">
-        <label for="refs">Customers you refer per month: <b id="refsOut">10</b></label>
+      <div class="earn__calc">
+        <label for="refs">Customers you refer per month <b id="refsOut">10</b></label>
         <input type="range" id="refs" min="1" max="50" value="10">
-        <div class="earn__out"><small>Example monthly commission*</small><b id="earnOut">$1,500</b></div>
-        <p>*Illustrative only, based on a placeholder $150 average commission. Real rates to be confirmed by BetterBody360.</p>
+        <div class="earn__out"><span>Example monthly earnings*</span><b id="earnOut">$1,500</b></div>
+        <p>*Illustrative only. Uses a placeholder $150 average commission; real rates to be confirmed by BetterBody360.</p>
       </div>
     </div>
   </div>
 </section>
 
-<!-- 12. Articles -->
-<section class="learn" data-note="12">
+<!-- Articles -->
+<section class="learn" data-note="13">
   <div class="wrap">
-    <header class="sec-head sec-head--row">
+    <header class="head head--split">
       <div>
-        <span class="eyebrow">Education</span>
-        <h2>Learn from <em>our experts.</em></h2>
+        <span class="kicker">Education</span>
+        <h2 class="h2">Learn from <em>our experts.</em></h2>
       </div>
-      <a href="#" class="link">Read all articles →</a>
+      <a href="#" class="ulink">Read all articles</a>
     </header>
     <div class="agrid">
-      <a href="#" class="acard">
-        <div class="acard__img"><img src="https://images.unsplash.com/photo-1490645935967-10de6ba17061?w=700&h=440&fit=crop" alt="" loading="lazy"></div>
-        <span class="acard__tag">Weight loss · 6 min read</span>
-        <h3>Understanding GLP-1: how it affects hunger, weight loss and metabolic health</h3>
+      <a href="#" class="ac ac--big">
+        <div class="ac__img"><img src="https://images.unsplash.com/photo-1490645935967-10de6ba17061?w=1100&h=760&fit=crop" alt="" loading="lazy"></div>
+        <div class="ac__body"><span class="ac__tag">Weight loss · 6 min read</span><h3>Understanding GLP-1: how it affects hunger, weight loss and metabolic health</h3><span class="ac__go">Read article →</span></div>
       </a>
-      <a href="#" class="acard">
-        <div class="acard__img"><img src="https://images.unsplash.com/photo-1517836357463-d25dfeac3438?w=700&h=440&fit=crop" alt="" loading="lazy"></div>
-        <span class="acard__tag">Metabolism · 8 min read</span>
-        <h3>How to improve your metabolism: 12 science-based strategies</h3>
+      <a href="#" class="ac">
+        <div class="ac__img"><img src="https://images.unsplash.com/photo-1517836357463-d25dfeac3438?w=800&h=520&fit=crop" alt="" loading="lazy"></div>
+        <div class="ac__body"><span class="ac__tag">Metabolism · 8 min read</span><h3>How to improve your metabolism: 12 science-based strategies</h3></div>
       </a>
-      <a href="#" class="acard">
-        <div class="acard__img"><img src="https://images.unsplash.com/photo-1434494878577-86c23bcb06b9?w=700&h=440&fit=crop" alt="" loading="lazy"></div>
-        <span class="acard__tag">Peptides · 7 min read</span>
-        <h3>Peptides for performance, recovery and healthy aging: what you should know</h3>
+      <a href="#" class="ac">
+        <div class="ac__img"><img src="https://images.unsplash.com/photo-1581009146145-b5ef050c2e1e?w=800&h=520&fit=crop" alt="" loading="lazy"></div>
+        <div class="ac__body"><span class="ac__tag">Peptides · 7 min read</span><h3>Peptides for performance, recovery and healthy aging</h3></div>
       </a>
     </div>
   </div>
 </section>
 
-<!-- 13. FAQ -->
-<section class="faq" id="faq" data-note="13">
+<!-- FAQ -->
+<section class="faq" id="faq" data-note="14">
   <div class="wrap faq__grid">
-    <div>
-      <span class="eyebrow">FAQ</span>
-      <h2>Questions, <em>answered.</em></h2>
+    <div class="faq__side">
+      <span class="kicker">FAQ</span>
+      <h2 class="h2">Questions, <em>answered.</em></h2>
       <p>Still unsure? Our team is happy to help before you start.</p>
-      <a href="#" class="btn btn--ghost">Contact our team</a>
+      <a href="#" class="btn btn--ink btn--lg"><span>Talk to our team</span></a>
     </div>
     <div class="acc">
-      <details open><summary>Do I need a prescription already?</summary><p>No. Complete a short online questionnaire and a licensed US physician will review it and decide whether a treatment is right for you.</p></details>
-      <details><summary>How much does it cost?</summary><p>Each treatment and Coaching360 program has transparent pricing shown before checkout. New members currently get 20% off their first 3 months. <em>(Pricing details to be confirmed by BetterBody360.)</em></p></details>
-      <details><summary>Do I need insurance?</summary><p>No insurance is needed. Your treatment is prescribed by a licensed physician and filled by a licensed US pharmacy.</p></details>
-      <details><summary>How fast will my treatment arrive?</summary><p>Once prescribed, your treatment ships discreetly from a licensed pharmacy directly to your home. <em>(Exact timing to be confirmed.)</em></p></details>
-      <details><summary>What’s included in Coaching360?</summary><p>A 1:1 personal coach, a full health assessment, a personalized plan, the Coaching360 health app and dashboard, daily notifications, monthly check-ins and unlimited messaging support.</p></details>
-      <details><summary>Is my information private?</summary><p>Yes. BetterBody360 is HIPAA compliant and LegitScript certified, and your health information is kept secure and confidential.</p></details>
+      <details open><summary>Do I need a prescription already?<i></i></summary><div class="acc__a"><p>No. Complete a short online questionnaire and a licensed US physician will review it and decide whether a treatment is right for you.</p></div></details>
+      <details><summary>How much does it cost?<i></i></summary><div class="acc__a"><p>Each treatment and Coaching360 program has clear pricing shown before checkout, and new members get 20% off their first 3 months. <em>(Pricing details to be confirmed by BetterBody360.)</em></p></div></details>
+      <details><summary>Do I need insurance?<i></i></summary><div class="acc__a"><p>No insurance is needed. Your treatment is prescribed by a licensed physician and filled by a licensed US pharmacy.</p></div></details>
+      <details><summary>How fast will my treatment arrive?<i></i></summary><div class="acc__a"><p>Once prescribed, your treatment ships discreetly from a licensed pharmacy straight to your home. <em>(Exact timing to be confirmed.)</em></p></div></details>
+      <details><summary>What’s included in Coaching360?<i></i></summary><div class="acc__a"><p>A 1:1 personal coach, a full health assessment, a personalized plan, the Coaching360 app and dashboard, daily notifications, monthly check-ins and unlimited messaging.</p></div></details>
+      <details><summary>Is my information private?<i></i></summary><div class="acc__a"><p>Yes. BetterBody360 is HIPAA compliant and LegitScript certified, and your health information is kept secure and confidential.</p></div></details>
     </div>
   </div>
 </section>
 
-<!-- 14. Final CTA -->
-<section class="final" data-note="14">
+<!-- Final CTA -->
+<section class="final" data-note="15">
+  <div class="final__orb" aria-hidden="true"></div>
   <div class="wrap final__inner">
-    <h2>Your better body starts with <em>one simple step.</em></h2>
-    <p>Take the free 3-minute assessment and get a plan built around your goals, plus 20% off your first 3 months.</p>
+    <span class="kicker kicker--o">Your next step</span>
+    <h2 class="final__title">Start your <em>360.</em></h2>
+    <p>Take the free 3-minute assessment and get a plan built around your goals, plus <b>20% off your first 3 months.</b></p>
     <div class="final__ctas">
-      <a href="#goals" class="btn btn--orange btn--lg">Start my free assessment <span class="arr">→</span></a>
-      <a href="#products" class="btn btn--ghost-light btn--lg">Browse treatments</a>
+      <a href="#goals" class="btn btn--orange btn--xl magnetic"><span>Start my free assessment</span><i class="btn__arrow">→</i></a>
+      <a href="#products" class="btn btn--glass btn--xl"><span>Browse treatments</span></a>
     </div>
     <ul class="final__trust"><li>LegitScript certified</li><li>HIPAA compliant</li><li>Licensed in all 50 states</li><li>Results guarantee</li></ul>
   </div>
@@ -579,61 +677,60 @@
   <div class="wrap">
     <div class="foot__top">
       <div class="foot__brand">
-        <a href="index.html" class="logo logo--light">
-          <span class="logo__mark" aria-hidden="true"><svg viewBox="0 0 40 40"><circle cx="20" cy="20" r="16" fill="none" stroke="currentColor" stroke-width="3" stroke-dasharray="80 21" stroke-linecap="round"/><circle cx="20" cy="20" r="6" fill="#F06A1D"/></svg></span>
-          <span class="logo__text">BetterBody<b>360</b><small>Health &amp; Wellness</small></span>
-        </a>
-        <p>A national health and wellness company with a 360-degree approach to better health.</p>
-        <form class="news" onsubmit="return false">
-          <label for="nl">Get health tips &amp; member offers</label>
-          <div><input id="nl" type="email" placeholder="Your email" autocomplete="email"><button class="btn btn--orange btn--sm" type="submit">Subscribe</button></div>
+        <p class="foot__lead">Health tips, new treatments and member-only offers. Once a month, never spam.</p>
+        <form class="news" id="news">
+          <label for="nl" class="sr">Email address</label>
+          <input id="nl" type="email" placeholder="Your email address" autocomplete="email" required>
+          <button class="btn btn--orange btn--sm" type="submit"><span>Subscribe</span></button>
         </form>
         <div class="socials">
-          <a href="#" aria-label="Facebook">f</a><a href="#" aria-label="Instagram">ig</a><a href="#" aria-label="LinkedIn">in</a><a href="#" aria-label="YouTube">▶</a><a href="#" aria-label="TikTok">♪</a>
+          <a href="#" aria-label="Facebook">Fb</a><a href="#" aria-label="Instagram">Ig</a><a href="#" aria-label="LinkedIn">In</a><a href="#" aria-label="YouTube">Yt</a><a href="#" aria-label="TikTok">Tk</a>
         </div>
       </div>
       <div class="foot__cols">
-        <div><h5>Company</h5><a href="#">Our Story</a><a href="#">Treatments</a><a href="#">Contact Us</a><a href="#partner">Become a Brand Partner</a></div>
+        <div><h5>Company</h5><a href="#">Our Story</a><a href="#products">Treatments</a><a href="#">Contact Us</a><a href="#partner">Brand Partners</a></div>
         <div><h5>Coaching360</h5><a href="#coaching">Overview</a><a href="#">Health App</a><a href="#">Personal Coaching</a><a href="#">Programs &amp; Pricing</a></div>
         <div><h5>Resources</h5><a href="#">Articles</a><a href="#faq">FAQ</a><a href="#">Press</a></div>
         <div><h5>Legal</h5><a href="#">Privacy Policy</a><a href="#">Terms of Service</a><a href="#">Medical Disclaimer</a></div>
       </div>
     </div>
-    <p class="foot__legal">Prescription treatments require an online consultation with a licensed physician, who determines whether a prescription is appropriate. Individual results vary. These statements have not been evaluated by the FDA. Supplements are not intended to diagnose, treat, cure or prevent any disease.</p>
-    <div class="foot__bottom"><span>© 2026 BetterBody360™. All rights reserved.</span><span>Homepage concept · design preview</span></div>
+    <div class="foot__word" aria-hidden="true">BetterBody<b>360</b></div>
+    <p class="foot__legal">Prescription treatments require an online consultation with a licensed physician, who decides whether a prescription is appropriate. Individual results vary. These statements have not been evaluated by the FDA. Supplements are not intended to diagnose, treat, cure or prevent any disease.</p>
+    <div class="foot__bottom"><span>© 2026 BetterBody360™. All rights reserved.</span><span>LegitScript certified · HIPAA compliant</span></div>
   </div>
 </footer>
 
 <!-- Sticky mobile CTA -->
-<div class="sticky" id="sticky" data-note="15">
+<div class="sticky" id="sticky">
   <div><b>20% off</b> your first 3 months</div>
-  <a href="#goals" class="btn btn--orange btn--sm">Get started</a>
+  <a href="#goals" class="btn btn--orange btn--sm"><span>Get started</span></a>
 </div>
 
-<!-- Exit-intent offer -->
+<!-- Exit intent -->
 <div class="modal" id="exit" hidden>
   <div class="modal__box" role="dialog" aria-modal="true" aria-labelledby="exitT">
     <button class="modal__x" aria-label="Close">×</button>
-    <span class="eyebrow eyebrow--orange">Before you go</span>
-    <h3 id="exitT">Get <em>20% off</em> your first 3 months.</h3>
-    <p>Send yourself the offer and a free guide: <b>“5 habits that make GLP-1 results last.”</b></p>
-    <form onsubmit="this.innerHTML='<p class=&quot;ok&quot;>✓ Check your inbox, your code is on its way.</p>';return false">
-      <input type="email" required placeholder="Your email" aria-label="Email">
-      <button class="btn btn--orange btn--block" type="submit">Send my offer</button>
+    <div class="modal__seal">20%<small>OFF</small></div>
+    <h3 id="exitT">Wait, take <em>20% off</em> with you.</h3>
+    <p>Get 20% off your first 3 months, plus our free guide: <b>“5 habits that make GLP-1 results last.”</b></p>
+    <form id="exitForm">
+      <input type="email" required placeholder="Your email address" aria-label="Email address">
+      <button class="btn btn--orange btn--lg btn--block" type="submit"><span>Send my 20% offer</span></button>
     </form>
     <small>No spam. Unsubscribe anytime.</small>
   </div>
 </div>
 
 <!-- Design notes (?notes=1) -->
-<button class="notes-toggle" id="notesToggle" hidden>Design notes</button>
+<button class="notes-toggle" id="notesToggle" hidden>✦ Design notes</button>
 <aside class="notes" id="notes" hidden aria-label="Design notes">
-  <header><h3>Why this layout converts</h3><button id="notesClose" aria-label="Close notes">×</button></header>
+  <header><div><small>BetterBody360 · homepage</small><h3>Why this layout converts</h3></div><button id="notesClose" aria-label="Close notes">×</button></header>
   <ol id="notesList"></ol>
 </aside>
 
 <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/gsap.min.js"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/ScrollTrigger.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/lenis@1.1.13/dist/lenis.min.js"></script>
 <script src="script.js"></script>
 </body>
 </html>
