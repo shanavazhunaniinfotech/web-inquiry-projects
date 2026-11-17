@@ -836,7 +836,7 @@ h1, h2, h3, h4 { margin: 0; font-weight: 500; line-height: .95; letter-spacing: 
 .howto li::before { counter-increment: h; content: "0" counter(h); font-size: 1.8rem; font-weight: 500; letter-spacing: -.04em; color: var(--accent); }
 @media (max-width: 800px) { .tabs__2 { grid-template-columns: 1fr; } }
 /* ingredient bento */
-.ib { display: grid; grid-template-columns: repeat(4, 1fr); grid-auto-rows: minmax(200px, auto); gap: var(--gap); }
+.ibento { display: grid; grid-template-columns: repeat(4, 1fr); grid-auto-rows: minmax(200px, auto); gap: var(--gap); }
 .ib__t { position: relative; border-radius: var(--r); background: var(--tile); padding: 22px; display: flex; flex-direction: column; justify-content: space-between; gap: 20px; overflow: hidden; }
 .ib__t h3 { font-size: 1.15rem; margin: 10px 0 6px; letter-spacing: -.02em; line-height: 1.05; }
 .ib__t p { margin: 0; font-size: .88rem; color: var(--ink-2); }
@@ -850,7 +850,7 @@ h1, h2, h3, h4 { margin: 0; font-weight: 500; line-height: .95; letter-spacing: 
 .ib__t--big p { color: rgba(255,255,255,.85); }
 .ib__t--prod { display: grid; place-items: center; padding: 14px; }
 .ib__t--prod img { max-height: 180px; width: auto; filter: drop-shadow(0 20px 18px rgba(63,37,33,.25)); }
-@media (max-width: 900px) { .ib { grid-template-columns: 1fr 1fr; } .ib__t { padding: 16px; } .ib__t--big { min-height: 320px; } .ib__t h3 { font-size: .98rem; } .ib__t p { font-size: .78rem; } }
+@media (max-width: 900px) { .ibento { grid-template-columns: 1fr 1fr; } .ib__t { padding: 16px; } .ib__t--big { min-height: 320px; } .ib__t h3 { font-size: .98rem; } .ib__t p { font-size: .78rem; } }
 /* timeline */
 .tl { display: grid; grid-template-columns: repeat(4, 1fr); gap: var(--gap); position: relative; }
 .tl__line { display: none; }
@@ -920,7 +920,7 @@ body[data-page="product"] .ft { padding-bottom: 100px; }
 }
 
 /* ---------- QA fixes: grid min-content overflow ---------- */
-.ft__cta > *, .ft__cols > *, .shop3 > *, .grid > *, .bento__g > *, .res3 > *, .faq3 > *, .faq3 > div > *, .tabs__2 > *, .barrier3 > *, .founder3 > *, .bun3 > *, .qb > *, .chead > *, .side > *, .ib > *, .tl > * { min-width: 0; }
+.ft__cta > *, .ft__cols > *, .shop3 > *, .grid > *, .bento__g > *, .res3 > *, .faq3 > *, .faq3 > div > *, .tabs__2 > *, .barrier3 > *, .founder3 > *, .bun3 > *, .qb > *, .chead > *, .side > *, .ibento > *, .tl > * { min-width: 0; }
 #barrier { overflow: hidden; }
 @media (max-width: 1000px) {
   .lr__lab:nth-of-type(1) { left: 44% !important; }
@@ -944,3 +944,11 @@ body[data-page="product"] .ft { padding-bottom: 100px; }
 .pc__m .cut--wide { width: 88%; height: 70%; }
 .gs__thumbs img.c { width: 78%; height: 78%; object-fit: contain; }
 @media (max-width: 760px) { .pc__tags .tag { display: none; } }
+/* PDP QA fix: routine card images contained */
+.ctr__m { position: relative; }
+.ctr__m img { position: absolute; inset: 0; margin: auto; width: 78%; height: 78%; max-height: none; object-fit: contain; }
+.ib__t--prod { position: relative; min-height: 200px; }
+.ib__t--prod img { position: absolute; inset: 0; margin: auto; width: 70%; height: 80%; max-height: none; object-fit: contain; }
+@media (min-width: 901px) { .ib__t--prod { grid-column: span var(--span, 1); } }
+.ib__t--big::after { background: linear-gradient(180deg, rgba(40,22,19,0) 25%, rgba(40,22,19,.82)); }
+.ib__t--big::after { background: linear-gradient(180deg, rgba(40,22,19,.05) 20%, rgba(40,22,19,.88)); } .ib__t--big h3, .ib__t--big p { text-shadow: 0 2px 14px rgba(40,22,19,.45); }
