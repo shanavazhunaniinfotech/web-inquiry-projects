@@ -2,6 +2,9 @@
 (function () {
   "use strict";
 
+  /* Pages live at /mehas/, /mehas/product/, /mehas/strategy/ — resolve shared paths from the site root */
+  var ROOT = /\/(product|strategy)\/?$/.test(location.pathname.replace(/index\.html$/, "")) ? "../" : "";
+
   /* ---------------- Data (real products from mehas.com) ---------------- */
   var CUR = "AED";
   var GIFT_AT = 400; // complimentary 10 mL travel spray threshold (proposal)
@@ -9,47 +12,47 @@
     monarch: {
       id: "monarch", name: "Monarch", tagline: "Leave a legacy", tone: "#7b2430", toneBg: "#4a1820",
       family: "Oriental · Amber", price: 200, rating: 4.9, reviews: 128,
-      img: "images/monarch.jpg", box: "images/monarch-box.jpg", mood: "images/desert.jpg",
+      img: ROOT + "images/monarch.jpg", box: ROOT + "images/monarch-box.jpg", mood: ROOT + "images/desert.jpg",
       short: "Smoky, syrupy vanilla wrapped in incense and refined woods.",
       desc: "A rich oriental-amber composition built around an elegant, smoky and syrupy vanilla. Incense adds depth and mystery, while a refined woody heart gives the fragrance structure before melting into its warm vanilla drydown.",
       story: "Monarch is crafted to leave behind a legacy, inspired by the timeless grandeur of royal dynasties. Its elegant, commanding sillage fills the room with distinction, lingering like the memory of kings and queens long after they have departed.",
       notes: { top: "Incense, smoked resin", heart: "Refined woods", base: "Syrupy vanilla, warm amber" },
       noteTiles: [["Opening", "Incense", "Smoke and resin that announce you before you speak."], ["Heart", "Refined woods", "A polished, structured core that gives Monarch its posture."], ["Drydown", "Vanilla & amber", "A warm, syrupy finish that lingers for hours."]],
-      noteImgs: ["images/desert.jpg", "images/atelier.jpg", "images/monarch-box.jpg"],
+      noteImgs: [ROOT + "images/desert.jpg", ROOT + "images/atelier.jpg", ROOT + "images/monarch-box.jpg"],
       character: { longevity: [5, "10–12 h"], sillage: [5, "Room-filling"], intensity: [4, "Rich"] },
       wear: "Evenings, weddings, majlis gatherings", season: "Autumn · Winter", vibe: "Regal, magnetic"
     },
     silverback: {
       id: "silverback", name: "Silverback", tagline: "Strength. Composure. Presence.", tone: "#2433a8", toneBg: "#141c5c",
       family: "Marine · Woody", price: 200, rating: 4.8, reviews: 96,
-      img: "images/silverback.jpg", box: "images/silverback-box.jpg", mood: "images/ocean.jpg",
+      img: ROOT + "images/silverback.jpg", box: ROOT + "images/silverback-box.jpg", mood: ROOT + "images/ocean.jpg",
       short: "Fresh citrus and salty ocean air over suede and mineral amber.",
       desc: "A bold marine-woody composition that opens with fresh citrus and crisp, salty ocean air. Smooth suede adds refined depth, while mineral amber and earthy woods create a powerful, oceanic drydown.",
       story: "Silverback was forged to embody strength, composure and refinement, leaving behind a commanding presence of strength, power, and calmness.",
       notes: { top: "Fresh citrus, salty sea air", heart: "Smooth suede", base: "Mineral amber, earthy woods" },
       noteTiles: [["Opening", "Citrus & sea air", "Crisp, salty and instantly clean."], ["Heart", "Suede", "Soft, refined depth that keeps it grown-up."], ["Drydown", "Mineral amber", "Earthy woods and amber for a calm, powerful trail."]],
-      noteImgs: ["images/ocean.jpg", "images/silverback-box.jpg", "images/atelier.jpg"],
+      noteImgs: [ROOT + "images/ocean.jpg", ROOT + "images/silverback-box.jpg", ROOT + "images/atelier.jpg"],
       character: { longevity: [4, "8–10 h"], sillage: [4, "Strong"], intensity: [3, "Balanced"] },
       wear: "Daytime, the office, warm weather", season: "Spring · Summer", vibe: "Calm, assured"
     },
     "beast-mode": {
       id: "beast-mode", name: "Beast Mode", tagline: "Make your presence unmissable", tone: "#c3161f", toneBg: "#1f1416",
       family: "Fruity · Floral · Woody", price: 200, rating: 4.9, reviews: 112,
-      img: "images/beast-mode.jpg", box: "images/beast-mode-box.jpg", mood: "images/citrus.jpg",
+      img: ROOT + "images/beast-mode.jpg", box: ROOT + "images/beast-mode-box.jpg", mood: ROOT + "images/citrus.jpg",
       short: "Grapefruit, crisp apple and geranium over woods and musk.",
       desc: "A high-impact fruity-floral composition that opens with vibrant grapefruit, crisp apple and fresh geranium. As it develops, the fragrance becomes sweeter and more floral before settling into a rich, woody and musky drydown.",
       story: "Beast Mode is built to fill the room with an unmistakable presence, ensuring that the moment you walk in, everyone knows you are there.",
       notes: { top: "Grapefruit, crisp apple, geranium", heart: "Sweet florals", base: "Rich woods, musk" },
       noteTiles: [["Opening", "Grapefruit & apple", "A bright, juicy burst with a green geranium edge."], ["Heart", "Sweet florals", "It warms and blooms as it settles on skin."], ["Drydown", "Woods & musk", "Rich, sensual and built to be noticed."]],
-      noteImgs: ["images/citrus.jpg", "images/beast-mode-box.jpg", "images/atelier.jpg"],
+      noteImgs: [ROOT + "images/citrus.jpg", ROOT + "images/beast-mode-box.jpg", ROOT + "images/atelier.jpg"],
       character: { longevity: [4, "8–10 h"], sillage: [5, "Room-filling"], intensity: [5, "Bold"] },
       wear: "Nights out, celebrations, statement days", season: "All year", vibe: "Bold, energetic"
     }
   };
   var ORDER = ["monarch", "silverback", "beast-mode"];
   var SETS = {
-    trilogy: { id: "trilogy", name: "The Trilogy", sub: "All three · 100 mL each", price: 540, was: 600, img: "images/monarch-box.jpg" },
-    discovery: { id: "discovery", name: "Discovery Set", sub: "3 × 10 mL · AED 95 credit on a full bottle", price: 95, img: "images/silverback-box.jpg" }
+    trilogy: { id: "trilogy", name: "The Trilogy", sub: "All three · 100 mL each", price: 540, was: 600, img: ROOT + "images/monarch-box.jpg" },
+    discovery: { id: "discovery", name: "Discovery Set", sub: "3 × 10 mL · AED 95 credit on a full bottle", price: 95, img: ROOT + "images/silverback-box.jpg" }
   };
 
   /* ---------------- Helpers ---------------- */
@@ -80,13 +83,13 @@
     mail: '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.4"><rect x="3" y="5" width="18" height="14"/><path d="m3 6 9 7 9-7"/></svg>'
   };
   var stars = function (n) { var s = ""; for (var i = 0; i < 5; i++) s += I.star; return '<span class="stars" aria-label="' + n + ' out of 5 stars">' + s + "</span>"; };
-  var pdpUrl = function (id) { return "product.html?p=" + id; };
+  var pdpUrl = function (id) { return ROOT + "product/?p=" + id; };
 
   /* ---------------- Shared chrome ---------------- */
   var ANNOUNCE = [
     "Free express delivery across the UAE — Dubai &amp; Abu Dhabi next day",
     "Pay in 4 interest-free instalments with Tabby or Tamara",
-    'Not sure yet? <a href="index.html#discovery">Try all three with the Discovery Set</a>',
+    'Not sure yet? <a href="' + (ROOT || './') + '#discovery">Try all three with the Discovery Set</a>',
     "Complimentary gift wrapping &amp; handwritten note on every order"
   ];
 
@@ -103,21 +106,21 @@
       h.outerHTML =
         '<header class="header" id="top"><div class="wrap header__inner">' +
         '<div class="header__left"><button class="icon-btn menu-toggle" aria-label="Open menu" data-open-mnav>' + I.menu + "</button>" +
-        '<nav class="nav" aria-label="Primary"><button aria-expanded="false" aria-controls="mega" data-mega>Fragrances</button><a href="index.html#discovery">Sets &amp; Gifts</a><a href="index.html#finder">Scent Finder</a><a href="index.html#story">Our Story</a></nav></div>' +
-        '<a class="logo" href="index.html" aria-label="MEHAS home"><img src="images/logo.png" alt="MEHAS" width="600" height="165"></a>' +
+        '<nav class="nav" aria-label="Primary"><button aria-expanded="false" aria-controls="mega" data-mega>Fragrances</button><a href="' + (ROOT || './') + '#discovery">Sets &amp; Gifts</a><a href="' + (ROOT || './') + '#finder">Scent Finder</a><a href="' + (ROOT || './') + '#story">Our Story</a></nav></div>' +
+        '<a class="logo" href="' + (ROOT || './') + '" aria-label="MEHAS home"><img src="' + ROOT + 'images/logo.png" alt="MEHAS" width="600" height="165"></a>' +
         '<div class="header__tools"><button class="icon-btn" aria-label="Search" data-open-search>' + I.search + '</button><a class="icon-btn hide-m" href="#" aria-label="Account" data-noop>' + I.user + '</a><button class="icon-btn" aria-label="Open bag" data-open-cart>' + I.bag + '<span class="cart-count" data-count>0</span></button></div>' +
         "</div>" +
-        '<div class="mega" id="mega"><div class="mega__inner"><div class="mega__col"><h4>Shop</h4><ul><li><a href="index.html#collection">All fragrances</a></li><li><a href="index.html#discovery">The Trilogy</a></li><li><a href="index.html#discovery">Discovery Set</a></li><li><a href="index.html#gifting">Gifting</a></li><li><a href="index.html#finder">Scent Finder</a></li></ul></div>' + cards +
-        '<a class="mega__card" href="index.html#discovery"><div class="ph" style="background:#1d1a17;display:grid;place-items:center;color:#efe6d8;padding:20px;text-align:center"><span style="font-family:var(--serif);font-size:30px;line-height:1.1;color:#efe6d8">Can’t choose?<br><em style="color:#b8925c">Take all three.</em></span></div><strong>The Trilogy</strong><span>Save AED 60</span></a>' +
+        '<div class="mega" id="mega"><div class="mega__inner"><div class="mega__col"><h4>Shop</h4><ul><li><a href="' + (ROOT || './') + '#collection">All fragrances</a></li><li><a href="' + (ROOT || './') + '#discovery">The Trilogy</a></li><li><a href="' + (ROOT || './') + '#discovery">Discovery Set</a></li><li><a href="' + (ROOT || './') + '#gifting">Gifting</a></li><li><a href="' + (ROOT || './') + '#finder">Scent Finder</a></li></ul></div>' + cards +
+        '<a class="mega__card" href="' + (ROOT || './') + '#discovery"><div class="ph" style="background:#1d1a17;display:grid;place-items:center;color:#efe6d8;padding:20px;text-align:center"><span style="font-family:var(--serif);font-size:30px;line-height:1.1;color:#efe6d8">Can’t choose?<br><em style="color:#b8925c">Take all three.</em></span></div><strong>The Trilogy</strong><span>Save AED 60</span></a>' +
         "</div></div></header>";
     }
     // Mobile nav, search, drawer, toast, WhatsApp
     var extra = document.createElement("div");
     extra.innerHTML =
-      '<div class="mnav" id="mnav" aria-hidden="true"><div class="mnav__top"><a class="logo" href="index.html"><img src="images/logo.png" alt="MEHAS"></a><button class="icon-btn" aria-label="Close menu" data-close-mnav>' + I.close + "</button></div>" +
+      '<div class="mnav" id="mnav" aria-hidden="true"><div class="mnav__top"><a class="logo" href="' + (ROOT || './') + '"><img src="' + ROOT + 'images/logo.png" alt="MEHAS"></a><button class="icon-btn" aria-label="Close menu" data-close-mnav>' + I.close + "</button></div>" +
       '<div class="mnav__body"><p class="eyebrow">The collection</p><div class="mnav__products">' +
       ORDER.map(function (id) { var p = PRODUCTS[id]; return '<a href="' + pdpUrl(id) + '"><img src="' + p.img + '" alt="" loading="lazy">' + p.name + "</a>"; }).join("") +
-      '</div><a href="index.html#collection">All fragrances</a><a href="index.html#discovery">Sets &amp; Gifts</a><a href="index.html#finder">Scent Finder</a><a href="index.html#story">Our Story</a><a href="index.html#faq">Help &amp; FAQ</a>' +
+      '</div><a href="' + (ROOT || './') + '#collection">All fragrances</a><a href="' + (ROOT || './') + '#discovery">Sets &amp; Gifts</a><a href="' + (ROOT || './') + '#finder">Scent Finder</a><a href="' + (ROOT || './') + '#story">Our Story</a><a href="' + (ROOT || './') + '#faq">Help &amp; FAQ</a>' +
       '<div class="mnav__meta"><span>Free express delivery across the UAE</span><span>online@mehas.com</span></div></div></div>' +
       '<div class="search" id="search" aria-hidden="true"><div class="search__panel" role="dialog" aria-label="Search"><div class="search__row">' + I.search + '<input type="search" placeholder="Search fragrances, notes…" aria-label="Search" data-search-input><button class="icon-btn" aria-label="Close search" data-close-search>' + I.close + '</button></div><div class="search__results" data-search-results></div><p class="search__hint">Try “vanilla”, “fresh”, “citrus”, “evening”.</p></div></div>' +
       '<div class="scrim" data-scrim></div>' +
@@ -131,10 +134,10 @@
     var f = $("[data-footer]");
     if (f) {
       f.outerHTML = '<footer class="footer"><div class="wrap"><div class="footer__grid">' +
-        '<div><img class="footer__logo" src="images/logo.png" alt="MEHAS"><p style="max-width:34ch;margin:0">Luxury perfumery from the UAE. A fragrance that becomes your signature.</p><div class="social"><a href="https://www.instagram.com/mehasofficial/" target="_blank" rel="noopener" aria-label="Instagram">' + I.ig + '</a><a href="https://www.facebook.com/profile.php?id=61594731578189" target="_blank" rel="noopener" aria-label="Facebook">' + I.fb + '</a><a href="mailto:online@mehas.com" aria-label="Email">' + I.mail + "</a></div></div>" +
-        '<div><h4>Shop</h4><ul><li><a href="' + pdpUrl("monarch") + '">Monarch</a></li><li><a href="' + pdpUrl("silverback") + '">Silverback</a></li><li><a href="' + pdpUrl("beast-mode") + '">Beast Mode</a></li><li><a href="index.html#discovery">The Trilogy</a></li><li><a href="index.html#discovery">Discovery Set</a></li></ul></div>' +
-        '<div><h4>Help</h4><ul><li><a href="index.html#faq">Delivery &amp; returns</a></li><li><a href="index.html#faq">FAQ</a></li><li><a href="index.html#finder">Scent Finder</a></li><li><a href="mailto:online@mehas.com">online@mehas.com</a></li></ul></div>' +
-        '<div><h4>MEHAS</h4><ul><li><a href="index.html#story">Our story</a></li><li><a href="index.html#ritual">How to wear</a></li><li><a href="index.html#gifting">Gifting</a></li><li><a href="#" data-noop>Privacy policy</a></li></ul></div>' +
+        '<div><img class="footer__logo" src="' + ROOT + 'images/logo.png" alt="MEHAS"><p style="max-width:34ch;margin:0">Luxury perfumery from the UAE. A fragrance that becomes your signature.</p><div class="social"><a href="https://www.instagram.com/mehasofficial/" target="_blank" rel="noopener" aria-label="Instagram">' + I.ig + '</a><a href="https://www.facebook.com/profile.php?id=61594731578189" target="_blank" rel="noopener" aria-label="Facebook">' + I.fb + '</a><a href="mailto:online@mehas.com" aria-label="Email">' + I.mail + "</a></div></div>" +
+        '<div><h4>Shop</h4><ul><li><a href="' + pdpUrl("monarch") + '">Monarch</a></li><li><a href="' + pdpUrl("silverback") + '">Silverback</a></li><li><a href="' + pdpUrl("beast-mode") + '">Beast Mode</a></li><li><a href="' + (ROOT || './') + '#discovery">The Trilogy</a></li><li><a href="' + (ROOT || './') + '#discovery">Discovery Set</a></li></ul></div>' +
+        '<div><h4>Help</h4><ul><li><a href="' + (ROOT || './') + '#faq">Delivery &amp; returns</a></li><li><a href="' + (ROOT || './') + '#faq">FAQ</a></li><li><a href="' + (ROOT || './') + '#finder">Scent Finder</a></li><li><a href="mailto:online@mehas.com">online@mehas.com</a></li></ul></div>' +
+        '<div><h4>MEHAS</h4><ul><li><a href="' + (ROOT || './') + '#story">Our story</a></li><li><a href="' + (ROOT || './') + '#ritual">How to wear</a></li><li><a href="' + (ROOT || './') + '#gifting">Gifting</a></li><li><a href="#" data-noop>Privacy policy</a></li></ul></div>' +
         '</div><div class="footer__bottom"><span>© 2026 MEHAS Perfumes UAE. All rights reserved.</span><div class="pay" aria-label="Accepted payments"><span>VISA</span><span>MASTERCARD</span><span>APPLE PAY</span><span>GOOGLE PAY</span><span>TABBY</span><span>TAMARA</span><span>COD</span></div></div></div></footer>';
     }
   }
@@ -180,7 +183,7 @@
       '<div class="ship__bar"><i style="width:' + Math.min(100, (sub / GIFT_AT) * 100) + '%"></i></div>';
     var items = $("[data-items]");
     if (!cart.length) {
-      items.innerHTML = '<div class="empty"><h3>Your bag is empty</h3><p>Three signatures are waiting to be discovered.</p><a class="btn btn--ghost" href="index.html#collection" data-close-cart>Shop fragrances</a></div>';
+      items.innerHTML = '<div class="empty"><h3>Your bag is empty</h3><p>Three signatures are waiting to be discovered.</p><a class="btn btn--ghost" href="' + (ROOT || './') + '#collection" data-close-cart>Shop fragrances</a></div>';
     } else {
       items.innerHTML = cart.map(function (l) {
         var it = itemInfo(l.id);
@@ -267,7 +270,7 @@
     });
     $("[data-search-results]").innerHTML = res.length ? res.map(function (p) {
       return '<a href="' + pdpUrl(p.id) + '"><img src="' + p.img + '" alt=""><span><b style="font-family:var(--serif);font-size:20px;font-weight:500">' + p.name + "</b><small>" + p.family + " · " + money(p.price) + "</small></span></a>";
-    }).join("") : '<p style="color:var(--muted);margin:0">No match — try “vanilla”, “fresh” or “citrus”, or take the <a href="index.html#finder">Scent Finder</a>.</p>';
+    }).join("") : '<p style="color:var(--muted);margin:0">No match — try “vanilla”, “fresh” or “citrus”, or take the <a href="' + (ROOT || './') + '#finder">Scent Finder</a>.</p>';
   }
 
   /* ---------------- Home: scent finder ---------------- */
@@ -475,9 +478,9 @@
       '<div class="pcard__body"><span class="pcard__family">' + p.family + '</span><div class="pcard__top"><h3 class="pcard__name"><a href="' + pdpUrl(id) + '">' + p.name + '</a></h3><span class="pcard__price">' + money(p.price) + '</span></div><p class="pcard__notes">' + p.short + '</p><div class="pcard__rating">' + stars(p.rating) + " " + p.rating + " (" + p.reviews + ')</div><button class="btn btn--ghost pcard__mobile-add" data-add="' + id + '">Add to bag</button></div></article>';
   }
   function setCard() {
-    return '<article class="pcard pcard--set rv"><a class="pcard__media" href="index.html#discovery" aria-label="The Trilogy set"><span class="pcard__badge">Save AED 60</span><span class="set-visual"><img src="images/monarch.jpg" alt=""><img src="images/beast-mode.jpg" alt=""><img src="images/silverback.jpg" alt=""></span></a>' +
+    return '<article class="pcard pcard--set rv"><a class="pcard__media" href="' + (ROOT || './') + '#discovery" aria-label="The Trilogy set"><span class="pcard__badge">Save AED 60</span><span class="set-visual"><img src="' + ROOT + 'images/monarch.jpg" alt=""><img src="' + ROOT + 'images/beast-mode.jpg" alt=""><img src="' + ROOT + 'images/silverback.jpg" alt=""></span></a>' +
       '<button class="btn btn--gold pcard__quick" data-add="trilogy">Add the set · AED 540</button>' +
-      '<div class="pcard__body"><span class="pcard__family">The complete wardrobe</span><div class="pcard__top"><h3 class="pcard__name"><a href="index.html#discovery">The Trilogy</a></h3><span class="pcard__price"><span class="strike">AED 600</span>AED 540</span></div><p class="pcard__notes">All three signatures — one for every mood, day to night.</p><div class="pcard__rating">' + stars(5) + ' 5.0 (41)</div><button class="btn btn--gold pcard__mobile-add" data-add="trilogy">Add the set</button></div></article>';
+      '<div class="pcard__body"><span class="pcard__family">The complete wardrobe</span><div class="pcard__top"><h3 class="pcard__name"><a href="' + (ROOT || './') + '#discovery">The Trilogy</a></h3><span class="pcard__price"><span class="strike">AED 600</span>AED 540</span></div><p class="pcard__notes">All three signatures — one for every mood, day to night.</p><div class="pcard__rating">' + stars(5) + ' 5.0 (41)</div><button class="btn btn--gold pcard__mobile-add" data-add="trilogy">Add the set</button></div></article>';
   }
   function grid() {
     var g = $("[data-grid]"); if (!g) return;
