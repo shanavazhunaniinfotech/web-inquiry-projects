@@ -174,7 +174,7 @@ body::after {
    1. HERO
    ========================================================= */
 .hero {
-  position: relative; min-height: 100svh; padding: 130px var(--pad) 40px; overflow: hidden;
+  position: relative; min-height: 100svh; padding: 116px var(--pad) 36px; overflow: hidden;
   background: radial-gradient(120% 80% at 50% 0%, var(--g-800) 0%, var(--g-900) 46%, var(--g-950) 100%);
   display: grid; grid-template-columns: 1fr minmax(260px, 30vw) 1fr; grid-template-rows: 1fr auto;
   align-items: center;
@@ -195,7 +195,7 @@ body::after {
 
 .hero__arch {
   grid-column: 2; grid-row: 1; position: relative; z-index: 2; margin: 0;
-  width: 100%; height: min(66vh, 640px); justify-self: center;
+  width: 100%; height: min(56vh, 600px); justify-self: center; margin-top: 10px;
 }
 .hero__arch-img {
   width: 100%; height: 100%; overflow: hidden; border-radius: 999px 999px 4px 4px;
@@ -220,7 +220,7 @@ body::after {
 
 .hero__meta { position: relative; z-index: 5; grid-row: 2; }
 .hero__meta--l { grid-column: 1 / 2; align-self: end; }
-.hero__lede { font-family: var(--serif); font-size: clamp(20px, 1.8vw, 26px); line-height: 1.25; margin: 0 0 26px; max-width: 340px; }
+.hero__lede { font-family: var(--serif); font-size: clamp(20px, 1.8vw, 26px); line-height: 1.25; margin: 0 0 24px; max-width: 400px; }
 .hero__lede em { color: var(--gold-2); }
 .hero__ctas { display: flex; align-items: center; gap: 28px; flex-wrap: wrap; }
 .hero__meta--r { grid-column: 3; justify-self: end; align-self: end; }
@@ -796,3 +796,6 @@ body.cart-open .drawer-overlay { opacity: 1; visibility: visible; }
 @media (prefers-reduced-motion: reduce) {
   *, *::before, *::after { animation-duration: .001ms !important; animation-iteration-count: 1 !important; transition-duration: .001ms !important; }
 }
+
+/* hero caption collides with the wordmark on wide screens */
+@media (min-width: 901px) { .hero__arch figcaption { display: none; } }
