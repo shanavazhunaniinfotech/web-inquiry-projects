@@ -889,3 +889,10 @@ h2 .serif { color: var(--blue); }
   .announce__msgs { height: 36px; }
   .announce__msg { white-space: normal; line-height: 1.25; display: block; padding-top: 1px; }
 }
+/* Design A / B switch */
+.ab { position: fixed; z-index: 95; left: 16px; bottom: 16px; display: flex; align-items: center; gap: 4px; padding: 4px 4px 4px 12px; border-radius: 12px; background: var(--ink); color: #9aa3b2; font: 600 .66rem var(--f-m); letter-spacing: .1em; text-transform: uppercase; box-shadow: var(--sh-3); }
+.ab span { margin-right: 6px; }
+.ab b { width: 28px; height: 28px; border-radius: 8px; display: grid; place-items: center; color: #fff; transition: background .3s; }
+.ab:hover b:not(.on) { background: #2a3346; }
+.ab b.on { background: var(--blue); }
+@media (max-width: 640px) { .ab { bottom: 82px; left: 10px; } }
