@@ -101,7 +101,7 @@
   w.addEventListener('scroll', onScroll, { passive: true }); onScroll();
 
   /* ---------- Reveal on scroll ---------- */
-  var revealSel = '.hero__copy > *, .trust li, .ben__head > *, .ben__tabs, .shift__in > *, .meet__copy > *, .meet__fig, .how__head, .shop__head > *, .card, .principle > *, .proof__head, .prow, .research__head > *, .rrow, .seen, .revs__side > *, .try__in > *, .faq__head > *, .faq details, .ftr__top > *';
+  var revealSel = '.hero__copy > *, .trust li, .ben__head > *, .ben__tabs, .shift__in > *, .meet__copy > *, .meet__fig, .how__head, .shop__head > *, .card, .principle > *, .proof__head, .prow, .research__head > *, .rrow, .seen, .revs__side > *, .vids__head > *, .try__in > *, .faq__head > *, .faq details, .ftr__top > *';
   var io = 'IntersectionObserver' in w ? new IntersectionObserver(function (es) {
     es.forEach(function (e) { if (e.isIntersecting) { e.target.classList.add('in'); io.unobserve(e.target); } });
   }, { rootMargin: '0px 0px -8% 0px' }) : null;
@@ -171,6 +171,36 @@
     timer = setInterval(function () { go(cur + 1); }, 7000);
   })();
 
+  /* ---------- Video testimonials ---------- */
+  (function () {
+    var track = $('.vids__track'), cards = $$('.vcard'), modal = $('.vmodal'), mv = $('video', modal);
+    var hoverable = w.matchMedia('(hover: hover)').matches;
+    cards.forEach(function (c) {
+      var v = $('video', c);
+      if (hoverable) {
+        c.addEventListener('mouseenter', function () { v.preload = 'auto'; var p = v.play(); if (p && p.catch) p.catch(function () {}); });
+        c.addEventListener('mouseleave', function () { v.pause(); });
+      }
+      c.addEventListener('click', function () {
+        mv.src = c.dataset.src; mv.poster = v.poster; modal.hidden = false;
+        requestAnimationFrame(function () { modal.classList.add('is-on'); });
+        d.body.classList.add('locked');
+        var p = mv.play(); if (p && p.catch) p.catch(function () {});
+      });
+    });
+    if (!hoverable && io) {
+      var vio = new IntersectionObserver(function (es) {
+        es.forEach(function (e) { var v = $('video', e.target); if (e.isIntersecting) { v.preload = 'auto'; var p = v.play(); if (p && p.catch) p.catch(function () {}); } else v.pause(); });
+      }, { threshold: .7 });
+      cards.forEach(function (c) { vio.observe(c); });
+    }
+    function closeV() { modal.classList.remove('is-on'); mv.pause(); setTimeout(function () { modal.hidden = true; mv.removeAttribute('src'); mv.load(); }, 300); d.body.classList.remove('locked'); }
+    $('.vmodal__x').addEventListener('click', closeV);
+    modal.addEventListener('click', function (e) { if (e.target === modal) closeV(); });
+    d.addEventListener('keydown', function (e) { if (e.key === 'Escape' && !modal.hidden) closeV(); });
+    $$('[data-vdir]').forEach(function (b) { b.addEventListener('click', function () { track.scrollBy({ left: +b.dataset.vdir * track.clientWidth * .6, behavior: 'smooth' }); }); });
+  })();
+
   /* ---------- Proof counters ---------- */
   (function () {
     var nums = $$('.count'); if (!io) { nums.forEach(function (n) { n.textContent = n.dataset.to; }); return; }
@@ -208,7 +238,8 @@
     10: ['Research + as seen on', 'The three studies from your science page as a clean table, plus the media logos from your current site. <b>Please confirm you can use these logos.</b>'],
     11: ['Reviews', 'Your 7 real reviews, one at a time, large and readable — auto-rotating with arrows and swipe on mobile.'],
     12: ['Try it banner', 'Risk-reversal right before the FAQ: free shipping + 30-day guarantee + one button.'],
-    13: ['FAQ', 'The six questions that stop people buying, answered from your store policies.']
+    13: ['FAQ', 'The six questions that stop people buying, answered from your store policies.'],
+    14: ['Video testimonials', 'Short vertical, phone-style customer videos — the format shoppers trust most on TikTok and Instagram. They preview silently on hover (or as you scroll on mobile) and open full-screen with sound on click. <b>The clips shown are free stock samples</b>; they will be replaced with your customers\' own videos (ask buyers for a 10-second clip, or use a UGC service). Built to connect to review apps like Judge.me, Loox or Okendo, which collect photo and video reviews automatically.']
   };
   if (/[?&]notes=1/.test(location.search)) {
     var panel = $('.notes'), keys = Object.keys(NOTES).map(Number), nc = 0;
