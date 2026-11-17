@@ -118,7 +118,7 @@
   };
   P["core-four"].ingredients = [["Rice ferment + ginseng", "Korean-inspired", "Glow and softness from the toner."], ["Tranexamic acid + niacinamide", "Targeted", "Dark-spot correction from the serum."], ["Soursop + moringa leaf", "Jamaican botanical", "Comfort and nourishment from the moisturizer."], ["Triple ceramides", "Barrier", "In the toner and moisturizer to seal it all in."]];
   const ROUTINE = ["cleanser", "toner", "serum", "moisturizer"];
-  const url = (id) => `product.html?p=${id}`;
+  const url = (id) => `product/?p=${id}`;
 
   /* ---------------- Reviews (placeholder — swap for real reviews) ---------------- */
   const REVIEWS = [
@@ -174,7 +174,7 @@
         <div class="announce__track" aria-live="polite">
           <p class="announce__msg is-on"><button type="button" data-signup>Sign up for 20% off your first order</button></p>
           <p class="announce__msg">Free US shipping on orders over $${FREE_SHIP}</p>
-          <p class="announce__msg"><a href="product.html?p=toner">Our toner was featured in the Blissim Beauty Box</a></p>
+          <p class="announce__msg"><a href="product/?p=toner">Our toner was featured in the Blissim Beauty Box</a></p>
         </div>
         <button class="announce__nav announce__nav--next" aria-label="Next announcement"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><path d="M9 6l6 6-6 6"/></svg></button>
       </div>
@@ -183,13 +183,13 @@
           <div class="header__left" style="display:flex;align-items:center;gap:28px">
             <button class="icon-btn menu-btn" aria-label="Open menu" aria-controls="mnav" aria-expanded="false" data-open="mnav">${I.menu}</button>
             <nav class="header__nav" aria-label="Main">
-              <a href="shop.html" ${page === "shop" ? 'aria-current="page"' : ""}>Shop all</a>
-              <a href="index.html#routine">The routine</a>
-              <a href="product.html?p=core-four">Core Four</a>
-              <a href="index.html#story">Our story</a>
+              <a href="shop/" ${page === "shop" ? 'aria-current="page"' : ""}>Shop all</a>
+              <a href="./#routine">The routine</a>
+              <a href="product/?p=core-four">Core Four</a>
+              <a href="./#story">Our story</a>
             </nav>
           </div>
-          <a class="logo" href="index.html" aria-label="Unpopular You home">${LOGO}</a>
+          <a class="logo" href="./" aria-label="Unpopular You home">${LOGO}</a>
           <div class="header__icons">
             <a class="icon-btn hide-sm" href="#" aria-label="Search" onclick="return false">${I.search}</a>
             <a class="icon-btn hide-sm" href="#" aria-label="Account" onclick="return false">${I.user}</a>
@@ -220,14 +220,14 @@
               </div>
             </div>
             <div><h3>Shop</h3><ul>
-              <li><a href="shop.html">Shop all</a></li>
-              <li><a href="product.html?p=core-four">The Core Four</a></li>
+              <li><a href="shop/">Shop all</a></li>
+              <li><a href="product/?p=core-four">The Core Four</a></li>
               ${ROUTINE.map((id) => `<li><a href="${url(id)}">${P[id].name.replace(/ (Rice Essence|Brightening)/, "")}</a></li>`).join("")}
             </ul></div>
             <div><h3>Learn</h3><ul>
-              <li><a href="index.html#story">Our story</a></li>
-              <li><a href="index.html#routine">Barrier First</a></li>
-              <li><a href="index.html#faq">FAQ</a></li>
+              <li><a href="./#story">Our story</a></li>
+              <li><a href="./#routine">Barrier First</a></li>
+              <li><a href="./#faq">FAQ</a></li>
               <li><a href="#" onclick="return false">Ingredient glossary</a></li>
             </ul></div>
             <div><h3>Help</h3><ul>
@@ -248,11 +248,11 @@
       <div class="overlay" data-close></div>
 
       <aside class="drawer drawer--left" id="mnav" aria-label="Menu" aria-hidden="true">
-        <div class="drawer__head"><a class="logo" href="index.html" aria-label="Home">${LOGO}</a><button class="icon-btn" data-close aria-label="Close menu">${I.close}</button></div>
+        <div class="drawer__head"><a class="logo" href="./" aria-label="Home">${LOGO}</a><button class="icon-btn" data-close aria-label="Close menu">${I.close}</button></div>
         <div class="drawer__body"><div class="mnav">
           <div class="mnav__links">
-            <a href="shop.html">Shop all <span>4 products</span></a>
-            <a href="product.html?p=core-four">Bundles <span>Save $24</span></a>
+            <a href="shop/">Shop all <span>4 products</span></a>
+            <a href="product/?p=core-four">Bundles <span>Save $24</span></a>
           </div>
           <p class="eyebrow mnav__label">Build your routine</p>
           ${ROUTINE.map((id) => { const p = P[id]; return `
@@ -261,11 +261,11 @@
               <span><span class="step"><b>${p.step}</b>${p.stepName}</span><strong>${p.name}</strong><small>${p.sub}</small></span>
               <span>${money(p.price)}</span>
             </a>`; }).join("")}
-          <a class="mnav__bundle" href="product.html?p=core-four">
+          <a class="mnav__bundle" href="product/?p=core-four">
             <span><strong>The Core Four Routine</strong><small>All 4 steps · <s>$142</s> $118</small></span>
             <span class="btn btn--primary btn--sm">Shop</span>
           </a>
-          <div class="mnav__more"><a href="index.html#story">About us</a><a href="index.html#faq">Learn</a><a href="index.html#faq">FAQ</a></div>
+          <div class="mnav__more"><a href="./#story">About us</a><a href="./#faq">Learn</a><a href="./#faq">FAQ</a></div>
           <p class="mnav__trust">${I.nurse}<span>Nurse-founded · Made for melanin-rich skin</span></p>
         </div></div>
       </aside>
@@ -332,6 +332,12 @@
     if (!silent && lastFocus) lastFocus.focus({ preventScroll: true });
   }
   document.addEventListener("click", (e) => {
+    // Same-page anchors (subpages use <base href="../">, so resolve #hash locally)
+    const hashA = e.target.closest('a[href^="#"]');
+    if (hashA && hashA.getAttribute("href").length > 1) {
+      const t = document.getElementById(hashA.getAttribute("href").slice(1));
+      if (t) { e.preventDefault(); t.scrollIntoView({ behavior: reduce ? "auto" : "smooth" }); if (hashA.classList.contains("skip")) t.setAttribute("tabindex", "-1"), t.focus(); return; }
+    }
     const o = e.target.closest("[data-open]");
     if (o) { e.preventDefault(); open(o.dataset.open); return; }
     if (e.target.closest("[data-close]")) { e.preventDefault(); closeAll(); return; }
@@ -390,7 +396,7 @@
     $("#cartShip").innerHTML = `<p>${left > 0 ? `You're <strong>${money(left)}</strong> away from free shipping` : `<strong>You've unlocked free shipping</strong> 🎉`}</p><div class="progress" aria-hidden="true"><span style="width:${Math.min(100, (sub / FREE_SHIP) * 100)}%"></span></div>`;
 
     if (!n) {
-      body.innerHTML = `<div class="cart__empty"><h3 class="h3">Your bag is empty</h3><p>Start with the full routine — it's the easiest way to see results.</p><a class="btn btn--primary" href="product.html?p=core-four">Shop the Core Four ${I.arrow}</a></div>${routineBlock()}`;
+      body.innerHTML = `<div class="cart__empty"><h3 class="h3">Your bag is empty</h3><p>Start with the full routine — it's the easiest way to see results.</p><a class="btn btn--primary" href="product/?p=core-four">Shop the Core Four ${I.arrow}</a></div>${routineBlock()}`;
       $("#cartFoot").innerHTML = "";
       return;
     }
