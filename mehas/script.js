@@ -128,6 +128,7 @@
       '<div class="drawer__foot"><label class="gift-toggle"><input type="checkbox" data-giftwrap checked> Gift wrap with a handwritten note (complimentary)</label><div class="drawer__total"><span>Subtotal</span><b data-subtotal>AED 0</b></div><button class="btn btn--block" data-checkout>Secure checkout</button><small>or 4 interest-free payments with Tabby / Tamara · Cash on delivery available</small>' +
       '<div class="trust-mini"><span>' + I.lock + 'Secure SSL</span><span>' + I.check + '100% authentic</span><span>' + I.check + 'Easy returns</span></div></div></aside>' +
       '<div class="toast" role="status" aria-live="polite" data-toast></div>' +
+      '<nav class="vswitch" aria-label="Design versions"><span aria-current="page">Design A</span><a href="' + ROOT + 'v2/' + (ROOT ? 'product/' + location.search : '') + '">Design B</a></nav>' +
       '<a class="wa" href="https://wa.me/" target="_blank" rel="noopener" aria-label="Chat with a fragrance advisor on WhatsApp" data-noop>' + I.wa + '<span class="wa__tip">Ask a fragrance advisor</span></a>';
     document.body.appendChild(extra);
 
