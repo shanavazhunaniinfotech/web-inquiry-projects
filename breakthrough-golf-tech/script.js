@@ -161,8 +161,8 @@
       }
     });
   };
-  walk(mText);
-  const mUnits = $$('.w, .pic', mText);
+  if (mText) walk(mText);
+  const mUnits = mText ? $$('.w, .pic', mText) : [];
 
   /* ---------- Accordion ---------- */
   const accs = $$('.acc');
@@ -402,10 +402,12 @@
     progEl.style.transform = `scaleX(${h > 0 ? y / h : 0})`;
 
     // manifesto
-    const mr = mText.getBoundingClientRect();
-    const mp = clamp((vh * .85 - mr.top) / (mr.height + vh * .35), 0, 1);
-    const on = Math.floor(mp * mUnits.length * 1.05);
-    mUnits.forEach((u, i) => u.classList.toggle('on', i < on));
+    if (mText) {
+      const mr = mText.getBoundingClientRect();
+      const mp = clamp((vh * .85 - mr.top) / (mr.height + vh * .35), 0, 1);
+      const on = Math.floor(mp * mUnits.length * 1.05);
+      mUnits.forEach((u, i) => u.classList.toggle('on', i < on));
+    }
 
     // tech
     if (desktopPin()) {

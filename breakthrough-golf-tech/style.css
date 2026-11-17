@@ -896,3 +896,17 @@ h2 .serif { color: var(--blue); }
 .ab:hover b:not(.on) { background: #2a3346; }
 .ab b.on { background: var(--blue); }
 @media (max-width: 640px) { .ab { bottom: 82px; left: 10px; } }
+
+/* Find your fit — cards grow to fit their content so CTAs are never cropped */
+.lp { height: auto; min-height: min(62vh, 560px); align-items: stretch; }
+.lp__body { gap: 12px; padding-block: clamp(24px, 3vw, 40px); }
+.lp__body li { padding: 9px 0; }
+.lp__body .btn { margin-top: 4px; }
+.lines__pin { gap: 26px; }
+.kinetic { padding-bottom: clamp(30px, 4vw, 60px); }
+@media (max-height: 800px) and (min-width: 1001px) {
+  .lp__body h3 { font-size: 2.6rem; }
+  .lp__body p { font-size: .92rem; }
+  .lp__body li { padding: 7px 0; font-size: .86rem; }
+  .lines__head h2 { font-size: clamp(2rem, 4vw, 3.2rem); }
+}
