@@ -268,7 +268,7 @@
   reveal('.sc', '.seen__cards', { y: 50, stagger: .1 });
   reveal('.revs__side > *', '.revs');
   reveal('.wild__head > *', '.wild');
-  reveal('.wc', '.wild__track', { y: 60, stagger: .08 });
+  reveal('.wc', '.wild__track', { y: 0, scale: .94, stagger: .08 });
   reveal('.offer', '.try__offers');
 
   // SHIFT: video zoom + lines
