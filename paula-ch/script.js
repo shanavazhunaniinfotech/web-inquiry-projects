@@ -88,10 +88,10 @@
 
   /* Milestones */
   var MS = [
-    ['Week 1', 'Theme and homepage', ['Theme set up, fonts, colours and global sections from your Figma', 'Header, footer, navigation', 'Homepage, desktop and mobile'], 'You review the homepage on a preview link'],
-    ['Week 2', 'All other pages', ['3 use pages', 'Our Story and Contact', 'Wholesale page with the request form'], 'You review every page side by side with Figma'],
-    ['Week 3', 'B2B wholesale', ['Companies, wholesale catalog and prices', 'Min 5 per SKU, shipping rule', 'Approval flow and branded email'], 'You test as a buyer with a demo company'],
-    ['Week 4', 'Launch', ['SEO, redirects, analytics, speed', 'Full test on desktop and mobile', 'Go live, then training video'], '30 days of support starts']
+    ['Days 1–3', 'Theme and pages', ['Theme set up from your Figma: fonts, colours, global sections', 'Homepage, 3 use pages, Our Story, Contact', 'Wholesale page with the request form'], 'You review the pages on a preview link'],
+    ['Days 4–7', 'B2B wholesale', ['Companies, wholesale catalog and prices', 'Min 5 per SKU and the shipping rule', 'Approval flow and branded approval email'], 'You test as a buyer with a demo company'],
+    ['Week 2', 'Review and launch', ['Your feedback applied, side by side with Figma', 'SEO, redirects, analytics, speed', 'Full desktop and mobile test, then go live'], 'Launch date set by your review, not by me'],
+    ['After launch', 'Support', ['30 days of fixes included', 'Training video for your team', 'Optional ongoing help'], '30 days of support starts at launch']
   ];
   $('#ms').innerHTML = MS.map(function (m) { return '<article><span class="wk">' + m[0] + '</span><h3>' + m[1] + '</h3><ul>' + m[2].map(function (x) { return '<li>' + x + '</li>'; }).join('') + '</ul><p class="rev">' + m[3] + '</p></article>'; }).join('');
 })();
