@@ -85,5 +85,20 @@ h2 { font-size: clamp(26px, 3.6vw, 40px); max-width: 26ch; }
 .cta { margin-top: 16px; background: var(--teal); color: #fff; border-radius: 18px; padding: clamp(18px, 3vw, 28px); }
 .cta h3 { font-family: var(--serif); font-size: 22px; color: #f2c48d; }
 .cta p { color: #d3e2df; margin-top: 6px; max-width: 72ch; }
+.price { margin-top: 16px; background: var(--card); border: 2px solid var(--teal-2); border-radius: 18px; padding: clamp(18px, 3vw, 26px); display: grid; grid-template-columns: auto minmax(0, 1fr); gap: 18px; align-items: center; }
+@media (max-width: 640px) { .price { grid-template-columns: minmax(0, 1fr); } }
+.price span { display: block; font-size: 13px; font-weight: 700; letter-spacing: .1em; text-transform: uppercase; color: var(--muted); }
+.price b { font-family: var(--serif); font-size: clamp(36px, 5vw, 48px); color: var(--teal); line-height: 1.1; }
+.price p { color: var(--muted); }
+@media print {
+  @page { size: A4; margin: 12mm 0; }
+  body { font-size: 15px; }
+  .sec { padding-block: 34px; }
+  .hero { padding-block: 34px; }
+  .pick select { appearance: none; -webkit-appearance: none; }
+  article, .chk, .formcmp > div, .price, .cta, .kpis div, .paths, .sub { break-inside: avoid; }
+  h2, .eyebrow, .sub { break-after: avoid; }
+  #group, #ahpra, #form, #next { break-before: page; }
+}
 .foot { color: var(--muted); font-size: 13px; padding-block: 24px 44px; }
 @media (prefers-reduced-motion: reduce) { html { scroll-behavior: auto; } }
