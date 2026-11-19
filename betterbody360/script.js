@@ -219,6 +219,20 @@
     csteps.forEach(function (s) { io.observe(s); s.addEventListener('click', function () { setC(+s.dataset.i); }); });
   }
 
+  /* Testimonial slider with photos */
+  var tsEl = $('#ts');
+  if (tsEl) {
+    var tss = $$('.ts__s', tsEl), tsd = $$('#tsDots button'), tsi = 0, tst;
+    var showTs = function (i) { tsi = (i + tss.length) % tss.length; tss.forEach(function (s, j) { s.classList.toggle('is-on', j === tsi); }); tsd.forEach(function (d, j) { d.classList.toggle('is-on', j === tsi); }); };
+    var autoTs = function () { clearInterval(tst); if (!reduce) tst = setInterval(function () { showTs(tsi + 1); }, 7000); };
+    $('#tsPrev').addEventListener('click', function () { showTs(tsi - 1); autoTs(); });
+    $('#tsNext').addEventListener('click', function () { showTs(tsi + 1); autoTs(); });
+    tsd.forEach(function (d, j) { d.addEventListener('click', function () { showTs(j); autoTs(); }); });
+    tsEl.addEventListener('mouseenter', function () { clearInterval(tst); });
+    tsEl.addEventListener('mouseleave', autoTs);
+    autoTs();
+  }
+
   /* Testimonials */
   var tq = $$('#tq figure'), td = $$('#tdots button'), ti = 0, tt;
   if (tq.length) {
@@ -272,9 +286,10 @@
     var calc = function () {
       var n = +cN.value, a = +cA.value, m = n * a * .2;
       $('#cNo').textContent = n; $('#cAo').textContent = fmt(a);
-      $('#cOut').textContent = fmt(m); $('#cYr').textContent = '≈ ' + fmt(m * 12) + ' per year';
+      var net = cN.closest('.calc3') ? ' · ' + fmt(Math.max(0, m - 99)) + '/mo after the $99 monthly fee' : '';
+      $('#cOut').textContent = fmt(m); $('#cYr').textContent = '≈ ' + fmt(m * 12) + ' per year' + net;
       cN.style.setProperty('--p', ((n - 1) / 199 * 100) + '%');
-      cA.style.setProperty('--p', ((a - 99) / 400 * 100) + '%');
+      cA.style.setProperty('--p', ((a - +cA.min) / (+cA.max - +cA.min) * 100) + '%');
     };
     cN.addEventListener('input', calc); cA.addEventListener('input', calc); calc();
   }
