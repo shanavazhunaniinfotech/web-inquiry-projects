@@ -316,11 +316,11 @@
       scrollTrigger: {
         trigger: stage, start: "top top", end: function () { return "+=" + Math.round(window.innerHeight * 4.2); },
         pin: true, scrub: 1, anticipatePin: 1, invalidateOnRefresh: true,
-        onUpdate: function (s) {
-          bar.style.width = (s.progress * 100) + "%";
-          var t = tl.time(), i = t < 1.3 ? 0 : t < 2.6 ? 1 : t < 4.1 ? 2 : t < 5.6 ? 3 : 4;
-          setStep(i);
-        }
+      },
+      onUpdate: function () {
+        var t = tl.time(), i = t < 1.3 ? 0 : t < 2.6 ? 1 : t < 4.1 ? 2 : t < 5.6 ? 3 : 4;
+        bar.style.width = (tl.progress() * 100) + "%";
+        setStep(i);
       }
     });
     tl.to(poster, { scale: 1, rotateX: 0, rotateZ: 0, y: 0, x: 0, duration: 1.2 })
@@ -718,7 +718,7 @@
     var a = document.createElement("a"); a.href = "#explorer"; a.dataset.region = r.id; a.textContent = r.name;
     (r.cat === "bio" ? $("#footBio") : $("#footTech")).appendChild(a);
   });
-  if (hasG && !reduce) G.from(".foot__word", { yPercent: 40, opacity: 0, duration: 1.6, ease: "expo.out", scrollTrigger: { trigger: ".foot__word", start: "top 95%" } });
+  if (hasG && !reduce) G.from(".foot__cta h2", { yPercent: 40, opacity: 0, duration: 1.6, ease: "expo.out", scrollTrigger: { trigger: ".foot__cta", start: "top 95%" } });
 
   window.addEventListener("load", function () { if (ST) ST.refresh(); });
   if (document.fonts && document.fonts.ready) document.fonts.ready.then(function () { if (ST) ST.refresh(); });

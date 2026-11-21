@@ -61,11 +61,18 @@
       <span class="mono">Silicon Maps · Home page redesign · Design rationale</span>
       <h1>Why every section sits <em>where it does.</em></h1>
       <p>This home page turns visitors into <b>advertisers</b> (the main revenue), <b>poster buyers</b> (the second revenue stream) and <b>leads</b>, while making the maps themselves the hero. Below is the reasoning behind each section and each conversion feature.</p>
-      <a class="btn" href="../index.html">← View the home page design</a>
+      <a class="btn" href="../index.html">View Version A · Night Atlas</a><a class="btn btn--line" href="../v2/">View Version B · Daylight Atlas</a>
     </div>
   </header>
 
   <main class="wrap">
+    <h2>Two directions, <em>same strategy</em></h2>
+    <div class="grid2">
+      <div class="card"><span class="mono">Version A · Night Atlas</span><p><b style="color:#f4eee2">Cinematic and editorial.</b> A dark "night map" palette, serif headlines, a live topographic hero, the scroll-driven zoom into the real poster, and a 3D globe. Best if Mike wants the site to feel like a premium publication and a showpiece.</p></div>
+      <div class="card" style="background:#fff;color:#0e1a26"><span class="mono">Version B · Daylight Atlas</span><p style="color:#5f6b77"><b style="color:#0e1a26">Light, clean and product-led.</b> Bold grotesque type, a "find your region" search right in the hero, a full-width live map with hover pins, stacking cards, a "banner ad vs map" comparison, a side-by-side package table with a live receipt, and a bento store. Best if Mike wants the fastest path from visit to reservation.</p></div>
+    </div>
+    <p style="color:var(--mute);margin-top:14px">Both share the same content, prices, conversion features and Webflow CMS structure, so either can be built. The notes below use Version A's section order; the Version B differences are summarized after them.</p>
+
     <h2>Three <em>goals</em></h2>
     <div class="goals">
       <div class="goal"><span class="mono">Primary</span><b>Sell ad placements</b><p>Packages are $1,995 to $4,995 a year. Every section leads back to "Reserve my spot".</p></div>
@@ -116,6 +123,17 @@
       <div class="card"><span class="mono">Motion (GSAP + Lenis)</span><ul><li>Smooth inertia scrolling</li><li>Live topographic canvas that reacts to the cursor</li><li>3D poster with a magnifier lens</li><li>Pinned scroll-driven poster dive</li><li>Draggable dotted 3D globe with animated routes</li><li>Horizontal pinned store, clip-path reveals, word-by-word headings, magnetic buttons, custom cursor</li></ul><p>All motion switches off for visitors who prefer reduced motion.</p></div>
     </div>
 
+    <h2>Version B: <em>what's different and why</em></h2>
+    <ol class="sec">
+      <li><h3>Hero search: "Find your region"</h3><p>A search box with autocomplete (it understands cities: "Austin" finds Silicon Hills) and one-tap popular regions.</p><p class="why"><b>Why</b>It turns the first action into a micro-commitment. Typing your own region makes the offer personal, and the result jumps straight to the package builder with that map already selected.</p></li>
+      <li><h3>Full-width live map with hover pins</h3><p>The real 2027 poster opens up to full width as you scroll. Pins show Intel, AMD, Applied Materials, Cisco and Adobe, plus an orange "Your logo?" pin that links to packages.</p><p class="why"><b>Why</b>It proves the "next to the giants" promise in one glance and plants the idea of an empty spot waiting for you.</p></li>
+      <li><h3>Stacking cards: Print, Brand, Digital</h3><p class="why"><b>Why</b>Three clear value pillars, each with real visuals (the poster mock-up, the ad-space diagram and the expanded-profile example from the current site).</p></li>
+      <li><h3>"A banner ad gets a glance. A map gets a year."</h3><p class="why"><b>Why</b>A direct comparison against the alternative the buyer is weighing (digital ads). It reframes the price as a better-value choice, not just a cost.</p></li>
+      <li><h3>Package table + live receipt</h3><p>All four packages side by side, with the chosen column highlighted. A ticket-style receipt itemises the map, package and add-ons and totals them live.</p><p class="why"><b>Why</b>B2B buyers compare before they commit; a table removes the guesswork. The receipt makes the order feel concrete and "nearly done", which lifts reservations.</p></li>
+      <li><h3>Region index with poster preview and quick view</h3><p class="why"><b>Why</b>Every region is one click from a quick view with both "Advertise on this map" and "Buy the poster", so there are no dead ends.</p></li>
+      <li><h3>Bento store, auto-scrolling display reel, testimonial grid</h3><p class="why"><b>Why</b>The same proof and shopping as Version A, laid out for scanning rather than storytelling.</p></li>
+    </ol>
+
     <h2>Built for <em>Webflow</em></h2>
     <div class="note">Each section maps to a Webflow component and CMS collection: <b>Regions</b> (name, category, poster, coordinates, description), <b>Products</b> (Webflow Ecommerce), <b>Packages</b>, <b>Testimonials</b> and <b>Displays</b>. Mike can update content, images, products and prices himself, as he asked. Webflow now supports GSAP natively, so these interactions carry over.</div>
 
@@ -128,6 +146,6 @@
       <li><b>The exact 75,000 vs 100,000 print figure.</b> The current site uses both, and we show 75,000+.</li>
     </ul>
   </main>
-  <footer>Silicon Maps home page concept, prepared for Mike Desrosiers · <a href="../index.html">View the design</a> · <a href="../v1/">Earlier concept (v1)</a></footer>
+  <footer>Silicon Maps home page concept, prepared for Mike Desrosiers · <a href="../index.html">View the design</a> · <a href="../v2/">Version B</a></footer>
 </body>
 </html>
