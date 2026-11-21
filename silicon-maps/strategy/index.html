@@ -1,0 +1,123 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="robots" content="noindex, nofollow">
+  <title>Silicon Maps | Home Page Design Rationale</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,600;1,9..144,400&family=Inter:wght@400;500;600&family=JetBrains+Mono:wght@400&display=swap" rel="stylesheet">
+  <style>
+    :root { --ink:#0b2236; --navy:#103c5c; --blue:#276bac; --orange:#f47524; --paper:#f6f1e6; --line:#ddd3bf; --muted:#5b6875; }
+    * { box-sizing: border-box; }
+    body { margin: 0; background: var(--paper); color: #13202c; font: 16px/1.65 "Inter", system-ui, sans-serif; }
+    header { background: var(--ink); color: #fff; padding: 56px 0 64px; }
+    .wrap { width: min(980px, 100% - 32px); margin: 0 auto; }
+    .mono { font-family: "JetBrains Mono", monospace; font-size: .75rem; letter-spacing: .14em; text-transform: uppercase; color: #8fc3ea; }
+    h1 { font-family: "Fraunces", serif; font-size: clamp(2.2rem, 5vw, 3.6rem); line-height: 1.05; margin: 12px 0 16px; letter-spacing: -.02em; }
+    h1 em, h2 em { color: var(--orange); font-weight: 400; }
+    header p { color: #c4d4e3; max-width: 62ch; margin: 0 0 24px; }
+    .btn { display: inline-block; background: var(--orange); color: #fff; padding: 13px 22px; border-radius: 999px; text-decoration: none; font-weight: 600; }
+    main { padding: 56px 0 80px; }
+    h2 { font-family: "Fraunces", serif; font-size: 1.9rem; margin: 56px 0 16px; color: var(--ink); line-height: 1.15; }
+    .goals { display: grid; grid-template-columns: repeat(3, 1fr); gap: 14px; }
+    .goal { background: #fff; border: 1px solid var(--line); border-radius: 14px; padding: 20px; }
+    .goal b { display: block; font-family: "Fraunces", serif; font-size: 1.2rem; color: var(--ink); margin-bottom: 4px; }
+    .goal p { margin: 0; color: var(--muted); font-size: .93rem; }
+    ol.sections { list-style: none; padding: 0; margin: 0; counter-reset: s; }
+    ol.sections li { counter-increment: s; background: #fff; border: 1px solid var(--line); border-radius: 14px; padding: 22px 24px 22px 76px; margin-bottom: 12px; position: relative; }
+    ol.sections li::before { content: counter(s, decimal-leading-zero); position: absolute; left: 22px; top: 22px; width: 38px; height: 38px; border-radius: 50%; background: var(--ink); color: #fff; display: grid; place-items: center; font: 500 .8rem "JetBrains Mono", monospace; }
+    ol.sections h3 { margin: 0 0 6px; font-size: 1.08rem; color: var(--ink); }
+    ol.sections p { margin: 0 0 6px; color: var(--muted); }
+    ol.sections .why { color: #13202c; }
+    ol.sections .why b { color: var(--orange); }
+    table { width: 100%; border-collapse: collapse; background: #fff; border-radius: 14px; overflow: hidden; border: 1px solid var(--line); }
+    th, td { text-align: left; padding: 12px 16px; border-bottom: 1px solid var(--line); vertical-align: top; font-size: .93rem; }
+    th { background: var(--ink); color: #fff; font-weight: 600; }
+    td:first-child { font-weight: 600; color: var(--ink); width: 34%; }
+    ul.list { padding-left: 20px; color: var(--muted); }
+    ul.list li { margin-bottom: 6px; }
+    ul.list b { color: var(--ink); }
+    .note { background: #fff7f0; border-left: 4px solid var(--orange); padding: 16px 20px; border-radius: 8px; color: #13202c; }
+    footer { text-align: center; padding: 32px 0 48px; color: var(--muted); font-size: .88rem; }
+    @media (max-width: 720px) { .goals { grid-template-columns: 1fr; } ol.sections li { padding: 70px 18px 18px; } ol.sections li::before { left: 18px; top: 18px; } table, tbody, tr, td, th { display: block; width: 100% !important; } thead { display: none; } td:first-child { border-bottom: 0; padding-bottom: 0; } }
+  </style>
+</head>
+<body>
+  <header>
+    <div class="wrap">
+      <span class="mono">Silicon Maps · Home page redesign · Design notes</span>
+      <h1>Why every section sits <em>where it does.</em></h1>
+      <p>This home page is built to do one job: turn visitors into <b>advertisers</b> (the main revenue) and <b>poster buyers</b> (the second revenue stream), while making the interactive maps more central. Below is the reasoning behind each section and each conversion feature.</p>
+      <a class="btn" href="../index.html">← Back to the home page design</a>
+    </div>
+  </header>
+
+  <main class="wrap">
+    <h2>The three goals</h2>
+    <div class="goals">
+      <div class="goal"><b>1. Sell ad placements</b><p>The packages run $1,995 to $4,995 a year, so this is the main goal. Every section leads back to "See packages" or "Reserve my spot".</p></div>
+      <div class="goal"><b>2. Sell posters &amp; gifts</b><p>A $25 purchase is a low-commitment first step. Buyers become future advertisers and help spread the brand.</p></div>
+      <div class="goal"><b>3. Showcase the maps</b><p>The product is the map itself, so it is the hero image and the interactive explorer, not just a link in the menu.</p></div>
+    </div>
+
+    <h2>Section order and reasoning</h2>
+    <ol class="sections">
+      <li><h3>Announcement bar: "2027 editions now booking"</h3><p>An orange strip across the top of every page.</p><p class="why"><b>Why:</b> Each map has a fixed number of ad spaces and a print deadline. That's genuine scarcity, so we say it first. It creates honest urgency and links straight to availability.</p></li>
+      <li><h3>Header: mega-menu, phone number, cart and a permanent CTA</h3><p>The current 20-region dropdown is reorganized into High Tech / Life Science / International. The phone number and "Put My Company on the Map" are always visible.</p><p class="why"><b>Why:</b> B2B buyers often want to call before they spend about $3,000. A one-tap phone number and a CTA on screen at all times remove friction at any scroll depth.</p></li>
+      <li><h3>Hero: "Put your company on the map. Literally."</h3><p>Built on Silicon Maps' own slogan, with the real 2027 poster and a magnifier lens that zooms into real logos.</p><p class="why"><b>Why:</b> Visitors see the product, the benefit (75,000+ prints, 92 countries) and two clear paths (advertise or shop) within 5 seconds. The zoom lens recreates the moment someone studies the map on a wall. That moment is what an advertiser is paying for.</p></li>
+      <li><h3>Logo marquee: "Featured alongside Intel, AMD, Cisco…"</h3><p class="why"><b>Why:</b> Social proof right below the hero. A prospect's first question is "who else is on it?" Big names answer it immediately and set up the "be seen next to the giants" idea.</p></li>
+      <li><h3>Path selector: Advertise / Buy / Explore</h3><p class="why"><b>Why:</b> The site has three different audiences: marketers, gift buyers and people curious about the region. Sending each to the right section early stops buyers from wading through ad content, and the reverse. This is one of the most effective CRO changes for a site with more than one audience.</p></li>
+      <li><h3>Stats band: 1989 · 75,000+ · 92 · 95% · 20 ft</h3><p class="why"><b>Why:</b> Numbers taken from the current site, shown big and animated. They answer "is this worth it?" before price comes up.</p></li>
+      <li><h3>"Why it works": scroll-driven poster anatomy</h3><p>As you scroll, the real poster zooms into each part of the placement: the map spot, the logos, the 3"×12" custom imprint, the calendar, and the online link.</p><p class="why"><b>Why:</b> The current site explains the value in long text that few people read. Showing exactly what you get on the real poster makes the value concrete before the price appears.</p></li>
+      <li><h3>Interactive map explorer (USA / World, High Tech / Life Science)</h3><p>Every region is a pin. Clicking one shows the poster, a description, and both CTAs: "Advertise on this map" and "Buy poster, $25".</p><p class="why"><b>Why:</b> It answers Mike's request to improve the interactive maps, and turns 20+ menu links into one engaging tool. Every click ends in an action, and choosing a region carries through to the package builder and the contact form.</p></li>
+      <li><h3>Packages + live package builder</h3><p>Choose a map, then a tier (Gold is highlighted as "Most chosen"), then add-ons (+50 maps, Corporate Sponsor listing, setup fee). The total and cost per day update live. "Reserve my spot" opens a short form with no payment.</p><p class="why"><b>Why:</b> Transparent pricing builds trust. Highlighting the middle-upper tier is classic price anchoring and lifts average order value. Showing "$10.26 a day" makes an annual spend feel small. "No payment now" lowers the barrier for a big-ticket B2B decision, which turns a hard sell into a lead the team can close.</p></li>
+      <li><h3>"On display": Times Square, the Smithsonian, airports, Stanford</h3><p class="why"><b>Why:</b> Authority. These are real photos from the current site. Showing the map in a museum and in airports proves the reach claim placed directly after pricing, where doubt is highest.</p></li>
+      <li><h3>Testimonials from Silicon Valley Bank, CIENA, QED Bioscience and Chemwest</h3><p class="why"><b>Why:</b> Real quotes from the current testimonials page, cut down to the line that sells, with that line highlighted. The headline uses the strongest line: prospects "aspire to be on the map."</p></li>
+      <li><h3>Store with filters, quick add, cart drawer and an upsell</h3><p class="why"><b>Why:</b> Buyers can buy without leaving the page. The drawer offers the $29 puzzle as an add-on, which raises order value. A "bulk order" prompt turns gift buyers into larger orders or advertiser leads.</p></li>
+      <li><h3>4-step process</h3><p class="why"><b>Why:</b> It removes the fear of "this sounds complicated." Reserve, send art, approve your proof, go live. It's based on the current Art Requirements page, so it's accurate.</p></li>
+      <li><h3>FAQ (objection handling) + a person to call</h3><p class="why"><b>Why:</b> Each question answers a real objection: who sees it, deadlines, artwork, Expanded Profile, "are we too small?", invoicing. Answering them on the page stops people leaving to "think about it."</p></li>
+      <li><h3>Final CTA: "Your competitors are already on the map." + media kit form</h3><p class="why"><b>Why:</b> A softer offer (a free media kit) for visitors who aren't ready to reserve. That way we still capture the lead. The form is pre-filled with the region they browsed.</p></li>
+      <li><h3>Sticky mobile CTA bar</h3><p class="why"><b>Why:</b> On phones the "Reserve a spot" button and the "from $1,995/yr" price are always one tap away. It hides when the pricing or contact section is already on screen, so it never gets in the way.</p></li>
+    </ol>
+
+    <h2>Conversion features at a glance</h2>
+    <table>
+      <thead><tr><th>Feature</th><th>The conversion principle behind it</th></tr></thead>
+      <tbody>
+        <tr><td>"2027 now booking" + limited ad spaces</td><td>Honest urgency and scarcity (spaces really are limited per map)</td></tr>
+        <tr><td>Gold "Most chosen" + cost-per-day</td><td>Price anchoring, framing a big annual spend as a small daily one</td></tr>
+        <tr><td>Reserve with no payment</td><td>A lower barrier for a high-value B2B purchase, captured as a lead for sales</td></tr>
+        <tr><td>Path selector</td><td>Routes three different audiences to the right section</td></tr>
+        <tr><td>Region → builder → form carry-over</td><td>Fewer fields and less effort for the visitor</td></tr>
+        <tr><td>Logos, displays, testimonials</td><td>Social proof and authority, placed right after the claims they support</td></tr>
+        <tr><td>Cart drawer + puzzle upsell</td><td>Higher order value; shopping without leaving the page</td></tr>
+        <tr><td>FAQ + phone number everywhere</td><td>Objections answered on the page; a real person to reach</td></tr>
+        <tr><td>Media kit form</td><td>A second, softer offer for visitors not ready to commit</td></tr>
+      </tbody>
+    </table>
+
+    <h2>Design &amp; brand</h2>
+    <ul class="list">
+      <li><b>Colors from the current brand:</b> deep navy (#103c5c), brand blue (#276bac) and the site's CTA orange (#f47524), plus a "map paper" cream inspired by the cartographic studios Mike likes (Scott Reinhard, Studio Briar, Mapaxis, Geografa).</li>
+      <li><b>Type:</b> an editorial serif (Fraunces) for a premium, published-map feel, Inter for easy reading, and a mono font for map-style coordinates and labels.</li>
+      <li><b>Motion (GSAP):</b> headline reveal, 3D poster entrance, magnifier lens, count-up stats, scroll-driven poster zoom, animated map pins, a route line that draws itself, and a magnetic CTA. All motion turns off for people who prefer reduced motion.</li>
+      <li><b>Real content:</b> the logo, posters, prices, packages, testimonials and display photos all come from siliconmaps.com.</li>
+    </ul>
+
+    <h2>Built for Webflow</h2>
+    <div class="note">Every section maps to a Webflow component and CMS collection: <b>Regions</b> (name, category, poster, description, coordinates), <b>Products</b> (Webflow Ecommerce, $25 posters, puzzle, mouse pad), <b>Packages</b> (tiers, prices, features), <b>Testimonials</b> and <b>Displays</b>. Mike can update content, images, products and prices himself, without a developer, as he asked. The animations use GSAP, which Webflow now includes natively through Webflow Interactions.</div>
+
+    <h2>To confirm with the client</h2>
+    <ul class="list">
+      <li>The exact 2027 artwork deadline (for a real countdown in the announcement bar)</li>
+      <li>Whether packages are the same price on every regional map, or only on Silicon Valley</li>
+      <li>Poster images for Lone Star Tech, New York Photonics, South Florida and Málaga, plus a mouse pad photo</li>
+      <li>Permission to name specific participant logos in the "featured alongside" strip</li>
+      <li>Whether the interactive maps keep their current hotspot data (we'd move them to a Webflow CMS map)</li>
+    </ul>
+  </main>
+  <footer>Silicon Maps home page concept, prepared for Mike Desrosiers · <a href="../index.html">View the design</a></footer>
+</body>
+</html>
