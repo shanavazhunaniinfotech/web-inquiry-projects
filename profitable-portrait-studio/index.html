@@ -1,0 +1,773 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<meta name="robots" content="noindex, nofollow">
+<title>The Profitable Portrait Studio · Member Experience Prototype</title>
+<meta name="description" content="Clickable design concept for The Profitable Portrait Studio member platform and marketing site.">
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Crect width='64' height='64' rx='16' fill='%2313261f'/%3E%3Ccircle cx='32' cy='32' r='14' fill='none' stroke='%23f2b26b' stroke-width='5'/%3E%3Ccircle cx='32' cy='32' r='4' fill='%23f2b26b'/%3E%3C/svg%3E">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,300..600;1,9..144,300..600&family=Instrument+Sans:wght@400;500;600;700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+<!-- ============================================================
+     COVER  (prototype index for David)
+============================================================ -->
+<section class="screen cover" data-screen="cover" data-title="Prototype overview">
+  <div class="cover__bg" aria-hidden="true">
+    <img src="https://images.unsplash.com/photo-1471341971476-ae15ff5dd4ea?w=2000&q=70&auto=format&fit=crop" alt="">
+  </div>
+  <div class="cover__inner">
+    <p class="eyebrow eyebrow--light" data-a>Design concept · Member experience + marketing</p>
+    <h1 class="cover__title" data-a>The Profitable Portrait Studio <em>Member Studio</em></h1>
+    <p class="cover__lede" data-a>A clickable concept for the platform your members will log into every week: one clear next step, a visible road to World Class, and results that get celebrated. Your full Client Journey stays intact; the member just sees it one step at a time.</p>
+
+    <div class="cover__actions" data-a>
+      <a class="btn btn--apricot btn--lg" href="#login">Start the member walkthrough <span class="arr">→</span></a>
+      <button class="btn btn--ghost-light btn--lg" data-open-phones>View the iPhone screens</button>
+    </div>
+
+    <div class="flow" data-a aria-label="Clickable flow">
+      <span>Log in</span><i></i><span>See progress</span><i></i><span>Next action</span><i></i><span>Learn in TalentLMS</span><i></i><span>Report it</span><i></i><span>Feedback &amp; recognition</span>
+    </div>
+
+    <div class="cover__grid">
+      <a href="#home" class="cover-card" data-a><span class="cover-card__n">01</span><strong>Member home</strong><small>Where am I, what have I done, what's next</small></a>
+      <a href="#journey" class="cover-card" data-a><span class="cover-card__n">02</span><strong>Client Journey roadmap</strong><small>The road to World Class, 10 stages</small></a>
+      <a href="#action" class="cover-card" data-a><span class="cover-card__n">03</span><strong>Next action &amp; learning</strong><small>Learn → implement → report, with TalentLMS</small></a>
+      <a href="#results" class="cover-card" data-a><span class="cover-card__n">04</span><strong>My numbers &amp; feedback</strong><small>Business stats in plain English</small></a>
+      <a href="#community" class="cover-card" data-a><span class="cover-card__n">05</span><strong>Calendar &amp; community</strong><small>Calls, events, wins and resources</small></a>
+      <a href="#site" class="cover-card" data-a><span class="cover-card__n">06</span><strong>Public marketing page</strong><small>Who you help and how to join</small></a>
+    </div>
+    <p class="cover__fine" data-a>Prototype only: names, numbers, events and community posts are sample data. Lesson content stays in your existing TalentLMS.</p>
+  </div>
+</section>
+
+<!-- ============================================================
+     LOGIN
+============================================================ -->
+<section class="screen login" data-screen="login" data-title="Log in">
+  <div class="login__art">
+    <img src="https://images.unsplash.com/photo-1554080353-a576cf803bda?w=1400&q=75&auto=format&fit=crop" alt="Portrait photographer at work">
+    <div class="login__quote">
+      <p>“Remember the dashes between the dots.”</p>
+      <span>David Hilton</span>
+    </div>
+  </div>
+  <div class="login__panel">
+    <a href="#site" class="wordmark wordmark--dark">The Profitable <em>Portrait</em> Studio</a>
+    <div class="login__form" data-a>
+      <p class="eyebrow">Member Studio</p>
+      <h1>Welcome back.<br><em>Your studio is waiting.</em></h1>
+      <form id="loginForm" novalidate>
+        <label>Email<input type="email" value="maya@ellisonportrait.co" autocomplete="off"></label>
+        <label>Password<input type="password" value="prototype" autocomplete="off"></label>
+        <button class="btn btn--pine btn--block btn--lg" type="submit">Sign in <span class="arr">→</span></button>
+      </form>
+      <p class="login__help"><a href="#login">Forgot password?</a> · <a href="#site">Not a member yet?</a></p>
+    </div>
+  </div>
+</section>
+
+<!-- ============================================================
+     APP SHELL (sidebar + topbar) — wraps member screens
+============================================================ -->
+<div class="app" id="app">
+  <aside class="side">
+    <a href="#home" class="wordmark wordmark--light">The Profitable <em>Portrait</em> Studio</a>
+    <nav class="side__nav" aria-label="Member">
+      <a href="#home" data-nav="home"><svg viewBox="0 0 24 24"><path d="M4 11.5 12 5l8 6.5V19a1 1 0 0 1-1 1h-4.5v-5h-5v5H5a1 1 0 0 1-1-1z"/></svg>Today</a>
+      <a href="#journey" data-nav="journey"><svg viewBox="0 0 24 24"><path d="M5 19c3-6 11-2 14-9M5 19h.01M19 10h.01"/><circle cx="5" cy="19" r="2"/><circle cx="19" cy="6" r="2"/></svg>My Journey</a>
+      <a href="#results" data-nav="results"><svg viewBox="0 0 24 24"><path d="M5 20V11M12 20V5M19 20v-6"/></svg>My Numbers</a>
+      <a href="#community" data-nav="community"><svg viewBox="0 0 24 24"><rect x="4" y="5" width="16" height="15" rx="2"/><path d="M4 10h16M9 3v4M15 3v4"/></svg>Calendar &amp; Community</a>
+    </nav>
+    <div class="side__sub">
+      <a href="#lms"><svg viewBox="0 0 24 24"><path d="M4 6h7a2 2 0 0 1 2 2v12a2 2 0 0 0-2-2H4zM20 6h-7"/><path d="M20 6v12h-7"/></svg>Learning Center <small>↗</small></a>
+      <a href="#results" data-scroll="feedback"><svg viewBox="0 0 24 24"><path d="M5 5h14v10H9l-4 4z"/></svg>Messages from David <b class="dot-badge" id="msgBadge">1</b></a>
+    </div>
+    <div class="side__coach">
+      <div class="avatar avatar--dh">DH</div>
+      <div><strong>David Hilton</strong><small>Your coach · replies within 48h</small></div>
+    </div>
+  </aside>
+
+  <header class="topbar">
+    <div class="topbar__crumb" id="crumb">Today</div>
+    <div class="topbar__right">
+      <div class="streak" title="Weeks in a row with an implemented action"><span>🔥</span> 6-week streak</div>
+      <button class="icon-btn" aria-label="Notifications"><svg viewBox="0 0 24 24"><path d="M6 17V11a6 6 0 1 1 12 0v6l1.5 2h-15zM10 21h4"/></svg><i></i></button>
+      <div class="me"><div class="avatar avatar--me">ME</div><div class="me__txt"><strong>Maya Ellison</strong><small>Ellison Portrait Co.</small></div></div>
+    </div>
+  </header>
+
+  <main class="main" id="main">
+
+    <!-- ========== SCREEN 1: HOME ========== -->
+    <section class="screen" data-screen="home" data-app data-title="Today">
+      <div class="m-head">
+        <div class="m-head__top"><span class="wordmark wordmark--dark wordmark--sm">The Profitable <em>Portrait</em> Studio</span><div class="avatar avatar--me">ME</div></div>
+      </div>
+
+      <div class="hello" data-a>
+        <div>
+          <p class="eyebrow">Saturday, November 21 · Month 5 of your transformation</p>
+          <h1 class="h-display">Good morning, Maya.<br><em>You're 3 stages into the road.</em></h1>
+        </div>
+        <a href="#journey" class="hello__link">See my whole journey <span class="arr">→</span></a>
+      </div>
+
+      <div class="home-grid">
+        <!-- Next step hero -->
+        <article class="next-card" data-a>
+          <div class="next-card__glow" aria-hidden="true"></div>
+          <div class="next-card__top">
+            <span class="pill pill--apricot">Your one next step</span>
+            <span class="next-card__stage">Stage 3 · Discovery Call &amp; Booking</span>
+          </div>
+          <h2 class="next-card__title">Run your next 5 discovery calls with the 5-question script.</h2>
+          <p class="next-card__why"><svg viewBox="0 0 24 24"><path d="M12 3v18M17 7.5c0-1.9-2.2-3-5-3s-5 1.1-5 3 2 2.7 5 3.4 5 1.6 5 3.6-2.2 3-5 3-5-1.1-5-3"/></svg><span>Booking 2 more of the people who already call you is about <strong>$3,900 more a month</strong> at your average sale.</span></p>
+          <div class="next-card__meta">
+            <span><b>1</b> Learn · 14 min</span><span><b>2</b> Use it this week</span><span><b>3</b> Report to David</span>
+          </div>
+          <div class="next-card__cta">
+            <a href="#action" class="btn btn--apricot btn--lg magnetic">Start this step <span class="arr">→</span></a>
+            <span class="next-card__due">Suggested by David · due Fri, Nov 27</span>
+          </div>
+        </article>
+
+        <!-- Progress ring -->
+        <article class="card progress-card" data-a>
+          <p class="eyebrow">Road to World Class</p>
+          <div class="ring" data-ring="24">
+            <svg viewBox="0 0 140 140"><circle class="ring__track" cx="70" cy="70" r="60"/><circle class="ring__bar" cx="70" cy="70" r="60"/></svg>
+            <div class="ring__label"><strong data-count="24">0</strong><span>%</span><small>of the way</small></div>
+          </div>
+          <div class="mini-road" aria-label="Stages 1 to 10">
+            <i class="done"></i><i class="done"></i><i class="now"></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i>
+          </div>
+          <p class="progress-card__txt"><strong>2 stages verified</strong> by David. Next milestone: <em>Discovery Call &amp; Booking</em>.</p>
+        </article>
+
+        <!-- Wins -->
+        <article class="card wins" data-a>
+          <div class="card__head"><h3>Since you joined</h3><a href="#results" class="link">All my numbers →</a></div>
+          <ul class="wins__list">
+            <li><span class="wins__icon wins__icon--green">↑</span><div><strong>Average sale up $310</strong><small>$1,630 → $1,940</small></div></li>
+            <li><span class="wins__icon wins__icon--green">⏱</span><div><strong>Reply time down to 45 min</strong><small>was about 6 hours</small></div></li>
+            <li><span class="wins__icon wins__icon--apricot">★</span><div><strong>Badge: Fast Responder</strong><small>every inquiry answered within an hour, 30 days</small></div></li>
+          </ul>
+        </article>
+
+        <!-- Next call -->
+        <article class="card call-card" data-a>
+          <div class="call-card__date"><small>Tue</small><strong>24</strong><small>Nov</small></div>
+          <div class="call-card__txt">
+            <p class="eyebrow">Next group coaching</p>
+            <h3>Discovery calls that book</h3>
+            <small>7:00 PM ET · Live on Zoom · with David</small>
+          </div>
+          <a href="#community" class="btn btn--pine btn--sm">Add to calendar</a>
+        </article>
+
+        <!-- Note from David -->
+        <article class="card note" data-a>
+          <div class="note__who"><div class="avatar avatar--dh">DH</div><div><strong>A note from David</strong><small>2 days ago</small></div></div>
+          <p>“Maya, your follow-up is now faster than most studios I coach. The phone is where your next jump comes from. Use the script word for word for five calls before you make it your own.”</p>
+          <a href="#results" data-scroll="feedback" class="link">Reply to David →</a>
+        </article>
+      </div>
+    </section>
+
+    <!-- ========== SCREEN 2: JOURNEY ========== -->
+    <section class="screen" data-screen="journey" data-app data-title="My Journey">
+      <div class="page-head" data-a>
+        <div>
+          <p class="eyebrow">Your Client Journey</p>
+          <h1 class="h-display">The road to <em>World Class.</em></h1>
+          <p class="lede">Every stop is one part of how a client experiences your studio, from the first inquiry to the referral they send years later. Finish each stop in four simple moves: <b>learn it, use it, measure it, get it verified</b>.</p>
+        </div>
+        <div class="legend">
+          <span><i class="tl tl--green"></i>World class</span>
+          <span><i class="tl tl--amber"></i>Meets expectations</span>
+          <span><i class="tl tl--red"></i>Not consistent yet</span>
+        </div>
+      </div>
+
+      <div class="road-wrap card" data-a>
+        <div class="road-phases">
+          <span style="--w:30%">Attract <small>Stages 1–3</small></span>
+          <span style="--w:40%">Create &amp; sell <small>Stages 4–7</small></span>
+          <span style="--w:30%">Deliver &amp; grow <small>Stages 8–10</small></span>
+        </div>
+        <svg class="road" id="road" viewBox="0 0 1200 330" preserveAspectRatio="xMidYMid meet" aria-label="Journey road with 10 stages">
+          <path id="roadBase" d="M30,250 C150,250 170,80 300,80 S450,250 590,250 S740,80 880,80 S1040,250 1170,180" />
+          <path id="roadDash" d="M30,250 C150,250 170,80 300,80 S450,250 590,250 S740,80 880,80 S1040,250 1170,180" />
+          <path id="roadDone" d="M30,250 C150,250 170,80 300,80 S450,250 590,250 S740,80 880,80 S1040,250 1170,180" />
+          <g id="roadStops"></g>
+        </svg>
+        <p class="road-note">“Remember the dashes between the dots.” <span>Each dash is a habit your clients feel between the big moments.</span></p>
+      </div>
+
+      <!-- Mobile / list version of stops -->
+      <ol class="stop-list" id="stopList"></ol>
+
+      <div class="stage-detail card" id="stageDetail" data-a></div>
+    </section>
+
+    <!-- ========== SCREEN 3: NEXT ACTION ========== -->
+    <section class="screen" data-screen="action" data-app data-title="Next step">
+      <a href="#home" class="back" data-a>← Today</a>
+      <div class="action-head" data-a>
+        <div>
+          <p class="eyebrow">Stage 3 · Discovery Call &amp; Booking · Action 2 of 4</p>
+          <h1 class="h-display">Run your next 5 discovery calls with the <em>5-question script.</em></h1>
+        </div>
+        <div class="action-progress">
+          <div class="seg" id="actionSeg"><i></i><i></i><i></i></div>
+          <small id="actionSegTxt">0 of 3 done</small>
+        </div>
+      </div>
+
+      <div class="action-grid">
+        <div class="steps" id="steps">
+          <!-- Step 1 -->
+          <article class="step" data-step="1" data-a>
+            <header class="step__head">
+              <span class="step__num">1</span>
+              <div><p class="step__kicker">Learn · 14 min</p><h3>Watch “SK600 Telephone Basic Script Structure”</h3></div>
+              <span class="step__state">To do</span>
+            </header>
+            <div class="step__body">
+              <div class="lesson-preview">
+                <div class="lesson-preview__thumb"><img src="https://images.unsplash.com/photo-1520390138845-fd2d229dd553?w=600&q=70&auto=format&fit=crop" alt=""><span class="play">▶</span></div>
+                <div>
+                  <p>David walks through the five questions, in order, and why each one earns the next. Opens in your Learning Center (TalentLMS). We'll bring you right back here.</p>
+                  <a href="#lms" class="btn btn--pine" id="openLesson">Open lesson in TalentLMS <span class="arr">↗</span></a>
+                </div>
+              </div>
+            </div>
+          </article>
+
+          <!-- Step 2 -->
+          <article class="step" data-step="2" data-a>
+            <header class="step__head">
+              <span class="step__num">2</span>
+              <div><p class="step__kicker">Use it · this week</p><h3>Put the script to work in your studio</h3></div>
+              <span class="step__state">Locked</span>
+            </header>
+            <div class="step__body">
+              <ul class="checks" id="implChecks">
+                <li><label><input type="checkbox"><span></span>Print the one-page script and keep it by the phone <a href="#community" class="file">PDF</a></label></li>
+                <li><label><input type="checkbox"><span></span>Use it word for word on your next 5 discovery calls</label></li>
+                <li><label><input type="checkbox"><span></span>Log each call on your Phone Board (booked / not booked)</label></li>
+              </ul>
+              <p class="hint">Tip from David: don't skip question 4, “Why now?”. That's the one that books.</p>
+            </div>
+          </article>
+
+          <!-- Step 3 -->
+          <article class="step" data-step="3" data-a>
+            <header class="step__head">
+              <span class="step__num">3</span>
+              <div><p class="step__kicker">Report · 2 min</p><h3>Tell David how it went</h3></div>
+              <span class="step__state">Locked</span>
+            </header>
+            <div class="step__body">
+              <div class="report">
+                <p class="report__q">Of your 5 scripted calls, how many booked a planning consultation?</p>
+                <div class="stepper" id="bookStepper">
+                  <button type="button" data-d="-1" aria-label="Fewer">−</button>
+                  <output id="bookVal">3</output>
+                  <button type="button" data-d="1" aria-label="More">+</button>
+                  <span class="stepper__of">of 5 calls</span>
+                </div>
+                <p class="report__calc" id="bookCalc">That's a <b>60%</b> booking rate on scripted calls. Before the script you were at <b>40%</b>.</p>
+                <label class="report__note">Anything David should know? <span>(optional)</span>
+                  <textarea rows="2" placeholder="e.g. Two people stalled at the price question…"></textarea>
+                </label>
+                <button class="btn btn--apricot btn--lg" id="submitReport" type="button">Send to David <span class="arr">→</span></button>
+              </div>
+            </div>
+          </article>
+        </div>
+
+        <aside class="action-aside">
+          <div class="card why" data-a>
+            <p class="eyebrow">Why this matters</p>
+            <div class="why__math">
+              <div><strong>14</strong><small>inquiries a month</small></div>
+              <div class="why__x">×</div>
+              <div><strong>+15%</strong><small>more booked</small></div>
+              <div class="why__x">≈</div>
+              <div><strong>2</strong><small>more sessions</small></div>
+            </div>
+            <p>At your <b>$1,940 average sale</b>, two more sessions is about <b class="hl">$3,900 a month</b> without spending a dollar more on marketing.</p>
+          </div>
+          <div class="card done-when" data-a>
+            <p class="eyebrow">You're done when…</p>
+            <ul>
+              <li>You've used the script on 5 real calls</li>
+              <li>You've reported how many booked</li>
+              <li>David gives you a <i class="tl tl--green"></i> green or <i class="tl tl--amber"></i> yellow light</li>
+            </ul>
+          </div>
+          <div class="card unlocks" data-a>
+            <div class="badge-ico badge-ico--locked" id="scriptBadge"><svg viewBox="0 0 24 24"><path d="M6 4h12v6a6 6 0 0 1-12 0zM9 20h6M12 16v4"/></svg></div>
+            <div><p class="eyebrow">This unlocks</p><strong>Badge: Script Pro</strong><small>and moves Stage 3 to 75%</small></div>
+          </div>
+        </aside>
+      </div>
+
+      <!-- mobile sticky CTA -->
+      <div class="sticky-cta" id="stickyCta"><a href="#lms" class="btn btn--apricot btn--block btn--lg">Open lesson in TalentLMS ↗</a></div>
+    </section>
+
+    <!-- ========== SCREEN 3b: TALENTLMS (simulated) ========== -->
+    <section class="screen lms" data-screen="lms" data-app data-title="Learning Center">
+      <div class="lms-bar" data-a>
+        <span class="lms-bar__tag">Learning Center · TalentLMS</span>
+        <span>You're in the lesson. We'll bring you back to your next step when you finish.</span>
+        <a href="#action" class="link">← Back to my step</a>
+      </div>
+      <div class="lms-grid">
+        <div class="lms-player card" data-a>
+          <div class="lms-player__video">
+            <img src="https://images.unsplash.com/photo-1471341971476-ae15ff5dd4ea?w=1400&q=70&auto=format&fit=crop" alt="">
+            <button class="lms-play" id="lmsPlay" aria-label="Play">▶</button>
+            <div class="lms-player__bar"><i id="lmsProg"></i></div>
+          </div>
+          <div class="lms-player__info">
+            <p class="eyebrow">SK600 · Unit 2 of 3</p>
+            <h2>Telephone Basic Script Structure</h2>
+            <p>The five questions, in order: <b>1</b> Who is the portrait for? <b>2</b> Where will it hang? <b>3</b> What's the occasion? <b>4</b> Why now? <b>5</b> What would make this a success for you?</p>
+            <button class="btn btn--pine btn--lg" id="lmsComplete">Mark lesson complete &amp; return to my step <span class="arr">→</span></button>
+          </div>
+        </div>
+        <aside class="card lms-units" data-a>
+          <h3>In this course</h3>
+          <ol>
+            <li class="done">Why the phone decides the sale <small>6 min</small></li>
+            <li class="now">The five-question structure <small>14 min</small></li>
+            <li>Role-play: three real calls <small>11 min</small></li>
+          </ol>
+          <p class="hint">Integration note: lesson completion syncs back from TalentLMS to the Member Studio, so the member never marks it twice.</p>
+        </aside>
+      </div>
+    </section>
+
+    <!-- ========== SCREEN 4: RESULTS ========== -->
+    <section class="screen" data-screen="results" data-app data-title="My Numbers">
+      <div class="page-head" data-a>
+        <div>
+          <p class="eyebrow">My Numbers · November</p>
+          <h1 class="h-display">Your studio, <em>in plain English.</em></h1>
+          <p class="lede">Five numbers tell the whole story. Green means it's working, yellow means it's your focus, and David reads every check-in.</p>
+        </div>
+        <button class="btn btn--apricot btn--lg" id="openCheckin">Do my monthly check-in <span class="arr">→</span></button>
+      </div>
+
+      <div class="goal card" data-a>
+        <div class="goal__txt">
+          <p class="eyebrow">2026 sales goal</p>
+          <h2><span data-count="186200" data-prefix="$">$0</span> <small>of $210,000</small></h2>
+          <p>You're <b class="ok">on pace</b>. $23,800 to go in about 6 weeks, which is two good ordering appointments a week.</p>
+        </div>
+        <div class="goal__bar"><i style="--p:89%"></i><span class="goal__pace" style="--p:92%">today</span></div>
+      </div>
+
+      <div class="metrics">
+        <article class="metric card" data-a>
+          <header><i class="tl tl--green"></i><span>Average portrait sale</span></header>
+          <strong data-count="1940" data-prefix="$">$0</strong>
+          <p class="metric__delta up">↑ $310 since you joined</p>
+          <div class="spark"><i style="--h:52%"></i><i style="--h:55%"></i><i style="--h:61%"></i><i style="--h:66%"></i><i style="--h:72%"></i><i style="--h:78%" class="now"></i></div>
+          <p class="metric__plain">What each client spends with you, on average.</p>
+        </article>
+        <article class="metric card" data-a>
+          <header><i class="tl tl--green"></i><span>New inquiries</span></header>
+          <strong data-count="14">0</strong>
+          <p class="metric__delta up">↑ 3 vs. last November</p>
+          <div class="spark"><i style="--h:50%"></i><i style="--h:44%"></i><i style="--h:58%"></i><i style="--h:62%"></i><i style="--h:55%"></i><i style="--h:70%" class="now"></i></div>
+          <p class="metric__plain">People who called, emailed or messaged about a portrait.</p>
+        </article>
+        <article class="metric card metric--focus" data-a>
+          <header><i class="tl tl--amber"></i><span>Booking rate</span><em class="pill pill--amber">Your focus</em></header>
+          <strong><span data-count="50">0</span>%</strong>
+          <p class="metric__delta">Goal: 60%</p>
+          <div class="people" aria-label="7 of 14 booked">
+            <i class="b"></i><i class="b"></i><i class="b"></i><i class="b"></i><i class="b"></i><i class="b"></i><i class="b"></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i>
+          </div>
+          <p class="metric__plain"><b>7 of every 14</b> people who reached out booked a session.</p>
+        </article>
+        <article class="metric card" data-a>
+          <header><i class="tl tl--green"></i><span>Reply time</span></header>
+          <strong>45 <small>min</small></strong>
+          <p class="metric__delta up">↓ from about 6 hours</p>
+          <div class="spark spark--down"><i style="--h:90%"></i><i style="--h:70%"></i><i style="--h:48%"></i><i style="--h:30%"></i><i style="--h:22%"></i><i style="--h:14%" class="now"></i></div>
+          <p class="metric__plain">How quickly a new inquiry hears from a real person.</p>
+        </article>
+      </div>
+
+      <div class="results-grid">
+        <div class="card feedback" id="feedback" data-a>
+          <div class="card__head"><h3>Coaching feedback</h3><span class="muted">David reviews within 48 hours</span></div>
+          <div class="fb-list" id="fbList">
+            <article class="fb fb--pending" id="fbPending" hidden>
+              <div class="fb__light"><i class="tl tl--wait"></i></div>
+              <div><p class="fb__meta">Just now · Discovery calls report</p><p>Sent to David. You'll get a light and a note here, usually within 48 hours.</p></div>
+            </article>
+            <article class="fb">
+              <div class="fb__light"><i class="tl tl--green"></i></div>
+              <div><p class="fb__meta">Nov 12 · Stage 2 · Lead Follow-up <span class="verified">✓ Verified</span></p><p>“30 days, every inquiry answered inside an hour. That's world-class follow-up, Maya. Stage 2 is verified. On to the phone.”</p></div>
+            </article>
+            <article class="fb">
+              <div class="fb__light"><i class="tl tl--amber"></i></div>
+              <div><p class="fb__meta">Oct 28 · Monthly check-in</p><p>“Average sale is climbing nicely. Inquiries are healthy, so the leak is between inquiry and booking. That's exactly where we go next.”</p></div>
+            </article>
+          </div>
+          <form class="reply" onsubmit="return false"><input placeholder="Write to David…"><button class="btn btn--pine btn--sm">Send</button></form>
+        </div>
+
+        <div class="card achievements" data-a>
+          <div class="card__head"><h3>Achievements</h3><span class="muted">For results, not clicks</span></div>
+          <div class="badges" id="badges">
+            <div class="badge earned"><div class="badge-ico"><svg viewBox="0 0 24 24"><path d="M13 3 5 14h6l-1 7 8-11h-6z"/></svg></div><strong>Fast Responder</strong><small>Under 1 hr for 30 days</small></div>
+            <div class="badge earned"><div class="badge-ico"><svg viewBox="0 0 24 24"><path d="M12 3v18M17 7.5c0-1.9-2.2-3-5-3s-5 1.1-5 3 2 2.7 5 3.4 5 1.6 5 3.6-2.2 3-5 3-5-1.1-5-3"/></svg></div><strong>First $3K Order</strong><small>September</small></div>
+            <div class="badge earned"><div class="badge-ico"><svg viewBox="0 0 24 24"><path d="m5 12 4 4 10-10"/></svg></div><strong>Stage 2 Verified</strong><small>Lead Follow-up</small></div>
+            <div class="badge" id="badgeScript"><div class="badge-ico"><svg viewBox="0 0 24 24"><path d="M6 4h12v6a6 6 0 0 1-12 0zM9 20h6M12 16v4"/></svg></div><strong>Script Pro</strong><small>5 scripted calls</small></div>
+            <div class="badge"><div class="badge-ico"><svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="8"/><path d="M12 8v4l3 2"/></svg></div><strong>60% Booking Rate</strong><small>Locked</small></div>
+            <div class="badge"><div class="badge-ico"><svg viewBox="0 0 24 24"><path d="m12 3 2.6 5.6 6.1.7-4.5 4.2 1.2 6L12 16.6 6.6 19.5l1.2-6-4.5-4.2 6.1-.7z"/></svg></div><strong>Top 5% Studio</strong><small>The big one</small></div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ========== SCREEN 5: CALENDAR & COMMUNITY ========== -->
+    <section class="screen" data-screen="community" data-app data-title="Calendar &amp; Community">
+      <div class="page-head" data-a>
+        <div>
+          <p class="eyebrow">Calendar &amp; Community</p>
+          <h1 class="h-display">You're never doing this <em>alone.</em></h1>
+        </div>
+        <div class="seg-tabs" role="tablist">
+          <button class="on" data-filter="all">Everything</button>
+          <button data-filter="stage">Picked for Stage 3</button>
+        </div>
+      </div>
+
+      <div class="cc-grid">
+        <div class="card upcoming" data-a>
+          <div class="card__head"><h3>Coming up</h3><a class="link" href="#community">Replays library →</a></div>
+          <ul class="events">
+            <li class="event event--live" data-stage>
+              <div class="event__date"><small>Tue</small><strong>24</strong><small>Nov</small></div>
+              <div class="event__txt"><span class="chip chip--pine">Group coaching</span><h4>Discovery calls that book</h4><small>7:00–8:00 PM ET · Zoom · 18 studios going</small></div>
+              <button class="btn btn--apricot btn--sm" data-rsvp>Save my seat</button>
+            </li>
+            <li class="event">
+              <div class="event__date"><small>Thu</small><strong>3</strong><small>Dec</small></div>
+              <div class="event__txt"><span class="chip chip--sand">Webinar</span><h4>Holiday wall-art campaigns that still work in December</h4><small>12:00 PM ET · 45 min · replay available</small></div>
+              <button class="btn btn--line btn--sm" data-rsvp>Save my seat</button>
+            </li>
+            <li class="event" data-stage>
+              <div class="event__date"><small>Mon</small><strong>7</strong><small>Dec</small></div>
+              <div class="event__txt"><span class="chip chip--apricot">1:1 with David</span><h4>Your Stage 3 review</h4><small>2:00 PM ET · 30 min · confirmed</small></div>
+              <button class="btn btn--line btn--sm">Reschedule</button>
+            </li>
+            <li class="event">
+              <div class="event__date"><small>Jan</small><strong>14</strong><small>2027</small></div>
+              <div class="event__txt"><span class="chip chip--sand">In person</span><h4>Annual Member Workshop</h4><small>2 days · limited seats</small></div>
+              <button class="btn btn--line btn--sm" data-rsvp>Save my seat</button>
+            </li>
+          </ul>
+        </div>
+
+        <div class="card community" data-a>
+          <div class="topic">
+            <img src="https://images.unsplash.com/photo-1609220136736-443140cffec6?w=900&q=70&auto=format&fit=crop" alt="">
+            <div class="topic__txt"><p class="eyebrow eyebrow--light">This month's conversation</p><h3>“What do you say when they're just shopping around?”</h3><a href="#community" class="btn btn--apricot btn--sm">Join the thread · 24 replies</a></div>
+          </div>
+          <ul class="threads">
+            <li class="thread thread--win">
+              <div class="avatar avatar--sm" style="--c:#c98c5a">JR</div>
+              <div><p><b>Jenna R.</b> <span class="chip chip--win">🎉 Win</span></p><p>First $4,000 order this month! Planning the wall before the session changed everything.</p>
+                <div class="thread__acts"><button class="cheer" data-cheer><span>👏</span> <b>34</b></button><small>2h ago</small></div></div>
+            </li>
+            <li class="thread" data-stage>
+              <div class="avatar avatar--sm" style="--c:#5f8b78">MT</div>
+              <div><p><b>Marcus T.</b> <span class="chip chip--sand">Stage 3 question</span></p><p>Do you ask budget on the discovery call or wait for the consultation?</p>
+                <div class="thread__acts"><button class="cheer" data-cheer><span>💬</span> <b>11</b></button><small>yesterday</small></div></div>
+            </li>
+          </ul>
+          <button class="btn btn--line btn--block">Share a win or ask a question</button>
+        </div>
+
+        <div class="card resources" data-a>
+          <div class="card__head"><h3>Resources for your stage</h3><label class="search"><svg viewBox="0 0 24 24"><circle cx="11" cy="11" r="6"/><path d="m20 20-4.5-4.5"/></svg><input placeholder="Search 120+ worksheets & templates"></label></div>
+          <div class="res-list">
+            <a class="res" href="#community"><span class="res__type res__type--pdf">PDF</span><div><strong>The 5-Question Discovery Script</strong><small>One page · keep by the phone</small></div><span class="res__dl">↓</span></a>
+            <a class="res" href="#community"><span class="res__type res__type--sheet">Sheet</span><div><strong>Booking Rate Tracker</strong><small>Does the math for you</small></div><span class="res__dl">↓</span></a>
+            <a class="res" href="#community"><span class="res__type res__type--pdf">PDF</span><div><strong>Price Conversation Cheat Sheet</strong><small>What to say when “how much?” comes early</small></div><span class="res__dl">↓</span></a>
+          </div>
+        </div>
+      </div>
+    </section>
+
+  </main>
+
+  <!-- mobile tab bar -->
+  <nav class="tabbar" aria-label="Member mobile">
+    <a href="#home" data-nav="home"><svg viewBox="0 0 24 24"><path d="M4 11.5 12 5l8 6.5V19a1 1 0 0 1-1 1h-4.5v-5h-5v5H5a1 1 0 0 1-1-1z"/></svg>Today</a>
+    <a href="#journey" data-nav="journey"><svg viewBox="0 0 24 24"><path d="M5 19c3-6 11-2 14-9"/><circle cx="5" cy="19" r="2"/><circle cx="19" cy="6" r="2"/></svg>Journey</a>
+    <a href="#action" data-nav="action" class="tabbar__main"><span><svg viewBox="0 0 24 24"><path d="M5 12h14M13 6l6 6-6 6"/></svg></span>Next step</a>
+    <a href="#results" data-nav="results"><svg viewBox="0 0 24 24"><path d="M5 20V11M12 20V5M19 20v-6"/></svg>Numbers</a>
+    <a href="#community" data-nav="community"><svg viewBox="0 0 24 24"><rect x="4" y="5" width="16" height="15" rx="2"/><path d="M4 10h16"/></svg>Community</a>
+  </nav>
+</div>
+
+<!-- ============================================================
+     SCREEN 6: PUBLIC MARKETING PAGE
+============================================================ -->
+<section class="screen site" data-screen="site" data-title="Public marketing page">
+  <header class="site-nav">
+    <a href="#site" class="wordmark wordmark--light">The Profitable <em>Portrait</em> Studio</a>
+    <nav><a href="#how" data-jump>How it works</a><a href="#roadmap" data-jump>The Client Journey</a><a href="#inside" data-jump>Member Studio</a><a href="#join" data-jump>Membership</a></nav>
+    <div class="site-nav__r"><a href="#login" class="site-nav__login">Member login</a><a href="#join" data-jump class="btn btn--apricot btn--sm">Book a strategy call</a></div>
+  </header>
+
+  <div class="s-hero">
+    <div class="s-hero__bg"><img src="https://images.unsplash.com/photo-1471341971476-ae15ff5dd4ea?w=2200&q=72&auto=format&fit=crop" alt=""></div>
+    <div class="s-hero__inner">
+      <div class="s-hero__copy">
+        <p class="eyebrow eyebrow--light" data-a>Business coaching for professional portrait photographers</p>
+        <h1 data-split>Build the studio you dreamed of, <em>and the profit to match.</em></h1>
+        <p class="s-hero__lede" data-a>A proven Client Journey, a coach who has built the studios himself, and a member studio that shows you exactly what to do next, one clear step at a time.</p>
+        <div class="s-hero__cta" data-a>
+          <a href="#join" data-jump class="btn btn--apricot btn--lg magnetic">Book a free studio strategy call <span class="arr">→</span></a>
+          <a href="#inside" data-jump class="btn btn--ghost-light btn--lg">See inside the Member Studio</a>
+        </div>
+        <ul class="s-hero__ticks" data-a><li>For established portrait studios</li><li>Month-to-month membership</li><li>Coached by David Hilton</li></ul>
+      </div>
+      <div class="s-hero__ui" aria-hidden="true">
+        <div class="float-card fc-1"><span class="pill pill--apricot">Your one next step</span><strong>Run 5 discovery calls with the script</strong><small>≈ $3,900 / month opportunity</small></div>
+        <div class="float-card fc-2"><i class="tl tl--green"></i><div><strong>Average sale</strong><small>$1,630 → $1,940</small></div></div>
+        <div class="float-card fc-3"><div class="badge-ico"><svg viewBox="0 0 24 24"><path d="M13 3 5 14h6l-1 7 8-11h-6z"/></svg></div><div><strong>Badge earned</strong><small>Fast Responder</small></div></div>
+      </div>
+    </div>
+    <div class="marquee" aria-hidden="true"><div class="marquee__track">
+      <span>Lead Generation</span><span>Lead Follow-up</span><span>Discovery &amp; Booking</span><span>Planning Consultation</span><span>Portrait Session</span><span>Pre-Sale Momentum</span><span>Ordering Appointment</span><span>Production &amp; Quality</span><span>Delivery &amp; Installation</span><span>Relationship Growth</span>
+      <span>Lead Generation</span><span>Lead Follow-up</span><span>Discovery &amp; Booking</span><span>Planning Consultation</span><span>Portrait Session</span><span>Pre-Sale Momentum</span><span>Ordering Appointment</span><span>Production &amp; Quality</span><span>Delivery &amp; Installation</span><span>Relationship Growth</span>
+    </div></div>
+  </div>
+
+  <section class="s-sec s-who">
+    <div class="s-wrap">
+      <div class="s-head"><p class="eyebrow">Who we help</p><h2 data-a>You're a gifted photographer. <em>The business should feel as good as the art.</em></h2></div>
+      <div class="who-grid">
+        <article class="who" data-a><span class="who__n">01</span><h3>Busy, but not profitable</h3><p>The calendar's full, yet the average sale hasn't moved in years and the work never stops.</p></article>
+        <article class="who" data-a><span class="who__n">02</span><h3>Doing everything yourself</h3><p>Marketing, phones, sessions, ordering, delivery. You need systems, not more hours.</p></article>
+        <article class="who" data-a><span class="who__n">03</span><h3>Ready for the top 5%</h3><p>You want a studio that's known, referred and well paid, and a clear plan to get there.</p></article>
+      </div>
+    </div>
+  </section>
+
+  <section class="s-sec s-how" id="how">
+    <div class="s-wrap s-how__grid">
+      <div class="s-how__img" data-a><img src="https://images.unsplash.com/photo-1495745966610-2a67f2297e5e?w=1000&q=72&auto=format&fit=crop" alt="Photographer framing a portrait"></div>
+      <div>
+        <p class="eyebrow">How it works</p>
+        <h2 data-a>One clear step at a time, <em>for 12 to 18 months.</em></h2>
+        <ol class="how-list">
+          <li data-a><b>1</b><div><h4>Start with a studio evaluation</h4><p>See where your business really stands across all ten stages of the Client Journey.</p></div></li>
+          <li data-a><b>2</b><div><h4>Get your one next step</h4><p>No 200-lesson library to wade through. David picks the action with the biggest payoff for you.</p></div></li>
+          <li data-a><b>3</b><div><h4>Learn it, use it, measure it</h4><p>Short lessons, real implementation in your studio, and a few numbers that show it working.</p></div></li>
+          <li data-a><b>4</b><div><h4>Get verified and celebrated</h4><p>David reviews your results, gives you a green light, and your studio moves up the road.</p></div></li>
+        </ol>
+      </div>
+    </div>
+  </section>
+
+  <section class="s-sec s-road" id="roadmap">
+    <div class="s-wrap">
+      <div class="s-head s-head--center"><p class="eyebrow eyebrow--light">The Client Journey</p><h2 data-a>Ten stops between a first inquiry <em>and a client for life.</em></h2><p class="s-sub" data-a>Every stage is one moment your client feels. Master them in order and the profit follows.</p></div>
+      <ol class="s-stages">
+        <li data-a><b>01</b>Lead Generation</li><li data-a><b>02</b>Lead Follow-up</li><li data-a><b>03</b>Discovery &amp; Booking</li><li data-a><b>04</b>Planning Consultation</li><li data-a><b>05</b>Portrait Session</li>
+        <li data-a><b>06</b>Pre-Sale Momentum</li><li data-a><b>07</b>Ordering Appointment</li><li data-a><b>08</b>Production &amp; Quality</li><li data-a><b>09</b>Delivery &amp; Installation</li><li data-a><b>10</b>Relationship Growth</li>
+      </ol>
+    </div>
+  </section>
+
+  <section class="s-sec s-inside" id="inside">
+    <div class="s-wrap s-inside__grid">
+      <div>
+        <p class="eyebrow">Inside the Member Studio</p>
+        <h2 data-a>Log in and know <em>exactly what to do next.</em></h2>
+        <ul class="inside-list">
+          <li data-a><i class="tl tl--green"></i><div><strong>I know where I'm going.</strong><span>Your road to World Class, with every stage you've conquered.</span></div></li>
+          <li data-a><i class="tl tl--amber"></i><div><strong>I know what to do next.</strong><span>One recommended action, with the lesson and the why.</span></div></li>
+          <li data-a><i class="tl tl--apricot"></i><div><strong>I can see how far I've come.</strong><span>Your numbers in plain English, and achievements for real results.</span></div></li>
+        </ul>
+        <a href="#login" class="btn btn--pine btn--lg">Take a look inside <span class="arr">→</span></a>
+      </div>
+      <div class="device" data-a>
+        <div class="device__screen">
+          <div class="mini-app">
+            <p class="mini-app__hi">Good morning, Maya.</p>
+            <div class="mini-app__next"><span>Your one next step</span><strong>Run 5 discovery calls with the script</strong><em>Start this step →</em></div>
+            <div class="mini-app__row"><div><b>24%</b><small>to World Class</small></div><div><b>$1,940</b><small>avg. sale ↑</small></div></div>
+            <div class="mini-app__road"><i class="d"></i><i class="d"></i><i class="n"></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i></div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="s-sec s-coach">
+    <div class="s-wrap s-coach__grid">
+      <div class="s-coach__img" data-a><img src="https://images.unsplash.com/photo-1452587925148-ce544e77e70d?w=1000&q=72&auto=format&fit=crop" alt="Camera and printed photographs"><span class="s-coach__tag">Photo of David goes here</span></div>
+      <div>
+        <p class="eyebrow">Your coach</p>
+        <h2 data-a>David Hilton has built the studios <em>he coaches you to build.</em></h2>
+        <p class="s-p" data-a>David spent decades building successful portrait photography businesses, and more than 20 years helping hundreds of studio owners improve their profitability, their systems and their personal freedom. The Profitable Portrait Studio is that experience, organized into a path you can follow.</p>
+        <blockquote class="s-quote" data-a>“I know where I'm going. I can see how far I've come. I know exactly what to do next. And I believe I can succeed.”<cite>The feeling every member should have when they log in</cite></blockquote>
+      </div>
+    </div>
+  </section>
+
+  <section class="s-sec s-join" id="join">
+    <div class="s-wrap s-join__grid">
+      <div>
+        <p class="eyebrow eyebrow--light">Membership</p>
+        <h2 data-a>Everything you need to become <em>a top 5% studio.</em></h2>
+        <p class="s-p s-p--light" data-a>Start with a free 30-minute strategy call. We'll look at your studio together and tell you honestly whether the program is the right fit.</p>
+      </div>
+      <div class="plan" data-a>
+        <p class="eyebrow">Monthly membership</p>
+        <p class="plan__price">$— <small>/ month · pricing from David</small></p>
+        <ul>
+          <li>Your personal Member Studio and next-step plan</li>
+          <li>Full Client Journey curriculum in the Learning Center</li>
+          <li>Weekly group coaching with David, plus replays</li>
+          <li>Coach feedback on every report you send</li>
+          <li>Worksheets, scripts and templates library</li>
+          <li>Private community of studio owners</li>
+        </ul>
+        <a href="#login" class="btn btn--apricot btn--block btn--lg magnetic">Book my free strategy call <span class="arr">→</span></a>
+        <small class="plan__fine">Month to month. Cancel anytime.</small>
+      </div>
+    </div>
+  </section>
+
+  <footer class="s-foot">
+    <div class="s-wrap s-foot__in">
+      <span class="wordmark wordmark--light">The Profitable <em>Portrait</em> Studio</span>
+      <span>© 2026 The Profitable Portrait Studio</span>
+      <a href="#login">Member login →</a>
+    </div>
+  </footer>
+</section>
+
+<!-- ============================================================
+     OVERLAYS
+============================================================ -->
+<!-- Celebration -->
+<div class="modal" id="celebrate" hidden>
+  <canvas id="confetti"></canvas>
+  <div class="modal__card celebrate">
+    <div class="celebrate__badge"><div class="badge-ico badge-ico--xl"><svg viewBox="0 0 24 24"><path d="M6 4h12v6a6 6 0 0 1-12 0zM9 20h6M12 16v4"/></svg></div></div>
+    <p class="eyebrow">Badge earned</p>
+    <h2>Script Pro</h2>
+    <p>You used the discovery script on 5 real calls. That's implementation, not just a lesson watched.</p>
+    <div class="celebrate__stats"><div><strong>75%</strong><small>Stage 3 complete</small></div><div><strong>27%</strong><small>to World Class</small></div><div><strong>7</strong><small>week streak</small></div></div>
+    <p class="muted">Your report is with David. He'll send you a light and a note.</p>
+    <div class="celebrate__cta">
+      <button class="btn btn--apricot btn--lg" id="seeFeedback">See David's feedback <span class="arr">→</span></button>
+      <small>Prototype: skips ahead to when David has replied</small>
+    </div>
+  </div>
+</div>
+
+<!-- Monthly check-in -->
+<div class="modal" id="checkin" hidden>
+  <div class="modal__card checkin">
+    <button class="modal__x" data-close aria-label="Close">×</button>
+    <div class="checkin__prog"><i id="ciProg"></i></div>
+    <div class="ci-steps" id="ciSteps">
+      <div class="ci" data-ci="0">
+        <p class="eyebrow">Monthly check-in · 1 of 4</p>
+        <h3>How many new inquiries came in this month?</h3>
+        <p class="hint">Count every call, email, DM and web form. Your Phone Board has this number.</p>
+        <input class="big-input" type="number" value="14" inputmode="numeric" data-k="inq">
+      </div>
+      <div class="ci" data-ci="1" hidden>
+        <p class="eyebrow">Monthly check-in · 2 of 4</p>
+        <h3>How many of them booked a session?</h3>
+        <p class="hint">Only count people who paid a session fee or put a date on the calendar.</p>
+        <input class="big-input" type="number" value="7" inputmode="numeric" data-k="book">
+      </div>
+      <div class="ci" data-ci="2" hidden>
+        <p class="eyebrow">Monthly check-in · 3 of 4</p>
+        <h3>What were your total portrait sales this month?</h3>
+        <p class="hint">Not sure? Your best estimate is fine. You can correct it later.</p>
+        <div class="big-input big-input--money"><span>$</span><input type="number" value="15600" inputmode="numeric" data-k="sales"></div>
+      </div>
+      <div class="ci" data-ci="3" hidden>
+        <p class="eyebrow">Monthly check-in · 4 of 4</p>
+        <h3>How many orders was that?</h3>
+        <p class="hint">One order per client, however many products they bought.</p>
+        <input class="big-input" type="number" value="8" inputmode="numeric" data-k="orders">
+      </div>
+      <div class="ci ci--sum" data-ci="4" hidden>
+        <p class="eyebrow">We did the math for you</p>
+        <h3>Here's your month, in plain English.</h3>
+        <ul class="ci-sum" id="ciSum"></ul>
+      </div>
+    </div>
+    <div class="checkin__nav">
+      <button class="btn btn--line" id="ciBack">Back</button>
+      <button class="btn btn--pine" id="ciNext">Next <span class="arr">→</span></button>
+    </div>
+  </div>
+</div>
+
+<!-- iPhone preview -->
+<div class="modal phones" id="phones" hidden>
+  <button class="modal__x modal__x--light" data-close aria-label="Close">×</button>
+  <div class="phones__head"><p class="eyebrow eyebrow--light">Mobile, designed on purpose</p><h2>Two iPhone screens: <em>Today</em> and <em>Next step.</em></h2><p>Both are fully clickable. Thumb-reach tab bar, the next step pinned first, one action button always in reach.</p></div>
+  <div class="phones__row">
+    <figure class="iphone"><div class="iphone__frame"><iframe title="iPhone: member home" data-src="index.html?frame=1#home" loading="lazy"></iframe><span class="iphone__island"></span></div><figcaption>Member home</figcaption></figure>
+    <figure class="iphone"><div class="iphone__frame"><iframe title="iPhone: next action" data-src="index.html?frame=1#action" loading="lazy"></iframe><span class="iphone__island"></span></div><figcaption>Next action &amp; learning</figcaption></figure>
+  </div>
+</div>
+
+<!-- Toast -->
+<div class="toast" id="toast" role="status" aria-live="polite"></div>
+
+<!-- Prototype bar -->
+<div class="proto" id="proto">
+  <button class="proto__toggle" id="protoToggle" aria-expanded="false"><span class="proto__dot"></span><span class="proto__label">Prototype</span><span class="proto__screen" id="protoScreen">Overview</span></button>
+  <div class="proto__panel" id="protoPanel">
+    <nav class="proto__links">
+      <a href="#cover">Overview</a>
+      <a href="#home">1 · Member home</a>
+      <a href="#journey">2 · Client Journey</a>
+      <a href="#action">3 · Next action</a>
+      <a href="#lms">3b · TalentLMS lesson</a>
+      <a href="#results">4 · Numbers &amp; feedback</a>
+      <a href="#community">5 · Calendar &amp; community</a>
+      <a href="#site">6 · Marketing page</a>
+      <button data-open-phones>📱 iPhone screens</button>
+      <button id="resetProto">↺ Reset walkthrough</button>
+    </nav>
+    <div class="proto__note"><p class="eyebrow">Why it's designed this way</p><p id="protoNote"></p></div>
+  </div>
+</div>
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/gsap.min.js"></script>
+<script src="script.js"></script>
+</body>
+</html>
