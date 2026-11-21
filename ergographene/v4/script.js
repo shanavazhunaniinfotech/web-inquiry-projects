@@ -97,7 +97,7 @@
     w.addEventListener('scroll', function () {
       if (dismissed) return;
       var p = w.scrollY / (d.documentElement.scrollHeight - innerHeight);
-      if (p > .18) { prompt.hidden = false; prompt.classList.add('is-on'); }
+      if (p > .5) { prompt.hidden = false; prompt.classList.add('is-on'); }
     }, { passive: true });
   })();
 
@@ -105,6 +105,7 @@
   var benGo;
   (function () {
     var sec = $('.ben'), tabs = $$('.ben__tabs button'), panes = $$('.bp'), line = $('.ben__line'), i0 = 0, timer, vis = false, user = false;
+    if (!tabs.length || !line) return;
     benGo = function (i) {
       i0 = i;
       tabs.forEach(function (t, j) { t.classList.toggle('is-on', j === i); t.setAttribute('aria-selected', j === i); });
@@ -176,12 +177,11 @@
 
   /* ---------- Design notes (?notes=1) ---------- */
   var NOTES = {
-    1: ['Hero — your product, CoreChair layout', 'Your own studio product photo fills the right side of a dark hero (like CoreChair), with a big serif headline, an italic accent line and two stacked buttons. The headline slides up line by line and the photo drifts gently with the mouse.'],
-    2: ['"A better way to feel while you sit"', 'CoreChair\'s benefit slider: five tabs with a sliding underline, a 4-photo collage mixing <b>your product placed into real rooms</b>, your close-ups and real lifestyle photos and one customer-feedback fact per tab. It auto-advances while in view.'],
-    3: ['The shift — full-screen video', 'Like CoreChair\'s "Designed for alignment. Built for movement." — a real office video plays behind a huge two-line statement that reveals as you arrive and slowly zooms as you scroll.'],
-    4: ['Meet ErgoGraphene', 'White chapter, giant headline, plain-language explanation and the product with four labelled support zones — mirrors CoreChair\'s "Meet CoreChair".'],
+    1: ['Hero — your lifestyle image and wording', 'Your current hero lifestyle photo and the exact same text as your current page, with the button matched to your current size and glow. One clear action: "Relieve My Back Pain Now".'],
+    2: ['One clear benefit + use cases', 'One outcome headline, one strong desk photo that stays put, a small close-up of the lumbar ribs, plain-language benefits and a single primary button. Below it, three static cards — At your desk, In the car, At home — each with its own shop link.'],
+    3: ['The shift — the product in use', 'A short sequence shows the cushion on a chair, then in use at a desk, in the car and at home, with a clear "Shop the seat cushion" button under the message.'],
+    4: ['The graphene advantage', 'Focused on the graphene technology, in the style of the first design: dark navy, glowing graphene pattern, the product with three callouts and the three key benefits.'],
     5: ['How it works — sticky timeline', 'CoreChair\'s signature layout: the image column stays fixed on the left while the three steps scroll on the right. The blue rail fills as you read, the numbered dots light up and the image crossfades between your product close-ups: the lumbar ribs → the graphene glow → the breathable mesh.'],
-    6: ['Choose your set', 'CoreChair lists its four chairs as clean product columns. We do the same with <b>The Single, The Duo and The Trio</b> — bundles that raise order value (discounts to confirm). "Find your set" opens a 3-question quiz with a 10% code.'],
     7: ['The principle', 'One short brand belief. The second line fills with colour as you scroll, like CoreChair\'s "always the best".'],
     8: ['The proof — dark chapter', 'Your real 96 / 94 / 91 / 97% customer-feedback numbers count up in CoreChair\'s big-number rows, followed by the research references from your science page.'],
     9: ['Seen on', 'CoreChair\'s "Seen, tested and awarded" cards, using the media logos from your current site. <b>Please confirm you can use these logos.</b>'],
@@ -239,8 +239,8 @@
     .from('.hero__bg', { opacity: 0, duration: 1.2, ease: 'power2.out' })
     .from('.hero__photo img', { scale: 1.14, opacity: 0, duration: 2, ease: 'expo.out' }, .05)
     .from('.hero__t .ln > span', { yPercent: 110, duration: 1.2, stagger: .12, ease: 'expo.out' }, .3)
-    .from(['.hero__p', '.hero__cta .btn'], { y: 24, opacity: 0, duration: 1, stagger: .08, ease: 'expo.out' }, .7);
-  gsap.to('.hero__photo img', { yPercent: 8, ease: 'none', scrollTrigger: { trigger: '.hero', start: 'top top', end: 'bottom top', scrub: true } });
+    .from(['.hero__pill', '.hero__p', '.hero .btn-main', '.hero__checks li'], { y: 24, opacity: 0, duration: 1, stagger: .08, ease: 'expo.out' }, .55);
+  gsap.to('.hero__photo img', { yPercent: 3, ease: 'none', scrollTrigger: { trigger: '.hero', start: 'top top', end: 'bottom top', scrub: true } });
   gsap.to('.hero__copy', { y: -60, opacity: .3, ease: 'none', scrollTrigger: { trigger: '.hero', start: 'top top', end: 'bottom top', scrub: true } });
   if (fine) {
     var hx = gsap.quickTo('.hero__photo img', 'x', { duration: 1.4, ease: 'power3' }), hy = gsap.quickTo('.hero__photo img', 'y', { duration: 1.4, ease: 'power3' });
@@ -251,15 +251,17 @@
   function reveal(targets, trig, vars) {
     gsap.from(targets, Object.assign({ y: 40, opacity: 0, duration: 1.1, stagger: .08, ease: 'expo.out', scrollTrigger: { trigger: trig, start: 'top 82%' } }, vars || {}));
   }
-  reveal('.ben__head > *', '.ben');
-  reveal('.ben__tabs', '.ben__tabs');
-  reveal('.ben__panes', '.ben__panes', { y: 60 });
-  reveal('.meet__copy > *', '.meet');
-  gsap.from('.meet__fig img', { y: 80, rotate: -4, opacity: 0, duration: 1.6, ease: 'expo.out', scrollTrigger: { trigger: '.meet__fig', start: 'top 80%' } });
-  gsap.from('.tag', { scale: .6, opacity: 0, duration: .8, stagger: .15, ease: 'back.out(2)', delay: .5, scrollTrigger: { trigger: '.meet__fig', start: 'top 70%' } });
+  reveal('.bo__copy > *', '.bo');
+  gsap.from('.bo__main', { clipPath: 'inset(12% 12% 12% 12% round 14px)', opacity: 0, duration: 1.6, ease: 'expo.out', scrollTrigger: { trigger: '.bo', start: 'top 78%' } });
+  gsap.from('.bo__inset', { y: 60, rotate: 3, opacity: 0, duration: 1.3, delay: .35, ease: 'expo.out', scrollTrigger: { trigger: '.bo', start: 'top 70%' } });
+  reveal('.use', '.uses', { y: 50, stagger: .12 });
+  reveal('.gtech__k, .gtech__t, .gtech__p', '.gtech');
+  gsap.from('.gtech__img', { y: 90, scale: .86, opacity: 0, duration: 1.6, ease: 'expo.out', scrollTrigger: { trigger: '.gtech__stage', start: 'top 80%' } });
+  gsap.from('.gtech__ring', { scale: .6, opacity: 0, duration: 1.6, ease: 'expo.out', scrollTrigger: { trigger: '.gtech__stage', start: 'top 80%' } });
+  gsap.from('.gcall', { opacity: 0, x: function (i) { return i === 0 ? -30 : 30; }, duration: 1, stagger: .14, delay: .5, ease: 'expo.out', scrollTrigger: { trigger: '.gtech__stage', start: 'top 75%' } });
+  reveal('.gcard', '.gtech__cards', { y: 50, stagger: .1 });
+  reveal('.gtech .btn-main', '.gtech__cards');
   reveal('.how .wrap > *', '.how');
-  reveal('.choose .wrap > .eyebrow, .choose .h2, .choose .btn--ink', '.choose');
-  reveal('.model', '.models', { y: 70, stagger: .12 });
   reveal('.proof__head > div > .eyebrow, .proof__intro', '.proof');
   gsap.from('.proof .h2 .ln > span', { yPercent: 110, duration: 1.2, stagger: .12, ease: 'expo.out', scrollTrigger: { trigger: '.proof .h2', start: 'top 80%' } });
   reveal('.stat', '.stat', { stagger: .1 });
@@ -272,7 +274,20 @@
   reveal('.offer', '.try__offers');
 
   // SHIFT: video zoom + lines
-  gsap.fromTo('.shift__vid', { scale: 1.18 }, { scale: 1, ease: 'none', scrollTrigger: { trigger: '.shift', start: 'top bottom', end: 'bottom top', scrub: true } });
+  (function () {
+    var slides = $$('.ss'), steps = $$('.ss-steps li'), cur = 0, timer = null, DUR = 3600;
+    if (!slides.length) return;
+    function go(i) {
+      cur = i;
+      slides.forEach(function (sl, j) { sl.classList.toggle('is-on', j === i); });
+      steps.forEach(function (st, j) { st.classList.toggle('is-on', j === i); st.classList.toggle('done', j < i); var b = $('i', st); b.style.animation = 'none'; void b.offsetWidth; b.style.animation = ''; });
+    }
+    function play() { stop(); timer = setInterval(function () { go((cur + 1) % slides.length); }, DUR); }
+    function stop() { if (timer) clearInterval(timer); timer = null; }
+    steps.forEach(function (st, i) { st.addEventListener('click', function () { go(i); play(); }); });
+    ScrollTrigger.create({ trigger: '.shift', start: 'top 70%', end: 'bottom 20%', onToggle: function (stg) { if (stg.isActive) { go(0); play(); } else stop(); } });
+    gsap.from(['.shift .btn-main', '.ss-steps'], { opacity: 0, y: 20, duration: 1, stagger: .2, delay: .5, ease: 'expo.out', scrollTrigger: { trigger: '.shift', start: 'top 55%' } });
+  })();
   gsap.from('.shift__t .ln > span', { yPercent: 110, duration: 1.3, stagger: .14, ease: 'expo.out', scrollTrigger: { trigger: '.shift', start: 'top 55%' } });
   gsap.from(['.shift .eyebrow', '.shift__p'], { opacity: 0, y: 20, duration: 1, stagger: .4, delay: .2, ease: 'expo.out', scrollTrigger: { trigger: '.shift', start: 'top 55%' } });
 
@@ -312,6 +327,39 @@
   // TRY: scale-in scene
   gsap.fromTo('.try__scene img', { scale: 1.2 }, { scale: 1, ease: 'none', scrollTrigger: { trigger: '.try__scene', start: 'top bottom', end: 'bottom bottom', scrub: true } });
   gsap.from('.try__copy > *', { y: 40, opacity: 0, duration: 1.2, stagger: .1, ease: 'expo.out', scrollTrigger: { trigger: '.try__scene', start: 'top 45%' } });
+
+  (function () {
+    var cv = $('.gtech__lattice'); if (!cv) return;
+    var ctx = cv.getContext('2d'), dpr = Math.min(2, w.devicePixelRatio || 1), W, H, pts = [], mx = -999, my = -999, tx = -999, ty = -999, run = false;
+    function resize() {
+      W = cv.offsetWidth; H = cv.offsetHeight; cv.width = W * dpr; cv.height = H * dpr; ctx.setTransform(dpr, 0, 0, dpr, 0, 0);
+      pts = []; var st = innerWidth <= 760 ? 30 : 40, hh = st * Math.sqrt(3) / 2;
+      for (var row = 0, y = 0; y < H + st; y += hh, row++) for (var x = (row % 2) * st / 2; x < W + st; x += st) pts.push([x, y]);
+    }
+    resize(); w.addEventListener('resize', function () { clearTimeout(cv._t); cv._t = setTimeout(resize, 200); });
+    var sec = $('.gtech');
+    sec.addEventListener('pointermove', function (e) { var r = cv.getBoundingClientRect(); tx = e.clientX - r.left; ty = e.clientY - r.top; });
+    sec.addEventListener('pointerleave', function () { tx = -999; });
+    function frame(t) {
+      if (!run) return;
+      var s2 = t / 1000, ax = tx < -900 ? W / 2 + Math.cos(s2 * .45) * W * .3 : tx, ay = tx < -900 ? H * .5 + Math.sin(s2 * .6) * H * .25 : ty;
+      mx += (ax - mx) * .08; my += (ay - my) * .08;
+      ctx.clearRect(0, 0, W, H);
+      var R = Math.max(W, H) * .2;
+      for (var i = 0; i < pts.length; i++) {
+        var q = pts[i], dx = q[0] - mx, dy = q[1] - my, k = Math.max(0, 1 - Math.sqrt(dx * dx + dy * dy) / R);
+        ctx.fillStyle = k > .02 ? 'rgba(' + Math.round(108 + k * 120) + ',' + Math.round(194 + k * 50) + ',255,' + (.08 + k * .8) + ')' : 'rgba(220,236,255,.07)';
+        ctx.beginPath(); ctx.arc(q[0], q[1], 1 + k * 2.4, 0, 6.283); ctx.fill();
+      }
+      requestAnimationFrame(frame);
+    }
+    new IntersectionObserver(function (es) { var v = es[0].isIntersecting; if (v && !run) { run = true; requestAnimationFrame(frame); } else if (!v) run = false; }).observe(sec);
+    if (fine) {
+      var gx = gsap.quickTo('.gtech__img', 'rotationY', { duration: .8, ease: 'power3' }), gy = gsap.quickTo('.gtech__img', 'rotationX', { duration: .8, ease: 'power3' });
+      gsap.set('.gtech__stage', { perspective: 1000 });
+      sec.addEventListener('pointermove', function (e) { var r = sec.getBoundingClientRect(); gx(((e.clientX - r.left) / r.width - .5) * 14); gy(-((e.clientY - r.top) / r.height - .5) * 8); });
+    }
+  })();
 
   w.addEventListener('load', function () { ScrollTrigger.refresh(); });
 })();
