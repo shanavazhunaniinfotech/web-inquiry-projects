@@ -352,7 +352,7 @@
   /* drawer */
   const drawer = $('#drawer'), shops = $('#shops'), country = $('#country');
   const SHOPS = { bg: ['Online pharmacy', 'Drugstore chain', 'Marketplace', 'Pharmacy chain'], ro: ['Online pharmacy', 'Pharmacy chain', 'Drugstore chain', 'Marketplace'], mk: ['Pharmacy chain', 'Online pharmacy'], al: ['Pharmacy chain', 'Online pharmacy'], other: ['Distributor enquiry', 'International marketplace'] };
-  const renderShops = () => { shops.innerHTML = SHOPS[country.value].map(n => `<a class="shop" href="#" onclick="return false"><span class="shop__logo">RETAILER LOGO</span><b>${n}</b><span>Shop now →</span></a>`).join(''); };
+  const renderShops = () => { shops.innerHTML = SHOPS[country.value].map(n => `<a class="shop" href="where-to-buy/"><span class="shop__logo">RETAILER LOGO</span><b>${n}</b><span>Shop now →</span></a>`).join(''); };
   country.addEventListener('change', renderShops); renderShops();
   let lastFocus = null;
   const openDrawer = p => { lastFocus = document.activeElement; $('#drProduct').textContent = p || ''; drawer.hidden = false; requestAnimationFrame(() => drawer.classList.add('is-open')); lenis && lenis.stop(); closeMenu(); setTimeout(() => $('.drawer__x').focus(), 80); };
