@@ -339,7 +339,7 @@
 
   // generic reveals
   function reveal(targets, trig, vars) {
-    gsap.from(targets, Object.assign({ y: 40, opacity: 0, duration: 1.1, stagger: .08, ease: 'expo.out', scrollTrigger: { trigger: trig, start: 'top 82%' } }, vars || {}));
+    gsap.from(targets, Object.assign({ y: 40, opacity: 0, duration: 1.1, stagger: .08, ease: 'expo.out', clearProps: 'transform,opacity', scrollTrigger: { trigger: trig, start: 'top 82%' } }, vars || {}));
   }
   reveal('.bo__copy > *', '.bo');
   gsap.from('.bo__main', { clipPath: 'inset(12% 12% 12% 12% round 14px)', opacity: 0, duration: 1.6, ease: 'expo.out', scrollTrigger: { trigger: '.bo', start: 'top 78%' } });

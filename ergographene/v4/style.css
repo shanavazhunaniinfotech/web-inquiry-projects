@@ -799,3 +799,13 @@ section { position: relative; }
   .nl__f input { height: 48px; }
 }
 .revs--img .revs__dots { display: none !important; }
+
+/* ---- Round 3 fix: hover lift uses `translate` so it never fights the scroll-in animation (cards could stop part-way and overlap) ---- */
+.use, .wy, .wc { transition: translate .45s var(--ease), box-shadow .45s var(--ease); }
+.gcard { transition: translate .45s var(--ease), border-color .4s; }
+.use:hover, .wy:hover, .wc:hover, .gcard:hover { transform: none; }
+.use:hover { translate: 0 -4px; }
+.wy:hover { translate: 0 -5px; }
+.wc:hover, .gcard:hover { translate: 0 -6px; }
+.gtech > .wrap > .btn-main, .gtech .btn-main { position: relative; z-index: 1; margin-top: 8px; }
+.uses + .disc { margin-top: 28px; }
