@@ -16,15 +16,15 @@
   var RATES = { EUR: 1, GBP: 0.86, CHF: 0.94, SEK: 11.4, DKK: 7.46, PLN: 4.3, USD: 1.08, CAD: 1.5 };
   var CUR_LOC = { EUR: 'de-DE', GBP: 'en-GB', USD: 'en-US', CAD: 'en-CA', CHF: 'de-CH', SEK: 'sv-SE', DKK: 'da-DK', PLN: 'pl-PL' };
   var cur = 'EUR';
-  try { var s = localStorage.getItem('eg3-cur'); if (s && RATES[s]) cur = s; } catch (e) {}
+  try { var s = localStorage.getItem('eg4-cur'); if (s && RATES[s]) cur = s; } catch (e) {}
   function money(eur) {
     var v = eur * RATES[cur], whole = ['SEK', 'DKK', 'PLN'].indexOf(cur) > -1;
     if (whole) v = Math.round(v / 5) * 5; else if (cur !== 'EUR') v = Math.ceil(v) - 0.05;
     return new Intl.NumberFormat(CUR_LOC[cur], { style: 'currency', currency: cur, minimumFractionDigits: whole ? 0 : 2, maximumFractionDigits: whole ? 0 : 2 }).format(v);
   }
-  function applyPrices() { $$('[data-price]').forEach(function (el) { el.textContent = money(+el.dataset.price); }); renderCart(); }
+  function applyPrices() { $$('[data-price]').forEach(function (el) { el.textContent = money(+el.dataset.price); }); $$('.offer__eq').forEach(function (el) { el.hidden = cur === 'EUR'; }); renderCart(); }
   var sel = $('.region__sel'); sel.value = cur;
-  sel.addEventListener('change', function () { cur = sel.value; try { localStorage.setItem('eg3-cur', cur); } catch (e) {} applyPrices(); });
+  sel.addEventListener('change', function () { cur = sel.value; try { localStorage.setItem('eg4-cur', cur); } catch (e) {} applyPrices(); });
 
   /* ---------- Cart ---------- */
   var qty = 0;
@@ -193,7 +193,7 @@
     11: ['Text testimonials with photos', 'Each review now shows a customer photo, the stars and the quote, with photo thumbnails to switch between reviewers.'],
     12: ['Try it in your chair', 'One clear offer — the seat cushion — with the guarantee and trust points. The Duo has been removed.'],
     13: ['Video testimonials', 'Blank video slots ready for your customer videos.'],
-    14: ['Sign Up & Save', 'Email sign-up in the same style as your current site, just above the footer.']
+    14: ['Newsletter & footer', 'Newsletter sign-up, quick links and your store\'s accepted payment icons, in the format you shared.']
   };
   if (/[?&]notes=1/.test(location.search)) {
     var panel = $('.notes'), keys = Object.keys(NOTES).map(Number), nc = 0;
@@ -356,7 +356,7 @@
   reveal('.st2', '.stats2', { y: 40, stagger: .1 });
 
   reveal('.rv-thumbs', '.rv-thumbs', { y: 20 });
-  reveal('.nl__row > *', '.nl', { y: 24 });
+  reveal('.ftr2 > *, .pay2', '.ftr--nl', { y: 24 });
   reveal('.gtech__k, .gtech__t, .gtech__p', '.gtech');
   gsap.from('.gtech__img', { y: 90, scale: .86, opacity: 0, duration: 1.6, ease: 'expo.out', scrollTrigger: { trigger: '.gtech__stage', start: 'top 80%' } });
   gsap.from('.gtech__ring', { scale: .6, opacity: 0, duration: 1.6, ease: 'expo.out', scrollTrigger: { trigger: '.gtech__stage', start: 'top 80%' } });

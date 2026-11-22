@@ -809,3 +809,49 @@ section { position: relative; }
 .wc:hover, .gcard:hover { translate: 0 -6px; }
 .gtech > .wrap > .btn-main, .gtech .btn-main { position: relative; z-index: 1; margin-top: 8px; }
 .uses + .disc { margin-top: 28px; }
+
+/* ================= Round 4 (client feedback) ================= */
+/* Try it: trust points with feature icons instead of ticks */
+.offer__trust li { display: inline-flex; align-items: center; gap: 10px; }
+.offer__trust li::before { content: none; }
+.offer__trust svg { flex: none; width: 34px; height: 34px; padding: 7px; border-radius: 10px; background: rgba(79, 169, 255, .14); border: 1px solid rgba(79, 169, 255, .28); fill: none; stroke: var(--eg-blue); stroke-width: 1.7; stroke-linecap: round; stroke-linejoin: round; }
+.offer__trust { gap: 14px 34px; margin-top: 22px; }
+/* Try it: price always readable, converted prices clearly marked */
+.offer__price { display: grid; gap: 4px; justify-items: end; text-align: right; }
+.offer__eq { font-size: 11.5px; color: rgba(255, 255, 255, .62); max-width: 170px; line-height: 1.3; }
+.try__scene img { object-position: 70% 50%; }
+
+/* Footer with newsletter (client's format: sign-up left, links right, payment icons at the bottom) */
+.ftr--nl { background: var(--eg-navy); color: #fff; border-top: 0; padding: 72px 0 28px; }
+.ftr2 { display: grid; grid-template-columns: minmax(0, 1fr) auto; gap: 40px 60px; align-items: start; }
+.ftr2__logo { width: 170px; height: auto; margin-bottom: 26px; }
+.ftr--nl .nl__t { font: 700 24px/1.2 var(--sans); margin: 0 0 8px; color: #fff; }
+.ftr--nl .nl__p { font-size: 14.5px; color: rgba(255, 255, 255, .72); margin: 0 0 20px; max-width: 460px; }
+.ftr--nl .nl__f { width: min(440px, 100%); }
+.ftr--nl .nl__f input { height: 52px; border-radius: 10px 0 0 10px; background: rgba(255, 255, 255, .06); color: #fff; box-shadow: inset 0 0 0 1px rgba(255, 255, 255, .28); }
+.ftr--nl .nl__f input::placeholder { color: rgba(255, 255, 255, .55); }
+.ftr--nl .nl__f input:focus { box-shadow: inset 0 0 0 1px var(--eg-blue); }
+.ftr--nl .nl__f button { width: 52px; height: 52px; padding: 0; border-radius: 0 10px 10px 0; display: grid; place-items: center; }
+.ftr--nl .nl__f button svg { width: 20px; height: 20px; fill: none; stroke: #fff; stroke-width: 2; stroke-linecap: round; stroke-linejoin: round; }
+.ftr--nl .nl__f.err input { box-shadow: inset 0 0 0 2px #ff6b5b; }
+.ftr--nl .ftr__nav { display: grid; gap: 14px; justify-content: start; padding-top: 4px; font-size: 15px; min-width: 180px; white-space: nowrap; }
+.ftr--nl .ftr__nav a { color: rgba(255, 255, 255, .86); }
+.ftr--nl .ftr__nav a:hover { color: var(--eg-blue); }
+.ftr2__pay { margin-top: 56px; padding-top: 28px; border-top: 1px solid rgba(255, 255, 255, .12); }
+.pay2 { list-style: none; margin: 0; padding: 0; display: flex; flex-wrap: wrap; justify-content: center; gap: 8px; }
+.pay2 img { display: block; width: 38px; height: 24px; border-radius: 3px; }
+.ftr2__base { display: flex; justify-content: center; flex-wrap: wrap; gap: 6px 22px; margin-top: 18px; font-size: 12.5px; color: rgba(255, 255, 255, .55); text-align: center; }
+.ftr2__base a { color: rgba(255, 255, 255, .75); text-decoration: underline; text-underline-offset: 3px; }
+@media (max-width: 760px) {
+  .ftr--nl { padding: 56px 0 26px; }
+  .ftr2 { grid-template-columns: 1fr; gap: 34px; }
+  .ftr--nl .ftr__nav { grid-auto-flow: column; gap: 22px; grid-column: auto; }
+  .offer__price { justify-items: start; text-align: left; }
+  .offer__trust { gap: 12px 20px; }
+  .offer__trust li { width: 100%; }
+}
+.offer__eq { max-width: 230px; }
+@media (max-width: 760px) {
+  .try__scene img { object-position: 74% 20%; }
+  .try__scene::after { background: linear-gradient(0deg, rgba(6, 18, 32, .92) 0%, rgba(6, 18, 32, .7) 45%, rgba(6, 18, 32, .05) 75%); }
+}
