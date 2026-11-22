@@ -3,6 +3,7 @@
   'use strict';
   const $ = (s, r = document) => r.querySelector(s);
   const $$ = (s, r = document) => Array.from(r.querySelectorAll(s));
+  const esc = v => String(v).replace(/"/g, '&quot;');
   const money = n => '$' + n.toFixed(2);
   const icon = (id, cls = 'ic') => `<svg class="${cls}"><use href="#i-${id}"/></svg>`;
   const STARS = '<span class="stars">' + icon('star').repeat(5) + '</span>';
@@ -209,8 +210,8 @@
   function cardHTML(cfg, i) {
     const st = state[i]; const p = pick(cfg, st); const sizes = sizesOf(cfg.f); const packs = packsOf(cfg.f);
     const sizeOpts = sizes.length > 1 ? (cfg.sizeSel
-      ? `<label class="opt"><span class="opt__l">${FAM[cfg.f].sz}</span><select data-o="s">${sizes.map(s => `<option ${s === st.s ? 'selected' : ''} value="${s}">${fmtSize(s)}</option>`).join('')}</select></label>`
-      : `<div class="opt"><span class="opt__l">${FAM[cfg.f].sz}</span><div class="opt__row">${sizes.map(s => `<button class="chip" data-o="s" data-v="${s}" aria-pressed="${s === st.s}">${fmtSize(s)}</button>`).join('')}</div></div>`) : '';
+      ? `<label class="opt"><span class="opt__l">${FAM[cfg.f].sz}</span><select data-o="s">${sizes.map(s => `<option ${s === st.s ? 'selected' : ''} value="${esc(s)}">${fmtSize(s)}</option>`).join('')}</select></label>`
+      : `<div class="opt"><span class="opt__l">${FAM[cfg.f].sz}</span><div class="opt__row">${sizes.map(s => `<button class="chip" data-o="s" data-v="${esc(s)}" aria-pressed="${s === st.s}">${fmtSize(s)}</button>`).join('')}</div></div>`) : '';
     const packOpts = packs.length > 1 ? `<div class="opt"><span class="opt__l">${cfg.f === 'netting' ? 'Spool' : 'Quantity'}</span><div class="opt__row">${packs.map(k => { const ok = famItems(cfg.f).some(x => x.s === st.s && x.k === k); return `<button class="chip" data-o="k" data-v="${k}" aria-pressed="${k === st.k}" ${ok ? '' : 'disabled'}>${packLabel(k)}</button>`; }).join('')}</div></div>` : '';
     const colorOpts = cfg.colors && p && p.v.length ? `<div class="opt"><span class="opt__l">Color</span><div class="opt__row">${p.v.map(c => `<button class="chip" data-o="c" data-v="${c}" aria-pressed="${c === (st.c || p.v[0])}">${c}</button>`).join('')}</div></div>` : '';
     const priceHTML = p ? `${money(p.p)}${p.c ? `<s>${money(p.c)}</s>` : ''}<small>${p.k ? packLabel(p.k) : 'Each'}${cfg.f === 'paper' && p.k === 'Case' ? ' · ' + money(p.p / 24) + '/roll' : ''}</small>` : '—';
@@ -364,7 +365,7 @@
   }
   function renderFinder() {
     const f = fs.fam, sizes = sizesOf(f), packs = [...new Set(famItems(f).filter(p => !fs.s || p.s === fs.s).map(p => p.k).filter(Boolean))].sort((a, b) => PACK_ORDER.indexOf(a) - PACK_ORDER.indexOf(b));
-    $('#fSizes').innerHTML = sizes.length ? `<span class="flabel">${FAM[f].sz}</span>` + sizes.map(s => `<button class="chip" data-fs="${s}" aria-pressed="${s === fs.s}">${fmtSize(s)}</button>`).join('') : '';
+    $('#fSizes').innerHTML = sizes.length ? `<span class="flabel">${FAM[f].sz}</span>` + sizes.map(s => `<button class="chip" data-fs="${esc(s)}" aria-pressed="${s === fs.s}">${fmtSize(s)}</button>`).join('') : '';
     if (fs.k && !packs.includes(fs.k)) fs.k = null;
     $('#fPacks').innerHTML = packs.length > 1 ? `<span class="flabel">Quantity</span><button class="chip" data-fk="" aria-pressed="${!fs.k}">All</button>` + packs.map(k => `<button class="chip" data-fk="${k}" aria-pressed="${k === fs.k}">${packLabel(k)}</button>`).join('') : '';
     const res = famItems(f).filter(p => (!fs.s || p.s === fs.s) && (!fs.k || p.k === fs.k)).sort((a, b) => (b.a - a.a) || PACK_ORDER.indexOf(a.k) - PACK_ORDER.indexOf(b.k));
