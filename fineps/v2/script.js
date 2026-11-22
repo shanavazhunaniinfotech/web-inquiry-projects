@@ -376,8 +376,9 @@
   fdStart();
 
   /* ---------------- Wholesale ---------------- */
-  $('#volSteps').addEventListener('click', e => { const b = e.target.closest('button'); if (!b) return; $$('#volSteps button').forEach(x => x.classList.toggle('is-on', x === b)); $('#volFill').style.width = ((+b.dataset.v + 1) * 20) + '%'; });
-  let vi = 0; const vT = setInterval(() => { vi = (vi + 1) % 5; $$('#volSteps button')[vi].click(); }, 1800);
+  const volSet = b => { $$('#volSteps button').forEach(x => x.classList.toggle('is-on', x === b)); $('#volFill').style.width = ((+b.dataset.v + 1) * 20) + '%'; };
+  $('#volSteps').addEventListener('click', e => { const b = e.target.closest('button'); if (b) { clearInterval(vT); volSet(b); } });
+  let vi = 0; const vT = setInterval(() => { vi = (vi + 1) % 5; volSet($$('#volSteps button')[vi]); }, 1800);
   $('#volSteps').addEventListener('mouseenter', () => clearInterval(vT));
   $$('.wf__chips').forEach(g => g.addEventListener('click', e => { const b = e.target.closest('button'); if (b) $$('button', g).forEach(x => x.classList.toggle('is-on', x === b)); }));
   $('#wf').addEventListener('submit', e => { e.preventDefault(); let ok = true; $$('#wf input[required]').forEach(i => { const bad = !i.value.trim() || (i.type === 'email' && !/^\S+@\S+\.\S+$/.test(i.value)); i.classList.toggle('is-err', bad); if (bad) ok = false; }); if (ok) $('#wf .wf__ok').hidden = false; else toast('Please complete the highlighted fields'); });
