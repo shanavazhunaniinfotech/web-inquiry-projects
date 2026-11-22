@@ -107,9 +107,9 @@
     li.addEventListener('focusout', e => { if (!li.contains(e.relatedTarget)) setOpen(li, false); });
     li.addEventListener('click', e => { if (e.target.closest('a')) setOpen(li, false); });
   });
-  document.addEventListener('click', e => { if (!e.target.closest('[data-menu]')) closeAll(); if (!e.target.closest('.sb__pick')) $$('.sb__pick').forEach(p => setPick(p, false)); });
+  document.addEventListener('click', e => { if (!e.target.closest('[data-menu]')) closeAll(); });
   document.addEventListener('keydown', e => {
-    if (e.key === 'Escape') { const o = menus.find(m => m.classList.contains('is-open')); if (o) { setOpen(o, false); o.querySelector('button').focus(); } closeCart(); closeSearch(); closeMnav(); $$('.sb__pick').forEach(p => setPick(p, false)); }
+    if (e.key === 'Escape') { const o = menus.find(m => m.classList.contains('is-open')); if (o) { setOpen(o, false); o.querySelector('button').focus(); } closeCart(); closeSearch(); closeMnav(); closePicks(); }
     if (e.key === '/' && !/input|textarea|select/i.test(document.activeElement.tagName)) { e.preventDefault(); openSearch(); }
   });
   // products mega: group tabs
@@ -167,20 +167,60 @@
     { id: 'auto', n: 'truck & trailer parts', d: 'Semi-truck & trailer', ic: 'truck', f: ['spring', 'spiral'] }
   ];
   const sb = { app: 'window', fam: 'spline' };
-  function setPick(p, on) { p.classList.toggle('is-open', on); p.querySelector('.sb__btn').setAttribute('aria-expanded', on); }
+  const picks = Object.fromEntries($$('.sb__pick').map(p => [p.dataset.sb, p]));
+  const pops = {};
+  const bd = document.createElement('div'); bd.className = 'sb__bd'; document.body.appendChild(bd);
+  // move each list to <body> so it is never clipped by the hero card or hidden under the sticky header
+  Object.entries(picks).forEach(([k, p]) => { const pop = p.querySelector('.sb__pop'); pop.dataset.for = k; pop.id = 'sbPop-' + k; p.querySelector('.sb__btn').setAttribute('aria-controls', pop.id); document.body.appendChild(pop); pops[k] = pop; });
+  let sbOpen = null;
+  function placePop(k) {
+    const pop = pops[k], r = picks[k].querySelector('.sb__btn').getBoundingClientRect();
+    if (innerWidth <= 720) { pop.classList.add('sb__pop--sheet'); bd.classList.add('is-open'); return; }
+    pop.classList.remove('sb__pop--sheet'); bd.classList.remove('is-open');
+    const pill = $('#hd .hd__pill'), hdr = (pill ? pill.getBoundingClientRect().bottom : 0) + 8;
+    const w = pop.offsetWidth || 320, want = Math.min(pop.scrollHeight || 340, 380);
+    const below = innerHeight - r.bottom - 12, above = r.top - hdr - 8;
+    pop.style.left = Math.max(8, Math.min(r.left, innerWidth - w - 8)) + 'px';
+    if (below >= want || below >= above) { pop.style.top = (r.bottom + 8) + 'px'; pop.style.bottom = 'auto'; pop.style.maxHeight = Math.max(160, Math.min(380, below)) + 'px'; }
+    else { pop.style.top = 'auto'; pop.style.bottom = (innerHeight - r.top + 8) + 'px'; pop.style.maxHeight = Math.max(160, Math.min(380, above)) + 'px'; }
+  }
+  function setPick(p, on) {
+    const k = p.dataset.sb;
+    p.classList.toggle('is-open', on); p.querySelector('.sb__btn').setAttribute('aria-expanded', on);
+    pops[k].classList.toggle('is-open', on);
+    if (on) { sbOpen = k; placePop(k); const sel = pops[k].querySelector('[aria-selected=true]'); if (sel) setTimeout(() => sel.focus({ preventScroll: true }), 60); }
+    else if (sbOpen === k) { sbOpen = null; bd.classList.remove('is-open'); }
+  }
+  function closePicks() { Object.values(picks).forEach(p => setPick(p, false)); }
   function sbRender() {
     const a = APPS.find(x => x.id === sb.app);
-    const [pa, pf] = $$('.sb__pick');
-    pa.querySelector('.sb__btn').innerHTML = `${icon(a.ic, 'ic sb__ic')}<b>${a.n}</b>${icon('chev', 'ic chev')}`;
-    pa.querySelector('.sb__pop').innerHTML = APPS.map(x => `<button type="button" class="sb__opt" role="option" aria-selected="${x.id === sb.app}" data-v="${x.id}">${icon(x.ic)}<span>${x.n[0].toUpperCase() + x.n.slice(1)}<small>${x.d}</small></span></button>`).join('');
     if (!a.f.includes(sb.fam)) sb.fam = a.f[0];
-    pf.querySelector('.sb__btn').innerHTML = `<img class="sb__th" src="${im(FAM[sb.fam].img)}" alt=""><b>${FAM[sb.fam].n.toLowerCase()}</b>${icon('chev', 'ic chev')}`;
-    pf.querySelector('.sb__pop').innerHTML = a.f.map(f => `<button type="button" class="sb__opt" role="option" aria-selected="${f === sb.fam}" data-v="${f}"><img src="${im(FAM[f].img)}" alt=""><span>${FAM[f].n}<small>from ${money(minP(f))}</small></span></button>`).join('');
+    picks.app.querySelector('.sb__btn').innerHTML = `${icon(a.ic, 'ic sb__ic')}<b>${a.n}</b>${icon('chev', 'ic chev')}`;
+    pops.app.innerHTML = `<p class="sb__ph">I'm working on…<button type="button" data-sb-close aria-label="Close">${icon('x')}</button></p>` + APPS.map(x => `<button type="button" class="sb__opt" role="option" aria-selected="${x.id === sb.app}" data-v="${x.id}">${icon(x.ic)}<span>${x.n[0].toUpperCase() + x.n.slice(1)}<small>${x.d}</small></span></button>`).join('');
+    picks.fam.querySelector('.sb__btn').innerHTML = `<img class="sb__th" src="${im(FAM[sb.fam].img)}" alt=""><b>${FAM[sb.fam].n.toLowerCase()}</b>${icon('chev', 'ic chev')}`;
+    pops.fam.innerHTML = `<p class="sb__ph">I need…<button type="button" data-sb-close aria-label="Close">${icon('x')}</button></p>` + a.f.map(f => `<button type="button" class="sb__opt" role="option" aria-selected="${f === sb.fam}" data-v="${f}"><img src="${im(FAM[f].img)}" alt=""><span>${FAM[f].n}<small>from ${money(minP(f))}</small></span></button>`).join('');
   }
-  $$('.sb__pick').forEach(p => {
-    p.querySelector('.sb__btn').addEventListener('click', () => { const on = !p.classList.contains('is-open'); $$('.sb__pick').forEach(x => setPick(x, false)); setPick(p, on); });
-    p.querySelector('.sb__pop').addEventListener('click', e => { const o = e.target.closest('.sb__opt'); if (!o) return; sb[p.dataset.sb] = o.dataset.v; setPick(p, false); sbRender(); if (p.dataset.sb === 'app') setTimeout(() => setPick($$('.sb__pick')[1], true), 120); });
+  Object.entries(picks).forEach(([k, p]) => {
+    p.querySelector('.sb__btn').addEventListener('click', e => { e.stopPropagation(); const on = !p.classList.contains('is-open'); closePicks(); setPick(p, on); });
+    pops[k].addEventListener('click', e => {
+      e.stopPropagation();
+      if (e.target.closest('[data-sb-close]')) return closePicks();
+      const o = e.target.closest('.sb__opt'); if (!o) return;
+      const changed = sb[k] !== o.dataset.v; sb[k] = o.dataset.v;
+      closePicks(); sbRender();
+      if (k === 'app' && changed) setTimeout(() => setPick(picks.fam, true), 180);
+    });
+    pops[k].addEventListener('keydown', e => {
+      const os = $$('.sb__opt', pops[k]), i = os.indexOf(document.activeElement);
+      if (e.key === 'ArrowDown') { e.preventDefault(); (os[i + 1] || os[0]).focus(); }
+      if (e.key === 'ArrowUp') { e.preventDefault(); (os[i - 1] || os[os.length - 1]).focus(); }
+      if (e.key === 'Escape') { closePicks(); p.querySelector('.sb__btn').focus(); }
+    });
   });
+  document.addEventListener('pointerdown', e => { if (sbOpen && !e.target.closest('.sb__pick, .sb__pop')) closePicks(); });
+  bd.addEventListener('click', closePicks);
+  addEventListener('resize', () => { if (sbOpen) placePop(sbOpen); });
+  addEventListener('scroll', () => { if (sbOpen && innerWidth > 720) placePop(sbOpen); }, { passive: true });
   sbRender();
   $('#sb').addEventListener('submit', e => { e.preventDefault(); fdJump(sb.app, sb.fam); $('#finder').scrollIntoView({ behavior: 'smooth' }); });
 
