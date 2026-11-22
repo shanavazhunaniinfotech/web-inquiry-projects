@@ -257,71 +257,108 @@
   });
   $$('[data-ind]').forEach(a => a.tagName === 'A' && a.addEventListener('click', () => { const t = inds.find(x => x.dataset.ind === a.dataset.ind); t && openInd(t); }));
 
-  /* ---------------- Featured solution ---------------- */
+  /* ---------------- Featured solution (with kit builder) ---------------- */
   const SOL = [
     { img: 'app-red-netting', problem: 'Finished parts get nicked, scratched and tangled in transit.',
       k: 'SOLUTION 01 — PART PROTECTION', h: 'Ship precision parts without a single scratch.',
-      p: 'FinePS PE netting stretches over flanges, threads and odd shapes to form a protective sleeve — light, breathable and fast to apply on the line.',
-      steps: ['Measure the part’s largest diameter', 'Choose a stretch range that covers it', 'Cut to length and slide it on — done'],
-      hot: [[52, 40, 'Stretch-fit sleeve', 'Expands over flanges and odd-shaped housings.'], [70, 80, 'Cut to length', 'Use only what you need from the spool.'], [24, 60, 'Breathable mesh', 'Protects surfaces without trapping moisture.']],
+      bad: 'Scratched flanges and threads mean returns, rework and unhappy customers.',
+      good: 'Stretch-fit PE netting slides over odd shapes and protects every surface.',
+      steps: ['Measure the part', 'Pick a stretch range', 'Cut & slide on'],
+      hot: [[44, 42, 'Stretch-fit sleeve', 'Expands over flanges and odd-shaped housings.'], [33, 62, 'Labelled & ready to ship', 'Clean, professional presentation for your customers.'], [56, 22, 'Breathable mesh', 'Protects surfaces without trapping moisture.']],
       prods: ['poly200green-net', 'mesh-protective-sleeves-1x4-to-1x2-inch'] },
     { img: 'app-screened-porch', problem: 'Torn or sagging screens let bugs in and look neglected.',
       k: 'SOLUTION 02 — SCREEN REPAIR', h: 'Tight, professional screens in one afternoon.',
-      p: 'The right spline diameter is the difference between a screen that pops out and one that stays drum-tight for years. Pair it with a roller tool for a clean finish.',
-      steps: ['Pull the old spline and check its size', 'Lay new mesh over the frame', 'Roll the spline into the channel and trim'],
-      hot: [[30, 40, 'Exact-fit spline', '40+ diameters so it locks into your channel.'], [74, 30, 'UV-stabilised vinyl', 'Stays flexible in full sun.'], [60, 70, 'Bug-free space', 'Add bug seals to sliding doors.']],
+      bad: 'The wrong spline size pops out of the channel and the mesh sags.',
+      good: 'The exact diameter locks the mesh drum-tight — for years.',
+      steps: ['Check the old size', 'Lay the new mesh', 'Roll in & trim'],
+      hot: [[22, 34, 'Exact-fit spline', '40+ diameters so it locks into your channel.'], [46, 26, 'UV-stabilised vinyl', 'Stays flexible in full sun.'], [38, 72, 'Bug-free living', 'Add bug seals to sliding doors.']],
       prods: ['0-185-inch-window-screen-spline-250ft-roll', 'screen-roller-tool-door-window-screen-installation-repair', '7-16-inch-window-screen-clips-diecast-zinc-fasteners'] },
     { img: 'app-hydraulic-wrap', problem: 'Exposed hoses and cables chafe, crack and fail early.',
       k: 'SOLUTION 03 — HOSE & CABLE', h: 'Add years to hoses, lines and wiring.',
-      p: 'Spiral wrap coils around hydraulic hoses and cable bundles to shield them from abrasion — and keeps runs organised and easy to identify.',
-      steps: ['Measure the hose or bundle diameter', 'Pick 3/4", 1.1" or 2" wrap in black or high-vis yellow', 'Twist it on — no tools needed'],
-      hot: [[48, 64, 'Abrasion shield', 'Polyethylene coil takes the wear instead of the hose.'], [30, 32, 'High-vis yellow', 'Spot lines at a glance on the shop floor.']],
+      bad: 'Abrasion wears through hose covers and cable jackets — costly downtime.',
+      good: 'Spiral wrap takes the wear, keeps runs organised and easy to spot.',
+      steps: ['Measure the hose', 'Pick size & colour', 'Twist it on'],
+      hot: [[46, 70, 'Abrasion shield', 'Polyethylene coil takes the wear instead of the hose.'], [30, 40, 'High-vis yellow', 'Spot lines at a glance on the shop floor.']],
       prods: ['spiral-cable-wrap-3-4-inch-hose-protector-flexible-polyethylene-wire-conduit-tubing-cable-sleeve-cord-cover-to-organize-wires-and-hose', '2-inch-spiral-hydraulic-hose-wrap-100-ft-flexible-polyethylene-hose-and-wire-protector'] }
   ];
+  let solI = 0;
   function renderSol(i) {
-    const s = SOL[i];
+    solI = i; const s = SOL[i];
+    const prods = s.prods.map(h => BY[h]).filter(p => p && p.a);
     $('#solStage').innerHTML = `
       <div class="sol__img"><img src="images/${s.img}.webp" alt="${s.h}" loading="lazy">
         <div class="sol__problem"><span class="mono">PROBLEM</span>${s.problem}</div>
         ${s.hot.map((h, j) => `<button class="hot" style="--x:${h[0]}%;--y:${h[1]}%" data-h="${j}" aria-label="${h[2]}"><span>${j + 1}</span></button><div class="hot__tip" style="--x:${h[0]}%;--y:${h[1]}%" data-t="${j}"><b>${h[2]}</b>${h[3]}</div>`).join('')}
       </div>
-      <div class="sol__panel"><p class="mono" style="color:var(--green-d);margin:0">${s.k}</p><h3>${s.h}</h3><p>${s.p}</p>
+      <div class="sol__panel">
+        <p class="mono sol__k">${s.k}</p><h3>${s.h}</h3>
+        <ul class="sol__pf"><li class="is-bad">${icon('x')}<span>${s.bad}</span></li><li class="is-good">${icon('check')}<span>${s.good}</span></li></ul>
         <ol class="sol__steps">${s.steps.map(x => `<li>${x}</li>`).join('')}</ol>
-        <div class="sol__prods">${s.prods.map(h => BY[h]).filter(Boolean).map(p => `<div class="sol__prod"><img src="images/${imgFor(p)}.webp" alt=""><div><b>${shortTitle(p).slice(0, 52)}</b><small>${money(p.p)}${p.c ? ' · was ' + money(p.c) : ''}</small></div><button class="add" ${p.a ? `data-add="${p.h}"` : 'disabled'}>${p.a ? icon('plus') + 'Add' : 'Sold out'}</button></div>`).join('')}</div>
+        <div class="kit">
+          <div class="kit__h"><b>Build your kit</b><span>${prods.length} items</span></div>
+          ${prods.map(p => `<label class="kit__item"><input type="checkbox" checked value="${p.h}"><img src="images/${imgFor(p)}.webp" alt=""><span><b>${shortTitle(p).slice(0, 46)}${shortTitle(p).length > 46 ? '…' : ''}</b><small>${p.k ? packLabel(p.k) : 'Each'}${p.c ? ' · was ' + money(p.c) : ''}</small></span><em>${money(p.p)}</em></label>`).join('')}
+          <div class="kit__foot"><div class="kit__tot"><small>Kit total</small><b id="kitTot"></b></div><button class="btn btn--green" id="kitAdd">${icon('cart')}<span>Add kit to cart</span></button></div>
+          <p class="kit__trust"><span>${icon('truck')}Fast shipping</span><span>${icon('return')}30-day returns</span></p>
+        </div>
       </div>`;
+    kitTotal();
+  }
+  function kitTotal() {
+    const items = $$('#solStage .kit__item');
+    let t = 0, n = 0;
+    items.forEach(l => { const c = l.querySelector('input'); l.classList.toggle('is-off', !c.checked); if (c.checked) { t += BY[c.value].p; n++; } });
+    $('#kitTot').textContent = money(t);
+    const b = $('#kitAdd'); b.disabled = !n; b.querySelector('span').textContent = n ? `Add ${n === items.length ? 'kit' : n + ' item' + (n > 1 ? 's' : '')} to cart` : 'Select items';
   }
   renderSol(0);
-  tabs($('#solTabs'), b => renderSol(+b.dataset.s));
-  $('#solStage').addEventListener('mouseover', e => { const h = e.target.closest('.hot'); $$('#solStage .hot__tip').forEach(t => t.classList.toggle('is-on', h && t.dataset.t === h.dataset.h)); });
+  const solTabs = $('#solTabs');
+  let solTimer = null;
+  const solAuto = () => { clearInterval(solTimer); solTimer = setInterval(() => { if (solTabs.classList.contains('is-paused')) return; const n = (solI + 1) % SOL.length; $$('[role=tab]', solTabs).forEach(x => x.setAttribute('aria-selected', +x.dataset.s === n)); renderSol(n); }, 9000); };
+  tabs(solTabs, b => { renderSol(+b.dataset.s); solAuto(); });
+  solAuto();
+  $('#solution').addEventListener('mouseenter', () => solTabs.classList.add('is-paused'));
+  $('#solution').addEventListener('mouseleave', () => solTabs.classList.remove('is-paused'));
+  $('#solStage').addEventListener('change', e => { if (e.target.matches('.kit__item input')) kitTotal(); });
+  $('#solStage').addEventListener('click', e => {
+    if (e.target.closest('#kitAdd')) {
+      const hs = $$('#solStage .kit__item input:checked').map(c => c.value);
+      hs.forEach(h => addToCart(h, 1, (BY[h].v || [])[0] || ''));
+      toast(`Added ${hs.length} item${hs.length > 1 ? 's' : ''} to your cart`); openCart();
+      clearInterval(solTimer);
+    }
+    const h = e.target.closest('.hot'); if (h) $$('#solStage .hot__tip').forEach(t => t.classList.toggle('is-on', t.dataset.t === h.dataset.h && !t.classList.contains('is-on')));
+  });
+  $('#solStage').addEventListener('mouseover', e => { const h = e.target.closest('.hot'); if (h) $$('#solStage .hot__tip').forEach(t => t.classList.toggle('is-on', t.dataset.t === h.dataset.h)); });
   $('#solStage').addEventListener('mouseout', e => { if (e.target.closest('.hot')) $$('#solStage .hot__tip').forEach(t => t.classList.remove('is-on')); });
-  $('#solStage').addEventListener('click', e => { const h = e.target.closest('.hot'); if (h) $$('#solStage .hot__tip').forEach(t => t.classList.toggle('is-on', t.dataset.t === h.dataset.h && !t.classList.contains('is-on'))); });
 
   /* ---------------- Product finder ---------------- */
   const APPS = [
-    { id: 'window', n: 'Window & door screens', d: 'Repair or install screens, doors & pool cages', ic: 'home', f: ['spline', 'flat', 'smooth', 'tool', 'bugseal', 'clips'] },
-    { id: 'pack', n: 'Protecting parts & packaging', d: 'Prevent nicks & scratches in transit', ic: 'package', f: ['netting', 'spiral'] },
-    { id: 'hose', n: 'Hoses, cables & wiring', d: 'Shield & organise lines', ic: 'zap', f: ['spiral', 'netting'] },
-    { id: 'mask', n: 'Masking for coating', d: 'Powder coat, paint & high-heat', ic: 'roller', f: ['pet', 'dots', 'glass', 'paper'] },
-    { id: 'auto', n: 'Truck & trailer', d: 'Semi-truck & trailer components', ic: 'truck', f: ['spring', 'spiral'] }
+    { id: 'window', n: 'Window & door screens', d: 'Screens, doors & pool cages', ic: 'home', img: 'app-screened-porch', f: ['spline', 'flat', 'smooth', 'tool', 'bugseal', 'clips'] },
+    { id: 'pack', n: 'Parts & packaging', d: 'Prevent nicks & scratches in transit', ic: 'package', img: 'app-red-netting', f: ['netting', 'spiral'] },
+    { id: 'hose', n: 'Hoses, cables & wiring', d: 'Shield & organise lines', ic: 'zap', img: 'app-cable-wrap', f: ['spiral', 'netting'] },
+    { id: 'mask', n: 'Masking & coating', d: 'Powder coat, paint & high heat', ic: 'roller', img: 'app-machined-parts', f: ['pet', 'dots', 'glass', 'paper'] },
+    { id: 'auto', n: 'Truck & trailer', d: 'Semi-truck & trailer parts', ic: 'truck', img: 'app-hydraulic-wrap', f: ['spring', 'spiral'] }
   ];
-  const fs = { app: null, fam: null, s: null, k: null };
+  const fs = { app: null, fam: null, s: null, k: null, sel: null };
   const step = n => {
     $$('#finderPanel .fstep').forEach(x => x.hidden = +x.dataset.step !== n);
-    $$('#fSteps li').forEach((li, i) => { li.classList.toggle('is-active', i === n - 1); li.classList.toggle('is-done', i < n - 1); });
+    $$('#fSteps li').forEach((li, i) => { li.classList.toggle('is-active', i === n - 1); li.classList.toggle('is-done', i < n - 1); li.querySelector('span').innerHTML = i < n - 1 ? icon('check', 'ic ic--sm') : i + 1; });
+    renderMatch();
   };
-  $('#fApps').innerHTML = APPS.map(a => `<button class="fopt" data-app="${a.id}"><span class="fopt__ic">${icon(a.ic)}</span><span><b>${a.n}</b><small>${a.d}</small></span>${icon('arrow')}</button>`).join('');
+  $('#fApps').innerHTML = APPS.map(a => `<button class="fapp" data-app="${a.id}"><img src="images/${a.img}.webp" alt="" loading="lazy"><span class="fapp__go">${icon('arrow')}</span><span class="fapp__b">${icon(a.ic)}<b>${a.n}</b><small>${a.d}</small></span></button>`).join('');
   $('#fApps').addEventListener('click', e => { const b = e.target.closest('[data-app]'); if (b) chooseApp(b.dataset.app); });
   function chooseApp(id) {
-    fs.app = id; const a = APPS.find(x => x.id === id);
-    $('#fFams').innerHTML = a.f.map(f => { const it = famItems(f); return `<button class="fopt" data-f="${f}"><img src="images/${FAM[f].img}.webp" alt=""><span><b>${FAM[f].n}</b><small>${it.length} option${it.length > 1 ? 's' : ''} · from ${money(Math.min(...it.map(p => p.p)))}</small></span>${icon('arrow')}</button>`; }).join('') +
-      `<button class="fopt" data-back><span class="fopt__ic">${icon('arrow', 'ic flip')}</span><span><b>Back</b><small>Change application</small></span></button>`;
+    fs.app = id; fs.fam = null; fs.sel = null; const a = APPS.find(x => x.id === id);
+    $('#fFams').innerHTML = a.f.map((f, i) => { const it = famItems(f); return `<button class="ffam" data-f="${f}" style="animation-delay:${i * 50}ms"><span class="ffam__img"><img src="images/${FAM[f].img}.webp" alt=""></span><span class="ffam__b"><b>${FAM[f].n}</b><small><span>${it.length} option${it.length > 1 ? 's' : ''}</span><em>from ${money(Math.min(...it.map(p => p.p)))}</em></small></span></button>`; }).join('');
     step(2);
   }
-  $('#fFams').addEventListener('click', e => { if (e.target.closest('[data-back]')) return step(1); const b = e.target.closest('[data-f]'); if (b) chooseFam(b.dataset.f); });
+  $('#fFams').addEventListener('click', e => { const b = e.target.closest('[data-f]'); if (b) chooseFam(b.dataset.f); });
+  $$('.fback').forEach(b => b.addEventListener('click', () => { const g = +b.dataset.goto; if (g === 2 && fs.app) chooseApp(fs.app); else step(1); }));
   function chooseFam(f) {
-    fs.fam = f; const sizes = sizesOf(f); fs.s = sizes.length ? (f === 'spline' ? '0.185' : sizes[0]) : null; fs.k = null;
-    if (!fs.app) fs.app = APPS.find(a => a.f.includes(f)).id;
-    $('#fSizeQ').textContent = sizes.length ? `${FAM[f].n}: choose ${FAM[f].sz.toLowerCase()}` : FAM[f].n;
+    fs.fam = f; const sizes = sizesOf(f); fs.s = sizes.length ? (f === 'spline' && sizes.includes('0.185') ? '0.185' : sizes[0]) : null; fs.k = null;
+    if (!fs.app || !APPS.find(a => a.id === fs.app).f.includes(f)) fs.app = APPS.find(a => a.f.includes(f)).id;
+    if (!$('#fFams').innerHTML.includes(`data-f="${f}"`)) { const a = APPS.find(x => x.id === fs.app); $('#fFams').innerHTML = a.f.map(x => `<button class="ffam" data-f="${x}"><span class="ffam__img"><img src="images/${FAM[x].img}.webp" alt=""></span><span class="ffam__b"><b>${FAM[x].n}</b><small><span>${famItems(x).length} options</span><em>from ${money(Math.min(...famItems(x).map(p => p.p)))}</em></small></span></button>`).join(''); }
+    $('#fSizeQ').textContent = sizes.length ? `Choose ${FAM[f].sz.toLowerCase()}` : FAM[f].n;
     $('#fTip').innerHTML = icon('help') + '<span>' + FAM[f].tip + '</span>';
     renderFinder(); step(3);
   }
@@ -331,33 +368,53 @@
     if (fs.k && !packs.includes(fs.k)) fs.k = null;
     $('#fPacks').innerHTML = packs.length > 1 ? `<span class="flabel">Quantity</span><button class="chip" data-fk="" aria-pressed="${!fs.k}">All</button>` + packs.map(k => `<button class="chip" data-fk="${k}" aria-pressed="${k === fs.k}">${packLabel(k)}</button>`).join('') : '';
     const res = famItems(f).filter(p => (!fs.s || p.s === fs.s) && (!fs.k || p.k === fs.k)).sort((a, b) => (b.a - a.a) || PACK_ORDER.indexOf(a.k) - PACK_ORDER.indexOf(b.k));
-    $('#fResults').innerHTML = res.length ? res.map((p, i) => `<div class="fres ${i === 0 && p.a ? 'fres--best' : ''}"><img src="images/${imgFor(p)}.webp" alt=""><div><b>${shortTitle(p)}</b><small>${[fmtSize(p.s), p.k && packLabel(p.k), p.v.length ? p.v.join(' / ') : ''].filter(Boolean).join(' · ')}</small>${p.a ? '' : '<span class="oos">Sold out — notify me</span>'}</div><div class="fres__r"><span class="fres__price">${money(p.p)}</span><button class="add" ${p.a ? `data-add="${p.h}" data-variant="${p.v[0] || ''}"` : 'disabled'}>${p.a ? icon('cart') + 'Add' : 'Sold out'}</button></div></div>`).join('')
-      : `<p class="ftip">No exact match — <a class="tlink" href="#wholesale">request it</a></p>`;
+    if (!fs.sel || !res.includes(BY[fs.sel])) fs.sel = (res.find(p => p.a) || res[0] || {}).h || null;
+    $('#fResults').innerHTML = res.length ? `<span class="flabel">${res.length} match${res.length > 1 ? 'es' : ''}</span>` + res.map((p, i) => `<div class="fres ${p.h === fs.sel ? 'is-sel' : ''}" data-sel="${p.h}" style="animation-delay:${i * 40}ms"><img src="images/${imgFor(p)}.webp" alt=""><div><b>${shortTitle(p)}</b><small>${[fmtSize(p.s), p.k && packLabel(p.k), p.v.length ? p.v.join(' / ') : ''].filter(Boolean).join(' · ')}</small>${p.a ? '' : '<span class="oos">Sold out — notify me</span>'}</div><div class="fres__r"><span class="fres__price">${money(p.p)}</span><button class="add" ${p.a ? `data-add="${p.h}" data-variant="${p.v[0] || ''}"` : 'disabled'}>${p.a ? icon('cart') + 'Add' : 'Sold out'}</button></div></div>`).join('')
+      : `<p class="ftip">${icon('help')}<span>No exact match — <a class="tlink" href="#wholesale">request it</a></span></p>`;
+    renderMatch();
   }
-  $('#fSizes').addEventListener('click', e => { const c = e.target.closest('[data-fs]'); if (c) { fs.s = c.dataset.fs; renderFinder(); } });
-  $('#fPacks').addEventListener('click', e => { const c = e.target.closest('[data-fk]'); if (c) { fs.k = c.dataset.fk || null; renderFinder(); } });
-  $('#fBack').addEventListener('click', () => { chooseApp(fs.app); });
+  function renderMatch() {
+    const app = APPS.find(a => a.id === fs.app), p = fs.sel && BY[fs.sel], fam = fs.fam && FAM[fs.fam];
+    const onStep3 = !$('#finderPanel [data-step="3"]').hidden;
+    const img = p && onStep3 ? imgFor(p) : fam ? fam.img : null;
+    $('#fMatch').innerHTML = `
+      <div class="fmatch__h"><span class="mono">YOUR MATCH</span><span class="fmatch__st ${p && onStep3 ? 'is-ok' : ''}">${p && onStep3 ? 'Ready to order' : 'In progress'}</span></div>
+      <div class="fmatch__img">${img ? `<img src="images/${img}.webp" alt="">${p && onStep3 && p.s ? `<span class="pcard__spec">${fmtSize(p.s)}</span>` : ''}` : `<div class="fmatch__ph">${icon('target')}<span>Pick an application to start matching</span></div>`}</div>
+      <dl>
+        <dt>Application</dt><dd class="${app ? '' : 'is-empty'}">${app ? app.n : '—'}</dd>
+        <dt>Product</dt><dd class="${fam ? '' : 'is-empty'}">${fam ? fam.n : '—'}</dd>
+        <dt>Size</dt><dd class="${p && onStep3 && p.s ? '' : 'is-empty'}">${p && onStep3 && p.s ? fmtSize(p.s) : '—'}</dd>
+        <dt>Quantity</dt><dd class="${p && onStep3 && p.k ? '' : 'is-empty'}">${p && onStep3 && p.k ? packLabel(p.k) : '—'}</dd>
+      </dl>
+      ${p && onStep3 ? `<div class="fmatch__buy"><span class="fmatch__t">${shortTitle(p)}</span><div class="fmatch__p">${money(p.p)}${p.c ? `<small><s>${money(p.c)}</s></small>` : ''}</div><button class="btn btn--green btn--block" ${p.a ? `data-add="${p.h}" data-variant="${p.v[0] || ''}"` : 'disabled'}>${p.a ? icon('cart') + 'Add to cart' : 'Sold out'}</button></div>` : ''}
+      <ul class="fmatch__ticks"><li>${icon('check')}Professional-grade, quality controlled</li><li>${icon('check')}Free Regular Shipping on eligible orders</li><li>${icon('check')}30-day returns · prepaid label</li></ul>
+      <a class="fmatch__help" href="#faq">${icon('camera')}<span><b>Not sure? Send us a photo</b>We'll confirm the exact size for you.</span></a>`;
+  }
+  $('#fSizes').addEventListener('click', e => { const c = e.target.closest('[data-fs]'); if (c) { fs.s = c.dataset.fs; fs.sel = null; renderFinder(); } });
+  $('#fPacks').addEventListener('click', e => { const c = e.target.closest('[data-fk]'); if (c) { fs.k = c.dataset.fk || null; fs.sel = null; renderFinder(); } });
+  $('#fResults').addEventListener('click', e => { if (e.target.closest('.add')) return; const r = e.target.closest('[data-sel]'); if (r) { fs.sel = r.dataset.sel; $$('#fResults .fres').forEach(x => x.classList.toggle('is-sel', x === r)); renderMatch(); } });
   step(1);
 
   // Any [data-fam] link jumps to finder pre-filtered
   document.addEventListener('click', e => {
     const a = e.target.closest('a[data-fam]'); if (!a || !FAM[a.dataset.fam]) return;
+    if (a.dataset.app) fs.app = a.dataset.app;
     chooseFam(a.dataset.fam);
   });
 
-  // Hero quick finder
-  const qfApp = $('#qfApp'), qfFam = $('#qfFam');
-  const fillQf = () => { const a = APPS.find(x => x.id === qfApp.value); qfFam.innerHTML = a.f.map(f => `<option value="${f}">${FAM[f].n}</option>`).join(''); };
-  qfApp.addEventListener('change', fillQf); fillQf();
-  $('#qfind').addEventListener('submit', e => { e.preventDefault(); fs.app = qfApp.value; chooseFam(qfFam.value); $('#finder').scrollIntoView({ behavior: 'smooth' }); });
-
-  /* ---------------- Deals ---------------- */
-  const DEALS = [
-    { h: 'spiral-cable-wrap-3-4-inch-hose-protector-flexible-polyethylene-wire-conduit-tubing-cable-sleeve-cord-cover-to-organize-wires-and-hose', note: 'Save 5% · Black or yellow' },
-    { h: 'mesh-protective-sleeves-1x4-to-1x2-inch', note: 'Save $11.31 on the spool' },
-    { h: 'low-temperature-paper-masking-tape-2-inch-x-54-yard-case-24-pcs', note: 'Case of 24 · $12.00/roll vs $13.50 single', was: 13.5 * 24 }
-  ];
-  $('#dealsRow').innerHTML = DEALS.map(d => { const p = BY[d.h]; if (!p) return ''; const was = p.c || d.was; return `<div class="deal"><img src="images/${imgFor(p)}.webp" alt=""><div><span class="badge badge--amber">${was ? '-' + Math.round((1 - p.p / was) * 100) + '%' : 'Deal'}</span><b>${shortTitle(p)}</b><div class="deal__p"><em>${money(p.p)}</em>${was ? `<s>${money(was)}</s>` : ''}</div><small style="color:var(--muted-l)">${d.note}</small><br><button class="add" data-add="${p.h}" data-variant="${p.v[0] || ''}">${icon('cart')}Add to cart</button></div></div>`; }).join('');
+  /* ---------------- Hero: Find the right product ---------------- */
+  let qfSel = 'window';
+  $('#qfApps').innerHTML = APPS.map(a => `<button class="qfa" role="tab" aria-selected="${a.id === qfSel}" data-qa="${a.id}"><span class="qfa__ic">${icon(a.ic)}</span><span><b>${a.n}</b><small>${a.d}</small></span></button>`).join('');
+  function renderQf() {
+    const a = APPS.find(x => x.id === qfSel);
+    $('#qfProds').innerHTML = `<span class="qf__lbl">Step 2 · Choose a product</span>` + a.f.map((f, i) => { const it = famItems(f); return `<a class="qfp" href="#finder" data-fam="${f}" data-app="${a.id}" style="animation-delay:${i * 45}ms"><img src="images/${FAM[f].img}.webp" alt=""><span>${FAM[f].n} <small>from ${money(Math.min(...it.map(p => p.p)))}</small></span>${icon('arrow')}</a>`; }).join('');
+  }
+  $('#qfApps').addEventListener('click', e => {
+    const b = e.target.closest('[data-qa]'); if (!b) return;
+    qfSel = b.dataset.qa; $$('#qfApps .qfa').forEach(x => x.setAttribute('aria-selected', x === b));
+    $('#qfStep').innerHTML = '<i></i>Step 2 of 2 · Choose a product'; renderQf();
+  });
+  renderQf();
 
   /* ---------------- Wholesale form + newsletter ---------------- */
   $('#wform').addEventListener('submit', e => {
@@ -367,35 +424,86 @@
   });
   $('#news').addEventListener('submit', e => { e.preventDefault(); $('#news .news__ok').hidden = false; $('#newsEmail').value = ''; });
 
-  /* ---------------- Quality cross-section ---------------- */
-  (function teeth() {
-    const g = $('#xsecTeeth'); let d = ''; const N = 30, cx = 200, cy = 200, r1 = 110, r2 = 124;
-    for (let i = 0; i < N; i++) {
-      const a = i / N * Math.PI * 2, w = Math.PI / N * .55;
-      const p = (r, t) => `${(cx + r * Math.cos(t)).toFixed(1)},${(cy + r * Math.sin(t)).toFixed(1)}`;
-      d += `<path d="M${p(r1, a - w * 1.25)} L${p(r2, a - w * .6)} L${p(r2, a + w * .6)} L${p(r1, a + w * 1.25)} Z"/>`;
-    }
-    g.innerHTML = d;
-  })();
-  const qItems = $$('#qList li'), qHots = $$('#xsec .hot');
-  const qOn = i => { qItems.forEach(li => li.classList.toggle('is-on', li.dataset.q === String(i))); qHots.forEach(h => h.classList.toggle('is-on', h.dataset.q === String(i))); };
-  [...qItems, ...qHots].forEach(el => { el.addEventListener('mouseenter', () => qOn(el.dataset.q)); el.addEventListener('click', () => qOn(el.dataset.q)); });
-  let qi = 0; const qTimer = setInterval(() => { qOn(qi = (qi + 1) % 4); }, 2800);
-  $('#xsec').addEventListener('mouseenter', () => clearInterval(qTimer)); $('#qList').addEventListener('mouseenter', () => clearInterval(qTimer));
-  qOn(0);
+  /* ---------------- Reviews carousel (drag + arrows) ---------------- */
+  const REVIEWS = [
+    { n: 'Mike R.', r: 'Screen contractor · Tampa, FL', d: 'Oct 2026', t: 'Finally, the size nobody else stocks', b: 'Finally found .175 spline that actually fits our older pool-cage frames. Rolled in clean with no stretching, and the 15 lb roll covers a full week of jobs.', p: '0-175-inch-window-screen-spline', dark: true },
+    { n: 'Dana K.', r: 'Operations lead · CNC shop, OH', d: 'Oct 2026', t: 'Zero scratch complaints since switching', b: 'We wrap machined shafts and valve bodies before shipping. Not one customer complaint about scratches since we moved to FinePS netting.', p: 'poly200green-net' },
+    { n: 'Luis T.', r: 'Powder coater · Houston, TX', d: 'Sep 2026', t: 'Holds through the cure, peels clean', b: 'The green PET tape holds through the whole cure cycle and peels off clean. Case pricing beats our old distributor too.', p: 'green-pet-tape-1-inch-x-72-yard-single-roll' },
+    { n: 'Angela S.', r: 'Homeowner · Phoenix, AZ', d: 'Sep 2026', t: 'They matched my size from a photo', b: 'I had no idea what size I needed. Sent a photo, got an answer the same day, and the screen door looks brand new.', p: 'screen-roller-tool-door-window-screen-installation-repair' },
+    { n: 'Greg W.', r: 'Fleet maintenance · Dallas, TX', d: 'Aug 2026', t: 'Hydraulic lines finally protected', b: 'The yellow 2" spiral wrap makes our hydraulic lines easy to spot and it has stopped the rubbing on the trailer frames.', p: '2-inch-spiral-hydraulic-hose-wrap-100-ft-flexible-polyethylene-hose-and-wire-protector' },
+    { n: 'Priya N.', r: 'Property manager · Orlando, FL', d: 'Aug 2026', t: 'One supplier for 140 units', b: 'We re-screen units on turnover. Having the right spline, clips and tools from one place has saved our maintenance team hours.', p: '7-16-inch-window-screen-clips-diecast-zinc-fasteners' },
+    { n: 'Tom B.', r: 'DIY · Charlotte, NC', d: 'Jul 2026', t: 'Flat spline fixed my lanai', b: 'Big-box stores only had round spline. The .315 flat spline was exactly what my lanai frames needed. Easy install.', p: '0-315-inch-flat-screen-spline-250ft' },
+    { n: 'Rosa M.', r: 'Paint line supervisor · Phoenix, AZ', d: 'Jul 2026', t: 'Pre-cut dots save us real time', b: 'The green dots go on in seconds and survive the oven. Our masking time on threaded holes dropped noticeably.', p: 'green-dots-2-inch-x-1-000-dots-single-roll' }
+  ];
+  const STAR5 = '<span class="stars">' + icon('star').repeat(5) + '</span>';
+  $('#rTrack').innerHTML = REVIEWS.map(r => { const p = BY[r.p] || CAT.find(x => x.h.startsWith(r.p)); return `
+    <article class="rv ${r.dark ? 'rv--dark' : ''}">
+      <div class="rv__top">${STAR5}<span class="mono">${r.d}</span></div>
+      ${r.dark ? icon('quote', 'ic rv__q') : ''}
+      <h3>${r.t}</h3><p>“${r.b}”</p>
+      ${p ? `<div class="rv__prod"><img src="images/${imgFor(p)}.webp" alt=""><span><small>Purchased</small><b>${shortTitle(p).slice(0, 44)}${shortTitle(p).length > 44 ? '…' : ''}</b></span></div>` : ''}
+      <div class="rv__who"><span class="av">${r.n.split(' ').map(w => w[0]).join('').replace('.', '')}</span><span><b>${r.n}</b><small>${r.r}</small></span><span class="vb">${icon('check')}Verified</span></div>
+    </article>`; }).join('');
+  const rt = $('#rTrack');
+  const rUpd = () => {
+    const max = rt.scrollWidth - rt.clientWidth, w = rt.clientWidth / rt.scrollWidth;
+    const bar = $('#rProg'); bar.style.width = (w * 100) + '%'; bar.style.left = (max ? rt.scrollLeft / max * (1 - w) * 100 : 0) + '%';
+    $('#rPrev').disabled = rt.scrollLeft < 4; $('#rNext').disabled = rt.scrollLeft > max - 4;
+  };
+  rt.addEventListener('scroll', rUpd, { passive: true }); addEventListener('resize', rUpd); rUpd();
+  const cardW = () => (rt.querySelector('.rv') ? rt.querySelector('.rv').offsetWidth + 16 : 300);
+  $('#rPrev').addEventListener('click', () => rt.scrollBy({ left: -cardW(), behavior: 'smooth' }));
+  $('#rNext').addEventListener('click', () => rt.scrollBy({ left: cardW(), behavior: 'smooth' }));
+  rt.addEventListener('keydown', e => { if (e.key === 'ArrowRight') $('#rNext').click(); if (e.key === 'ArrowLeft') $('#rPrev').click(); });
+  let drag = null;
+  rt.addEventListener('pointerdown', e => { if (e.pointerType !== 'mouse') return; drag = { x: e.clientX, s: rt.scrollLeft, moved: false }; });
+  addEventListener('pointermove', e => { if (!drag) return; const dx = e.clientX - drag.x; if (Math.abs(dx) > 4) { drag.moved = true; rt.classList.add('is-drag'); } rt.scrollLeft = drag.s - dx; });
+  addEventListener('pointerup', () => { if (!drag) return; const moved = drag.moved; drag = null; rt.classList.remove('is-drag'); if (moved) { const w = cardW(); rt.scrollTo({ left: Math.round(rt.scrollLeft / w) * w, behavior: 'smooth' }); } });
+  $('#allReviews').addEventListener('click', e => { e.preventDefault(); toast('Prototype: opens the full reviews page (612 reviews)'); });
 
-  /* ---------------- Hero parallax ---------------- */
-  const hv = $('#heroVisual');
-  if (fine.matches && !matchMedia('(prefers-reduced-motion: reduce)').matches) {
-    $('.hero').addEventListener('mousemove', e => {
-      const r = hv.getBoundingClientRect(), x = (e.clientX - r.left) / r.width - .5, y = (e.clientY - r.top) / r.height - .5;
-      $$('[data-depth]', hv).forEach(el => { const d = +el.dataset.depth; el.style.transform = `translate(${x * d}px,${y * d}px)`; });
-    });
-  }
+  /* ---------------- FAQ ---------------- */
+  $('#qaList').addEventListener('click', e => {
+    const q = e.target.closest('.qa__q'); if (!q) return;
+    const item = q.parentElement, open = !item.classList.contains('is-open');
+    $$('#qaList .qa').forEach(x => { x.classList.remove('is-open'); x.querySelector('.qa__q').setAttribute('aria-expanded', 'false'); });
+    if (open) { item.classList.add('is-open'); q.setAttribute('aria-expanded', 'true'); }
+  });
+  tabs($('#faqTabs'), b => $$('#qaList .qa').forEach(x => x.classList.toggle('is-hidden', b.dataset.c !== 'all' && x.dataset.c !== b.dataset.c)));
+
+  /* ---------------- Stats counters ---------------- */
+  const sio = new IntersectionObserver(es => es.forEach(en => {
+    if (!en.isIntersecting) return; sio.unobserve(en.target);
+    $$('b[data-to]', en.target).forEach(b => { const to = +b.dataset.to, suf = b.dataset.suf || '', t0 = performance.now();
+      const tick = t => { const k = Math.min(1, (t - t0) / 1400), v = Math.round(to * (1 - Math.pow(1 - k, 3))); b.textContent = v + suf; if (k < 1) requestAnimationFrame(tick); };
+      requestAnimationFrame(tick); });
+  }), { threshold: .4 });
+  sio.observe($('#stats'));
+
+  /* ---------------- Footer wordmark interaction ---------------- */
+  const wm = $('#wordmark'), letters = $$('span', wm);
+  const hotAt = i => letters.forEach((l, j) => { l.classList.toggle('is-hot', j === i); l.classList.toggle('is-near', Math.abs(j - i) === 1); });
+  wm.addEventListener('mousemove', e => {
+    let best = 0, bd = 1e9; letters.forEach((l, j) => { const r = l.getBoundingClientRect(), d = Math.abs(e.clientX - (r.left + r.width / 2)); if (d < bd) { bd = d; best = j; } });
+    hotAt(best);
+  });
+  wm.addEventListener('mouseleave', () => hotAt(-9));
+  const wio = new IntersectionObserver(es => es.forEach(en => {
+    if (!en.isIntersecting) return; wio.unobserve(wm);
+    letters.forEach((l, j) => setTimeout(() => hotAt(j), 120 * j)); setTimeout(() => hotAt(-9), 120 * letters.length + 200);
+  }), { threshold: .5 });
+  wio.observe(wm);
+
+  /* ---------------- Announcement marquee: fill the width ---------------- */
+  (function () {
+    const g = $$('.announce__group'); if (g.length < 2) return;
+    const base = g[0].innerHTML; let guard = 0;
+    while (g[0].scrollWidth < innerWidth + 200 && guard++ < 4) g[0].insertAdjacentHTML('beforeend', base);
+    g[1].innerHTML = g[0].innerHTML; $$('a', g[1]).forEach(a => a.tabIndex = -1);
+  })();
 
   /* ---------------- Reveal on scroll ---------------- */
   const io = new IntersectionObserver(es => es.forEach(en => { if (en.isIntersecting) { const t = en.target; t.classList.add('is-in'); io.unobserve(t); setTimeout(() => { t.style.transitionDelay = ''; }, 1000); } }), { rootMargin: '0px 0px -8% 0px' });
-  $$('.reveal, .ladder, .speeds').forEach(el => io.observe(el));
+  $$('.reveal, .ladder').forEach(el => io.observe(el));
   // stagger
   $$('#catGrid .cat').forEach((c, i) => c.style.transitionDelay = (i % 6) * 50 + 'ms');
   $$('#bestGrid .pcard').forEach((c, i) => c.style.transitionDelay = (i % 4) * 70 + 'ms');
