@@ -76,7 +76,7 @@
   /* Animations */
   if (G) {
     // hero headline on load
-    var heroH = $('.hhero h1, .bphero h1');
+    var heroH = $('.hhero h1, .bphero h1, .h4 h1, .ch h1');
     $$('[data-split]').forEach(function (h) {
       var ws = $$('.wi', h);
       gsap.set(ws, { yPercent: 110 });
@@ -124,6 +124,14 @@
     bar.style.transform = 'translateX(' + (max > 0 ? rail.scrollLeft / max * (1 / vis - 1) * 100 : 0) + '%)';
   }
   function filter(f) {
+    var grid = $('#pgrid4');
+    if (grid) {
+      $$('.chip').forEach(function (c) { c.classList.toggle('is-on', c.dataset.f === f); });
+      var vis = [];
+      $$('.pk', grid).forEach(function (p) { var ok = f === 'all' || p.dataset.cat.split(' ').indexOf(f) > -1; p.classList.toggle('is-x', !ok); if (ok) vis.push(p); });
+      if (G) { gsap.fromTo(vis, { opacity: 0, y: 26 }, { opacity: 1, y: 0, duration: .6, stagger: .05, ease: 'power3.out', clearProps: 'all' }); ScrollTrigger.refresh(); }
+      return;
+    }
     if (!rail) return;
     $$('.chip').forEach(function (c) { c.classList.toggle('is-on', c.dataset.f === f); });
     var shown = [];
@@ -139,6 +147,65 @@
     $('#rNext').addEventListener('click', function () { step(1); });
   }
 
+  /* Product grid chips (home rev 4) */
+  if ($('#pgrid4')) $$('.chip').forEach(function (c) { c.addEventListener('click', function () { filter(c.dataset.f); }); });
+
+  /* Home hero: slideshow synced with the three pillars */
+  var show = $('#show'), pills = $$('#pillars button');
+  if (show && pills.length) {
+    var SH = [['Products', 'GLP-1s, hormones, peptides and supplements'], ['Personalized Coaching', 'A personal coach and a monthly plan'], ['Coaching360 Health App', 'All of your health in one place']];
+    var slides = $$('.show__i', show), si = 0, sTimer;
+    var setS = function (i) {
+      si = (i + slides.length) % slides.length;
+      slides.forEach(function (s, j) { s.classList.toggle('is-on', j === si); });
+      pills.forEach(function (b, j) { b.classList.remove('is-on'); if (j === si) { void b.offsetWidth; b.classList.add('is-on'); } });
+      $('#sK').textContent = SH[si][0]; $('#sT').textContent = SH[si][1];
+    };
+    var autoS = function () { clearInterval(sTimer); if (!reduce) sTimer = setInterval(function () { setS(si + 1); }, 5500); };
+    pills.forEach(function (b, j) { b.addEventListener('click', function () { setS(j); autoS(); }); });
+    autoS();
+  }
+
+  /* Goal rows: cursor-follow photo preview */
+  var peek = $('#peek');
+  if (peek && fine) {
+    var pimgs = $$('img', peek), px = 0, py = 0, cx = 0, cy = 0, praf = null;
+    var ploop = function () { cx += (px - cx) * .14; cy += (py - cy) * .14; peek.style.left = cx + 'px'; peek.style.top = cy + 'px'; praf = requestAnimationFrame(ploop); };
+    $$('.grow').forEach(function (r) {
+      r.addEventListener('mouseenter', function (e) { pimgs.forEach(function (im, j) { im.classList.toggle('is-on', j === +r.dataset.img); }); if (!peek.classList.contains('is-on')) { cx = px = e.clientX + 170; cy = py = e.clientY; } peek.classList.add('is-on'); if (!praf) ploop(); });
+      r.addEventListener('mousemove', function (e) { px = e.clientX + 170; py = e.clientY; });
+    });
+    $('#glist').addEventListener('mouseleave', function () { peek.classList.remove('is-on'); cancelAnimationFrame(praf); praf = null; });
+  }
+
+  /* Program toggle */
+  var seg = $('.seg');
+  if (seg) {
+    var sb = $$('button', seg), sInk = $('i', seg);
+    var PG = [{ n: 'Weight Loss Program', p: 299 }, { n: 'Guaranteed Weight Loss Program', p: 499 }];
+    var mvS = function (b) { sInk.style.width = b.offsetWidth + 'px'; sInk.style.transform = 'translateX(' + (b.offsetLeft - 5) + 'px)'; };
+    var setPg = function (i) {
+      sb.forEach(function (b, j) { b.classList.toggle('is-on', j === i); b.setAttribute('aria-selected', String(j === i)); });
+      mvS(sb[i]); $('#pName').textContent = PG[i].n;
+      var el = $('#pPrice'), from = +el.textContent.replace(/\D/g, '');
+      if (G) { var o = { v: from }; gsap.to(o, { v: PG[i].p, duration: .9, ease: 'power3.out', onUpdate: function () { el.textContent = '$' + Math.round(o.v); } }); } else el.textContent = '$' + PG[i].p;
+      $$('#pFeat span[data-a]').forEach(function (s) { s.textContent = i ? s.dataset.b : s.dataset.a; });
+      var g = $('#pFeat [data-g]'); if (g) g.classList.toggle('off', !i);
+    };
+    sb.forEach(function (b, j) { b.addEventListener('click', function () { setPg(j); }); });
+    addEventListener('resize', function () { mvS($('button.is-on', seg)); }); addEventListener('load', function () { mvS($('button.is-on', seg)); });
+    mvS(sb[0]);
+  }
+
+  /* Newsletter */
+  $$('.js-news').forEach(function (f) {
+    f.addEventListener('submit', function (e) {
+      e.preventDefault(); var inp = $('input', f);
+      if (!inp.value || inp.value.indexOf('@') < 1) { inp.focus(); inp.setAttribute('placeholder', 'Please enter a valid email'); return; }
+      f.innerHTML = '<p class="ok">Thank you. You’re subscribed.</p>';
+    });
+  });
+
   /* Coaching360 steps: photo + caption follow scroll */
   var csteps = $$('.cstep'), cimgs = $$('#cMedia img'), cdots = $$('.coach__dots i');
   if (csteps.length) {
@@ -150,6 +217,20 @@
     };
     var io = new IntersectionObserver(function (es) { es.forEach(function (e) { if (e.isIntersecting) setC(+e.target.dataset.i); }); }, { rootMargin: '-45% 0px -45% 0px' });
     csteps.forEach(function (s) { io.observe(s); s.addEventListener('click', function () { setC(+s.dataset.i); }); });
+  }
+
+  /* Testimonial slider with photos */
+  var tsEl = $('#ts');
+  if (tsEl) {
+    var tss = $$('.ts__s', tsEl), tsd = $$('#tsDots button'), tsi = 0, tst;
+    var showTs = function (i) { tsi = (i + tss.length) % tss.length; tss.forEach(function (s, j) { s.classList.toggle('is-on', j === tsi); }); tsd.forEach(function (d, j) { d.classList.toggle('is-on', j === tsi); }); };
+    var autoTs = function () { clearInterval(tst); if (!reduce) tst = setInterval(function () { showTs(tsi + 1); }, 7000); };
+    $('#tsPrev').addEventListener('click', function () { showTs(tsi - 1); autoTs(); });
+    $('#tsNext').addEventListener('click', function () { showTs(tsi + 1); autoTs(); });
+    tsd.forEach(function (d, j) { d.addEventListener('click', function () { showTs(j); autoTs(); }); });
+    tsEl.addEventListener('mouseenter', function () { clearInterval(tst); });
+    tsEl.addEventListener('mouseleave', autoTs);
+    autoTs();
   }
 
   /* Testimonials */
@@ -174,6 +255,30 @@
     ways.forEach(function (w) { w.addEventListener('click', function () { setW(w); }); });
   }
 
+  /* Brand Partner: "everything you need" carousel */
+  var pT = $('#plsTrack');
+  if (pT) {
+    var pDots = $('#plsDots'), pItems = $$('.pl', pT), pTimer;
+    var perView = function () { return Math.max(1, Math.round(pT.clientWidth / pItems[0].offsetWidth)); };
+    var pages = function () { return Math.max(1, pItems.length - perView() + 1); };
+    var cur = function () { return Math.round(pT.scrollLeft / pItems[0].offsetWidth); };
+    var buildDots = function () {
+      pDots.innerHTML = '';
+      for (var i = 0; i < pages(); i++) { var b = document.createElement('button'); b.setAttribute('aria-label', 'Slide ' + (i + 1)); (function (i) { b.addEventListener('click', function () { goP(i); autoP(); }); })(i); pDots.appendChild(b); }
+      syncDots();
+    };
+    var syncDots = function () { var c = Math.min(cur(), pages() - 1); $$('button', pDots).forEach(function (d, j) { d.classList.toggle('is-on', j === c); }); };
+    var goP = function (i) { var n = pages(); i = (i + n) % n; pT.scrollTo({ left: i * pItems[0].offsetWidth, behavior: 'smooth' }); };
+    var autoP = function () { clearInterval(pTimer); if (!reduce) pTimer = setInterval(function () { goP(cur() + 1); }, 3500); };
+    $('#plsPrev').addEventListener('click', function () { goP(cur() - 1); autoP(); });
+    $('#plsNext').addEventListener('click', function () { goP(cur() + 1); autoP(); });
+    pT.addEventListener('scroll', function () { syncDots(); }, { passive: true });
+    pT.addEventListener('mouseenter', function () { clearInterval(pTimer); });
+    pT.addEventListener('mouseleave', autoP);
+    addEventListener('resize', buildDots);
+    buildDots(); autoP();
+  }
+
   /* Brand Partner: calculator */
   var cN = $('#cN'), cA = $('#cA');
   if (cN && cA) {
@@ -181,9 +286,10 @@
     var calc = function () {
       var n = +cN.value, a = +cA.value, m = n * a * .2;
       $('#cNo').textContent = n; $('#cAo').textContent = fmt(a);
-      $('#cOut').textContent = fmt(m); $('#cYr').textContent = '≈ ' + fmt(m * 12) + ' per year';
+      var net = cN.closest('.calc3') ? ' · ' + fmt(Math.max(0, m - 99)) + '/mo after the $99 monthly fee' : '';
+      $('#cOut').textContent = fmt(m); $('#cYr').textContent = '≈ ' + fmt(m * 12) + ' per year' + net;
       cN.style.setProperty('--p', ((n - 1) / 199 * 100) + '%');
-      cA.style.setProperty('--p', ((a - 99) / 400 * 100) + '%');
+      cA.style.setProperty('--p', ((a - +cA.min) / (+cA.max - +cA.min) * 100) + '%');
     };
     cN.addEventListener('input', calc); cA.addEventListener('input', calc); calc();
   }

@@ -1,0 +1,531 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Silicon Maps | Your Logo on the Map, on 75,000 Walls</title>
+  <meta name="description" content="Advertise on the iconic Silicon Valley map and 20+ high-tech and life-science industry maps. 75,000+ prints, displayed in 92 countries and linked online all year. 2027 editions now booking.">
+  <meta name="robots" content="noindex, nofollow">
+  <meta name="theme-color" content="#f6f4ef">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,400..800&family=Inter:wght@400;500;600&family=IBM+Plex+Mono:wght@400;500&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <a class="skip" href="#main">Skip to content</a>
+
+  <!-- Announcement -->
+  <div class="ann" role="region" aria-label="Announcement">
+    <span class="live"></span>
+    <p><b>2027 editions are booking now.</b> <span class="hide-sm">Ad spaces are limited on every map.</span></p>
+    <a href="#build">Check availability →</a>
+  </div>
+
+  <!-- Floating pill nav -->
+  <header class="nav" id="nav">
+    <div class="nav__pill">
+      <a href="#top" class="nav__logo" aria-label="Silicon Maps, back to top"><img src="../images/logo-dark.png" alt="Silicon Maps" width="250" height="48"></a>
+      <nav class="nav__links" aria-label="Main">
+        <a href="#why">Why it works</a>
+        <a href="#regions">Maps</a>
+        <a href="#build">Packages</a>
+        <a href="#store">Store</a>
+        <a href="#faq">FAQ</a>
+      </nav>
+      <div class="nav__right">
+        <button class="icon-btn" id="cartBtn" aria-label="Open cart, 0 items">
+          <svg width="18" height="18" viewBox="0 0 24 24" aria-hidden="true"><path fill="none" stroke="currentColor" stroke-width="1.7" d="M5 7h14l-1.2 12.2a1 1 0 01-1 .8H7.2a1 1 0 01-1-.8L5 7zm4 0V6a3 3 0 016 0v1"/></svg>
+          <span class="badge" id="cartCount">0</span>
+        </button>
+        <a href="#build" class="btn btn--ink btn--sm hide-sm">Reserve a spot</a>
+        <button class="icon-btn burger" id="burger" aria-label="Open menu" aria-expanded="false" aria-controls="sheet"><i></i><i></i></button>
+      </div>
+    </div>
+  </header>
+
+  <div class="sheet" id="sheet" aria-hidden="true">
+    <nav aria-label="Mobile">
+      <a href="#why">Why it works</a><a href="#regions">Maps</a><a href="#build">Packages</a><a href="#store">Store</a><a href="#faq">FAQ</a><a href="#contact">Contact</a>
+    </nav>
+    <a href="#build" class="btn btn--orange btn--lg btn--block">Reserve my 2027 spot</a>
+    <a href="tel:+19253141130" class="sheet__tel">Call 925-314-1130, ext. 11</a>
+  </div>
+
+  <main id="main">
+    <!-- HERO -->
+    <section class="hero" id="top" aria-labelledby="hero-title">
+      <div class="hero__bg" aria-hidden="true"></div>
+      <div class="wrap hero__in">
+        <p class="chip-badge rv"><span class="chip-badge__dot"></span>Since 1989 · 20+ high-tech &amp; life-science regions</p>
+        <h1 class="hero__title" id="hero-title">
+          <span class="hl"><span>Put your</span></span>
+          <span class="hl"><span>company <span class="inline-pill" aria-hidden="true"><img id="pillImg" src="../images/p-silicon-valley.jpg" alt=""></span> on</span></span>
+          <span class="hl"><span>the <span class="grad">map.</span></span></span>
+        </h1>
+        <p class="hero__sub rv">Your logo on the iconic Silicon Valley map, printed <b>75,000+ times a year</b>, hung on office walls in <b>92 countries</b> and linked online for all 365 days.</p>
+
+        <form class="finder rv" id="finder" role="search" autocomplete="off">
+          <label for="finderInput" class="sr-only">Find your region</label>
+          <svg class="finder__ic" width="20" height="20" viewBox="0 0 24 24" aria-hidden="true"><path fill="none" stroke="currentColor" stroke-width="2" d="M12 21s-7-6.2-7-11.5A7 7 0 0119 9.5C19 14.8 12 21 12 21z"/><circle cx="12" cy="9.5" r="2.5" fill="none" stroke="currentColor" stroke-width="2"/></svg>
+          <input id="finderInput" type="text" placeholder="Find your region, e.g. Silicon Valley, Austin, Boston…" aria-autocomplete="list" aria-controls="finderList" aria-expanded="false" role="combobox">
+          <button type="submit" class="btn btn--orange">Check availability</button>
+          <ul class="finder__list" id="finderList" role="listbox"></ul>
+        </form>
+        <div class="hero__quick rv">
+          <span>Popular:</span>
+          <button type="button" data-pick="silicon-valley">Silicon Valley</button>
+          <button type="button" data-pick="bioscience-west">Bioscience West</button>
+          <button type="button" data-pick="silicon-hills">Silicon Hills</button>
+          <button type="button" data-pick="east-coast-tech">East Coast Tech</button>
+        </div>
+      </div>
+
+      <!-- Interactive map window -->
+      <div class="window-wrap">
+        <div class="window" id="window">
+          <div class="window__map" id="windowMap">
+            <img src="../images/sv27-preview.jpg" srcset="../images/sv27-900.jpg 900w, ../images/sv27-preview.jpg 1766w" sizes="(max-width: 600px) 190vw, 100vw" alt="The 2027 Silicon Valley map, showing company logos across the Bay Area" width="1766" height="2560" id="windowImg" fetchpriority="high">
+            <button class="hot" style="left:64.5%;top:48%" data-tip="Intel · Santa Clara"><i></i></button>
+            <button class="hot" style="left:54.3%;top:55.6%" data-tip="AMD · Santa Clara"><i></i></button>
+            <button class="hot" style="left:43.7%;top:53.5%" data-tip="Applied Materials · Santa Clara"><i></i></button>
+            <button class="hot" style="left:71%;top:60%" data-tip="Adobe · San José"><i></i></button>
+            <button class="hot" style="left:50%;top:41%" data-tip="Cisco · San José"><i></i></button>
+            <a href="#build" class="hot hot--you" style="left:33%;top:55.5%" data-tip="This spot could be yours. Reserve it →"><i></i><span>Your logo?</span></a>
+          </div>
+          <div class="window__ui">
+            <span class="wtag"><span class="live"></span>Live preview · 2027 Silicon Valley edition</span>
+            <span class="wtag wtag--r hide-sm">Hover the pins</span>
+          </div>
+          <div class="wstat wstat--a"><b data-count="75000">75,000</b><span>+ prints a year</span></div>
+          <div class="wstat wstat--b"><b><span data-count="95">95</span>%</b><span>display rate</span></div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Logos -->
+    <section class="logos" aria-label="Companies on our maps">
+      <p class="eyebrow">Featured on our maps alongside 200+ innovators</p>
+      <div class="logos__track" aria-hidden="true">
+        <div class="logos__row"><span>Intel</span><span>AMD</span><span>Cisco</span><span>Keysight</span><span>Adobe</span><span>Applied Materials</span><span>Analog Devices</span><span>Stanford</span><span>Seagate</span><span>FUJIFILM</span><span>Pure Storage</span><span>Sanmina</span></div>
+        <div class="logos__row"><span>Intel</span><span>AMD</span><span>Cisco</span><span>Keysight</span><span>Adobe</span><span>Applied Materials</span><span>Analog Devices</span><span>Stanford</span><span>Seagate</span><span>FUJIFILM</span><span>Pure Storage</span><span>Sanmina</span></div>
+      </div>
+      <p class="sr-only">Participants include Intel, AMD, Cisco, Keysight, Adobe, Applied Materials, Analog Devices and Stanford.</p>
+    </section>
+
+    <!-- WHY: stacking cards -->
+    <section class="why" id="why" aria-labelledby="why-title">
+      <div class="wrap">
+        <div class="head head--split">
+          <div>
+            <p class="eyebrow">Why it works</p>
+            <h2 class="h2" id="why-title">One placement.<br>Three ways to be seen.</h2>
+          </div>
+          <p class="lead">Most ads vanish once they're scrolled past. A Silicon Maps poster stays on the wall for a year, and every copy carries your brand.</p>
+        </div>
+        <div class="stack">
+          <article class="scard scard--1">
+            <div class="scard__txt">
+              <span class="scard__n">01 / Print</span>
+              <h3>On 75,000+ walls in 92 countries</h3>
+              <p>Your logo, URL and an optional photo of your building, placed at your real location on every printed poster.</p>
+              <ul><li>Trade shows, direct mail and every company on the map distribute it</li><li>Seen by CEOs, VCs, engineers and researchers</li><li>Your company details in large foil, readable from 20 ft</li></ul>
+            </div>
+            <div class="scard__img scard__img--poster"><img src="../images/sv-mockup.jpg" alt="Silicon Valley map poster with a custom imprint" loading="lazy" width="1200" height="1425"></div>
+          </article>
+          <article class="scard scard--2">
+            <div class="scard__txt">
+              <span class="scard__n">02 / Brand</span>
+              <h3>Your own custom-imprinted poster</h3>
+              <p>From Silver up you get posters with a 3" × 12" message about your company across the bottom: a gift customers, staff and recruits actually keep.</p>
+              <ul><li>50 large posters (plus 50 mini posters from Gold)</li><li>Our art team designs your imprint</li><li>You approve a proof before anything prints</li></ul>
+            </div>
+            <div class="scard__img"><img src="../images/ad-space.png" alt="Diagram of an ad space and the custom imprint on a regional map" loading="lazy" width="390" height="350"></div>
+          </article>
+          <article class="scard scard--3">
+            <div class="scard__txt">
+              <span class="scard__n">03 / Digital</span>
+              <h3>Linked on the interactive map</h3>
+              <p>Online, your logo enlarges on hover and links to your website. With an Expanded Profile you can add your story, products, careers and an intro video.</p>
+              <ul><li>7,000+ industry visitors a month</li><li>Promoted by press releases, social media and email</li><li>Corporate Sponsor listing available</li></ul>
+            </div>
+            <div class="scard__img"><img src="../images/expanded-profile.png" alt="Example of an expanded online company profile" loading="lazy" width="300" height="262"></div>
+          </article>
+        </div>
+      </div>
+    </section>
+
+    <!-- STATS -->
+    <section class="stats" aria-label="By the numbers">
+      <div class="wrap stats__row">
+        <div class="stat rv"><b data-count="1989" data-plain="1">1989</b><span>The first Silicon Valley map</span></div>
+        <div class="stat rv"><b><span data-count="75000">75,000</span>+</b><span>Prints every year</span></div>
+        <div class="stat rv"><b data-count="92">92</b><span>Countries reached</span></div>
+        <div class="stat rv"><b><span data-count="365">365</span></b><span>Days on the wall</span></div>
+      </div>
+    </section>
+
+    <!-- COMPARE -->
+    <section class="compare" aria-labelledby="cmp-title">
+      <div class="wrap">
+        <div class="head head--center">
+          <p class="eyebrow">The difference</p>
+          <h2 class="h2" id="cmp-title">A banner ad gets a glance.<br><span class="grad">A map gets a year.</span></h2>
+        </div>
+        <div class="cmp">
+          <div class="cmp__col cmp__col--them rv">
+            <span class="cmp__k">Typical digital ad</span>
+            <ul>
+              <li><i>✕</i>Scrolled past in seconds</li>
+              <li><i>✕</i>Gone the moment the budget ends</li>
+              <li><i>✕</i>Hidden by ad blockers</li>
+              <li><i>✕</i>Shown next to anyone who pays</li>
+              <li><i>✕</i>Nothing to hand out or keep</li>
+            </ul>
+          </div>
+          <div class="cmp__vs" aria-hidden="true">vs</div>
+          <div class="cmp__col cmp__col--us rv">
+            <span class="cmp__k">Silicon Maps poster</span>
+            <ul>
+              <li><i>✓</i>On the wall for 365 days</li>
+              <li><i>✓</i>One annual price, visible all year</li>
+              <li><i>✓</i>Can't be blocked or skipped</li>
+              <li><i>✓</i>Placed next to Intel, AMD and Cisco</li>
+              <li><i>✓</i>A gift your customers keep</li>
+            </ul>
+            <a href="#build" class="btn btn--orange btn--block">Build my placement →</a>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- REGIONS INDEX -->
+    <section class="regions" id="regions" aria-labelledby="reg-title">
+      <div class="wrap">
+        <div class="head head--split">
+          <div>
+            <p class="eyebrow">The maps</p>
+            <h2 class="h2" id="reg-title">20+ regions.<br>One is yours.</h2>
+          </div>
+          <div class="seg" role="tablist" aria-label="Filter regions">
+            <button role="tab" aria-selected="true" data-cat="all">All</button>
+            <button role="tab" aria-selected="false" data-cat="tech">High Tech</button>
+            <button role="tab" aria-selected="false" data-cat="bio">Life Science</button>
+          </div>
+        </div>
+        <ol class="rindex" id="rindex"></ol>
+      </div>
+      <div class="rfloat" id="rfloat" aria-hidden="true"><img id="rfloatImg" src="../images/p-silicon-valley.jpg" alt=""></div>
+    </section>
+
+    <!-- BUILD: configurator -->
+    <section class="build" id="build" aria-labelledby="build-title">
+      <div class="wrap">
+        <div class="head head--center">
+          <p class="eyebrow">2027 packages</p>
+          <h2 class="h2" id="build-title">Build your placement<br>in three steps.</h2>
+          <p class="lead">Simple annual pricing. No payment needed to reserve, and you approve a proof before print.</p>
+        </div>
+        <div class="build__grid">
+          <div class="build__steps">
+            <div class="bstep">
+              <div class="bstep__h"><span class="bstep__n">1</span><h3>Choose your map</h3></div>
+              <div class="bmap">
+                <select id="pkRegion" aria-label="Choose your map"></select>
+                <p class="bmap__note"><span class="live"></span><span>Spaces on <b id="pkRegionName">Silicon Valley</b> are limited, first come, first served</span></p>
+              </div>
+            </div>
+            <div class="bstep">
+              <div class="bstep__h"><span class="bstep__n">2</span><h3>Pick a package</h3></div>
+              <div class="matrix-wrap">
+                <table class="matrix" id="matrix">
+                  <thead>
+                    <tr>
+                      <th scope="col" class="matrix__corner">What's included</th>
+                      <th scope="col" data-col="basic"><label><input type="radio" name="tier" value="basic" data-price="1995" data-name="Basic Profile"><span class="mh"><b>Basic</b><em>$1,995</em><small>/year</small></span></label></th>
+                      <th scope="col" data-col="silver"><label><input type="radio" name="tier" value="silver" data-price="2495" data-name="Silver Package"><span class="mh"><b>Silver</b><em>$2,495</em><small>/year</small></span></label></th>
+                      <th scope="col" data-col="gold"><label><input type="radio" name="tier" value="gold" data-price="3495" data-name="Gold Package" checked><span class="mh"><span class="mh__badge">Most chosen</span><b>Gold</b><em>$3,495</em><small>/year</small></span></label></th>
+                      <th scope="col" data-col="platinum"><label><input type="radio" name="tier" value="platinum" data-price="3995" data-name="Platinum Package"><span class="mh"><b>Platinum</b><em>$3,995</em><small>/year</small></span></label></th>
+                    </tr>
+                  </thead>
+                  <tbody>
+                    <tr><th scope="row">Logo, URL &amp; facility photo on the map</th><td>●</td><td>●</td><td>●</td><td>●</td></tr>
+                    <tr><th scope="row">On every printed poster this year</th><td>●</td><td>●</td><td>●</td><td>●</td></tr>
+                    <tr><th scope="row">Interactive logo linking to your site</th><td>●</td><td>●</td><td>●</td><td>●</td></tr>
+                    <tr><th scope="row">50 large custom-imprinted posters</th><td>–</td><td>●</td><td>●</td><td>●</td></tr>
+                    <tr><th scope="row">LinkedIn social promotion</th><td>–</td><td>●</td><td>●</td><td>●●</td></tr>
+                    <tr><th scope="row">50 mini custom-imprinted posters</th><td>–</td><td>–</td><td>●</td><td>●</td></tr>
+                    <tr><th scope="row">Expanded online profile</th><td>–</td><td>–</td><td>●</td><td>●</td></tr>
+                    <tr><th scope="row">50 custom mouse pads</th><td>–</td><td>–</td><td>–</td><td>●</td></tr>
+                    <tr><th scope="row">Featured on our website &amp; in email</th><td>–</td><td>–</td><td>–</td><td>●</td></tr>
+                  </tbody>
+                </table>
+              </div>
+              <p class="matrix__hint show-sm">Swipe to compare all four packages →</p>
+            </div>
+            <div class="bstep">
+              <div class="bstep__h"><span class="bstep__n">3</span><h3>Add extras</h3></div>
+              <div class="addons">
+                <label class="addon"><input type="checkbox" id="adMaps" data-price="395"><span class="addon__in"><b>+50 additional large maps</b><small>More posters to give away</small><em>+$395</em></span></label>
+                <label class="addon"><input type="checkbox" id="adSponsor" data-price="450"><span class="addon__in"><b>Corporate Sponsor listing</b><small>Listed above all participants, with an expanded profile</small><em>+$450</em></span></label>
+                <label class="addon"><input type="checkbox" id="adSetup" data-price="250" checked><span class="addon__in"><b>New client / imprint setup</b><small>One-time, for new clients or imprint changes</small><em>+$250</em></span></label>
+              </div>
+              <a href="#contact" class="semicon" data-interest="SEMICON West Sponsor"><img src="../images/d-semicon.png" alt="" width="40" height="40" loading="lazy"><span><b>Exhibiting at SEMICON West?</b> The $4,995 sponsorship includes 500+ posters handed out at our booth.</span><i>→</i></a>
+            </div>
+          </div>
+
+          <aside class="receipt" aria-live="polite">
+            <div class="receipt__card">
+              <div class="receipt__top">
+                <img src="../images/logo-dark.png" alt="" width="125" height="24">
+                <span class="mono">Order · 2027</span>
+              </div>
+              <dl class="receipt__lines" id="rLines"></dl>
+              <div class="receipt__total"><span>First-year total</span><b id="sumTotal">$3,745</b></div>
+              <p class="receipt__day">Just <b id="sumDay">$10.26</b> a day for a full year of visibility</p>
+              <button class="btn btn--orange btn--lg btn--block" id="reserveBtn">Reserve my spot →</button>
+              <ul class="receipt__trust"><li>No payment today</li><li>Reply within 1 business day</li><li>Invoice, PO or card</li></ul>
+            </div>
+            <a href="tel:+19253141130" class="receipt__call"><span class="av">SM</span><span><b>Prefer to talk?</b><small>925-314-1130, ext. 11</small></span></a>
+          </aside>
+        </div>
+      </div>
+    </section>
+
+    <!-- STORE -->
+    <section class="store" id="store" aria-labelledby="store-title">
+      <div class="wrap">
+        <div class="head head--split">
+          <div>
+            <p class="eyebrow">The store</p>
+            <h2 class="h2" id="store-title">Hang a region on your wall.</h2>
+          </div>
+          <div class="seg seg--light" role="tablist" aria-label="Filter products">
+            <button role="tab" aria-selected="true" data-f="all">All</button>
+            <button role="tab" aria-selected="false" data-f="tech">High Tech</button>
+            <button role="tab" aria-selected="false" data-f="bio">Life Science</button>
+            <button role="tab" aria-selected="false" data-f="gift">Gifts</button>
+          </div>
+        </div>
+        <div class="bento" id="bento"></div>
+        <div class="store__more"><button class="btn btn--line" id="showAll">Show all maps</button></div>
+      </div>
+    </section>
+
+    <!-- IN THE WILD -->
+    <section class="wild" aria-labelledby="wild-title">
+      <div class="wrap head head--split">
+        <div>
+          <p class="eyebrow">Seen in the wild</p>
+          <h2 class="h2" id="wild-title">From Times Square<br>to the Smithsonian.</h2>
+        </div>
+        <p class="lead">Airport displays, museum exhibits and trade-show booths put your logo in front of even more people.</p>
+      </div>
+      <div class="reel" aria-label="Photos of Silicon Maps on display">
+        <div class="reel__track">
+          <figure><img src="../images/d-times-square.jpg" alt="Silicon Valley map on a Times Square screen" loading="lazy" width="600" height="600"><figcaption>Times Square, NYC</figcaption></figure>
+          <figure><img src="../images/d-smithsonian.jpg" alt="Silicon Valley map at the Smithsonian" loading="lazy" width="600" height="450"><figcaption>Smithsonian Institution</figcaption></figure>
+          <figure><img src="../images/d-chm.jpg" alt="Map at the Computer History Museum store" loading="lazy" width="1200" height="900"><figcaption>Computer History Museum</figcaption></figure>
+          <figure><img src="../images/d-sjc-airport.jpg" alt="Map at San José International Airport" loading="lazy" width="600" height="450"><figcaption>San José Airport</figcaption></figure>
+          <figure><img src="../images/d-stanford.jpg" alt="Map at the Stanford Visitor Center" loading="lazy" width="472" height="600"><figcaption>Stanford Visitor Center</figcaption></figure>
+          <figure><img src="../images/d-pdx-airport.jpg" alt="Silicon Forest map at Portland International Airport" loading="lazy" width="800" height="600"><figcaption>Portland Airport</figcaption></figure>
+          <figure aria-hidden="true"><img src="../images/d-times-square.jpg" alt="" loading="lazy" width="600" height="600"><figcaption>Times Square, NYC</figcaption></figure>
+          <figure aria-hidden="true"><img src="../images/d-smithsonian.jpg" alt="" loading="lazy" width="600" height="450"><figcaption>Smithsonian Institution</figcaption></figure>
+          <figure aria-hidden="true"><img src="../images/d-chm.jpg" alt="" loading="lazy" width="1200" height="900"><figcaption>Computer History Museum</figcaption></figure>
+          <figure aria-hidden="true"><img src="../images/d-sjc-airport.jpg" alt="" loading="lazy" width="600" height="450"><figcaption>San José Airport</figcaption></figure>
+          <figure aria-hidden="true"><img src="../images/d-stanford.jpg" alt="" loading="lazy" width="472" height="600"><figcaption>Stanford Visitor Center</figcaption></figure>
+          <figure aria-hidden="true"><img src="../images/d-pdx-airport.jpg" alt="" loading="lazy" width="800" height="600"><figcaption>Portland Airport</figcaption></figure>
+        </div>
+      </div>
+    </section>
+
+    <!-- TESTIMONIALS -->
+    <section class="love" aria-labelledby="love-title">
+      <div class="wrap">
+        <div class="head head--center">
+          <p class="eyebrow">Sponsors renew year after year</p>
+          <h2 class="h2" id="love-title">Don't take our word for it.</h2>
+        </div>
+        <div class="quotes">
+          <figure class="q q--big rv">
+            <span class="q__mark" aria-hidden="true">“</span>
+            <blockquote>On the prospect side, we have repeatedly heard the comment that they <mark>"aspire" to be on the map.</mark></blockquote>
+            <figcaption><span class="av">SVB</span><span><b>Vice President, Southwest Region</b><small>Silicon Valley Bank</small></span></figcaption>
+          </figure>
+          <figure class="q rv">
+            <blockquote>Of all the other advertising options available, we find your Technology Map to be <mark>a most cost effective way</mark> to gain visibility.</blockquote>
+            <figcaption><span class="av">CI</span><span><b>Project Director</b><small>CIENA Corporation</small></span></figcaption>
+          </figure>
+          <figure class="q rv">
+            <blockquote>We've received so many compliments on the maps we've sent out previously, <mark>we definitely want to be included.</mark></blockquote>
+            <figcaption><span class="av">QED</span><span><b>Eileen Skaletsky, President</b><small>QED Bioscience, Inc.</small></span></figcaption>
+          </figure>
+          <figure class="q q--wide rv">
+            <blockquote>The content, color, and quality are unmatched. <mark>We enthusiastically reserve our order</mark> for next year.</blockquote>
+            <figcaption><span class="av">CW</span><span><b>Accounting Manager</b><small>Chemwest Systems, Inc.</small></span></figcaption>
+          </figure>
+        </div>
+      </div>
+    </section>
+
+    <!-- PROCESS -->
+    <section class="process" aria-labelledby="proc-title">
+      <div class="wrap">
+        <div class="head head--center">
+          <p class="eyebrow">How it works</p>
+          <h2 class="h2" id="proc-title">From yes to on the wall.</h2>
+        </div>
+        <div class="timeline">
+          <div class="timeline__line" aria-hidden="true"><i id="tlFill"></i></div>
+          <ol>
+            <li class="rv"><span class="tdot">1</span><h3>Reserve</h3><p>Pick your map and package. We confirm availability within 1 business day.</p></li>
+            <li class="rv"><span class="tdot">2</span><h3>Send your art</h3><p>A vector logo (.AI / .EPS) and a building photo. We help design your imprint.</p></li>
+            <li class="rv"><span class="tdot">3</span><h3>Approve the proof</h3><p>Check your ad space before print, and approve your final placement in autumn.</p></li>
+            <li class="rv"><span class="tdot">4</span><h3>Go live</h3><p>Posters ship, the map goes out worldwide and your logo is live online.</p></li>
+          </ol>
+        </div>
+      </div>
+    </section>
+
+    <!-- FAQ -->
+    <section class="faq" id="faq" aria-labelledby="faq-title">
+      <div class="wrap faq__grid">
+        <div>
+          <p class="eyebrow">FAQ</p>
+          <h2 class="h2" id="faq-title">Questions,<br>answered.</h2>
+          <p class="lead">Can't find what you need? Talk to the people who make the maps.</p>
+          <a href="tel:+19253141130" class="btn btn--line">Call 925-314-1130</a>
+        </div>
+        <div class="acc">
+          <details open><summary>Who actually sees the maps?</summary><p>75,000+ prints go out each year through trade shows, direct mail and the companies on the map: CEOs, VCs, engineers, researchers, government and economic development leaders, and universities. Sponsors also hand them out to their own sales, marketing and HR teams and their executives.</p></details>
+          <details><summary>When is the 2027 deadline?</summary><p>Spaces are first come, first served and limited on every map. Artwork is finalized in autumn, when every sponsor approves their final placement. The earlier you book, the more location options you have.</p></details>
+          <details><summary>What artwork do I need?</summary><p>A vector logo (.AI or .EPS), a high-resolution JPEG of your building, and any brand guidelines. Our art department designs your ad space and imprint and sends you a proof.</p></details>
+          <details><summary>Interactive logo vs. Expanded Profile?</summary><p>Every package includes an interactive logo that links to your website. The Expanded Profile (Gold and up) adds contact details, a company summary, social links, photos, careers and investor links, and a video.</p></details>
+          <details><summary>We're a startup. Is it for us?</summary><p>Yes. Participants range from companies building their first product to Fortune 100 multinationals. Sharing the map with industry leaders is exactly the point.</p></details>
+          <details><summary>Can we pay by invoice or PO?</summary><p>Yes. Reserve now and we'll send an invoice, or pay by card.</p></details>
+        </div>
+      </div>
+    </section>
+
+    <!-- FINAL CTA -->
+    <section class="final" id="contact" aria-labelledby="final-title">
+      <div class="wrap">
+        <div class="final__card">
+          <div class="final__copy">
+            <p class="eyebrow eyebrow--light">Free 2027 media kit</p>
+            <h2 class="h2 h2--light" id="final-title">Your competitors are already on the map.</h2>
+            <ul><li>Live availability for your map</li><li>The 2027 preview and placement options</li><li>Pricing and add-ons in one PDF</li></ul>
+          </div>
+          <form class="form" id="leadForm" novalidate>
+            <div class="form__row">
+              <label>Full name<input name="name" required autocomplete="name" placeholder="Jane Cooper"></label>
+              <label>Work email<input name="email" type="email" required autocomplete="email" placeholder="jane@company.com"></label>
+            </div>
+            <label>Company<input name="company" required autocomplete="organization" placeholder="Company, Inc."></label>
+            <div class="form__row">
+              <label>Map<select id="leadRegion" name="region"></select></label>
+              <label>Interested in<select id="leadInterest" name="interest"><option>Advertising on a map</option><option>Gold Package</option><option>SEMICON West Sponsor</option><option>Airport display sponsorship</option><option>Bulk order</option><option>Something else</option></select></label>
+            </div>
+            <button class="btn btn--orange btn--lg btn--block" type="submit">Send me the media kit →</button>
+            <p class="form__fine">We reply within 1 business day. No spam, ever.</p>
+            <div class="form__ok" hidden><span class="okc">✓</span><b>Your media kit is on its way.</b><p>We'll follow up with availability for <span id="okRegion">your map</span>.</p></div>
+          </form>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <footer class="foot">
+    <div class="wrap">
+      <div class="foot__grid">
+        <div class="foot__brand">
+          <img src="../images/logo-light.png" alt="Silicon Maps, We Put Your Business on the Map!" width="250" height="48" loading="lazy">
+          <p>A creative marketing agency and publisher of iconic promotional posters for the world's high-tech and life-science hubs since 1989.</p>
+          <a href="#build" class="btn btn--orange">Reserve my 2027 spot</a>
+        </div>
+        <div><h4>High Tech</h4><div id="footTech" class="foot__cols"></div></div>
+        <div><h4>Life Science</h4><div id="footBio"></div></div>
+        <div><h4>Contact</h4><a href="tel:+19253141130">925-314-1130, ext. 11</a><a href="mailto:sales@siliconmaps.com">sales@siliconmaps.com</a><span>Fax 925-314-1137</span><span>Walnut Creek, California</span></div>
+      </div>
+      <div class="foot__bar"><span>© 2026 Silicon Maps, Inc.</span><span>Version B · Daylight Atlas</span><a href="../">See Version A →</a><a href="../strategy/">Design rationale →</a></div>
+    </div>
+  </footer>
+
+  <!-- Sticky bar -->
+  <div class="sticky" id="sticky">
+    <img src="../images/p-silicon-valley.jpg" alt="" id="stickyImg" width="34" height="48">
+    <span class="sticky__t"><small id="stickyRegion">Silicon Valley 2027</small><b>From $1,995/yr</b></span>
+    <a href="#build" class="btn btn--orange btn--sm">Reserve a spot</a>
+  </div>
+
+  <!-- Region quick view -->
+  <div class="qv" id="qv" aria-hidden="true">
+    <div class="qv__scrim" data-qclose></div>
+    <div class="qv__box" role="dialog" aria-modal="true" aria-labelledby="qvName">
+      <button class="x" data-qclose aria-label="Close">×</button>
+      <img id="qvImg" src="../images/p-silicon-valley.jpg" alt="" width="345" height="495">
+      <div class="qv__body">
+        <span class="mono" id="qvCat">High Tech · Northern California</span>
+        <h3 id="qvName">Silicon Valley</h3>
+        <p id="qvDesc"></p>
+        <div class="qv__ctas">
+          <a href="#build" class="btn btn--orange btn--lg btn--block" id="qvAdvertise">Advertise on this map →</a>
+          <button class="btn btn--line btn--lg btn--block" id="qvBuy">Buy the 2026 poster · $25</button>
+        </div>
+        <p class="qv__fine">2027 edition now booking · limited ad spaces</p>
+      </div>
+    </div>
+  </div>
+
+  <!-- Cart drawer -->
+  <div class="drawer" id="drawer" aria-hidden="true">
+    <div class="drawer__scrim" data-close></div>
+    <aside class="drawer__panel" role="dialog" aria-modal="true" aria-labelledby="drawer-title">
+      <header><h3 id="drawer-title">Your cart</h3><button class="x" data-close aria-label="Close cart">×</button></header>
+      <div class="drawer__items" id="cartItems"></div>
+      <div class="drawer__upsell" id="cartUpsell"><img src="../images/p-puzzle.jpg" alt="" width="44" height="66"><p><b>Add the 150-piece puzzle?</b><small>Silicon Valley · a favorite desk gift · $29</small></p><button class="btn btn--ink btn--sm" data-add="sv-puzzle">Add</button></div>
+      <footer><p class="drawer__sub"><span>Subtotal</span><b id="cartSub">$0.00</b></p><p class="drawer__fine">Shipping calculated at checkout.</p><button class="btn btn--orange btn--lg btn--block" id="checkoutBtn">Checkout</button></footer>
+    </aside>
+  </div>
+
+  <!-- Reserve modal -->
+  <div class="modal" id="modal" aria-hidden="true">
+    <div class="modal__scrim" data-mclose></div>
+    <div class="modal__box" role="dialog" aria-modal="true" aria-labelledby="modal-title">
+      <button class="x modal__x" data-mclose aria-label="Close">×</button>
+      <div class="modal__form">
+        <span class="mono">Reserve · No payment today</span>
+        <h3 id="modal-title">Hold your spot on <span id="mRegion">Silicon Valley</span></h3>
+        <p class="modal__sum" id="mSum"></p>
+        <form id="reserveForm" class="form form--plain" novalidate>
+          <label>Full name<input name="name" required autocomplete="name"></label>
+          <label>Work email<input type="email" name="email" required autocomplete="email"></label>
+          <label>Company<input name="company" required autocomplete="organization"></label>
+          <label>Phone (optional)<input name="phone" type="tel" autocomplete="tel"></label>
+          <button class="btn btn--orange btn--lg btn--block" type="submit">Request my spot →</button>
+        </form>
+      </div>
+      <div class="modal__ok" hidden><span class="okc">✓</span><h3>Your spot is on hold.</h3><p>We'll email availability and a placement proof within 1 business day. In the meantime, have your vector logo (.AI / .EPS) and a building photo ready.</p><button class="btn btn--ink" data-mclose>Done</button></div>
+    </div>
+  </div>
+
+  <!-- Exit intent -->
+  <div class="modal" id="exit" aria-hidden="true">
+    <div class="modal__scrim" data-xclose></div>
+    <div class="modal__box modal__box--exit" role="dialog" aria-modal="true" aria-labelledby="exit-title">
+      <button class="x modal__x" data-xclose aria-label="Close">×</button>
+      <span class="mono">Before you go</span>
+      <h3 id="exit-title">Get the free 2027 media kit</h3>
+      <p>Availability, placement options and pricing for your map in one PDF.</p>
+      <a href="#contact" class="btn btn--orange btn--lg btn--block" data-xclose>Send me the media kit →</a>
+    </div>
+  </div>
+
+  <div class="toast" id="toast" role="status" aria-live="polite"></div>
+
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/gsap.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/ScrollTrigger.min.js"></script>
+  <script src="https://unpkg.com/lenis@1.1.13/dist/lenis.min.js"></script>
+  <script src="script.js"></script>
+</body>
+</html>
