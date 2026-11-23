@@ -1,146 +1,174 @@
-/* VK Homes — homepage interactions */
+/* VK Homes — "Elegant Living" homepage interactions */
 (function () {
   "use strict";
 
   var $ = function (s, c) { return (c || document).querySelector(s); };
   var $$ = function (s, c) { return Array.prototype.slice.call((c || document).querySelectorAll(s)); };
+  var root = document.documentElement;
   var reduce = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
   var hasGsap = typeof window.gsap !== "undefined" && typeof window.ScrollTrigger !== "undefined";
+  var motion = hasGsap && !reduce;
+  var finePointer = window.matchMedia("(hover: hover) and (pointer: fine)").matches;
+  if (!motion) root.classList.remove("motion"); // show everything plainly if GSAP failed / reduced motion
+  if (motion) root.classList.add("gsap-on");
 
   var yearEl = $("#year");
   if (yearEl) yearEl.textContent = new Date().getFullYear();
 
-  /* ---------- 1. Hero slideshow: changes every 3 seconds (client requirement) ---------- */
+  var header = $(".header"), hero = $(".hero");
+
+  /* ======================================================
+     1. Smooth scroll (Lenis) + anchor links
+     ====================================================== */
+  var lenis = null;
+  if (motion && typeof window.Lenis !== "undefined") {
+    lenis = new Lenis({ duration: 1.15, easing: function (t) { return Math.min(1, 1.001 - Math.pow(2, -10 * t)); }, smoothWheel: true });
+    lenis.on("scroll", ScrollTrigger.update);
+    gsap.ticker.add(function (t) { lenis.raf(t * 1000); });
+    gsap.ticker.lagSmoothing(0);
+    lenis.stop(); // locked while the preloader plays
+  }
+  function goTo(hash) {
+    var target = hash === "#top" ? 0 : $(hash);
+    if (target === null) return;
+    if (lenis) lenis.scrollTo(target, { duration: 1.6 });
+    else if (target === 0) window.scrollTo({ top: 0, behavior: reduce ? "auto" : "smooth" });
+    else target.scrollIntoView({ behavior: reduce ? "auto" : "smooth" });
+  }
+  $$('a[href^="#"]').forEach(function (a) {
+    a.addEventListener("click", function (e) {
+      var h = a.getAttribute("href");
+      if (h.length < 2) return;
+      e.preventDefault();
+      if (!mmenu.hidden) closeMenu();
+      goTo(h);
+    });
+  });
+
+  /* ======================================================
+     2. Hero slideshow — a new image every 3 seconds (client requirement)
+     ====================================================== */
   var SLIDE_MS = 3000;
-  var hero = $(".hero");
-  var slides = $$(".slide");
-  var dots = $$(".hero__progress button");
-  var nameEl = $("#slide-name"), statusEl = $("#slide-status"), numEl = $("#slide-num");
-  var current = 0, timer = null;
+  var slides = $$(".slide"), dots = $$(".hero__index button");
+  var nameEl = $("#h-name"), statusEl = $("#h-status");
+  var cur = 0, timer = null;
   hero.style.setProperty("--slide-ms", SLIDE_MS + "ms");
 
-  // Lazy images in hidden slides: force-load the next ones early so the change is seamless
-  slides.forEach(function (s) { var img = $("img", s); if (img) img.loading = "eager"; });
-
   function show(i) {
-    var prev = current;
-    current = (i + slides.length) % slides.length;
-    slides.forEach(function (s, k) { s.classList.toggle("is-active", k === current); });
+    var prev = cur;
+    cur = (i + slides.length) % slides.length;
+    slides.forEach(function (s, k) {
+      s.classList.remove("is-prev");
+      if (k === prev && prev !== cur) s.classList.add("is-prev");
+      if (k !== cur) s.classList.remove("is-active");
+    });
+    var s = slides[cur];
+    s.classList.remove("is-active"); void s.offsetWidth; s.classList.add("is-active");
     dots.forEach(function (d, k) {
       d.classList.remove("is-active");
-      d.classList.toggle("is-done", k < current);
-      d.setAttribute("aria-selected", k === current ? "true" : "false");
+      d.classList.toggle("is-done", k < cur);
     });
-    // restart CSS fill animation
-    var d = dots[current]; void d.offsetWidth; d.classList.add("is-active");
-    // restart Ken Burns on the new slide
-    var img = $("img", slides[current]);
-    if (img && prev !== current) { img.style.animation = "none"; void img.offsetWidth; img.style.animation = ""; }
-    var s = slides[current];
-    if (nameEl) nameEl.textContent = s.getAttribute("data-caption");
+    var d = dots[cur]; void d.offsetWidth; d.classList.add("is-active");
+    if (nameEl) swapText(nameEl, s.getAttribute("data-name"));
     if (statusEl) statusEl.textContent = s.getAttribute("data-status");
-    if (numEl) numEl.textContent = ("0" + (current + 1)).slice(-2);
   }
-  function start() { stop(); timer = setInterval(function () { show(current + 1); }, SLIDE_MS); hero.classList.remove("is-paused"); }
-  function stop() { if (timer) clearInterval(timer); timer = null; }
-  dots.forEach(function (d, k) { d.addEventListener("click", function () { show(k); start(); }); });
+  function swapText(el, txt) {
+    if (!motion) { el.textContent = txt; return; }
+    gsap.to(el, { yPercent: -60, opacity: 0, duration: .3, ease: "power2.in", onComplete: function () {
+      el.textContent = txt; gsap.fromTo(el, { yPercent: 60, opacity: 0 }, { yPercent: 0, opacity: 1, duration: .5, ease: "power3.out" });
+    } });
+  }
+  function startSlides() { stopSlides(); timer = setInterval(function () { show(cur + 1); }, SLIDE_MS); hero.classList.remove("is-paused"); }
+  function stopSlides() { if (timer) clearInterval(timer); timer = null; }
+  dots.forEach(function (d, k) { d.addEventListener("click", function () { if (k !== cur) show(k); startSlides(); }); });
   document.addEventListener("visibilitychange", function () {
-    if (document.hidden) { stop(); hero.classList.add("is-paused"); } else { show(current); start(); }
+    if (document.hidden) { stopSlides(); hero.classList.add("is-paused"); } else { startSlides(); }
   });
-  show(0); start();
 
-  /* ---------- 2. Header: transparent over hero, solid after; hides on scroll down ---------- */
-  var header = $(".header");
-  var mbar = $(".mbar");
+  /* ======================================================
+     3. Header, progress, floating CTAs, active nav
+     ====================================================== */
+  var mbar = $(".mbar"), floatCta = $(".float-cta"), progress = $(".progress i");
   var lastY = window.scrollY;
+  var secs = ["top", "approach", "available", "completed", "process", "contact"].map(function (id) { return [id, document.getElementById(id)]; });
+  var navLinks = $$(".nav__link");
+  function inView(el, frac) {
+    var r = el.getBoundingClientRect(), m = window.innerHeight * frac;
+    return r.top < m && r.bottom > m;
+  }
   function onScroll() {
-    var y = window.scrollY;
-    var heroEnd = hero.offsetHeight - 90;
-    header.classList.toggle("is-solid", y > heroEnd || document.body.classList.contains("menu-open"));
-    var goingDown = y > lastY && y > heroEnd + 200;
-    header.classList.toggle("is-hidden", goingDown && !document.body.classList.contains("menu-open") && !document.body.classList.contains("notes-on"));
-    mbar.classList.toggle("is-on", y > hero.offsetHeight * 0.6);
+    var y = window.scrollY, vh = window.innerHeight;
+    var menuOpen = document.body.classList.contains("menu-open");
+    var pastHero = y > hero.offsetHeight - 90;
+    header.classList.toggle("is-solid", pastHero && !menuOpen);
+    header.classList.toggle("is-hidden", y > lastY + 2 && pastHero && y > vh * 1.3 && !menuOpen && !document.body.classList.contains("notes-on"));
+    if (y < lastY - 2) header.classList.remove("is-hidden");
     lastY = y;
+
+    var max = document.documentElement.scrollHeight - vh;
+    progress.style.transform = "scaleX(" + (max > 0 ? y / max : 0).toFixed(4) + ")";
+
+    var cr = $("#completed").getBoundingClientRect();
+    var inGallery = cr.top < vh * .5 && cr.bottom > vh * .5;
+    var nearConvert = inView($("#available"), .5) || inView($("#contact"), .6) || inGallery || y > max - 200;
+    floatCta.classList.toggle("is-on", y > vh * .9 && !nearConvert);
+    mbar.classList.toggle("is-on", y > vh * .6);
+
+    var active = "top";
+    secs.forEach(function (s) { if (s[1] && inView(s[1], .42)) active = s[0]; });
+    if (active === "approach") active = "top";
+    navLinks.forEach(function (l) { l.classList.toggle("is-active", l.getAttribute("data-sec") === active); });
   }
   window.addEventListener("scroll", onScroll, { passive: true });
+  window.addEventListener("resize", onScroll);
   onScroll();
 
-  /* ---------- 3. Active nav link ---------- */
-  var navLinks = $$(".nav__link");
-  var map = { top: 0, completed: 1, available: 2, process: 3, contact: 4 };
-  var watched = [["top", hero], ["available", $("#available")], ["approach", $("#approach")], ["completed", $("#completed")], ["process", $("#process")], ["contact", $("#contact")]];
-  function setActive() {
-    var mid = window.innerHeight * 0.4, active = "top";
-    watched.forEach(function (w) {
-      var r = w[1].getBoundingClientRect();
-      if (r.top <= mid && r.bottom > mid) active = w[0];
-    });
-    if (active === "approach") active = "available";
-    navLinks.forEach(function (l, k) { l.classList.toggle("is-active", k === map[active]); });
-  }
-  window.addEventListener("scroll", setActive, { passive: true });
-  setActive();
-
-  /* ---------- 4. Mobile menu ---------- */
-  var burger = $(".burger"), mmenu = $("#mobile-menu");
+  /* ======================================================
+     4. Mobile menu
+     ====================================================== */
+  var burger = $(".burger"), mmenu = $("#mmenu");
   function closeMenu() {
     burger.setAttribute("aria-expanded", "false"); burger.setAttribute("aria-label", "Open menu");
-    mmenu.hidden = true; document.body.classList.remove("menu-open"); onScroll();
+    mmenu.hidden = true; document.body.classList.remove("menu-open");
+    if (lenis) lenis.start();
+    onScroll();
   }
   burger.addEventListener("click", function () {
-    var open = burger.getAttribute("aria-expanded") === "true";
-    if (open) { closeMenu(); return; }
+    if (burger.getAttribute("aria-expanded") === "true") { closeMenu(); return; }
     burger.setAttribute("aria-expanded", "true"); burger.setAttribute("aria-label", "Close menu");
-    mmenu.hidden = false; document.body.classList.add("menu-open"); header.classList.add("is-solid");
+    mmenu.hidden = false; document.body.classList.add("menu-open"); onScroll();
+    if (lenis) lenis.stop();
+    if (motion) gsap.from($$("nav a", mmenu), { yPercent: 60, opacity: 0, duration: .8, stagger: .06, ease: "power4.out" });
   });
-  $$("a", mmenu).forEach(function (a) { a.addEventListener("click", closeMenu); });
   document.addEventListener("keydown", function (e) { if (e.key === "Escape" && !mmenu.hidden) closeMenu(); });
 
-  /* ---------- 5. Copy email ---------- */
+  /* ======================================================
+     5. Copy email + toast
+     ====================================================== */
   var toast = $(".toast"), toastT;
   function say(msg) { toast.textContent = msg; toast.classList.add("is-on"); clearTimeout(toastT); toastT = setTimeout(function () { toast.classList.remove("is-on"); }, 2200); }
   $$("[data-copy]").forEach(function (b) {
-    b.addEventListener("click", function () {
+    b.addEventListener("click", function (e) {
+      e.preventDefault(); e.stopPropagation();
       var v = b.getAttribute("data-copy");
-      var done = function () { say("Email copied — " + v); $("span", b).textContent = "Copied"; setTimeout(function () { $("span", b).textContent = "Copy"; }, 2000); };
+      var done = function () { say("Email copied — " + v); b.textContent = "Copied ✓"; setTimeout(function () { b.textContent = "Copy"; }, 2000); };
       if (navigator.clipboard && window.isSecureContext) navigator.clipboard.writeText(v).then(done, function () { say(v); });
-      else {
-        var t = document.createElement("textarea"); t.value = v; document.body.appendChild(t); t.select();
-        try { document.execCommand("copy"); done(); } catch (e) { say(v); }
-        t.remove();
-      }
+      else { var t = document.createElement("textarea"); t.value = v; document.body.appendChild(t); t.select(); try { document.execCommand("copy"); done(); } catch (er) { say(v); } t.remove(); }
     });
   });
 
-  /* ---------- 6. Build process — highlight step in view ---------- */
-  var steps = $$(".step"), pimgs = $$(".pimg"), stamp = $("#pstamp"), stepsList = $(".steps");
-  function setStep(i) {
-    steps.forEach(function (s, k) { s.classList.toggle("is-active", k === i); s.classList.toggle("is-past", k < i); });
-    pimgs.forEach(function (p, k) { p.classList.toggle("is-active", k === i); });
-    if (stamp) stamp.textContent = "Step " + ("0" + (i + 1)).slice(-2);
-  }
-  function stepScroll() {
-    var mid = window.innerHeight * 0.5, idx = 0;
-    steps.forEach(function (s, k) { if (s.getBoundingClientRect().top < mid) idx = k; });
-    setStep(idx);
-    var r = stepsList.getBoundingClientRect();
-    var p = Math.min(1, Math.max(0, (mid - r.top) / r.height));
-    stepsList.style.setProperty("--p", p.toFixed(3));
-  }
-  window.addEventListener("scroll", stepScroll, { passive: true });
-  stepScroll();
-
-  /* ---------- 7. Design rationale notes (for the client review) ---------- */
+  /* ======================================================
+     6. Design-rationale notes (to walk the client through the layout)
+     ====================================================== */
   var NOTES = {
-    1: ["Header", "Same menu the client asked for (Homepage · Completed · Available · Build Process · Contact ↗). A phone button is always visible on desktop, and the header hides while reading but slides back the moment you scroll up — so 'call' is never more than one move away."],
-    2: ["Hero slideshow", "Required: images change automatically every 3 seconds. Each slide is labelled (Available now / Completed) so even the slideshow sells. One clear main action — 'See available homes' — plus a softer 'Talk to the builder' for people who prefer to call. Tagline from the logo keeps the brand consistent."],
-    3: ["At-a-glance strip", "Visitors decide in seconds. These four facts answer 'what can I buy, can I trust you, and how easy is this?' before they even scroll. Numbers match what's actually on the page — no inflated claims."],
-    4: ["Available homes first", "These are the homes that make money today, so they come before the portfolio. Green 'Available now' signals create urgency; every card has its own 'Enquire' button that opens an email already titled with the home's name — less typing = more enquiries. Phase 1 keeps it to image + title, exactly as agreed."],
-    5: ["Safety net", "If none of the available homes fit, we don't lose the visitor — we invite them to get first access to upcoming homes. This catches buyers who would otherwise just leave."],
-    6: ["Our approach", "Uses the client's own words and layout (01 / Our Approach · 'Good design is how a home feels'). Placed after the homes so it builds trust right when the visitor is weighing up an enquiry. Three short promises turn the paragraph into scannable reasons to choose VK Homes."],
-    7: ["Completed homes = proof", "Real finished homes are the strongest trust signal a builder has. A cinematic dark gallery makes them feel premium; on desktop it glides sideways as you scroll, on phones it swipes. It ends with a CTA back to available homes so the visitor's excitement turns into action."],
-    8: ["Build process", "Uncertainty stops people enquiring. Five plain-English steps show exactly what happens, with the image and progress line following along. It ends on 'Step one takes just a phone call' — making the first move feel small and easy."],
-    9: ["Contact", "As requested: phone + email only, no form. Both are one-tap (tap-to-call / tap-to-email) with a 'Copy' button for desktop users. Hours and reply time set expectations, and the 'currently taking enquiries' line adds gentle urgency. On phones, a sticky Call · Email · Available homes bar is always within thumb reach."]
+    1: ["Header", "Exactly the menu Venkat asked for (Homepage · Completed · Available · Build Process · Contact ↗). A 'call' button with a green 'available' dot sits top-right on every screen. The header tucks away while reading and returns the moment you scroll up."],
+    2: ["Cinematic hero", "Required: a new image every 3 seconds, automatically. Each slide wipes in like a film cut and is labelled 'Available now' or 'Completed', so even the slideshow sells. The logo's own tagline is the headline. One main action (See available homes), one for callers, and a '3 homes available now' card that answers the #1 buyer question instantly."],
+    3: ["Our approach", "Venkat's own words, presented as a manifesto that lights up word by word as you scroll — it forces a slower, emotional read. Three short promises turn the paragraph into scannable reasons to trust VK Homes."],
+    4: ["Available homes first", "These are the homes that make money today, so they come before the portfolio. Large, magazine-style imagery with a live 'Available now' signal; the whole card is one tap to enquire, opening an email already titled with that home's name. Phase 1 keeps it to image + title, exactly as agreed."],
+    5: ["Safety net", "If none of the homes fit, we don't lose the visitor — we offer first access to upcoming homes. The email even pre-fills what to tell us (bedrooms, area, timing), so the lead arrives qualified."],
+    6: ["Completed homes = proof", "Finished homes are a builder's strongest trust signal. A dark, cinematic chapter that pins and glides sideways as you scroll (swipe on phones) makes the portfolio feel premium. It ends by pointing back to the available homes while excitement is highest."],
+    7: ["Build process", "Uncertainty is what stops people enquiring. Five plain-English steps stack on top of each other as you scroll — one idea at a time. The last card ends with the easiest possible first step: a phone call."],
+    8: ["Contact", "As requested: phone and email only, no form. Huge, tappable rows (tap-to-call / tap-to-email) plus a Copy button for desktop. Hours and reply time set expectations; 'currently taking enquiries' adds gentle urgency. Throughout the page a floating 'View & enquire' pill (desktop) and a Call · Email bar (mobile) keep the next step one tap away."]
   };
   $$("[data-note]").forEach(function (el) {
     var n = el.getAttribute("data-note"), d = NOTES[n];
@@ -149,124 +177,232 @@
     box.className = "note";
     box.innerHTML = "<b><i>" + n + "</i>" + d[0] + "</b><p>" + d[1] + "</p>";
     if (el === header) { box.classList.add("note--header"); hero.appendChild(box); }
+    else if (el.classList.contains("completed")) $(".completed__pin", el).appendChild(box);
     else el.appendChild(box);
   });
   var notesBtn = $(".notes-toggle");
-  notesBtn.addEventListener("click", function () {
-    var on = document.body.classList.toggle("notes-on");
+  function setNotes(on) {
+    document.body.classList.toggle("notes-on", on);
     notesBtn.setAttribute("aria-pressed", on ? "true" : "false");
     $(".notes-toggle__txt").textContent = on ? "Hide notes" : "Why this layout?";
+    $$(".notes-link").forEach(function (x) { x.textContent = on ? "Hide design notes" : "Why this layout? — design notes"; });
     if (on) header.classList.remove("is-hidden");
-  });
+  }
+  notesBtn.addEventListener("click", function () { setNotes(!document.body.classList.contains("notes-on")); });
   $$(".notes-link").forEach(function (l) {
     l.addEventListener("click", function () {
       if (!mmenu.hidden) closeMenu();
-      notesBtn.click();
-      var on = document.body.classList.contains("notes-on");
-      $$(".notes-link").forEach(function (x) { x.textContent = on ? "Hide design notes" : "Why this layout?"; });
-      if (on) window.scrollTo({ top: 0, behavior: "smooth" });
+      var on = !document.body.classList.contains("notes-on");
+      setNotes(on);
+      if (on) goTo("#top");
     });
   });
-  if (/[?&]notes\b/.test(location.search)) notesBtn.click();
+  if (/[?&]notes\b/.test(location.search)) setNotes(true);
 
-  /* ---------- 8. GSAP motion ---------- */
-  if (!hasGsap || reduce) {
-    document.documentElement.classList.remove("js-anim");
+  /* ======================================================
+     No-motion path: show everything, start slides, done.
+     ====================================================== */
+  if (!motion) {
+    root.classList.add("loaded", "gone");
+    show(0); startSlides();
     return;
   }
+
   gsap.registerPlugin(ScrollTrigger);
 
-  // Split headings into words for a masked reveal
-  $$(".reveal-words").forEach(function (h) {
+  /* ======================================================
+     7. Custom cursor + magnetic buttons (desktop only)
+     ====================================================== */
+  if (finePointer) {
+    var cursor = $(".cursor"), label = $(".cursor__label");
+    var cx = gsap.quickTo(cursor, "x", { duration: .45, ease: "power3" });
+    var cy = gsap.quickTo(cursor, "y", { duration: .45, ease: "power3" });
+    window.addEventListener("mousemove", function (e) { cx(e.clientX); cy(e.clientY); });
+    $$("[data-cursor]").forEach(function (el) {
+      el.addEventListener("mouseenter", function () { label.textContent = el.getAttribute("data-cursor"); cursor.classList.add("has-label"); });
+      el.addEventListener("mouseleave", function () { cursor.classList.remove("has-label"); });
+    });
+    $$("a, button").forEach(function (el) {
+      if (el.closest("[data-cursor]")) return;
+      el.addEventListener("mouseenter", function () { cursor.classList.add("is-link"); });
+      el.addEventListener("mouseleave", function () { cursor.classList.remove("is-link"); });
+    });
+    $$(".magnetic").forEach(function (el) {
+      var mx = gsap.quickTo(el, "x", { duration: .6, ease: "elastic.out(1, .4)" });
+      var my = gsap.quickTo(el, "y", { duration: .6, ease: "elastic.out(1, .4)" });
+      el.addEventListener("mousemove", function (e) {
+        var r = el.getBoundingClientRect();
+        mx((e.clientX - r.left - r.width / 2) * .28); my((e.clientY - r.top - r.height / 2) * .38);
+      });
+      el.addEventListener("mouseleave", function () { mx(0); my(0); });
+    });
+  }
+
+  /* ======================================================
+     8. Preloader → hero intro
+     ====================================================== */
+  var counter = $(".loader__count b"), count = { v: 0 };
+  var pageLoaded = document.readyState === "complete";
+  window.addEventListener("load", function () { pageLoaded = true; });
+  gsap.to(count, {
+    v: 100, duration: 1.7, ease: "power2.inOut",
+    onUpdate: function () { counter.textContent = ("00" + Math.round(count.v)).slice(-3); },
+    onComplete: function () { revealPage(); }
+  });
+  var revealed = false;
+  function revealPage() {
+    if (revealed) return; revealed = true;
+    root.classList.add("loaded");
+    setTimeout(function () { root.classList.add("gone"); }, 1500);
+    if (lenis) lenis.start();
+    heroIntro();
+  }
+  setTimeout(revealPage, 3800); // hard cap
+
+  function heroIntro() {
+    show(0);
+    var tl = gsap.timeline({ defaults: { ease: "power4.out" }, delay: .45, onStart: startSlides });
+    tl.fromTo(".slide.is-active img", { scale: 1.35 }, { scale: 1.06, duration: 2.4, ease: "power3.out" }, 0)
+      .to(".hero__title .ln > span", { y: 0, duration: 1.4, stagger: .12 }, .15)
+      .fromTo(".hero__kicker", { opacity: 0, y: 16 }, { opacity: 1, y: 0, duration: 1 }, .3)
+      .fromTo(".header__inner", { opacity: 0, y: -16 }, { opacity: 1, y: 0, duration: 1 }, .3)
+      .fromTo(".hero__side", { opacity: 0, y: 30 }, { opacity: 1, y: 0, duration: 1.1 }, .7)
+      .fromTo(".hero__now", { opacity: 0, x: 30 }, { opacity: 1, x: 0, duration: 1.1 }, .85)
+      .fromTo(".hero__foot", { opacity: 0 }, { opacity: 1, duration: 1.2 }, 1);
+  }
+
+  /* ======================================================
+     9. Scroll choreography
+     ====================================================== */
+  // Hero: image frame zooms out into a rounded card, copy drifts away
+  gsap.to(".hero__media", {
+    clipPath: "inset(6% 3% 0% 3% round 22px)", ease: "none",
+    scrollTrigger: { trigger: hero, start: "top top", end: "bottom top", scrub: true }
+  });
+  gsap.to(".hero__grid", { yPercent: -14, opacity: 0, ease: "none", scrollTrigger: { trigger: hero, start: "35% top", end: "bottom top", scrub: true } });
+
+  // Split headings into masked words
+  function splitWords(el) {
     var out = [];
-    Array.prototype.slice.call(h.childNodes).forEach(function (node) {
+    Array.prototype.slice.call(el.childNodes).forEach(function (node) {
       if (node.nodeType === 3) {
         node.textContent.split(/(\s+)/).forEach(function (part) {
           if (!part) return;
-          if (/^\s+$/.test(part)) out.push(document.createTextNode(" "));
-          else { var w = document.createElement("span"); w.className = "w"; w.innerHTML = "<span>" + part + "</span>"; out.push(w); }
+          if (/^\s+$/.test(part)) { out.push(document.createTextNode(" ")); return; }
+          var w = document.createElement("span"); w.className = "w";
+          var i = document.createElement("span"); i.textContent = part; w.appendChild(i); out.push(w);
         });
       } else {
         var w2 = document.createElement("span"); w2.className = "w";
-        var inner = document.createElement("span"); inner.appendChild(node.cloneNode(true));
-        w2.appendChild(inner); out.push(w2);
+        var i2 = document.createElement("span"); i2.appendChild(node.cloneNode(true)); w2.appendChild(i2); out.push(w2);
       }
     });
-    h.innerHTML = ""; out.forEach(function (n) { h.appendChild(n); });
-    gsap.from($$(".w > span", h), {
-      yPercent: 110, duration: 1.1, ease: "power4.out", stagger: 0.05,
-      scrollTrigger: { trigger: h, start: "top 85%" }
-    });
+    el.innerHTML = ""; out.forEach(function (n) { el.appendChild(n); });
+    return $$(".w > span", el);
+  }
+  $$(".split-words").forEach(function (h) {
+    var words = splitWords(h);
+    gsap.from(words, { yPercent: 115, rotate: 4, duration: 1.3, ease: "power4.out", stagger: .07, scrollTrigger: { trigger: h, start: "top 85%" } });
   });
 
-  // Hero intro
-  var tl = gsap.timeline({ defaults: { ease: "power4.out" } });
-  tl.to(".hero__title .line > span", { y: 0, yPercent: 0, duration: 1.3, stagger: 0.12 }, 0.15)
-    .fromTo(".hero__eyebrow", { opacity: 0, y: 14 }, { opacity: 1, y: 0, duration: .9 }, 0.1)
-    .fromTo(".hero__lead", { opacity: 0, y: 20 }, { opacity: 1, y: 0, duration: 1 }, 0.55)
-    .fromTo(".hero__cta", { opacity: 0, y: 20 }, { opacity: 1, y: 0, duration: 1 }, 0.7)
-    .fromTo(".hero__bar", { opacity: 0 }, { opacity: 1, duration: 1 }, 0.9)
-    .fromTo(".header__inner", { opacity: 0, y: -14 }, { opacity: 1, y: 0, duration: 1 }, 0.2);
-
-  // Hero content drifts as you scroll away
-  gsap.to(".hero__content", { yPercent: -18, opacity: 0.2, ease: "none", scrollTrigger: { trigger: hero, start: "top top", end: "bottom top", scrub: true } });
-
-  // Count-up facts
-  $$(".fact__num").forEach(function (el) {
-    var end = +el.getAttribute("data-count"), o = { v: 0 };
-    gsap.to(o, { v: end, duration: 1.4, ease: "power2.out", scrollTrigger: { trigger: el, start: "top 90%" },
-      onUpdate: function () { el.textContent = ("0" + Math.round(o.v)).slice(-2); } });
+  // Manifesto: words light up as you read
+  $$(".scroll-lit").forEach(function (p) {
+    splitWords(p);
+    var ws = $$(".w", p);
+    gsap.to(ws, { opacity: 1, stagger: .08, ease: "none", scrollTrigger: { trigger: p, start: "top 78%", end: "bottom 42%", scrub: true } });
   });
-  gsap.from(".fact", { opacity: 0, y: 24, duration: .9, stagger: .08, ease: "power3.out", scrollTrigger: { trigger: ".facts", start: "top 90%" } });
-
-  // Generic fades
-  gsap.utils.toArray(".sec-index, .eyebrow:not(.hero__eyebrow), .sec-head__aside, .body-lg, .link-arrow, .nudge, .process__cta, .contact__lead, .contact__cards > *").forEach(function (el) {
-    gsap.from(el, { opacity: 0, y: 26, duration: 1, ease: "power3.out", scrollTrigger: { trigger: el, start: "top 90%" } });
+  gsap.fromTo(".float-img--a", { yPercent: 30 }, { yPercent: -25, ease: "none", scrollTrigger: { trigger: ".manifesto", start: "top bottom", end: "bottom top", scrub: true } });
+  gsap.fromTo(".float-img--b", { yPercent: 70 }, { yPercent: -60, ease: "none", scrollTrigger: { trigger: ".manifesto", start: "top bottom", end: "bottom top", scrub: true } });
+  $$(".float-img").forEach(function (f) {
+    gsap.fromTo(f, { clipPath: "inset(100% 0 0 0)" }, { clipPath: "inset(0% 0 0 0)", duration: 1.6, ease: "power4.inOut", scrollTrigger: { trigger: ".manifesto", start: "top 60%" } });
   });
 
-  // Available cards: clip reveal
-  gsap.from(".card", { opacity: 0, y: 60, duration: 1.1, stagger: .12, ease: "power3.out", scrollTrigger: { trigger: ".cards", start: "top 82%" } });
-  $$(".card__media").forEach(function (m) {
-    gsap.fromTo(m, { clipPath: "inset(18% 0 0 0)" }, { clipPath: "inset(0% 0 0 0)", duration: 1.4, ease: "power4.out", scrollTrigger: { trigger: m, start: "top 88%" } });
+  // Marquee that speeds up with scroll velocity
+  var marq = gsap.to(".marquee__row", { xPercent: -50, duration: 32, ease: "none", repeat: -1 });
+  var marqST = ScrollTrigger.create({
+    trigger: ".marquee", start: "top bottom", end: "bottom top",
+    onUpdate: function (self) {
+      var v = self.getVelocity();
+      gsap.to(marq, { timeScale: (v < 0 ? -1 : 1) * (1 + Math.min(Math.abs(v) / 260, 6)), duration: .2, overwrite: true });
+      gsap.to(marq, { timeScale: v < 0 ? -1 : 1, duration: 1.4, delay: .2, overwrite: false });
+    }
   });
 
-  // Approach images
-  $$(".clip").forEach(function (c, i) {
-    gsap.fromTo(c, { clipPath: "inset(0 0 100% 0)" }, { clipPath: "inset(0 0 0% 0)", duration: 1.5, delay: i * .15, ease: "power4.inOut", scrollTrigger: { trigger: ".approach__media", start: "top 80%" } });
+  // Generic fade-ups
+  gsap.utils.toArray(".label, .eyebrow, .avail__meta, .process__sub, .link-line, .promise, .contact__note, .footer__top > *").forEach(function (el) {
+    if (el.closest(".hero")) return;
+    gsap.from(el, { opacity: 0, y: 28, duration: 1.1, ease: "power3.out", scrollTrigger: { trigger: el, start: "top 90%" } });
   });
-  gsap.fromTo(".parallax", { yPercent: -8 }, { yPercent: 4, ease: "none", scrollTrigger: { trigger: ".approach__media", start: "top bottom", end: "bottom top", scrub: true } });
-  gsap.from(".pillar", { opacity: 0, y: 30, duration: 1, stagger: .12, ease: "power3.out", scrollTrigger: { trigger: ".pillars", start: "top 85%" } });
 
-  // Completed homes — horizontal scroll pinned on desktop
+  // Available homes: curtain reveal + inner parallax
+  $$(".home").forEach(function (h, i) {
+    var media = $(".home__media", h), img = $("img", media);
+    gsap.fromTo(media, { clipPath: "inset(100% 0 0 0)" }, { clipPath: "inset(0% 0 0 0)", duration: 1.5, delay: (i % 3) * .12, ease: "power4.inOut", scrollTrigger: { trigger: h, start: "top 88%" } });
+    gsap.fromTo(img, { yPercent: -6 }, { yPercent: 6, ease: "none", scrollTrigger: { trigger: h, start: "top bottom", end: "bottom top", scrub: true } });
+    gsap.from($(".home__row", h), { opacity: 0, y: 20, duration: 1, delay: .4 + (i % 3) * .12, ease: "power3.out", scrollTrigger: { trigger: h, start: "top 88%" } });
+  });
+  gsap.from(".firstdibs", { opacity: 0, y: 40, duration: 1.2, ease: "power3.out", scrollTrigger: { trigger: ".firstdibs", start: "top 90%" } });
+
+  // Completed: pinned horizontal gallery with velocity skew (desktop), native swipe (touch)
+  var completed = $(".completed"), track = $(".track"), bar = $(".completed__bar i"), cnum = $("#c-num");
+  var tiles = $$(".tile:not(.tile--cta)");
   var mm = gsap.matchMedia();
-  var completed = $(".completed"), track = $(".track"), bar = $(".completed__bar i");
-  mm.add("(min-width: 1025px)", function () {
+  mm.add("(min-width: 1101px)", function () {
     completed.classList.add("is-pinned");
     var dist = function () { return Math.max(0, track.scrollWidth - window.innerWidth); };
+    var skew = gsap.quickTo(".tile", "skewX", { duration: .5, ease: "power3" });
     var tw = gsap.to(track, {
       x: function () { return -dist(); }, ease: "none",
       scrollTrigger: {
         trigger: completed, start: "top top", end: function () { return "+=" + dist(); },
-        pin: true, scrub: 0.8, invalidateOnRefresh: true, anticipatePin: 1,
-        onUpdate: function (self) { bar.style.transform = "scaleX(" + self.progress.toFixed(3) + ")"; }
+        pin: true, scrub: 1, invalidateOnRefresh: true, anticipatePin: 1,
+        onUpdate: function (self) {
+          bar.style.transform = "scaleX(" + self.progress.toFixed(3) + ")";
+          cnum.textContent = ("0" + Math.min(6, 1 + Math.floor(self.progress * 6))).slice(-2);
+          skew(gsap.utils.clamp(-6, 6, self.getVelocity() / -400));
+        },
+        onScrubComplete: function () { skew(0); }
       }
     });
-    return function () { completed.classList.remove("is-pinned"); gsap.set(track, { x: 0 }); tw.kill(); };
+    gsap.to(".completed__ghost", { xPercent: -30, ease: "none", scrollTrigger: { trigger: completed, start: "top top", end: function () { return "+=" + dist(); }, scrub: true } });
+    tiles.forEach(function (t) {
+      gsap.fromTo($("img", t), { xPercent: 6 }, { xPercent: -6, ease: "none", scrollTrigger: { trigger: t, containerAnimation: tw, start: "left right", end: "right left", scrub: true } });
+    });
+    return function () { completed.classList.remove("is-pinned"); gsap.set(track, { x: 0 }); gsap.set(".tile", { skewX: 0 }); };
   });
-  mm.add("(max-width: 1024px)", function () {
+  mm.add("(max-width: 1100px)", function () {
+    var hint = $(".completed__hint"); hint.textContent = "Swipe to explore";
     var upd = function () {
-      var max = track.scrollWidth - track.clientWidth;
-      bar.style.transform = "scaleX(" + (max > 0 ? track.scrollLeft / max : 0).toFixed(3) + ")";
+      var max = track.scrollWidth - track.clientWidth, p = max > 0 ? track.scrollLeft / max : 0;
+      bar.style.transform = "scaleX(" + p.toFixed(3) + ")";
+      cnum.textContent = ("0" + Math.min(6, 1 + Math.floor(p * 6))).slice(-2);
     };
     track.addEventListener("scroll", upd, { passive: true });
-    $(".completed__hint").textContent = "Swipe to explore";
-    return function () { track.removeEventListener("scroll", upd); $(".completed__hint").textContent = "Scroll to explore"; };
+    return function () { track.removeEventListener("scroll", upd); hint.textContent = "Scroll to explore"; };
   });
-  gsap.from(".tile", { opacity: 0, y: 50, duration: 1.1, stagger: .08, ease: "power3.out", scrollTrigger: { trigger: completed, start: "top 70%" } });
+  gsap.from(".tile", { opacity: 0, y: 80, duration: 1.3, stagger: .08, ease: "power4.out", scrollTrigger: { trigger: completed, start: "top 65%" } });
 
-  // Contact background parallax
-  gsap.fromTo(".contact__bg img", { yPercent: -6, scale: 1.1 }, { yPercent: 6, ease: "none", scrollTrigger: { trigger: ".contact", start: "top bottom", end: "bottom top", scrub: true } });
+  // Process: each card recedes as the next one stacks on top
+  var cards = $$(".pcard");
+  cards.forEach(function (c, i) {
+    var img = $(".pcard__img img", c);
+    gsap.fromTo(img, { scale: 1.25 }, { scale: 1, ease: "none", scrollTrigger: { trigger: c, start: "top bottom", end: "top 30%", scrub: true } });
+    if (i === cards.length - 1) return;
+    gsap.to(c, {
+      scale: .9 + i * .015, filter: "brightness(.72)", ease: "none",
+      scrollTrigger: { trigger: cards[i + 1], start: "top bottom", end: "top 25%", scrub: true }
+    });
+  });
 
-  // Refresh once images settle
+  // Contact: giant lines rise, image parallax, rows slide in
+  gsap.fromTo(".contact__title .ln > span", { yPercent: 110 }, { yPercent: 0, duration: 1.4, stagger: .12, ease: "power4.out", scrollTrigger: { trigger: ".contact__title", start: "top 85%" } });
+  gsap.fromTo(".contact__img", { clipPath: "inset(100% 0 0 0)" }, { clipPath: "inset(0% 0 0 0)", duration: 1.6, ease: "power4.inOut", scrollTrigger: { trigger: ".contact__top", start: "top 70%" } });
+  gsap.fromTo(".contact__img img", { yPercent: -10 }, { yPercent: 4, ease: "none", scrollTrigger: { trigger: ".contact", start: "top bottom", end: "bottom top", scrub: true } });
+  gsap.from(".row", { opacity: 0, y: 50, duration: 1.1, stagger: .12, ease: "power3.out", scrollTrigger: { trigger: ".rows", start: "top 88%" } });
+
+  // Footer wordmark rises in
+  gsap.fromTo(".footer__word", { yPercent: 35, opacity: .2 }, { yPercent: 0, opacity: 1, ease: "none", scrollTrigger: { trigger: ".footer", start: "top bottom", end: "bottom bottom", scrub: true } });
+
   window.addEventListener("load", function () { ScrollTrigger.refresh(); });
+  if (document.fonts && document.fonts.ready) document.fonts.ready.then(function () { ScrollTrigger.refresh(); });
 })();
