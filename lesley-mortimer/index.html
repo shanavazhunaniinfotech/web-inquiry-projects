@@ -1,0 +1,102 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+  <meta name="robots" content="noindex, nofollow">
+  <title>Brand Guide Preview</title>
+  <meta name="description" content="Enter your own brand guide and see it on a Shopify-style store, with free local delivery and multi-buy discounts working. Nothing is uploaded.">
+  <meta name="theme-color" content="#24211d">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Albert+Sans:wght@400;500;600;700;800&display=swap">
+  <link id="brandFonts" rel="stylesheet" href="">
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <header class="top">
+    <div class="wrap">
+      <p class="kind"><span>TOOL</span>Brand Guide Preview · made for Lesley by Riyaz Lohiya</p>
+      <h1>Put your brand guide in. <em>See your store in your style.</em></h1>
+      <p class="lede">You said your main concern is someone who can truly follow your brand guide. So here you're in charge: type in your own colours, fonts, logo and story, and the store on the right follows them. Nothing is uploaded or saved anywhere; it all stays in your browser.</p>
+    </div>
+  </header>
+
+  <main class="wrap app">
+    <form class="panel" id="panel" autocomplete="off">
+      <fieldset>
+        <legend>1 · Your brand</legend>
+        <label>Business name<input id="name" value="Your Brand" maxlength="40"></label>
+        <label>Tagline<input id="tagline" value="Made by hand. Loved in person." maxlength="70"></label>
+        <label class="file">Logo <small>(optional, stays on your device)</small><input id="logo" type="file" accept="image/*"></label>
+      </fieldset>
+      <fieldset>
+        <legend>2 · Colours from your guide</legend>
+        <div class="colours">
+          <label>Main<input type="color" id="c1" value="#2f4a3a"></label>
+          <label>Accent<input type="color" id="c2" value="#c8793d"></label>
+          <label>Background<input type="color" id="c3" value="#f7f1e8"></label>
+          <label>Text<input type="color" id="c4" value="#2a2622"></label>
+        </div>
+      </fieldset>
+      <fieldset>
+        <legend>3 · Fonts from your guide</legend>
+        <label>Heading font<input id="fh" list="fonts" value="Fraunces"></label>
+        <label>Body font<input id="fb" list="fonts" value="Work Sans"></label>
+        <datalist id="fonts"><option>Fraunces</option><option>Playfair Display</option><option>Lora</option><option>Cormorant Garamond</option><option>DM Serif Display</option><option>Libre Baskerville</option><option>Montserrat</option><option>Poppins</option><option>Raleway</option><option>Work Sans</option><option>Nunito</option><option>Lato</option><option>Open Sans</option><option>Josefin Sans</option><option>Quicksand</option><option>Amatic SC</option><option>Caveat</option></datalist>
+        <p class="hint">Any Google Font name works. If your guide uses a paid font, that can be added to the real site.</p>
+        <div class="seg" role="group" aria-label="Button style"><span>Buttons</span><button type="button" data-r="999px" class="on">Rounded</button><button type="button" data-r="8px">Soft</button><button type="button" data-r="0">Square</button></div>
+      </fieldset>
+      <fieldset>
+        <legend>4 · Your story</legend>
+        <label>Where it started<textarea id="story" rows="3" maxlength="300">We started at our local farmers market with one table and a handful of products. Years of conversations with customers shaped everything we make.</textarea></label>
+        <label>Where people meet you <small>(examples, one per line)</small><textarea id="events" rows="3" maxlength="300">Saturday Farmers Market
+Christmas Craft Fair
+Spring Garden Show</textarea></label>
+      </fieldset>
+      <fieldset>
+        <legend>5 · Delivery and discounts</legend>
+        <label>Free local delivery for these postcodes / ZIPs <small>(comma separated)</small><input id="zips" value="12345, 12346, 12347"></label>
+        <div class="two">
+          <label>Multi-buy: buy<input id="buyN" type="number" min="2" max="10" value="2"></label>
+          <label>save %<input id="off" type="number" min="1" max="50" value="10"></label>
+        </div>
+      </fieldset>
+      <button type="button" class="copy" id="share">Copy a link with these settings</button>
+      <p class="hint">The link keeps colours, fonts and text, but never the logo.</p>
+    </form>
+
+    <section class="preview">
+      <div class="bar"><span>Preview</span><div class="seg" role="group" aria-label="Screen size"><button type="button" data-w="desk" class="on">Desktop</button><button type="button" data-w="phone">Phone</button></div></div>
+      <div class="frame" id="frame">
+        <div class="store" id="store">
+          <div class="s-ann" id="sAnn"></div>
+          <div class="s-head"><span class="s-logo" id="sLogo"></span><nav><span>Shop</span><span>Our story</span><span>Find us</span></nav><button type="button" class="s-cartbtn" id="sCartBtn">Cart (0)</button></div>
+          <div class="s-hero"><div><p class="s-kick">Built face to face</p><h2 id="sName"></h2><p id="sTag"></p><button type="button" class="s-btn" id="shopNow">Shop the collection</button></div><div class="s-heroimg" aria-hidden="true"><i></i><i></i><i></i></div></div>
+          <div class="s-sec"><p class="s-kick">Our story</p><h3>From our table to your door</h3><p id="sStory"></p></div>
+          <div class="s-sec s-shop" id="shop"><p class="s-kick">Shop</p><h3>Customer favourites</h3><p class="s-deal" id="sDeal"></p><div class="s-grid" id="sGrid"></div></div>
+          <div class="s-sec s-alt"><p class="s-kick">Find us in person</p><h3>Where you can meet us</h3><ul id="sEvents"></ul></div>
+          <div class="s-sec"><p class="s-kick">Delivery</p><h3>Is delivery free to you?</h3><div class="s-zip"><input id="zipTry" placeholder="Enter your postcode / ZIP" inputmode="numeric" aria-label="Your postcode"><button type="button" class="s-btn" id="zipBtn">Check</button></div><p id="zipRes" class="s-zipres"></p></div>
+          <div class="s-foot" id="sFoot"></div>
+          <aside class="s-cart" id="sCart" hidden><div class="s-carthead"><b>Your cart</b><button type="button" id="closeCart" aria-label="Close cart">×</button></div><div id="cartRows"></div></aside>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <section class="wrap how">
+    <h2>How this becomes your real Shopify store</h2>
+    <div class="how-grid">
+      <article><b>Your brand guide</b><span>Colours, fonts, logo rules and button styles go into the Shopify theme settings, so every page follows them automatically, and you can adjust them later.</span></article>
+      <article><b>Your story</b><span>Written with you, from the face-to-face sales that built the business: your markets, your customers, your photos. No stock images, no template copy.</span></article>
+      <article><b>Free local delivery</b><span>Shopify's built-in Local delivery lets us set free delivery for your area by postcode or distance. Most likely no plug-in or monthly app fee needed.</span></article>
+      <article><b>Multi-buy discounts</b><span>Shopify's built-in automatic discounts handle "buy 2, save 10%" style offers, together with your size and colour variations.</span></article>
+    </div>
+    <p class="note">This page is a quick way to see your brand in action. The real site is designed carefully from your full brand guide and your Weebly content.</p>
+  </section>
+
+  <footer class="wrap foot">Made for Lesley by Riyaz Lohiya · November 2026 · Example products are placeholders · Nothing you enter leaves your browser.</footer>
+  <div class="toast" id="toast" role="status" aria-live="polite"></div>
+  <script src="script.js"></script>
+</body>
+</html>
