@@ -184,7 +184,7 @@
     2: ['One clear benefit + use cases', 'One outcome headline, one desk photo, a lumbar-ribs close-up, plain-language benefits and one main button, then three static cards: At your desk, In the car, At home.'],
     3: ['The product in use', 'A short sequence showing the cushion on a chair, at the desk, through the day and at home, with a "Shop the seat cushion" button.'],
     4: ['Before / after', 'The before/after posture slider from the first design, in your colours. It plays once on arrival to show how it works, then visitors can drag it.'],
-    5: ['Why people choose ErgoGraphene', 'All five reasons visible at once as compact cards, each with a small image that explains the point: rib close-up, posture, everyday comfort, graphene inset and mesh detail.'],
+    5: ['Why people choose ErgoGraphene', 'All five reasons visible at once as compact cards, each with an image that matches its point: lower-back relief, upright posture, everyday comfort, graphene warmth and breathable mesh.'],
     6: ['The graphene advantage', 'The graphene section with the interactive warmth panel and four technology points from the first design, re-coloured to your navy and blue.'],
     7: ['Your first month', 'The posture figure straightens as you scroll past — a shorter version with no long pinned scrolling.'],
     8: ['The principle', 'One short brand belief that fills with colour as you scroll.'],
@@ -193,7 +193,7 @@
     11: ['Text testimonials with photos', 'Each review now shows a customer photo, the stars and the quote, with photo thumbnails to switch between reviewers.'],
     12: ['Try it in your chair', 'One clear offer — the seat cushion — with the guarantee and trust points. The Duo has been removed.'],
     13: ['Video testimonials', 'Blank video slots ready for your customer videos.'],
-    14: ['Newsletter & footer', 'Newsletter sign-up, quick links and your store\'s accepted payment icons, in the format you shared.']
+    14: ['Newsletter & footer', 'Newsletter sign-up, your Information / Quick Links / Our Brand columns and your store\'s payment icons.']
   };
   if (/[?&]notes=1/.test(location.search)) {
     var panel = $('.notes'), keys = Object.keys(NOTES).map(Number), nc = 0;
