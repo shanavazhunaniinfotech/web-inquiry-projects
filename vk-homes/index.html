@@ -3,434 +3,55 @@
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
-  <title>VK Homes | Building Elegant Living Spaces</title>
-  <meta name="description" content="VK Homes builds elegant, thoughtfully planned new homes. See homes available now, explore completed homes and talk directly to the builder.">
+  <title>VK Homes | Building Elegant Homes</title>
+  <meta name="description" content="VK Homes — Building Elegant Homes. Quality, comfort and value.">
   <meta name="robots" content="noindex, nofollow">
-  <meta name="theme-color" content="#11120f">
-  <meta property="og:title" content="VK Homes | Building Elegant Living Spaces">
-  <meta property="og:description" content="Thoughtfully planned, quality-built homes. Three homes available now.">
+  <meta name="theme-color" content="#0e0f0d">
   <link rel="icon" type="image/png" href="images/vk-emblem-sm.png">
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link rel="preconnect" href="https://images.unsplash.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Inter+Tight:ital,wght@0,300;0,400;0,500;0,600;1,300&family=Instrument+Serif:ital@0;1&display=swap" rel="stylesheet">
-  <link rel="preload" as="image" href="https://images.unsplash.com/photo-1600585154340-be6161a56a0c?auto=format&fit=crop&w=2200&q=78">
+  <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500;600;700&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="style.css">
-  <script>
-    (function () {
-      var d = document.documentElement;
-      d.classList.add("js");
-      if (!window.matchMedia("(prefers-reduced-motion: reduce)").matches) d.classList.add("motion");
-      // Safety net: never leave the preloader up if a CDN fails
-      setTimeout(function () { d.classList.add("loaded"); }, 4500);
-    })();
-  </script>
+  <script>document.documentElement.classList.add("js");</script>
 </head>
-<body>
+<body class="is-home">
   <a class="skip" href="#main">Skip to content</a>
-
-  <!-- ================= PRELOADER ================= -->
-  <div class="loader" aria-hidden="true">
-    <div class="loader__panel loader__panel--a"></div>
-    <div class="loader__panel loader__panel--b"></div>
-    <div class="loader__inner">
-      <div class="loader__mark"><img src="images/vk-emblem-sm.png" alt="" width="240" height="188"></div>
-      <p class="loader__word">VK&nbsp;Homes</p>
-      <p class="loader__tag">Building elegant living spaces</p>
-    </div>
-    <span class="loader__count"><b>000</b></span>
-  </div>
-
-  <!-- custom cursor + scroll progress -->
-  <div class="cursor" aria-hidden="true"><span class="cursor__label"></span></div>
-  <div class="progress" aria-hidden="true"><i></i></div>
-
-  <!-- ================= HEADER ================= -->
-  <header class="header" data-note="1">
+  <header class="header">
     <div class="header__inner">
-      <a class="brand" href="#top" aria-label="VK Homes — back to top">
-        <img src="images/vk-emblem-sm.png" alt="" width="240" height="188" class="brand__mark">
-        <span class="brand__word">VK&nbsp;Homes</span>
+      <a class="brand" href="./" aria-label="VK Homes — home">
+        <img src="images/vk-emblem-sm.png" alt="" width="240" height="188">
+        <span>VK Homes</span>
       </a>
       <nav class="nav" aria-label="Main">
-        <a href="#top" class="nav__link is-active" data-sec="top"><span>Homepage</span></a>
-        <a href="#completed" class="nav__link" data-sec="completed"><span>Completed Homes</span></a>
-        <a href="#available" class="nav__link" data-sec="available"><span>Available Homes</span></a>
-        <a href="#process" class="nav__link" data-sec="process"><span>Build Process</span></a>
-        <a href="#contact" class="nav__link" data-sec="contact"><span>Contact</span> <em aria-hidden="true">↗</em></a>
+      <a href="./" class="is-active" aria-current="page">Home</a>
+      <a href="completed-homes/">Completed Homes</a>
+      <a href="available-homes/">Available Homes</a>
+      <a href="available-lots/">Available Lots</a>
+      <a href="our-work/">Our Work</a>
+      <a href="contact/">Contact</a>
       </nav>
-      <a class="header__call magnetic" href="tel:+15550123456">
-        <span class="header__call-dot"></span>
-        <span class="header__call-txt">(555) 012-3456</span>
-      </a>
       <button class="burger" aria-label="Open menu" aria-expanded="false" aria-controls="mmenu"><span></span><span></span></button>
     </div>
   </header>
-
-  <div class="mmenu" id="mmenu" hidden>
-    <div class="mmenu__bg"><img src="https://images.unsplash.com/photo-1600607687644-c7171b42498f?auto=format&fit=crop&w=900&q=70" alt=""></div>
-    <nav aria-label="Mobile">
-      <a href="#top"><small>00</small>Homepage</a>
-      <a href="#completed"><small>03</small>Completed Homes</a>
-      <a href="#available"><small>02</small>Available Homes</a>
-      <a href="#process"><small>04</small>Build Process</a>
-      <a href="#contact"><small>05</small>Contact</a>
-    </nav>
-    <div class="mmenu__foot">
-      <a class="btn btn--gold" href="tel:+15550123456">Call (555) 012-3456</a>
-      <a class="btn btn--ghost-light" href="mailto:hello@vkhomes.com">hello@vkhomes.com</a>
-      <button type="button" class="notes-link">Why this layout? — design notes</button>
+  <nav class="mmenu" id="mmenu" aria-label="Mobile" hidden>
+      <a href="./" class="is-active" aria-current="page">Home</a>
+      <a href="completed-homes/">Completed Homes</a>
+      <a href="available-homes/">Available Homes</a>
+      <a href="available-lots/">Available Lots</a>
+      <a href="our-work/">Our Work</a>
+      <a href="contact/">Contact</a>
+  </nav>
+  <main id="main" class="hero">
+      <figure class="slide is-active"><img src="https://images.unsplash.com/photo-1568605114967-8130f3a36994?auto=format&fit=crop&w=2200&q=76" alt="Family home glowing at twilight" fetchpriority="high"></figure>
+      <figure class="slide"><img src="https://images.unsplash.com/photo-1600585154340-be6161a56a0c?auto=format&fit=crop&w=2200&q=76" alt="Modern two-storey home at dusk" loading="eager"></figure>
+      <figure class="slide"><img src="https://images.unsplash.com/photo-1613490493576-7fde63acd811?auto=format&fit=crop&w=2200&q=76" alt="White contemporary home with pool" loading="eager"></figure>
+      <figure class="slide"><img src="https://images.unsplash.com/photo-1613977257363-707ba9348227?auto=format&fit=crop&w=2200&q=76" alt="Modern home with garden and pool" loading="eager"></figure>
+      <figure class="slide"><img src="https://images.unsplash.com/photo-1600596542815-ffad4c1539a9?auto=format&fit=crop&w=2200&q=76" alt="Modern villa with pool" loading="eager"></figure>
+    <div class="hero__text wrap">
+      <h1 class="hero__title">Building Elegant Homes</h1>
+      <p class="hero__sub">Quality<i aria-hidden="true">•</i>Comfort<i aria-hidden="true">•</i>Value</p>
     </div>
-  </div>
-
-  <main id="main">
-
-    <!-- ================= HERO ================= -->
-    <section class="hero" id="top" data-note="2">
-      <div class="hero__media">
-        <div class="hero__slides">
-          <figure class="slide is-active" data-name="Residence A" data-status="Available now">
-            <img src="https://images.unsplash.com/photo-1600585154340-be6161a56a0c?auto=format&fit=crop&w=2200&q=78" alt="Residence A — modern two-storey home at dusk" fetchpriority="high">
-          </figure>
-          <figure class="slide" data-name="Residence 01" data-status="Completed">
-            <img src="https://images.unsplash.com/photo-1613490493576-7fde63acd811?auto=format&fit=crop&w=2200&q=78" alt="Residence 01 — white contemporary villa with pool">
-          </figure>
-          <figure class="slide" data-name="Open-plan living" data-status="Interiors">
-            <img src="https://images.unsplash.com/photo-1600607687644-c7171b42498f?auto=format&fit=crop&w=2200&q=78" alt="Bright open-plan living space with double-height windows">
-          </figure>
-          <figure class="slide" data-name="Residence 04" data-status="Completed">
-            <img src="https://images.unsplash.com/photo-1568605114967-8130f3a36994?auto=format&fit=crop&w=2200&q=78" alt="Residence 04 — timber family home glowing at twilight">
-          </figure>
-          <figure class="slide" data-name="Residence B" data-status="Available now">
-            <img src="https://images.unsplash.com/photo-1613977257363-707ba9348227?auto=format&fit=crop&w=2200&q=78" alt="Residence B — white modern home with pool and garden">
-          </figure>
-        </div>
-        <div class="hero__shade"></div>
-      </div>
-
-      <div class="hero__grid wrap">
-        <p class="hero__kicker"><span class="gold-dot"></span>VK Homes · New-build homes</p>
-
-        <h1 class="hero__title" aria-label="Building elegant living spaces">
-          <span class="ln"><span>Building</span></span>
-          <span class="ln ln--indent"><span><em>elegant</em> living</span></span>
-          <span class="ln"><span>spaces.</span></span>
-        </h1>
-
-        <div class="hero__side">
-          <p class="hero__lead">Thoughtfully planned, quality-built homes — designed to look beautiful, work effortlessly and feel right. Talk directly to the builder.</p>
-          <div class="hero__cta">
-            <a href="#available" class="btn btn--gold magnetic" data-track="hero-available">
-              <span>See available homes</span>
-              <i class="btn__arrow" aria-hidden="true">→</i>
-            </a>
-            <a href="tel:+15550123456" class="btn btn--ghost-light magnetic" data-track="hero-call"><span>Call the builder</span></a>
-          </div>
-        </div>
-
-        <a class="hero__now" href="#available" data-track="hero-now-card">
-          <span class="hero__now-img"><img src="https://images.unsplash.com/photo-1600047509807-ba8f99d2cdde?auto=format&fit=crop&w=300&q=70" alt=""></span>
-          <span class="hero__now-txt">
-            <small><i class="live"></i>3 homes available now</small>
-            <b>View &amp; enquire</b>
-          </span>
-          <span class="hero__now-arrow" aria-hidden="true">↗</span>
-        </a>
-      </div>
-
-      <div class="hero__foot wrap">
-        <div class="hero__caption" aria-live="polite">
-          <span class="hero__status" id="h-status">Available now</span>
-          <span class="hero__name" id="h-name">Residence A</span>
-        </div>
-        <ol class="hero__index" aria-label="Choose image">
-          <li><button class="is-active" aria-label="Slide 1"><span>01</span><i><b></b></i></button></li>
-          <li><button aria-label="Slide 2"><span>02</span><i><b></b></i></button></li>
-          <li><button aria-label="Slide 3"><span>03</span><i><b></b></i></button></li>
-          <li><button aria-label="Slide 4"><span>04</span><i><b></b></i></button></li>
-          <li><button aria-label="Slide 5"><span>05</span><i><b></b></i></button></li>
-        </ol>
-        <span class="hero__scroll">Scroll<i></i></span>
-      </div>
-    </section>
-
-    <!-- ================= MARQUEE ================= -->
-    <div class="marquee" aria-hidden="true">
-      <div class="marquee__row">
-        <span>Thoughtful planning <i>✦</i> Clear communication <i>✦</i> Quality-minded construction <i>✦</i> Elegant living spaces <i>✦</i>&nbsp;</span>
-        <span>Thoughtful planning <i>✦</i> Clear communication <i>✦</i> Quality-minded construction <i>✦</i> Elegant living spaces <i>✦</i>&nbsp;</span>
-      </div>
-    </div>
-
-    <!-- ================= MANIFESTO / APPROACH ================= -->
-    <section class="manifesto" id="approach" data-note="3">
-      <div class="wrap manifesto__grid">
-        <p class="label">01 <span>/</span> Our approach</p>
-        <div class="manifesto__body">
-          <p class="eyebrow">More than a floor plan</p>
-          <p class="manifesto__text scroll-lit">Good design is how a home <em>feels.</em> At VK Homes, we believe a well-built home should look beautiful, work effortlessly, and feel right for the people who live in it.</p>
-          <a href="#process" class="link-line" data-track="approach-link">Discover our approach <span aria-hidden="true">→</span></a>
-        </div>
-      </div>
-      <figure class="float-img float-img--a"><img src="https://images.unsplash.com/photo-1600210492486-724fe5c67fb0?auto=format&fit=crop&w=700&q=72" alt="Warm living room in a VK home" loading="lazy"></figure>
-      <figure class="float-img float-img--b"><img src="https://images.unsplash.com/photo-1600573472550-8090b5e0745e?auto=format&fit=crop&w=600&q=72" alt="Open timber staircase" loading="lazy"></figure>
-
-      <div class="wrap promises">
-        <div class="promise">
-          <span class="promise__n">i</span>
-          <h3>Thoughtful planning</h3>
-          <p>Light, storage and flow considered before a single wall goes up — layouts made for real life.</p>
-        </div>
-        <div class="promise">
-          <span class="promise__n">ii</span>
-          <h3>Clear communication</h3>
-          <p>One point of contact from the first conversation to the finishing details. You always know what's next.</p>
-        </div>
-        <div class="promise">
-          <span class="promise__n">iii</span>
-          <h3>Quality-minded construction</h3>
-          <p>Careful workmanship and finishes you'll appreciate every single day you live there.</p>
-        </div>
-      </div>
-    </section>
-
-    <!-- ================= AVAILABLE HOMES ================= -->
-    <section class="available" id="available" data-note="4">
-      <div class="wrap">
-        <div class="avail__head">
-          <p class="label">02 <span>/</span> Available homes</p>
-          <h2 class="display split-words">Available <em>now.</em></h2>
-          <div class="avail__meta">
-            <p class="avail__count"><i class="live"></i><b>3</b> homes ready for new owners</p>
-            <p class="avail__sub">Like what you see? Enquire in one tap — we reply personally.</p>
-          </div>
-        </div>
-
-        <div class="homes">
-          <article class="home" data-cursor="Enquire">
-            <a class="home__link" href="mailto:hello@vkhomes.com?subject=Enquiry%20about%20Residence%20A" data-track="enquire-a" aria-label="Enquire about Residence A">
-              <div class="home__media">
-                <img src="https://images.unsplash.com/photo-1600047509807-ba8f99d2cdde?auto=format&fit=crop&w=1100&q=76" alt="Residence A — contemporary home with timber-clad facade" loading="lazy">
-                <span class="tag"><i class="live"></i>Available now</span>
-                <span class="home__letter" aria-hidden="true">A</span>
-              </div>
-              <div class="home__row">
-                <h3 class="home__title">Residence A</h3>
-                <span class="home__cta">Enquire <i aria-hidden="true">↗</i></span>
-              </div>
-            </a>
-          </article>
-          <article class="home home--offset" data-cursor="Enquire">
-            <a class="home__link" href="mailto:hello@vkhomes.com?subject=Enquiry%20about%20Residence%20B" data-track="enquire-b" aria-label="Enquire about Residence B">
-              <div class="home__media">
-                <img src="https://images.unsplash.com/photo-1512917774080-9991f1c4c750?auto=format&fit=crop&w=1100&q=76" alt="Residence B — white contemporary home with garden courtyard" loading="lazy">
-                <span class="tag"><i class="live"></i>Available now</span>
-                <span class="home__letter" aria-hidden="true">B</span>
-              </div>
-              <div class="home__row">
-                <h3 class="home__title">Residence B</h3>
-                <span class="home__cta">Enquire <i aria-hidden="true">↗</i></span>
-              </div>
-            </a>
-          </article>
-          <article class="home" data-cursor="Enquire">
-            <a class="home__link" href="mailto:hello@vkhomes.com?subject=Enquiry%20about%20Residence%20C" data-track="enquire-c" aria-label="Enquire about Residence C">
-              <div class="home__media">
-                <img src="https://images.unsplash.com/photo-1599809275671-b5942cabc7a2?auto=format&fit=crop&w=1100&q=76" alt="Residence C — Mediterranean-style home with pool terrace" loading="lazy">
-                <span class="tag"><i class="live"></i>Available now</span>
-                <span class="home__letter" aria-hidden="true">C</span>
-              </div>
-              <div class="home__row">
-                <h3 class="home__title">Residence C</h3>
-                <span class="home__cta">Enquire <i aria-hidden="true">↗</i></span>
-              </div>
-            </a>
-          </article>
-        </div>
-
-        <div class="firstdibs" data-note="5">
-          <div class="firstdibs__img"><img src="https://images.unsplash.com/photo-1600566753190-17f0baa2a6c3?auto=format&fit=crop&w=700&q=70" alt="" loading="lazy"></div>
-          <div class="firstdibs__txt">
-            <p class="eyebrow eyebrow--gold">Not quite the right fit?</p>
-            <h3>Be first to know when the next VK home is ready.</h3>
-            <p>Tell us what you're looking for — bedrooms, area, timing — and we'll reach out before it's listed anywhere.</p>
-          </div>
-          <a class="btn btn--dark magnetic" href="mailto:hello@vkhomes.com?subject=Please%20tell%20me%20about%20upcoming%20VK%20homes&amp;body=Hi%20VK%20Homes%2C%0A%0AI%27m%20looking%20for%3A%0A-%20Bedrooms%3A%0A-%20Area%3A%0A-%20Timing%3A%0A%0AThanks!" data-track="first-access"><span>Get first access</span><i class="btn__arrow" aria-hidden="true">→</i></a>
-        </div>
-      </div>
-    </section>
-
-    <!-- ================= COMPLETED HOMES (pinned horizontal) ================= -->
-    <section class="completed" id="completed" data-note="6">
-      <div class="completed__pin">
-        <div class="completed__ghost" aria-hidden="true">Completed&nbsp;Homes&nbsp;✦&nbsp;Completed&nbsp;Homes</div>
-        <div class="wrap completed__head">
-          <p class="label label--light">03 <span>/</span> Completed homes</p>
-          <h2 class="display display--light split-words">Proof, <em>not</em> promises.</h2>
-          <div class="completed__meter">
-            <span class="completed__num"><b id="c-num">01</b> / 06</span>
-            <span class="completed__bar"><i></i></span>
-            <span class="completed__hint">Scroll to explore</span>
-          </div>
-        </div>
-        <div class="track" data-cursor="Drag">
-          <figure class="tile"><div class="tile__img"><img src="https://images.unsplash.com/photo-1600596542815-ffad4c1539a9?auto=format&fit=crop&w=1100&q=75" alt="Residence 01 — completed modern villa with pool" loading="lazy"></div><figcaption><span class="tile__n">01</span><span class="tile__name">Residence 01</span><span class="tile__tag">Completed</span></figcaption></figure>
-          <figure class="tile tile--land"><div class="tile__img"><img src="https://images.unsplash.com/photo-1564013799919-ab600027ffc6?auto=format&fit=crop&w=1300&q=75" alt="Residence 02 — completed home with pool and palms" loading="lazy"></div><figcaption><span class="tile__n">02</span><span class="tile__name">Residence 02</span><span class="tile__tag">Completed</span></figcaption></figure>
-          <figure class="tile tile--low"><div class="tile__img"><img src="https://images.unsplash.com/photo-1570129477492-45c003edd2be?auto=format&fit=crop&w=1100&q=75" alt="Residence 03 — completed traditional family home" loading="lazy"></div><figcaption><span class="tile__n">03</span><span class="tile__name">Residence 03</span><span class="tile__tag">Completed</span></figcaption></figure>
-          <figure class="tile"><div class="tile__img"><img src="https://images.unsplash.com/photo-1600585154526-990dced4db0d?auto=format&fit=crop&w=1100&q=75" alt="Residence 04 — completed modern home with timber entrance" loading="lazy"></div><figcaption><span class="tile__n">04</span><span class="tile__name">Residence 04</span><span class="tile__tag">Completed</span></figcaption></figure>
-          <figure class="tile tile--land"><div class="tile__img"><img src="https://images.unsplash.com/photo-1583608205776-bfd35f0d9f83?auto=format&fit=crop&w=1300&q=75" alt="Residence 05 — completed home with landscaped lawn" loading="lazy"></div><figcaption><span class="tile__n">05</span><span class="tile__name">Residence 05</span><span class="tile__tag">Completed</span></figcaption></figure>
-          <figure class="tile tile--low"><div class="tile__img"><img src="https://images.unsplash.com/photo-1605276374104-dee2a0ed3cd6?auto=format&fit=crop&w=1100&q=75" alt="Residence 06 — completed home with pool terrace" loading="lazy"></div><figcaption><span class="tile__n">06</span><span class="tile__name">Residence 06</span><span class="tile__tag">Completed</span></figcaption></figure>
-          <div class="tile tile--cta">
-            <img src="images/vk-emblem-sm.png" alt="" width="240" height="188" class="tile__mark">
-            <p>Like what you see?</p>
-            <h3>Your home could be <em>next.</em></h3>
-            <a class="btn btn--gold magnetic" href="#available" data-track="gallery-available"><span>View available homes</span><i class="btn__arrow" aria-hidden="true">→</i></a>
-          </div>
-        </div>
-      </div>
-    </section>
-
-    <!-- ================= BUILD PROCESS (stacking cards) ================= -->
-    <section class="process" id="process" data-note="7">
-      <div class="wrap">
-        <div class="process__head">
-          <p class="label">04 <span>/</span> Build process</p>
-          <h2 class="display split-words">From <em>hello</em> to home.</h2>
-          <p class="process__sub">Five clear steps. No jargon, no surprises — just a calm, well-run path to your new home.</p>
-        </div>
-
-        <div class="stack">
-          <article class="pcard" style="--i:0">
-            <div class="pcard__img"><img src="https://images.unsplash.com/photo-1503387762-592deb58ef4e?auto=format&fit=crop&w=1200&q=74" alt="Reviewing home plans together" loading="lazy"></div>
-            <div class="pcard__txt">
-              <span class="pcard__n">01<small>/05</small></span>
-              <h3>First conversation</h3>
-              <p>We listen first. Tell us what you need, how you live and what matters most — no pressure, no obligation.</p>
-              <span class="pcard__time">Where it starts</span>
-            </div>
-          </article>
-          <article class="pcard" style="--i:1">
-            <div class="pcard__img"><img src="https://images.unsplash.com/photo-1600607687939-ce8a6c25118c?auto=format&fit=crop&w=1200&q=74" alt="Finished living space showing considered design" loading="lazy"></div>
-            <div class="pcard__txt">
-              <span class="pcard__n">02<small>/05</small></span>
-              <h3>Planning &amp; design</h3>
-              <p>Layout, finishes and details shaped together, so the plan fits your life before anything is built.</p>
-              <span class="pcard__time">Plan it right</span>
-            </div>
-          </article>
-          <article class="pcard" style="--i:2">
-            <div class="pcard__img"><img src="https://images.unsplash.com/photo-1541888946425-d81bb19240f5?auto=format&fit=crop&w=1200&q=74" alt="Construction site with team at work" loading="lazy"></div>
-            <div class="pcard__txt">
-              <span class="pcard__n">03<small>/05</small></span>
-              <h3>Quality construction</h3>
-              <p>Building begins with regular updates from your single point of contact — you'll always know where things stand.</p>
-              <span class="pcard__time">Built with care</span>
-            </div>
-          </article>
-          <article class="pcard" style="--i:3">
-            <div class="pcard__img"><img src="https://images.unsplash.com/photo-1600566753190-17f0baa2a6c3?auto=format&fit=crop&w=1200&q=74" alt="Finished kitchen with quality details" loading="lazy"></div>
-            <div class="pcard__txt">
-              <span class="pcard__n">04<small>/05</small></span>
-              <h3>Finishing details</h3>
-              <p>The touches that make a house feel like home — carefully completed and checked with you, room by room.</p>
-              <span class="pcard__time">Every detail</span>
-            </div>
-          </article>
-          <article class="pcard" style="--i:4">
-            <div class="pcard__img"><img src="https://images.unsplash.com/photo-1600566753086-00f18fb6b3ea?auto=format&fit=crop&w=1200&q=74" alt="Light-filled living room ready to move in" loading="lazy"></div>
-            <div class="pcard__txt">
-              <span class="pcard__n">05<small>/05</small></span>
-              <h3>Keys &amp; move in</h3>
-              <p>A final walkthrough, your keys, and a home ready to live in. We're still a call away afterwards.</p>
-              <a class="btn btn--dark magnetic" href="tel:+15550123456" data-track="process-call"><span>Step one: give us a call</span><i class="btn__arrow" aria-hidden="true">→</i></a>
-            </div>
-          </article>
-        </div>
-      </div>
-    </section>
-
-    <!-- ================= CONTACT ================= -->
-    <section class="contact" id="contact" data-note="8">
-      <div class="wrap">
-        <div class="contact__top">
-          <p class="label">05 <span>/</span> Contact</p>
-          <h2 class="contact__title" aria-label="Let's talk about your next home.">
-            <span class="ln"><span>Let's talk</span></span>
-            <span class="ln"><span>about your</span></span>
-            <span class="ln"><span><em>next home.</em></span></span>
-          </h2>
-          <figure class="contact__img"><img src="https://images.unsplash.com/photo-1580587771525-78b9dba3b914?auto=format&fit=crop&w=900&q=74" alt="A completed VK home" loading="lazy"></figure>
-        </div>
-
-        <div class="rows">
-          <a class="row" href="tel:+15550123456" data-track="contact-call">
-            <span class="row__fill" aria-hidden="true"></span>
-            <span class="row__label">Call</span>
-            <span class="row__value">(555) 012-3456</span>
-            <span class="row__meta">Mon–Sat · 9am–6pm</span>
-            <span class="row__arrow" aria-hidden="true">↗</span>
-          </a>
-          <div class="row row--email">
-            <span class="row__fill" aria-hidden="true"></span>
-            <a class="row__hit" href="mailto:hello@vkhomes.com" data-track="contact-email" aria-label="Email hello@vkhomes.com"></a>
-            <span class="row__label">Email</span>
-            <span class="row__value">hello@vkhomes.com</span>
-            <span class="row__meta">Reply within one business day</span>
-            <button class="copy" type="button" data-copy="hello@vkhomes.com">Copy</button>
-            <span class="row__arrow" aria-hidden="true">↗</span>
-          </div>
-        </div>
-        <p class="contact__note"><i class="live"></i>Currently taking enquiries for 3 available homes</p>
-      </div>
-    </section>
   </main>
-
-  <!-- ================= FOOTER ================= -->
-  <footer class="footer">
-    <div class="wrap footer__top">
-      <img src="images/vk-logo.png" alt="VK Homes — Building Elegant Living Spaces" width="560" height="418" class="footer__logo" loading="lazy">
-      <nav class="footer__nav" aria-label="Footer">
-        <a href="#top">Homepage</a>
-        <a href="#completed">Completed Homes</a>
-        <a href="#available">Available Homes</a>
-        <a href="#process">Build Process</a>
-        <a href="#contact">Contact</a>
-      </nav>
-      <div class="footer__contact">
-        <a href="tel:+15550123456">(555) 012-3456</a>
-        <a href="mailto:hello@vkhomes.com">hello@vkhomes.com</a>
-      </div>
-    </div>
-    <div class="footer__word" aria-hidden="true">VK&nbsp;HOMES</div>
-    <div class="wrap footer__base">
-      <span>© <span id="year">2026</span> VK Homes. All rights reserved.</span>
-      <button type="button" class="notes-link notes-link--foot">Why this layout?</button>
-      <a href="v2/" class="ver-link">View Version B</a>
-      <a href="#top" class="totop">Back to top ↑</a>
-    </div>
-  </footer>
-
-  <!-- Desktop floating CTA -->
-  <a class="float-cta" href="#available" data-track="float-cta">
-    <span class="float-cta__img"><img src="https://images.unsplash.com/photo-1512917774080-9991f1c4c750?auto=format&fit=crop&w=160&q=60" alt=""></span>
-    <span class="float-cta__txt"><small><i class="live"></i>3 available now</small><b>View &amp; enquire</b></span>
-    <span class="float-cta__arrow" aria-hidden="true">→</span>
-  </a>
-
-  <!-- Mobile action bar -->
-  <div class="mbar" aria-label="Quick actions">
-    <a href="tel:+15550123456" data-track="mbar-call">Call</a>
-    <a href="mailto:hello@vkhomes.com" data-track="mbar-email">Email</a>
-    <a href="#available" class="mbar__primary" data-track="mbar-available"><i class="live"></i>3 homes available</a>
-  </div>
-
-  <div class="ver" role="group" aria-label="Design version"><span class="is-on" aria-current="page">A</span><a href="v2/">B</a></div>
-  <button class="notes-toggle" type="button" aria-pressed="false"><span class="notes-toggle__q">?</span><span class="notes-toggle__txt">Why this layout?</span></button>
-  <div class="toast" role="status" aria-live="polite"></div>
-
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/gsap.min.js"></script>
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/ScrollTrigger.min.js"></script>
-  <script src="https://unpkg.com/lenis@1.1.13/dist/lenis.min.js"></script>
   <script src="script.js"></script>
 </body>
 </html>
