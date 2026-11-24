@@ -297,24 +297,35 @@
     if (e.target.closest('.ps__r, [data-quote]')) closeSearch();
   });
 
-  /* ================= Category cards ================= */
-  $('#cats').innerHTML = [
-    `<a class="cat cat--main" href="#masking"><span class="cat__go">${icon('arrow')}</span><span><b>Masking Tapes</b><small>11 tape types for powder coating, plating, paint &amp; electronics</small></span><span class="cat__chips"><span>Green PET</span><span>Dots</span><span>Glass cloth</span><span>Paper</span><span>+7 more</span></span><span class="cat__img"><img src="${im('cut-green-tape')}" alt="Green polyester masking tape" loading="lazy"></span></a>`,
-    ...['protect', 'caps', 'hooks', 'screen'].map(k => { const L = LINES[k]; return `<a class="cat" href="#more" data-line="${k}"><span class="cat__go">${icon('arrow')}</span>${L.isNew ? '<span class="new">New</span>' : ''}<span><b>${L.n}</b><small>${L.d}</small></span><span class="cat__img">${L.img ? `<img src="${im(L.img)}" alt="${L.n}" loading="lazy">` : ILL[L.ill]}</span></a>`; })
+  /* ================= Bento categories ================= */
+  $('#bento').innerHTML = [
+    `<a class="bx bx--main rv" href="#masking"><span class="bx__go">${icon('arrow')}</span><b>Masking Tapes</b><small>11 tape types for powder coating, plating, paint lines and electronics — the heart of FinePS.</small><span class="bx__chips"><span>Green PET</span><span>Die-cut dots</span><span>Glass cloth</span><span>Paper</span><span>+7 on request</span></span><span class="bx__v"><img src="${im('cut-pet-lineup')}" alt="Green polyester masking tape rolls" loading="lazy"></span><span class="bt bt--ink bx__cta">Shop 11 tape types ${icon('arrow')}</span></a>`,
+    `<a class="bx bx--photo rv" href="#more" data-line="protect"><img src="${im('app-red-netting')}" alt="" loading="lazy"><span class="bx__go">${icon('arrow')}</span><span class="bx__info"><b>Netting &amp; Spiral Wrap</b><small>PE netting, sleeves &amp; hose wrap</small></span></a>`,
+    `<a class="bx bx--warm rv" href="#more" data-line="caps"><span class="bx__go">${icon('arrow')}</span><b>Caps &amp; Plugs</b><small>Silicone caps &amp; masking plugs</small><span class="new">New</span><span class="bx__v">${ILL.cap}</span></a>`,
+    `<a class="bx bx--cool rv" href="#more" data-line="hooks"><span class="bx__go">${icon('arrow')}</span><b>Hooks</b><small>Powder-coating &amp; racking hooks</small><span class="new">New</span><span class="bx__v">${ILL.rack}</span></a>`,
+    `<a class="bx bx--photo rv" href="#more" data-line="screen"><img src="${im('app-screened-porch')}" alt="" loading="lazy"><span class="bx__go">${icon('arrow')}</span><span class="bx__info"><b>Screen &amp; Spline</b><small>40+ spline sizes, tools &amp; seals</small></span></a>`
   ].join('');
 
-  /* ================= Masking selector ================= */
+  /* ================= Masking: tape rail + stage ================= */
+  const LOOK = { pet: ['#DDF0E1', '#1F8A4C', 400], dots: ['#D8F1EB', '#37BFA0', 400], glass: ['#ECEFF1', '#E9EDEF', null], paper: ['#F5EEDA', '#E2D2A0', null] };
   let tapeSel = 'pet';
   const tState = {};
   function renderTabs() {
-    const tab = m => `<button class="mt" role="tab" aria-selected="${m.id === tapeSel}" data-tape="${m.id}"><span class="mt__th">${visual(m)}</span><span><b>${m.s === 'Green PET' ? 'Green Polyester (PET)' : m.n.replace(' Tape', '')}</b><small>${m.soon ? 'Available on request' : 'from ' + money(minP(tapeItems(m))) + ' / roll'}</small></span><span class="mt__t ${m.soon ? 'req' : ''}">${m.soon ? 'Quote' : m.tShort}</span></button>`;
-    $('#mkTabs').innerHTML = `<p class="mk__lbl">In stock · ships now</p>` + MASK.filter(m => !m.soon).map(tab).join('') + `<p class="mk__lbl">Available on request</p>` + MASK.filter(m => m.soon).map(tab).join('');
+    const tab = m => `<button class="tt" role="tab" aria-selected="${m.id === tapeSel}" data-tape="${m.id}"><span class="tt__v">${visual(m)}</span><b>${m.s === 'Green PET' ? 'Green Polyester (PET)' : m.n.replace(' Tape', '')}</b><small>${m.soon ? '<span>On request</span><em class="q">Quote</em>' : `<span>${m.tShort === 'High' || m.tShort === 'Low' ? m.temp : 'Up to ' + m.tShort}</span><em>${money(minP(tapeItems(m)))}</em>`}</small></button>`;
+    $('#trail').innerHTML = MASK.filter(m => !m.soon).map(tab).join('') + `<span class="tt__sep">On request</span>` + MASK.filter(m => m.soon).map(tab).join('');
+  }
+  function meters(m, p) {
+    const L = LOOK[m.id] || [];
+    const max = UNIT === 'mm' ? 152 : 6, val = UNIT === 'mm' ? num(p.s) * 25.4 : num(p.s);
+    const w = Math.max(4, Math.min(100, val / max * 100));
+    const temp = L[2] ? `<div class="meter"><div class="meter__h"><span>Max cure temperature</span><b>${L[2]}°F · ${Math.round((L[2] - 32) / 1.8)}°C</b></div><div class="temp"><i style="--p:${L[2] / 600 * 100}%"></i></div><div class="temp__s"><span>0°F</span><span>200°F</span><span>400°F</span><span>600°F</span></div></div>` : `<div class="meter"><div class="meter__h"><span>Temperature class</span><b>${m.temp}</b></div></div>`;
+    return temp + `<div class="meter"><div class="meter__h"><span>${m.id === 'dots' ? 'Dot diameter' : 'Width'} · actual scale</span><b>${fmtSize(p.s)}</b></div><div class="wv" style="--tick:${UNIT === 'mm' ? (25.4 / 152 * 100).toFixed(2) : (100 / 6).toFixed(2)}%"><span class="wv__b" style="--w:${w}%;--tape:${L[1] || '#2E8B4F'}"></span><span class="wv__l">${UNIT === 'mm' ? '0–152 mm' : '0–6"'}</span></div></div>`;
   }
   function renderPanel() {
-    const m = MK[tapeSel], P = $('#mkPanel');
+    const m = MK[tapeSel], P = $('#stage');
     if (m.soon) {
-      P.innerHTML = `<div class="mp"><div class="mp__media"><div class="mp__tags"><span>Masking tape</span><span class="g">Available on request</span></div>${ILL[m.ill]}</div>
-        <div class="mp__b"><h3>${m.n}</h3><p>We're adding ${m.n.toLowerCase()} to the FinePS range. Tell us the width, length and quantity you need and we'll confirm availability and pricing — usually within one business day.</p>
+      P.innerHTML = `<div class="sg"><div class="sg__media" style="--wash:#F3EFE6"><div class="sg__tags"><span>Masking tape</span><span class="g">Available on request</span></div><div class="sg__img">${ILL[m.ill]}</div></div>
+        <div class="sg__b"><span class="sg__k">${icon('bell')}Coming to the FinePS range</span><h3>${m.n}</h3><p>Tell us the width, length and quantity you need and we'll confirm availability and pricing — usually within one business day.</p>
         <div class="uses">${m.uses.map(u => `<span>${icon('check')}${u}</span>`).join('')}</div>
         <div class="req"><b>Request sizes &amp; pricing</b><p>Widths quoted in ${unitWord()} — switch units at the top of the page.</p>
         <div class="req__f"><input id="reqW" placeholder="Width you need, e.g. ${UNIT === 'mm' ? '25 mm' : '1 inch'}" aria-label="Width you need"><button class="bt bt--green" data-quote="${esc(m.n)}" data-vis="${m.ill}" data-note="Available on request" id="reqBtn">Request a quote ${icon('arrow')}</button></div>
@@ -325,29 +336,29 @@
     const items = tapeItems(m);
     const st = tState[m.id] || (tState[m.id] = { h: (items.find(p => p.a && /^1"$/.test(p.s)) || items.find(p => p.a) || items[0]).h, q: 1 });
     const p = BY[st.h];
-    P.innerHTML = `<div class="mp"><div class="mp__media"><div class="mp__tags">${m.badge ? `<span class="g">${m.badge}</span>` : ''}<span>${m.temp}</span></div><img src="${im(m.img)}" alt="${esc(m.n)}"></div>
-      <div class="mp__b"><h3>${m.n}</h3><p>${m.d}</p>
+    P.innerHTML = `<div class="sg"><div class="sg__media" style="--wash:${(LOOK[m.id] || [])[0] || '#E6F3E1'}"><div class="sg__tags">${m.badge ? `<span class="g">${m.badge}</span>` : ''}<span>${m.temp}</span><span>${m.adh} adhesive</span></div><div class="sg__img"><img src="${im(m.id === 'pet' ? 'cut-pet-lineup' : m.id === 'dots' ? 'cut-dots-hero' : m.img)}" alt="${esc(m.n)}"></div>${meters(m, p)}</div>
+      <div class="sg__b"><span class="sg__k"><span class="stars">${icon('star').repeat(5)}</span>4.8 · Trusted by finishing shops</span><h3>${m.n}</h3><p>${m.d}</p>
       <dl class="spec"><div><dt>Max temperature</dt><dd>${m.temp}</dd></div><div><dt>Adhesive</dt><dd>${m.adh}</dd></div><div><dt>Carrier</dt><dd>${m.car}</dd></div><div><dt>${m.yd ? 'Roll length' : 'Per roll'}</dt><dd>${m.yd ? fmtYd(m.yd) : dotsCount(p) || 'Varies by size'}</dd></div></dl>
       <div class="uses">${m.uses.map(u => `<span>${icon('check')}${u}</span>`).join('')}</div>
       <div class="buy">
         <div class="buy__row">
-          <label class="fld"><span>${m.id === 'dots' ? 'Dot diameter' : 'Width'} <em style="font-style:normal;color:var(--mut2)">${items.length} sizes · in ${unitWord()}</em></span><span class="sel"><select id="mkSize">${items.map(x => `<option value="${x.h}" ${x.h === st.h ? 'selected' : ''}>${fmtSize(x.s)}${m.id === 'dots' ? ' · ' + dotsCount(x) : ''} — ${money(x.p)}${x.a ? '' : ' (contact us)'}</option>`).join('')}</select></span></label>
+          <label class="fld"><span>${m.id === 'dots' ? 'Dot diameter' : 'Width'} <em style="font-style:normal;color:var(--mut2)">${items.length} sizes · ${unitWord()}</em></span><span class="sel"><select id="mkSize">${items.map(x => `<option value="${x.h}" ${x.h === st.h ? 'selected' : ''}>${fmtSize(x.s)}${m.id === 'dots' ? ' · ' + dotsCount(x) : ''} — ${money(x.p)}${x.a ? '' : ' (contact us)'}</option>`).join('')}</select></span></label>
           <div class="fld" style="flex:0 0 auto;min-width:0"><span>Rolls</span><div class="qty"><button type="button" data-st="-1" aria-label="Fewer rolls">${icon('minus')}</button><input id="mkQty" type="number" min="1" value="${st.q}" aria-label="Number of rolls"><button type="button" data-st="1" aria-label="More rolls">${icon('plus')}</button></div></div>
         </div>
-        <div class="price"><b>${money(p.p)}</b><small>per single roll · flat price</small>${p.a ? `<span class="stk"><i></i>In stock</span>` : `<span class="stk stk--o"><i></i>Out of stock — contact us</span>`}</div>
-        <div class="buy__cta">${p.a ? `<button class="bt bt--green bt--lg" data-add="${p.h}" data-qty="${st.q}">${icon('cart')}Add ${st.q > 1 ? st.q + ' rolls' : 'to cart'} · ${money(p.p * st.q)}</button>` : `<button class="bt bt--green bt--lg" data-quote="${esc(m.n)}" data-size="${esc(fmtSize(p.s))}" data-vis="${m.img}" data-note="Out of stock — we'll confirm availability">${icon('chat')}Contact us for this size</button>`}<button class="bt bt--line bt--lg" data-quote="${esc(m.n)}" data-size="${esc(fmtSize(p.s))}" data-vis="${m.img}" title="Bulk quote">${icon('file')}Bulk quote</button></div>
-        ${st.q >= 10 ? `<p class="mini">${icon('chat')}<span>Buying ${st.q} rolls? You may qualify for bulk pricing — <button data-quote="${esc(m.n)}" data-size="${esc(fmtSize(p.s))}" data-vis="${m.img}">request a quote</button>.</span></p>` : ''}
+        <div class="price"><b>${money(p.p)}</b><small>per roll · flat price</small>${p.a ? `<span class="stk"><i></i>In stock</span>` : `<span class="stk stk--o"><i></i>Contact us</span>`}</div>
+        <div class="buy__cta">${p.a ? `<button class="bt bt--green bt--lg" data-add="${p.h}" data-qty="${st.q}">${icon('cart')}Add ${st.q > 1 ? st.q + ' rolls' : 'to cart'} · ${money(p.p * st.q)}</button>` : `<button class="bt bt--green bt--lg" data-quote="${esc(m.n)}" data-size="${esc(fmtSize(p.s))}" data-vis="${m.img}" data-note="Out of stock — we'll confirm availability">${icon('chat')}Contact us for this size</button>`}<button class="bt bt--line bt--lg" data-quote="${esc(m.n)}" data-size="${esc(fmtSize(p.s))}" data-vis="${m.img}">${icon('file')}Bulk quote</button></div>
+        ${st.q >= 10 ? `<p class="mini">${icon('chat')}<span>Buying ${st.q} rolls? You may qualify for bulk pricing — <button data-quote="${esc(m.n)}" data-size="${esc(fmtSize(p.s))}" data-vis="${m.img}">request a quote</button>.</span></p>` : `<div class="assure"><span>${icon('truck')}Ships to 50 states</span><span>${icon('return')}30-day returns</span><span>${icon('lock')}Secure checkout</span></div>`}
       </div></div></div>`;
     $('#mkSize').addEventListener('change', e => { st.h = e.target.value; renderPanel(); });
     const setQ = v => { st.q = Math.max(1, Math.min(999, v | 0 || 1)); renderPanel(); };
     $$('[data-st]', P).forEach(b => b.addEventListener('click', () => setQ(st.q + +b.dataset.st)));
     $('#mkQty').addEventListener('change', e => setQ(+e.target.value));
   }
-  function selTape(id) { tapeSel = id; renderTabs(); renderPanel(); }
-  $('#mkTabs').addEventListener('keydown', e => {
-    if (!/Arrow(Down|Up|Left|Right)/.test(e.key)) return; e.preventDefault();
-    const tabs = $$('.mt', $('#mkTabs')), i = tabs.findIndex(t => t.dataset.tape === tapeSel), n = tabs[(i + (/Down|Right/.test(e.key) ? 1 : -1) + tabs.length) % tabs.length];
-    selTape(n.dataset.tape); $(`.mt[data-tape="${n.dataset.tape}"]`).focus();
+  function selTape(id) { tapeSel = id; renderTabs(); renderPanel(); const t = $(`.tt[data-tape="${id}"]`); if (t) t.scrollIntoView({ block: 'nearest', inline: 'nearest', behavior: 'smooth' }); }
+  $('#trail').addEventListener('keydown', e => {
+    if (!/Arrow(Left|Right)/.test(e.key)) return; e.preventDefault();
+    const tabs = $$('.tt', $('#trail')), i = tabs.findIndex(t => t.dataset.tape === tapeSel), n = tabs[(i + (e.key === 'ArrowRight' ? 1 : -1) + tabs.length) % tabs.length];
+    selTape(n.dataset.tape); $(`.tt[data-tape="${n.dataset.tape}"]`).focus();
   });
   function renderCompare() {
     $('#cmpT').innerHTML = `<thead><tr><th>Tape</th><th>Max temp</th><th>Adhesive</th><th>Carrier</th><th>Roll length</th><th>Widths (${UNIT === 'mm' ? 'mm' : 'in'})</th><th>From</th></tr></thead><tbody>` + MASK.map(m => {
@@ -355,7 +366,39 @@
       return `<tr data-tape="${m.id}" tabindex="0"><td>${visual(m)}${m.n}</td>${m.soon ? '<td class="m" colspan="4">Specifications on request</td><td class="m">On request</td>' : `<td>${m.temp}</td><td>${m.adh}</td><td>${m.car}</td><td>${m.yd ? fmtYd(m.yd) : 'Varies'}</td><td>${it.map(x => fmtSize(x.s).replace(' mm', '')).join(', ')}</td>`}<td>${m.soon ? '<span class="tl">Quote</span>' : `<b>${money(minP(it))}</b>`}</td></tr>`;
     }).join('') + '</tbody>';
   }
-  $('#cmpT').addEventListener('click', e => { const r = e.target.closest('tr[data-tape]'); if (r) $('#mkPanel').scrollIntoView({ behavior: 'smooth', block: 'center' }); });
+  $('#cmpT').addEventListener('click', e => { const r = e.target.closest('tr[data-tape]'); if (r) $('#stage').scrollIntoView({ behavior: 'smooth', block: 'center' }); });
+
+  /* ================= Hero: quick order, rotating word, gauge, parallax ================= */
+  let qoSel = 'pet';
+  const qoState = {};
+  function renderQo() {
+    $('#qoTabs').innerHTML = MASK.filter(m => !m.soon).map(m => `<button type="button" class="qo__t" role="tab" aria-selected="${m.id === qoSel}" data-qo="${m.id}"><img src="${im(m.img)}" alt="">${m.s}</button>`).join('');
+    const m = MK[qoSel], items = tapeItems(m).filter(p => p.a);
+    const h = qoState[qoSel] || (qoState[qoSel] = (items.find(p => /^1"$/.test(p.s)) || items[0]).h);
+    $('#qoLbl').textContent = (m.id === 'dots' ? 'Dot diameter' : 'Width') + ' (' + (UNIT === 'mm' ? 'mm' : 'in') + ')';
+    $('#qoSize').innerHTML = items.map(p => `<option value="${p.h}" ${p.h === h ? 'selected' : ''}>${fmtSize(p.s)}${m.id === 'dots' ? ' · ' + dotsCount(p) : m.yd ? ' × ' + fmtYd(m.yd) : ''}</option>`).join('');
+    $('#qoPrice').textContent = money(BY[h].p);
+  }
+  $('#qoTabs').addEventListener('click', e => { const b = e.target.closest('[data-qo]'); if (b) { qoSel = b.dataset.qo; renderQo(); } });
+  $('#qoSize').addEventListener('change', e => { qoState[qoSel] = e.target.value; $('#qoPrice').textContent = money(BY[e.target.value].p); });
+  $('#qo').addEventListener('submit', e => {
+    e.preventDefault(); const h = qoState[qoSel]; addToCart(h, 1, '');
+    const b = $('#qoAdd'); b.classList.add('is-done'); b.innerHTML = icon('check') + 'Added'; setTimeout(() => { b.classList.remove('is-done'); b.innerHTML = icon('cart') + 'Add'; }, 1400);
+  });
+  (function rotate() {
+    const W = ['powder coating', 'Cerakote', 'anodizing & plating', 'paint lines', 'sublimation', 'flame spray'];
+    let i = 0; const el = $('#rotW');
+    setInterval(() => { el.classList.add('out'); setTimeout(() => { i = (i + 1) % W.length; el.textContent = W[i]; el.classList.remove('out'); }, 350); }, 2600);
+  })();
+  function heroUnits() { $('#chipW').textContent = UNIT === 'mm' ? '25 mm ≈ 1"' : '1" = 25.4 mm'; }
+  (function gauge() {
+    const run = () => { $('#gArc').style.strokeDashoffset = 100 - 400 / 600 * 100; const t0 = performance.now(); const tick = t => { const k = Math.min(1, (t - t0) / 1600), v = Math.round(400 * (1 - Math.pow(1 - k, 3))); $('#gNum').textContent = v + '°F'; if (k < 1) requestAnimationFrame(tick); }; requestAnimationFrame(tick); };
+    setTimeout(run, 700);
+  })();
+  if (fine.matches && !matchMedia('(prefers-reduced-motion: reduce)').matches) {
+    const hv = $('#heroV');
+    $('.hero__stage').addEventListener('mousemove', e => { const r = hv.getBoundingClientRect(), x = (e.clientX - r.left) / r.width - .5, y = (e.clientY - r.top) / r.height - .5; $$('[data-depth]', hv).forEach(el => { const d = +el.dataset.depth; el.style.transform = `translate(${x * d}px,${y * d}px)`; }); });
+  }
 
   /* ================= More product lines ================= */
   let lineSel = 'protect';
@@ -363,7 +406,7 @@
   $('#moreTabs').innerHTML = ['protect', 'caps', 'hooks', 'screen'].map(k => `<button role="tab" aria-selected="${k === lineSel}" data-line="${k}">${icon(LINES[k].ic)}${LINES[k].n}${LINES[k].isNew ? ' <span class="new">New</span>' : ''}</button>`).join('');
   function cardItems(c) { return (c.filt ? famAll(c.fam).filter(c.filt) : famAll(c.fam)).filter(p => p.k !== 'Case'); }
   function card(c, i) {
-    if (c.soon) return `<article class="pc" style="animation-delay:${i * 60}ms"><div class="pc__m"><span class="new">Coming soon</span>${ILL[c.ill]}</div><div class="pc__b"><h3 class="pc__t">${c.t}</h3><p class="pc__s">${c.sub}</p><p class="pc__s" style="margin:0">Sizes in ${unitWord()} on request.</p><div class="pc__f"><div class="pc__p">Quote<small>Bulk &amp; single orders</small></div><button class="add add--q" data-quote="${esc(c.t)}" data-vis="${c.ill}" data-note="Available on request">${icon('chat')}Request</button></div></div></article>`;
+    if (c.soon) return `<article class="pc" style="animation-delay:${i * 70}ms"><div class="pc__m"><span class="new">Coming soon</span>${ILL[c.ill]}</div><div class="pc__b"><h3 class="pc__t">${c.t}</h3><p class="pc__s">${c.sub}</p><p class="pc__s" style="margin:0">Sizes in ${unitWord()} on request.</p><div class="pc__f"><div class="pc__p">Quote<small>Bulk &amp; single orders</small></div><button class="add add--q" data-quote="${esc(c.t)}" data-vis="${c.ill}" data-note="Available on request">${icon('chat')}Request</button></div></div></article>`;
     const key = lineSel + i, items = cardItems(c);
     const st = lState[key] || (lState[key] = (() => { const p = items.find(x => x.a && (!c.def || x.s === c.def)) || items.find(x => x.a) || items[0]; return { s: p.s, k: p.k, v: (p.v || [])[0] || '' }; })());
     const sizes = [...new Set(items.map(p => p.s).filter(Boolean))].sort((a, b) => num(a) - num(b));
@@ -371,14 +414,14 @@
     if (st.k && !lens.includes(st.k)) st.k = lens[0];
     const p = items.find(x => (!st.s || x.s === st.s) && (!st.k || x.k === st.k)) || items[0];
     const sel = (key2, label, opts, cur, fmt) => opts.length > 1 ? `<label class="fld"><span>${label}</span><span class="sel"><select data-k="${key2}" data-card="${key}">${opts.map(o => `<option value="${esc(o)}" ${o === cur ? 'selected' : ''}>${fmt(o)}</option>`).join('')}</select></span></label>` : '';
-    return `<article class="pc" style="animation-delay:${i * 60}ms"><div class="pc__m">${c.badge ? `<span class="bd">${c.badge}</span>` : ''}<img src="${im(imgFor(p))}" alt="${esc(c.t)}" loading="lazy"></div><div class="pc__b"><h3 class="pc__t">${c.t}</h3><p class="pc__s">${c.sub}</p>
+    return `<article class="pc" style="animation-delay:${i * 70}ms"><div class="pc__m">${c.badge ? `<span class="bd">${c.badge}</span>` : ''}<img src="${im(imgFor(p))}" alt="${esc(c.t)}" loading="lazy"></div><div class="pc__b"><h3 class="pc__t">${c.t}</h3><p class="pc__s">${c.sub}</p>
       ${sel('s', c.lbl.s || 'Size', sizes, st.s, fmtSize)}${sel('k', c.lbl.k || 'Length', lens, st.k, fmtLen)}${c.lbl.v && p.v.length > 1 ? sel('v', 'Color', p.v, st.v, x => x) : ''}
       <div class="pc__f"><div class="pc__p">${money(p.p)}<small>${p.k ? fmtLen(p.k) : 'Each'}</small></div>${p.a ? `<button class="add" data-add="${p.h}" data-variant="${esc(c.lbl.v ? st.v : '')}">${icon('plus')}Add</button>` : `<button class="add add--q" data-quote="${esc(c.t)}" data-size="${esc(fmtSize(p.s))}" data-vis="${imgFor(p)}" data-note="Out of stock — we'll confirm availability">${icon('chat')}Contact us</button>`}</div></div></article>`;
   }
   function renderMore() {
     const L = LINES[lineSel];
     $$('#moreTabs button').forEach(b => b.setAttribute('aria-selected', b.dataset.line === lineSel));
-    $('#moreBody').innerHTML = `<div class="more__intro">${L.photo ? `<img src="${im(L.photo)}" alt="" loading="lazy">` : `<div style="height:170px;border-radius:14px;background:#fff;display:grid;place-items:center">${ILL[L.ill]}</div>`}<div><b>${L.n}</b><p>${L.intro}</p></div><button class="tl" data-quote="${esc(L.n)}" data-note="Bulk & volume pricing">${L.isNew ? 'Request sizes & pricing' : 'Bulk pricing'} ${icon('arrow')}</button></div>` + CARDS[lineSel].map(card).join('');
+    $('#moreBody').innerHTML = `<div class="more__intro ${L.photo ? '' : 'more__intro--ill'}">${L.photo ? `<img src="${im(L.photo)}" alt="" loading="lazy">` : ILL[L.ill]}${L.isNew ? '<span class="new" style="align-self:flex-start">New line</span>' : ''}<b>${L.n}</b><p>${L.intro}</p><button class="tl" data-quote="${esc(L.n)}" data-note="Bulk & volume pricing">${L.isNew ? 'Request sizes & pricing' : 'Get bulk pricing'} ${icon('arrow')}</button></div>` + CARDS[lineSel].map(card).join('');
   }
   function selLine(k) { lineSel = k; renderMore(); }
   $('#moreBody').addEventListener('change', e => {
@@ -386,10 +429,20 @@
     lState[s.dataset.card][s.dataset.k] = s.value; renderMore();
   });
 
-  /* ================= Industries ================= */
-  function renderInd() {
-    $('#ind').innerHTML = INDS.map(i => `<article class="in"><img src="${im(i.img)}" alt="${esc(i.n)}" loading="lazy"><div class="in__b"><b>${i.n}</b><p>${i.d}</p><div class="in__r">${i.rec.map(([t, id]) => t === 'tape' ? `<a href="#masking" data-tape="${id}">${MK[id].s}</a>` : `<a href="#more" data-line="${id}">${LINES[id].n}</a>`).join('')}</div></div></article>`).join('');
+  /* ================= Industries (interactive) ================= */
+  let ixSel = 0;
+  $('#ixList').innerHTML = INDS.map((d, i) => `<li><button class="ixl" role="tab" aria-selected="${i === 0}" data-ix="${i}"><span>0${i + 1}</span><b>${d.n}</b>${icon('arrow')}</button></li>`).join('');
+  function renderIx() {
+    const d = INDS[ixSel];
+    $$('.ixl').forEach((b, i) => b.setAttribute('aria-selected', i === ixSel));
+    const recs = d.rec.map(([t, id]) => {
+      if (t === 'tape') { const m = MK[id]; return `<a href="#masking" data-tape="${id}"><span class="th">${visual(m)}</span><span><b>${m.n.replace(' Tape', '')}</b><small>${m.soon ? 'Available on request' : 'from ' + money(minP(tapeItems(m))) + ' / roll'}</small></span></a>`; }
+      const L = LINES[id]; return `<a href="#more" data-line="${id}"><span class="th">${L.img ? `<img src="${im(L.img)}" alt="">` : ILL[L.ill]}</span><span><b>${L.n}</b><small>${L.isNew ? 'New line' : L.d}</small></span></a>`;
+    }).join('');
+    $('#ixStage').innerHTML = `<img src="${im(d.img)}" alt="${esc(d.n)}"><div class="ixc"><div class="ixc__h"><div><b>${d.n}</b><p>${d.d}</p></div><button class="bt bt--ink bt--sm" data-quote="${esc(d.n)} supplies" data-note="Industry supply quote">Get a quote ${icon('arrow')}</button></div><div class="ixc__r">${recs}</div></div>`;
   }
+  $('#ixList').addEventListener('click', e => { const b = e.target.closest('[data-ix]'); if (b) { ixSel = +b.dataset.ix; renderIx(); } });
+  $('#ixList').addEventListener('mouseover', e => { const b = e.target.closest('[data-ix]'); if (b && fine.matches && +b.dataset.ix !== ixSel) { ixSel = +b.dataset.ix; renderIx(); } });
 
   /* ================= Reviews ================= */
   const RV = [
@@ -432,8 +485,9 @@
 
   /* ================= Unit switch ================= */
   function renderUnits() {
+    $$('.unit').forEach(u => u.dataset.u = UNIT);
     $$('.unit button').forEach(b => b.setAttribute('aria-checked', b.dataset.unit === UNIT));
-    renderPanel(); renderCompare(); renderMore(); renderCart();
+    renderPanel(); renderCompare(); renderMore(); renderCart(); renderQo(); heroUnits();
     if (ps.classList.contains('is-open')) runSearch();
   }
   $$('.unit').forEach(u => u.addEventListener('click', e => {
@@ -442,8 +496,21 @@
     renderUnits(); toast(`Showing sizes in ${UNIT === 'mm' ? 'millimetres' : 'inches'}`);
   }));
 
+  /* ================= Scroll effects: reveal, counters, process line ================= */
+  const count = el => { const to = +el.dataset.to, dec = +(el.dataset.dec || 0), suf = el.dataset.suf || '', t0 = performance.now(); const tick = t => { const k = Math.min(1, (t - t0) / 1500), v = to * (1 - Math.pow(1 - k, 3)); el.textContent = v.toFixed(dec) + suf; if (k < 1) requestAnimationFrame(tick); }; requestAnimationFrame(tick); };
+  const io = new IntersectionObserver(es => es.forEach(en => { if (!en.isIntersecting) return; const t = en.target; io.unobserve(t); if (t.dataset.to) count(t); else t.classList.add('in'); }), { rootMargin: '0px 0px -10% 0px' });
+  $$('[data-to]').forEach(el => io.observe(el));
+  $$('.rv').forEach((el, i) => { el.style.transitionDelay = (i % 5) * 80 + 'ms'; io.observe(el); });
+  const steps = $$('.step'), fill = $('#stepsFill'), stepsBox = $('#steps');
+  const onProc = () => {
+    const r = stepsBox.getBoundingClientRect(), p = Math.max(0, Math.min(1, (innerHeight * .75 - r.top) / (r.height * .8)));
+    fill.style.setProperty('--p', p); steps.forEach((s, i) => s.classList.toggle('on', p >= i / steps.length + .05));
+  };
+  addEventListener('scroll', onProc, { passive: true }); onProc();
+  $('#drShip').innerHTML = `${icon('truck')} Free Regular Shipping (8–10 days) on eligible orders`;
+  $('#drShip').style.display = 'flex'; $('#drShip').style.gap = '10px'; $('#drShip').style.alignItems = 'center';
+
   /* ================= Init ================= */
   buildNav();
-  $('#heroFrom').textContent = 'from ' + money(minP(tapeItems(MK.pet)));
-  renderTabs(); renderInd(); renderUnits();
+  renderTabs(); renderIx(); renderUnits();
 })();
