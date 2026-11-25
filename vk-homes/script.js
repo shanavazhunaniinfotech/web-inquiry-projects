@@ -11,7 +11,23 @@
   var slides = $$(".slide");
   if (slides.length > 1) {
     var cur = 0, timer = null;
-    var next = function () { slides[cur].classList.remove("is-active"); cur = (cur + 1) % slides.length; slides[cur].classList.add("is-active"); };
+    // Photos load one step ahead, so the page opens fast even with many images
+    var load = function (i) { var img = slides[i % slides.length].querySelector("img"); if (img && img.dataset.src) { img.src = img.dataset.src; img.removeAttribute("data-src"); } };
+    var waiting = false;
+    var next = function () {
+      if (waiting) return;
+      var to = (cur + 1) % slides.length, img = slides[to].querySelector("img");
+      load(to);
+      if (!img.complete) { // wait until the photo is ready, then show it
+        waiting = true;
+        var go = function () { waiting = false; next(); };
+        img.addEventListener("load", go, { once: true }); img.addEventListener("error", go, { once: true });
+        return;
+      }
+      slides[cur].classList.remove("is-active"); cur = to; slides[cur].classList.add("is-active");
+      load(cur + 1);
+    };
+    if (document.readyState === "complete") load(1); else window.addEventListener("load", function () { load(1); });
     var start = function () { stop(); timer = setInterval(next, 5000); };
     var stop = function () { if (timer) clearInterval(timer); timer = null; };
     document.addEventListener("visibilitychange", function () { if (document.hidden) stop(); else start(); });
