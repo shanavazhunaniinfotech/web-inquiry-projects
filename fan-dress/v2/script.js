@@ -45,6 +45,32 @@
   tb.forEach((b, k) => b.onclick = () => heroGo(k));
   restart();
 
+
+  /* what · enlarge thumbnail on hover / tap */
+  const zp = document.createElement('div'); zp.className = 'zprev'; zp.innerHTML = '<img alt="">'; document.body.appendChild(zp);
+  const zImg = zp.querySelector('img');
+  let zOn = null;
+  const zShow = el => {
+    zOn = el; zImg.src = el.querySelector('img').src;
+    const place = () => {
+      const r = el.getBoundingClientRect(), w = zp.offsetWidth, h = zp.offsetHeight || w * 1.3;
+      let x = r.left + r.width / 2 - w / 2, y = r.top + r.height / 2 - h / 2;
+      x = Math.max(12, Math.min(innerWidth - w - 12, x)); y = Math.max(12, Math.min(innerHeight - h - 12, y));
+      zp.style.left = x + 'px'; zp.style.top = y + 'px';
+      zp.style.transformOrigin = `${r.left + r.width / 2 - x}px ${r.top + r.height / 2 - y}px`;
+    };
+    zImg.complete ? place() : (zImg.onload = place); place();
+    requestAnimationFrame(() => zp.classList.add('on'));
+  };
+  const zHide = () => { zOn = null; zp.classList.remove('on'); };
+  document.querySelectorAll('.pillimg').forEach(el => {
+    el.addEventListener('mouseenter', () => fine && zShow(el));
+    el.addEventListener('mouseleave', () => fine && zHide());
+    el.addEventListener('click', e => { if (fine) return; e.stopPropagation(); zOn === el ? zHide() : zShow(el); });
+  });
+  document.addEventListener('click', () => !fine && zOn && zHide());
+  addEventListener('scroll', () => zOn && zHide(), { passive: true });
+
   /* products */
   const W = ['XS', 'S', 'M', 'L', 'XL', '2XL'], GS = ['2T', '3T', '4T', '5T', '6/7', '8/9', '10/11'], B = ['0-3m', '6-9m', '12-18m'];
   const TEAM = { lsu: { n: 'LSU Tigers', c: '#461D7C' }, am: { n: 'Texas A&M', c: '#500000' } };

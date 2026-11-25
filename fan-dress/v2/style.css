@@ -739,3 +739,9 @@ input{font:inherit}
 }
 
 @media(max-width:600px){.hero__look .mono{display:none}}
+
+/* what · hover-to-enlarge thumbnails */
+.pillimg{cursor:zoom-in}
+.zprev{position:fixed;z-index:150;left:0;top:0;width:min(340px,80vw);border-radius:24px;overflow:hidden;background:#fff;padding:8px;box-shadow:0 40px 80px -30px rgba(18,26,42,.6);pointer-events:none;opacity:0;transform:scale(.3);transition:opacity .35s var(--ease),transform .55s var(--ease)}
+.zprev.on{opacity:1;transform:scale(1)}
+.zprev img{width:100%;height:auto;border-radius:18px;display:block}
