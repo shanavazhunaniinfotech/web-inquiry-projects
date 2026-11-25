@@ -2,37 +2,9 @@
 (function () {
   "use strict";
 
-  /* ---------- Data (names, colors and photos from faithfitswear.com) ---------- */
-  var COLORS = {
-    maroon:   { word: "Chosen",    color: "Maroon",        hex: "#6b1d2c", ref: "1 Peter 2:9",          verse: "But ye are a chosen generation, a royal priesthood." },
-    ceil:     { word: "Covered",   color: "Ceil Blue",     hex: "#6fa0d6", ref: "Psalm 91:4",           verse: "He shall cover thee with his feathers, and under his wings shalt thou trust." },
-    navy:     { word: "Anchored",  color: "Navy Blue",     hex: "#1f2a48", ref: "Hebrews 6:19",         verse: "Which hope we have as an anchor of the soul, both sure and stedfast." },
-    black:    { word: "Blessed",   color: "Black",         hex: "#151515", ref: "Numbers 6:24",         verse: "The Lord bless thee, and keep thee." },
-    red:      { word: "Redeemed",  color: "Red",           hex: "#d42037", ref: "Ephesians 1:7",        verse: "In whom we have redemption through his blood." },
-    pink:     { word: "Loved",     color: "Pink",          hex: "#e9a3b4", ref: "1 John 4:19",          verse: "We love him, because he first loved us." },
-    purple:   { word: "Crowned",   color: "Purple",        hex: "#6a4bb0", ref: "Psalm 103:4",          verse: "Who crowneth thee with lovingkindness and tender mercies." },
-    teal:     { word: "Called",    color: "Teal",          hex: "#1fb2b6", ref: "Romans 8:28",          verse: "All things work together for good… to them who are the called." },
-    gray:     { word: "Rooted",    color: "Gray",          hex: "#b0aca6", ref: "Colossians 2:7",       verse: "Rooted and built up in him, and stablished in the faith." },
-    charcoal: { word: "Steadfast", color: "Charcoal Gray", hex: "#45464a", ref: "1 Corinthians 15:58",  verse: "Be ye stedfast, unmoveable, always abounding in the work of the Lord." },
-    royal:    { word: "Faithful",  color: "Royal Blue",    hex: "#1f6fd1", ref: "Lamentations 3:23",    verse: "They are new every morning: great is thy faithfulness." },
-    green:    { word: "Grounded",  color: "Green",         hex: "#1d5a44", ref: "Ephesians 3:17",       verse: "That ye, being rooted and grounded in love…" },
-    coral:    { word: "Clothed",   color: "Coral",         hex: "#ef8a7e", ref: "Colossians 3:12",      verse: "Put on… a heart of compassion, kindness, humility." }
-  };
-  var ORDER = ["maroon", "ceil", "navy", "black", "red", "pink", "purple", "teal", "gray", "charcoal", "royal"];
-  var WIDE = ["royal", "teal", "navy", "maroon", "green", "coral"];
-  var BADGES = { maroon: "Best seller", navy: "Best seller", ceil: "Most loved", black: "Best seller" };
-
-  var PRODUCTS = [];
-  ORDER.forEach(function (c, i) {
-    PRODUCTS.push({ id: "w-" + c, line: "women", c: c, img: "images/w-" + c + ".jpg", img2: "images/w-" + c + "-2.jpg", type: "Jogger set", rank: i });
-    PRODUCTS.push({ id: "m-" + c, line: "men", c: c, img: "images/m-" + c + ".jpg", img2: "images/m-" + c + "-2.jpg", type: "Jogger set", rank: i });
-  });
-  WIDE.forEach(function (c, i) {
-    PRODUCTS.push({ id: "wl-" + c, line: "wide", c: c, img: "images/wl-" + c + ".jpg", img2: "images/wl-" + c + "-2.jpg", type: "Wide leg set", rank: i, isNew: true });
-  });
-  var PRICE = 120;
-  function byId(id) { return PRODUCTS.filter(function (p) { return p.id === id; })[0]; }
-  function title(p) { var c = COLORS[p.c]; return c.word + " in " + c.color; }
+  /* ---------- Data (shared, see data.js) ---------- */
+  var FF = window.FF, COLORS = FF.COLORS, ORDER = FF.ORDER, WIDE = FF.WIDE, BADGES = FF.BADGES, PRODUCTS = FF.PRODUCTS, PRICE = FF.PRICE;
+  var byId = FF.byId, title = FF.title;
   function $(s, r) { return (r || document).querySelector(s); }
   function $$(s, r) { return Array.prototype.slice.call((r || document).querySelectorAll(s)); }
   var reduce = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
@@ -72,12 +44,12 @@
     var badge = p.isNew ? '<span class="badge badge--gold">New</span>' : (BADGES[p.c] ? '<span class="badge">' + BADGES[p.c] + "</span>" : "");
     return '<article class="card" data-id="' + p.id + '">' +
       '<div class="card__media">' + badge +
-        '<img src="' + p.img + '" alt="' + title(p) + ' ' + p.type + '" loading="lazy" width="760" height="1013">' +
-        '<img class="alt" src="' + p.img2 + '" alt="" loading="lazy" width="760" height="1013">' +
+        '<a href="' + FF.url(p) + '" class="card__link" aria-label="' + title(p) + '"><img src="' + p.img + '" alt="' + title(p) + ' ' + p.type + '" loading="lazy" width="760" height="1013">' +
+        '<img class="alt" src="' + p.img2 + '" alt="" loading="lazy" width="760" height="1013"></a>' +
         '<button class="card__add" data-quick="' + p.id + '">+ Quick add</button>' +
       "</div>" +
       '<div class="card__body">' +
-        '<div class="card__top"><h3 class="card__name"><button data-quick="' + p.id + '">' + title(p) + '</button></h3><span class="card__price">$' + PRICE + "</span></div>" +
+        '<div class="card__top"><h3 class="card__name"><a href="' + FF.url(p) + '">' + title(p) + '</a></h3><span class="card__price">$' + PRICE + "</span></div>" +
         '<p class="card__verse">' + c.ref + "</p>" +
         '<div class="card__dots">' + dotsFor(p) + "</div>" +
         '<div class="card__rate"><span class="stars">★★★★★</span>' + p.type + " · top + pants</div>" +
@@ -92,7 +64,8 @@
       gsap.fromTo(grid.children, { y: 24, opacity: 0 }, { y: 0, opacity: 1, duration: .6, stagger: .05, ease: "power3.out" });
     }
   }
-  renderGrid("women");
+  var qTab = (location.search.match(/[?&]tab=(women|men|wide)/) || [])[1];
+  renderGrid(qTab || "women");
   $$(".tab").forEach(function (t) { t.addEventListener("click", function () { renderGrid(t.dataset.tab, true); }); });
   grid.addEventListener("click", function (e) {
     var sw = e.target.closest("[data-swap]");
@@ -128,6 +101,7 @@
       $("#callingVerse").textContent = "“" + o.verse + "”";
       $("#callingRef").textContent = o.ref;
       $("#callingAdd").textContent = "Choose size · " + o.word + " in " + o.color;
+      $("#callingMore").href = "product.html?p=" + cg + "-" + cc;
     }
     if (window.gsap && !reduce) {
       gsap.to([img, ".calling__card"], { opacity: 0, y: 10, duration: .2, onComplete: function () {
@@ -173,7 +147,7 @@
   });
 
   /* ---------- Fit finder ---------- */
-  var SIZES = ["XS", "S", "M", "L", "XL"], fitForm = $("#fitForm");
+  var SIZES = FF.SIZES, fitForm = $("#fitForm");
   function fit() {
     var i = SIZES.indexOf(fitForm.top.value) + (+fitForm.querySelector("[name=feel]:checked").value);
     i = Math.min(i, 4);
@@ -231,7 +205,7 @@
   function openQuick(id) {
     qp = byId(id); if (!qp) return; var c = COLORS[qp.c];
     sel = { top: null, bottom: null }; $$("[data-size] button").forEach(function (x) { x.classList.remove("is-on"); });
-    $("#qImg").src = qp.img; $("#qImg").alt = title(qp);
+    $("#qImg").src = qp.img; $("#qImg").alt = title(qp); $("#qMore").href = FF.url(qp);
     $("#qTitle").textContent = title(qp) + (qp.line === "wide" ? " Wide Leg" : "");
     $("#qRef").textContent = c.ref + " · " + (qp.line === "men" ? "Men's " : "Women's ") + qp.type.toLowerCase();
     updateQBtn(); open("quick");
@@ -239,13 +213,14 @@
   $("#qAdd").addEventListener("click", function () { if (!qp) return; addToCart(qp, sel.top, sel.bottom); close(); setTimeout(function () { open("cart"); }, 250); });
 
   /* ---------- Cart ---------- */
-  var cart = [];
+  var cart = FF.loadCart();
   function addToCart(p, t, b) {
     var key = p.id + "|" + t + "|" + b, ex = cart.filter(function (x) { return x.key === key; })[0];
     if (ex) ex.qty++; else cart.push({ key: key, p: p, t: t, b: b, qty: 1 });
     renderCart(true);
   }
   function renderCart(bump) {
+    FF.saveCart(cart);
     var n = cart.reduce(function (s, x) { return s + x.qty; }, 0), total = n * PRICE;
     $$("[data-cart-count]").forEach(function (el) {
       el.textContent = n; el.classList.toggle("has", n > 0);
