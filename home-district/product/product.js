@@ -8,7 +8,7 @@
   const reduce = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
   const fine = window.matchMedia('(pointer: fine)').matches;
   const store = { get(k, d) { try { return JSON.parse(localStorage.getItem(k)) ?? d; } catch (e) { return d; } }, set(k, v) { try { localStorage.setItem(k, JSON.stringify(v)); } catch (e) {} } };
-  const I = n => '../images/' + n;
+  const I = n => (document.documentElement.dataset.base || '../') + 'images/' + n;
 
   /* ======================= CATALOG (placeholder data until the client's range is final) ======================= */
   const SOFA_LEGS = [{ label: 'Natural oak', c: '#B8916A', add: 0 }, { label: 'Black ash', c: '#1a1a1a', add: 150 }];
@@ -206,6 +206,7 @@
     $('[data-g-total]').textContent = gal.length; $('[data-g-cur]').textContent = 1;
     $('[data-gallery-dots]').innerHTML = gal.map((_, i) => `<i class="${i ? '' : 'is-on'}"></i>`).join('');
     track.scrollLeft = 0;
+    document.dispatchEvent(new CustomEvent('hd:gallery'));
     bindCursor(track);
     if (window.gsap && !reduce) gsap.from(track.children, { opacity: 0, y: 16, duration: .7, stagger: .05, ease: 'power3.out' });
   }
@@ -370,7 +371,7 @@
   }
 
   /* ======================= DESIGN NOTES ======================= */
-  const NOTES = {
+  const NOTES = window.HD_NOTES || {
     1: ['Buy box: everything above the fold', `<p>Name, rating, price, the 4-payment price, options, delivery date and Add to cart are all visible without scrolling. The gallery scrolls while the buy box stays put on desktop.</p><ul><li>A <b>comparable showroom price</b> anchors the value.</li><li>Delivery date changes with the Emirate you choose: a concrete promise, not a vague "3–10 days".</li><li>Fabric swatches change the gallery; size and leg choices update the price live.</li><li>Trust row and a stylist with a face answer the last doubts. WhatsApp is one tap away.</li></ul><span class="tag">Clarity</span><span class="tag">Trust</span>`],
     2: ['Highlights: three reasons in three seconds', `<p>Big numbers in serif italic make the key benefits scannable: seat depth, washable covers, frame guarantee. For products without custom highlights, the template falls back to delivery, trial and guarantee.</p>`],
     3: ['Will it fit? Remove the #1 objection', `<p>"Will it fit?" is the biggest reason people don't buy a sofa online. A to-scale drawing updates with the chosen size, and a doorway checker gives an instant, honest answer — even suggesting the modular sofa if a door is too narrow.</p><span class="tag">Objection handling</span>`],
@@ -406,6 +407,7 @@
 
   /* ======================= INIT ======================= */
   renderGallery(); updateBuy(); syncWish(); bindCursor();
+  window.HD_PDP = { p, st, get gal() { return gal; }, openLb, price, I };
   function motion() {
     if (!window.gsap || !window.ScrollTrigger || reduce) return;
     gsap.registerPlugin(ScrollTrigger);

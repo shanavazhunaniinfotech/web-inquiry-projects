@@ -13,48 +13,50 @@
     set(k, v) { try { localStorage.setItem(k, JSON.stringify(v)); } catch (e) {} }
   };
   const hasGsap = () => !!(window.gsap && window.ScrollTrigger);
+  const B = document.documentElement.dataset.base || '';
+  const PDP = document.documentElement.dataset.pdp || 'product/';
 
   /* ======================= DATA (placeholders until the range is final) ======================= */
   const P = {
     'coast-sofa': { name: 'Coast 3-seater sofa', cat: 'sofas', badge: 'Bestseller', rating: 4.9, reviews: 86, meta: '220 × 95 × 78 cm', mat: 'Kiln-dried oak frame',
       desc: 'A deep seat, a relaxed back and the space to settle in. Feather-wrapped cushions and zip-off, washable covers.',
       variants: [
-        { label: 'Forest velvet', c: '#2f5a4a', img: 'images/p-sofa-green.jpg', price: 4290 },
-        { label: 'Charcoal weave', c: '#3a3a3a', img: 'images/p-sofa-dark.jpg', price: 4290 },
-        { label: 'Cognac leather', c: '#9a5f37', img: 'images/p-sofa-tan.jpg', price: 5990 }
-      ], alt: 'images/v2-tansofa.jpg', sizes: ['180 cm', '220 cm', '260 cm'] },
+        { label: 'Forest velvet', c: '#2f5a4a', img: B + 'images/p-sofa-green.jpg', price: 4290 },
+        { label: 'Charcoal weave', c: '#3a3a3a', img: B + 'images/p-sofa-dark.jpg', price: 4290 },
+        { label: 'Cognac leather', c: '#9a5f37', img: B + 'images/p-sofa-tan.jpg', price: 5990 }
+      ], alt: B + 'images/v2-tansofa.jpg', sizes: ['180 cm', '220 cm', '260 cm'] },
     'nook-chair': { name: 'Nook lounge chair', cat: 'chairs', badge: 'Bestseller', rating: 4.9, reviews: 64, meta: '78 × 74 × 82 cm', mat: 'Bouclé, solid beech',
       desc: 'A soft, rounded shell on solid beech legs. Small enough for a bedroom corner, comfortable enough for a long read.',
-      variants: [{ label: 'Sky bouclé', c: '#86A6C9', img: 'images/p-chair-blue.jpg', price: 1890 }, { label: 'Mist bouclé', c: '#d9d6d0', img: 'images/v2-anatomy.jpg', price: 1890 }], alt: 'images/v2-anatomy.jpg' },
+      variants: [{ label: 'Sky bouclé', c: '#86A6C9', img: B + 'images/p-chair-blue.jpg', price: 1890 }, { label: 'Mist bouclé', c: '#d9d6d0', img: B + 'images/v2-anatomy.jpg', price: 1890 }], alt: B + 'images/v2-anatomy.jpg' },
     'orbit-chair': { name: 'Orbit swivel chair', cat: 'chairs', badge: 'New', rating: 4.8, reviews: 22, meta: '62 × 60 × 80 cm', mat: 'Woven fabric, oak base',
       desc: 'A gentle 360° swivel on a four-star oak base. Ideal for a reading corner or a desk.',
-      variants: [{ label: 'Pebble', c: '#a59c90', img: 'images/pp-swivel.jpg', price: 1290 }], alt: 'images/v2-work.jpg' },
+      variants: [{ label: 'Pebble', c: '#a59c90', img: B + 'images/pp-swivel.jpg', price: 1290 }], alt: B + 'images/v2-work.jpg' },
     'sato-side': { name: 'Sato side table', cat: 'tables', rating: 4.9, reviews: 28, meta: '45 × 35 × 55 cm', mat: 'Solid oak',
       desc: 'Solid oak with a cantilevered top that slides over the sofa arm, and a shelf for books.',
-      variants: [{ label: 'Natural oak', c: '#b89068', img: 'images/pp-side.jpg', price: 590 }], alt: 'images/p-console.jpg' },
+      variants: [{ label: 'Natural oak', c: '#b89068', img: B + 'images/pp-side.jpg', price: 590 }], alt: B + 'images/p-console.jpg' },
     'dome-pendant': { name: 'Dome pendant', cat: 'lighting', rating: 4.8, reviews: 37, meta: 'Ø 32 cm', mat: 'Brushed brass',
       desc: 'Spun brushed-brass shade with a warm, downward glow. Hang alone or as a cluster over the dining table.',
-      variants: [{ label: 'Brushed brass', c: '#b8954a', img: 'images/pp-pendant.jpg', price: 490 }], alt: 'images/v2-lighting.jpg' },
+      variants: [{ label: 'Brushed brass', c: '#b8954a', img: B + 'images/pp-pendant.jpg', price: 490 }], alt: B + 'images/v2-lighting.jpg' },
     'ochre-chair': { name: 'Ochre armchair', cat: 'chairs', rating: 4.7, reviews: 19, meta: '70 × 76 × 88 cm', mat: 'Velvet, turned legs',
       desc: 'Button-tufted back and turned black legs: a warm accent for a calm room.',
-      variants: [{ label: 'Ochre velvet', c: '#c49a3c', img: 'images/pp-ochre.jpg', price: 1650 }] },
+      variants: [{ label: 'Ochre velvet', c: '#c49a3c', img: B + 'images/pp-ochre.jpg', price: 1650 }] },
     'mara-sofa': { name: 'Mara modular sofa', cat: 'sofas', badge: 'Made to order', dark: true, rating: 4.8, reviews: 41, meta: '264 × 100 × 72 cm', mat: 'Stone weave, oak plinth',
       desc: 'Low, generous and endlessly re-arrangeable. Start with three modules and add more as your home grows.',
-      variants: [{ label: 'Stone weave', c: '#8d8d88', img: 'images/pp-mara.jpg', price: 5490 }], alt: 'images/r-sofa.jpg', sizes: ['3 modules', '4 modules', 'Corner'] },
+      variants: [{ label: 'Stone weave', c: '#8d8d88', img: B + 'images/pp-mara.jpg', price: 5490 }], alt: B + 'images/r-sofa.jpg', sizes: ['3 modules', '4 modules', 'Corner'] },
     'saddle-chair': { name: 'Saddle desk chair', cat: 'chairs', rating: 4.7, reviews: 15, meta: '60 × 58 × 84 cm', mat: 'Cognac leather',
       desc: 'Channel-stitched cognac leather on a smooth swivel base.',
-      variants: [{ label: 'Cognac leather', c: '#8A5A3C', img: 'images/pp-saddle.jpg', price: 1390 }] },
+      variants: [{ label: 'Cognac leather', c: '#8A5A3C', img: B + 'images/pp-saddle.jpg', price: 1390 }] },
     'halo-lamp': { name: 'Halo floor lamp', cat: 'lighting', rating: 4.8, reviews: 31, meta: 'H 160 cm', mat: 'Powder-coated steel',
       desc: 'Adjustable head and a warm, focused reading light.',
-      variants: [{ label: 'Graphite', c: '#5a5d60', img: 'images/p-lamp.jpg', price: 690 }] },
+      variants: [{ label: 'Graphite', c: '#5a5d60', img: B + 'images/p-lamp.jpg', price: 690 }] },
     'wren-sideboard': { name: 'Wren sideboard', cat: 'tables', rating: 4.8, reviews: 19, meta: '160 × 45 × 75 cm', mat: 'Lacquer & oak',
       desc: 'Matt white lacquer with a solid oak top and soft-close doors.',
-      variants: [{ label: 'White & oak', c: '#f3f1ec', img: 'images/p-sideboard.jpg', price: 2890 }], alt: 'images/v2-storage.jpg' },
+      variants: [{ label: 'White & oak', c: '#f3f1ec', img: B + 'images/p-sideboard.jpg', price: 2890 }], alt: B + 'images/v2-storage.jpg' },
     /* Shop-the-room pieces */
-    'teak-table': { name: 'Block coffee table', cat: 'tables', rating: 4.8, reviews: 31, meta: '120 × 60 × 40 cm', mat: 'Reclaimed teak', desc: 'Reclaimed teak, oiled by hand. Every top is unique.', variants: [{ label: 'Reclaimed teak', c: '#8a5a3c', img: 'images/r-table.jpg', price: 1890 }] },
-    'saddle-pouf': { name: 'Saddle leather pouf', cat: 'chairs', rating: 4.9, reviews: 44, meta: '45 × 45 × 42 cm', mat: 'Vegetable-tanned leather', desc: 'Hand-stitched leather that softens beautifully with age.', variants: [{ label: 'Cognac', c: '#9a5f37', img: 'images/r-pouf.jpg', price: 490 }] },
-    'arc-lamp': { name: 'Arc floor lamp', cat: 'lighting', badge: 'New', rating: 4.8, reviews: 15, meta: 'H 195 cm · reach 160 cm', mat: 'Brushed brass', desc: 'A brushed-brass arc that lights a sofa without a ceiling point.', variants: [{ label: 'Brushed brass', c: '#b8954a', img: 'images/r-lamp.jpg', price: 890 }] },
-    'ranch-chair': { name: 'Ranch lounge chair', cat: 'chairs', rating: 4.7, reviews: 12, meta: '72 × 80 × 74 cm', mat: 'Steel & saddle leather', desc: 'Black steel frame with a slung saddle-leather seat.', variants: [{ label: 'Cognac & black', c: '#7a4a2c', img: 'images/r-chair.jpg', price: 2190 }] }
+    'teak-table': { name: 'Block coffee table', cat: 'tables', rating: 4.8, reviews: 31, meta: '120 × 60 × 40 cm', mat: 'Reclaimed teak', desc: 'Reclaimed teak, oiled by hand. Every top is unique.', variants: [{ label: 'Reclaimed teak', c: '#8a5a3c', img: B + 'images/r-table.jpg', price: 1890 }] },
+    'saddle-pouf': { name: 'Saddle leather pouf', cat: 'chairs', rating: 4.9, reviews: 44, meta: '45 × 45 × 42 cm', mat: 'Vegetable-tanned leather', desc: 'Hand-stitched leather that softens beautifully with age.', variants: [{ label: 'Cognac', c: '#9a5f37', img: B + 'images/r-pouf.jpg', price: 490 }] },
+    'arc-lamp': { name: 'Arc floor lamp', cat: 'lighting', badge: 'New', rating: 4.8, reviews: 15, meta: 'H 195 cm · reach 160 cm', mat: 'Brushed brass', desc: 'A brushed-brass arc that lights a sofa without a ceiling point.', variants: [{ label: 'Brushed brass', c: '#b8954a', img: B + 'images/r-lamp.jpg', price: 890 }] },
+    'ranch-chair': { name: 'Ranch lounge chair', cat: 'chairs', rating: 4.7, reviews: 12, meta: '72 × 80 × 74 cm', mat: 'Steel & saddle leather', desc: 'Black steel frame with a slung saddle-leather seat.', variants: [{ label: 'Cognac & black', c: '#7a4a2c', img: B + 'images/r-chair.jpg', price: 2190 }] }
   };
   P['mara-sofa-room'] = P['mara-sofa'];
   const FEATURED = ['coast-sofa', 'nook-chair', 'orbit-chair', 'sato-side', 'dome-pendant', 'ochre-chair', 'mara-sofa', 'saddle-chair', 'wren-sideboard'];
@@ -198,7 +200,7 @@
     box.innerHTML = cart.map((i, idx) => {
       const p = P[i.id], va = p.variants[i.v];
       const label = i.custom ? i.custom.label : va.label + (i.size ? ' · ' + i.size : '');
-      return `<div class="cart-item"><img src="${i.custom ? 'images/p-sofa-tan.jpg' : va.img}" alt="">
+      return `<div class="cart-item"><img src="${i.custom ? B + 'images/p-sofa-tan.jpg' : va.img}" alt="">
         <div><strong>${i.custom ? i.custom.name : p.name}</strong><span class="muted">${label}</span>
         <div class="qty"><button aria-label="Decrease" data-q="${idx}" data-d="-1"><svg><use href="#i-minus"/></svg></button><span>${i.qty}</span><button aria-label="Increase" data-q="${idx}" data-d="1"><svg><use href="#i-plus"/></svg></button></div></div>
         <div><div class="cart-item__price">${aed(itemPrice(i) * i.qty)}</div><button class="cart-item__remove" data-rm="${idx}">Remove</button></div></div>`;
@@ -236,16 +238,16 @@
       </div>`;
     if (feature) return `<article class="pcard pcard--feature" data-id="${id}" data-cat="${p.cat}" data-reveal>${media}
       <div class="pcard__info">
-        <h3 class="pcard__name"><a href="product/?id=${id}">${p.name.replace('3-seater', '<em>3-seater</em>')}</a></h3>
+        <h3 class="pcard__name"><a href="${PDP}?id=${id}">${p.name.replace('3-seater', '<em>3-seater</em>')}</a></h3>
         <span class="pcard__price" data-price>${aed(v.price)}</span>
         <p class="pcard__desc">${p.desc}</p>
         <div class="pcard__row" style="grid-column:1/-1">${sw}<span class="rating">${stars5.slice(0, 32)} ${p.rating}<span>&nbsp;(${p.reviews} reviews)</span></span></div>
         <span class="pcard__tabby" style="grid-column:1/-1">or 4 interest-free payments of <b data-tabby>${q4(v.price)}</b> with tabby or tamara</span>
-        <div class="pcard__cta"><button class="btn btn--dark" type="button" data-add="${id}">Add to cart</button><a class="btn btn--line" href="product/?id=${id}">Choose size &amp; colour</a></div>
+        <div class="pcard__cta"><button class="btn btn--dark" type="button" data-add="${id}">Add to cart</button><a class="btn btn--line" href="${PDP}?id=${id}">Choose size &amp; colour</a></div>
       </div></article>`;
     return `<article class="pcard" data-id="${id}" data-cat="${p.cat}" data-reveal>${media}
       <div class="pcard__info">
-        <div class="pcard__top"><h3 class="pcard__name"><a href="product/?id=${id}">${p.name}</a></h3><span class="pcard__price" data-price>${aed(v.price)}</span></div>
+        <div class="pcard__top"><h3 class="pcard__name"><a href="${PDP}?id=${id}">${p.name}</a></h3><span class="pcard__price" data-price>${aed(v.price)}</span></div>
         <span class="pcard__tabby">or 4 × <b data-tabby>${q4(v.price)}</b></span>
         <div class="pcard__row">${sw}<span class="rating"><svg><use href="#i-star"/></svg>${p.rating}<span>&nbsp;(${p.reviews})</span></span></div>
       </div></article>`;
@@ -309,7 +311,7 @@
           <p class="small muted">Dimensions: ${p.meta} · ${p.mat}</p>
           <span class="qv__stock">In stock · delivered &amp; assembled by&nbsp;<b>${eta(7)}</b></span>
           <div class="qv__actions"><button class="btn btn--dark" data-qv-add>Add to cart · ${aed(va.price)}</button><button class="icon-btn" style="border:1px solid var(--mist);border-radius:4px;width:54px;height:54px" data-wish="${id}" aria-label="Save"><svg><use href="#i-heart"/></svg></button></div>
-          <a class="link-btn" href="product/?id=${id}">View full product details <svg><use href="#i-arrow-ne"/></svg></a>
+          <a class="link-btn" href="${PDP}?id=${id}">View full product details <svg><use href="#i-arrow-ne"/></svg></a>
           <ul class="qv__perks">
             <li><svg><use href="#i-truck"/></svg>Free delivery &amp; assembly · packaging removed</li>
             <li><svg><use href="#i-shield"/></svg>5-year frame guarantee · 30-day home trial</li>
@@ -332,7 +334,7 @@
   const list = $('[data-room-list]');
   const roomTotal = ROOM.reduce((a, id) => a + priceOf(id), 0);
   const roomNet = roomTotal - Math.round(roomTotal * ROOM_DISCOUNT);
-  list.innerHTML = ROOM.map(id => `<li data-room-item="${id}"><img src="${id === 'mara-sofa' ? 'images/r-sofa.jpg' : P[id].variants[0].img}" alt="" loading="lazy"><div><strong>${P[id].name}</strong><span>${P[id].variants[0].label}</span></div><span class="p">${aed(priceOf(id))}</span></li>`).join('');
+  list.innerHTML = ROOM.map(id => `<li data-room-item="${id}"><img src="${id === 'mara-sofa' ? B + 'images/r-sofa.jpg' : P[id].variants[0].img}" alt="" loading="lazy"><div><strong>${P[id].name}</strong><span>${P[id].variants[0].label}</span></div><span class="p">${aed(priceOf(id))}</span></li>`).join('');
   $('[data-room-was]').textContent = aed(roomTotal);
   $('[data-room-total]').textContent = aed(roomNet);
   $('[data-room-tabby]').textContent = q4(roomNet);
@@ -343,7 +345,7 @@
     $$('[data-spot]').forEach(s => s.classList.toggle('is-active', s === spot));
     $$('[data-room-item]').forEach(li => li.classList.toggle('is-active', li.dataset.roomItem === id));
     const p = P[id];
-    pop.innerHTML = `<img src="${id === 'mara-sofa' ? 'images/r-sofa.jpg' : p.variants[0].img}" alt=""><div><strong>${p.name}</strong><span>${aed(priceOf(id))} · or 4 × ${q4(priceOf(id))}</span></div><button class="btn btn--dark btn--sm btn--block" data-add-one="${id}">Add to cart</button>`;
+    pop.innerHTML = `<img src="${id === 'mara-sofa' ? B + 'images/r-sofa.jpg' : p.variants[0].img}" alt=""><div><strong>${p.name}</strong><span>${aed(priceOf(id))} · or 4 × ${q4(priceOf(id))}</span></div><button class="btn btn--dark btn--sm btn--block" data-add-one="${id}">Add to cart</button>`;
     pop.hidden = false;
     const fr = look.getBoundingClientRect(), sr = spot.getBoundingClientRect();
     const w = pop.offsetWidth, h = pop.offsetHeight;
@@ -363,7 +365,7 @@
   $('[data-add-room]').addEventListener('click', () => { ROOM.forEach(id => { addToCart(id, 0, 1, { silent: true }); markAdded(id); }); open('cart'); });
 
   /* ======================= CONSIDERED DETAILS (blueprint) ======================= */
-  const bp = $('[data-blueprint]');
+  const bp = $('[data-blueprint]') || document.createElement('div');
   function bpFocus(key) {
     bp.classList.toggle('is-focus', !!key);
     $$('[data-bp]', bp).forEach(g => g.classList.toggle('is-on', g.dataset.bp === key));
@@ -371,8 +373,8 @@
   }
   $$('[data-bp-label]', bp).forEach(l => { l.tabIndex = 0; l.addEventListener('mouseenter', () => bpFocus(l.dataset.bpLabel)); l.addEventListener('focus', () => bpFocus(l.dataset.bpLabel)); l.addEventListener('mouseleave', () => bpFocus(null)); l.addEventListener('blur', () => bpFocus(null)); });
   const FAB_TILES = [['Oat linen', '#E3DCCF', 'Performance linen'], ['Mist bouclé', '#C9C3B8', 'Soft bouclé'], ['Stone weave', '#8F8A82', 'Easy-clean weave'], ['Forest velvet', '#2F4A42', 'Performance velvet'], ['Cognac leather', '#8A5A3C', 'Full-grain leather'], ['Charcoal weave', '#3A3936', 'Easy-clean weave']];
-  $('[data-fabric-rail]').innerHTML = FAB_TILES.map(([n, c, t]) => `<button class="fab-tile" type="button" data-fab-tile="${n}" data-cursor-text="Add"><i style="--c:${c}"></i><strong>${n}</strong><span>${t}</span></button>`).join('');
-  $('[data-fabric-rail]').addEventListener('click', e => { const t = e.target.closest('[data-fab-tile]'); if (!t) return; if (!picked.includes(t.dataset.fabTile)) picked.push(t.dataset.fabTile); open('swatches'); });
+  if ($('[data-fabric-rail]')) $('[data-fabric-rail]').innerHTML = FAB_TILES.map(([n, c, t]) => `<button class="fab-tile" type="button" data-fab-tile="${n}" data-cursor-text="Add"><i style="--c:${c}"></i><strong>${n}</strong><span>${t}</span></button>`).join('');
+  $('[data-fabric-rail]') && $('[data-fabric-rail]').addEventListener('click', e => { const t = e.target.closest('[data-fab-tile]'); if (!t) return; if (!picked.includes(t.dataset.fabTile)) picked.push(t.dataset.fabTile); open('swatches'); });
 
   /* ======================= TAILOR-MADE CONFIGURATOR ======================= */
   const builder = $('[data-builder]'), sofa = $('[data-sofa]');
@@ -441,12 +443,13 @@
 
   /* ======================= REVIEWS ======================= */
   const REVIEWS = [
-    { q: 'It looks twice the price. Delivered on the day they promised, assembled in forty minutes, every bit of packaging taken away.', n: 'Layla A.', m: 'Dubai Hills · Coast sofa in Forest velvet', img: 'images/ugc-2.jpg', face: 'images/face-1.jpg', id: 'coast-sofa' },
-    { q: 'The home visit sold me. Sara measured our majlis, brought swatches and suggested the 260 cm. It fits perfectly — paid with tabby in four.', n: 'Omar K.', m: 'Abu Dhabi · Mara modular sofa', img: 'images/ug-10.jpg', face: 'images/face-2.jpg', id: 'mara-sofa' },
-    { q: 'Two kids and a dog. I zipped the covers off, washed them and they came back like new. Calm, beautiful and actually practical.', n: 'Hannah R.', m: 'Sharjah · Nook lounge chair', img: 'images/ugc-3.jpg', face: 'images/face-3.jpg', id: 'nook-chair' },
-    { q: 'We furnished the whole apartment in one visit. Everything works together, and the prices were honest from the first quote.', n: 'Rania & Karim', m: 'Dubai Marina · Whole home', img: 'images/ug-9.jpg', face: 'images/face-5.jpg', id: 'wren-sideboard' }
+    { q: 'It looks twice the price. Delivered on the day they promised, assembled in forty minutes, every bit of packaging taken away.', n: 'Layla A.', m: 'Dubai Hills · Coast sofa in Forest velvet', img: B + 'images/ugc-2.jpg', face: B + 'images/face-1.jpg', id: 'coast-sofa' },
+    { q: 'The home visit sold me. Sara measured our majlis, brought swatches and suggested the 260 cm. It fits perfectly — paid with tabby in four.', n: 'Omar K.', m: 'Abu Dhabi · Mara modular sofa', img: B + 'images/ug-10.jpg', face: B + 'images/face-2.jpg', id: 'mara-sofa' },
+    { q: 'Two kids and a dog. I zipped the covers off, washed them and they came back like new. Calm, beautiful and actually practical.', n: 'Hannah R.', m: 'Sharjah · Nook lounge chair', img: B + 'images/ugc-3.jpg', face: B + 'images/face-3.jpg', id: 'nook-chair' },
+    { q: 'We furnished the whole apartment in one visit. Everything works together, and the prices were honest from the first quote.', n: 'Rania & Karim', m: 'Dubai Marina · Whole home', img: B + 'images/ug-9.jpg', face: B + 'images/face-5.jpg', id: 'wren-sideboard' }
   ];
   const qMedia = $('[data-quote-media]'), qText = $('[data-quote-text]'), qDots = $('[data-quote-dots]');
+  if (qMedia) {
   qMedia.innerHTML = REVIEWS.map((r, i) => `<img src="${r.img}" alt="" loading="lazy" class="${i === 0 ? 'is-on' : ''}">`).join('');
   qDots.innerHTML = REVIEWS.map((r, i) => `<button type="button" aria-label="Review ${i + 1}" aria-current="${i === 0}" data-qi="${i}"></button>`).join('');
   let qi = 0, qTimer;
@@ -464,6 +467,8 @@
   $('[data-quote-next]').addEventListener('click', () => showQuote(qi + 1));
   qDots.addEventListener('click', e => { const b = e.target.closest('[data-qi]'); b && showQuote(+b.dataset.qi); });
   $('[data-quote-shop]').addEventListener('click', () => quickView(REVIEWS[qi].id));
+  }
+  window.HD_REVIEWS = REVIEWS; window.HD_quickView = id => quickView(id); window.HD_addToCart = (id, v, q, o) => addToCart(id, v, q, o); window.HD_toast = m => toast(m); window.HD_P = P;
 
   /* ======================= HOME VISIT (multi-step) ======================= */
   const vf = $('[data-visit-form]');
@@ -542,13 +547,12 @@
 
   /* ======================= UGC rows ======================= */
   const U1 = ['ugc-1', 'ug-7', 'ugc-2', 'ug-8', 'ugc-6', 'ug-10'], U2 = ['ugc-3', 'ug-9', 'ugc-4', 'ugc-5', 'v2-detail', 'v2-plant'];
-  const ugcHTML = arr => arr.map(n => `<a class="ugc__item" href="#edit" data-cursor-text="Shop"><img src="images/${n}.jpg" alt="A customer's room styled with Home District furniture" loading="lazy"></a>`).join('');
-  $('[data-ugc-row="1"]').innerHTML = ugcHTML(U1) + ugcHTML(U1);
-  $('[data-ugc-row="2"]').innerHTML = ugcHTML(U2) + ugcHTML(U2);
-  const mq = $('[data-marquee]'); mq.innerHTML += mq.innerHTML;
+  const ugcHTML = arr => arr.map(n => `<a class="ugc__item" href="#edit" data-cursor-text="Shop"><img src="${B}images/${n}.jpg" alt="A customer's room styled with Home District furniture" loading="lazy"></a>`).join('');
+  if ($('[data-ugc-row="1"]')) { $('[data-ugc-row="1"]').innerHTML = ugcHTML(U1) + ugcHTML(U1); $('[data-ugc-row="2"]').innerHTML = ugcHTML(U2) + ugcHTML(U2); }
+  const mq = $('[data-marquee]'); if (mq) mq.innerHTML += mq.innerHTML;
 
   /* ======================= DESIGN NOTES ======================= */
-  const NOTES = {
+  const NOTES = window.HD_NOTES || {
     1: ['Hero: the promise in one line', `<p>Visitors decide in about 3 seconds whether a store is for them. The headline states the positioning — <b>the designer look, at a fair price</b> — in big editorial type, like a magazine cover.</p><ul><li>The small arch "window" in the headline opens into a full-screen room as you scroll: a memorable, award-style moment that is also on-brand (calm, modern, the furniture supplies the warmth).</li><li>Shop + Book a free home visit are visible immediately: one path for ready buyers, one for considered buyers.</li><li>Rating and tabby/tamara sit beside the CTAs, answering "can I trust it?" and "can I afford it?" before the first scroll.</li><li>The full-screen room has a shoppable dot, turning inspiration into a product.</li></ul><span class="tag">Clarity</span><span class="tag">Memorability</span>`],
     2: ['Promise marquee: remove risk', `<p>Buying a AED 4,000 sofa online feels risky. A slow, endless marquee keeps the five promises that remove that risk in view without taking space: free delivery &amp; assembly, pay in 4, 5-year guarantee, 30-day trial, free home visit.</p><p><b>Client to confirm:</b> exact policy wording.</p>`],
     3: ['Rooms: a horizontal gallery', `<p>People shop for a room, not a SKU. On desktop the page turns sideways as you scroll — the "turning pages of a magazine" feeling the brief asks for — and every room is one click from its products. On mobile it's a native swipe rail.</p><span class="tag">Navigation</span><span class="tag">Editorial feel</span>`],
@@ -656,7 +660,7 @@
   }
 
   function initMotion() {
-    if (!hasGsap() || reduce) { introDone(); return; }
+    if (!hasGsap() || reduce) { introDone(); window.HD_onMotion && window.HD_onMotion(null); return; }
     gsap.registerPlugin(ScrollTrigger);
 
     // Lenis smooth scroll
@@ -693,31 +697,33 @@
       ScrollTrigger.create({ trigger: mt, start: 'top 80%', end: 'bottom 45%', scrub: true, onUpdate: s => { const n = Math.round(s.progress * words.length); words.forEach((w, i) => w.classList.toggle('on', i < n)); } });
     }
     // Ledger rows slide in
-    gsap.from('[data-ledger-row]', { opacity: 0, x: -16, duration: .9, stagger: .09, ease: 'expo.out', scrollTrigger: { trigger: '.ledger', start: 'top 80%' } });
+    if ($('.ledger')) gsap.from('[data-ledger-row]', { opacity: 0, x: -16, duration: .9, stagger: .09, ease: 'expo.out', scrollTrigger: { trigger: '.ledger', start: 'top 80%' } });
     // Blueprint leader lines draw in
     const bpPaths = $$('.blueprint__lines path');
     bpPaths.forEach(p => { p.style.strokeDasharray = 3000; p.style.strokeDashoffset = 3000; });
-    gsap.to(bpPaths, { strokeDashoffset: 0, duration: 2.4, stagger: .2, ease: 'power3.inOut', scrollTrigger: { trigger: '[data-blueprint]', start: 'top 70%' } });
-    gsap.from('.blueprint__lines circle:not(.ring)', { scale: 0, duration: .8, stagger: .2, ease: 'back.out(3)', scrollTrigger: { trigger: '[data-blueprint]', start: 'top 70%' } });
-    gsap.from('.fab-tile', { opacity: 0, y: 40, duration: 1.1, stagger: .07, ease: 'expo.out', scrollTrigger: { trigger: '.fabric-rail__list', start: 'top 88%' } });
+    if (bpPaths.length) gsap.to(bpPaths, { strokeDashoffset: 0, duration: 2.4, stagger: .2, ease: 'power3.inOut', scrollTrigger: { trigger: '[data-blueprint]', start: 'top 70%' } });
+    if (bpPaths.length) gsap.from('.blueprint__lines circle:not(.ring)', { scale: 0, duration: .8, stagger: .2, ease: 'back.out(3)', scrollTrigger: { trigger: '[data-blueprint]', start: 'top 70%' } });
+    if ($('.fabric-rail__list')) gsap.from('.fab-tile', { opacity: 0, y: 40, duration: 1.1, stagger: .07, ease: 'expo.out', scrollTrigger: { trigger: '.fabric-rail__list', start: 'top 88%' } });
     // Price seal drifts
-    gsap.fromTo('[data-seal]', { yPercent: 30 }, { yPercent: -30, ease: 'none', scrollTrigger: { trigger: '.value__media', start: 'top bottom', end: 'bottom top', scrub: true } });
+    if ($('[data-seal]')) gsap.fromTo('[data-seal]', { yPercent: 30 }, { yPercent: -30, ease: 'none', scrollTrigger: { trigger: '.value__media', start: 'top bottom', end: 'bottom top', scrub: true } });
 
     // Shop the look: slow zoom
-    gsap.fromTo('[data-look-img]', { scale: 1.12 }, { scale: 1, ease: 'none', scrollTrigger: { trigger: '.look', start: 'top bottom', end: 'center center', scrub: true } });
+    if ($('.look [data-look-img]')) gsap.fromTo('[data-look-img]', { scale: 1.12 }, { scale: 1, ease: 'none', scrollTrigger: { trigger: '.look', start: 'top bottom', end: 'center center', scrub: true } });
 
     // Signature draw
     const sig = $('[data-sign]');
     if (sig) { const L = sig.getTotalLength(); gsap.fromTo(sig, { strokeDasharray: L, strokeDashoffset: L }, { strokeDashoffset: 0, duration: 2.2, ease: 'power2.inOut', scrollTrigger: { trigger: sig, start: 'top 85%' } }); }
 
     // Sofa entrance
-    gsap.from('.sofa', { opacity: 0, y: 40, duration: 1.4, ease: 'expo.out', scrollTrigger: { trigger: '.sofa-stage', start: 'top 80%' } });
+    if ($('.sofa-stage')) gsap.from('.sofa', { opacity: 0, y: 40, duration: 1.4, ease: 'expo.out', scrollTrigger: { trigger: '.sofa-stage', start: 'top 80%' } });
 
     const mm = gsap.matchMedia();
-    setupHero(mm);
+    if ($('[data-hero-slot]')) setupHero(mm);
+    window.HD_onMotion && window.HD_onMotion(mm, lenis);
     mm.add('(min-width: 761px)', () => {
       // Rooms: horizontal scroll
       const track = $('[data-rooms-track]');
+      if (!track) return;
       const dist = () => track.scrollWidth - window.innerWidth;
       const tw = gsap.to(track, { x: () => -dist(), ease: 'none', scrollTrigger: { trigger: '[data-rooms-pin]', start: 'top top', end: () => '+=' + dist(), pin: true, scrub: .8, invalidateOnRefresh: true,
         onUpdate: s => { $('[data-rooms-progress]').style.transform = `scaleX(${s.progress})`; } } });
@@ -767,7 +773,7 @@
 
   const start = () => {
     initMotion();
-    finishLoader(() => { introTl && introTl.play(); });
+    finishLoader(() => { introTl && introTl.play(); window.HD_onIntro && window.HD_onIntro(); });
   };
   if (document.readyState === 'complete') start(); else window.addEventListener('load', start);
 })();
