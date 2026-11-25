@@ -1,0 +1,121 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="robots" content="noindex, nofollow">
+  <title>Home District — Home page rationale</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
+  <style>
+    :root { --black:#0A0A0A; --grey:#777; --soft:#B6B6B6; --mist:#E9E9E9; --cloud:#F7F7F7; --text-2:#626262; }
+    * { box-sizing: border-box; }
+    body { margin:0; font-family:"Inter",system-ui,sans-serif; color:var(--black); background:#fff; line-height:1.6; -webkit-font-smoothing:antialiased; }
+    .wrap { max-width: 980px; margin: 0 auto; padding: 0 20px; }
+    header { border-bottom:1px solid var(--mist); }
+    header .wrap { display:flex; justify-content:space-between; align-items:center; min-height:76px; gap:16px; }
+    header img { width:160px; display:block; }
+    .btn { display:inline-flex; align-items:center; min-height:44px; padding:0 18px; border-radius:4px; background:var(--black); color:#fff; text-decoration:none; font-weight:600; font-size:14px; white-space:nowrap; }
+    .eyebrow { font-size:12px; letter-spacing:.12em; text-transform:uppercase; color:var(--grey); font-weight:500; }
+    h1 { font-size:clamp(34px,5vw,56px); line-height:1.05; letter-spacing:-.04em; font-weight:400; margin:12px 0 20px; max-width:16ch; }
+    h2 { font-size:clamp(24px,3vw,32px); letter-spacing:-.03em; font-weight:500; margin:0 0 16px; }
+    h3 { font-size:18px; font-weight:600; margin:0 0 6px; letter-spacing:-.01em; }
+    p { margin:0 0 12px; }
+    .lede { font-size:18px; color:var(--text-2); max-width:60ch; }
+    section { padding:56px 0; border-bottom:1px solid var(--mist); }
+    .hero { padding:72px 0 56px; }
+    .grid { display:grid; grid-template-columns:repeat(3,1fr); gap:16px; }
+    .box { background:var(--cloud); padding:22px; border-radius:2px; }
+    .box p { color:var(--text-2); font-size:15px; margin:0; }
+    ol.flow { list-style:none; padding:0; margin:0; counter-reset:s; }
+    ol.flow li { display:grid; grid-template-columns:56px 1fr; gap:12px; padding:22px 0; border-top:1px solid var(--mist); counter-increment:s; }
+    ol.flow li::before { content:counter(s,decimal-leading-zero); font-size:13px; color:var(--grey); padding-top:3px; }
+    ol.flow p { color:var(--text-2); font-size:15px; margin:4px 0 0; }
+    .tag { display:inline-block; font-size:11px; font-weight:600; letter-spacing:.06em; text-transform:uppercase; border:1px solid var(--mist); padding:2px 8px; border-radius:3px; margin:8px 6px 0 0; color:var(--black); }
+    .swatches { display:flex; gap:8px; flex-wrap:wrap; margin-top:16px; }
+    .swatches div { width:120px; font-size:12px; color:var(--text-2); }
+    .swatches i { display:block; height:56px; border:1px solid var(--mist); margin-bottom:6px; }
+    table { width:100%; border-collapse:collapse; font-size:15px; }
+    td { padding:12px 0; border-top:1px solid var(--mist); vertical-align:top; }
+    td:first-child { width:42%; font-weight:500; padding-right:16px; }
+    td:last-child { color:var(--text-2); }
+    footer { padding:40px 0 64px; color:var(--text-2); font-size:14px; }
+    @media (max-width:760px) { .grid { grid-template-columns:1fr; } header img { width:130px; } }
+  </style>
+</head>
+<body>
+<header><div class="wrap"><img src="../images/logo.png" alt="home district"><a class="btn" href="../">View the home page</a></div></header>
+
+<main class="wrap">
+  <section class="hero">
+    <p class="eyebrow">Home page concept · design rationale</p>
+    <h1>A showroom that sells, calmly.</h1>
+    <p class="lede">The home page has one job: turn a first-time visitor into a buyer or a qualified lead, while feeling like an interior design magazine. Every section below earns its place by removing a reason not to buy.</p>
+    <p class="lede" style="margin-top:16px">Tip: on the home page, tap <b>“Why this layout?”</b> (bottom-left) to see these notes on each section.</p>
+  </section>
+
+  <section>
+    <h2>Built on your brand guide</h2>
+    <div class="grid">
+      <div class="box"><h3>White leads</h3><p>White canvas, Cloud (#F7F7F7) to separate sections, black for actions only. Roughly the 65 / 20 / 10 / 5 balance from the guide.</p></div>
+      <div class="box"><h3>The furniture supplies the warmth</h3><p>Brand graphics stay monochrome. Warmth comes from daylight photography, wood and textiles, exactly as the guide describes.</p></div>
+      <div class="box"><h3>Inter, sentence case</h3><p>Inter throughout: Regular copy, Medium headings, Semibold buttons. Large, tightly spaced headlines give the editorial, magazine feel.</p></div>
+      <div class="box"><h3>One clear action</h3><p>Black buttons with white text; secondary actions in black outline. 4 px corners, 8 px spacing, 44 px tap targets.</p></div>
+      <div class="box"><h3>Logo untouched</h3><p>The supplied wordmark artwork, at 180 px on desktop, always on white with clear space. No font substitute.</p></div>
+      <div class="box"><h3>Honest, useful copy</h3><p>No "ultimate luxury". We name real details: kiln-dried frames, zip-off covers, delivery times, payment splits.</p></div>
+    </div>
+    <div class="swatches">
+      <div><i style="background:#0A0A0A"></i>District black</div><div><i style="background:#777"></i>Home grey</div><div><i style="background:#B6B6B6"></i>Soft grey</div><div><i style="background:#E9E9E9"></i>Mist</div><div><i style="background:#F7F7F7"></i>Cloud</div><div><i style="background:#fff"></i>Pure white</div>
+    </div>
+  </section>
+
+  <section>
+    <h2>The section order — and why</h2>
+    <p class="lede">The page follows the questions a furniture buyer asks, in the order they ask them: <i>Is this for me? Can I trust it? What do you have? Is it good? Why so affordable? Will it fit? Who are you?</i></p>
+    <ol class="flow">
+      <li><div><h3>Hero — the promise in one line</h3><p>"The designer look, at a fair price." The positioning is understood in 3 seconds. Two paths: Shop (ready buyers) and Book a free home visit (considered buyers). A shoppable tag on the photo and a trust row (rating, free delivery, 0% instalments) sit above the fold.</p><span class="tag">Clarity</span><span class="tag">Trust</span></div></li>
+      <li><div><h3>Promise bar — remove risk</h3><p>Free delivery and assembly, pay in 4 with tabby/tamara, 30-day returns, 5-year frame guarantee. These answer the biggest fears of buying furniture online before a product is shown.</p><span class="tag">Risk reversal</span></div></li>
+      <li><div><h3>Shop by room — fast self-sorting</h3><p>People shop for a room, not a SKU. Large photographic tiles (swipeable on mobile) get them to the right range in one tap.</p><span class="tag">Navigation</span></div></li>
+      <li><div><h3>Most loved — social proof that sells</h3><p>Bestsellers with filters. Every card shows price and the 4-payment price, colour swatches that switch the photo, ratings, wishlist, Quick view and Add to cart, so buying never needs more than two taps.</p><span class="tag">Bandwagon effect</span><span class="tag">BNPL framing</span></div></li>
+      <li><div><h3>Why it costs less — justify the price</h3><p>"Affordable luxury" raises a doubt: is cheaper worse? A clear comparison shows where showroom money goes and why ours goes into the product. This turns low price into a reason to trust, not a warning sign.</p><span class="tag">Objection handling</span></div></li>
+      <li><div><h3>Shop the room — raise order value</h3><p>A styled room with tap-to-shop dots and "Add the whole room · save 5%". Furniture is bought as a look; bundling lifts average order value.</p><span class="tag">AOV</span></div></li>
+      <li><div><h3>Considered details + free swatches</h3><p>Proof of the quality people can't touch online: frame, foam, covers, fabric. Free swatches give hesitant buyers a small, free first step.</p><span class="tag">Quality proof</span><span class="tag">Micro-conversion</span></div></li>
+      <li><div><h3>Tailor-made — an instant price</h3><p>A mini builder (design, width, fabric) with a live estimate instead of a vague "contact us". The chosen design flows into the home-visit form, so leads arrive qualified.</p><span class="tag">Engagement</span><span class="tag">Lead quality</span></div></li>
+      <li><div><h3>Reviews — real homes</h3><p>Customer photos, verified badges and a rating summary. Each review answers an objection: quality, fit, practicality.</p><span class="tag">Social proof</span></div></li>
+      <li><div><h3>Free home visit — the high-ticket closer</h3><p>Many buyers won't purchase a sofa on first visit. A free, no-obligation visit captures them as leads. Short form, +971 mobile, WhatsApp alternative.</p><span class="tag">Lead capture</span></div></li>
+      <li><div><h3>Our story — the people behind the brand</h3><p>Founder note, faces and a studio address. A new brand needs to feel accountable and human.</p><span class="tag">Brand trust</span></div></li>
+      <li><div><h3>Community — shoppable inspiration</h3><p>Customer photos from Instagram, each linking to products.</p></div></li>
+      <li><div><h3>FAQ — stop exits</h3><p>Delivery, assembly, tabby/tamara, returns and guarantee answered on the page, with WhatsApp for anything else.</p><span class="tag">Objection handling</span></div></li>
+      <li><div><h3>Launch list — sell before January</h3><p>Early access and AED 250 off builds a launch-day audience. After launch it becomes the newsletter sign-up.</p><span class="tag">Pre-launch</span></div></li>
+    </ol>
+  </section>
+
+  <section>
+    <h2>Always-on conversion features</h2>
+    <table>
+      <tr><td>WhatsApp button</td><td>Always visible; the way most UAE customers prefer to ask questions. Styled in brand black with the recognisable icon.</td></tr>
+      <tr><td>tabby / tamara everywhere</td><td>On cards, quick view, cart and checkout, so big prices feel manageable at every step.</td></tr>
+      <tr><td>Cart drawer</td><td>Adds without leaving the page. Shows free delivery, the 4-payment price and a "Complete the room" suggestion.</td></tr>
+      <tr><td>Quick view</td><td>A preview of the product page: colours, sizes, delivery date, guarantee and free swatches.</td></tr>
+      <tr><td>Search</td><td>Instant results with popular searches.</td></tr>
+      <tr><td>Mobile first</td><td>Thumb-friendly 44 px targets, swipeable rails, full-width CTAs, no horizontal scrolling.</td></tr>
+      <tr><td>Calm motion</td><td>Slow, subtle reveals and parallax (GSAP). Switched off for people who prefer reduced motion.</td></tr>
+    </table>
+  </section>
+
+  <section>
+    <h2>What we need from you</h2>
+    <table>
+      <tr><td>Product photography</td><td>Currently stock images as placeholders. Your final product and lifestyle shots drop straight in.</td></tr>
+      <tr><td>Policies</td><td>Confirm delivery times, return window, guarantee length and home-visit areas.</td></tr>
+      <tr><td>Prices &amp; comparison</td><td>Real prices and a verified benchmark for the "Why it costs less" section.</td></tr>
+      <tr><td>Reviews</td><td>Sample reviews for now; at launch we connect a review app and seed with first customers.</td></tr>
+      <tr><td>Founder story</td><td>A founder photo, a few lines in your own words, and studio details.</td></tr>
+      <tr><td>Contacts</td><td>WhatsApp number, email, social accounts.</td></tr>
+    </table>
+  </section>
+</main>
+<footer><div class="wrap">Home District · home page concept for review. Built as a clickable prototype; final build in Shopify.</div></footer>
+</body>
+</html>
