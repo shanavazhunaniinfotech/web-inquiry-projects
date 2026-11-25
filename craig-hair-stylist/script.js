@@ -70,7 +70,7 @@
     mbar.classList.toggle('is-on', y > 500 && !hideNear);
     // active nav
     var cur = '';
-    ['about', 'services', 'transformations', 'lookbook', 'reviews', 'visit'].forEach(function (id) {
+    ['services', 'transformations', 'lookbook', 'reviews', 'visit'].forEach(function (id) {
       var el = document.getElementById(id); if (el && el.getBoundingClientRect().top < innerHeight * .4) cur = id;
     });
     $$('.nav a').forEach(function (a) { a.classList.toggle('is-active', a.getAttribute('href') === '#' + cur); });
@@ -102,7 +102,7 @@
   });
 
   /* fade-up targets */
-  $$('.sec-head__side, .plan__svcs, .plan__foot, .stylist__grid > *, .sv-menu, .sv-foot, .tf__side, .ba, .why__head p, .why__head .btn, .promise, .rv, .igx__card, .book__card, .vcard, .map, .footer__cta .footer__btns, .eyebrow').forEach(function (el) { el.classList.add('fade-up'); });
+  $$('.sec-head__side, .plan__svcs, .plan__foot, .sv-menu, .sv-foot, .tf__side, .ba, .why__head p, .why__head .btn, .promise, .rv, .igx__card, .book__card, .vcard, .map, .footer__cta .footer__btns, .eyebrow').forEach(function (el) { el.classList.add('fade-up'); });
 
   if ('IntersectionObserver' in window) {
     var io = new IntersectionObserver(function (es) {
@@ -309,8 +309,6 @@
       });
       // hero card subtle scale on scroll
       gsap.to('#hx', { scale: .96, ease: 'none', scrollTrigger: { trigger: '.hx', start: 'top top', end: 'bottom top', scrub: true } });
-      // portrait parallax
-      gsap.fromTo('.st-portrait img', { yPercent: -5, scale: 1.12 }, { yPercent: 5, scale: 1.12, ease: 'none', scrollTrigger: { trigger: '.stylist', start: 'top bottom', end: 'bottom top', scrub: true } });
       // footer wordmark
       gsap.from('.footer__word', { yPercent: 40, opacity: 0, ease: 'power2.out', scrollTrigger: { trigger: '.footer__word', start: 'top bottom', end: 'bottom 85%', scrub: true } });
     });
