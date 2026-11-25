@@ -1,0 +1,94 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+  <meta name="robots" content="noindex, nofollow">
+  <title>Wildlife Auto-Tagging Demo</title>
+  <meta name="description" content="A working demo: AI looks at a wildlife photo and creates species tags, website keywords, alt text and Instagram hashtags, with your approval before anything goes live.">
+  <meta name="theme-color" content="#121410">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Bodoni+Moda:ital,opsz,wght@0,6..96,500;0,6..96,600;1,6..96,500&family=Karla:wght@400;500;600;700&display=swap">
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <header class="hero">
+    <div class="wrap">
+      <p class="kind"><span>DEMO</span>Automatic photo tagging · made for Murali by Asiaben Hunani</p>
+      <h1>Your photos, tagged <em>automatically.</em></h1>
+      <p class="lede">You said automatic hashtags and keywords are the most important part. So instead of describing it, here it is working. Pick a sample photo or <b>try one of your own</b>: the AI looks at it, reads the camera details, and creates species tags, website keywords, alt text and Instagram hashtags.</p>
+      <p class="priv">Your photo never leaves your device. Everything runs inside your browser.</p>
+    </div>
+  </header>
+
+  <main>
+    <section class="sec wrap" id="try">
+      <p class="eyebrow">01 · Try it</p>
+      <h2>Choose a photo and watch it get tagged.</h2>
+      <div class="pick" id="pick" role="group" aria-label="Sample photos"></div>
+      <label class="upload">
+        <input type="file" id="file" accept="image/jpeg,image/png,image/webp">
+        <span><b>Or use one of your own photos</b><small>JPG straight from the camera works best: it includes the date, camera and location.</small></span>
+      </label>
+
+      <div class="run" id="run" hidden>
+        <div class="run__img"><img id="runImg" alt=""></div>
+        <div class="run__out">
+          <ol class="steps" id="steps">
+            <li data-s="exif">Reading camera details</li>
+            <li data-s="ai">AI looking at the photo</li>
+            <li data-s="tags">Building tags and hashtags</li>
+          </ol>
+          <div id="result" hidden>
+            <div class="sp">
+              <div><span class="k">Species</span><input id="species" aria-label="Species name"><small id="conf"></small></div>
+              <span class="flag" id="flag" hidden>Needs your check</span>
+            </div>
+            <p class="why" id="why"></p>
+            <label class="alb">Album<select id="album"></select></label>
+            <div class="out"><span class="k">Tags (click to remove)</span><div class="chips" id="tags"></div></div>
+            <div class="out"><span class="k">Camera details</span><p id="exif"></p></div>
+            <div class="out"><span class="k">Alt text for Google and screen readers</span><p id="alt"></p></div>
+            <div class="out"><span class="k">Instagram hashtags</span><p id="hash" class="hash"></p><button type="button" class="btn btn--ghost" id="copy">Copy hashtags</button></div>
+            <button type="button" class="btn" id="approve">Approve and add to gallery</button>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section class="sec sec--deep" id="gallery">
+      <div class="wrap">
+        <p class="eyebrow">02 · How visitors find your photos</p>
+        <h2>Every tag becomes a way in.</h2>
+        <p class="sub">Search or tap a tag, and the gallery filters instantly across all albums. Approved photos from the demo above appear here too.</p>
+        <div class="bar"><input id="q" type="search" placeholder="Search: tiger, kingfisher, birds, Nepal…" aria-label="Search photos"><div class="albums" id="albums"></div></div>
+        <div class="cloud" id="cloud"></div>
+        <div class="grid" id="grid"></div>
+        <p class="empty" id="empty" hidden>No photos match that yet.</p>
+      </div>
+    </section>
+
+    <section class="sec wrap" id="how">
+      <p class="eyebrow">03 · Why it's built this way</p>
+      <h2>Automatic, but never wrong in public.</h2>
+      <div class="how">
+        <article><b>Species, not just "bird"</b><span>Basic AI often gets wildlife wrong. Try the kingfishers above: this small free model guesses badly. The full version uses a much stronger AI for species, and anything it's unsure about is flagged.</span></article>
+        <article><b>You approve before it goes live</b><span>Tags are suggestions. One click to approve, or type the right species, so a wrong name never appears on your site.</span></article>
+        <article><b>Your albums do half the work</b><span>The album a photo sits in (a park, a trip, a species group) adds its tags automatically.</span></article>
+        <article><b>Camera details for free</b><span>Date, camera and lens are read straight from your original files, so tags like the year and season need no typing.</span></article>
+        <article><b>Exact locations hidden</b><span>GPS is rounded to a wider area, so nests and sensitive animals can't be pinpointed from your site.</span></article>
+        <article><b>Two outputs, two jobs</b><span>Keywords and alt text help Google and visitors search your site. Hashtags are a separate, copy-ready set for Instagram.</span></article>
+      </div>
+      <div class="next"><h3>Next step</h3><p>Tell me which platform your website is on, and send a few photos from one album. I'll show you the full version tagging your own work.</p></div>
+    </section>
+  </main>
+
+  <footer class="wrap foot">Made for Murali by Asiaben Hunani · November 2026 · Sample photos: public domain (CC0) via Openverse · Demo AI: MobileNet running in your browser.</footer>
+  <div class="toast" id="toast" role="status" aria-live="polite"></div>
+  <script src="https://cdn.jsdelivr.net/npm/@tensorflow/tfjs@4.22.0/dist/tf.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/@tensorflow-models/mobilenet@2.1.1/dist/mobilenet.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/exifr@7.1.3/dist/full.umd.js"></script>
+  <script src="script.js"></script>
+</body>
+</html>
