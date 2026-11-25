@@ -7,13 +7,11 @@
   document.documentElement.classList.add('js');
 
   /* countdown */
-  const end = new Date('2026-11-28T23:59:00-06:00').getTime(), cd = $('#countdown');
+  const end = new Date('2026-11-28T23:59:00-06:00').getTime();
   const tick = () => {
     const s = Math.max(0, (end - Date.now()) / 1000);
-    if (!s) { cd.textContent = 'Final hours'; return; }
-    $('[data-d]', cd).textContent = Math.floor(s / 86400);
-    $('[data-h]', cd).textContent = String(Math.floor(s % 86400 / 3600)).padStart(2, '0');
-    $('[data-m]', cd).textContent = String(Math.floor(s % 3600 / 60)).padStart(2, '0');
+    const v = { d: Math.floor(s / 86400), h: String(Math.floor(s % 86400 / 3600)).padStart(2, '0'), m: String(Math.floor(s % 3600 / 60)).padStart(2, '0') };
+    ['d', 'h', 'm'].forEach(k => $$('.cd-' + k).forEach(el => el.textContent = v[k]));
   };
   tick(); setInterval(tick, 30000);
 
@@ -28,17 +26,24 @@
   $('.dd__btn').onclick = () => { const o = dd.classList.toggle('open'); $('.dd__btn').setAttribute('aria-expanded', o); };
   document.addEventListener('click', e => { if (!dd.contains(e.target)) dd.classList.remove('open'); });
 
-  /* hero crossfade · 8s */
-  const himgs = $$('#heroMedia img'), hbars = $$('.hero__prog i'), hnum = $('#heroNum');
-  let hI = 0;
+  /* hero slider · 6s wipe */
+  const slides = $$('#heroStage .hs'), thumbs = $('#heroThumbs'), look = $('#heroLook'), lab = $('#heroLabel'), hnum = $('#heroNum');
+  thumbs.innerHTML = slides.map((f, k) => `<button role="tab" aria-label="Look ${k + 1}" class="${k ? '' : 'on'}"><img src="${f.dataset.thumb}" alt=""></button>`).join('');
+  const tb = $$('button', thumbs);
+  let hI = 0, hT;
+  const restart = () => { clearTimeout(hT); if (!reduce) hT = setTimeout(() => heroGo((hI + 1) % slides.length), 6000); };
   const heroGo = n => {
-    himgs[hI].classList.remove('on');
-    hbars.forEach((b, k) => { b.classList.remove('on'); b.classList.toggle('done', k < n); });
-    hI = n; himgs[hI].classList.add('on');
-    void hbars[hI].offsetWidth; hbars[hI].classList.add('on');
-    hnum.textContent = '0' + (hI + 1);
+    if (n === hI) return;
+    slides.forEach(f => f.classList.remove('prev'));
+    slides[hI].classList.remove('on'); slides[hI].classList.add('prev');
+    hI = n; slides[hI].classList.add('on');
+    tb.forEach(b => b.classList.remove('on')); void tb[hI].offsetWidth; tb[hI].classList.add('on');
+    lab.innerHTML = slides[hI].dataset.label; look.href = slides[hI].dataset.href;
+    hnum.textContent = `0${hI + 1} / 0${slides.length}`;
+    restart();
   };
-  if (!reduce) setInterval(() => heroGo((hI + 1) % himgs.length), 8000);
+  tb.forEach((b, k) => b.onclick = () => heroGo(k));
+  restart();
 
   /* products */
   const W = ['XS', 'S', 'M', 'L', 'XL', '2XL'], GS = ['2T', '3T', '4T', '5T', '6/7', '8/9', '10/11'], B = ['0-3m', '6-9m', '12-18m'];
@@ -166,7 +171,7 @@
       const step = t => { const k = Math.min(1, (t - t0) / dur), e = 1 - Math.pow(1 - k, 3), v = to * e; n.textContent = dec ? v.toFixed(1) : Math.round(v); if (k < 1) requestAnimationFrame(step); };
       requestAnimationFrame(step);
     });
-  }), { threshold: .4 }).observe($('.proof'));
+  }), { threshold: .4 }).observe($('.cert'));
 
   /* reviews (real, verified Judge.me reviews) */
   const R = [
@@ -212,5 +217,5 @@
 
   /* reveals */
   const io = new IntersectionObserver(es => es.forEach(en => { if (en.isIntersecting) { en.target.classList.add('in'); io.unobserve(en.target); } }), { threshold: .1, rootMargin: '0px 0px -30px 0px' });
-  $$('.trust__row, .head, .bento, .formula, .mcard, .wbento, .tgrid, .lic, .nana, .proof, .story, .ugc, .club, .faq, .posts, .final, .ftr__card').forEach(el => { el.classList.add('rv'); io.observe(el); });
+  $$('.head, .bento, .what, .mcard, .wbento, .tgrid, .lic, .nana, .cert, .story, .ugc, .club, .faq, .mag, .stands').forEach(el => { el.classList.add('rv'); io.observe(el); });
 })();
