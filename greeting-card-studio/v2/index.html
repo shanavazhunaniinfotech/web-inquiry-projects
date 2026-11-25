@@ -1,0 +1,475 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="robots" content="noindex">
+<title>Missive &amp; Co. · Greeting Cards Worth Keeping</title>
+<meta name="description" content="Homepage design concept for a Shopify greeting card business: luxury stationery, shop by occasion, card bundles, personalise and send direct, reminders.">
+<meta name="theme-color" content="#F4EEE6">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant:ital,wght@0,300;0,400;0,500;0,600;1,300;1,400;1,500&family=Inter+Tight:wght@300;400;500;600;700&family=Mrs+Saint+Delafield&family=Caveat:wght@500;600&display=swap" rel="stylesheet">
+<link rel="preload" as="image" href="images/hero-roses.jpg">
+<link rel="stylesheet" href="style.css">
+</head>
+<body class="is-loading">
+
+<a class="skip" href="#main">Skip to content</a>
+
+<!-- ============ PRELOADER ============ -->
+<div class="loader" id="loader" aria-hidden="true">
+  <div class="loader__env">
+    <div class="loader__flap"></div>
+    <div class="loader__seal">M</div>
+  </div>
+  <p class="loader__word">Missive <i>&amp;</i> Co.</p>
+</div>
+
+<!-- custom cursor -->
+<div class="cursor" id="cursor" aria-hidden="true"><span id="cursorTxt">View</span></div>
+
+<!-- ============ ANNOUNCEMENT ============ -->
+<div class="bar">
+  <div class="bar__in">
+    <p class="bar__l"><span class="pulse"></span> Christmas cut-off in <b id="barCd">--d --h --m</b></p>
+    <div class="bar__rot" id="barRot">
+      <p class="on">Free shipping on 3+ cards</p>
+      <p>Buy 5 cards, save 20%</p>
+      <p>Written &amp; posted for you, same day before 2pm</p>
+    </div>
+    <p class="bar__r"><a href="#reminders">Get birthday reminders</a></p>
+  </div>
+</div>
+
+<!-- ============ HEADER ============ -->
+<header class="hdr" id="hdr">
+  <div class="hdr__in">
+    <button class="burger" id="burger" aria-label="Open menu" aria-expanded="false"><span></span><span></span></button>
+    <nav class="nav" aria-label="Main">
+      <ul>
+        <li class="has-mega"><a href="#occasions">Occasions <small>▾</small></a>
+          <div class="mega">
+            <div class="mega__links">
+              <div><h4>Everyday</h4><a href="#shop">Birthday</a><a href="#shop">Thank You</a><a href="#shop">Love &amp; Anniversary</a><a href="#shop">Thinking of You</a><a href="#shop">Just Because</a></div>
+              <div><h4>Milestones</h4><a href="#shop">Wedding</a><a href="#shop">New Baby</a><a href="#shop">Graduation</a><a href="#shop">Sympathy</a><a href="#shop">Retirement</a></div>
+              <div><h4>Seasonal</h4><a href="#holiday">Christmas</a><a href="#holiday">Hanukkah</a><a href="#holiday">New Year</a><a href="#shop">Valentine's</a><a href="#shop">Mother's Day</a></div>
+            </div>
+            <a class="mega__tile" href="#holiday"><img src="images/h-main.jpg" alt="" loading="lazy"><span><small>New season</small><strong>The Winter Edit</strong></span></a>
+            <a class="mega__tile" href="#bundle"><img src="images/mega-shop.jpg" alt="" loading="lazy"><span><small>Save 20%</small><strong>Build a Card Wardrobe</strong></span></a>
+          </div>
+        </li>
+        <li><a href="#recipients">For Them</a></li>
+        <li><a href="#bundle">Bundles</a></li>
+        <li><a href="#studio">Personalise</a></li>
+        <li><a href="#craft">Our Craft</a></li>
+      </ul>
+    </nav>
+    <a class="logo" href="#top" aria-label="Missive &amp; Co. home">Missive <i>&amp;</i> Co.</a>
+    <div class="tools">
+      <button class="ic" id="searchBtn" aria-label="Search"><svg viewBox="0 0 24 24"><circle cx="11" cy="11" r="6.5"/><path d="m20 20-4.2-4.2"/></svg></button>
+      <a class="ic hide-sm" href="#reminders" aria-label="Reminders"><svg viewBox="0 0 24 24"><rect x="3.5" y="5" width="17" height="15" rx="2"/><path d="M3.5 10h17M8 3v4M16 3v4"/></svg></a>
+      <a class="ic hide-sm" href="#" aria-label="Account"><svg viewBox="0 0 24 24"><circle cx="12" cy="8" r="3.6"/><path d="M4.5 20.5c1.4-3.6 4.2-5.4 7.5-5.4s6.1 1.8 7.5 5.4"/></svg></a>
+      <button class="ic bag" id="cartBtn" aria-label="Open bag"><svg viewBox="0 0 24 24"><path d="M5 8.5h14l-1.2 11.5H6.2z"/><path d="M9 8.5V7a3 3 0 0 1 6 0v1.5"/></svg><span id="cartCount">0</span></button>
+    </div>
+  </div>
+  <div class="search" id="search" hidden>
+    <div class="search__in">
+      <input type="search" id="searchInput" placeholder="Search “birthday for mum”, “gold foil”, “thank you”…" aria-label="Search cards" autocomplete="off">
+      <div class="search__chips"><span>Trending</span><button>Birthday</button><button>Christmas</button><button>Thank you</button><button>Wedding</button><button>Mum</button></div>
+      <div class="search__res" id="searchRes"></div>
+    </div>
+  </div>
+</header>
+
+<aside class="mnav" id="mnav" aria-label="Mobile menu">
+  <nav>
+    <a href="#occasions"><span>01</span>Occasions</a><a href="#shop"><span>02</span>Bestsellers</a><a href="#bundle"><span>03</span>Bundles</a><a href="#studio"><span>04</span>Personalise</a><a href="#holiday"><span>05</span>Winter Edit</a><a href="#recipients"><span>06</span>For Them</a><a href="#reminders"><span>07</span>Reminders</a>
+  </nav>
+  <p>Free shipping on 3+ cards · 4.9★ from 12,400 reviews</p>
+</aside>
+
+<main id="main">
+
+<!-- ============ HERO ============ -->
+<section class="hero" id="top" data-note="Hero: one clear promise, two CTAs split by intent (browse vs. personalise), proof (rating, reviews, shipping) right under the fold line. Product chips make the hero shoppable.">
+  <div class="hero__grid">
+    <div class="hero__copy">
+      <p class="hero__eyebrow"><span>Est. 2016</span><span class="sep"></span><span>Letterpress studio &amp; card shop</span></p>
+      <h1 class="hero__h1">
+        <span class="ln"><span>Words they’ll</span></span>
+        <span class="ln"><span><em>keep</em> for years.</span></span>
+      </h1>
+      <p class="hero__sub">Luxury greeting cards for every <span class="rot" id="rot" aria-live="polite"><span class="on">birthday.</span><span>thank-you.</span><span>“I love you.”</span><span>new beginning.</span><span>“I’m sorry.”</span></span><br>
+        Printed on cotton paper, written by hand or by you, and posted the same day.</p>
+      <div class="hero__ctas">
+        <a class="btn btn--dark" href="#occasions" data-magnet><span>Shop by occasion</span><i>→</i></a>
+        <a class="btn btn--line" href="#studio" data-magnet><span>Write &amp; send a card</span></a>
+      </div>
+      <ul class="proof">
+        <li><span class="avatars"><img src="images/u-2.jpg" alt=""><img src="images/u-4.jpg" alt=""><img src="images/rev-2.jpg" alt=""></span><div><b>4.9 <span class="stars">★★★★★</span></b><small>12,400+ reviews</small></div></li>
+        <li><b>Same-day</b><small>dispatch before 2pm</small></li>
+        <li><b>Free</b><small>shipping on 3+ cards</small></li>
+      </ul>
+    </div>
+
+    <div class="hero__art" id="heroArt">
+      <div class="hero__arch" data-depth="0.4"><img src="images/hero-roses.jpg" alt="Blush greeting card surrounded by fresh roses" fetchpriority="high"></div>
+      <div class="hero__ring" aria-hidden="true">
+        <svg viewBox="0 0 200 200"><defs><path id="ring" d="M100 100m-80 0a80 80 0 1 1 160 0a80 80 0 1 1-160 0"/></defs><text><textPath href="#ring">PRINTED BY HAND · SEALED WITH LOVE · POSTED TODAY · </textPath></text></svg>
+        <span>✦</span>
+      </div>
+      <a class="chip chip--a" href="#shop" data-depth="1.2">
+        <img src="images/p-golden-birthday.jpg" alt="Gold foil Happy Birthday card">
+        <span><small>Bestseller · Gold foil</small><strong>Golden Hour Birthday</strong><em>$6.50 <span class="stars">★★★★★</span> 864</em></span>
+        <button class="chip__add" data-add="hero1" data-name="Golden Hour Birthday" data-price="6.5" data-img="images/p-golden-birthday.jpg" aria-label="Add Golden Hour Birthday to bag">+</button>
+      </a>
+      <a class="chip chip--b" href="#shop" data-depth="0.8">
+        <img src="images/p-thanks-noir.jpg" alt="Black Thanks card held in hand">
+        <span><small>New · Letterpress</small><strong>Thanks, Noir</strong><em>$5.50</em></span>
+        <button class="chip__add" data-add="hero2" data-name="Thanks, Noir" data-price="5.5" data-img="images/p-thanks-noir.jpg" aria-label="Add Thanks, Noir to bag">+</button>
+      </a>
+      <p class="hero__caption" data-depth="0.6"><span>Nº 014</span> The Rosé Collection</p>
+    </div>
+  </div>
+  <a class="scroll" href="#occasions" aria-label="Scroll down"><span></span></a>
+</section>
+
+<!-- ============ PRESS / USP MARQUEE ============ -->
+<section class="press" aria-label="As featured in">
+  <div class="press__track">
+    <span>Vogue Living</span><i>✦</i><span>Kinfolk</span><i>✦</i><span>Elle Decoration</span><i>✦</i><span>The Gift Guide</span><i>✦</i><span>Monocle</span><i>✦</i><span>Paper Magazine</span><i>✦</i>
+    <span>Vogue Living</span><i>✦</i><span>Kinfolk</span><i>✦</i><span>Elle Decoration</span><i>✦</i><span>The Gift Guide</span><i>✦</i><span>Monocle</span><i>✦</i><span>Paper Magazine</span><i>✦</i>
+  </div>
+</section>
+
+<!-- ============ OCCASIONS (horizontal) ============ -->
+<section class="occ" id="occasions" data-note="Occasion is how card buyers think. A pinned horizontal gallery shows all 8 occasions without pushing products down; big photography sells the feeling, counts show depth of range.">
+  <div class="occ__pin" id="occPin">
+    <div class="occ__intro">
+      <p class="kicker">Shop by occasion</p>
+      <h2>Every moment,<br><em>beautifully</em> said.</h2>
+      <p>900+ designs from independent illustrators and our own letterpress studio.</p>
+      <div class="occ__progress"><span id="occBar"></span></div>
+      <p class="occ__hint">Scroll to explore →</p>
+    </div>
+    <div class="occ__track" id="occTrack"></div>
+  </div>
+</section>
+
+<!-- ============ BESTSELLERS ============ -->
+<section class="sec shop" id="shop" data-note="Product grid: real photography, ratings and price visible without hovering; hover shows the inside message (answers 'what's inside?'). Quick add + Personalise split the two buying intents. An inline offer tile lifts average order value.">
+  <div class="head">
+    <div>
+      <p class="kicker">The bestsellers</p>
+      <h2>Loved, written in, <em>kept on mantels.</em></h2>
+    </div>
+    <div class="tabs" id="tabs" role="tablist">
+      <button class="on" data-f="all">All</button><button data-f="birthday">Birthday</button><button data-f="thanks">Thank you</button><button data-f="love">Love &amp; Mum</button><button data-f="wedding">Wedding</button><button data-f="holiday">Holiday</button>
+    </div>
+  </div>
+  <div class="grid" id="grid"></div>
+  <div class="shop__more"><a class="btn btn--line" href="#">View all 900+ cards <i>→</i></a></div>
+</section>
+
+<!-- ============ BUNDLE BUILDER ============ -->
+<section class="bundle" id="bundle" data-note="Bundle builder: the biggest AOV lever for cards. Tiered savings (3 = 10%, 5 = 20%) with a live tray and progress bar turn a $6 purchase into a $25+ basket.">
+  <div class="bundle__in">
+    <div class="bundle__copy">
+      <p class="kicker kicker--gold">Build a Card Wardrobe</p>
+      <h2>Never be caught <em>without the right card.</em></h2>
+      <p>Pick any cards for the drawer. The more you choose, the more you save, and your box ships free.</p>
+      <div class="tiers">
+        <div class="tier" data-t="3"><b>3 cards</b><span>Save 10%</span></div>
+        <div class="tier" data-t="5"><b>5 cards</b><span>Save 20%</span></div>
+        <div class="tier" data-t="8"><b>8 cards</b><span>Save 25% + gift box</span></div>
+      </div>
+      <div class="tray">
+        <div class="tray__slots" id="traySlots"></div>
+        <div class="tray__bar"><span id="trayBar"></span></div>
+        <div class="tray__foot">
+          <p id="trayMsg">Choose 3 cards to unlock 10% off</p>
+          <p class="tray__price"><s id="trayWas"></s> <b id="trayNow">$0.00</b></p>
+        </div>
+        <button class="btn btn--gold btn--block" id="trayAdd" disabled>Add bundle to bag</button>
+      </div>
+    </div>
+    <div class="bundle__pick" id="bundlePick"></div>
+  </div>
+</section>
+
+<!-- ============ PROCESS (pinned story) ============ -->
+<section class="story" id="craft" data-note="Brand story told through process. It justifies the premium price before the personalisation ask, and pinning keeps it short on the page.">
+  <div class="story__pin">
+    <div class="story__media" id="storyMedia">
+      <img class="on" src="images/s-design.jpg" alt="Pencils and paper on an artist's desk" loading="lazy">
+      <img src="images/s-print.jpg" alt="Racks of printed greeting cards" loading="lazy">
+      <img src="images/s-write.jpg" alt="Writing a card at a wooden desk" loading="lazy">
+      <img src="images/s-seal.jpg" alt="Envelopes sealed with gold wax" loading="lazy">
+      <span class="story__num" id="storyNum">01</span>
+    </div>
+    <div class="story__steps" id="storySteps">
+      <p class="kicker">How a card becomes a keepsake</p>
+      <article class="step on"><span>01</span><h3>Drawn by hand</h3><p>Every design starts on an artist’s desk. 120 independent illustrators across 14 countries, all paid a royalty on every card.</p></article>
+      <article class="step"><span>02</span><h3>Pressed on cotton</h3><p>Letterpress and real gold foil on 600gsm cotton paper. A bite you can feel, and weight you notice the second it’s in your hand.</p></article>
+      <article class="step"><span>03</span><h3>Written in real ink</h3><p>Choose a handwriting style and our scribes, or our printer, write your words inside. Or leave it blank for you.</p></article>
+      <article class="step"><span>04</span><h3>Sealed &amp; posted today</h3><p>A lined envelope, wax seal and first-class stamp. Posted the same day if ordered before 2pm.</p></article>
+    </div>
+  </div>
+</section>
+
+<!-- ============ PERSONALISE STUDIO ============ -->
+<section class="sec studio" id="studio" data-note="Personalisation is the margin driver for card shops (send-direct = $3 to $4 extra and zero effort for the buyer). The live preview on a real card removes doubt; delivery choice is explicit.">
+  <div class="head head--center">
+    <p class="kicker">Write it here · We post it there</p>
+    <h2>Your words, <em>in real ink,</em> on their doormat.</h2>
+  </div>
+  <div class="studio__grid">
+    <div class="studio__stage">
+      <img src="images/studio-blank.jpg" alt="Hands holding a blank greeting card" loading="lazy">
+      <div class="studio__card"><p class="ink" id="inkMsg"></p></div>
+      <span class="studio__tag">Live preview</span>
+    </div>
+    <form class="studio__form" id="studioForm" onsubmit="return false">
+      <ol class="mini-steps"><li class="on">Message</li><li>Style</li><li>Delivery</li></ol>
+      <label class="fld">
+        <span>Your message <em id="cc">0/220</em></span>
+        <textarea id="msg" maxlength="220" rows="4">Dearest Ellie, happy birthday! Thank you for every long walk and terrible joke. Here's to your best year yet. All my love, Sam x</textarea>
+      </label>
+      <div class="prompts"><span>Need words?</span><button type="button" data-p="Happy birthday to my favourite person. May this year be as wonderful as you are. Love always x">Birthday</button><button type="button" data-p="I can’t thank you enough. You went above and beyond, and it meant the world. With gratitude x">Thank you</button><button type="button" data-p="Thinking of you today and sending all my love. I’m here, always. x">Thinking of you</button></div>
+      <fieldset class="fld"><legend>Handwriting</legend>
+        <div class="seg" id="inkSeg"><button type="button" class="on" data-ink="script">Script</button><button type="button" data-ink="casual">Casual</button><button type="button" data-ink="serif">Classic</button></div>
+      </fieldset>
+      <fieldset class="fld"><legend>Delivery</legend>
+        <div class="seg seg--2" id="sendSeg">
+          <button type="button" class="on" data-send="direct"><b>Send direct</b><small>We post it to them, +$3.50</small></button>
+          <button type="button" data-send="me"><b>Send to me</b><small>Sign it yourself</small></button>
+        </div>
+      </fieldset>
+      <div class="studio__buy">
+        <div><b id="studioPrice">$9.95</b><small>Card, envelope, wax seal &amp; stamp</small></div>
+        <button class="btn btn--dark" type="button" id="studioAdd">Add to bag</button>
+      </div>
+      <p class="studio__trust">✓ Arrives in 1–2 days · ✓ Proof emailed before posting · ✓ Love it or we reprint free</p>
+    </form>
+  </div>
+</section>
+
+<!-- ============ HOLIDAY CAMPAIGN ============ -->
+<section class="holiday" id="holiday" data-note="Seasonal campaign block with a real deadline. A cut-off countdown is honest urgency that drives conversion in Q4; boxed sets are the primary CTA.">
+  <div class="holiday__bg"><img src="images/h-main.jpg" alt="" loading="lazy"></div>
+  <div class="holiday__in">
+    <div class="holiday__copy">
+      <p class="kicker kicker--gold">The Winter Edit · 2026</p>
+      <h2>Season’s greetings, <em>hand-finished in gold.</em></h2>
+      <p>64 new holiday designs with wax seals, deckled edges and lined envelopes. Boxed sets of 10 from $28.</p>
+      <div class="cd" id="cd">
+        <p>Order by <b>Dec 15</b> for Christmas delivery</p>
+        <div><span><b data-d>00</b><small>Days</small></span><span><b data-h>00</b><small>Hours</small></span><span><b data-m>00</b><small>Mins</small></span><span><b data-s>00</b><small>Secs</small></span></div>
+      </div>
+      <div class="ctas">
+        <a class="btn btn--gold" href="#shop" data-magnet><span>Shop the Winter Edit</span><i>→</i></a>
+        <a class="btn btn--ghost-light" href="#sets">Boxed sets</a>
+      </div>
+    </div>
+    <div class="holiday__cards">
+      <figure class="hcard hcard--1"><img src="images/h-vintage.jpg" alt="Vintage-style Christmas cards" loading="lazy"><figcaption>Heirloom Noël · Box of 10 · $32</figcaption></figure>
+      <figure class="hcard hcard--2"><img src="images/p-embossed-pine.jpg" alt="Embossed pine tree Christmas card in a tree" loading="lazy"><figcaption>Embossed Pine · $6.50</figcaption></figure>
+    </div>
+  </div>
+</section>
+
+<!-- ============ RECIPIENTS (editorial index) ============ -->
+<section class="sec rec" id="recipients" data-note="Shop by recipient is the second most common way people search for cards ('card for dad'). An editorial index with a hover preview keeps it elegant and scannable on mobile.">
+  <div class="rec__grid">
+    <div class="rec__intro">
+      <p class="kicker">Shop by recipient</p>
+      <h2>Who are you <em>writing to?</em></h2>
+      <div class="rec__preview" id="recPreview"><img src="images/r-mum.jpg" alt="" id="recImg"></div>
+    </div>
+    <ul class="rec__list" id="recList"></ul>
+  </div>
+</section>
+
+<!-- ============ CRAFT / QUALITY ============ -->
+<section class="quality" data-note="Quality proof in numbers backs up the price point. Short, scannable, tactile.">
+  <div class="quality__in">
+    <div class="quality__img quality__img--a"><img src="images/c-texture.jpg" alt="Close-up of textured seed paper cards" loading="lazy"></div>
+    <div class="quality__copy">
+      <p class="kicker">Made properly</p>
+      <h2>The details you <em>feel</em> before you read a word.</h2>
+      <div class="stats">
+        <div><b data-count="600">0</b><span>gsm cotton paper</span></div>
+        <div><b data-count="100" data-suf="%">0</b><span>recycled &amp; plastic-free</span></div>
+        <div><b data-count="120" data-suf="+">0</b><span>independent artists</span></div>
+        <div><b data-count="1" data-pre="Nº ">0</b><span>for gifting, 3 years running</span></div>
+      </div>
+      <ul class="feat"><li>Letterpress &amp; real gold foil</li><li>Lined envelopes in 8 colours</li><li>Wax seal on every order</li><li>Carbon-neutral shipping</li></ul>
+    </div>
+    <div class="quality__img quality__img--b"><img src="images/pink-env.jpg" alt="Blush pink envelope" loading="lazy"></div>
+  </div>
+</section>
+
+<!-- ============ BOXED SETS + CLUB ============ -->
+<section class="sec sets" id="sets" data-note="Sets and subscription: stock-up buyers and repeat revenue. The subscription card is visually distinct so it reads as a different offer.">
+  <div class="head">
+    <div><p class="kicker">Boxed sets &amp; Card Club</p><h2>Stock the drawer. <em>Save more.</em></h2></div>
+  </div>
+  <div class="sets__grid">
+    <article class="set">
+      <div class="set__img"><img src="images/set-everyday.jpg" alt="Wall of assorted everyday greeting cards" loading="lazy"><span class="pill">Save 25%</span></div>
+      <div class="set__b"><h3>The Everyday Box</h3><p>10 cards: thanks, birthdays &amp; just because</p><div class="set__buy"><span><b>$36</b> <s>$48</s></span><button class="btn btn--sm btn--dark" data-add="set1" data-name="The Everyday Box" data-price="36" data-img="images/set-everyday.jpg">Add</button></div></div>
+    </article>
+    <article class="set">
+      <div class="set__img"><img src="images/set-holiday.jpg" alt="Collection of vintage holiday cards" loading="lazy"><span class="pill">Limited</span></div>
+      <div class="set__b"><h3>Heirloom Noël Box</h3><p>10 vintage-inspired holiday cards, red envelopes</p><div class="set__buy"><span><b>$32</b> <s>$42</s></span><button class="btn btn--sm btn--dark" data-add="set2" data-name="Heirloom Noël Box" data-price="32" data-img="images/set-holiday.jpg">Add</button></div></div>
+    </article>
+    <article class="club">
+      <img src="images/club-envelopes.jpg" alt="" loading="lazy">
+      <div class="club__b">
+        <p class="kicker kicker--gold">Card Club</p>
+        <h3>Five exclusive cards, <em>every month.</em></h3>
+        <ul><li>Members-only artist designs</li><li>Free shipping on every order</li><li>15% off the whole shop</li><li>Skip or cancel any time</li></ul>
+        <div class="club__p"><b>$18</b><span>/month</span></div>
+        <a class="btn btn--gold" href="#">Join the Club <i>→</i></a>
+      </div>
+    </article>
+  </div>
+</section>
+
+<!-- ============ REVIEWS ============ -->
+<section class="sec reviews" id="reviews" data-note="Social proof with photos and a rating breakdown. Real photos of received cards are more convincing than star counts alone.">
+  <div class="rev__top">
+    <div class="rev__score">
+      <b>4.9</b>
+      <div><span class="stars stars--lg">★★★★★</span><p>12,416 verified reviews</p></div>
+    </div>
+    <div class="rev__bars">
+      <div><span>5★</span><i style="--w:92%"></i><em>92%</em></div>
+      <div><span>4★</span><i style="--w:6%"></i><em>6%</em></div>
+      <div><span>3★</span><i style="--w:1.5%"></i><em>1%</em></div>
+      <div><span>2★</span><i style="--w:.5%"></i><em>&lt;1%</em></div>
+    </div>
+    <blockquote class="rev__press">“The most beautiful cards we’ve held all year.”<cite>Vogue Living</cite></blockquote>
+  </div>
+  <div class="rev__rail" id="revRail"></div>
+</section>
+
+<!-- ============ REMINDERS ============ -->
+<section class="remind" id="reminders" data-note="Reminder service = free email capture with real intent. Every saved date becomes a future purchase prompt 10 days out.">
+  <div class="remind__in">
+    <div class="remind__img"><img src="images/rem-ribbon.jpg" alt="Blank card with ribbon and kraft envelope" loading="lazy"></div>
+    <div class="remind__copy">
+      <p class="kicker">Never miss a date</p>
+      <h2>We’ll remember, <em>so you look like you did.</em></h2>
+      <p>Save the birthdays and anniversaries that matter. We’ll email you 10 days before with cards we think they’ll love. Free, forever.</p>
+      <form class="remind__form" id="remForm">
+        <input id="remName" placeholder="Who? e.g. Grandma Rose" required aria-label="Name">
+        <input id="remDate" type="date" required aria-label="Date">
+        <button class="btn btn--dark" type="submit">Save date</button>
+      </form>
+      <ul class="remind__list" id="remList">
+        <li><b>12 <small>Dec</small></b><span><strong>Grandma Rose</strong> Birthday · we’ll remind you Dec 2</span></li>
+        <li><b>03 <small>Jan</small></b><span><strong>Sam &amp; Alex</strong> Anniversary · we’ll remind you Dec 24</span></li>
+      </ul>
+    </div>
+  </div>
+</section>
+
+<!-- ============ CORPORATE ============ -->
+<section class="sec biz" data-note="B2B gets one strong band, not a whole page. Corporate holiday orders are often the most valuable orders of the year.">
+  <div class="biz__card">
+    <img src="images/biz-suite.jpg" alt="Custom stationery suite" loading="lazy">
+    <div class="biz__b">
+      <p class="kicker kicker--gold">For business &amp; weddings</p>
+      <h3>Custom cards, client gifting &amp; wholesale.</h3>
+      <p>Your logo in foil, bespoke artwork or full wedding suites. Minimum 25 cards, proofs in 48 hours.</p>
+      <div class="ctas"><a class="btn btn--gold" href="#">Request a quote <i>→</i></a><a class="btn btn--ghost-light" href="#">Wholesale</a></div>
+    </div>
+  </div>
+</section>
+
+<!-- ============ UGC ============ -->
+<section class="sec ugc" data-note="UGC closes the loop: real cards in real homes. Each tile links to the product.">
+  <div class="head head--center">
+    <p class="kicker">@missiveandco · #keptonthemantel</p>
+    <h2>On mantels, fridges <em>&amp; memory boxes.</em></h2>
+  </div>
+  <div class="ugc__grid">
+    <a href="#" class="ugc__i"><img src="images/u-1.jpg" alt="Vintage postcards" loading="lazy"><span>Shop the look</span></a>
+    <a href="#" class="ugc__i"><img src="images/u-2.jpg" alt="Fountain pen writing" loading="lazy"><span>Shop the look</span></a>
+    <a href="#" class="ugc__i"><img src="images/u-3.jpg" alt="Handwritten letter" loading="lazy"><span>Shop the look</span></a>
+    <a href="#" class="ugc__i"><img src="images/u-4.jpg" alt="Envelope with dried flowers" loading="lazy"><span>Shop the look</span></a>
+    <a href="#" class="ugc__i"><img src="images/u-5.jpg" alt="Lilac rose birthday card" loading="lazy"><span>Shop the look</span></a>
+    <a href="#" class="ugc__i"><img src="images/u-6.jpg" alt="Writing a card" loading="lazy"><span>Shop the look</span></a>
+  </div>
+</section>
+
+<!-- ============ FINAL CTA ============ -->
+<section class="final">
+  <img src="images/cta-florals.jpg" alt="" loading="lazy">
+  <div class="final__in">
+    <h2>Say it <em>properly.</em></h2>
+    <p>Get 15% off your first order, plus first look at new designs.</p>
+    <form class="news" id="newsForm"><input type="email" placeholder="Your email address" required aria-label="Email"><button class="btn btn--dark" type="submit">Get 15% off</button></form>
+  </div>
+</section>
+
+</main>
+
+<footer class="ftr">
+  <div class="ftr__cols">
+    <div class="ftr__brand"><p class="logo">Missive <i>&amp;</i> Co.</p><p>Luxury greeting cards, letterpress printed and posted with care since 2016.</p></div>
+    <div><h4>Shop</h4><a href="#occasions">Occasions</a><a href="#holiday">Winter Edit</a><a href="#recipients">For Them</a><a href="#bundle">Bundles</a><a href="#">Gift cards</a></div>
+    <div><h4>Help</h4><a href="#">Delivery &amp; cut-off dates</a><a href="#">Track an order</a><a href="#">Returns</a><a href="#">FAQ</a><a href="#">Contact</a></div>
+    <div><h4>Studio</h4><a href="#craft">Our craft</a><a href="#">Artists</a><a href="#">Sustainability</a><a href="#">Wholesale</a><a href="#">Corporate</a></div>
+  </div>
+  <p class="ftr__word" aria-hidden="true">Missive<i>&amp;</i>Co.</p>
+  <div class="ftr__base"><span>© 2026 Missive &amp; Co. (placeholder brand) · Homepage design concept · Photos: Unsplash</span><span class="pay"><i>Visa</i><i>Mastercard</i><i>Amex</i><i>PayPal</i><i>Shop Pay</i><i>Apple Pay</i></span></div>
+</footer>
+
+<!-- ============ CART ============ -->
+<div class="scrim" id="scrim"></div>
+<aside class="cart" id="cart" aria-label="Your bag" aria-hidden="true">
+  <div class="cart__h"><h3>Your bag <small id="cartN">(0)</small></h3><button class="ic" id="cartClose" aria-label="Close">✕</button></div>
+  <div class="ship"><p id="shipMsg"></p><div class="ship__bar"><span id="shipBar"></span></div></div>
+  <ul class="cart__items" id="cartItems"></ul>
+  <div class="cart__up">
+    <p>Finish it beautifully</p>
+    <div class="up"><img src="images/s-seal.jpg" alt=""><div><b>Gold wax seals ×6</b><small>$4.00</small></div><button class="btn btn--sm btn--line" data-add="seals" data-name="Gold wax seals ×6" data-price="4" data-img="images/s-seal.jpg">Add</button></div>
+  </div>
+  <div class="cart__f">
+    <div class="cart__tot"><span>Subtotal</span><b id="cartTot">$0.00</b></div>
+    <button class="btn btn--dark btn--block">Secure checkout</button>
+    <p class="cart__pay">Shop Pay · Apple Pay · PayPal · Klarna</p>
+  </div>
+</aside>
+
+<!-- exit intent -->
+<div class="pop" id="pop" role="dialog" aria-modal="true" aria-label="15% off offer" hidden>
+  <div class="pop__card">
+    <button class="ic pop__x" id="popX" aria-label="Close">✕</button>
+    <img src="images/nl-kraft.jpg" alt="">
+    <div class="pop__b">
+      <p class="kicker">Before you go</p>
+      <h3>15% off <em>your first cards.</em></h3>
+      <form id="popForm"><input type="email" placeholder="Email address" required aria-label="Email"><button class="btn btn--dark btn--block" type="submit">Send my code</button></form>
+      <button class="pop__no" id="popNo">No thanks, I’ll pay full price</button>
+    </div>
+  </div>
+</div>
+
+<!-- mobile sticky -->
+<div class="mbar" id="mbar"><a class="btn btn--dark" href="#occasions">Shop cards</a><a class="btn btn--line" href="#studio">Write &amp; send</a></div>
+
+<!-- CRO notes toggle -->
+<button class="notes-btn" id="notesBtn" aria-pressed="false">Why this layout?</button>
+
+<div class="toast" id="toast" role="status"></div>
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/gsap.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/ScrollTrigger.min.js"></script>
+<script src="https://unpkg.com/lenis@1.1.13/dist/lenis.min.js"></script>
+<script src="script.js"></script>
+</body>
+</html>
