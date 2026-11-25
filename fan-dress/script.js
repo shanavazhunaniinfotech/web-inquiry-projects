@@ -12,7 +12,7 @@
   const end = new Date('2026-11-28T23:59:00-06:00').getTime();
   const cd = $('#countdown');
   const tick = () => {
-    let s = Math.max(0, (end - Date.now()) / 1000);
+    const s = Math.max(0, (end - Date.now()) / 1000);
     if (!s) { cd.textContent = 'Final hours'; return; }
     $('[data-d]', cd).textContent = Math.floor(s / 86400);
     $('[data-h]', cd).textContent = String(Math.floor(s % 86400 / 3600)).padStart(2, '0');
@@ -53,71 +53,64 @@
   }
 
   /* ---------------- hero ---------------- */
-  const stage = $('.hero__stage'), arch = $('.hero__arch'), line = $('.hero__word--line');
-  const clipLine = () => {
-    const L = line.getBoundingClientRect(), A = arch.getBoundingClientRect();
-    const t = A.top - L.top, r = L.right - A.right, b = Math.max(0, L.bottom - A.bottom), l = A.left - L.left;
-    line.style.clipPath = `inset(${t}px ${r}px ${b}px ${l}px round ${A.width / 2}px ${A.width / 2}px 0 0)`;
-  };
-  addEventListener('resize', clipLine); clipLine();
-  const heroReady = () => { clipLine(); line.classList.add('ready'); };
   if (G && !reduce) {
-    const letters = $$('.hero__word .hw > span:not(.sp)');
-    const n = letters.length / 2;
-    const tl = G.timeline({ defaults: { ease: 'expo.out' }, onComplete: heroReady });
-    tl.from(arch, { clipPath: 'inset(100% 0 0 0 round 999px 999px 0 0)', duration: 1.5 }, 0)
-      .from($('.hero__arch img'), { scale: 1.4, duration: 2 }, 0)
-      .from(letters, { yPercent: 110, opacity: 0, duration: 1.2, stagger: i => (i % n) * .06 }, .15)
-      .from('.hero__script', { opacity: 0, y: 40, rotate: -10, duration: 1.2 }, .7)
-      .from('.hero__pol, .hero__stamp', { opacity: 0, scale: .6, y: 40, duration: 1.1, stagger: .12, ease: 'back.out(1.6)' }, .8)
-      .from('.hero__foot > *', { opacity: 0, y: 30, duration: 1, stagger: .1 }, .9)
-      .from('.hero__meta', { opacity: 0, duration: 1 }, .9);
-    // mouse parallax
-    if (fine) stage.addEventListener('pointermove', e => {
-      const r = stage.getBoundingClientRect(), x = (e.clientX - r.left) / r.width - .5, y = (e.clientY - r.top) / r.height - .5;
-      $$('[data-depth]', stage).forEach(el => G.to(el, { x: x * el.dataset.depth * 2, y: y * el.dataset.depth * 2, duration: 1, ease: 'power3.out' }));
-    });
-    // scroll parallax of hero bits
-    if (window.ScrollTrigger) {
-      G.to('.hero__script', { yPercent: -60, ease: 'none', scrollTrigger: { trigger: '.hero', start: 'top top', end: 'bottom top', scrub: true } });
-      G.to('.hero__pol--a', { yPercent: -50, ease: 'none', scrollTrigger: { trigger: '.hero', start: 'top top', end: 'bottom top', scrub: true } });
-      G.to('.hero__pol--b', { yPercent: -90, ease: 'none', scrollTrigger: { trigger: '.hero', start: 'top top', end: 'bottom top', scrub: true } });
-    }
-  } else heroReady();
-  document.fonts && document.fonts.ready.then(clipLine);
+    G.timeline({ defaults: { ease: 'expo.out' } })
+      .from('.hero__word .hw > span:not(.sp)', { yPercent: 110, opacity: 0, duration: 1.2, stagger: .06 }, 0)
+      .from('.hero__arch', { clipPath: 'inset(100% 0 0 0 round 999px 999px 10px 10px)', duration: 1.5 }, .2)
+      .from('.hero__arch img', { scale: 1.35, duration: 2 }, .2)
+      .from('.hero__copy > *', { opacity: 0, y: 30, duration: 1, stagger: .08 }, .55)
+      .from('.hero__slides', { opacity: 0, x: 40, rotate: 8, duration: 1.2 }, .7);
+  }
+  // right-hand polaroid slideshow: 8s per look
+  const slides = $$('#slides .slide'), sdots = $$('#slideDots i');
+  let sI = 0;
+  const showSlide = n => {
+    slides[sI].classList.remove('on'); slides[sI].classList.add('out');
+    const prev = slides[sI]; setTimeout(() => prev.classList.remove('out'), 1100);
+    sdots.forEach((d, k) => { d.classList.remove('on'); d.classList.toggle('done', k < n); });
+    sI = n; slides[sI].classList.add('on');
+    void sdots[sI].offsetWidth; sdots[sI].classList.add('on');
+  };
+  if (!reduce) setInterval(() => showSlide((sI + 1) % slides.length), 8000);
 
   /* ---------------- shop-by-who panels ---------------- */
   const panels = $$('.panel');
+  panels.forEach(p => p.style.setProperty('--bg', `url("${$('img', p).getAttribute('src')}")`));
   const openPanel = p => panels.forEach(x => x.classList.toggle('is-open', x === p));
   panels.forEach(p => {
     if (fine) p.addEventListener('mouseenter', () => openPanel(p));
     p.addEventListener('click', e => { if (!p.classList.contains('is-open')) { e.preventDefault(); openPanel(p); } });
   });
 
-  /* ---------------- what-is sticky story ---------------- */
-  const what = $('#what'), steps = $$('#whatSteps li'), frames = $$('.wf'), eqs = $$('.what__eq span'), bar = $('#whatBar');
-  let wStep = -1;
-  const whatScroll = () => {
-    const r = what.getBoundingClientRect(), span = Math.max(1, r.height - innerHeight);
-    const p = Math.min(1, Math.max(0, -r.top / span));
-    const s = p < .34 ? 0 : p < .67 ? 1 : 2;
-    bar.style.width = (p * 100) + '%';
-    if (s === wStep) return; wStep = s;
-    steps.forEach((x, i) => x.classList.toggle('on', i <= s && i === s || innerWidth <= 960));
-    frames.forEach((x, i) => x.classList.toggle('on', i <= s));
-    eqs.forEach((x, i) => x.classList.toggle('on', i <= s));
+  /* ---------------- what-is: hover / tap to select ---------------- */
+  const steps = $$('#whatSteps li'), frames = $$('.wf'), eqs = $$('.what__eq span');
+  let wI = 0;
+  const setStep = i => {
+    if (i === wI) return;
+    frames.forEach(f => f.classList.remove('was'));
+    frames[wI].classList.add('was');
+    wI = i;
+    steps.forEach((x, k) => x.classList.toggle('on', k === i));
+    frames.forEach((x, k) => x.classList.toggle('on', k === i));
+    eqs.forEach((x, k) => x.classList.toggle('on', k <= i));
   };
-  addEventListener('scroll', whatScroll, { passive: true }); whatScroll();
+  steps.forEach((li, i) => {
+    li.addEventListener('mouseenter', () => fine && setStep(i));
+    li.addEventListener('click', () => setStep(i));
+    li.addEventListener('focus', () => setStep(i));
+  });
 
   /* ---------------- products ---------------- */
   const W = ['XS', 'S', 'M', 'L', 'XL', '2XL'], GS = ['2T', '3T', '4T', '5T', '6/7', '8/9', '10/11'], B = ['0-3m', '6-9m', '12-18m'];
+  const TEAM = { lsu: { n: 'LSU Tigers', c: '#461D7C', l: 'logo-lsu.png' }, am: { n: 'Texas A&M', c: '#500000', l: 'logo-tamu.jpg' } };
+  const KIND = { W: ['Women', 'XS–2XL', 'Patented drawstring'], G: ['Girls', '2T–10/11', 'Built-in twirl skirt'], B: ['Baby', '0–18 mo', 'Snap closure'] };
   const P = {
-    lsuW: { n: "LSU Women's Baseball Jersey Dress", s: 'LSU Tigers · Women', p: 148, z: W, i: ['lsu-women.jpg', 'lsu-women-2.jpg'], u: '/products/lsu_jeresy_dress', b: 'Best seller', t: 'logo-lsu.png', team: 'lsu', kind: 'W' },
-    amW: { n: "Texas A&M Women's Baseball Jersey Dress", s: 'Texas A&M · Women', p: 148, z: W, i: ['aggie-women.jpg', 'aggie-women-drawstring.jpg'], u: '/products/texas-am-jersey-dress', b: 'Best seller', t: 'logo-tamu.jpg', team: 'am', kind: 'W' },
-    lsuG: { n: 'LSU Tigers Baseball Jersey Dress - Girls', s: 'LSU Tigers · Girls', p: 88, z: GS, i: ['lsu-girls.jpg', 'lsu-girl-twirl.jpg'], u: '/products/louisiana-state-university%C2%AE-fan-dress-girls', b: 'Twirl-ready', t: 'logo-lsu.png', team: 'lsu', kind: 'G' },
-    amG: { n: 'Texas A&M Aggies Baseball Jersey Dress - Girls', s: 'Texas A&M · Girls', p: 88, z: GS, i: ['aggie-girl-twirl.jpg', 'aggie-girls.jpg'], u: '/products/texas-am-jersey-dress-girls', b: 'Twirl-ready', t: 'logo-tamu.jpg', team: 'am', kind: 'G' },
-    lsuB: { n: 'LSU Tigers Baseball Jersey Dress - Baby', s: 'LSU Tigers · Baby', p: 78, z: B, i: ['lsu-baby.jpg', 'lsu-baby-2.jpg'], u: '/products/lsu_baby_jersey_dress', b: 'Snap closure', t: 'logo-lsu.png', team: 'lsu', kind: 'B' },
-    amB: { n: 'Texas A&M Aggies Baseball Jersey Dress - Baby', s: 'Texas A&M · Baby', p: 78, z: B, i: ['aggie-baby.jpg', 'aggie-baby-2.jpg'], u: '/products/texas-am-jersey-dress-baby', b: 'Snap closure', t: 'logo-tamu.jpg', team: 'am', kind: 'B' },
+    lsuW: { n: "LSU Women's Baseball Jersey Dress", p: 148, z: W, i: ['lsu-women.jpg', 'lsu-women-2.jpg'], u: '/products/lsu_jeresy_dress', b: 'Best seller', team: 'lsu', kind: 'W' },
+    amW: { n: "Texas A&M Women's Baseball Jersey Dress", p: 148, z: W, i: ['aggie-women.jpg', 'aggie-women-drawstring.jpg'], u: '/products/texas-am-jersey-dress', b: 'Best seller', team: 'am', kind: 'W' },
+    lsuG: { n: 'LSU Tigers Baseball Jersey Dress · Girls', p: 88, z: GS, i: ['lsu-girls.jpg', 'lsu-girl-twirl.jpg'], u: '/products/louisiana-state-university%C2%AE-fan-dress-girls', b: 'Twirl-ready', team: 'lsu', kind: 'G' },
+    amG: { n: 'Texas A&M Aggies Baseball Jersey Dress · Girls', p: 88, z: GS, i: ['aggie-girl-twirl.jpg', 'aggie-girls.jpg'], u: '/products/texas-am-jersey-dress-girls', b: 'Twirl-ready', team: 'am', kind: 'G' },
+    lsuB: { n: 'LSU Tigers Baseball Jersey Dress · Baby', p: 78, z: B, i: ['lsu-baby.jpg', 'lsu-baby-2.jpg'], u: '/products/lsu_baby_jersey_dress', b: 'Little fan', team: 'lsu', kind: 'B' },
+    amB: { n: 'Texas A&M Aggies Baseball Jersey Dress · Baby', p: 78, z: B, i: ['aggie-baby.jpg', 'aggie-baby-2.jpg'], u: '/products/texas-am-jersey-dress-baby', b: 'Little fan', team: 'am', kind: 'B' },
   };
   const promo = (img, small, title, cta, url, color, span = 2) => ({ img, small, title, cta, url, color, span });
 
@@ -133,19 +126,19 @@
   const sizes = (key, z) => `<div class="sz">${z.map(s => `<button data-add="${key}" data-size="${s}" aria-label="Add size ${s}">${s}</button>`).join('')}</div>`;
   const card = it => {
     if (typeof it === 'object') return `<a class="promo${it.span === 1 ? ' promo--1' : ''}" href="${STORE}${it.url}" style="--pc:${it.color}" data-cursor="Shop"><img src="images/${it.img}" alt="" loading="lazy"><div><small>${it.small}</small><h3>${it.title}</h3><span>${it.cta}</span></div></a>`;
-    const p = P[it];
+    const p = P[it], t = TEAM[p.team], k = KIND[p.kind];
     return `<article class="card">
       <div class="card__media">
         <a href="${STORE}${p.u}" aria-label="${p.n}" data-cursor="View"><img class="pi" src="images/${p.i[0]}" alt="${p.n}" loading="lazy"><img class="pi" src="images/${p.i[1]}" alt="" loading="lazy"></a>
         <span class="badge${p.b === 'Best seller' ? ' badge--hot' : ''}">${p.b}</span>
-        <img class="card__team" src="images/${p.t}" alt="">
-        <div class="quick"><p>Quick add · tap a size</p>${sizes(it, p.z)}</div>
+        <div class="quick"><p>Select a size · adds to bag</p>${sizes(it, p.z)}</div>
       </div>
-      <div class="card__info">
-        <div><a href="${STORE}${p.u}" class="card__name">${p.n}</a><p class="card__sub">${p.s}</p><p class="card__stars">★★★★★<small>Verified</small></p></div>
-        <span class="card__price">$${p.p}</span>
+      <div class="card__body">
+        <div class="card__top"><span class="card__tm" style="--tc:${t.c}"><img src="images/${t.l}" alt="">${t.n} · ${k[0]}</span><span class="card__rate"><i>★</i>5.0</span></div>
+        <a href="${STORE}${p.u}" class="card__name">${p.n}</a>
+        <p class="card__meta"><span>${k[1]}</span><span>${k[2]}</span><span>Licensed</span></p>
+        <div class="card__buy"><span class="card__price">$${p.p}</span><button class="card__add" data-pick>Quick add <b>+</b></button></div>
       </div>
-      <div class="card__mob">${sizes(it, p.z)}</div>
     </article>`;
   };
   let plan = 0;
@@ -166,7 +159,7 @@
 
   /* ---------------- cart drawer ---------------- */
   const FREE = 100;
-  let cart = [];
+  const cart = [];
   const drawer = $('#drawer'), scrim = $('#scrim'), bagN = $('#bagCount');
   const openBag = () => { drawer.classList.add('on'); scrim.classList.add('on'); drawer.setAttribute('aria-hidden', 'false'); };
   const closeBag = () => { drawer.classList.remove('on'); scrim.classList.remove('on'); drawer.setAttribute('aria-hidden', 'true'); };
@@ -181,7 +174,6 @@
     $('#shipBar').style.width = Math.min(100, sub / FREE * 100) + '%';
     $('#shipTxt').innerHTML = sub >= FREE ? '🎉 You\'ve unlocked <b>free shipping!</b>' : `Add <b>$${FREE - sub}</b> more for <b>free shipping</b>`;
     $('#dItems').innerHTML = cart.map((c, i) => { const p = P[c.k]; return `<li class="ditem"><img src="images/${p.i[0]}" alt=""><div><b>${p.n}</b><small>Size ${c.s}</small><div class="qty"><button data-q="${i}" data-d="-1" aria-label="Decrease">−</button>${c.q}<button data-q="${i}" data-d="1" aria-label="Increase">+</button></div></div><span class="p">$${p.p * c.q}</span></li>`; }).join('');
-    // upsell: complete the match
     const has = k => cart.some(c => c.k === k);
     let up = null;
     for (const c of cart) {
@@ -197,10 +189,10 @@
   };
   render();
   document.addEventListener('click', e => {
+    const pk = e.target.closest('[data-pick]');
+    if (pk) { const c = pk.closest('.card'); $$('.card.pick').forEach(x => x !== c && x.classList.remove('pick')); c.classList.toggle('pick'); return; }
     const a = e.target.closest('[data-add]');
-    if (a) { e.preventDefault(); addToCart(a.dataset.add, a.dataset.size); return; }
-    const q = e.target.closest('[data-quick]');
-    if (q) { addToCart(q.dataset.quick, 'M'); return; }
+    if (a) { e.preventDefault(); a.closest('.card')?.classList.remove('pick'); addToCart(a.dataset.add, a.dataset.size); return; }
     const d = e.target.closest('[data-q]');
     if (d) { const c = cart[+d.dataset.q]; c.q += +d.dataset.d; if (c.q <= 0) cart.splice(+d.dataset.q, 1); render(); return; }
     const u = e.target.closest('[data-upsell]');
@@ -219,9 +211,13 @@
     if (t && t.dataset.team !== team) {
       team = t.dataset.team;
       $$('.match__teams button').forEach(x => { x.classList.toggle('on', x === t); x.setAttribute('aria-checked', x === t); });
-      const a = $('#mImgA'), g = $('#mImgB');
+      const a = $('#mImgA'), g = $('#mImgB'), nm = team === 'lsu' ? 'LSU' : 'Texas A&M';
       [a, g].forEach(x => x.classList.add('swap'));
-      setTimeout(() => { a.src = 'images/' + P[team + 'W'].i[0]; g.src = 'images/' + P[team + 'G'].i[0]; [a, g].forEach(x => x.classList.remove('swap')); }, 300);
+      setTimeout(() => {
+        a.src = 'images/' + P[team + 'W'].i[0]; g.src = 'images/' + P[team + 'G'].i[0];
+        $('#mCapA').textContent = `${nm} Women's · $148`; $('#mCapB').textContent = `${nm} Girls' · $88`;
+        [a, g].forEach(x => x.classList.remove('swap'));
+      }, 300);
     }
   });
   $('#matchAdd').onclick = () => {
@@ -232,36 +228,19 @@
     addToCart(team + 'W', sW, false); addToCart(team + 'G', sG);
   };
 
-  /* ---------------- detail zoom ---------------- */
-  const zArt = $('#zoomArt'), zImg = $('#zoomImg'), dots = $$('.dot'), feats = $$('#feats li');
-  let fI = 0, fT, fIn = false, fUser = false;
-  const setFeat = (i, zoom = true) => {
-    fI = i;
-    dots.forEach(d => d.classList.toggle('on', +d.dataset.i === i));
-    feats.forEach(f => { f.classList.remove('on'); void f.offsetWidth; f.classList.toggle('on', +f.dataset.i === i); });
-    zImg.style.transformOrigin = feats[i].dataset.o;
-    zImg.style.transform = zoom ? 'scale(1.65)' : 'scale(1)';
-    zArt.classList.toggle('zoomed', zoom);
-    $('#zoomN').textContent = '0' + (i + 1);
-  };
-  const auto = () => { clearTimeout(fT); if (!fUser && fIn && !reduce) fT = setTimeout(() => { setFeat((fI + 1) % 4); auto(); }, 4500); };
-  [...dots, ...feats].forEach(el => el.addEventListener('click', () => {
-    fUser = true; clearTimeout(fT);
-    const i = +el.dataset.i;
-    i === fI && zArt.classList.contains('zoomed') ? setFeat(i, false) : setFeat(i);
-  }));
-  zImg.addEventListener('click', () => { fUser = true; setFeat(fI, false); });
-  new IntersectionObserver(([en]) => { fIn = en.isIntersecting; if (fIn) { setFeat(fI); auto(); } else clearTimeout(fT); }, { threshold: .4 }).observe(zArt);
-  setFeat(0, false);
+  /* ---------------- why fan dress: link cards <-> hotspots ---------------- */
+  const feats = $$('.feat'), dots = $$('.why__center .dot');
+  const setWhy = i => { feats.forEach(f => f.classList.toggle('on', +f.dataset.i === i)); dots.forEach(d => d.classList.toggle('on', +d.dataset.i === i)); };
+  [...feats, ...dots].forEach(el => { el.addEventListener('mouseenter', () => setWhy(+el.dataset.i)); el.addEventListener('click', () => setWhy(+el.dataset.i)); });
+  setWhy(0);
 
   /* ---------------- scoreboard counters ---------------- */
   const nums = $$('[data-count]');
   if (!reduce) nums.forEach(n => n.textContent = n.dataset.dec ? '0.0' : '0');
   new IntersectionObserver((es, o) => es.forEach(en => {
-    if (!en.isIntersecting) return; o.disconnect();
+    if (!en.isIntersecting || reduce) return; o.disconnect();
     nums.forEach((n, k) => {
       const to = +n.dataset.count, dec = n.dataset.dec; let v = 0;
-      if (reduce) return;
       const step = () => { v++; n.textContent = dec ? (v === to ? to.toFixed(1) : (v + Math.random()).toFixed(1)) : v; v < to && setTimeout(step, 160 + k * 30); };
       setTimeout(step, k * 150);
     });
@@ -283,6 +262,17 @@
     qw.forEach((w, i) => w.classList.toggle('lit', i < lit || reduce));
   };
   addEventListener('scroll', qScroll, { passive: true }); qScroll();
+
+  /* ---------------- reviews rail: drag + arrows ---------------- */
+  const rail = $('#revRail');
+  const stepW = () => ($('.rev', rail)?.offsetWidth || 320) + 16;
+  $('#revNext').onclick = () => rail.scrollBy({ left: stepW(), behavior: 'smooth' });
+  $('#revPrev').onclick = () => rail.scrollBy({ left: -stepW(), behavior: 'smooth' });
+  let down = false, sx = 0, sl = 0, moved = 0;
+  rail.addEventListener('pointerdown', e => { if (e.pointerType !== 'mouse') return; down = true; moved = 0; sx = e.clientX; sl = rail.scrollLeft; rail.classList.add('drag'); });
+  addEventListener('pointermove', e => { if (!down) return; const dx = e.clientX - sx; moved = Math.abs(dx); rail.scrollLeft = sl - dx; });
+  addEventListener('pointerup', () => { if (!down) return; down = false; rail.classList.remove('drag'); });
+  rail.addEventListener('click', e => { if (moved > 6) { e.preventDefault(); e.stopPropagation(); } }, true);
 
   /* ---------------- video modal ---------------- */
   const modal = $('#vidModal'), vid = $('#vid');
@@ -316,10 +306,9 @@
 
   /* ---------------- reveals + parallax ---------------- */
   const io = new IntersectionObserver(es => es.forEach(en => { if (en.isIntersecting) { en.target.classList.add('in'); io.unobserve(en.target); } }), { threshold: .12, rootMargin: '0px 0px -40px 0px' });
-  $$('.who__head, .best__top, .plan__q, .match__panel, .detail__copy, .teams__head, .lic, .nana__copy, .score__copy, .story__copy, .revs__top, .rev, .ticket, .faq__side, .qa, .journal__head, .jlist li, .final__in, .ftr__top').forEach(el => { el.classList.add('rv'); io.observe(el); });
+  $$('.who__head, .what__copy, .best__top, .plan__q, .match__panel, .why__head, .cmp, .teams__head, .lic, .nana__copy, .score__copy, .story__copy, .revs__top, .ticket, .faq__side, .qa, .journal__head, .jlist li, .final__in, .ftr__top').forEach(el => { el.classList.add('rv'); io.observe(el); });
   if (G && window.ScrollTrigger && !reduce) {
     G.fromTo('.final__img', { yPercent: -8 }, { yPercent: 8, ease: 'none', scrollTrigger: { trigger: '.final', start: 'top bottom', end: 'bottom top', scrub: true } });
-    G.fromTo('.match__b', { y: 80 }, { y: -40, ease: 'none', scrollTrigger: { trigger: '.match', start: 'top bottom', end: 'bottom top', scrub: true } });
     G.fromTo('.nana__sub', { y: 90 }, { y: -30, ease: 'none', scrollTrigger: { trigger: '.nana', start: 'top bottom', end: 'bottom top', scrub: true } });
     G.fromTo('.story__pol', { y: 80 }, { y: -40, ease: 'none', scrollTrigger: { trigger: '.story', start: 'top bottom', end: 'bottom top', scrub: true } });
     G.fromTo('.score__img', { y: 60, rotate: 6 }, { y: -40, rotate: 0, ease: 'none', scrollTrigger: { trigger: '.score', start: 'top bottom', end: 'bottom top', scrub: true } });
