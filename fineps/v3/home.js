@@ -1,7 +1,7 @@
 /* FinePS — homepage sections */
 (function () {
   'use strict';
-  const FPS = window.FPS;
+  const FPS = window.FPS; const B = FPS.B;
   const { $, $$, esc, money, icon, im, fine, fmtSize, fmtLen, fmtYd, unitWord, CAT, BY, num, short, TAPE_F, singles, famAll, minP, imgFor, ILL, visual, MASK, MK, NET, netInfo, ftLen, tapeItems, dotsCount, LINES, LINE_ORDER, INDS, ut, toast, addToCart, openQuote, cardItems, slug, CATS, PBY, purl, pFrom } = FPS;
   /* ================= Hero quick buy ================= */
   let qbSel = 'pet';

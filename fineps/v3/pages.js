@@ -1,14 +1,14 @@
 /* FinePS — inner pages (shop, categories, product, industries, bulk quote, contact, cart) */
 (function () {
   'use strict';
-  const FPS = window.FPS;
+  const FPS = window.FPS; const B = FPS.B;
   const { $, $$, esc, money, icon, im, fmtSize, fmtLen, fmtYd, num, short, ILL, visual, MK, netInfo, ftLen, dotsCount, LINE_ORDER, INDS, ut, toast, openQuote, slug, CATS, FAMINFO, PRODUCTS, PBY, purl, pItems, pFrom, imgFor, BY } = FPS;
   const page = document.body.dataset.page, key = document.body.dataset.key;
   const params = new URLSearchParams(location.search);
   const ORDER = ['masking', ...LINE_ORDER];
 
   /* ---------- shared bits ---------- */
-  const crumbs = list => `<nav class="crumbs" aria-label="Breadcrumb"><a href="index.html">Home</a>${list.map(([n, h]) => `${icon('chev', 'ic cr')}${h ? `<a href="${h}">${n}</a>` : `<span aria-current="page">${n}</span>`}`).join('')}</nav>`;
+  const crumbs = list => `<nav class="crumbs" aria-label="Breadcrumb"><a href="${B || './'}">Home</a>${list.map(([n, h]) => `${icon('chev', 'ic cr')}${h ? `<a href="${h}">${n}</a>` : `<span aria-current="page">${n}</span>`}`).join('')}</nav>`;
   const bulkBox = (name) => `<aside class="bulk" aria-label="Bulk orders"><span class="bulk__ic">${icon('chat')}</span><p><b>Need a larger quantity?</b> We offer deeper pricing on bulk, corporate and government orders. <button class="bulk__a" data-quote="${esc(name || '')}">Request a quote</button> and we'll get right back to you.</p></aside>`;
   const lineName = k => (CATS[k] || {}).n || '';
   function gcard(p) {
@@ -34,7 +34,7 @@
         ${tapeTable}
         ${bulkBox(C.n)}
       </div></section>
-      <section class="sec sec--soft"><div class="w"><div class="sh"><div><p class="ey">Keep shopping</p><h2 class="h2">Other categories</h2></div><a class="tl" href="shop.html">Shop all products ${icon('arrow')}</a></div>
+      <section class="sec sec--soft"><div class="w"><div class="sh"><div><p class="ey">Keep shopping</p><h2 class="h2">Other categories</h2></div><a class="tl" href="${B}shop/">Shop all products ${icon('arrow')}</a></div>
       <div class="oc">${ORDER.filter(k => k !== key).map(k => `<a class="oc__i" href="${CATS[k].page}"><span>${CATS[k].img ? `<img src="${im(CATS[k].img)}" alt="">` : ILL[CATS[k].ill]}</span><b>${CATS[k].n}</b>${icon('arrow')}</a>`).join('')}</div></div></section>`;
     const cf = $('#cf');
     if (cf) cf.addEventListener('click', e => { const b = e.target.closest('[data-f]'); if (!b) return; filter = b.dataset.f; $$('button', cf).forEach(x => x.setAttribute('aria-selected', x === b)); $('#cg').innerHTML = grid(list.filter(p => filter === 'all' || String(+!!p.soon) === filter)); });
@@ -66,7 +66,7 @@
     const desc = (m && m.d) || fi.d || `${p.n} for ${C.n.toLowerCase()} work. Tell us the size and quantity you need and we'll send availability and pricing — usually within one business day.`;
     const imgs = p.soon ? [] : (fi.imgs || [p.img]);
     const related = PRODUCTS.filter(x => x.line === p.line && x.id !== p.id).sort((a, b) => a.soon - b.soon).slice(0, 4);
-    $('#pg').innerHTML = `<section class="sec sec--pd"><div class="w">${crumbs([[C.n, C.page.startsWith('shop') ? 'shop.html' : C.page], [p.n]])}<div class="pd" id="pd"></div></div></section>
+    $('#pg').innerHTML = `<section class="sec sec--pd"><div class="w">${crumbs([[C.n, C.page.includes('shop/') ? B + 'shop/' : C.page], [p.n]])}<div class="pd" id="pd"></div></div></section>
       <section class="sec sec--soft"><div class="w pdx" id="pdx"></div></section>
       ${related.length ? `<section class="sec"><div class="w"><div class="sh"><div><p class="ey">${C.n}</p><h2 class="h2">You may also need</h2></div><a class="tl" href="${C.page}">View all ${icon('arrow')}</a></div>${grid(related)}</div></section>` : ''}`;
     function sel() { return BY[st.h]; }
@@ -104,7 +104,7 @@
       const uses = fi.uses || (m && m.uses) || [];
       const chart = !p.soon && items.length > 1 ? `<div class="pdx__c"><div class="pdx__h"><h2>Sizes &amp; prices</h2>${items.some(i => i.s) ? ut() : ''}</div><div class="tw"><table class="tbl"><thead><tr><th>${fi.lbl || 'Size'}</th>${items.some(i => i.k && i.k !== 'Single roll') || p.fam === 'netting' ? '<th>Roll / length</th>' : ''}${p.fam === 'netting' ? '<th>Colour</th><th>Part no.</th>' : ''}${p.fam === 'dots' ? '<th>Per roll</th>' : ''}<th>Price</th><th>Stock</th><th></th></tr></thead><tbody>${items.map(i => { const n2 = p.fam === 'netting' && netInfo(i.s); return `<tr><td><b>${i.s ? fmtSize(i.s) : short(i)}</b></td>${items.some(j => j.k && j.k !== 'Single roll') || p.fam === 'netting' ? `<td>${n2 ? ftLen(n2[3]) : fmtLen(i.k)}</td>` : ''}${p.fam === 'netting' ? `<td>${n2 ? n2[2] : ''}</td><td>${n2 ? n2[1] : ''}</td>` : ''}${p.fam === 'dots' ? `<td>${dotsCount(i).replace(' / roll', '')}</td>` : ''}<td>${money(i.p)}</td><td>${i.a ? '<span class="stk"><i></i>In stock</span>' : '<span class="stk stk--o"><i></i>Out</span>'}</td><td>${i.a ? `<button class="add" data-add="${i.h}" data-variant="${esc((i.v || [])[0] || '')}">${icon('plus')}Add</button>` : `<button class="add add--q" data-quote="${esc(p.n)}" data-size="${esc(fmtSize(i.s))}">Contact</button>`}</td></tr>`; }).join('')}</tbody></table></div></div>` : '';
       $('#pdx').innerHTML = `<div class="pdx__g"><div class="pdx__c"><h2>Specifications</h2>${spec.length ? `<table class="tbl tbl--spec"><tbody>${spec.map(([k, v]) => `<tr><th>${k}</th><td>${v}</td></tr>`).join('')}</tbody></table>` : '<p>Specifications available on request — we\'ll send the data sheet with your quote.</p>'}</div>
-        <div class="pdx__c"><h2>Common uses</h2>${uses.length ? `<ul class="uses2">${uses.map(u => `<li>${icon('check')}${u}</li>`).join('')}</ul>` : '<p>Tell us your application and we\'ll confirm this is the right product.</p>'}<h2 style="margin-top:28px">Shipping &amp; returns</h2><p>Free Regular Shipping (8–10 days) on eligible orders, or Standard (4–7 days) and Expedited (2–4 days). 30-day returns with a prepaid label. <a class="tl" href="help.html#shipping">Details</a></p></div></div>${chart}`;
+        <div class="pdx__c"><h2>Common uses</h2>${uses.length ? `<ul class="uses2">${uses.map(u => `<li>${icon('check')}${u}</li>`).join('')}</ul>` : '<p>Tell us your application and we\'ll confirm this is the right product.</p>'}<h2 style="margin-top:28px">Shipping &amp; returns</h2><p>Free Regular Shipping (8–10 days) on eligible orders, or Standard (4–7 days) and Expedited (2–4 days). 30-day returns with a prepaid label. <a class="tl" href="${B}help/#shipping">Details</a></p></div></div>${chart}`;
       const r = $('#reqW'); if (r) r.addEventListener('input', () => { $('#reqBtn').dataset.size = [r.value, $('#reqQ').value && 'Qty ' + $('#reqQ').value].filter(Boolean).join(' · '); });
       const rq = $('#reqQ'); if (rq) rq.addEventListener('input', () => r.dispatchEvent(new Event('input')));
     }
@@ -162,8 +162,8 @@
       const c = FPS.cart;
       const sub = c.reduce((a, i) => a + BY[i.h].p * i.q, 0);
       $('#pg').innerHTML = `<section class="phd phd--s"><div class="w">${crumbs([['Cart']])}<h1>Your cart</h1></div></section><section class="sec sec--top"><div class="w">${c.length ? `<div class="cp"><div class="cp__l"><table class="tbl cp__t"><thead><tr><th>Product</th><th>Price</th><th>Quantity</th><th>Total</th></tr></thead><tbody>${c.map((i, x) => { const p = BY[i.h]; return `<tr><td><div class="cp__p"><img src="${im(imgFor(p))}" alt=""><span><b>${short(p)}</b><small>${[p.s && fmtSize(p.s), i.v, p.k && p.k !== 'Single roll' ? fmtLen(p.k) : 'Single roll'].filter(Boolean).join(' · ')}</small><button class="ci__rm" data-rm="${x}">Remove</button></span></div></td><td>${money(p.p)}</td><td><div class="qty"><button data-cq="-1" data-i="${x}" aria-label="Decrease">${icon('minus')}</button><span style="min-width:30px;text-align:center;font-weight:700">${i.q}</span><button data-cq="1" data-i="${x}" aria-label="Increase">${icon('plus')}</button></div></td><td><b>${money(p.p * i.q)}</b></td></tr>`; }).join('')}</tbody></table>${bulkBox()}</div>
-        <aside class="cp__s"><h2>Order summary</h2><div class="cp__r"><span>Subtotal</span><b>${money(sub)}</b></div><div class="cp__r"><span>Shipping</span><span>Calculated at checkout</span></div><p class="cp__n">${icon('truck')}Free Regular Shipping (8–10 days) on eligible orders</p><button class="bt bt--dark bt--lg bt--block" id="checkout2">${icon('lock')}Secure checkout</button><a class="bt bt--line bt--block" href="shop.html">Continue shopping</a><ul class="pay"><li>VISA</li><li>Mastercard</li><li>AMEX</li><li>Discover</li><li>Apple Pay</li><li>G Pay</li><li>Shop Pay</li></ul></aside></div>`
-        : `<div class="empty">${icon('cart')}<h2>Your cart is empty</h2><p>Start with our most popular masking tape.</p><div class="hero__cta" style="justify-content:center"><a class="bt bt--dark bt--lg" href="masking-tapes.html">Shop masking tapes</a><a class="bt bt--line bt--lg" href="shop.html">Shop all products</a></div></div>`}</div></section>`;
+        <aside class="cp__s"><h2>Order summary</h2><div class="cp__r"><span>Subtotal</span><b>${money(sub)}</b></div><div class="cp__r"><span>Shipping</span><span>Calculated at checkout</span></div><p class="cp__n">${icon('truck')}Free Regular Shipping (8–10 days) on eligible orders</p><button class="bt bt--dark bt--lg bt--block" id="checkout2">${icon('lock')}Secure checkout</button><a class="bt bt--line bt--block" href="${B}shop/">Continue shopping</a><ul class="pay"><li>VISA</li><li>Mastercard</li><li>AMEX</li><li>Discover</li><li>Apple Pay</li><li>G Pay</li><li>Shop Pay</li></ul></aside></div>`
+        : `<div class="empty">${icon('cart')}<h2>Your cart is empty</h2><p>Start with our most popular masking tape.</p><div class="hero__cta" style="justify-content:center"><a class="bt bt--dark bt--lg" href="${B}masking-tapes/">Shop masking tapes</a><a class="bt bt--line bt--lg" href="${B}shop/">Shop all products</a></div></div>`}</div></section>`;
     }
     $('#pg').addEventListener('click', e => {
       const q = e.target.closest('[data-cq]'), rm = e.target.closest('#pg [data-rm]');

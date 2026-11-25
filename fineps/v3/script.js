@@ -6,7 +6,8 @@
   const esc = v => String(v).replace(/&/g, '&amp;').replace(/"/g, '&quot;').replace(/</g, '&lt;');
   const money = n => '$' + n.toFixed(2);
   const icon = (id, cls = 'ic') => `<svg class="${cls}"><use href="#i-${id}"/></svg>`;
-  const im = n => '../images/' + n + '.webp';
+  const B = document.body.dataset.base || '';
+  const im = n => B + '../images/' + n + '.webp';
   const fine = matchMedia('(hover:hover) and (pointer:fine)');
 
   /* ================= Units (mm / inch) ================= */
@@ -134,13 +135,13 @@
   /* ================= Pages & product registry ================= */
   const slug = t => t.toLowerCase().replace(/&/g, 'and').replace(/°/g, '').replace(/[^a-z0-9]+/g, '-').replace(/^-|-$/g, '');
   const CATS = {
-    masking: { n: 'Masking Tapes', page: 'masking-tapes.html', img: 'cut-pet-stack', d: 'High-temperature and general masking tape for powder coating, plating, painting and electronics. In-stock tapes sell by the single roll at a flat price.' },
-    diecut: { n: 'Die-Cut Dots & Shapes', page: 'die-cuts.html', img: 'cut-dots-hero', d: 'Pre-cut masking dots, discs, donuts, squares and custom die-cut shapes that mask holes, studs and grounding points in seconds.' },
-    protect: { n: 'Netting & Spiral Wrap', page: 'netting-spiral-wrap.html', img: 'cut-netting-red', d: 'Expandable PE netting and spiral wrap that protect machined parts, hoses and cables during handling, storage and shipping.' },
-    caps: { n: 'Caps & Plugs', page: 'caps-plugs.html', ill: 'cap', isNew: true, d: 'Silicone and vinyl caps, plugs, tubing and cord for masking studs, threads and holes through powder coating and plating.' },
-    hooks: { n: 'Hooks', page: 'hooks.html', ill: 'rack', isNew: true, d: 'Powder-coating and racking hooks to hang parts through the spray booth and the cure oven.' },
-    screen: { n: 'Screen & Spline', page: 'screen-spline.html', img: 'cut-round-spline', d: 'Round, serrated, flat and smooth screen spline in 40+ sizes, plus the roller tools, clips and bug seals to finish the job.' },
-    auto: { n: 'Automotive', page: 'shop.html#auto', img: 'cut-tender-spring', d: 'Heavy-duty parts for trucks and trailers.' }
+    masking: { n: 'Masking Tapes', page: B + 'masking-tapes/', img: 'cut-pet-stack', d: 'High-temperature and general masking tape for powder coating, plating, painting and electronics. In-stock tapes sell by the single roll at a flat price.' },
+    diecut: { n: 'Die-Cut Dots & Shapes', page: B + 'die-cuts/', img: 'cut-dots-hero', d: 'Pre-cut masking dots, discs, donuts, squares and custom die-cut shapes that mask holes, studs and grounding points in seconds.' },
+    protect: { n: 'Netting & Spiral Wrap', page: B + 'netting-spiral-wrap/', img: 'cut-netting-red', d: 'Expandable PE netting and spiral wrap that protect machined parts, hoses and cables during handling, storage and shipping.' },
+    caps: { n: 'Caps & Plugs', page: B + 'caps-plugs/', ill: 'cap', isNew: true, d: 'Silicone and vinyl caps, plugs, tubing and cord for masking studs, threads and holes through powder coating and plating.' },
+    hooks: { n: 'Hooks', page: B + 'hooks/', ill: 'rack', isNew: true, d: 'Powder-coating and racking hooks to hang parts through the spray booth and the cure oven.' },
+    screen: { n: 'Screen & Spline', page: B + 'screen-spline/', img: 'cut-round-spline', d: 'Round, serrated, flat and smooth screen spline in 40+ sizes, plus the roller tools, clips and bug seals to finish the job.' },
+    auto: { n: 'Automotive', page: B + 'shop/#auto', img: 'cut-tender-spring', d: 'Heavy-duty parts for trucks and trailers.' }
   };
   const FAMINFO = {
     pet: { imgs: ['cut-pet-lineup', 'cut-green-tape', 'cut-pet-stack', 'cut-green-tape-2'], lbl: 'Width',
@@ -190,7 +191,7 @@
     ...['spline', 'flat', 'smooth', 'tool', 'bugseal', 'clips', 'spring'].map(f => ({ id: f, fam: f }))
   ].map(p => { const fi = FAMINFO[p.fam] || {}; return Object.assign({ n: fi.n, line: fi.line, img: fi.imgs && fi.imgs[0] }, p); });
   const PBY = Object.fromEntries(PRODUCTS.map(p => [p.id, p]));
-  const purl = id => 'product.html?id=' + id;
+  const purl = id => B + 'product/?id=' + id;
   const pItems = p => p.soon || !p.fam ? [] : (['pet', 'glass', 'paper', 'dots'].includes(p.fam) ? singles(p.fam) : famAll(p.fam).filter(x => x.k !== 'Case')).sort((a, b) => num(a.s) - num(b.s));
   const pFrom = p => { const it = pItems(p).filter(x => x.a); return it.length ? minP(it) : (pItems(p).length ? minP(pItems(p)) : 0); };
   const INDS = [
@@ -282,11 +283,11 @@
     const items = [
       { n: 'Masking Tapes', main: true, panel: mega('Masking tapes', maskLinks, promo('Not sure which tape?', 'Tell us your coating and cure temperature.', `<img src="${im('cut-green-tape')}" alt="">`, 'Ask our team', 'data-quote="Masking tape recommendation"'), CATS.masking.page) },
       ...LINE_ORDER.map(k => ({ n: LINES[k].n, isNew: LINES[k].isNew, panel: mega(LINES[k].n, lineLinks(k), promo('Bulk orders', 'Deeper pricing on larger quantities.', LINES[k].img ? `<img src="${im(LINES[k].img)}" alt="">` : ILL[LINES[k].ill], 'Request a quote', `data-quote="${esc(LINES[k].n)}"`), CATS[k].page) })),
-      { n: 'Industries', panel: mega('Shop by industry', INDS.map(i => ({ n: i.n, d: i.d, vis: `<img src="${im(i.img)}" alt="" style="width:50px;height:50px;object-fit:cover">`, href: 'industries.html#' + slug(i.n) })), promo('One supplier', 'For coating, plating, packaging and screens.', `<img src="${im('cut-glass-cloth')}" alt="">`, 'Talk to sales', 'data-quote="Industry supply"'), 'industries.html') }
+      { n: 'Industries', panel: mega('Shop by industry', INDS.map(i => ({ n: i.n, d: i.d, vis: `<img src="${im(i.img)}" alt="" style="width:50px;height:50px;object-fit:cover">`, href: B + 'industries/#' + slug(i.n) })), promo('One supplier', 'For coating, plating, packaging and screens.', `<img src="${im('cut-glass-cloth')}" alt="">`, 'Talk to sales', 'data-quote="Industry supply"'), B + 'industries/') }
     ];
     nvUl.innerHTML = items.map(x => `<li class="nv__i" data-menu><button class="nv__b ${x.main ? 'nv__b--main' : ''}" aria-expanded="false">${x.n}${x.isNew ? ' <span class="new">New</span>' : ''}${icon('chev', 'ic chev')}</button>${x.panel}</li>`).join('') +
-      `<li class="nv__sp"></li><li class="nv__i"><a class="nv__b" href="about.html">About</a></li><li class="nv__i"><a class="nv__b" href="contact.html">Contact</a></li>`;
-    $('#mnavList').innerHTML = items.map((x, i) => `<details class="macc" ${i === 0 ? 'open' : ''}><summary>${x.n}${x.isNew ? ' <span class="new">New</span>' : ''}${icon('chev', 'ic chev')}</summary><div class="macc__b">${(i === 0 ? maskLinks : i === items.length - 1 ? INDS.map(d => ({ n: d.n, href: 'industries.html#' + slug(d.n) })) : lineLinks(LINE_ORDER[i - 1])).map(l => `<a href="${l.href}">${l.n}</a>`).join('')}<a href="${i === 0 ? CATS.masking.page : i === items.length - 1 ? 'industries.html' : CATS[LINE_ORDER[i - 1]].page}"><b>View all</b></a></div></details>`).join('') + ['shop.html|Shop all products', 'bulk-quote.html|Bulk quote', 'about.html|About us', 'contact.html|Contact', 'help.html|FAQ & shipping'].map(x => `<a class="mnav__l" href="${x.split('|')[0]}">${x.split('|')[1]}</a>`).join('');
+      `<li class="nv__sp"></li><li class="nv__i"><a class="nv__b" href="${B}about/">About</a></li><li class="nv__i"><a class="nv__b" href="${B}contact/">Contact</a></li>`;
+    $('#mnavList').innerHTML = items.map((x, i) => `<details class="macc" ${i === 0 ? 'open' : ''}><summary>${x.n}${x.isNew ? ' <span class="new">New</span>' : ''}${icon('chev', 'ic chev')}</summary><div class="macc__b">${(i === 0 ? maskLinks : i === items.length - 1 ? INDS.map(d => ({ n: d.n, href: B + 'industries/#' + slug(d.n) })) : lineLinks(LINE_ORDER[i - 1])).map(l => `<a href="${l.href}">${l.n}</a>`).join('')}<a href="${i === 0 ? CATS.masking.page : i === items.length - 1 ? B + 'industries/' : CATS[LINE_ORDER[i - 1]].page}"><b>View all</b></a></div></details>`).join('') + [B + 'shop/|Shop all products', B + 'bulk-quote/|Bulk quote', B + 'about/|About us', B + 'contact/|Contact', B + 'help/|FAQ & shipping'].map(x => `<a class="mnav__l" href="${x.split('|')[0]}">${x.split('|')[1]}</a>`).join('');
     wireMenus();
   }
   let menus = [];
@@ -380,7 +381,7 @@
   /* ================= Init + shared API for page scripts ================= */
   const hooks = [];
   function renderAll() { renderCart(); hooks.forEach(f => f()); if (ps.classList.contains('is-open')) runSearch(); }
-  const FPS = window.FPS = { $, $$, esc, money, icon, im, fine, fmtSize, fmtLen, fmtYd, unitWord, CAT, BY, num, short, TAPE_F, singles, famAll, minP, imgFor, ILL, visual,
+  const FPS = window.FPS = { B, $, $$, esc, money, icon, im, fine, fmtSize, fmtLen, fmtYd, unitWord, CAT, BY, num, short, TAPE_F, singles, famAll, minP, imgFor, ILL, visual,
     MASK, MK, NET, netInfo, ftLen, tapeItems, dotsCount, LINES, LINE_ORDER, INDS, ut, toast, addToCart, openQuote, cardItems, slug, CATS, FAMINFO, PRODUCTS, PBY, purl, pItems, pFrom,
     get cart() { return cart; }, setCart(c) { cart = c; save(); renderCart(); }, onUnit(f) { hooks.push(f); }, onTape: null, onLine: null };
   Object.defineProperty(FPS, 'UNIT', { get: () => UNIT });
