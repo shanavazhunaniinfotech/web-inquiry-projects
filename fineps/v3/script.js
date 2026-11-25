@@ -32,7 +32,7 @@
 
   /* ================= Catalog ================= */
   const CAT = (window.FINEPS_CATALOG || []).map(p => {
-    if (p.f === 'netting' && !p.s) { const m = p.t.match(/(\d?\.\d+)\D{0,4}to\s*(\d?\.\d+)/i); if (m) p.s = (m[1].startsWith('.') ? '0' + m[1] : m[1]) + '–' + m[2] + '"'; }
+    if (p.f === 'netting' && !p.s) { const m = p.t.match(/(\d?\.\d+)\D{0,4}to\s*(\d?\.\d+)/i); if (m) p.s = (m[1].startsWith('.') ? '0' + m[1] : m[1]) + '–' + m[2] + '"'; else if (/450/.test(p.t)) p.s = '4.50–5.00"'; }
     return p;
   });
   const BY = Object.fromEntries(CAT.map(p => [p.h, p]));
@@ -84,11 +84,11 @@
 
   /* ================= Masking tape types ================= */
   const MASK = [
-    { id: 'pet', n: 'Green Polyester (PET) Tape', s: 'Green PET', fam: 'pet', img: 'cut-green-tape', temp: 'Up to 400°F (204°C)', adh: 'Silicone', yd: 72, badge: 'Best seller', thick: true,
+    { id: 'pet', n: 'Green Polyester (PET) Tape', s: 'Green PET', fam: 'pet', img: 'cut-green-tape', temp: 'Up to 400°F (204°C)', tnote: 'Holds through powder-coat and Cerakote cure cycles. Test on your process first.', adh: 'Silicone', yd: 72, badge: 'Best seller', thick: true,
       d: 'High-temperature polyester tape with silicone adhesive for powder coating, Cerakote, plating and anodizing. Removes cleanly with no residue.' },
-    { id: 'glass', n: 'Glass Cloth Tape', s: 'Glass Cloth', fam: 'glass', img: 'cut-glass-cloth', temp: 'High temperature', adh: 'Silicone', yd: 32,
+    { id: 'glass', n: 'Glass Cloth Tape', s: 'Glass Cloth', fam: 'glass', img: 'cut-glass-cloth', temp: 'High temperature', tnote: 'For high-heat masking, flame and plasma spray work.', adh: 'Silicone', yd: 32,
       d: 'Strong, tear-resistant glass cloth with silicone adhesive for high-heat masking, flame and plasma spray, and electrical insulation.' },
-    { id: 'paper', n: 'Paper Masking Tape', s: 'Paper', fam: 'paper', img: 'cut-paper-tape', temp: 'Low temperature', adh: 'Water-based', yd: 54,
+    { id: 'paper', n: 'Paper Masking Tape', s: 'Paper', fam: 'paper', img: 'cut-paper-tape', temp: 'Low temperature', tnote: 'For painting and lower-heat finishing — not for oven cures.', adh: 'Water-based', yd: 54,
       d: 'Crepe paper masking tape with strong hold and clean removal for painting and general finishing work.' },
     { id: 'polyimide', n: 'Polyimide Tape', s: 'Polyimide', ill: 'polyimide', soon: true, opts: '1, 2, 3 & 5 mil' },
     { id: 'blue', n: 'Blue Polyester Tape', s: 'Blue Polyester', ill: 'blue', soon: true, opts: '1, 2 & 5 mil' },
@@ -101,6 +101,10 @@
     { id: 'copper', n: 'Copper Foil Tape', s: 'Copper Foil', ill: 'copper', soon: true }
   ];
   const MK = Object.fromEntries(MASK.map(m => [m.id, m]));
+  /* Poly netting roll chart (client sheet): stretch range start -> [part no., colour, feet per roll] */
+  const NET = [[0.25, 'Poly32', 'Orange', 1500], [0.5, 'Poly50', 'Blue', 1500], [1, 'Poly100', 'Yellow', 1000], [2, 'Poly200', 'Green', 750], [2.5, 'Poly250', 'White', 500], [3, 'Poly300', 'Red', 600], [3.5, 'Poly350', 'Black', 450], [4, 'Poly400', 'Gray', 400], [4.5, 'Poly450', 'Brown', 300], [5, 'Poly500', 'Orange', 350]];
+  const netInfo = s => NET.find(r => Math.abs(r[0] - num(s)) < .01);
+  const ftLen = ft => UNIT === 'mm' ? Math.round(ft * 0.3048) + ' m' : ft.toLocaleString() + ' ft';
   const tapeItems = m => m.soon ? [] : singles(m.fam).sort((a, b) => num(a.s) - num(b.s));
   const dotsCount = p => { const m = p.t.match(/x\s*([\d,]+)\s*Dots/i); return m ? m[1] + ' dots / roll' : ''; };
 
@@ -111,9 +115,9 @@
       range: [['Green Discs', 'disc'], ['Green Donuts (Washer Dots)', 'donut'], ['Squares & Rectangles', 'square'], ['Discs with Pull Tab', 'pulldisc'], ['Polyimide Discs', 'disc'], ['Plating & Anodizing Discs', 'disc'], ['Custom Die-Cut Shapes', 'diecut']] },
     protect: { n: 'Netting & Spiral Wrap', short: 'Netting & Wrap', d: 'PE netting, sleeves & hose wrap', img: 'cut-netting-red',
       cards: [
-        { t: 'Heavy-Duty PE Netting', sub: 'Expandable stretch-fit spools', fam: 'netting', filt: p => num(p.s) >= 2, lbl: { s: 'Stretch range' }, badge: 'Bulk spool' },
-        { t: 'Protective Mesh Sleeves', sub: 'For small parts & threads', fam: 'netting', filt: p => num(p.s) < 2, lbl: { s: 'Stretch range' } },
-        { t: 'Spiral Cable & Hose Wrap', sub: 'Polyethylene · black or yellow', fam: 'spiral', lbl: { s: 'Size', k: 'Length', v: 'Color' } }] },
+        { t: 'PE Protective Netting', sub: '10 stretch ranges · colour-coded rolls', fam: 'netting', lbl: { s: 'Stretch range' }, def: '2.00–2.50"', badge: 'Full roll' },
+        { t: 'Spiral Cable & Hose Wrap', sub: 'Polyethylene · black or yellow', fam: 'spiral', lbl: { s: 'Size', k: 'Length', v: 'Color' } }],
+      range: [['Netting on Sewing Cones', 'tube'], ['Custom Cut Sleeves', 'tube']] },
     caps: { n: 'Caps & Plugs', short: 'Caps & Plugs', d: 'Silicone caps, plugs, tubing & cord', ill: 'cap', isNew: true,
       range: [['Silicone Caps', 'cap'], ['Silicone Flange Caps', 'flangecap'], ['Pull-Tab Vinyl Caps', 'vinylcap'], ['Silicone Tapered Plugs', 'plug'], ['Tapered Plugs with Handles', 'pulltab'], ['Silicone Pull Plugs', 'pulltab'], ['Silicone Flange Plugs', 'flangeplug'], ['Hollow Core Plugs', 'hollow'], ['Silicone Tubing & Cord', 'tube']] },
     hooks: { n: 'Hooks', short: 'Hooks', d: 'Powder-coating & racking hooks', ill: 'rack', isNew: true,
@@ -121,8 +125,8 @@
     screen: { n: 'Screen & Spline', short: 'Screen & Spline', d: '40+ spline sizes, tools & bug seals', img: 'cut-round-spline',
       cards: [
         { t: 'Round Retainer Spline', sub: 'Serrated black vinyl', fam: 'spline', lbl: { s: 'Diameter', k: 'Length' }, def: '0.185', badge: 'Best seller' },
-        { t: 'Flat Screen Spline', sub: 'Pool cages & patio enclosures', fam: 'flat', lbl: { s: 'Width', k: 'Length' } },
-        { t: 'Screen Roller Tool', sub: 'Steel bearing wheels', fam: 'tool', lbl: {} }] }
+        { t: 'Flat Screen Spline', sub: 'Pool cages & patio enclosures', fam: 'flat', lbl: { s: 'Width', k: 'Length' } }],
+      also: ['Smooth Spline', 'Screen Roller Tool', 'Bug Seals', 'Screen Clips'] }
   };
   const LINE_ORDER = ['diecut', 'protect', 'caps', 'hooks', 'screen'];
   const INDS = [
@@ -175,7 +179,7 @@
     closeMenus(); closeCart(); closeSearch(); closeMnav();
     $('#qf .md__ok').hidden = true;
     const pr = $('#qfProd');
-    if (ctx && ctx.name) { pr.hidden = false; pr.innerHTML = `${ctx.vis || ''}<span><b>${ctx.name}</b><small>${ctx.note || 'Bulk, corporate & government pricing'}</small></span>`; $('#qfProduct').value = ctx.name + (ctx.size ? ' — ' + ctx.size : ''); }
+    if (ctx && ctx.name) { pr.hidden = false; pr.innerHTML = `${ctx.vis || ''}<span><b>${ctx.name}</b><small>${ctx.note || 'Bulk quantity pricing'}</small></span>`; $('#qfProduct').value = ctx.name + (ctx.size ? ' — ' + ctx.size : ''); }
     else { pr.hidden = true; $('#qfProduct').value = ''; }
     md.classList.add('is-open'); md.setAttribute('aria-hidden', 'false');
     setTimeout(() => $('#qf input[name=name]').focus(), 80);
@@ -213,7 +217,7 @@
     const promo = (h, s, vis, btn, attr) => `<div class="mm__p"><b>${h}</b><small>${s}</small>${vis}<button class="bt bt--dark bt--sm" ${attr}>${btn}</button></div>`;
     const items = [
       { n: 'Masking Tapes', main: true, panel: mega('Masking tapes', maskLinks, promo('Not sure which tape?', 'Tell us your coating and cure temperature.', `<img src="${im('cut-green-tape')}" alt="">`, 'Ask our team', 'data-quote="Masking tape recommendation"')) },
-      ...LINE_ORDER.map(k => ({ n: LINES[k].n, isNew: LINES[k].isNew, panel: mega(LINES[k].n, lineLinks(k), promo('Bulk & government orders', 'Deeper pricing on larger quantities.', LINES[k].img ? `<img src="${im(LINES[k].img)}" alt="">` : ILL[LINES[k].ill], 'Request a quote', `data-quote="${esc(LINES[k].n)}"`)) })),
+      ...LINE_ORDER.map(k => ({ n: LINES[k].n, isNew: LINES[k].isNew, panel: mega(LINES[k].n, lineLinks(k), promo('Bulk orders', 'Deeper pricing on larger quantities.', LINES[k].img ? `<img src="${im(LINES[k].img)}" alt="">` : ILL[LINES[k].ill], 'Request a quote', `data-quote="${esc(LINES[k].n)}"`)) })),
       { n: 'Industries', panel: mega('Shop by industry', INDS.map(i => ({ n: i.n, d: i.d, vis: `<img src="${im(i.img)}" alt="" style="width:50px;height:50px;object-fit:cover">`, href: '#industries' })), promo('One supplier', 'For coating, plating, packaging and screens.', `<img src="${im('cut-glass-cloth')}" alt="">`, 'Talk to sales', 'data-quote="Industry supply"')) }
     ];
     nvUl.innerHTML = items.map(x => `<li class="nv__i" data-menu><button class="nv__b ${x.main ? 'nv__b--main' : ''}" aria-expanded="false">${x.n}${x.isNew ? ' <span class="new">New</span>' : ''}${icon('chev', 'ic chev')}</button>${x.panel}</li>`).join('') +
@@ -333,7 +337,6 @@
     const tab = m => `<button class="mt" role="tab" aria-selected="${m.id === tapeSel}" data-tape="${m.id}"><span class="mt__th">${visual(m)}</span><span><b>${m.n.replace(' Tape', '')}</b>${m.soon && m.opts ? `<small>${m.opts}</small>` : ''}</span><em class="${m.soon ? 'q' : ''}">${m.soon ? 'Quote' : money(minP(tapeItems(m)))}</em></button>`;
     $('#mkList').innerHTML = `<p class="mk__lbl">In stock</p>` + MASK.filter(m => !m.soon).map(tab).join('') + `<p class="mk__lbl">Available on request</p>` + MASK.filter(m => m.soon).map(tab).join('');
   }
-  const bulkLine = (name, size, vis) => `<p class="ibulk">${icon('file')}<span>Buying in bulk, or for a company or government agency? <button data-quote="${esc(name)}" data-size="${esc(size || '')}" data-vis="${vis}">Get a quote</button></span></p>`;
   function renderPanel() {
     const m = MK[tapeSel], P = $('#mkPanel');
     if (m.soon) {
@@ -349,7 +352,8 @@
     const p = BY[st.h], size = fmtSize(p.s);
     P.innerHTML = `<div class="mp"><div class="mp__media">${m.badge ? `<span class="new mp__tag" style="background:var(--g);color:#fff">${m.badge}</span>` : ''}<img src="${im(m.id === 'pet' ? 'cut-pet-lineup' : m.img)}" alt="${esc(m.n)}"></div>
       <div class="mp__b"><h3>${m.n}</h3><p>${m.d}</p>
-      <dl class="spec"><div><dt>Temperature</dt><dd>${m.temp}</dd></div><div><dt>Adhesive</dt><dd>${m.adh}</dd></div><div><dt>Roll length</dt><dd>${fmtYd(m.yd)}</dd></div></dl>
+      <div class="tempx">${icon('thermo')}<span><b>Temperature range: ${m.temp}</b><small>${m.tnote}</small></span></div>
+      <dl class="spec"><div><dt>Adhesive</dt><dd>${m.adh}</dd></div><div><dt>Roll length</dt><dd>${fmtYd(m.yd)}</dd></div><div><dt>Sold as</dt><dd>Single roll</dd></div></dl>
       ${m.thick ? `<div class="chips"><span>Thickness:</span><button class="ch" aria-pressed="true">2 mil</button><button class="ch" data-quote="${esc(m.n)} — 1 mil" data-vis="${m.img}" data-note="1 mil — available on request">1 mil <small>· request</small></button><button class="ch" data-quote="${esc(m.n)} — 5 mil" data-vis="${m.img}" data-note="5 mil — available on request">5 mil <small>· request</small></button></div>` : ''}
       <div class="buy">
         <div class="buy__row">
@@ -358,7 +362,6 @@
         </div>
         <div class="price"><b>${money(p.p)}</b><small>per roll</small>${p.a ? `<span class="stk"><i></i>In stock</span>` : `<span class="stk stk--o"><i></i>Out of stock</span>`}</div>
         ${p.a ? `<button class="bt bt--green bt--lg bt--block" data-add="${p.h}" data-qty="${st.q}">${icon('cart')}Add ${st.q > 1 ? st.q + ' rolls' : 'to cart'} · ${money(p.p * st.q)}</button>` : `<button class="bt bt--dark bt--lg bt--block" data-quote="${esc(m.n)}" data-size="${esc(size)}" data-vis="${m.img}" data-note="Out of stock — we'll confirm availability">${icon('chat')}Contact us for this size</button>`}
-        ${bulkLine(m.n, size, m.img)}
       </div></div></div>`;
     $('#mkSize').addEventListener('change', e => { st.h = e.target.value; renderPanel(); });
     const setQ = v => { st.q = Math.max(1, Math.min(999, v | 0 || 1)); renderPanel(); };
@@ -383,20 +386,24 @@
     const lens = [...new Set(items.filter(p => p.s === st.s).map(p => p.k).filter(Boolean))];
     if (st.k && !lens.includes(st.k)) st.k = lens[0];
     const p = items.find(x => (!st.s || x.s === st.s) && (!st.k || x.k === st.k)) || items[0];
-    const sel = (k2, label, opts, cur, fmt, u) => opts.length > 1 ? `<div class="fld"><span class="fld__l">${label}${u ? ut() : ''}</span><span class="sel"><select data-k="${k2}" data-card="${key}" aria-label="${label}">${opts.map(o => `<option value="${esc(o)}" ${o === cur ? 'selected' : ''}>${fmt(o)}${c.fam === 'dots' ? ' · ' + dotsCount(items.find(x => x.s === o)) : ''}</option>`).join('')}</select></span></div>` : '';
+    const extra = o => c.fam === 'dots' ? ' · ' + dotsCount(items.find(x => x.s === o)) : c.fam === 'netting' && netInfo(o) ? ' · ' + netInfo(o)[2] + ' · ' + ftLen(netInfo(o)[3]) : '';
+    const sel = (k2, label, opts, cur, fmt, u) => opts.length > 1 ? `<div class="fld"><span class="fld__l">${label}${u ? ut() : ''}</span><span class="sel"><select data-k="${k2}" data-card="${key}" aria-label="${label}">${opts.map(o => `<option value="${esc(o)}" ${o === cur ? 'selected' : ''}>${fmt(o)}${k2 === 's' ? extra(o) : ''}</option>`).join('')}</select></span></div>` : '';
+    const ni = c.fam === 'netting' && netInfo(p.s);
     return `<article class="pc"><div class="pc__m">${c.badge ? `<span class="bd">${c.badge}</span>` : ''}<img src="${im(imgFor(p))}" alt="${esc(c.t)}" loading="lazy"></div><div class="pc__b"><h3 class="pc__t">${c.t}</h3><p class="pc__s">${c.sub}</p>
-      ${sel('s', c.lbl.s || 'Size', sizes, st.s, fmtSize, true)}${sel('k', c.lbl.k || 'Length', lens, st.k, fmtLen)}${c.lbl.v && p.v.length > 1 ? sel('v', 'Color', p.v, st.v, x => x) : ''}
-      <div class="pc__f"><div class="pc__p">${money(p.p)}<small>${p.k && p.k !== 'Single roll' ? fmtLen(p.k) : c.fam === 'dots' ? 'per roll' : 'each'}</small></div>${p.a ? `<button class="add" data-add="${p.h}" data-variant="${esc(c.lbl.v ? st.v : '')}">${icon('plus')}Add</button>` : `<button class="add add--q" data-quote="${esc(c.t)}" data-size="${esc(fmtSize(p.s))}" data-vis="${imgFor(p)}" data-note="Out of stock — we'll confirm availability">Contact us</button>`}</div>
-      <button class="pc__q" data-quote="${esc(c.t)}" data-size="${esc(fmtSize(p.s))}" data-vis="${imgFor(p)}">Bulk or government quote</button></div></article>`;
+      ${sel('s', c.lbl.s || 'Size', sizes, st.s, fmtSize, true)}${ni ? `<span class="pc__len">${icon('ruler')}${ftLen(ni[3])} roll · ${ni[2]} · ${ni[1]}</span>` : ''}${sel('k', c.lbl.k || 'Length', lens, st.k, fmtLen)}${c.lbl.v && p.v.length > 1 ? sel('v', 'Color', p.v, st.v, x => x) : ''}
+      <div class="pc__f"><div class="pc__p">${money(p.p)}<small>${ni ? 'per ' + ftLen(ni[3]) + ' roll' : p.k && p.k !== 'Single roll' ? fmtLen(p.k) : c.fam === 'dots' ? 'per roll' : 'each'}</small></div>${p.a ? `<button class="add" data-add="${p.h}" data-variant="${esc(c.lbl.v ? st.v : '')}">${icon('plus')}Add</button>` : `<button class="add add--q" data-quote="${esc(c.t)}" data-size="${esc(fmtSize(p.s))}" data-vis="${imgFor(p)}" data-note="Out of stock — we'll confirm availability">Contact us</button>`}</div></div></article>`;
   }
+  const reqCard = (n, ill, L) => `<article class="pc pc--req"><div class="pc__m"><span class="req-b">On request</span>${ILL[ill]}</div><div class="pc__b"><h3 class="pc__t">${n}</h3><p class="pc__s">${L.n} · sizes in inches or mm</p><div class="pc__f"><div class="pc__p">Quote<small>Tell us size &amp; quantity</small></div><button class="add add--q" data-quote="${esc(n)}" data-vis="${ill}" data-note="${esc(L.n)} · available on request">Request</button></div></div></article>`;
   function renderMore() {
     const L = LINES[lineSel];
     $('#moreTabs').innerHTML = LINE_ORDER.map(k => `<button role="tab" aria-selected="${k === lineSel}" data-line="${k}">${LINES[k].n}${LINES[k].isNew ? ' <span class="new">New</span>' : ''}</button>`).join('');
-    const cards = (L.cards || []).map(card).join('');
-    const range = L.range ? `<div class="rg"><div class="rg__h"><b>${L.cards ? 'More ' + L.short.toLowerCase() + ' — available on request' : 'Our ' + L.n.toLowerCase() + ' range — available on request'}</b><span>Tell us the size and quantity and we'll quote it.</span></div>${L.range.map(([n, ill]) => `<button class="ri" data-quote="${esc(n)}" data-vis="${ill}" data-note="${esc(L.n)} · available on request"><span class="th">${ILL[ill]}</span><span><b>${n}</b><small>Request a quote</small></span>${icon('arrow')}</button>`).join('')}</div>` : '';
-    const intro = !L.cards ? '' : (L.cards.length < 3 ? `<div class="intro"><div><b>${L.n}</b><p>${L.d}. Order in-stock sizes now, or request custom sizes and bulk pricing.</p></div><button class="bt bt--dark" data-quote="${esc(L.n)}">Request a quote</button></div>` : '');
-    $('#moreBody').innerHTML = cards + intro + range;
-    $('#moreBody').classList.toggle('one', (L.cards || []).length === 1);
+    const stocked = (L.cards || []).slice(0, 2);
+    const req = (L.range || []).slice(0, 2 - stocked.length);
+    const rest = [...(L.range || []).slice(req.length).map(r => r[0]), ...(L.also || [])];
+    const html = stocked.map(card).join('') + req.map(([n, ill]) => reqCard(n, ill, L)).join('');
+    const all = `<div class="allc"><b>More ${L.short.toLowerCase()}</b><p>${L.d}. ${L.cards ? 'In-stock sizes ship now — anything else we quote quickly.' : "Tell us what you need and we'll send pricing."}</p>${rest.length ? `<ul>${rest.map(n => `<li>${n}</li>`).join('')}</ul>` : ''}<button class="bt bt--dark" data-quote="${esc(L.n)}">Ask about ${L.short.toLowerCase()}</button></div>`;
+    $('#moreBody').innerHTML = html + all;
+    $('#moreBody').classList.remove('one');
   }
   function selLine(k) { lineSel = k; renderMore(); }
   $('#moreBody').addEventListener('change', e => { const s = e.target.closest('select[data-card]'); if (!s) return; lState[s.dataset.card][s.dataset.k] = s.value; renderMore(); });
