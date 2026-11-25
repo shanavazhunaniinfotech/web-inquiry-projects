@@ -7,7 +7,7 @@
   var y = document.getElementById("year");
   if (y) y.textContent = new Date().getFullYear();
 
-  // Home: a new photo every 5 seconds
+  // Home: a new photo every 4 seconds
   var slides = $$(".slide");
   if (slides.length > 1) {
     var cur = 0, timer = null;
@@ -28,7 +28,7 @@
       load(cur + 1);
     };
     if (document.readyState === "complete") load(1); else window.addEventListener("load", function () { load(1); });
-    var start = function () { stop(); timer = setInterval(next, 5000); };
+    var start = function () { stop(); timer = setInterval(next, 4000); };
     var stop = function () { if (timer) clearInterval(timer); timer = null; };
     document.addEventListener("visibilitychange", function () { if (document.hidden) stop(); else start(); });
     start();
