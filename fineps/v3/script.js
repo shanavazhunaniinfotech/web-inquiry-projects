@@ -1,4 +1,4 @@
-/* FinePS homepage — Version 3 (revision after call #3) */
+/* FinePS — shared core (header, menus, search, cart, quote form, units, catalog) */
 (function () {
   'use strict';
   const $ = (s, r = document) => r.querySelector(s);
@@ -129,6 +129,70 @@
       also: ['Smooth Spline', 'Screen Roller Tool', 'Bug Seals', 'Screen Clips'] }
   };
   const LINE_ORDER = ['diecut', 'protect', 'caps', 'hooks', 'screen'];
+  function cardItems(c) { return (c.filt ? famAll(c.fam).filter(c.filt) : famAll(c.fam)).filter(p => p.k !== 'Case'); }
+
+  /* ================= Pages & product registry ================= */
+  const slug = t => t.toLowerCase().replace(/&/g, 'and').replace(/°/g, '').replace(/[^a-z0-9]+/g, '-').replace(/^-|-$/g, '');
+  const CATS = {
+    masking: { n: 'Masking Tapes', page: 'masking-tapes.html', img: 'cut-pet-stack', d: 'High-temperature and general masking tape for powder coating, plating, painting and electronics. In-stock tapes sell by the single roll at a flat price.' },
+    diecut: { n: 'Die-Cut Dots & Shapes', page: 'die-cuts.html', img: 'cut-dots-hero', d: 'Pre-cut masking dots, discs, donuts, squares and custom die-cut shapes that mask holes, studs and grounding points in seconds.' },
+    protect: { n: 'Netting & Spiral Wrap', page: 'netting-spiral-wrap.html', img: 'cut-netting-red', d: 'Expandable PE netting and spiral wrap that protect machined parts, hoses and cables during handling, storage and shipping.' },
+    caps: { n: 'Caps & Plugs', page: 'caps-plugs.html', ill: 'cap', isNew: true, d: 'Silicone and vinyl caps, plugs, tubing and cord for masking studs, threads and holes through powder coating and plating.' },
+    hooks: { n: 'Hooks', page: 'hooks.html', ill: 'rack', isNew: true, d: 'Powder-coating and racking hooks to hang parts through the spray booth and the cure oven.' },
+    screen: { n: 'Screen & Spline', page: 'screen-spline.html', img: 'cut-round-spline', d: 'Round, serrated, flat and smooth screen spline in 40+ sizes, plus the roller tools, clips and bug seals to finish the job.' },
+    auto: { n: 'Automotive', page: 'shop.html#auto', img: 'cut-tender-spring', d: 'Heavy-duty parts for trucks and trailers.' }
+  };
+  const FAMINFO = {
+    pet: { imgs: ['cut-pet-lineup', 'cut-green-tape', 'cut-pet-stack', 'cut-green-tape-2'], lbl: 'Width',
+      spec: [['Carrier', 'Polyester (PET) film'], ['Adhesive', 'Silicone'], ['Colour', 'Green'], ['Temperature', 'Up to 400°F (204°C)'], ['Roll length', '72 yd'], ['Thickness', '2 mil']],
+      uses: ['Powder coating', 'Cerakote & ceramic coating', 'Painting', 'Plating & anodizing', 'Sublimation', 'Die cutting'] },
+    glass: { imgs: ['cut-glass-cloth'], lbl: 'Width',
+      spec: [['Carrier', 'Woven glass cloth'], ['Adhesive', 'Silicone'], ['Colour', 'White'], ['Temperature', 'High temperature'], ['Roll length', '32 yd']],
+      uses: ['Flame & plasma spray', 'Electrical insulation', 'Motor & coil wrapping', 'Bundling', 'High-heat masking'] },
+    paper: { imgs: ['cut-paper-tape'], lbl: 'Width',
+      spec: [['Carrier', 'Crepe paper'], ['Adhesive', 'Water-based'], ['Colour', 'Natural'], ['Temperature', 'Low temperature'], ['Roll length', '54 yd'], ['Shelf life', '12 months (store at 60–80°F)']],
+      uses: ['Painting', 'Auto refinish', 'Appliances', 'Interior finishing'] },
+    dots: { n: 'Green Masking Dots', line: 'diecut', imgs: ['cut-dots-hero', 'cut-green-dots'], lbl: 'Dot diameter',
+      d: 'Pre-cut green polyester discs with silicone adhesive. They keep powder coat, Cerakote and paint off holes, nuts, mating surfaces and grounding points — no trimming needed.',
+      spec: [['Material', 'Polyester film, silicone adhesive'], ['Colour', 'Green'], ['Temperature', 'Oven cure up to 400°F for 20 min'], ['Sold as', 'Single roll']],
+      uses: ['Holes & studs', 'Nuts & threads', 'Grounding points', 'Mating surfaces'] },
+    netting: { n: 'PE Protective Netting', line: 'protect', imgs: ['cut-netting-red', 'cut-netting-blue', 'cut-netting-yellow', 'cut-netting-gray', 'app-red-netting', 'app-green-netting'], lbl: 'Stretch range',
+      d: 'Expandable polyethylene mesh that slides over parts to stop scratches, scuffs and metal-on-metal contact. Open mesh keeps parts visible and lets air through. Colour-coded by size, sold by the full roll.',
+      spec: [['Material', 'Polyethylene (PE)'], ['Type', 'Expandable open-mesh sleeve'], ['Sizes', '10 stretch ranges, 0.25" to 5.50"'], ['Roll length', '300 – 1,500 ft by size'], ['Reusable', 'Yes']],
+      uses: ['Machined parts', 'Threaded components', 'Shafts & fasteners', 'Tooling', 'Warehouse & packing lines'] },
+    spiral: { n: 'Spiral Cable & Hose Wrap', line: 'protect', imgs: ['cut-spiral-wrap', 'app-hydraulic-wrap', 'app-cable-wrap'], lbl: 'Size',
+      d: 'Flexible polyethylene spiral wrap that protects and organises hoses, wires and cable bundles. Individual lines can exit the wrap wherever you need.',
+      spec: [['Material', 'Polyethylene (PE)'], ['Colours', 'Black, Yellow'], ['Sizes', '3/4", 1.1", 2"'], ['Lengths', '25, 50 & 100 ft']],
+      uses: ['Hydraulic hoses', 'Cable management', 'Automotive', 'Construction', 'Electronics'] },
+    spline: { n: 'Round Retainer Screen Spline', line: 'screen', imgs: ['cut-round-spline', 'cut-spline-15lb', 'cut-spline-coil', 'app-screened-porch'], lbl: 'Diameter',
+      d: 'Serrated black vinyl spline that locks screen mesh into window and door frames. UV-resistant and crack-resistant, in more sizes than big-box stores carry.',
+      spec: [['Material', 'Vinyl'], ['Profile', 'Round, serrated'], ['Colour', 'Black'], ['Sizes', '.105" to .250"'], ['Lengths', '100 ft, 250 ft, 15 lb roll']],
+      uses: ['Window screens', 'Door screens', 'Patio & porch', 'Contractors'] },
+    flat: { n: 'Flat Screen Spline', line: 'screen', imgs: ['cut-flat-spline', 'cut-flat-1000', 'app-pool-enclosure'], lbl: 'Width',
+      d: 'Flat-profile vinyl spline for frames with shallow grooves, such as pool cages and patio enclosures, where round spline won’t sit securely.',
+      spec: [['Material', 'Vinyl'], ['Profile', 'Flat'], ['Colour', 'Black'], ['Widths', '.290", .315"'], ['Lengths', '100 – 1,000 ft']],
+      uses: ['Pool cages', 'Patio enclosures', 'Lanais'] },
+    smooth: { n: 'Smooth Screen Spline', line: 'screen', imgs: ['cut-smooth-spline'], lbl: 'Diameter',
+      d: 'Smooth gray vinyl spline for frames that call for a non-serrated profile.', spec: [['Material', 'Vinyl'], ['Colour', 'Gray'], ['Sizes', '.090", .110"'], ['Length', '100 ft']], uses: ['Window screens', 'Door screens'] },
+    tool: { n: 'Screen Roller Tool', line: 'screen', imgs: ['cut-roller-tool', 'app-installer'], d: 'Convex and concave steel-bearing wheels on a hardwood handle — the one tool every screen job needs.', spec: [['Wheels', 'Steel, convex & concave'], ['Handle', 'Hardwood']], uses: ['Screen installs', 'Screen repair'] },
+    bugseal: { n: 'Bug Seal', line: 'screen', imgs: ['cut-bug-seal', 'cut-bug-seal-2'], d: 'Adjustable 8 ft vinyl seals for sliding screen doors. Trim to fit and press in.', spec: [['Length', '8 ft'], ['Material', 'Vinyl']], uses: ['Sliding screen doors'] },
+    clips: { n: 'Window Screen Clips', line: 'screen', imgs: ['cut-screen-clips'], d: '7/16" diecast zinc clips that hold screen frames securely in the window. 100 per pack.', spec: [['Size', '7/16"'], ['Material', 'Diecast zinc'], ['Pack', '100 clips']], uses: ['Window screens'] },
+    spring: { n: 'Heavy-Duty Tender Spring Kit', line: 'auto', imgs: ['cut-tender-spring'], d: '25" heavy-duty tracker tender spring kit for semi-trucks and trailers.', spec: [['Length', '25"'], ['Use', 'Semi-truck & trailer']], uses: ['Trucks', 'Trailers'] }
+  };
+  const PRODUCTS = [
+    ...MASK.map(m => ({ id: m.id, n: m.n, line: 'masking', fam: m.fam, soon: m.soon, img: m.img, ill: m.ill, opts: m.opts })),
+    { id: 'dots', fam: 'dots' },
+    ...LINES.diecut.range.map(([n, ill]) => ({ id: slug(n), n, line: 'diecut', soon: true, ill })),
+    { id: 'netting', fam: 'netting' }, { id: 'spiral', fam: 'spiral' },
+    ...LINES.protect.range.map(([n, ill]) => ({ id: slug(n), n, line: 'protect', soon: true, ill })),
+    ...LINES.caps.range.map(([n, ill]) => ({ id: slug(n), n, line: 'caps', soon: true, ill })),
+    ...LINES.hooks.range.map(([n, ill]) => ({ id: slug(n), n, line: 'hooks', soon: true, ill })),
+    ...['spline', 'flat', 'smooth', 'tool', 'bugseal', 'clips', 'spring'].map(f => ({ id: f, fam: f }))
+  ].map(p => { const fi = FAMINFO[p.fam] || {}; return Object.assign({ n: fi.n, line: fi.line, img: fi.imgs && fi.imgs[0] }, p); });
+  const PBY = Object.fromEntries(PRODUCTS.map(p => [p.id, p]));
+  const purl = id => 'product.html?id=' + id;
+  const pItems = p => p.soon || !p.fam ? [] : (['pet', 'glass', 'paper', 'dots'].includes(p.fam) ? singles(p.fam) : famAll(p.fam).filter(x => x.k !== 'Case')).sort((a, b) => num(a.s) - num(b.s));
+  const pFrom = p => { const it = pItems(p).filter(x => x.a); return it.length ? minP(it) : (pItems(p).length ? minP(pItems(p)) : 0); };
   const INDS = [
     { n: 'Powder coating', img: 'app-machined-parts', d: 'Clean edges through every cure.', rec: [['tape', 'pet'], ['line', 'diecut'], ['line', 'caps'], ['line', 'hooks']] },
     { n: 'Plating & anodizing', img: 'app-shaft-netting', d: 'Masking that holds in the bath.', rec: [['tape', 'vinyl'], ['tape', 'pet'], ['line', 'caps']] },
@@ -202,27 +266,27 @@
     const q = e.target.closest('[data-quote]');
     if (q) { e.preventDefault(); const d = q.dataset; openQuote(d.quote ? { name: d.quote, size: d.size, note: d.note, vis: d.vis ? (ILL[d.vis] || `<img src="${im(d.vis)}" alt="">`) : '' } : null); return; }
     const t = e.target.closest('[data-tape]');
-    if (t && MK[t.dataset.tape]) selTape(t.dataset.tape);
+    if (t && MK[t.dataset.tape] && FPS.onTape) FPS.onTape(t.dataset.tape, e);
     const l = e.target.closest('[data-line]');
-    if (l && LINES[l.dataset.line]) selLine(l.dataset.line);
+    if (l && LINES[l.dataset.line] && FPS.onLine) FPS.onLine(l.dataset.line, e);
   });
 
   /* ================= Header menus ================= */
   const nvUl = $('#nvUl');
   const menuLink = x => `<a class="mm__l" href="${x.href}" ${x.attr || ''}><span class="th">${x.vis}</span><span><b>${x.n}${x.isNew ? ' <span class="new">New</span>' : ''}</b><small>${x.d}</small></span></a>`;
   function buildNav() {
-    const maskLinks = MASK.map(m => ({ n: m.n.replace(' Tape', ''), d: m.soon ? 'Available on request' + (m.opts ? ' · ' + m.opts : '') : 'from ' + money(minP(tapeItems(m))) + ' / roll', vis: visual(m), href: '#masking', attr: `data-tape="${m.id}"` }));
-    const lineLinks = k => { const L = LINES[k]; return [...(L.cards || []).map(c => ({ n: c.t, d: c.sub, vis: `<img src="${im(imgFor(cardItems(c)[0]))}" alt="">`, href: '#more', attr: `data-line="${k}"` })), ...(L.range || []).map(([n, ill]) => ({ n, d: 'Available on request', vis: ILL[ill], href: '#more', attr: `data-line="${k}"` }))]; };
-    const mega = (title, links, promo) => `<div class="mm"><div class="w mm__in"><div><div class="mm__h"><b>${title}</b></div><div class="mm__g">${links.map(menuLink).join('')}</div></div>${promo}</div></div>`;
+    const maskLinks = MASK.map(m => ({ n: m.n.replace(' Tape', ''), d: m.soon ? 'Available on request' + (m.opts ? ' · ' + m.opts : '') : 'from ' + money(minP(tapeItems(m))) + ' / roll', vis: visual(m), href: purl(m.id) }));
+    const lineLinks = k => PRODUCTS.filter(p => p.line === k).map(p => ({ n: p.n, d: p.soon ? 'Available on request' : 'from ' + money(pFrom(p)), vis: visual(p), href: purl(p.id) }));
+    const mega = (title, links, promo, page) => `<div class="mm"><div class="w mm__in"><div><div class="mm__h"><b>${title}</b>${page ? `<a class="tl" href="${page}">View all ${icon('arrow')}</a>` : ''}</div><div class="mm__g">${links.map(menuLink).join('')}</div></div>${promo}</div></div>`;
     const promo = (h, s, vis, btn, attr) => `<div class="mm__p"><b>${h}</b><small>${s}</small>${vis}<button class="bt bt--dark bt--sm" ${attr}>${btn}</button></div>`;
     const items = [
-      { n: 'Masking Tapes', main: true, panel: mega('Masking tapes', maskLinks, promo('Not sure which tape?', 'Tell us your coating and cure temperature.', `<img src="${im('cut-green-tape')}" alt="">`, 'Ask our team', 'data-quote="Masking tape recommendation"')) },
-      ...LINE_ORDER.map(k => ({ n: LINES[k].n, isNew: LINES[k].isNew, panel: mega(LINES[k].n, lineLinks(k), promo('Bulk orders', 'Deeper pricing on larger quantities.', LINES[k].img ? `<img src="${im(LINES[k].img)}" alt="">` : ILL[LINES[k].ill], 'Request a quote', `data-quote="${esc(LINES[k].n)}"`)) })),
-      { n: 'Industries', panel: mega('Shop by industry', INDS.map(i => ({ n: i.n, d: i.d, vis: `<img src="${im(i.img)}" alt="" style="width:50px;height:50px;object-fit:cover">`, href: '#industries' })), promo('One supplier', 'For coating, plating, packaging and screens.', `<img src="${im('cut-glass-cloth')}" alt="">`, 'Talk to sales', 'data-quote="Industry supply"')) }
+      { n: 'Masking Tapes', main: true, panel: mega('Masking tapes', maskLinks, promo('Not sure which tape?', 'Tell us your coating and cure temperature.', `<img src="${im('cut-green-tape')}" alt="">`, 'Ask our team', 'data-quote="Masking tape recommendation"'), CATS.masking.page) },
+      ...LINE_ORDER.map(k => ({ n: LINES[k].n, isNew: LINES[k].isNew, panel: mega(LINES[k].n, lineLinks(k), promo('Bulk orders', 'Deeper pricing on larger quantities.', LINES[k].img ? `<img src="${im(LINES[k].img)}" alt="">` : ILL[LINES[k].ill], 'Request a quote', `data-quote="${esc(LINES[k].n)}"`), CATS[k].page) })),
+      { n: 'Industries', panel: mega('Shop by industry', INDS.map(i => ({ n: i.n, d: i.d, vis: `<img src="${im(i.img)}" alt="" style="width:50px;height:50px;object-fit:cover">`, href: 'industries.html#' + slug(i.n) })), promo('One supplier', 'For coating, plating, packaging and screens.', `<img src="${im('cut-glass-cloth')}" alt="">`, 'Talk to sales', 'data-quote="Industry supply"'), 'industries.html') }
     ];
     nvUl.innerHTML = items.map(x => `<li class="nv__i" data-menu><button class="nv__b ${x.main ? 'nv__b--main' : ''}" aria-expanded="false">${x.n}${x.isNew ? ' <span class="new">New</span>' : ''}${icon('chev', 'ic chev')}</button>${x.panel}</li>`).join('') +
-      `<li class="nv__sp"></li><li class="nv__i"><button class="nv__b nv__b--q" data-quote="">${icon('file')}Bulk Quotes</button></li>`;
-    $('#mnavList').innerHTML = items.map((x, i) => `<details class="macc" ${i === 0 ? 'open' : ''}><summary>${x.n}${x.isNew ? ' <span class="new">New</span>' : ''}${icon('chev', 'ic chev')}</summary><div class="macc__b">${(i === 0 ? maskLinks : i === items.length - 1 ? INDS.map(d => ({ n: d.n, href: '#industries' })) : lineLinks(LINE_ORDER[i - 1])).map(l => `<a href="${l.href}" ${l.attr || ''}>${l.n}</a>`).join('')}</div></details>`).join('');
+      `<li class="nv__sp"></li><li class="nv__i"><a class="nv__b" href="about.html">About</a></li><li class="nv__i"><a class="nv__b" href="contact.html">Contact</a></li>`;
+    $('#mnavList').innerHTML = items.map((x, i) => `<details class="macc" ${i === 0 ? 'open' : ''}><summary>${x.n}${x.isNew ? ' <span class="new">New</span>' : ''}${icon('chev', 'ic chev')}</summary><div class="macc__b">${(i === 0 ? maskLinks : i === items.length - 1 ? INDS.map(d => ({ n: d.n, href: 'industries.html#' + slug(d.n) })) : lineLinks(LINE_ORDER[i - 1])).map(l => `<a href="${l.href}">${l.n}</a>`).join('')}<a href="${i === 0 ? CATS.masking.page : i === items.length - 1 ? 'industries.html' : CATS[LINE_ORDER[i - 1]].page}"><b>View all</b></a></div></details>`).join('') + ['shop.html|Shop all products', 'bulk-quote.html|Bulk quote', 'about.html|About us', 'contact.html|Contact', 'help.html|FAQ & shipping'].map(x => `<a class="mnav__l" href="${x.split('|')[0]}">${x.split('|')[1]}</a>`).join('');
     wireMenus();
   }
   let menus = [];
@@ -264,8 +328,8 @@
   function closeSearch() { ps.classList.remove('is-open'); psIn.setAttribute('aria-expanded', 'false'); psSel = -1; }
   function psRow(c, hl) {
     const name = hl ? hl(c.name) : c.name;
-    if (c.kind === 'tape') return `<a class="ps__r" role="option" href="#masking" data-tape="${c.id}"><span class="th">${c.vis}</span><span><b>${name}</b><small>${c.soon ? 'Masking tape · available on request' : 'Masking tape · single roll'}</small></span><em class="${c.soon ? 'q' : ''}">${c.soon ? 'Quote' : 'from ' + money(c.price)}</em></a>`;
-    return `<a class="ps__r" role="option" href="#more" data-line="${c.line}"><span class="th">${c.vis}</span><span><b>${name}</b><small>${LINES[c.line].n} · available on request</small></span><em class="q">Quote</em></a>`;
+    if (c.kind === 'tape') return `<a class="ps__r" role="option" href="${purl(c.id)}"><span class="th">${c.vis}</span><span><b>${name}</b><small>${c.soon ? 'Masking tape · available on request' : 'Masking tape · single roll'}</small></span><em class="${c.soon ? 'q' : ''}">${c.soon ? 'Quote' : 'from ' + money(c.price)}</em></a>`;
+    return `<a class="ps__r" role="option" href="${purl(slug(c.name))}"><span class="th">${c.vis}</span><span><b>${name}</b><small>${LINES[c.line].n} · available on request</small></span><em class="q">Quote</em></a>`;
   }
   function runSearch() {
     const raw = psIn.value.trim().toLowerCase();
@@ -306,143 +370,19 @@
     if (e.target.closest('.ps__r, [data-quote]')) closeSearch();
   });
 
-  /* ================= Hero quick buy ================= */
-  let qbSel = 'pet';
-  const qbState = {};
-  const QB = ['pet', 'glass', 'paper', 'dots'];
-  function renderQb() {
-    $('#qbTabs').innerHTML = QB.map(id => { const m = MK[id] || { s: 'Masking Dots', img: 'cut-green-dots' }; return `<button type="button" class="qb__t" role="tab" aria-selected="${id === qbSel}" data-qb="${id}"><img src="${im(m.img)}" alt="">${m.s === 'Paper' ? 'Paper' : m.s}</button>`; }).join('');
-    const items = (qbSel === 'dots' ? singles('dots').sort((a, b) => num(a.s) - num(b.s)) : tapeItems(MK[qbSel])).filter(p => p.a);
-    const h = qbState[qbSel] || (qbState[qbSel] = (items.find(p => /^1"$/.test(p.s)) || items[0]).h);
-    $('#qbLbl').textContent = qbSel === 'dots' ? 'Dot diameter' : 'Width';
-    $('[data-ut]').innerHTML = ut();
-    $('#qbSize').innerHTML = items.map(p => `<option value="${p.h}" ${p.h === h ? 'selected' : ''}>${fmtSize(p.s)}${qbSel === 'dots' ? ' · ' + dotsCount(p) : MK[qbSel].yd ? ' × ' + fmtYd(MK[qbSel].yd) : ''}</option>`).join('');
-    $('#qbPrice').textContent = money(BY[h].p);
-  }
-  $('#qbTabs').addEventListener('click', e => { const b = e.target.closest('[data-qb]'); if (b) { qbSel = b.dataset.qb; renderQb(); } });
-  $('#qbSize').addEventListener('change', e => { qbState[qbSel] = e.target.value; $('#qbPrice').textContent = money(BY[e.target.value].p); });
-  $('#qb').addEventListener('submit', e => {
-    e.preventDefault(); addToCart(qbState[qbSel], 1, '');
-    const b = $('#qbAdd'); b.classList.add('is-done'); b.innerHTML = icon('check') + 'Added'; setTimeout(() => { b.classList.remove('is-done'); b.innerHTML = icon('cart') + 'Add'; }, 1400);
-  });
-
-  /* ================= Categories ================= */
-  $('#cats').innerHTML = `<a class="cat cat--main" href="#masking"><span class="cat__t"><span class="top">#1 product line</span><b>Masking Tapes</b><small>Green PET, glass cloth, paper, polyimide &amp; more</small><span class="cat__go">Shop masking tapes ${icon('arrow')}</span></span><span class="cat__v"><img src="${im('cut-pet-stack')}" alt="Green polyester masking tape" loading="lazy"></span></a>` +
-    LINE_ORDER.map(k => { const L = LINES[k]; return `<a class="cat" href="#more" data-line="${k}"><span class="cat__t">${L.isNew ? '<span class="new">New</span>' : ''}<b>${L.n}</b><small>${L.d}</small><span class="cat__go">Shop ${L.short.toLowerCase()} ${icon('arrow')}</span></span><span class="cat__v">${L.img ? `<img src="${im(L.img)}" alt="${esc(L.n)}" loading="lazy">` : ILL[L.ill]}</span></a>`; }).join('');
-
-  /* ================= Masking list + panel ================= */
-  let tapeSel = 'pet';
-  const tState = {};
-  function renderTabs() {
-    const tab = m => `<button class="mt" role="tab" aria-selected="${m.id === tapeSel}" data-tape="${m.id}"><span class="mt__th">${visual(m)}</span><span><b>${m.n.replace(' Tape', '')}</b>${m.soon && m.opts ? `<small>${m.opts}</small>` : ''}</span><em class="${m.soon ? 'q' : ''}">${m.soon ? 'Quote' : money(minP(tapeItems(m)))}</em></button>`;
-    $('#mkList').innerHTML = `<p class="mk__lbl">In stock</p>` + MASK.filter(m => !m.soon).map(tab).join('') + `<p class="mk__lbl">Available on request</p>` + MASK.filter(m => m.soon).map(tab).join('');
-  }
-  function renderPanel() {
-    const m = MK[tapeSel], P = $('#mkPanel');
-    if (m.soon) {
-      P.innerHTML = `<div class="mp"><div class="mp__media"><span class="req-b mp__tag">Available on request</span>${ILL[m.ill]}</div>
-        <div class="mp__b"><h3>${m.n}</h3><p>We're adding ${m.n.toLowerCase()} to our range. Tell us the size and quantity you need and we'll send availability and pricing.</p>
-        ${m.opts ? `<dl class="spec"><div><dt>Thickness options</dt><dd>${m.opts}</dd></div></dl>` : ''}
-        <div class="req"><b>Request this tape</b><div class="fld"><span class="fld__l">Width you need ${ut()}</span><div class="req__f"><input id="reqW" placeholder="${UNIT === 'mm' ? 'e.g. 25 mm' : 'e.g. 1 inch'}" aria-label="Width you need"><button class="bt bt--dark" data-quote="${esc(m.n)}" data-vis="${m.ill}" data-note="Available on request" id="reqBtn">Request a quote</button></div></div></div></div></div>`;
-      $('#reqW').addEventListener('input', e => { $('#reqBtn').dataset.size = e.target.value; });
-      return;
-    }
-    const items = tapeItems(m);
-    const st = tState[m.id] || (tState[m.id] = { h: (items.find(p => p.a && /^1"$/.test(p.s)) || items.find(p => p.a) || items[0]).h, q: 1 });
-    const p = BY[st.h], size = fmtSize(p.s);
-    P.innerHTML = `<div class="mp"><div class="mp__media">${m.badge ? `<span class="new mp__tag" style="background:var(--g);color:#fff">${m.badge}</span>` : ''}<img src="${im(m.id === 'pet' ? 'cut-pet-lineup' : m.img)}" alt="${esc(m.n)}"></div>
-      <div class="mp__b"><h3>${m.n}</h3><p>${m.d}</p>
-      <div class="tempx">${icon('thermo')}<span><b>Temperature range: ${m.temp}</b><small>${m.tnote}</small></span></div>
-      <dl class="spec"><div><dt>Adhesive</dt><dd>${m.adh}</dd></div><div><dt>Roll length</dt><dd>${fmtYd(m.yd)}</dd></div><div><dt>Sold as</dt><dd>Single roll</dd></div></dl>
-      ${m.thick ? `<div class="chips"><span>Thickness:</span><button class="ch" aria-pressed="true">2 mil</button><button class="ch" data-quote="${esc(m.n)} — 1 mil" data-vis="${m.img}" data-note="1 mil — available on request">1 mil <small>· request</small></button><button class="ch" data-quote="${esc(m.n)} — 5 mil" data-vis="${m.img}" data-note="5 mil — available on request">5 mil <small>· request</small></button></div>` : ''}
-      <div class="buy">
-        <div class="buy__row">
-          <div class="fld"><span class="fld__l">Width · ${items.length} sizes ${ut()}</span><span class="sel"><select id="mkSize" aria-label="Width">${items.map(x => `<option value="${x.h}" ${x.h === st.h ? 'selected' : ''}>${fmtSize(x.s)} — ${money(x.p)}${x.a ? '' : ' (contact us)'}</option>`).join('')}</select></span></div>
-          <div class="fld"><span class="fld__l">Rolls</span><div class="qty"><button type="button" data-st="-1" aria-label="Fewer rolls">${icon('minus')}</button><input id="mkQty" type="number" min="1" value="${st.q}" aria-label="Number of rolls"><button type="button" data-st="1" aria-label="More rolls">${icon('plus')}</button></div></div>
-        </div>
-        <div class="price"><b>${money(p.p)}</b><small>per roll</small>${p.a ? `<span class="stk"><i></i>In stock</span>` : `<span class="stk stk--o"><i></i>Out of stock</span>`}</div>
-        ${p.a ? `<button class="bt bt--green bt--lg bt--block" data-add="${p.h}" data-qty="${st.q}">${icon('cart')}Add ${st.q > 1 ? st.q + ' rolls' : 'to cart'} · ${money(p.p * st.q)}</button>` : `<button class="bt bt--dark bt--lg bt--block" data-quote="${esc(m.n)}" data-size="${esc(size)}" data-vis="${m.img}" data-note="Out of stock — we'll confirm availability">${icon('chat')}Contact us for this size</button>`}
-      </div></div></div>`;
-    $('#mkSize').addEventListener('change', e => { st.h = e.target.value; renderPanel(); });
-    const setQ = v => { st.q = Math.max(1, Math.min(999, v | 0 || 1)); renderPanel(); };
-    $$('[data-st]', P).forEach(b => b.addEventListener('click', () => setQ(st.q + +b.dataset.st)));
-    $('#mkQty').addEventListener('change', e => setQ(+e.target.value));
-  }
-  function selTape(id) { tapeSel = id; renderTabs(); renderPanel(); }
-  $('#mkList').addEventListener('keydown', e => {
-    if (!/Arrow(Down|Up|Left|Right)/.test(e.key)) return; e.preventDefault();
-    const tabs = $$('.mt', $('#mkList')), i = tabs.findIndex(t => t.dataset.tape === tapeSel), n = tabs[(i + (/Down|Right/.test(e.key) ? 1 : -1) + tabs.length) % tabs.length];
-    selTape(n.dataset.tape); $(`.mt[data-tape="${n.dataset.tape}"]`).focus();
-  });
-
-  /* ================= More lines ================= */
-  let lineSel = 'diecut';
-  const lState = {};
-  function cardItems(c) { return (c.filt ? famAll(c.fam).filter(c.filt) : famAll(c.fam)).filter(p => p.k !== 'Case'); }
-  function card(c, i) {
-    const key = lineSel + i, items = cardItems(c);
-    const st = lState[key] || (lState[key] = (() => { const p = items.find(x => x.a && (!c.def || x.s === c.def)) || items.find(x => x.a) || items[0]; return { s: p.s, k: p.k, v: (p.v || [])[0] || '' }; })());
-    const sizes = [...new Set(items.map(p => p.s).filter(Boolean))].sort((a, b) => num(a) - num(b));
-    const lens = [...new Set(items.filter(p => p.s === st.s).map(p => p.k).filter(Boolean))];
-    if (st.k && !lens.includes(st.k)) st.k = lens[0];
-    const p = items.find(x => (!st.s || x.s === st.s) && (!st.k || x.k === st.k)) || items[0];
-    const extra = o => c.fam === 'dots' ? ' · ' + dotsCount(items.find(x => x.s === o)) : c.fam === 'netting' && netInfo(o) ? ' · ' + netInfo(o)[2] + ' · ' + ftLen(netInfo(o)[3]) : '';
-    const sel = (k2, label, opts, cur, fmt, u) => opts.length > 1 ? `<div class="fld"><span class="fld__l">${label}${u ? ut() : ''}</span><span class="sel"><select data-k="${k2}" data-card="${key}" aria-label="${label}">${opts.map(o => `<option value="${esc(o)}" ${o === cur ? 'selected' : ''}>${fmt(o)}${k2 === 's' ? extra(o) : ''}</option>`).join('')}</select></span></div>` : '';
-    const ni = c.fam === 'netting' && netInfo(p.s);
-    return `<article class="pc"><div class="pc__m">${c.badge ? `<span class="bd">${c.badge}</span>` : ''}<img src="${im(imgFor(p))}" alt="${esc(c.t)}" loading="lazy"></div><div class="pc__b"><h3 class="pc__t">${c.t}</h3><p class="pc__s">${c.sub}</p>
-      ${sel('s', c.lbl.s || 'Size', sizes, st.s, fmtSize, true)}${ni ? `<span class="pc__len">${icon('ruler')}${ftLen(ni[3])} roll · ${ni[2]} · ${ni[1]}</span>` : ''}${sel('k', c.lbl.k || 'Length', lens, st.k, fmtLen)}${c.lbl.v && p.v.length > 1 ? sel('v', 'Color', p.v, st.v, x => x) : ''}
-      <div class="pc__f"><div class="pc__p">${money(p.p)}<small>${ni ? 'per ' + ftLen(ni[3]) + ' roll' : p.k && p.k !== 'Single roll' ? fmtLen(p.k) : c.fam === 'dots' ? 'per roll' : 'each'}</small></div>${p.a ? `<button class="add" data-add="${p.h}" data-variant="${esc(c.lbl.v ? st.v : '')}">${icon('plus')}Add</button>` : `<button class="add add--q" data-quote="${esc(c.t)}" data-size="${esc(fmtSize(p.s))}" data-vis="${imgFor(p)}" data-note="Out of stock — we'll confirm availability">Contact us</button>`}</div></div></article>`;
-  }
-  const reqCard = (n, ill, L) => `<article class="pc pc--req"><div class="pc__m"><span class="req-b">On request</span>${ILL[ill]}</div><div class="pc__b"><h3 class="pc__t">${n}</h3><p class="pc__s">${L.n} · sizes in inches or mm</p><div class="pc__f"><div class="pc__p">Quote<small>Tell us size &amp; quantity</small></div><button class="add add--q" data-quote="${esc(n)}" data-vis="${ill}" data-note="${esc(L.n)} · available on request">Request</button></div></div></article>`;
-  function renderMore() {
-    const L = LINES[lineSel];
-    $('#moreTabs').innerHTML = LINE_ORDER.map(k => `<button role="tab" aria-selected="${k === lineSel}" data-line="${k}">${LINES[k].n}${LINES[k].isNew ? ' <span class="new">New</span>' : ''}</button>`).join('');
-    const stocked = (L.cards || []).slice(0, 2);
-    const req = (L.range || []).slice(0, 2 - stocked.length);
-    const rest = [...(L.range || []).slice(req.length).map(r => r[0]), ...(L.also || [])];
-    const html = stocked.map(card).join('') + req.map(([n, ill]) => reqCard(n, ill, L)).join('');
-    const all = `<div class="allc"><b>More ${L.short.toLowerCase()}</b><p>${L.d}. ${L.cards ? 'In-stock sizes ship now — anything else we quote quickly.' : "Tell us what you need and we'll send pricing."}</p>${rest.length ? `<ul>${rest.map(n => `<li>${n}</li>`).join('')}</ul>` : ''}<button class="bt bt--dark" data-quote="${esc(L.n)}">Ask about ${L.short.toLowerCase()}</button></div>`;
-    $('#moreBody').innerHTML = html + all;
-    $('#moreBody').classList.remove('one');
-  }
-  function selLine(k) { lineSel = k; renderMore(); }
-  $('#moreBody').addEventListener('change', e => { const s = e.target.closest('select[data-card]'); if (!s) return; lState[s.dataset.card][s.dataset.k] = s.value; renderMore(); });
-
-  /* ================= Industries ================= */
-  $('#ind').innerHTML = INDS.map(i => `<article class="in"><img src="${im(i.img)}" alt="${esc(i.n)}" loading="lazy"><div class="in__b"><b>${i.n}</b><p>${i.d}</p><div class="in__r">${i.rec.map(([t, id]) => t === 'tape' ? `<a href="#masking" data-tape="${id}">${MK[id].n.replace(' Tape', '')}</a>` : `<a href="#more" data-line="${id}">${LINES[id].n}</a>`).join('')}</div></div></article>`).join('');
-
-  /* ================= Reviews ================= */
-  const RV = [
-    { n: 'Luis T.', r: 'Powder coater · Houston, TX', d: 'Oct 2026', t: 'Holds through the cure, peels clean', b: 'The green PET tape holds through the whole cure cycle and peels off clean. Buying single rolls in the width I need is a big help.', p: 'green-pet-tape-1-inch-x-72-yard-single-roll' },
-    { n: 'Rosa M.', r: 'Paint line supervisor · Phoenix, AZ', d: 'Oct 2026', t: 'Dots save us real time', b: 'The masking dots go on in seconds and survive the oven. Our masking time on threaded holes dropped noticeably.', p: 'green-dots-2-inch-x-1-000-dots-single-roll' },
-    { n: 'Dana K.', r: 'Operations lead · CNC shop, OH', d: 'Sep 2026', t: 'Zero scratch complaints', b: 'We wrap shafts and valve bodies before shipping. Not one scratch complaint since moving to FinePS netting.', p: 'poly200green-net' },
-    { n: 'Kevin P.', r: 'Electrical contractor · Atlanta, GA', d: 'Sep 2026', t: 'Easy to match our spec', b: 'Strong glass cloth tape for coil wrapping. Seeing sizes in mm made matching our spec sheet easy.', p: 'glass-cloth-tape-2-inch-x-32-yard-single-roll' },
-    { n: 'Sam R.', r: 'Body shop owner · Tampa, FL', d: 'Aug 2026', t: 'Sharp lines, no residue', b: 'Paper masking that lifts off without leaving glue behind. Reordering by the roll is simple.', p: 'low-temperature-paper-masking-tape-1-inch-x-54-yard-single-roll' }
-  ];
-  const STARS = icon('star').repeat(5);
-  $('#rsStars').innerHTML = STARS;
-  const rail = $('#rvRail');
-  rail.innerHTML = RV.map(r => { const p = BY[r.p]; return `<article class="rq"><div class="rq__top"><span class="stars">${STARS}</span><span>${r.d}</span></div><h3>${r.t}</h3><p>“${r.b}”</p>${p ? `<div class="rq__p"><img src="${im(imgFor(p))}" alt=""><span><small>Purchased</small>${short(p).slice(0, 42)}${short(p).length > 42 ? '…' : ''}</span></div>` : ''}<div class="rq__w"><span class="av">${r.n.replace('.', '').split(' ').map(w => w[0]).join('')}</span><span><b>${r.n}</b><small>${r.r}</small></span><span class="vb">${icon('check')}Verified</span></div></article>`; }).join('');
-  (function () {
-    let d = null;
-    rail.addEventListener('pointerdown', e => { if (e.pointerType !== 'mouse') return; d = { x: e.clientX, s: rail.scrollLeft, m: false }; });
-    addEventListener('pointermove', e => { if (!d) return; const dx = e.clientX - d.x; if (Math.abs(dx) > 4) { d.m = true; rail.classList.add('is-drag'); } rail.scrollLeft = d.s - dx; });
-    addEventListener('pointerup', () => { if (!d) return; const m = d.m; d = null; rail.classList.remove('is-drag'); if (m) { const w = rail.firstElementChild.offsetWidth + 16; rail.scrollTo({ left: Math.round(rail.scrollLeft / w) * w, behavior: 'smooth' }); } });
-    const upd = () => { const max = rail.scrollWidth - rail.clientWidth, w = rail.clientWidth / rail.scrollWidth, b = $('#rvProg'); b.style.width = w * 100 + '%'; b.style.left = (max ? rail.scrollLeft / max * (1 - w) * 100 : 0) + '%'; $$('.arw__b').forEach(x => x.disabled = +x.dataset.dir < 0 ? rail.scrollLeft < 4 : rail.scrollLeft > max - 4); };
-    rail.addEventListener('scroll', upd, { passive: true }); addEventListener('resize', upd); setTimeout(upd, 60);
-    $$('.arw__b').forEach(b => b.addEventListener('click', () => rail.scrollBy({ left: +b.dataset.dir * (rail.firstElementChild.offsetWidth + 16), behavior: 'smooth' })));
-  })();
-  $('#allReviews').addEventListener('click', e => { e.preventDefault(); toast('Prototype: opens the full reviews page'); });
-
-  /* ================= FAQ / newsletter / wordmark ================= */
-  $('#qa').addEventListener('click', e => { const b = e.target.closest('.q>button'); if (!b) return; const q = b.parentElement, on = !q.classList.contains('is-open'); $$('#qa .q').forEach(x => { x.classList.remove('is-open'); x.firstElementChild.setAttribute('aria-expanded', 'false'); }); if (on) { q.classList.add('is-open'); b.setAttribute('aria-expanded', 'true'); } });
-  $('#nl').addEventListener('submit', e => { e.preventDefault(); $('#nl .nl__ok').hidden = false; $('#nlE').value = ''; });
-  const wm = $('#wm'), WL = $$('span', wm);
+  /* ================= FAQ accordion / newsletter / wordmark ================= */
+  document.addEventListener('click', e => { const b = e.target.closest('.qa .q>button'); if (!b) return; const q = b.parentElement, box = q.parentElement, on = !q.classList.contains('is-open'); $$('.q', box).forEach(x => { x.classList.remove('is-open'); x.firstElementChild.setAttribute('aria-expanded', 'false'); }); if (on) { q.classList.add('is-open'); b.setAttribute('aria-expanded', 'true'); } });
+  $$('form.nl').forEach(f => f.addEventListener('submit', e => { e.preventDefault(); const ok = $('.nl__ok', f); if (ok) ok.hidden = false; $('input', f).value = ''; }));
+  const wm = $('#wm'), WL = wm ? $$('span', wm) : [];
   const hot = i => WL.forEach((l, j) => { l.classList.toggle('is-hot', j === i); l.classList.toggle('is-near', Math.abs(j - i) === 1); });
-  wm.addEventListener('mousemove', e => { let b = 0, bd = 1e9; WL.forEach((l, j) => { const r = l.getBoundingClientRect(), dd = Math.abs(e.clientX - (r.left + r.width / 2)); if (dd < bd) { bd = dd; b = j; } }); hot(b); });
-  wm.addEventListener('mouseleave', () => hot(-9));
+  if (wm) { wm.addEventListener('mousemove', e => { let b = 0, bd = 1e9; WL.forEach((l, j) => { const r = l.getBoundingClientRect(), dd = Math.abs(e.clientX - (r.left + r.width / 2)); if (dd < bd) { bd = dd; b = j; } }); hot(b); }); wm.addEventListener('mouseleave', () => hot(-9)); }
 
-  /* ================= Init ================= */
-  function renderAll() { renderQb(); renderPanel(); renderMore(); renderCart(); if (ps.classList.contains('is-open')) runSearch(); }
-  buildNav(); renderTabs(); renderAll();
+  /* ================= Init + shared API for page scripts ================= */
+  const hooks = [];
+  function renderAll() { renderCart(); hooks.forEach(f => f()); if (ps.classList.contains('is-open')) runSearch(); }
+  const FPS = window.FPS = { $, $$, esc, money, icon, im, fine, fmtSize, fmtLen, fmtYd, unitWord, CAT, BY, num, short, TAPE_F, singles, famAll, minP, imgFor, ILL, visual,
+    MASK, MK, NET, netInfo, ftLen, tapeItems, dotsCount, LINES, LINE_ORDER, INDS, ut, toast, addToCart, openQuote, cardItems, slug, CATS, FAMINFO, PRODUCTS, PBY, purl, pItems, pFrom,
+    get cart() { return cart; }, setCart(c) { cart = c; save(); renderCart(); }, onUnit(f) { hooks.push(f); }, onTape: null, onLine: null };
+  Object.defineProperty(FPS, 'UNIT', { get: () => UNIT });
+  buildNav(); renderCart();
 })();
