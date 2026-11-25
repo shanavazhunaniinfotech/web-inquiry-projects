@@ -4,611 +4,769 @@
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <meta name="robots" content="noindex, nofollow">
-  <title>Hair Stylist | Cuts, Colour &amp; Styling in Your Town</title>
-  <meta name="description" content="Award-winning local hair stylist for precision cuts, lived-in colour, balayage, curls and bridal styling. Book your appointment online in under a minute.">
+  <title>Hair Stylist | Cuts, Colour &amp; Curls in Your Town</title>
+  <meta name="description" content="A one-on-one hair studio for precision cuts, lived-in colour, curls and bridal styling. Book your chair online in under 60 seconds.">
+  <meta name="theme-color" content="#FBF8F3">
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,400;0,9..144,500;0,9..144,600;1,9..144,400;1,9..144,500&family=Plus+Jakarta+Sans:wght@400;500;600;700&display=swap" rel="stylesheet">
+  <link rel="preconnect" href="https://images.pexels.com">
+  <link href="https://fonts.googleapis.com/css2?family=Instrument+Serif:ital@0;1&family=Manrope:wght@400;500;600;700;800&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="style.css">
 </head>
-<body>
+<body class="is-loading">
 
-  <!-- ============ ANNOUNCEMENT BAR ============ -->
-  <div class="announce" role="region" aria-label="Announcement">
-    <div class="announce__track" id="announceTrack">
-      <p class="is-active">✨ New clients: <strong>15% off</strong> your first colour service, <a href="#book">book now</a></p>
-      <p>📅 Online booking open 24/7, <strong>same-week</strong> appointments available</p>
-      <p>💐 Now booking <strong>2027 bridal</strong> trials, <a href="#services">see bridal packages</a></p>
+<!-- ================= INTRO LOADER ================= -->
+<div class="loader" id="loader" aria-hidden="true">
+  <div class="loader__inner">
+    <div class="loader__word"><span>H</span><span>a</span><span>i</span><span>r</span><span class="sp"></span><span><i>S</i></span><span><i>t</i></span><span><i>y</i></span><span><i>l</i></span><span><i>i</i></span><span><i>s</i></span><span><i>t</i></span></div>
+    <div class="loader__bar"><b></b></div>
+  </div>
+</div>
+
+<!-- ================= ANNOUNCEMENT BAR ================= -->
+<div class="announce" role="region" aria-label="Offers">
+  <div class="container announce__inner">
+    <div class="announce__rot" id="announceRot">
+      <p class="is-on">✦ New clients: <b>15% off</b> your first colour appointment, <a href="#book">claim it</a></p>
+      <p>✦ Only <b id="spotsLeft">4 new-client spots</b> left this week, <a href="#book">book yours</a></p>
+      <p>✦ Now booking <b>2027 weddings</b>, trials from $85, <a href="#services">see bridal</a></p>
+    </div>
+    <div class="announce__side">
+      <a href="tel:+15550123456">(555) 012-3456</a>
+      <span class="sep"></span>
+      <span id="openNow" class="open-now">Open today until 6 pm</span>
     </div>
   </div>
+</div>
 
-  <!-- ============ HEADER ============ -->
-  <header class="header" id="header">
-    <div class="container header__inner">
-      <a href="#top" class="logo" aria-label="Hair Stylist, home">
-        <span class="logo__mark" aria-hidden="true">
-          <svg viewBox="0 0 40 40"><circle cx="20" cy="20" r="19" fill="#E9E1F7"/><path d="M13 27c4-2 6-6 7-13 1 7 3 11 7 13" fill="none" stroke="#6B4E8C" stroke-width="2" stroke-linecap="round"/><circle cx="14" cy="28" r="2.6" fill="none" stroke="#6B4E8C" stroke-width="1.8"/><circle cx="26" cy="28" r="2.6" fill="none" stroke="#6B4E8C" stroke-width="1.8"/><circle cx="20" cy="11" r="1.6" fill="#E7B84A"/></svg>
-        </span>
-        <span class="logo__text">Hair <em>Stylist</em></span>
-      </a>
-      <nav class="nav" id="nav" aria-label="Main">
-        <a href="#about">About</a>
-        <a href="#services">Services</a>
-        <a href="#transformations">Transformations</a>
-        <a href="#portfolio">Portfolio</a>
-        <a href="#reviews">Reviews</a>
-        <a href="#contact">Contact</a>
-        <a href="#book" class="btn btn--primary nav__mobile-cta">Book Appointment</a>
-      </nav>
-      <div class="header__actions">
-        <a href="tel:+15550123456" class="header__phone">
-          <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M6.6 10.8a15.1 15.1 0 0 0 6.6 6.6l2.2-2.2a1 1 0 0 1 1-.25 11.4 11.4 0 0 0 3.6.57 1 1 0 0 1 1 1V20a1 1 0 0 1-1 1A17 17 0 0 1 3 4a1 1 0 0 1 1-1h3.5a1 1 0 0 1 1 1c0 1.25.2 2.45.57 3.57a1 1 0 0 1-.25 1z"/></svg>
-          (555) 012-3456
-        </a>
-        <a href="#book" class="btn btn--primary">Book Now</a>
-        <button class="burger" id="burger" aria-label="Open menu" aria-expanded="false" aria-controls="nav"><span></span><span></span></button>
-      </div>
+<!-- ================= HEADER ================= -->
+<header class="header" id="header">
+  <div class="container header__inner">
+    <a href="#top" class="logo" aria-label="Hair Stylist home">
+      <svg class="logo__mark" viewBox="0 0 44 44" aria-hidden="true"><circle cx="22" cy="22" r="21" fill="#E8DFF6"/><path d="M14 30c5-3 7.5-8 8-17 .5 9 3 14 8 17" fill="none" stroke="#2A2433" stroke-width="1.8" stroke-linecap="round"/><circle cx="15" cy="31" r="3" fill="#FBF8F3" stroke="#2A2433" stroke-width="1.6"/><circle cx="29" cy="31" r="3" fill="#FBF8F3" stroke="#2A2433" stroke-width="1.6"/><path d="M22 7.5l1 2.2 2.2 1-2.2 1-1 2.2-1-2.2-2.2-1 2.2-1z" fill="#C99A2E"/></svg>
+      <span class="logo__word">Hair <i>Stylist</i></span>
+    </a>
+    <nav class="nav" id="nav" aria-label="Primary">
+      <a href="#about">The Stylist</a>
+      <a href="#services">Services</a>
+      <a href="#transformations">Transformations</a>
+      <a href="#lookbook">Lookbook</a>
+      <a href="#reviews">Reviews</a>
+      <a href="#visit">Visit</a>
+      <a href="#book" class="btn btn--ink nav__cta">Book your chair</a>
+    </nav>
+    <div class="header__right">
+      <a href="#match" class="header__quiz"><span class="spark">✦</span> Find my look</a>
+      <a href="#book" class="btn btn--ink btn--sm magnetic">Book your chair <span class="btn__arrow">→</span></a>
+      <button class="burger" id="burger" aria-label="Menu" aria-expanded="false" aria-controls="nav"><span></span><span></span></button>
     </div>
-  </header>
+  </div>
+</header>
 
-  <main id="top">
+<main id="top">
 
-    <!-- ============ HERO (in a card) ============ -->
-    <section class="hero container" aria-labelledby="hero-title">
-      <div class="hero__card">
-        <div class="hero__blob hero__blob--a" aria-hidden="true"></div>
-        <div class="hero__blob hero__blob--b" aria-hidden="true"></div>
+<!-- ================= HERO (CARD) ================= -->
+<section class="hero" aria-labelledby="heroTitle">
+  <div class="container">
+    <div class="hero__card" id="heroCard">
+      <div class="hero__grain" aria-hidden="true"></div>
+      <div class="hero__orb hero__orb--1" aria-hidden="true"></div>
+      <div class="hero__orb hero__orb--2" aria-hidden="true"></div>
+      <div class="hero__orb hero__orb--3" aria-hidden="true"></div>
 
+      <div class="hero__top">
+        <span class="tag tag--glass"><span class="live"></span> 3 appointments open this week</span>
+        <span class="hero__est">One-on-one studio · Est. 2014 · Your Town</span>
+      </div>
+
+      <div class="hero__grid">
         <div class="hero__copy">
-          <p class="eyebrow"><span class="dot"></span> Your neighbourhood hair studio · Now accepting new clients</p>
-          <h1 id="hero-title">Hair that feels like <em>you</em>, only more confident.</h1>
-          <p class="hero__lead">Precision cuts, lived-in colour and effortless styling, created one-on-one in a calm, light-filled studio just around the corner.</p>
+          <h1 id="heroTitle" class="hero__title">
+            <span class="line"><span class="w">Hair</span> <span class="w">that</span> <span class="w">makes</span></span>
+            <span class="line"><span class="w">you</span> <span class="w pill-img"><img src="https://images.pexels.com/photos/3065207/pexels-photo-3065207.jpeg?auto=compress&amp;cs=tinysrgb&amp;w=240&amp;h=120&amp;fit=crop" alt=""></span> <span class="w"><em>pause</em></span></span>
+            <span class="line"><span class="w">at</span> <span class="w">every</span> <span class="w"><em class="rotator" id="rotator"><span class="is-on">mirror.</span><span>window.</span><span>selfie.</span></em></span></span>
+          </h1>
+          <p class="hero__lead">Precision cuts, lived-in colour and curls that behave, created slowly and one-on-one by a stylist who listens first and cuts second.</p>
 
           <div class="hero__ctas">
-            <a href="#book" class="btn btn--primary btn--lg">Book Your Appointment
-              <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M5 12h14M13 6l6 6-6 6"/></svg>
-            </a>
-            <a href="#services" class="btn btn--ghost btn--lg">View Services &amp; Prices</a>
+            <a href="#book" class="btn btn--plum btn--lg magnetic">Book your chair <span class="btn__arrow">→</span></a>
+            <a href="#match" class="btn btn--glass btn--lg"><span class="spark">✦</span> Take the 20-sec Hair Match</a>
           </div>
 
           <div class="hero__proof">
-            <div class="avatars" aria-hidden="true">
-              <img src="https://images.unsplash.com/photo-1494790108377-be9c29b29330?auto=format&fit=crop&w=96&h=96&q=70" alt="">
-              <img src="https://images.unsplash.com/photo-1544005313-94ddf0286df2?auto=format&fit=crop&w=96&h=96&q=70" alt="">
-              <img src="https://images.unsplash.com/photo-1531123897727-8f129e1688ce?auto=format&fit=crop&w=96&h=96&q=70" alt="">
-              <img src="https://images.unsplash.com/photo-1508214751196-bcfd4ca60f91?auto=format&fit=crop&w=96&h=96&q=70" alt="">
+            <div class="faces">
+              <img src="https://images.pexels.com/photos/3993469/pexels-photo-3993469.jpeg?auto=compress&amp;cs=tinysrgb&amp;w=96&amp;h=96&amp;fit=crop" alt="">
+              <img src="https://images.pexels.com/photos/7440134/pexels-photo-7440134.jpeg?auto=compress&amp;cs=tinysrgb&amp;w=96&amp;h=96&amp;fit=crop" alt="">
+              <img src="https://images.pexels.com/photos/3993463/pexels-photo-3993463.jpeg?auto=compress&amp;cs=tinysrgb&amp;w=96&amp;h=96&amp;fit=crop" alt="">
+              <span>+2k</span>
             </div>
             <div>
-              <p class="stars" aria-label="Rated 4.9 out of 5">★★★★★ <strong>4.9</strong></p>
-              <p class="muted small">from 240+ happy local clients on Google</p>
+              <div class="stars">★★★★★ <b>4.9</b> <span>/ 5</span></div>
+              <small>240+ five-star Google reviews from local clients</small>
             </div>
           </div>
         </div>
 
-        <div class="hero__visual">
-          <div class="hero__arch">
-            <img src="https://images.unsplash.com/photo-1562322140-8baeececf3df?auto=format&fit=crop&w=900&h=1100&q=80" alt="Stylist blow-drying a client's hair in a bright salon" fetchpriority="high">
-          </div>
-          <div class="hero__mini">
-            <img src="https://images.unsplash.com/photo-1554519934-e32b1629d9ee?auto=format&fit=crop&w=400&h=400&q=75" alt="Soft blonde balayage on long hair">
-            <span>Balayage<br><strong>specialist</strong></span>
-          </div>
-          <div class="chip chip--slot">
-            <span class="pulse"></span>
-            <div><small>Next available</small><strong id="nextSlot">Thursday · 10:30 am</strong></div>
-          </div>
-          <div class="chip chip--award">
-            <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 2l2.9 6 6.6.9-4.8 4.6 1.2 6.5L12 17l-5.9 3 1.2-6.5L2.5 8.9 9.1 8z"/></svg>
-            <span><strong>Top-rated</strong> salon in town</span>
-          </div>
-        </div>
-      </div>
-    </section>
-
-    <!-- ============ TRUST BAR (outside card) ============ -->
-    <section class="trust" aria-label="Why clients trust us">
-      <div class="trust__track">
-        <div class="trust__group">
-          <span><b>★ 4.9</b> Google rating</span>
-          <span><b>12+</b> years behind the chair</span>
-          <span><b>3,500+</b> appointments</span>
-          <span>Olaplex® &amp; K18 certified</span>
-          <span>Licensed &amp; insured</span>
-          <span>Cruelty-free, vegan colour</span>
-          <span>Free consultations</span>
-        </div>
-        <div class="trust__group" aria-hidden="true">
-          <span><b>★ 4.9</b> Google rating</span>
-          <span><b>12+</b> years behind the chair</span>
-          <span><b>3,500+</b> appointments</span>
-          <span>Olaplex® &amp; K18 certified</span>
-          <span>Licensed &amp; insured</span>
-          <span>Cruelty-free, vegan colour</span>
-          <span>Free consultations</span>
-        </div>
-      </div>
-    </section>
-
-    <!-- ============ ABOUT THE STYLIST ============ -->
-    <section class="section about container" id="about" aria-labelledby="about-title">
-      <div class="about__media reveal">
-        <div class="about__img">
-          <img src="https://images.unsplash.com/photo-1595476108010-b4d1f102b1b1?auto=format&fit=crop&w=900&h=1100&q=80" alt="The stylist washing a client's hair at the basin" loading="lazy">
-        </div>
-        <div class="about__badge">
-          <strong>12</strong>
-          <span>years of<br>beautiful hair</span>
-        </div>
-        <div class="about__quote">“Every appointment starts with listening.”</div>
-      </div>
-      <div class="about__copy reveal">
-        <p class="kicker kicker--purple">Meet your stylist</p>
-        <h2 id="about-title">Hi, I'm <em>[Stylist Name]</em>, and your hair is in good hands.</h2>
-        <p>I've spent over a decade perfecting cuts and colour that grow out beautifully and suit real, busy lives. No rushing, no upselling, no one-size-fits-all looks. Just honest advice and hair you'll love on day one <em>and</em> week eight.</p>
-        <p>Trained in advanced colour and curl techniques, I work one-on-one with every client, so you'll always see the same friendly face from consultation to final style.</p>
-        <ul class="ticks">
-          <li>Advanced balayage &amp; colour correction training</li>
-          <li>Curl-specialist cutting (dry &amp; wet techniques)</li>
-          <li>Bridal &amp; editorial styling experience</li>
-        </ul>
-        <div class="about__stats">
-          <div><strong data-count="3500">0</strong><span>appointments</span></div>
-          <div><strong data-count="98">0</strong><span>% rebook rate</span></div>
-          <div><strong data-count="240">0</strong><span>5-star reviews</span></div>
-        </div>
-        <div class="about__cta">
-          <a href="#book" class="btn btn--primary">Book a Free Consultation</a>
-          <span class="signature">[Stylist Name]</span>
-        </div>
-      </div>
-    </section>
-
-    <!-- ============ SIGNATURE SERVICES ============ -->
-    <section class="section services" id="services" aria-labelledby="services-title">
-      <div class="container">
-        <div class="section__head reveal">
-          <p class="kicker kicker--green">Signature services</p>
-          <h2 id="services-title">Everything your hair needs, <em>under one roof</em></h2>
-          <p class="muted">Transparent "from" pricing. Your exact quote is confirmed at your free consultation, with no surprises at checkout.</p>
-        </div>
-
-        <div class="tabs reveal" role="tablist" aria-label="Service categories">
-          <button role="tab" class="tab is-active" data-filter="all" aria-selected="true">All services</button>
-          <button role="tab" class="tab" data-filter="cut" aria-selected="false">Cuts &amp; Styling</button>
-          <button role="tab" class="tab" data-filter="colour" aria-selected="false">Colour</button>
-          <button role="tab" class="tab" data-filter="care" aria-selected="false">Treatments</button>
-          <button role="tab" class="tab" data-filter="event" aria-selected="false">Bridal &amp; Events</button>
-        </div>
-
-        <div class="services__grid" id="servicesGrid">
-          <article class="svc svc--green reveal" data-cat="cut">
-            <div class="svc__img"><img src="https://images.unsplash.com/photo-1580618672591-eb180b1a973f?auto=format&fit=crop&w=700&h=520&q=75" alt="Round-brush blow-dry styling" loading="lazy"><span class="svc__tag">Most booked</span></div>
-            <div class="svc__body">
-              <h3>Signature Cut &amp; Style</h3>
-              <p>Consultation, wash, precision cut and a polished blow-dry finish tailored to your face shape.</p>
-              <div class="svc__meta"><span>⏱ 60 min</span><span class="price">from <strong>$65</strong></span></div>
-              <a href="#book" class="svc__link" data-service="Signature Cut &amp; Style">Book this service →</a>
-            </div>
-          </article>
-
-          <article class="svc svc--yellow reveal" data-cat="colour">
-            <div class="svc__img"><img src="https://images.unsplash.com/photo-1554519934-e32b1629d9ee?auto=format&fit=crop&w=700&h=520&q=75" alt="Long blonde balayage" loading="lazy"><span class="svc__tag">Signature</span></div>
-            <div class="svc__body">
-              <h3>Balayage &amp; Highlights</h3>
-              <p>Hand-painted, sun-kissed dimension that grows out softly, so you can stretch time between visits.</p>
-              <div class="svc__meta"><span>⏱ 2.5–3 hrs</span><span class="price">from <strong>$185</strong></span></div>
-              <a href="#book" class="svc__link" data-service="Balayage &amp; Highlights">Book this service →</a>
-            </div>
-          </article>
-
-          <article class="svc svc--purple reveal" data-cat="colour">
-            <div class="svc__img"><img src="https://images.unsplash.com/photo-1492106087820-71f1a00d2b11?auto=format&fit=crop&w=700&h=520&q=75" alt="Soft lavender hair colour" loading="lazy"></div>
-            <div class="svc__body">
-              <h3>All-Over Colour &amp; Gloss</h3>
-              <p>Root touch-ups, grey blending, rich brunettes and pastel tones, finished with a shine-boosting gloss.</p>
-              <div class="svc__meta"><span>⏱ 90 min</span><span class="price">from <strong>$95</strong></span></div>
-              <a href="#book" class="svc__link" data-service="All-Over Colour &amp; Gloss">Book this service →</a>
-            </div>
-          </article>
-
-          <article class="svc svc--blue reveal" data-cat="cut">
-            <div class="svc__img"><img src="https://images.unsplash.com/photo-1611601322175-ef8ec8c85f01?auto=format&fit=crop&w=700&h=520&q=75" alt="Defined natural curls" loading="lazy"></div>
-            <div class="svc__body">
-              <h3>Curl Cut &amp; Definition</h3>
-              <p>Curl-by-curl shaping for waves, curls and coils, plus a styling lesson so you can recreate it at home.</p>
-              <div class="svc__meta"><span>⏱ 75 min</span><span class="price">from <strong>$85</strong></span></div>
-              <a href="#book" class="svc__link" data-service="Curl Cut &amp; Definition">Book this service →</a>
-            </div>
-          </article>
-
-          <article class="svc svc--pink reveal" data-cat="care">
-            <div class="svc__img"><img src="https://images.unsplash.com/photo-1634449571010-02389ed0f9b0?auto=format&fit=crop&w=700&h=520&q=75" alt="Relaxing hair treatment at the wash basin" loading="lazy"></div>
-            <div class="svc__body">
-              <h3>Repair &amp; Gloss Treatments</h3>
-              <p>Olaplex® or K18 bond repair with a scalp massage, for softer, stronger, shinier hair in one visit.</p>
-              <div class="svc__meta"><span>⏱ 45 min</span><span class="price">from <strong>$45</strong></span></div>
-              <a href="#book" class="svc__link" data-service="Repair &amp; Gloss Treatment">Book this service →</a>
-            </div>
-          </article>
-
-          <article class="svc svc--green reveal" data-cat="event">
-            <div class="svc__img"><img src="https://images.unsplash.com/photo-1626954079979-ec4f7b05e032?auto=format&fit=crop&w=700&h=520&q=75" alt="Braided bridal updo" loading="lazy"><span class="svc__tag">2027 dates open</span></div>
-            <div class="svc__body">
-              <h3>Bridal &amp; Special Occasion</h3>
-              <p>Trials, updos, soft waves and on-location styling for weddings, proms and every big moment.</p>
-              <div class="svc__meta"><span>⏱ 60–90 min</span><span class="price">from <strong>$120</strong></span></div>
-              <a href="#book" class="svc__link" data-service="Bridal &amp; Special Occasion">Book this service →</a>
-            </div>
-          </article>
-        </div>
-
-        <div class="services__foot reveal">
-          <p>Not sure what to book? <strong>Start with a free 15-minute consultation.</strong></p>
-          <a href="#book" class="btn btn--dark-outline" data-service="Free Consultation">Book Free Consultation</a>
-        </div>
-      </div>
-    </section>
-
-    <!-- ============ TRANSFORMATIONS (BEFORE / AFTER) ============ -->
-    <section class="section transform" id="transformations" aria-labelledby="transform-title">
-      <div class="container transform__inner">
-        <div class="transform__copy reveal">
-          <p class="kicker kicker--yellow">Real transformations</p>
-          <h2 id="transform-title">Drag to see the <em>difference</em></h2>
-          <p class="muted">From brassy to bright, frizzy to defined, every transformation starts with a plan built around your hair's health.</p>
-
-          <div class="transform__list" role="tablist" aria-label="Choose a transformation">
-            <button class="tcase is-active" data-i="0" role="tab" aria-selected="true">
-              <span class="tcase__n">01</span>
-              <span><strong>Dull to Dimensional Blonde</strong><small>Balayage · Toner · Gloss · 3 hrs</small></span>
-            </button>
-            <button class="tcase" data-i="1" role="tab" aria-selected="false">
-              <span class="tcase__n">02</span>
-              <span><strong>Frizz to Defined Curls</strong><small>Curl cut · Hydration ritual · 90 min</small></span>
-            </button>
-            <button class="tcase" data-i="2" role="tab" aria-selected="false">
-              <span class="tcase__n">03</span>
-              <span><strong>Faded to Pastel Lavender</strong><small>Lightening · Custom tone · K18 · 3.5 hrs</small></span>
-            </button>
-          </div>
-          <a href="#book" class="btn btn--primary">Start Your Transformation</a>
-          <p class="tiny muted">Placeholder images. Swap in the stylist's own client photos.</p>
-        </div>
-
-        <div class="ba reveal" id="ba" aria-label="Before and after comparison">
-          <img class="ba__after" id="baAfter" src="https://images.unsplash.com/photo-1554519934-e32b1629d9ee?auto=format&fit=crop&w=1000&h=1100&q=80" alt="After: dimensional blonde balayage">
-          <div class="ba__before" id="baBeforeWrap">
-            <img id="baBefore" src="https://images.unsplash.com/photo-1522337360788-8b13dee7a37e?auto=format&fit=crop&w=1000&h=1100&q=80" alt="Before: flat, one-tone brown hair">
-          </div>
-          <span class="ba__label ba__label--b">Before</span>
-          <span class="ba__label ba__label--a">After</span>
-          <div class="ba__handle" id="baHandle"><span>
-            <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M9 6l-6 6 6 6M15 6l6 6-6 6"/></svg>
-          </span></div>
-          <input type="range" min="0" max="100" value="50" class="ba__range" id="baRange" aria-label="Before and after slider">
-        </div>
-      </div>
-    </section>
-
-    <!-- ============ PORTFOLIO ============ -->
-    <section class="section portfolio container" id="portfolio" aria-labelledby="portfolio-title">
-      <div class="section__head section__head--split reveal">
-        <div>
-          <p class="kicker kicker--blue">Portfolio</p>
-          <h2 id="portfolio-title">Recent work from <em>the chair</em></h2>
-        </div>
-        <div class="chips" role="group" aria-label="Filter portfolio">
-          <button class="fchip is-active" data-pf="all">All</button>
-          <button class="fchip" data-pf="colour">Colour</button>
-          <button class="fchip" data-pf="cut">Cuts</button>
-          <button class="fchip" data-pf="curls">Curls</button>
-          <button class="fchip" data-pf="styling">Styling</button>
-        </div>
-      </div>
-
-      <div class="pf-grid" id="pfGrid">
-        <figure class="pf pf--tall reveal" data-pf="colour"><img src="https://images.unsplash.com/photo-1500917293891-ef795e70e1f6?auto=format&fit=crop&w=700&h=950&q=75" alt="Long honey-blonde waves" loading="lazy"><figcaption><strong>Honey Blonde Waves</strong><span>Balayage + gloss</span></figcaption></figure>
-        <figure class="pf reveal" data-pf="colour"><img src="https://images.unsplash.com/photo-1529626455594-4ff0802cfb7e?auto=format&fit=crop&w=700&h=600&q=75" alt="Rich copper red hair" loading="lazy"><figcaption><strong>Copper Glow</strong><span>All-over colour</span></figcaption></figure>
-        <figure class="pf reveal" data-pf="cut"><img src="https://images.unsplash.com/photo-1544005313-94ddf0286df2?auto=format&fit=crop&w=700&h=600&q=75" alt="Long layered brunette cut" loading="lazy"><figcaption><strong>Soft Long Layers</strong><span>Signature cut</span></figcaption></figure>
-        <figure class="pf pf--tall reveal" data-pf="curls"><img src="https://images.unsplash.com/photo-1519699047748-de8e457a634e?auto=format&fit=crop&w=700&h=950&q=75" alt="Voluminous natural curls" loading="lazy"><figcaption><strong>Natural Volume</strong><span>Curl cut + hydration</span></figcaption></figure>
-        <figure class="pf reveal" data-pf="styling"><img src="https://images.unsplash.com/photo-1582095133179-bfd08e2fc6b3?auto=format&fit=crop&w=700&h=600&q=75" alt="Hair being set into an elegant updo" loading="lazy"><figcaption><strong>Event Updo</strong><span>Special occasion</span></figcaption></figure>
-        <figure class="pf reveal" data-pf="cut"><img src="https://images.unsplash.com/photo-1524504388940-b1c1722653e1?auto=format&fit=crop&w=700&h=600&q=75" alt="Face-framing shoulder length cut" loading="lazy"><figcaption><strong>Face-Framing Lob</strong><span>Cut &amp; blow-dry</span></figcaption></figure>
-        <figure class="pf reveal" data-pf="curls"><img src="https://images.unsplash.com/photo-1611601322175-ef8ec8c85f01?auto=format&fit=crop&w=700&h=600&q=75" alt="Defined dark curls" loading="lazy"><figcaption><strong>Defined Ringlets</strong><span>Curl definition</span></figcaption></figure>
-        <figure class="pf reveal" data-pf="styling"><img src="https://images.unsplash.com/photo-1626954079979-ec4f7b05e032?auto=format&fit=crop&w=700&h=600&q=75" alt="Braided low bun with accessories" loading="lazy"><figcaption><strong>Braided Bun</strong><span>Bridal trial</span></figcaption></figure>
-      </div>
-    </section>
-
-    <!-- ============ GALLERY (salon space) ============ -->
-    <section class="section gallery" id="gallery" aria-labelledby="gallery-title">
-      <div class="container section__head section__head--split reveal">
-        <div>
-          <p class="kicker kicker--pink">Gallery</p>
-          <h2 id="gallery-title">Step inside <em>the studio</em></h2>
-        </div>
-        <div class="gallery__nav">
-          <button class="circle-btn" id="galPrev" aria-label="Previous photos"><svg viewBox="0 0 24 24"><path d="M15 6l-6 6 6 6"/></svg></button>
-          <button class="circle-btn" id="galNext" aria-label="Next photos"><svg viewBox="0 0 24 24"><path d="M9 6l6 6-6 6"/></svg></button>
-        </div>
-      </div>
-      <div class="gallery__rail" id="galRail" tabindex="0" aria-label="Salon photo gallery, scroll horizontally">
-        <button class="g-item g-item--wide" data-full="https://images.unsplash.com/photo-1521590832167-7bcbfaa6381f?auto=format&fit=crop&w=1600&q=80"><img src="https://images.unsplash.com/photo-1521590832167-7bcbfaa6381f?auto=format&fit=crop&w=900&h=600&q=75" alt="Bright salon styling stations with pink chairs" loading="lazy"><span>Styling floor</span></button>
-        <button class="g-item" data-full="https://images.unsplash.com/photo-1527799820374-dcf8d9d4a388?auto=format&fit=crop&w=1600&q=80"><img src="https://images.unsplash.com/photo-1527799820374-dcf8d9d4a388?auto=format&fit=crop&w=600&h=700&q=75" alt="Professional hair tools laid out" loading="lazy"><span>Pro tools</span></button>
-        <button class="g-item" data-full="https://images.unsplash.com/photo-1560066984-138dadb4c035?auto=format&fit=crop&w=1600&q=80"><img src="https://images.unsplash.com/photo-1560066984-138dadb4c035?auto=format&fit=crop&w=600&h=700&q=75" alt="Light-filled salon interior with large windows" loading="lazy"><span>Natural light</span></button>
-        <button class="g-item g-item--wide" data-full="https://images.unsplash.com/photo-1633681926022-84c23e8cb2d6?auto=format&fit=crop&w=1600&q=80"><img src="https://images.unsplash.com/photo-1633681926022-84c23e8cb2d6?auto=format&fit=crop&w=900&h=600&q=75" alt="Modern salon with round mirrors" loading="lazy"><span>The studio</span></button>
-        <button class="g-item" data-full="https://images.unsplash.com/photo-1620331311520-246422fd82f9?auto=format&fit=crop&w=1600&q=80"><img src="https://images.unsplash.com/photo-1620331311520-246422fd82f9?auto=format&fit=crop&w=600&h=700&q=75" alt="Hair dryer next to a cup of coffee" loading="lazy"><span>Coffee's on us</span></button>
-        <button class="g-item" data-full="https://images.unsplash.com/photo-1595475884562-073c30d45670?auto=format&fit=crop&w=1600&q=80"><img src="https://images.unsplash.com/photo-1595475884562-073c30d45670?auto=format&fit=crop&w=600&h=700&q=75" alt="Hands holding scissors, brush and colour tools" loading="lazy"><span>Our craft</span></button>
-        <button class="g-item g-item--wide" data-full="https://images.unsplash.com/photo-1559599101-f09722fb4948?auto=format&fit=crop&w=1600&q=80"><img src="https://images.unsplash.com/photo-1559599101-f09722fb4948?auto=format&fit=crop&w=900&h=600&q=75" alt="Happy stylists with hair tools" loading="lazy"><span>Good vibes only</span></button>
-      </div>
-    </section>
-
-    <!-- ============ WHY CHOOSE US ============ -->
-    <section class="section why container" id="why" aria-labelledby="why-title">
-      <div class="section__head reveal">
-        <p class="kicker kicker--purple">Why choose us</p>
-        <h2 id="why-title">A salon experience that's <em>all about you</em></h2>
-      </div>
-      <div class="bento">
-        <div class="b b--lead b--purple reveal">
-          <div>
-            <span class="b__icon">🤍</span>
-            <h3>One stylist, start to finish</h3>
-            <p>No passing you between assistants. The person you consult with is the person who does your hair, every single time.</p>
-          </div>
-          <img src="https://images.unsplash.com/photo-1562322140-8baeececf3df?auto=format&fit=crop&w=700&h=600&q=75" alt="" loading="lazy">
-        </div>
-        <div class="b b--green reveal"><span class="b__icon">🌿</span><h3>Healthy-hair first</h3><p>Bond-building in every colour service and vegan, cruelty-free products.</p></div>
-        <div class="b b--yellow reveal"><span class="b__icon">💬</span><h3>Free consultations</h3><p>Honest advice and an exact quote before we start. No surprises.</p></div>
-        <div class="b b--blue reveal"><span class="b__icon">📅</span><h3>Easy online booking</h3><p>Book, reschedule or cancel 24/7 with text reminders.</p></div>
-        <div class="b b--pink reveal"><span class="b__icon">☕</span><h3>Relaxing, unrushed visits</h3><p>Coffee or tea, scalp massage and real time set aside just for you.</p></div>
-        <div class="b b--guarantee reveal">
-          <span class="b__icon">✓</span>
-          <div><h3>Love-it guarantee</h3><p>Not 100% happy? Come back within 7 days for a complimentary adjustment.</p></div>
-        </div>
-      </div>
-    </section>
-
-    <!-- ============ TESTIMONIALS ============ -->
-    <section class="section reviews" id="reviews" aria-labelledby="reviews-title">
-      <div class="container">
-        <div class="section__head section__head--split reveal">
-          <div>
-            <p class="kicker kicker--green">Client love</p>
-            <h2 id="reviews-title">240+ five-star reviews <em>and counting</em></h2>
-          </div>
-          <div class="g-badge">
-            <svg viewBox="0 0 48 48" aria-hidden="true"><path fill="#FFC107" d="M43.6 20.5H42V20H24v8h11.3C33.7 32.7 29.2 36 24 36c-6.6 0-12-5.4-12-12s5.4-12 12-12c3.1 0 5.8 1.2 7.9 3l5.7-5.7C34 6.1 29.3 4 24 4 13 4 4 13 4 24s9 20 20 20 20-9 20-20c0-1.3-.1-2.4-.4-3.5z"/><path fill="#FF3D00" d="M6.3 14.7l6.6 4.8C14.7 15.1 19 12 24 12c3.1 0 5.8 1.2 7.9 3l5.7-5.7C34 6.1 29.3 4 24 4 16.3 4 9.7 8.3 6.3 14.7z"/><path fill="#4CAF50" d="M24 44c5.2 0 9.9-2 13.4-5.2l-6.2-5.2C29.2 35.1 26.7 36 24 36c-5.2 0-9.6-3.3-11.3-8l-6.5 5C9.5 39.6 16.2 44 24 44z"/><path fill="#1976D2" d="M43.6 20.5H42V20H24v8h11.3c-.8 2.2-2.2 4.2-4.1 5.6l6.2 5.2C37 39.2 44 34 44 24c0-1.3-.1-2.4-.4-3.5z"/></svg>
-            <div><strong>4.9 ★★★★★</strong><span>Google Reviews</span></div>
-          </div>
-        </div>
-
-        <div class="rv-wrap reveal">
-          <div class="rv-track" id="rvTrack">
-            <article class="rv rv--purple">
-              <p class="stars">★★★★★</p>
-              <blockquote>“I've finally found my forever stylist. My balayage looks expensive, grows out beautifully and I get compliments every single week.”</blockquote>
-              <footer><img src="https://images.unsplash.com/photo-1494790108377-be9c29b29330?auto=format&fit=crop&w=96&h=96&q=70" alt="" loading="lazy"><div><strong>Jessica M.</strong><span>Balayage · Client for 3 years</span></div></footer>
-            </article>
-            <article class="rv rv--green">
-              <p class="stars">★★★★★</p>
-              <blockquote>“First person who actually knew how to cut my curls. She taught me a routine I can do in 10 minutes. Life-changing, honestly.”</blockquote>
-              <footer><img src="https://images.unsplash.com/photo-1531123897727-8f129e1688ce?auto=format&fit=crop&w=96&h=96&q=70" alt="" loading="lazy"><div><strong>Amara O.</strong><span>Curl cut &amp; definition</span></div></footer>
-            </article>
-            <article class="rv rv--yellow">
-              <p class="stars">★★★★★</p>
-              <blockquote>“My bridal hair lasted through a full day of dancing and a windy beach photo shoot. Calm, kind and so talented.”</blockquote>
-              <footer><img src="https://images.unsplash.com/photo-1544005313-94ddf0286df2?auto=format&fit=crop&w=96&h=96&q=70" alt="" loading="lazy"><div><strong>Sophie L.</strong><span>Bridal styling</span></div></footer>
-            </article>
-            <article class="rv rv--blue">
-              <p class="stars">★★★★★</p>
-              <blockquote>“She blended my greys so naturally that I now go 10 weeks between visits. The studio is gorgeous and so relaxing.”</blockquote>
-              <footer><img src="https://images.unsplash.com/photo-1508214751196-bcfd4ca60f91?auto=format&fit=crop&w=96&h=96&q=70" alt="" loading="lazy"><div><strong>Karen D.</strong><span>Colour &amp; grey blending</span></div></footer>
-            </article>
-            <article class="rv rv--pink">
-              <p class="stars">★★★★★</p>
-              <blockquote>“Booking online took 30 seconds, she was on time, and the cut is the best I've had in years. Already rebooked!”</blockquote>
-              <footer><img src="https://images.unsplash.com/photo-1529626455594-4ff0802cfb7e?auto=format&fit=crop&w=96&h=96&q=70" alt="" loading="lazy"><div><strong>Rachel T.</strong><span>Signature cut &amp; style</span></div></footer>
-            </article>
-          </div>
-        </div>
-        <div class="rv-controls">
-          <button class="circle-btn" id="rvPrev" aria-label="Previous review"><svg viewBox="0 0 24 24"><path d="M15 6l-6 6 6 6"/></svg></button>
-          <div class="rv-dots" id="rvDots"></div>
-          <button class="circle-btn" id="rvNext" aria-label="Next review"><svg viewBox="0 0 24 24"><path d="M9 6l6 6-6 6"/></svg></button>
-        </div>
-      </div>
-    </section>
-
-    <!-- ============ INSTAGRAM ============ -->
-    <section class="section insta container" id="instagram" aria-labelledby="insta-title">
-      <div class="insta__head reveal">
-        <div>
-          <p class="kicker kicker--pink">Follow along</p>
-          <h2 id="insta-title">Fresh looks daily on <em>@hairstylist.studio</em></h2>
-        </div>
-        <a href="#" class="btn btn--insta">
-          <svg viewBox="0 0 24 24" aria-hidden="true"><rect x="3" y="3" width="18" height="18" rx="5"/><circle cx="12" cy="12" r="4"/><circle cx="17.5" cy="6.5" r="1" fill="currentColor"/></svg>
-          Follow on Instagram
-        </a>
-      </div>
-      <div class="insta__grid">
-        <a href="#" class="ig reveal"><img src="https://images.unsplash.com/photo-1470259078422-826894b933aa?auto=format&fit=crop&w=500&h=500&q=70" alt="Rose pink hair colour" loading="lazy"><span class="ig__ov">♥ 1.2k</span></a>
-        <a href="#" class="ig reveal"><img src="https://images.unsplash.com/photo-1492106087820-71f1a00d2b11?auto=format&fit=crop&w=500&h=500&q=70" alt="Lavender waves" loading="lazy"><span class="ig__ov">♥ 986</span></a>
-        <a href="#" class="ig reveal"><img src="https://images.unsplash.com/photo-1582095133179-bfd08e2fc6b3?auto=format&fit=crop&w=500&h=500&q=70" alt="Updo in progress" loading="lazy"><span class="ig__ov">♥ 742</span></a>
-        <a href="#" class="ig reveal"><img src="https://images.unsplash.com/photo-1554519934-e32b1629d9ee?auto=format&fit=crop&w=500&h=500&q=70" alt="Blonde balayage" loading="lazy"><span class="ig__ov">♥ 2.1k</span></a>
-        <a href="#" class="ig reveal"><img src="https://images.unsplash.com/photo-1519699047748-de8e457a634e?auto=format&fit=crop&w=500&h=500&q=70" alt="Natural curls" loading="lazy"><span class="ig__ov">♥ 1.5k</span></a>
-        <a href="#" class="ig reveal"><img src="https://images.unsplash.com/photo-1527799820374-dcf8d9d4a388?auto=format&fit=crop&w=500&h=500&q=70" alt="Hair tools flat lay" loading="lazy"><span class="ig__ov">♥ 604</span></a>
-      </div>
-    </section>
-
-    <!-- ============ BOOKING CTA ============ -->
-    <section class="section book container" id="book" aria-labelledby="book-title">
-      <div class="book__card reveal">
-        <div class="book__copy">
-          <p class="kicker kicker--purple">Book your appointment</p>
-          <h2 id="book-title">Your best hair day is <em>one click away</em></h2>
-          <p>Choose your service and a time that suits you. We'll confirm by text within the hour during opening times.</p>
-          <ul class="ticks">
-            <li><strong>15% off</strong> your first colour service</li>
-            <li>Free reschedule up to 24 hours before</li>
-            <li>No deposit for consultations</li>
-          </ul>
-          <div class="book__alt">
-            <span>Prefer to talk?</span>
-            <a href="tel:+15550123456">📞 Call (555) 012-3456</a>
-            <a href="sms:+15550123456">💬 Text us</a>
-          </div>
-        </div>
-
-        <form class="book__form" id="bookForm" novalidate>
-          <div class="steps" aria-hidden="true"><span class="is-on">1 Service</span><span>2 Time</span><span>3 Details</span></div>
-          <label class="field">
-            <span>Service</span>
-            <select id="fService" required>
-              <option value="">Choose a service…</option>
-              <option>Free Consultation</option>
-              <option>Signature Cut &amp; Style</option>
-              <option>Balayage &amp; Highlights</option>
-              <option>All-Over Colour &amp; Gloss</option>
-              <option>Curl Cut &amp; Definition</option>
-              <option>Repair &amp; Gloss Treatment</option>
-              <option>Bridal &amp; Special Occasion</option>
-            </select>
-          </label>
-          <div class="field">
-            <span>Preferred day</span>
-            <div class="days" id="days" role="radiogroup" aria-label="Preferred day"></div>
-          </div>
-          <div class="field">
-            <span>Preferred time</span>
-            <div class="times" id="times" role="radiogroup" aria-label="Preferred time">
-              <button type="button" class="slot" role="radio" aria-checked="false">9:30 am</button>
-              <button type="button" class="slot" role="radio" aria-checked="false">11:00 am</button>
-              <button type="button" class="slot is-taken" disabled>12:30 pm</button>
-              <button type="button" class="slot" role="radio" aria-checked="false">2:00 pm</button>
-              <button type="button" class="slot" role="radio" aria-checked="false">3:30 pm</button>
-              <button type="button" class="slot" role="radio" aria-checked="false">5:00 pm</button>
-            </div>
-          </div>
-          <div class="row2">
-            <label class="field"><span>Name</span><input id="fName" type="text" placeholder="Your name" autocomplete="name" required></label>
-            <label class="field"><span>Mobile</span><input id="fPhone" type="tel" placeholder="(555) 000-0000" autocomplete="tel" required></label>
-          </div>
-          <button type="submit" class="btn btn--primary btn--lg btn--block">Request My Appointment</button>
-          <p class="tiny muted center">🔒 Your details are only used to confirm your booking.</p>
-          <p class="form__msg" id="formMsg" role="status" aria-live="polite"></p>
-        </form>
-      </div>
-    </section>
-
-    <!-- ============ LOCATION & CONTACT ============ -->
-    <section class="section contact container" id="contact" aria-labelledby="contact-title">
-      <div class="section__head reveal">
-        <p class="kicker kicker--blue">Location &amp; contact</p>
-        <h2 id="contact-title">Find us <em>in the neighbourhood</em></h2>
-      </div>
-      <div class="contact__grid">
-        <div class="map reveal" aria-label="Map placeholder">
-          <svg viewBox="0 0 600 420" preserveAspectRatio="xMidYMid slice" aria-hidden="true">
-            <rect width="600" height="420" fill="#EAF3FB"/>
-            <path d="M0 90 L600 140" stroke="#fff" stroke-width="22"/>
-            <path d="M0 300 L600 260" stroke="#fff" stroke-width="28"/>
-            <path d="M150 0 L210 420" stroke="#fff" stroke-width="20"/>
-            <path d="M430 0 L390 420" stroke="#fff" stroke-width="16"/>
-            <rect x="240" y="160" width="120" height="70" rx="10" fill="#DCEBDD"/>
-            <rect x="30" y="160" width="100" height="110" rx="10" fill="#DCEBDD"/>
-            <circle cx="510" cy="350" r="50" fill="#DCEBDD"/>
-            <rect x="460" y="170" width="110" height="60" rx="10" fill="#FFF3C9"/>
-            <rect x="240" y="320" width="120" height="70" rx="10" fill="#F3EDFB"/>
-          </svg>
-          <div class="map__pin"><span>📍</span><div><strong>Hair Stylist Studio</strong><small>123 Main Street</small></div></div>
-          <a class="map__btn" href="https://www.google.com/maps" target="_blank" rel="noopener">Get Directions ↗</a>
-        </div>
-
-        <div class="contact__info reveal">
-          <div class="info-card">
-            <h3>Visit</h3>
-            <p>123 Main Street, Suite 2<br>Your Town, ST 00000</p>
-            <p class="small muted">🚗 Free parking behind the building · ♿ Step-free access</p>
-          </div>
-          <div class="info-card">
-            <h3>Get in touch</h3>
-            <p><a href="tel:+15550123456">(555) 012-3456</a><br><a href="mailto:hello@hairstylist.studio">hello@hairstylist.studio</a></p>
-          </div>
-          <div class="info-card info-card--hours">
-            <h3>Hours <span class="open-badge" id="openBadge">Open today</span></h3>
-            <ul class="hours" id="hours">
-              <li data-d="1"><span>Monday</span><span>Closed</span></li>
-              <li data-d="2"><span>Tuesday</span><span>9:30 – 6:00</span></li>
-              <li data-d="3"><span>Wednesday</span><span>9:30 – 6:00</span></li>
-              <li data-d="4"><span>Thursday</span><span>10:00 – 8:00</span></li>
-              <li data-d="5"><span>Friday</span><span>9:30 – 7:00</span></li>
-              <li data-d="6"><span>Saturday</span><span>9:00 – 4:00</span></li>
-              <li data-d="0"><span>Sunday</span><span>Closed</span></li>
-            </ul>
-          </div>
-        </div>
-      </div>
-    </section>
-
-  </main>
-
-  <!-- ============ FOOTER ============ -->
-  <footer class="footer">
-    <div class="container">
-      <div class="footer__cta">
-        <h2>Ready for hair you'll <em>love</em>?</h2>
-        <a href="#book" class="btn btn--primary btn--lg">Book Your Appointment</a>
-      </div>
-      <div class="footer__grid">
-        <div>
-          <a href="#top" class="logo">
-            <span class="logo__mark" aria-hidden="true"><svg viewBox="0 0 40 40"><circle cx="20" cy="20" r="19" fill="#fff"/><path d="M13 27c4-2 6-6 7-13 1 7 3 11 7 13" fill="none" stroke="#6B4E8C" stroke-width="2" stroke-linecap="round"/><circle cx="14" cy="28" r="2.6" fill="none" stroke="#6B4E8C" stroke-width="1.8"/><circle cx="26" cy="28" r="2.6" fill="none" stroke="#6B4E8C" stroke-width="1.8"/><circle cx="20" cy="11" r="1.6" fill="#E7B84A"/></svg></span>
-            <span class="logo__text">Hair <em>Stylist</em></span>
+        <div class="hero__visual" id="heroVisual">
+          <figure class="hero__main" data-depth="0.4">
+            <img src="https://images.pexels.com/photos/3993463/pexels-photo-3993463.jpeg?auto=compress&amp;cs=tinysrgb&amp;w=900&amp;h=1150&amp;fit=crop" alt="A happy client with freshly styled, voluminous curls in the salon chair" fetchpriority="high">
+            <figcaption class="hero__cap"><span>Fresh off the chair</span><b>Curl cut + gloss · 90 min</b></figcaption>
+          </figure>
+          <figure class="hero__small hero__small--a" data-depth="1">
+            <img src="https://images.pexels.com/photos/7440132/pexels-photo-7440132.jpeg?auto=compress&amp;cs=tinysrgb&amp;w=400&amp;h=520&amp;fit=crop" alt="Soft blonde waves after styling">
+          </figure>
+          <figure class="hero__small hero__small--b" data-depth="1.4">
+            <img src="https://images.pexels.com/photos/3065208/pexels-photo-3065208.jpeg?auto=compress&amp;cs=tinysrgb&amp;w=400&amp;h=400&amp;fit=crop" alt="Half-up braided curls for an event">
+          </figure>
+          <a href="#book" class="badge-rotate" aria-label="Book your chair">
+            <svg viewBox="0 0 120 120" aria-hidden="true"><defs><path id="circ" d="M60,60 m-46,0 a46,46 0 1,1 92,0 a46,46 0 1,1 -92,0"/></defs><text><textPath href="#circ">BOOK YOUR CHAIR ✦ BOOK YOUR CHAIR ✦ </textPath></text></svg>
+            <span>→</span>
           </a>
-          <p class="muted">Precision cuts, beautiful colour and a calm, personal experience in the heart of Your Town.</p>
-          <div class="socials">
-            <a href="#" aria-label="Instagram"><svg viewBox="0 0 24 24"><rect x="3" y="3" width="18" height="18" rx="5"/><circle cx="12" cy="12" r="4"/></svg></a>
-            <a href="#" aria-label="Facebook"><svg viewBox="0 0 24 24"><path d="M14 8h3V4h-3a4 4 0 0 0-4 4v2H8v4h2v6h4v-6h3l1-4h-4V8z"/></svg></a>
-            <a href="#" aria-label="TikTok"><svg viewBox="0 0 24 24"><path d="M15 3c.4 2.4 1.9 3.9 4 4v3.3a7 7 0 0 1-4-1.3V15a5.5 5.5 0 1 1-5.5-5.5v3.3A2.3 2.3 0 1 0 11.8 15V3z"/></svg></a>
+          <div class="hero__review" data-depth="0.8">
+            <div class="stars sm">★★★★★</div>
+            <p>“Best hair of my life. I've stopped wearing it up.”</p>
+            <small>Jessica M. · Verified Google review</small>
           </div>
         </div>
-        <div>
-          <h4>Explore</h4>
-          <a href="#about">About</a><a href="#services">Services &amp; Prices</a><a href="#transformations">Transformations</a><a href="#portfolio">Portfolio</a><a href="#reviews">Reviews</a>
-        </div>
-        <div>
-          <h4>Services</h4>
-          <a href="#services">Cuts &amp; Styling</a><a href="#services">Balayage &amp; Colour</a><a href="#services">Curl Cuts</a><a href="#services">Treatments</a><a href="#services">Bridal &amp; Events</a>
-        </div>
-        <div>
-          <h4>Hair tips &amp; offers</h4>
-          <p class="muted small">Monthly hair-care tips and first dibs on openings. No spam.</p>
-          <form class="news" id="newsForm">
-            <input type="email" placeholder="Your email" aria-label="Email address" required>
-            <button class="btn btn--primary" type="submit">Join</button>
-          </form>
-          <p class="tiny" id="newsMsg" role="status"></p>
-        </div>
       </div>
-      <div class="footer__bottom">
-        <span>© <span id="year">2026</span> Hair Stylist. All rights reserved.</span>
-        <span>123 Main Street, Your Town · (555) 012-3456</span>
+
+      <!-- quick booking bar -->
+      <form class="quick" id="quickForm" aria-label="Quick availability search">
+        <label class="quick__f">
+          <small>I'd love a…</small>
+          <select id="quickService">
+            <option>Cut &amp; Blow-dry</option>
+            <option>Balayage / Highlights</option>
+            <option>Colour &amp; Gloss</option>
+            <option>Curl Cut</option>
+            <option>Treatment</option>
+            <option>Bridal / Event</option>
+            <option>Free Consultation</option>
+          </select>
+        </label>
+        <label class="quick__f">
+          <small>When suits you?</small>
+          <select id="quickWhen">
+            <option>This week</option>
+            <option>Next week</option>
+            <option>Weekend only</option>
+            <option>Evenings after 5</option>
+          </select>
+        </label>
+        <div class="quick__f quick__f--info">
+          <small>Starting from</small>
+          <b id="quickPrice">$65</b>
+        </div>
+        <button class="btn btn--plum quick__btn" type="submit">See open times <span class="btn__arrow">→</span></button>
+      </form>
+    </div>
+  </div>
+</section>
+
+<!-- ================= TRUST BAR (outside card) ================= -->
+<section class="trust" aria-label="Credentials">
+  <div class="marquee">
+    <div class="marquee__row">
+      <span><b>4.9 ★</b> Google rating</span><i>✦</i>
+      <span><b>12 yrs</b> behind the chair</span><i>✦</i>
+      <span>Olaplex® certified</span><i>✦</i>
+      <span>K18 repair partner</span><i>✦</i>
+      <span><b>3,500+</b> appointments</span><i>✦</i>
+      <span>Vegan &amp; cruelty-free colour</span><i>✦</i>
+      <span>Licensed &amp; insured</span><i>✦</i>
+      <span><b>98%</b> of clients rebook</span><i>✦</i>
+    </div>
+    <div class="marquee__row" aria-hidden="true">
+      <span><b>4.9 ★</b> Google rating</span><i>✦</i>
+      <span><b>12 yrs</b> behind the chair</span><i>✦</i>
+      <span>Olaplex® certified</span><i>✦</i>
+      <span>K18 repair partner</span><i>✦</i>
+      <span><b>3,500+</b> appointments</span><i>✦</i>
+      <span>Vegan &amp; cruelty-free colour</span><i>✦</i>
+      <span>Licensed &amp; insured</span><i>✦</i>
+      <span><b>98%</b> of clients rebook</span><i>✦</i>
+    </div>
+  </div>
+</section>
+
+<!-- ================= MANIFESTO ================= -->
+<section class="manifesto container" aria-label="Our philosophy">
+  <p class="eyebrow"><span>01</span> The philosophy</p>
+  <p class="manifesto__text" id="manifesto">Great hair isn't a trend <span class="m-img"><img src="https://images.pexels.com/photos/3993458/pexels-photo-3993458.jpeg?auto=compress&amp;cs=tinysrgb&amp;w=200&amp;h=120&amp;fit=crop" alt=""></span> it's the cut that still looks intentional at week eight, colour that grows out <em>softly</em> <span class="m-img m-img--round"><img src="https://images.pexels.com/photos/7440128/pexels-photo-7440128.jpeg?auto=compress&amp;cs=tinysrgb&amp;w=140&amp;h=140&amp;fit=crop" alt=""></span> and a stylist who actually <em>listens</em> before picking up the scissors.</p>
+</section>
+
+<!-- ================= ABOUT THE STYLIST ================= -->
+<section class="about container" id="about" aria-labelledby="aboutTitle">
+  <div class="about__visual">
+    <div class="about__arch reveal-img">
+      <img src="https://images.pexels.com/photos/3993303/pexels-photo-3993303.jpeg?auto=compress&amp;cs=tinysrgb&amp;w=900&amp;h=1200&amp;fit=crop" alt="Your stylist smiling in the studio" loading="lazy">
+    </div>
+    <div class="about__inset reveal-img">
+      <img src="https://images.pexels.com/photos/3993464/pexels-photo-3993464.jpeg?auto=compress&amp;cs=tinysrgb&amp;w=500&amp;h=620&amp;fit=crop" alt="The stylist cutting with precision" loading="lazy">
+    </div>
+    <div class="about__years"><b data-count="12">0</b><span>years of<br>happy hair</span></div>
+    <div class="about__note">Hi! I'm the only one who'll ever touch your hair. 💛</div>
+  </div>
+
+  <div class="about__copy">
+    <p class="eyebrow"><span>02</span> Meet your stylist</p>
+    <h2 id="aboutTitle" class="h2 split">Hi, I'm <em>[Stylist&nbsp;Name]</em>. I've spent twelve years making hair look <em>effortless.</em></h2>
+    <p class="lead">I opened this studio because I was tired of rushed, assembly-line salons. Here it's just you, me, a great coffee and the time it takes to get it right.</p>
+    <p>I specialise in lived-in blonde, rich brunettes and curl-by-curl cutting, and I'll always tell you honestly what will (and won't) suit your hair, your routine and your budget.</p>
+
+    <div class="creds">
+      <div class="cred cred--purple"><b>Colour</b><span>Advanced balayage &amp; colour correction</span></div>
+      <div class="cred cred--green"><b>Curls</b><span>Certified dry-cut curl specialist</span></div>
+      <div class="cred cred--yellow"><b>Bridal</b><span>200+ weddings styled on location</span></div>
+    </div>
+
+    <div class="about__stats">
+      <div><b data-count="3500" data-suffix="+">0</b><span>appointments</span></div>
+      <div><b data-count="98" data-suffix="%">0</b><span>client rebook rate</span></div>
+      <div><b data-count="240" data-suffix="+">0</b><span>5-star reviews</span></div>
+    </div>
+
+    <div class="about__cta">
+      <a href="#book" class="btn btn--plum magnetic" data-service="Free Consultation">Book a free 15-min consult <span class="btn__arrow">→</span></a>
+      <span class="sig">[Stylist Name]</span>
+    </div>
+  </div>
+</section>
+
+<!-- ================= SIGNATURE SERVICES ================= -->
+<section class="services" id="services" aria-labelledby="servicesTitle">
+  <div class="container">
+    <div class="sec-head">
+      <div>
+        <p class="eyebrow"><span>03</span> Signature services</p>
+        <h2 id="servicesTitle" class="h2 split">Six services, <em>perfected</em> over twelve years.</h2>
+      </div>
+      <div class="sec-head__side">
+        <p>Honest "from" pricing, confirmed at your free consultation. Every colour service includes bond repair at no extra cost.</p>
+        <div class="seg" role="tablist" aria-label="Filter services">
+          <button class="is-on" data-f="all" role="tab" aria-selected="true">All</button>
+          <button data-f="cut" role="tab" aria-selected="false">Cut</button>
+          <button data-f="colour" role="tab" aria-selected="false">Colour</button>
+          <button data-f="care" role="tab" aria-selected="false">Care</button>
+          <button data-f="event" role="tab" aria-selected="false">Events</button>
+        </div>
       </div>
     </div>
-  </footer>
 
-  <!-- Sticky mobile CTA -->
-  <div class="mbar" id="mbar">
-    <a href="tel:+15550123456" class="mbar__call">📞 Call</a>
-    <a href="#book" class="btn btn--primary">Book Appointment</a>
+    <div class="svc-list" id="svcList">
+      <a href="#book" class="svc" data-cat="cut" data-img="https://images.pexels.com/photos/3993458/pexels-photo-3993458.jpeg?auto=compress&amp;cs=tinysrgb&amp;w=600&amp;h=760&amp;fit=crop" data-service="Cut &amp; Blow-dry" style="--c: var(--sage)">
+        <span class="svc__n">01</span>
+        <img class="svc__thumb" src="https://images.pexels.com/photos/3993458/pexels-photo-3993458.jpeg?auto=compress&amp;cs=tinysrgb&amp;w=240&amp;h=240&amp;fit=crop" alt="" loading="lazy">
+        <span class="svc__main"><b>Signature Cut &amp; Blow-dry</b><small>Consult, wash, precision cut and a polished, bouncy finish</small></span>
+        <span class="svc__tags"><em>Most booked</em></span>
+        <span class="svc__time">60 min</span>
+        <span class="svc__price"><small>from</small> $65</span>
+        <span class="svc__go">Book<i>→</i></span>
+      </a>
+      <a href="#book" class="svc" data-cat="colour" data-img="https://images.pexels.com/photos/7440132/pexels-photo-7440132.jpeg?auto=compress&amp;cs=tinysrgb&amp;w=600&amp;h=760&amp;fit=crop" data-service="Balayage / Highlights" style="--c: var(--butter)">
+        <span class="svc__n">02</span>
+        <img class="svc__thumb" src="https://images.pexels.com/photos/7440132/pexels-photo-7440132.jpeg?auto=compress&amp;cs=tinysrgb&amp;w=240&amp;h=240&amp;fit=crop" alt="" loading="lazy">
+        <span class="svc__main"><b>Balayage &amp; Lived-in Blonde</b><small>Hand-painted dimension that grows out softly for 4–6 months</small></span>
+        <span class="svc__tags"><em>Signature</em></span>
+        <span class="svc__time">3 hrs</span>
+        <span class="svc__price"><small>from</small> $185</span>
+        <span class="svc__go">Book<i>→</i></span>
+      </a>
+      <a href="#book" class="svc" data-cat="colour" data-img="https://images.pexels.com/photos/3993324/pexels-photo-3993324.jpeg?auto=compress&amp;cs=tinysrgb&amp;w=600&amp;h=760&amp;fit=crop" data-service="Colour &amp; Gloss" style="--c: var(--lilac)">
+        <span class="svc__n">03</span>
+        <img class="svc__thumb" src="https://images.pexels.com/photos/3993324/pexels-photo-3993324.jpeg?auto=compress&amp;cs=tinysrgb&amp;w=240&amp;h=240&amp;fit=crop" alt="" loading="lazy">
+        <span class="svc__main"><b>Colour, Roots &amp; Gloss</b><small>Root touch-ups, grey blending and glossy brunettes</small></span>
+        <span class="svc__tags"></span>
+        <span class="svc__time">90 min</span>
+        <span class="svc__price"><small>from</small> $95</span>
+        <span class="svc__go">Book<i>→</i></span>
+      </a>
+      <a href="#book" class="svc" data-cat="cut" data-img="https://images.pexels.com/photos/3065207/pexels-photo-3065207.jpeg?auto=compress&amp;cs=tinysrgb&amp;w=600&amp;h=760&amp;fit=crop" data-service="Curl Cut" style="--c: var(--sky)">
+        <span class="svc__n">04</span>
+        <img class="svc__thumb" src="https://images.pexels.com/photos/3065207/pexels-photo-3065207.jpeg?auto=compress&amp;cs=tinysrgb&amp;w=240&amp;h=240&amp;fit=crop" alt="" loading="lazy">
+        <span class="svc__main"><b>Curl Cut &amp; Definition</b><small>Curl-by-curl dry cut plus a 10-minute routine for home</small></span>
+        <span class="svc__tags"><em>Curl specialist</em></span>
+        <span class="svc__time">75 min</span>
+        <span class="svc__price"><small>from</small> $85</span>
+        <span class="svc__go">Book<i>→</i></span>
+      </a>
+      <a href="#book" class="svc" data-cat="care" data-img="https://images.pexels.com/photos/3993449/pexels-photo-3993449.jpeg?auto=compress&amp;cs=tinysrgb&amp;w=600&amp;h=760&amp;fit=crop" data-service="Treatment" style="--c: var(--blush)">
+        <span class="svc__n">05</span>
+        <img class="svc__thumb" src="https://images.pexels.com/photos/3993449/pexels-photo-3993449.jpeg?auto=compress&amp;cs=tinysrgb&amp;w=240&amp;h=240&amp;fit=crop" alt="" loading="lazy">
+        <span class="svc__main"><b>Repair Rituals &amp; Scalp Spa</b><small>Olaplex® or K18 bond repair with a 10-min scalp massage</small></span>
+        <span class="svc__tags"></span>
+        <span class="svc__time">45 min</span>
+        <span class="svc__price"><small>from</small> $45</span>
+        <span class="svc__go">Book<i>→</i></span>
+      </a>
+      <a href="#book" class="svc" data-cat="event" data-img="https://images.pexels.com/photos/3065208/pexels-photo-3065208.jpeg?auto=compress&amp;cs=tinysrgb&amp;w=600&amp;h=760&amp;fit=crop" data-service="Bridal / Event" style="--c: var(--sage)">
+        <span class="svc__n">06</span>
+        <img class="svc__thumb" src="https://images.pexels.com/photos/3065208/pexels-photo-3065208.jpeg?auto=compress&amp;cs=tinysrgb&amp;w=240&amp;h=240&amp;fit=crop" alt="" loading="lazy">
+        <span class="svc__main"><b>Bridal &amp; Special Occasion</b><small>Trials, updos and soft waves, in studio or on location</small></span>
+        <span class="svc__tags"><em>2027 dates open</em></span>
+        <span class="svc__time">60–90 min</span>
+        <span class="svc__price"><small>from</small> $120</span>
+        <span class="svc__go">Book<i>→</i></span>
+      </a>
+    </div>
+    <div class="svc-float" id="svcFloat" aria-hidden="true"><img src="" alt=""></div>
+
+    <div class="svc-foot">
+      <p><b>Not sure what to book?</b> Answer 3 quick questions and get a personal recommendation.</p>
+      <a href="#match" class="btn btn--ink">Take the Hair Match <span class="btn__arrow">→</span></a>
+    </div>
+  </div>
+</section>
+
+<!-- ================= HAIR MATCH QUIZ (CRO) ================= -->
+<section class="match container" id="match" aria-labelledby="matchTitle">
+  <div class="match__card">
+    <div class="match__intro">
+      <p class="eyebrow"><span>✦</span> Hair Match · 20 seconds</p>
+      <h2 id="matchTitle" class="h2">Find the service your hair is <em>asking</em> for.</h2>
+      <p>Three taps. No email needed. We'll recommend a service, a time and an exact starting price.</p>
+      <div class="match__progress"><span id="matchBar"></span></div>
+    </div>
+    <div class="match__body" id="matchBody">
+      <div class="q is-on" data-q="0">
+        <p class="q__t">What would make you happiest?</p>
+        <div class="q__opts">
+          <button data-v="fresh">✂️ A fresh, flattering shape</button>
+          <button data-v="bright">☀️ Brighter, sun-kissed colour</button>
+          <button data-v="curl">🌀 Curls that actually behave</button>
+          <button data-v="health">🌿 Healthier, shinier hair</button>
+          <button data-v="event">💐 Hair for a big day</button>
+        </div>
+      </div>
+      <div class="q" data-q="1">
+        <p class="q__t">How much upkeep do you want?</p>
+        <div class="q__opts">
+          <button data-v="low">Low: every 3–4 months</button>
+          <button data-v="mid">Medium: every 6–8 weeks</button>
+          <button data-v="high">I love a regular treat</button>
+        </div>
+      </div>
+      <div class="q" data-q="2">
+        <p class="q__t">When would you like to come in?</p>
+        <div class="q__opts">
+          <button data-v="asap">As soon as possible</button>
+          <button data-v="week">Within 2 weeks</button>
+          <button data-v="plan">Just planning ahead</button>
+        </div>
+      </div>
+      <div class="q q--result" data-q="3">
+        <div class="result">
+          <img id="mImg" src="https://images.pexels.com/photos/3993458/pexels-photo-3993458.jpeg?auto=compress&amp;cs=tinysrgb&amp;w=400&amp;h=400&amp;fit=crop" alt="">
+          <div>
+            <small>Your Hair Match</small>
+            <h3 id="mName">Signature Cut &amp; Blow-dry</h3>
+            <p id="mWhy">A precision cut shaped to your face and routine.</p>
+            <div class="result__meta"><span id="mPrice">from $65</span><span id="mSlot">Next opening: Thu 11:00 am</span></div>
+            <div class="result__ctas">
+              <a href="#book" class="btn btn--plum" id="mBook">Book this look <span class="btn__arrow">→</span></a>
+              <button class="link" id="mRestart">Start again</button>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ================= TRANSFORMATIONS ================= -->
+<section class="transform" id="transformations" aria-labelledby="tfTitle">
+  <div class="container">
+    <div class="sec-head sec-head--center">
+      <p class="eyebrow"><span>04</span> Real transformations</p>
+      <h2 id="tfTitle" class="h2 split">Same client. Same day. <em>Drag to see.</em></h2>
+    </div>
+
+    <div class="tf">
+      <div class="tf__stage">
+        <div class="ba" id="ba">
+          <img class="ba__img ba__after" id="baAfter" src="https://images.pexels.com/photos/3993469/pexels-photo-3993469.jpeg?auto=compress&amp;cs=tinysrgb&amp;w=1000&amp;h=1250&amp;fit=crop" alt="After: glossy dark brown with soft curls">
+          <div class="ba__clip" id="baClip"><img class="ba__img" id="baBefore" src="https://images.pexels.com/photos/3993311/pexels-photo-3993311.jpeg?auto=compress&amp;cs=tinysrgb&amp;w=1000&amp;h=1250&amp;fit=crop" alt="Before: wet, flat hair during colour"></div>
+          <span class="ba__tag ba__tag--l">Before</span>
+          <span class="ba__tag ba__tag--r">After</span>
+          <div class="ba__line" id="baLine"><button class="ba__knob" id="baKnob" aria-label="Drag to compare before and after"><svg viewBox="0 0 24 24"><path d="M8 6l-5 6 5 6M16 6l5 6-5 6"/></svg></button></div>
+          <input type="range" class="ba__range" id="baRange" min="0" max="100" value="50" aria-label="Before and after comparison">
+        </div>
+      </div>
+
+      <div class="tf__side">
+        <div class="tf__tabs" role="tablist">
+          <button class="tf__tab is-on" data-i="0" role="tab" aria-selected="true">
+            <img src="https://images.pexels.com/photos/3993469/pexels-photo-3993469.jpeg?auto=compress&amp;cs=tinysrgb&amp;w=160&amp;h=160&amp;fit=crop" alt=""><span><b>The Glossy Brunette</b><small>Colour · Gloss · Curl set</small></span>
+          </button>
+          <button class="tf__tab" data-i="1" role="tab" aria-selected="false">
+            <img src="https://images.pexels.com/photos/7440132/pexels-photo-7440132.jpeg?auto=compress&amp;cs=tinysrgb&amp;w=160&amp;h=160&amp;fit=crop" alt=""><span><b>The Soft Blonde Wave</b><small>Tone · Blow-dry · Waves</small></span>
+          </button>
+          <button class="tf__tab" data-i="2" role="tab" aria-selected="false">
+            <img src="https://images.pexels.com/photos/3065207/pexels-photo-3065207.jpeg?auto=compress&amp;cs=tinysrgb&amp;w=160&amp;h=160&amp;fit=crop" alt=""><span><b>The Event Curls</b><small>Prep · Set · Brush-out</small></span>
+          </button>
+        </div>
+        <div class="tf__detail" id="tfDetail">
+          <div class="tf__row"><span>Time in chair</span><b id="tfTime">2 hrs 30 min</b></div>
+          <div class="tf__row"><span>Service total</span><b id="tfPrice">from $165</b></div>
+          <div class="tf__row"><span>Lasts</span><b id="tfLast">8–10 weeks</b></div>
+          <p class="tf__quote" id="tfQuote">“I walked in hiding under a bun and walked out not wanting to leave the mirror.”</p>
+        </div>
+        <a href="#book" class="btn btn--plum btn--block magnetic">Start my transformation <span class="btn__arrow">→</span></a>
+        <p class="fine">Placeholder photos for the design: swap in your own client before/afters.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ================= PORTFOLIO / LOOKBOOK ================= -->
+<section class="lookbook" id="lookbook" aria-labelledby="lbTitle">
+  <div class="container">
+    <div class="sec-head">
+      <div>
+        <p class="eyebrow"><span>05</span> Portfolio</p>
+        <h2 id="lbTitle" class="h2 split">The <em>lookbook.</em></h2>
+      </div>
+      <div class="sec-head__side">
+        <p>Real work, straight from the chair. Tap any look to see it full size, then book it.</p>
+        <div class="seg seg--lb" role="group" aria-label="Filter portfolio">
+          <button class="is-on" data-lb="all">All</button>
+          <button data-lb="colour">Colour</button>
+          <button data-lb="curls">Curls</button>
+          <button data-lb="cut">Cuts</button>
+          <button data-lb="event">Event</button>
+        </div>
+      </div>
+    </div>
+
+    <div class="lb-cols" id="lbCols">
+      <div class="lb-col" data-speed="-40">
+        <figure class="look" data-lb="curls"><img src="https://images.pexels.com/photos/3065207/pexels-photo-3065207.jpeg?auto=compress&amp;cs=tinysrgb&amp;w=600&amp;h=840&amp;fit=crop" alt="Long blonde ombré ringlets" loading="lazy"><figcaption><b>Honey Ringlets</b><span>Curl set · Ombré</span></figcaption></figure>
+        <figure class="look" data-lb="colour"><img src="https://images.pexels.com/photos/7440128/pexels-photo-7440128.jpeg?auto=compress&amp;cs=tinysrgb&amp;w=600&amp;h=700&amp;fit=crop" alt="Brushed-out blonde waves" loading="lazy"><figcaption><b>Champagne Blonde</b><span>Toner · Waves</span></figcaption></figure>
+      </div>
+      <div class="lb-col" data-speed="40">
+        <figure class="look" data-lb="cut"><img src="https://images.pexels.com/photos/3993469/pexels-photo-3993469.jpeg?auto=compress&amp;cs=tinysrgb&amp;w=600&amp;h=700&amp;fit=crop" alt="Glossy dark shoulder-length curls" loading="lazy"><figcaption><b>Glossy Brunette Lob</b><span>Cut · Gloss</span></figcaption></figure>
+        <figure class="look" data-lb="event"><img src="https://images.pexels.com/photos/3065208/pexels-photo-3065208.jpeg?auto=compress&amp;cs=tinysrgb&amp;w=600&amp;h=840&amp;fit=crop" alt="Twisted half-up curls" loading="lazy"><figcaption><b>Twisted Half-Up</b><span>Wedding guest</span></figcaption></figure>
+      </div>
+      <div class="lb-col" data-speed="-70">
+        <figure class="look" data-lb="colour"><img src="https://images.pexels.com/photos/7440132/pexels-photo-7440132.jpeg?auto=compress&amp;cs=tinysrgb&amp;w=600&amp;h=840&amp;fit=crop" alt="Soft blonde waves with hand" loading="lazy"><figcaption><b>Soft Blonde Wave</b><span>Balayage · Blow-dry</span></figcaption></figure>
+        <figure class="look" data-lb="curls"><img src="https://images.pexels.com/photos/3993463/pexels-photo-3993463.jpeg?auto=compress&amp;cs=tinysrgb&amp;w=600&amp;h=700&amp;fit=crop" alt="Voluminous dark curls" loading="lazy"><figcaption><b>Big Bouncy Curls</b><span>Curl cut</span></figcaption></figure>
+      </div>
+      <div class="lb-col" data-speed="20">
+        <figure class="look" data-lb="event"><img src="https://images.pexels.com/photos/3065170/pexels-photo-3065170.jpeg?auto=compress&amp;cs=tinysrgb&amp;w=600&amp;h=700&amp;fit=crop" alt="Pinned curls during an updo" loading="lazy"><figcaption><b>Pin-Curl Updo</b><span>Bridal trial</span></figcaption></figure>
+        <figure class="look" data-lb="cut"><img src="https://images.pexels.com/photos/7440134/pexels-photo-7440134.jpeg?auto=compress&amp;cs=tinysrgb&amp;w=600&amp;h=840&amp;fit=crop" alt="Client with long platinum waves" loading="lazy"><figcaption><b>Platinum Lengths</b><span>Trim · Tone</span></figcaption></figure>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ================= GALLERY (studio, horizontal) ================= -->
+<section class="studio" id="gallery" aria-labelledby="studioTitle">
+  <div class="studio__pin" id="studioPin">
+    <div class="studio__head container">
+      <div>
+        <p class="eyebrow"><span>06</span> Gallery</p>
+        <h2 id="studioTitle" class="h2">Step inside <em>the studio.</em></h2>
+      </div>
+      <p class="studio__hint">Scroll to explore <span>→</span></p>
+    </div>
+    <div class="studio__track" id="studioTrack">
+      <figure class="st st--xl"><img src="https://images.pexels.com/photos/3993133/pexels-photo-3993133.jpeg?auto=compress&amp;cs=tinysrgb&amp;w=1100&amp;h=760&amp;fit=crop" alt="The salon floor with Hollywood mirrors and pendant lights" loading="lazy"><figcaption><b>The floor</b>Four chairs. One stylist. Zero rush.</figcaption></figure>
+      <figure class="st"><img src="https://images.pexels.com/photos/3993116/pexels-photo-3993116.jpeg?auto=compress&amp;cs=tinysrgb&amp;w=600&amp;h=760&amp;fit=crop" alt="The stylist choosing colour from a wall of shades" loading="lazy"><figcaption><b>The colour bar</b>200+ shades, custom-mixed for you</figcaption></figure>
+      <figure class="st st--tall"><img src="https://images.pexels.com/photos/3993320/pexels-photo-3993320.jpeg?auto=compress&amp;cs=tinysrgb&amp;w=700&amp;h=900&amp;fit=crop" alt="Stylist working on a client at the mirror" loading="lazy"><figcaption><b>The work</b>Unhurried, precise, personal</figcaption></figure>
+      <figure class="st"><img src="https://images.pexels.com/photos/1319460/pexels-photo-1319460.jpeg?auto=compress&amp;cs=tinysrgb&amp;w=600&amp;h=760&amp;fit=crop" alt="Professional scissors hanging on a wooden wall" loading="lazy"><figcaption><b>The tools</b>Japanese steel, sharpened monthly</figcaption></figure>
+      <figure class="st st--xl"><img src="https://images.pexels.com/photos/3993449/pexels-photo-3993449.jpeg?auto=compress&amp;cs=tinysrgb&amp;w=1100&amp;h=760&amp;fit=crop" alt="A client relaxing during a foam hair wash" loading="lazy"><figcaption><b>The wash</b>10-minute scalp massage, every visit</figcaption></figure>
+      <figure class="st"><img src="https://images.pexels.com/photos/3992866/pexels-photo-3992866.jpeg?auto=compress&amp;cs=tinysrgb&amp;w=700&amp;h=760&amp;fit=crop" alt="Stylist caping a client before the appointment" loading="lazy"><figcaption><b>The welcome</b>Coffee, tea or something sparkling</figcaption></figure>
+      <figure class="st st--cta">
+        <div><p>Like what you see?</p><h3>Your chair is <em>waiting.</em></h3><a href="#book" class="btn btn--plum">Book a visit <span class="btn__arrow">→</span></a></div>
+      </figure>
+    </div>
+  </div>
+</section>
+
+<!-- ================= WHY CHOOSE US (stacking cards) ================= -->
+<section class="why container" id="why" aria-labelledby="whyTitle">
+  <div class="why__head">
+    <p class="eyebrow"><span>07</span> Why choose us</p>
+    <h2 id="whyTitle" class="h2 split">Five promises you'll feel <em>from the first visit.</em></h2>
+    <p>Not a chain. Not a factory. A studio designed around one appointment at a time, yours.</p>
+    <a href="#book" class="btn btn--ink">Book with confidence <span class="btn__arrow">→</span></a>
+  </div>
+  <div class="why__stack">
+    <article class="promise" style="--bg: var(--lilac)">
+      <span class="promise__n">01</span>
+      <div><h3>One stylist, start to finish</h3><p>No juniors, no hand-offs. The person you consult with is the person who does every step of your hair.</p></div>
+      <img src="https://images.pexels.com/photos/3993458/pexels-photo-3993458.jpeg?auto=compress&amp;cs=tinysrgb&amp;w=420&amp;h=420&amp;fit=crop" alt="" loading="lazy">
+    </article>
+    <article class="promise" style="--bg: var(--sage)">
+      <span class="promise__n">02</span>
+      <div><h3>Healthy-hair first</h3><p>Bond repair is included in every colour service, and we only use vegan, cruelty-free products.</p></div>
+      <img src="https://images.pexels.com/photos/3993449/pexels-photo-3993449.jpeg?auto=compress&amp;cs=tinysrgb&amp;w=420&amp;h=420&amp;fit=crop" alt="" loading="lazy">
+    </article>
+    <article class="promise" style="--bg: var(--butter)">
+      <span class="promise__n">03</span>
+      <div><h3>Honest, upfront pricing</h3><p>Your exact price is agreed before we start. No surprise add-ons, ever.</p></div>
+      <img src="https://images.pexels.com/photos/3993116/pexels-photo-3993116.jpeg?auto=compress&amp;cs=tinysrgb&amp;w=420&amp;h=420&amp;fit=crop" alt="" loading="lazy">
+    </article>
+    <article class="promise" style="--bg: var(--sky)">
+      <span class="promise__n">04</span>
+      <div><h3>Booking that respects your time</h3><p>Book 24/7 online, get text reminders and reschedule free up to 24 hours before.</p></div>
+      <img src="https://images.pexels.com/photos/3992866/pexels-photo-3992866.jpeg?auto=compress&amp;cs=tinysrgb&amp;w=420&amp;h=420&amp;fit=crop" alt="" loading="lazy">
+    </article>
+    <article class="promise" style="--bg: var(--blush)">
+      <span class="promise__n">05</span>
+      <div><h3>The love-it guarantee</h3><p>Not 100% happy? Come back within 7 days for a complimentary adjustment. No awkwardness.</p></div>
+      <img src="https://images.pexels.com/photos/3993469/pexels-photo-3993469.jpeg?auto=compress&amp;cs=tinysrgb&amp;w=420&amp;h=420&amp;fit=crop" alt="" loading="lazy">
+    </article>
+  </div>
+</section>
+
+<!-- ================= TESTIMONIALS ================= -->
+<section class="reviews" id="reviews" aria-labelledby="rvTitle">
+  <div class="container">
+    <div class="sec-head">
+      <div>
+        <p class="eyebrow"><span>08</span> Client testimonials</p>
+        <h2 id="rvTitle" class="h2 split">Loved by <em>240+</em> locals.</h2>
+      </div>
+      <div class="gscore">
+        <svg viewBox="0 0 48 48" aria-hidden="true"><path fill="#FFC107" d="M43.6 20.5H42V20H24v8h11.3C33.7 32.7 29.2 36 24 36c-6.6 0-12-5.4-12-12s5.4-12 12-12c3.1 0 5.8 1.2 7.9 3l5.7-5.7C34 6.1 29.3 4 24 4 13 4 4 13 4 24s9 20 20 20 20-9 20-20c0-1.3-.1-2.4-.4-3.5z"/><path fill="#FF3D00" d="M6.3 14.7l6.6 4.8C14.7 15.1 19 12 24 12c3.1 0 5.8 1.2 7.9 3l5.7-5.7C34 6.1 29.3 4 24 4 16.3 4 9.7 8.3 6.3 14.7z"/><path fill="#4CAF50" d="M24 44c5.2 0 9.9-2 13.4-5.2l-6.2-5.2C29.2 35.1 26.7 36 24 36c-5.2 0-9.6-3.3-11.3-8l-6.5 5C9.5 39.6 16.2 44 24 44z"/><path fill="#1976D2" d="M43.6 20.5H42V20H24v8h11.3c-.8 2.2-2.2 4.2-4.1 5.6l6.2 5.2C37 39.2 44 34 44 24c0-1.3-.1-2.4-.4-3.5z"/></svg>
+        <div><b>4.9</b><span class="stars sm">★★★★★</span><small>Based on 240+ Google reviews</small></div>
+      </div>
+    </div>
+
+    <div class="rv">
+      <div class="rv__photo">
+        <img id="rvImg" src="https://images.pexels.com/photos/3993469/pexels-photo-3993469.jpeg?auto=compress&amp;cs=tinysrgb&amp;w=700&amp;h=820&amp;fit=crop" alt="Client photo">
+        <span class="rv__chip" id="rvChip">Colour + curl set</span>
+      </div>
+      <div class="rv__body">
+        <div class="rv__q" aria-hidden="true">“</div>
+        <div class="rv__slides" id="rvSlides">
+          <blockquote class="is-on" data-img="https://images.pexels.com/photos/3993469/pexels-photo-3993469.jpeg?auto=compress&amp;cs=tinysrgb&amp;w=700&amp;h=820&amp;fit=crop" data-chip="Colour + curl set"><p>I've been to six salons in this town and this is the first time I've left feeling like the best version of me. My colour still looks amazing nine weeks later.</p><footer><b>Danielle R.</b><span>Client since 2021 · Colour &amp; Gloss</span></footer></blockquote>
+          <blockquote data-img="https://images.pexels.com/photos/7440132/pexels-photo-7440132.jpeg?auto=compress&amp;cs=tinysrgb&amp;w=700&amp;h=820&amp;fit=crop" data-chip="Balayage + waves"><p>She listened to everything (even my rambling Pinterest board) and gave me the exact soft blonde I'd been chasing for years. Worth every penny.</p><footer><b>Hannah K.</b><span>Balayage · Verified Google review</span></footer></blockquote>
+          <blockquote data-img="https://images.pexels.com/photos/3065208/pexels-photo-3065208.jpeg?auto=compress&amp;cs=tinysrgb&amp;w=700&amp;h=820&amp;fit=crop" data-chip="Wedding styling"><p>My wedding hair survived a windy beach ceremony, a 4-hour dance floor and a sparkler exit. Calm, kind and unbelievably talented.</p><footer><b>Sophie L.</b><span>Bride · Bridal trial + day-of</span></footer></blockquote>
+          <blockquote data-img="https://images.pexels.com/photos/3993463/pexels-photo-3993463.jpeg?auto=compress&amp;cs=tinysrgb&amp;w=700&amp;h=820&amp;fit=crop" data-chip="Curl cut"><p>First person who actually knew how to cut my curls. She taught me a 10-minute routine and now I wear my hair down every day.</p><footer><b>Amara O.</b><span>Curl Cut &amp; Definition</span></footer></blockquote>
+        </div>
+        <div class="rv__nav">
+          <button class="round" id="rvPrev" aria-label="Previous review">←</button>
+          <span class="rv__count"><b id="rvNow">01</b> / <span id="rvAll">04</span></span>
+          <button class="round" id="rvNext" aria-label="Next review">→</button>
+        </div>
+      </div>
+    </div>
   </div>
 
-  <!-- Lightbox -->
-  <div class="lightbox" id="lightbox" hidden>
-    <button class="lightbox__close" id="lbClose" aria-label="Close">×</button>
-    <img id="lbImg" src="" alt="">
+  <div class="snips" aria-label="More short reviews">
+    <div class="snips__row">
+      <span>“On time, every time.” <b>Kate</b></span><span>“My grey blending is invisible.” <b>Mel</b></span><span>“Finally a stylist who gets curls.” <b>Tara</b></span><span>“The scalp massage alone 😍” <b>Jo</b></span><span>“Booked online in 30 seconds.” <b>Rach</b></span><span>“Honest about what would suit me.” <b>Priya</b></span>
+      <span>“On time, every time.” <b>Kate</b></span><span>“My grey blending is invisible.” <b>Mel</b></span><span>“Finally a stylist who gets curls.” <b>Tara</b></span><span>“The scalp massage alone 😍” <b>Jo</b></span><span>“Booked online in 30 seconds.” <b>Rach</b></span><span>“Honest about what would suit me.” <b>Priya</b></span>
+    </div>
   </div>
+</section>
 
-  <script src="script.js"></script>
+<!-- ================= INSTAGRAM ================= -->
+<section class="insta container" id="instagram" aria-labelledby="igTitle">
+  <div class="insta__grid">
+    <a href="#" class="ig ig--1"><img src="https://images.pexels.com/photos/3065207/pexels-photo-3065207.jpeg?auto=compress&amp;cs=tinysrgb&amp;w=500&amp;h=500&amp;fit=crop" alt="Instagram post: blonde ringlets" loading="lazy"><span>♥ 2.4k</span></a>
+    <a href="#" class="ig ig--2"><img src="https://images.pexels.com/photos/3993467/pexels-photo-3993467.jpeg?auto=compress&amp;cs=tinysrgb&amp;w=500&amp;h=500&amp;fit=crop" alt="Instagram post: round-brush blow-dry" loading="lazy"><span>♥ 1.1k</span></a>
+    <a href="#" class="ig ig--3"><img src="https://images.pexels.com/photos/7440125/pexels-photo-7440125.jpeg?auto=compress&amp;cs=tinysrgb&amp;w=500&amp;h=500&amp;fit=crop" alt="Instagram post: curling iron on blonde hair" loading="lazy"><span>♥ 986</span></a>
+    <div class="insta__center">
+      <div class="insta__handle">
+        <svg viewBox="0 0 24 24" aria-hidden="true"><rect x="3" y="3" width="18" height="18" rx="5"/><circle cx="12" cy="12" r="4"/><circle cx="17.5" cy="6.5" r="1.1" fill="currentColor" stroke="none"/></svg>
+        <p class="eyebrow"><span>09</span> On Instagram</p>
+        <h2 id="igTitle" class="h2">@hairstylist<em>.studio</em></h2>
+        <p>Daily transformations, styling tips and last-minute openings (our followers hear first).</p>
+        <a href="#" class="btn btn--plum">Follow along <span class="btn__arrow">→</span></a>
+      </div>
+    </div>
+    <a href="#" class="ig ig--4"><img src="https://images.pexels.com/photos/3993463/pexels-photo-3993463.jpeg?auto=compress&amp;cs=tinysrgb&amp;w=500&amp;h=500&amp;fit=crop" alt="Instagram post: voluminous curls" loading="lazy"><span>♥ 1.8k</span></a>
+    <a href="#" class="ig ig--5"><img src="https://images.pexels.com/photos/1319460/pexels-photo-1319460.jpeg?auto=compress&amp;cs=tinysrgb&amp;w=500&amp;h=500&amp;fit=crop" alt="Instagram post: scissors on the wall" loading="lazy"><span>♥ 742</span></a>
+    <a href="#" class="ig ig--6"><img src="https://images.pexels.com/photos/3065173/pexels-photo-3065173.jpeg?auto=compress&amp;cs=tinysrgb&amp;w=500&amp;h=500&amp;fit=crop" alt="Instagram post: copper curls in progress" loading="lazy"><span>♥ 1.3k</span></a>
+  </div>
+</section>
+
+<!-- ================= BOOKING ================= -->
+<section class="book container" id="book" aria-labelledby="bookTitle">
+  <div class="book__card">
+    <div class="book__left">
+      <p class="eyebrow"><span>10</span> Book an appointment</p>
+      <h2 id="bookTitle" class="h2">Your best hair day starts <em>right here.</em></h2>
+      <ul class="perks">
+        <li><span>💜</span><div><b>15% off your first colour</b><small>Applied automatically for new clients</small></div></li>
+        <li><span>📅</span><div><b>Free reschedule</b><small>Up to 24 hours before, no fees</small></div></li>
+        <li><span>💬</span><div><b>Text confirmation within 1 hour</b><small>During opening hours</small></div></li>
+      </ul>
+      <div class="book__urgency"><span class="live"></span> <b id="viewers">6 people</b> are looking at times right now</div>
+      <div class="book__alt">Prefer a human? <a href="tel:+15550123456">Call (555) 012-3456</a> or <a href="sms:+15550123456">send a text</a></div>
+    </div>
+
+    <form class="bw" id="bw" novalidate aria-label="Booking form">
+      <ol class="bw__steps" aria-hidden="true"><li class="is-on"><i>1</i>Service</li><li><i>2</i>Date &amp; time</li><li><i>3</i>Details</li></ol>
+
+      <div class="bw__panel is-on" data-step="0">
+        <p class="bw__t">What are we doing?</p>
+        <div class="bw__svcs" id="bwSvcs">
+          <button type="button" data-s="Cut &amp; Blow-dry" data-p="65" data-d="60 min">Cut &amp; Blow-dry<small>60 min · from $65</small></button>
+          <button type="button" data-s="Balayage / Highlights" data-p="185" data-d="3 hrs">Balayage / Highlights<small>3 hrs · from $185</small></button>
+          <button type="button" data-s="Colour &amp; Gloss" data-p="95" data-d="90 min">Colour &amp; Gloss<small>90 min · from $95</small></button>
+          <button type="button" data-s="Curl Cut" data-p="85" data-d="75 min">Curl Cut<small>75 min · from $85</small></button>
+          <button type="button" data-s="Treatment" data-p="45" data-d="45 min">Repair Treatment<small>45 min · from $45</small></button>
+          <button type="button" data-s="Bridal / Event" data-p="120" data-d="60–90 min">Bridal / Event<small>60–90 min · from $120</small></button>
+          <button type="button" data-s="Free Consultation" data-p="0" data-d="15 min" class="bw__free">Free Consultation<small>15 min · $0</small></button>
+        </div>
+      </div>
+
+      <div class="bw__panel" data-step="1">
+        <p class="bw__t">Pick a day &amp; time</p>
+        <div class="bw__days" id="bwDays"></div>
+        <div class="bw__times" id="bwTimes"></div>
+      </div>
+
+      <div class="bw__panel" data-step="2">
+        <p class="bw__t">Almost done!</p>
+        <div class="bw__fields">
+          <label><span>First name</span><input id="bwName" type="text" autocomplete="given-name" placeholder="Jessica" required></label>
+          <label><span>Mobile</span><input id="bwPhone" type="tel" autocomplete="tel" placeholder="(555) 000-0000" required></label>
+          <label class="full"><span>Anything we should know? <em>(optional)</em></span><input id="bwNote" type="text" placeholder="e.g. I'd love to go 2 shades lighter"></label>
+          <label class="check full"><input type="checkbox" id="bwNew" checked> I'm a new client (apply 15% off colour)</label>
+        </div>
+      </div>
+
+      <div class="bw__panel bw__done" data-step="3">
+        <div class="bw__tick">✓</div>
+        <p class="bw__t">You're pencilled in!</p>
+        <p id="bwDoneText">We'll text you shortly to confirm.</p>
+        <small class="fine">Demo form: nothing has been sent.</small>
+      </div>
+
+      <div class="bw__summary" id="bwSummary">
+        <div><small>Service</small><b id="sumSvc">Not chosen</b></div>
+        <div><small>When</small><b id="sumWhen">-</b></div>
+        <div><small>From</small><b id="sumPrice">-</b></div>
+      </div>
+      <p class="bw__err" id="bwErr" role="alert"></p>
+      <div class="bw__nav">
+        <button type="button" class="link" id="bwBack" hidden>← Back</button>
+        <button type="button" class="btn btn--plum" id="bwNext">Continue <span class="btn__arrow">→</span></button>
+      </div>
+    </form>
+  </div>
+</section>
+
+<!-- ================= LOCATION & CONTACT ================= -->
+<section class="visit container" id="visit" aria-labelledby="visitTitle">
+  <div class="visit__head">
+    <p class="eyebrow"><span>11</span> Location &amp; contact</p>
+    <h2 id="visitTitle" class="h2 split">Come say hi, <em>we're local.</em></h2>
+  </div>
+  <div class="visit__grid">
+    <div class="map">
+      <svg viewBox="0 0 800 560" preserveAspectRatio="xMidYMid slice" aria-hidden="true">
+        <rect width="800" height="560" fill="#EEF4FA"/>
+        <path d="M-20 140 C200 120 420 180 820 150" stroke="#fff" stroke-width="26" fill="none"/>
+        <path d="M-20 400 C260 380 520 420 820 360" stroke="#fff" stroke-width="34" fill="none"/>
+        <path d="M230 -20 C250 200 210 380 260 580" stroke="#fff" stroke-width="22" fill="none"/>
+        <path d="M560 -20 C540 220 590 380 560 580" stroke="#fff" stroke-width="18" fill="none"/>
+        <rect x="300" y="200" width="200" height="130" rx="20" fill="#DDE8DA"/>
+        <rect x="40" y="190" width="150" height="160" rx="20" fill="#E7EFE3"/>
+        <circle cx="690" cy="470" r="70" fill="#DDE8DA"/>
+        <rect x="610" y="200" width="160" height="110" rx="20" fill="#FBF0C8"/>
+        <rect x="300" y="440" width="200" height="100" rx="20" fill="#EDE6F7"/>
+        <path d="M0 520 C120 490 180 540 300 510" stroke="#C9DCEE" stroke-width="30" fill="none"/>
+        <text x="330" y="270" font-family="Manrope" font-size="15" fill="#7C8C78">Main St Park</text>
+        <text x="620" y="262" font-family="Manrope" font-size="15" fill="#A89148">Market Sq.</text>
+      </svg>
+      <div class="map__pin"><span class="map__dot"></span><div class="map__card"><b>Hair Stylist Studio</b><small>123 Main Street, Suite 2</small></div></div>
+      <div class="map__actions">
+        <a class="btn btn--plum btn--sm" href="https://www.google.com/maps" target="_blank" rel="noopener">Get directions ↗</a>
+        <span class="map__walk">🚶 2 min from Market Sq. · 🚗 Free parking</span>
+      </div>
+    </div>
+
+    <div class="visit__info">
+      <div class="vcard vcard--sage">
+        <h3>Find us</h3>
+        <p>123 Main Street, Suite 2<br>Your Town, ST 00000</p>
+        <small>Free parking behind the building · Step-free access</small>
+      </div>
+      <div class="vcard vcard--sky">
+        <h3>Talk to us</h3>
+        <div class="vlinks">
+          <a href="tel:+15550123456">📞 (555) 012-3456</a>
+          <a href="sms:+15550123456">💬 Text us</a>
+          <a href="mailto:hello@hairstylist.studio">✉️ hello@hairstylist.studio</a>
+        </div>
+      </div>
+      <div class="vcard vcard--white">
+        <h3>Opening hours <span class="status" id="status">Open</span></h3>
+        <ul class="hours" id="hours">
+          <li data-d="2"><span>Tuesday</span><span>9:30 am – 6:00 pm</span></li>
+          <li data-d="3"><span>Wednesday</span><span>9:30 am – 6:00 pm</span></li>
+          <li data-d="4"><span>Thursday</span><span>10:00 am – 8:00 pm</span></li>
+          <li data-d="5"><span>Friday</span><span>9:30 am – 7:00 pm</span></li>
+          <li data-d="6"><span>Saturday</span><span>9:00 am – 4:00 pm</span></li>
+          <li data-d="0"><span>Sun &amp; Mon</span><span>Closed</span></li>
+        </ul>
+      </div>
+    </div>
+  </div>
+</section>
+
+</main>
+
+<!-- ================= FOOTER ================= -->
+<footer class="footer">
+  <div class="container">
+    <div class="footer__cta">
+      <h2 class="h2">Ready for hair that feels like <em>you?</em></h2>
+      <div class="footer__btns">
+        <a href="#book" class="btn btn--plum btn--lg magnetic">Book your chair <span class="btn__arrow">→</span></a>
+        <a href="tel:+15550123456" class="btn btn--glass btn--lg">Call (555) 012-3456</a>
+      </div>
+    </div>
+    <div class="footer__grid">
+      <div class="footer__brand">
+        <a href="#top" class="logo">
+          <svg class="logo__mark" viewBox="0 0 44 44" aria-hidden="true"><circle cx="22" cy="22" r="21" fill="#fff"/><path d="M14 30c5-3 7.5-8 8-17 .5 9 3 14 8 17" fill="none" stroke="#2A2433" stroke-width="1.8" stroke-linecap="round"/><circle cx="15" cy="31" r="3" fill="#fff" stroke="#2A2433" stroke-width="1.6"/><circle cx="29" cy="31" r="3" fill="#fff" stroke="#2A2433" stroke-width="1.6"/><path d="M22 7.5l1 2.2 2.2 1-2.2 1-1 2.2-1-2.2-2.2-1 2.2-1z" fill="#C99A2E"/></svg>
+          <span class="logo__word">Hair <i>Stylist</i></span>
+        </a>
+        <p>A one-on-one hair studio for cuts, colour, curls and big days, right here in Your Town.</p>
+        <div class="socials">
+          <a href="#" aria-label="Instagram"><svg viewBox="0 0 24 24"><rect x="3" y="3" width="18" height="18" rx="5"/><circle cx="12" cy="12" r="4"/></svg></a>
+          <a href="#" aria-label="Facebook"><svg viewBox="0 0 24 24"><path d="M14 8h3V4h-3a4 4 0 0 0-4 4v2H8v4h2v6h4v-6h3l1-4h-4V8z"/></svg></a>
+          <a href="#" aria-label="TikTok"><svg viewBox="0 0 24 24"><path d="M15 3c.4 2.4 1.9 3.9 4 4v3.3a7 7 0 0 1-4-1.3V15a5.5 5.5 0 1 1-5.5-5.5v3.3A2.3 2.3 0 1 0 11.8 15V3z"/></svg></a>
+        </div>
+      </div>
+      <div><h4>Studio</h4><a href="#about">The Stylist</a><a href="#transformations">Transformations</a><a href="#lookbook">Lookbook</a><a href="#reviews">Reviews</a><a href="#visit">Visit</a></div>
+      <div><h4>Services</h4><a href="#services">Cut &amp; Blow-dry</a><a href="#services">Balayage &amp; Colour</a><a href="#services">Curl Cuts</a><a href="#services">Repair Rituals</a><a href="#services">Bridal &amp; Events</a></div>
+      <div>
+        <h4>First dibs on openings</h4>
+        <p class="small">Last-minute appointments and seasonal offers, once a month.</p>
+        <form class="news" id="news"><input type="email" placeholder="Your email" aria-label="Email" required><button class="btn btn--ink btn--sm">Join</button></form>
+        <p class="small" id="newsMsg" role="status"></p>
+      </div>
+    </div>
+    <div class="footer__word" aria-hidden="true">Hair <i>Stylist</i></div>
+    <div class="footer__bottom"><span>© <span id="yr">2026</span> Hair Stylist Studio · 123 Main Street, Your Town</span><span>Made with 💜 for great hair days</span></div>
+  </div>
+</footer>
+
+<!-- sticky CTAs -->
+<a href="#book" class="float-book" id="floatBook"><span class="live"></span> 3 openings this week · <b>Book now →</b></a>
+<div class="mbar" id="mbar"><a href="tel:+15550123456" class="mbar__call" aria-label="Call">📞</a><a href="#match" class="mbar__quiz">✦ Match</a><a href="#book" class="btn btn--plum">Book your chair</a></div>
+
+<!-- lightbox -->
+<div class="lightbox" id="lightbox" hidden>
+  <button class="lightbox__x" id="lbX" aria-label="Close">×</button>
+  <figure><img id="lbImg" src="" alt=""><figcaption><b id="lbCap"></b><a href="#book" class="btn btn--plum btn--sm" id="lbBook">Book this look →</a></figcaption></figure>
+</div>
+
+<!-- cursor -->
+<div class="cursor" id="cursor" aria-hidden="true"><span>View</span></div>
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/gsap.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/ScrollTrigger.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/lenis@1.1.13/dist/lenis.min.js"></script>
+<script src="script.js"></script>
 </body>
 </html>
