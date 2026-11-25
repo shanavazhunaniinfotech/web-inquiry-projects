@@ -5,7 +5,6 @@
   var $$ = function (s, c) { return Array.prototype.slice.call((c || document).querySelectorAll(s)); };
   var PX = function (id, w, h) { return 'https://images.pexels.com/photos/' + id + '/pexels-photo-' + id + '.jpeg?auto=compress&cs=tinysrgb&w=' + w + (h ? '&h=' + h + '&fit=crop' : ''); };
   var reduce = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
-  var isDesktop = function () { return window.innerWidth > 760; };
   var hasGsap = typeof window.gsap !== 'undefined' && typeof window.ScrollTrigger !== 'undefined';
 
   /* ---------------- Loader ---------------- */
@@ -25,12 +24,7 @@
   var heroDone = false;
   function heroIntro() {
     if (heroDone) return; heroDone = true;
-    if (!hasGsap || reduce) return;
-    gsap.from('.hero__title .w', { yPercent: 110, opacity: 0, duration: 1.1, ease: 'power4.out', stagger: .06 });
-    gsap.from('.hero__lead, .hero__ctas, .hero__proof, .hero__top', { y: 24, opacity: 0, duration: 1, ease: 'power3.out', stagger: .1, delay: .35 });
-    gsap.from('.hero__main', { clipPath: 'inset(100% 0 0 0 round 260px 260px 30px 30px)', duration: 1.4, ease: 'expo.out', delay: .1 });
-    gsap.from('.hero__small, .hero__review, .badge-rotate', { scale: .6, opacity: 0, duration: 1, ease: 'back.out(1.6)', stagger: .12, delay: .6 });
-    gsap.from('.quick', { y: 40, opacity: 0, duration: 1, ease: 'power3.out', delay: .7 });
+    startHero();
   }
 
   /* ---------------- Smooth scroll ---------------- */
@@ -62,7 +56,6 @@
     }, ms);
   }
   rotate($$('#announceRot p'), 4200);
-  rotate($$('#rotator span'), 2600);
 
   /* ---------------- Header ---------------- */
   var header = $('#header'), lastY = 0, floatBook = $('#floatBook'), mbar = $('#mbar');
@@ -109,7 +102,7 @@
   });
 
   /* fade-up targets */
-  $$('.sec-head__side, .about__copy .lead, .about__copy > p:not(.eyebrow), .creds, .about__stats, .about__cta, .svc, .svc-foot, .tf__side, .ba, .why__head p, .why__head .btn, .promise, .rv, .insta__center, .ig, .book__card, .vcard, .map, .footer__cta .footer__btns, .eyebrow').forEach(function (el) { el.classList.add('fade-up'); });
+  $$('.sec-head__side, .plan__svcs, .plan__foot, .stylist__grid > *, .sv-menu, .sv-foot, .tf__side, .ba, .why__head p, .why__head .btn, .promise, .rv, .igx__card, .book__card, .vcard, .map, .footer__cta .footer__btns, .eyebrow').forEach(function (el) { el.classList.add('fade-up'); });
 
   if ('IntersectionObserver' in window) {
     var io = new IntersectionObserver(function (es) {
@@ -122,34 +115,6 @@
     }, { threshold: .1 });
     $$('.reveal-img').map(function (r) { return r.parentNode; }).filter(function (p, i, a) { return a.indexOf(p) === i; }).forEach(function (p) { rio.observe(p); });
   } else $$('.split, .fade-up, .reveal-img').forEach(function (el) { el.classList.add('is-in'); });
-
-  /* ---------------- Manifesto word light-up ---------------- */
-  var man = $('#manifesto');
-  if (man) {
-    (function wrap(node) {
-      Array.prototype.slice.call(node.childNodes).forEach(function (n) {
-        if (n.nodeType === 3) {
-          var frag = document.createDocumentFragment();
-          n.textContent.split(/(\s+)/).forEach(function (p) {
-            if (!p) return;
-            if (/^\s+$/.test(p)) frag.appendChild(document.createTextNode(' '));
-            else { var s = document.createElement('span'); s.className = 'word'; s.textContent = p; frag.appendChild(s); }
-          });
-          node.replaceChild(frag, n);
-        } else if (n.nodeType === 1 && n.tagName === 'EM') wrap(n);
-        else if (n.nodeType === 1) n.classList.add('word');
-      });
-    })(man);
-    var words = $$('.word', man);
-    var lightUp = function () {
-      var r = man.getBoundingClientRect(), vh = innerHeight;
-      var p = Math.min(1, Math.max(0, (vh * .85 - r.top) / (r.height + vh * .35)));
-      var n = Math.round(p * words.length);
-      words.forEach(function (w, i) { w.classList.toggle('is-lit', i < n); });
-    };
-    if (reduce) words.forEach(function (w) { w.classList.add('is-lit'); });
-    else { window.addEventListener('scroll', lightUp, { passive: true }); lightUp(); }
-  }
 
   /* ---------------- Count up ---------------- */
   function countUp(el) {
@@ -165,18 +130,6 @@
     $$('[data-count]').forEach(function (el) { cio.observe(el); });
   }
 
-  /* ---------------- Hero mouse parallax ---------------- */
-  var hv = $('#heroVisual');
-  if (hv && !reduce && window.matchMedia('(hover: hover)').matches) {
-    $('#heroCard').addEventListener('mousemove', function (e) {
-      var r = hv.getBoundingClientRect(), x = (e.clientX - r.left - r.width / 2) / r.width, y = (e.clientY - r.top - r.height / 2) / r.height;
-      $$('[data-depth]', hv).forEach(function (el) {
-        var d = +el.dataset.depth * 16;
-        el.style.translate = (x * d) + 'px ' + (y * d) + 'px';
-      });
-    });
-  }
-
   /* ---------------- Magnetic buttons ---------------- */
   if (window.matchMedia('(hover: hover)').matches && !reduce) {
     $$('.magnetic').forEach(function (b) {
@@ -185,29 +138,81 @@
     });
   }
 
-  /* ---------------- Services ---------------- */
-  var PRICES = { 'Cut & Blow-dry': 65, 'Balayage / Highlights': 185, 'Colour & Gloss': 95, 'Curl Cut': 85, 'Treatment': 45, 'Bridal / Event': 120, 'Free Consultation': 0 };
-  var qs = $('#quickService');
-  qs.addEventListener('change', function () { var p = PRICES[qs.value]; $('#quickPrice').textContent = p ? '$' + p : 'Free'; });
-  $('#quickForm').addEventListener('submit', function (e) { e.preventDefault(); bwSelect(qs.value, 1); goTo('#book'); });
+  /* ---------------- HERO slider (4 cards, 6s) ---------------- */
+  var hx = $('#hx'), hSlides = $$('.hx__slide', hx), tabs = $$('.hx__tabs button', hx), hi = 0, hTimer = null, HDUR = 6000, hStarted = false;
+  function goHero(n) {
+    n = (n + hSlides.length) % hSlides.length; if (n === hi) return restartHero();
+    var prev = hSlides[hi];
+    prev.classList.add('is-leaving'); prev.classList.remove('is-on');
+    setTimeout(function () { prev.classList.remove('is-leaving'); }, 1300);
+    hi = n;
+    var img = $('.hx__img', hSlides[hi]); if (img.loading === 'lazy') img.loading = 'eager';
+    hSlides[hi].classList.add('is-on');
+    tabs.forEach(function (t, i) {
+      t.classList.toggle('is-on', i === hi); t.setAttribute('aria-selected', i === hi);
+      var b = $('i b', t); b.style.animation = 'none'; void b.offsetWidth; b.style.animation = '';
+    });
+    restartHero();
+  }
+  function restartHero() { clearTimeout(hTimer); if (!reduce) hTimer = setTimeout(function () { goHero(hi + 1); }, HDUR); }
+  function startHero() { if (hStarted) return; hStarted = true; hSlides.forEach(function (s) { var i = $('.hx__img', s); if (i.loading === 'lazy') { var pre = new Image(); pre.src = i.src; } }); restartHero(); }
+  tabs.forEach(function (t, i) { t.addEventListener('click', function () { goHero(i); }); });
+  $('#hxPrev').addEventListener('click', function () { goHero(hi - 1); });
+  $('#hxNext').addEventListener('click', function () { goHero(hi + 1); });
+  document.addEventListener('visibilitychange', function () { if (document.hidden) { clearTimeout(hTimer); hx.classList.add('is-paused'); } else { hx.classList.remove('is-paused'); goHeroReset(); } });
+  function goHeroReset() { var t = tabs[hi], b = $('i b', t); b.style.animation = 'none'; void b.offsetWidth; b.style.animation = ''; restartHero(); }
+  var tsx = null;
+  hx.addEventListener('touchstart', function (e) { tsx = e.touches[0].clientX; }, { passive: true });
+  hx.addEventListener('touchend', function (e) { if (tsx === null) return; var dx = e.changedTouches[0].clientX - tsx; if (Math.abs(dx) > 50) goHero(hi + (dx < 0 ? 1 : -1)); tsx = null; });
+  setTimeout(startHero, 4000);
 
-  $$('.seg:not(.seg--lb) button').forEach(function (b) {
+  /* ---------------- Visit selector ---------------- */
+  var plan = { s: 'Cut & Blow-dry', w: 'this week' };
+  function swapText(el, txt) { el.classList.add('is-swap'); setTimeout(function () { el.textContent = txt; el.classList.remove('is-swap'); }, 220); }
+  $$('.pchip').forEach(function (c) {
+    c.addEventListener('click', function () {
+      $$('.pchip').forEach(function (x) { x.classList.remove('is-on'); x.setAttribute('aria-checked', 'false'); });
+      c.classList.add('is-on'); c.setAttribute('aria-checked', 'true');
+      plan.s = c.dataset.s;
+      swapText($('#planSvcTxt'), c.dataset.t);
+      $('#planPrice').textContent = '$' + c.dataset.p; $('#planDur').textContent = c.dataset.d;
+    });
+  });
+  $$('.plan__when button').forEach(function (b) {
     b.addEventListener('click', function () {
-      $$('.seg:not(.seg--lb) button').forEach(function (x) { x.classList.remove('is-on'); x.setAttribute('aria-selected', 'false'); });
-      b.classList.add('is-on'); b.setAttribute('aria-selected', 'true');
-      $$('.svc').forEach(function (s) { s.classList.toggle('is-hidden', b.dataset.f !== 'all' && s.dataset.cat !== b.dataset.f); });
+      $$('.plan__when button').forEach(function (x) { x.classList.remove('is-on'); x.setAttribute('aria-checked', 'false'); });
+      b.classList.add('is-on'); b.setAttribute('aria-checked', 'true');
+      plan.w = b.dataset.w; swapText($('#planWhenTxt'), b.dataset.w);
+    });
+  });
+  $('#planGo').addEventListener('click', function () { bwSelect(plan.s, 1); goTo('#book'); });
+
+  /* ---------------- Signature services ---------------- */
+  $$('.sv-menu__item').forEach(function (m) {
+    m.addEventListener('click', function () {
+      $$('.sv-menu__item').forEach(function (x) { x.classList.remove('is-on'); x.setAttribute('aria-selected', 'false'); });
+      m.classList.add('is-on'); m.setAttribute('aria-selected', 'true');
+      $$('.sv-group').forEach(function (g) { g.classList.toggle('is-on', g.dataset.g === m.dataset.g); });
       if (hasGsap) ScrollTrigger.refresh();
     });
   });
-  var sf = $('#svcFloat'), sfi = $('img', sf), fx = 0, fy = 0, tx = 0, ty = 0, floatRaf = null;
-  function floatLoop() { fx += (tx - fx) * .15; fy += (ty - fy) * .15; sf.style.left = fx + 'px'; sf.style.top = fy + 'px'; floatRaf = requestAnimationFrame(floatLoop); }
-  if (window.matchMedia('(hover: hover)').matches) {
-    $$('.svc').forEach(function (s) {
-      s.addEventListener('mouseenter', function (e) { sfi.src = s.dataset.img; tx = fx = e.clientX + 150; ty = fy = e.clientY; sf.classList.add('is-on'); if (!floatRaf) floatLoop(); });
-      s.addEventListener('mousemove', function (e) { tx = e.clientX + 150; ty = e.clientY; });
-      s.addEventListener('mouseleave', function () { sf.classList.remove('is-on'); cancelAnimationFrame(floatRaf); floatRaf = null; });
+  $$('.sv-card').forEach(function (card) {
+    var main = $('.sv-gal__main img', card);
+    function show(t) {
+      if (t.classList.contains('is-on')) return;
+      $$('.sv-thumb', card).forEach(function (x) { x.classList.remove('is-on'); });
+      t.classList.add('is-on');
+      main.classList.add('is-swap');
+      var pre = new Image(); pre.src = t.dataset.src;
+      setTimeout(function () { main.src = t.dataset.src; main.alt = t.dataset.alt; main.classList.remove('is-swap'); }, 220);
+    }
+    $$('.sv-thumb', card).forEach(function (t) {
+      t.addEventListener('mouseenter', function () { show(t); });
+      t.addEventListener('focus', function () { show(t); });
+      t.addEventListener('click', function () { show(t); });
+      var pre = new Image(); pre.src = t.dataset.src;
     });
-  }
+  });
   $$('[data-service]').forEach(function (el) { el.addEventListener('click', function () { bwSelect(el.dataset.service, 1); }); });
 
   /* ---------------- Hair Match quiz ---------------- */
@@ -272,7 +277,7 @@
   var cur = $('#cursor');
   if (window.matchMedia('(hover: hover)').matches) {
     window.addEventListener('mousemove', function (e) { cur.style.left = e.clientX + 'px'; cur.style.top = e.clientY + 'px'; }, { passive: true });
-    $$('.look, .st:not(.st--cta)').forEach(function (el) {
+    $$('.look').forEach(function (el) {
       el.addEventListener('mouseenter', function () { cur.classList.add('is-on'); });
       el.addEventListener('mouseleave', function () { cur.classList.remove('is-on'); });
     });
@@ -282,7 +287,7 @@
   var lb = $('#lightbox');
   function openLb(src, cap) { $('#lbImg').src = src; $('#lbImg').alt = cap; $('#lbCap').textContent = cap; lb.hidden = false; cur.classList.remove('is-on'); if (lenis) lenis.stop(); }
   function closeLb() { lb.hidden = true; if (lenis) lenis.start(); }
-  $$('.look, .st:not(.st--cta)').forEach(function (el) {
+  $$('.look').forEach(function (el) {
     el.addEventListener('click', function () {
       var img = $('img', el), cap = $('figcaption b', el);
       openLb(img.src.replace(/w=\d+&h=\d+&fit=crop/, 'w=1400'), cap ? cap.textContent : img.alt);
@@ -302,14 +307,10 @@
       $$('.lb-col').forEach(function (c) {
         gsap.fromTo(c, { y: -(+c.dataset.speed) }, { y: +c.dataset.speed, ease: 'none', scrollTrigger: { trigger: '#lbCols', start: 'top bottom', end: 'bottom top', scrub: true } });
       });
-      // studio horizontal pin
-      var track = $('#studioTrack');
-      var dist = function () { return Math.max(0, track.scrollWidth - window.innerWidth); };
-      gsap.to(track, { x: function () { return -dist(); }, ease: 'none', scrollTrigger: { trigger: '#studioPin', start: 'top top', end: function () { return '+=' + dist(); }, pin: true, scrub: 1, invalidateOnRefresh: true, anticipatePin: 1 } });
-      // hero image drift
-      gsap.to('.hero__main img', { yPercent: 8, ease: 'none', scrollTrigger: { trigger: '.hero', start: 'top top', end: 'bottom top', scrub: true } });
-      // about arch parallax
-      gsap.fromTo('.about__arch img', { yPercent: -6, scale: 1.12 }, { yPercent: 6, scale: 1.12, ease: 'none', scrollTrigger: { trigger: '.about', start: 'top bottom', end: 'bottom top', scrub: true } });
+      // hero card subtle scale on scroll
+      gsap.to('#hx', { scale: .96, ease: 'none', scrollTrigger: { trigger: '.hx', start: 'top top', end: 'bottom top', scrub: true } });
+      // portrait parallax
+      gsap.fromTo('.st-portrait img', { yPercent: -5, scale: 1.12 }, { yPercent: 5, scale: 1.12, ease: 'none', scrollTrigger: { trigger: '.stylist', start: 'top bottom', end: 'bottom top', scrub: true } });
       // footer wordmark
       gsap.from('.footer__word', { yPercent: 40, opacity: 0, ease: 'power2.out', scrollTrigger: { trigger: '.footer__word', start: 'top bottom', end: 'bottom 85%', scrub: true } });
     });
