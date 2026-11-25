@@ -101,7 +101,7 @@
       $("#callingVerse").textContent = "“" + o.verse + "”";
       $("#callingRef").textContent = o.ref;
       $("#callingAdd").textContent = "Choose size · " + o.word + " in " + o.color;
-      $("#callingMore").href = "product.html?p=" + cg + "-" + cc;
+      $("#callingMore").href = "product/?p=" + cg + "-" + cc;
     }
     if (window.gsap && !reduce) {
       gsap.to([img, ".calling__card"], { opacity: 0, y: 10, duration: .2, onComplete: function () {

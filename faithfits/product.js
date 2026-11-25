@@ -12,7 +12,7 @@
   var C = COLORS[P.c];
   var lineList = P.line === "wide" ? FF.WIDE : FF.ORDER;
   var lineName = P.line === "men" ? "Men" : P.line === "wide" ? "Wide Leg" : "Women";
-  var tabUrl = "index.html?tab=" + P.line + "#bestsellers";
+  var tabUrl = FF.ROOT + "?tab=" + P.line + "#bestsellers";
 
   document.title = title(P) + (P.line === "wide" ? " Wide Leg" : "") + " Scrub Set | FaithFits";
   document.documentElement.style.setProperty("--c", C.hex);

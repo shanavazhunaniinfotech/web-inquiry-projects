@@ -1,6 +1,7 @@
 /* FaithFits shared catalogue + cart storage (names, colors, photos from faithfitswear.com) */
 (function () {
   "use strict";
+  var ROOT = window.FF_ROOT || "";
   var COLORS = {
     maroon:   { word: "Chosen",    color: "Maroon",        hex: "#6b1d2c", ref: "1 Peter 2:9",         verse: "But ye are a chosen generation, a royal priesthood.", meaning: "You were picked on purpose, for this work and for these people." },
     ceil:     { word: "Covered",   color: "Ceil Blue",     hex: "#6fa0d6", ref: "Psalm 91:4",          verse: "He shall cover thee with his feathers, and under his wings shalt thou trust.", meaning: "On the longest night shift, you are not unprotected." },
@@ -23,7 +24,7 @@
   var PRODUCTS = [];
   function mk(prefix, line, c, i, type, isNew) {
     var id = prefix + c, n = GALLERY[id] || 5, imgs = [];
-    for (var k = 1; k <= n; k++) imgs.push("images/" + id + (k === 1 ? "" : "-" + k) + ".jpg");
+    for (var k = 1; k <= n; k++) imgs.push(ROOT + "images/" + id + (k === 1 ? "" : "-" + k) + ".jpg");
     return { id: id, line: line, c: c, img: imgs[0], img2: imgs[1], imgs: imgs, type: type, rank: i, isNew: !!isNew };
   }
   ORDER.forEach(function (c, i) {
@@ -35,7 +36,7 @@
   function byId(id) { for (var i = 0; i < PRODUCTS.length; i++) if (PRODUCTS[i].id === id) return PRODUCTS[i]; return null; }
   function title(p) { var c = COLORS[p.c]; return c.word + " in " + c.color; }
   function lineLabel(p) { return p.line === "men" ? "Men's" : "Women's"; }
-  function url(p) { return "product.html?p=" + p.id; }
+  function url(p) { return ROOT + "product/?p=" + p.id; }
   function sibling(line, c) { return byId((line === "wide" ? "wl-" : line[0] + "-") + c); }
 
   /* cart persisted per browser so it follows the shopper from home page to PDP */
@@ -49,6 +50,6 @@
     try { localStorage.setItem("ff_cart", JSON.stringify(cart.map(function (x) { return { id: x.p.id, t: x.t, b: x.b, qty: x.qty }; }))); } catch (e) {}
   }
 
-  window.FF = { COLORS: COLORS, ORDER: ORDER, WIDE: WIDE, BADGES: BADGES, PRODUCTS: PRODUCTS, PRICE: 120, SIZES: ["XS", "S", "M", "L", "XL"],
+  window.FF = { ROOT: ROOT, COLORS: COLORS, ORDER: ORDER, WIDE: WIDE, BADGES: BADGES, PRODUCTS: PRODUCTS, PRICE: 120, SIZES: ["XS", "S", "M", "L", "XL"],
     byId: byId, title: title, lineLabel: lineLabel, url: url, sibling: sibling, loadCart: loadCart, saveCart: saveCart };
 })();
