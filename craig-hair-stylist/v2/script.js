@@ -10,6 +10,8 @@
   /* ---------------- Loader ---------------- */
   var loader = $('#loader');
   $$('.loader__word span').forEach(function (s, i) { s.style.animationDelay = (i * 45) + 'ms'; });
+  var lc = document.getElementById('loaderCount');
+  if (lc) { var lt0 = performance.now(); (function cnt(now) { var p = Math.min(1, (now - lt0) / 1300); lc.textContent = Math.round(100 * (1 - Math.pow(1 - p, 3))); if (p < 1) requestAnimationFrame(cnt); })(lt0); }
   var seen = false;
   try { seen = sessionStorage.getItem('hs-intro') === '1'; sessionStorage.setItem('hs-intro', '1'); } catch (e) {}
   function endLoader() {
@@ -102,7 +104,7 @@
   });
 
   /* fade-up targets */
-  $$('.sec-head__side, .plan__svcs, .plan__foot, .trust2__row > div, .sv__aside, .sv-groups, .tf__side, .ba, .acc, .rv, .rv-cols, .ig2__head, .ig2__stories, .book__card, .vcard, .map, .footer__btns, .eyebrow').forEach(function (el) { el.classList.add('fade-up'); });
+  $$('.sec-head__side, .plan__svcs, .plan__card, .sv__note, .sv-menu, .tf__bar, .ba, .strips, .why3__item, .why3__media, .rv, .ig3__center, .book__card, .vcard, .map, .footer__btns').forEach(function (el) { el.classList.add('fade-up'); });
 
   if ('IntersectionObserver' in window) {
     var io = new IntersectionObserver(function (es) {
@@ -149,6 +151,7 @@
     var img = $('.hx__img', hSlides[hi]); if (img.loading === 'lazy') img.loading = 'eager';
     hSlides[hi].classList.add('is-on');
     hx.style.setProperty('--bg', hSlides[hi].dataset.bg);
+    var hn = document.getElementById('hxNow'); if (hn) hn.textContent = ('0' + (hi + 1)).slice(-2);
     tabs.forEach(function (t, i) {
       t.classList.toggle('is-on', i === hi); t.setAttribute('aria-selected', i === hi);
       var b = $('i b', t); b.style.animation = 'none'; void b.offsetWidth; b.style.animation = '';
@@ -175,6 +178,9 @@
       $$('.pchip').forEach(function (x) { x.classList.remove('is-on'); x.setAttribute('aria-checked', 'false'); });
       c.classList.add('is-on'); c.setAttribute('aria-checked', 'true');
       plan.s = c.dataset.s;
+      var pi = $('#planImg');
+      if (pi && c.dataset.img) { pi.classList.add('is-swap'); var pre = new Image(); pre.src = c.dataset.img; setTimeout(function () { pi.src = c.dataset.img; pi.classList.remove('is-swap'); }, 300); }
+      if ($('#planBadge')) $('#planBadge').textContent = c.dataset.label || c.dataset.s;
       swapText($('#planSvcTxt'), c.dataset.t);
       $('#planPrice').textContent = '$' + c.dataset.p; $('#planDur').textContent = c.dataset.d;
     });
@@ -333,6 +339,7 @@
     ri = (n + slides.length) % slides.length;
     slides.forEach(function (s, i) { s.classList.toggle('is-on', i === ri); });
     $('#rvNow').textContent = ('0' + (ri + 1)).slice(-2);
+    $$('.rv-av').forEach(function (a, k) { a.classList.toggle('is-on', k === ri); });
     rvImg.classList.add('is-swap');
     setTimeout(function () { rvImg.src = slides[ri].dataset.img; $('#rvChip').textContent = slides[ri].dataset.chip; rvImg.classList.remove('is-swap'); }, 300);
   }
@@ -438,4 +445,24 @@
   /* newsletter + year */
   $('#news').addEventListener('submit', function (e) { e.preventDefault(); $('#newsMsg').textContent = 'You\'re on the list 💜 Watch for last-minute openings.'; this.reset(); });
   $('#yr').textContent = new Date().getFullYear();
+  /* ---------------- V2 extras ---------------- */
+  // next opening on the selector card
+  var pn = document.getElementById('planNext');
+  if (pn) pn.textContent = nextOpenLabel().replace(/^(\w+) \d+ \w+, /, '$1, ');
+  // review avatars
+  $$('.rv-av').forEach(function (a) { a.addEventListener('click', function () { goRv(+a.dataset.i); stopRv(); }); });
+  // why: sticky photo follows the promise in view
+  var wItems = $$('.why3__item'), wImgs = $$('.why3__media img'), wNum = document.getElementById('whyNum');
+  if (wItems.length && 'IntersectionObserver' in window) {
+    var wio = new IntersectionObserver(function (es) {
+      es.forEach(function (e) {
+        if (!e.isIntersecting) return;
+        var i = +e.target.dataset.i;
+        wItems.forEach(function (x, k) { x.classList.toggle('is-on', k === i); });
+        wImgs.forEach(function (x, k) { x.classList.toggle('is-on', k === i); });
+        if (wNum) wNum.textContent = ('0' + (i + 1)).slice(-2);
+      });
+    }, { rootMargin: '-45% 0px -45% 0px' });
+    wItems.forEach(function (x) { wio.observe(x); });
+  }
 })();
