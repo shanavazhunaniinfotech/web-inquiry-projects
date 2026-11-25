@@ -61,6 +61,7 @@
   const ROOM = ['mara-sofa', 'teak-table', 'saddle-pouf', 'arc-lamp', 'ranch-chair'];
   const ROOM_DISCOUNT = 0.05;
   const priceOf = (id, v = 0) => P[id].variants[v].price;
+  let picked = [];
   const stars5 = '<svg><use href="#i-star"/></svg>'.repeat(5);
 
   /* ======================= LOADER ======================= */
@@ -235,16 +236,16 @@
       </div>`;
     if (feature) return `<article class="pcard pcard--feature" data-id="${id}" data-cat="${p.cat}" data-reveal>${media}
       <div class="pcard__info">
-        <h3 class="pcard__name"><button type="button" data-quick="${id}">${p.name.replace('3-seater', '<em>3-seater</em>')}</button></h3>
+        <h3 class="pcard__name"><a href="product/?id=${id}">${p.name.replace('3-seater', '<em>3-seater</em>')}</a></h3>
         <span class="pcard__price" data-price>${aed(v.price)}</span>
         <p class="pcard__desc">${p.desc}</p>
         <div class="pcard__row" style="grid-column:1/-1">${sw}<span class="rating">${stars5.slice(0, 32)} ${p.rating}<span>&nbsp;(${p.reviews} reviews)</span></span></div>
         <span class="pcard__tabby" style="grid-column:1/-1">or 4 interest-free payments of <b data-tabby>${q4(v.price)}</b> with tabby or tamara</span>
-        <div class="pcard__cta"><button class="btn btn--dark" type="button" data-add="${id}">Add to cart</button><button class="btn btn--line" type="button" data-quick="${id}">Choose size</button></div>
+        <div class="pcard__cta"><button class="btn btn--dark" type="button" data-add="${id}">Add to cart</button><a class="btn btn--line" href="product/?id=${id}">Choose size &amp; colour</a></div>
       </div></article>`;
     return `<article class="pcard" data-id="${id}" data-cat="${p.cat}" data-reveal>${media}
       <div class="pcard__info">
-        <div class="pcard__top"><h3 class="pcard__name"><button type="button" data-quick="${id}">${p.name}</button></h3><span class="pcard__price" data-price>${aed(v.price)}</span></div>
+        <div class="pcard__top"><h3 class="pcard__name"><a href="product/?id=${id}">${p.name}</a></h3><span class="pcard__price" data-price>${aed(v.price)}</span></div>
         <span class="pcard__tabby">or 4 × <b data-tabby>${q4(v.price)}</b></span>
         <div class="pcard__row">${sw}<span class="rating"><svg><use href="#i-star"/></svg>${p.rating}<span>&nbsp;(${p.reviews})</span></span></div>
       </div></article>`;
@@ -308,6 +309,7 @@
           <p class="small muted">Dimensions: ${p.meta} · ${p.mat}</p>
           <span class="qv__stock">In stock · delivered &amp; assembled by&nbsp;<b>${eta(7)}</b></span>
           <div class="qv__actions"><button class="btn btn--dark" data-qv-add>Add to cart · ${aed(va.price)}</button><button class="icon-btn" style="border:1px solid var(--mist);border-radius:4px;width:54px;height:54px" data-wish="${id}" aria-label="Save"><svg><use href="#i-heart"/></svg></button></div>
+          <a class="link-btn" href="product/?id=${id}">View full product details <svg><use href="#i-arrow-ne"/></svg></a>
           <ul class="qv__perks">
             <li><svg><use href="#i-truck"/></svg>Free delivery &amp; assembly · packaging removed</li>
             <li><svg><use href="#i-shield"/></svg>5-year frame guarantee · 30-day home trial</li>
@@ -360,23 +362,17 @@
   list.addEventListener('click', e => { const li = e.target.closest('[data-room-item]'); if (li) showSpot(li.dataset.roomItem); });
   $('[data-add-room]').addEventListener('click', () => { ROOM.forEach(id => { addToCart(id, 0, 1, { silent: true }); markAdded(id); }); open('cart'); });
 
-  /* ======================= ANATOMY ======================= */
-  const anImg = $('[data-anatomy-img]'), anMarker = $('[data-anatomy-marker]'), anN = $('[data-anatomy-n]');
-  const steps = $$('.anatomy__step');
-  function setStep(i) {
-    const s = steps[i];
-    steps.forEach(x => x.classList.toggle('is-active', x === s));
-    anImg.style.transformOrigin = `${s.dataset.ox} ${s.dataset.oy}`;
-    anImg.style.transform = `scale(${s.dataset.zoom})`;
-    // marker sits on the zoom origin (approximately the detail being described)
-    anMarker.style.setProperty('--x', s.dataset.mx); anMarker.style.setProperty('--y', s.dataset.my);
-    anN.textContent = String(i + 1).padStart(2, '0');
+  /* ======================= CONSIDERED DETAILS (blueprint) ======================= */
+  const bp = $('[data-blueprint]');
+  function bpFocus(key) {
+    bp.classList.toggle('is-focus', !!key);
+    $$('[data-bp]', bp).forEach(g => g.classList.toggle('is-on', g.dataset.bp === key));
+    $$('[data-bp-label]', bp).forEach(l => l.classList.toggle('is-on', l.dataset.bpLabel === key));
   }
-  setStep(0);
-  if ('IntersectionObserver' in window) {
-    const so = new IntersectionObserver(es => es.forEach(en => { if (en.isIntersecting) setStep(+en.target.dataset.step); }), { rootMargin: '-45% 0px -45% 0px' });
-    steps.forEach(s => so.observe(s));
-  }
+  $$('[data-bp-label]', bp).forEach(l => { l.tabIndex = 0; l.addEventListener('mouseenter', () => bpFocus(l.dataset.bpLabel)); l.addEventListener('focus', () => bpFocus(l.dataset.bpLabel)); l.addEventListener('mouseleave', () => bpFocus(null)); l.addEventListener('blur', () => bpFocus(null)); });
+  const FAB_TILES = [['Oat linen', '#E3DCCF', 'Performance linen'], ['Mist bouclé', '#C9C3B8', 'Soft bouclé'], ['Stone weave', '#8F8A82', 'Easy-clean weave'], ['Forest velvet', '#2F4A42', 'Performance velvet'], ['Cognac leather', '#8A5A3C', 'Full-grain leather'], ['Charcoal weave', '#3A3936', 'Easy-clean weave']];
+  $('[data-fabric-rail]').innerHTML = FAB_TILES.map(([n, c, t]) => `<button class="fab-tile" type="button" data-fab-tile="${n}" data-cursor-text="Add"><i style="--c:${c}"></i><strong>${n}</strong><span>${t}</span></button>`).join('');
+  $('[data-fabric-rail]').addEventListener('click', e => { const t = e.target.closest('[data-fab-tile]'); if (!t) return; if (!picked.includes(t.dataset.fabTile)) picked.push(t.dataset.fabTile); open('swatches'); });
 
   /* ======================= TAILOR-MADE CONFIGURATOR ======================= */
   const builder = $('[data-builder]'), sofa = $('[data-sofa]');
@@ -483,11 +479,10 @@
     step = n;
     $$('[data-panel-step]', vf).forEach(p => p.classList.toggle('is-active', +p.dataset.panelStep === n));
     $('[data-step-bar]').style.width = Math.min(n, 3) / 3 * 100 + '%';
-    $('[data-step-num]').textContent = Math.min(n, 3);
+    $$('[data-tab]', vf).forEach(t => { t.classList.toggle('is-active', +t.dataset.tab === n); t.classList.toggle('is-done', +t.dataset.tab < n); });
     back.hidden = n === 1 || n === 4;
     next.textContent = n === 3 ? 'Book my free visit' : 'Continue';
     $('[data-steps-foot]').hidden = n === 4;
-    $('.steps__count', vf).style.visibility = n === 4 ? 'hidden' : '';
   }
   next.addEventListener('click', () => {
     if (step === 1 && !$$('input[name=room]:checked', vf).length) { toast('Pick at least one room'); return; }
@@ -517,7 +512,6 @@
 
   /* ======================= SWATCHES ======================= */
   const FABRICS = [['Oat linen', '#E3DCCF'], ['Mist bouclé', '#C9C3B8'], ['Stone weave', '#8F8A82'], ['Olive velvet', '#5E6256'], ['Forest velvet', '#2F4A42'], ['Sky bouclé', '#86A6C9'], ['Cognac leather', '#8A5A3C'], ['Charcoal weave', '#3A3936']];
-  let picked = [];
   function renderSwatchPick() {
     $('[data-swatch-pick]').innerHTML = FABRICS.map(([n, c]) => `<button type="button" aria-pressed="${picked.includes(n)}" data-fab="${n}"><i style="--c:${c}"></i>${n}</button>`).join('');
     $('[data-swatch-submit]').textContent = `Send my swatches (${picked.length}/6)`;
@@ -555,16 +549,16 @@
 
   /* ======================= DESIGN NOTES ======================= */
   const NOTES = {
-    1: ['Hero: the promise in one line', `<p>Visitors decide in about 3 seconds whether a store is for them. The headline states the positioning — <b>the designer look, at a fair price</b> — in big editorial type, like a magazine cover ("Issue 01").</p><ul><li>The small arch "window" in the headline opens into a full-screen room as you scroll: a memorable, award-style moment that is also on-brand (calm, modern, the furniture supplies the warmth).</li><li>Shop + Book a free home visit are visible immediately: one path for ready buyers, one for considered buyers.</li><li>Rating and tabby/tamara sit beside the CTAs, answering "can I trust it?" and "can I afford it?" before the first scroll.</li><li>The full-screen room has a shoppable dot, turning inspiration into a product.</li></ul><span class="tag">Clarity</span><span class="tag">Memorability</span>`],
+    1: ['Hero: the promise in one line', `<p>Visitors decide in about 3 seconds whether a store is for them. The headline states the positioning — <b>the designer look, at a fair price</b> — in big editorial type, like a magazine cover.</p><ul><li>The small arch "window" in the headline opens into a full-screen room as you scroll: a memorable, award-style moment that is also on-brand (calm, modern, the furniture supplies the warmth).</li><li>Shop + Book a free home visit are visible immediately: one path for ready buyers, one for considered buyers.</li><li>Rating and tabby/tamara sit beside the CTAs, answering "can I trust it?" and "can I afford it?" before the first scroll.</li><li>The full-screen room has a shoppable dot, turning inspiration into a product.</li></ul><span class="tag">Clarity</span><span class="tag">Memorability</span>`],
     2: ['Promise marquee: remove risk', `<p>Buying a AED 4,000 sofa online feels risky. A slow, endless marquee keeps the five promises that remove that risk in view without taking space: free delivery &amp; assembly, pay in 4, 5-year guarantee, 30-day trial, free home visit.</p><p><b>Client to confirm:</b> exact policy wording.</p>`],
     3: ['Rooms: a horizontal gallery', `<p>People shop for a room, not a SKU. On desktop the page turns sideways as you scroll — the "turning pages of a magazine" feeling the brief asks for — and every room is one click from its products. On mobile it's a native swipe rail.</p><span class="tag">Navigation</span><span class="tag">Editorial feel</span>`],
     4: ['The edit: bestsellers that sell', `<p>A featured hero product with large imagery, then a tidy grid. "Most loved" uses social proof; filters keep it to one grid.</p><ul><li>Every card shows the price <b>and</b> the 4-payment price — AED 1,072.50 feels very different to AED 4,290.</li><li>Hover shows the piece in a room; swatches switch colour instantly.</li><li>The round "+" adds to cart in one tap; ♡ saves intent; Quick view previews the product page.</li></ul>`],
-    5: ['Manifesto: justify the price', `<p>"Affordable luxury" raises a doubt: is cheaper worse? The manifesto lights up word by word as you scroll, telling <i>why</i> the price is fair, followed by proof: a price comparison and four hard numbers. This is the guide's "avoid empty claims" in action.</p><p><b>Client to confirm:</b> benchmark prices and the cost split.</p>`],
+    5: ['Why it costs less: show the maths', `<p>"Affordable luxury" raises one doubt: <i>if it's cheaper, is it worse?</i> We answer it like a luxury price list, not a sales banner.</p><ul><li>The headline lights up as you scroll: "We removed the showroom mark-up. Not the quality."</li><li>A clear ledger shows the same materials cost in both columns, and where the showroom money really goes. Transparency builds trust.</li><li>A slowly turning seal ("Same frame · Same foam · Same fabric") makes the saving memorable.</li><li>It ends with "You keep AED 5,510", a direct link to the product and four guarantees.</li></ul><p><b>Client to confirm:</b> benchmark prices and the cost split.</p>`],
     6: ['Shop the room: raise basket size', `<p>Furniture is bought as a look. A cinematic, full-bleed room with tap-to-shop dots, and a panel that totals the whole room with a <b>5% bundle saving</b> and the 4-payment price. Bundles lift average order value.</p><span class="tag">AOV</span>`],
-    7: ['Anatomy: prove what you can’t touch', `<p>Online, nobody can sit on the sofa. As you scroll, the image zooms into each detail — frame, foam, covers, fabric — like a magazine close-up, while the text explains the real-life benefit.</p><p>It ends with <b>free swatches</b>: one of the strongest furniture conversion tools, turning "not sure" into a small, free first step.</p>`],
+    7: ['Considered details: a product blueprint', `<p>Online, nobody can sit on the sofa, so we show what's inside, like a luxury product brochure. Fine leader lines draw themselves onto the sofa and point at each detail (covers, fabric, frame, foam) with its real-life benefit.</p><ul><li>Hovering a detail highlights it and dims the rest.</li><li>The fabric rail turns "not sure" into a free first step: tap any fabric to order <b>free swatches</b>, one of the strongest furniture conversion tools.</li></ul>`],
     8: ['Tailor-made: a live configurator', `<p>The showpiece. Instead of a "contact us" form, the customer designs their sofa: shape, width, fabric and legs change the drawing live, and the price updates instantly.</p><ul><li>Instant price = transparency and commitment (people value what they help create).</li><li>Two exits: add to cart (made to order) or talk to a stylist, with the design carried into the home-visit request.</li><li>On the full site this becomes the Tailor-made page.</li></ul><span class="tag">Engagement</span><span class="tag">Lead quality</span>`],
     9: ['Reviews: real homes, big voices', `<p>Large serif quotes read like magazine pull-quotes, paired with photos of customers' rooms. Each review answers an objection (quality, fit, practicality) and links to the product it mentions.</p><p><b>Note:</b> sample reviews for the concept — at launch we connect a review app (Judge.me / Okendo).</p>`],
-    10: ['Free home visit: a 3-step form', `<p>High-ticket buyers often need a human before they commit. A multi-step form feels effortless (one question at a time) and converts better than one long form.</p><ul><li>Step 1 is a tap, not typing — it builds momentum.</li><li>Dates are pre-filled for the next 7 days.</li><li>Contact details come last, when commitment is highest. WhatsApp is always the alternative.</li></ul><span class="tag">Lead capture</span>`],
+    10: ['Free home visit: a premium concierge', `<p>High-ticket buyers often need a person before they commit. This section feels like a concierge service: a full-bleed room, a named stylist with a face and rating, and three clear promises (45 min, 48 hrs, AED 0).</p><ul><li>The form is split into Rooms → Date → Details. One question at a time feels effortless and converts better than one long form.</li><li>Step 1 is a tap, not typing, so it builds momentum. Contact details come last, when commitment is highest.</li><li>WhatsApp is always the alternative.</li></ul><p><b>Client to supply:</b> stylist name and photo.</p><span class="tag">Lead capture</span><span class="tag">Human trust</span>`],
     11: ['Story: the people behind the brand', `<p>The brief asks for "real people behind the brand". A founder quote, faces, a signature and a real studio address make a new brand accountable — vital trust for a January 2027 launch with no history yet.</p><p><b>Client to supply:</b> founder photo, story in their words, studio details.</p>`],
     12: ['Community: living proof', `<p>Two slowly drifting rows of customer homes show the furniture in real UAE rooms and invite people to tag #AtHomeDistrict. Every image links to shop.</p>`],
     13: ['FAQ: stop exits', `<p>Delivery, assembly, instalments, returns and guarantee are the questions that stop a purchase. Answering them here keeps people from leaving to "check later" — with a real person on WhatsApp for anything else.</p>`],
@@ -680,7 +674,7 @@
     });
 
     // Generic reveals
-    ['.sec-head .tabs', '.lede', '.compare', '.stats li', '.look__panel', '.config fieldset', '.config__out', '.quote__body', '.steps', '.story__quote', '.founders', '.story__facts li', '.faq__list details', '.wa-card', '.launch__lede', '.launch__form', '.footer__grid > *', '.edit__more', '.swatch-cta', '.rating-sum', '.visit__badge']
+    ['.sec-head .tabs', '.lede', '.ledger', '.value__foot', '.value__proof li', '.bp-label', '.fabric-rail__head', '.visit__perks li', '.stylist', '.visit__lede', '.look__panel', '.config fieldset', '.config__out', '.quote__body', '.steps', '.story__quote', '.founders', '.story__facts li', '.faq__list details', '.wa-card', '.launch__lede', '.launch__form', '.footer__grid > *', '.edit__more', '.rating-sum']
       .forEach(sel => $$(sel).forEach(el => { if (!el.closest('.hero')) el.setAttribute('data-reveal', ''); }));
     ScrollTrigger.batch('[data-reveal]:not(.pcard)', { start: 'top 90%', onEnter: b => gsap.to(b, { opacity: 1, y: 0, duration: 1.1, stagger: .08, ease: 'expo.out', overwrite: true }) });
     ScrollTrigger.create({ trigger: grid, start: 'top 85%', once: true, onEnter: () => gsap.to(grid.children, { opacity: 1, y: 0, duration: 1, stagger: .07, ease: 'expo.out' }) });
@@ -698,8 +692,16 @@
       const words = $$('.split-w', mt); words.forEach(w => w.classList.add('sw-word'));
       ScrollTrigger.create({ trigger: mt, start: 'top 80%', end: 'bottom 45%', scrub: true, onUpdate: s => { const n = Math.round(s.progress * words.length); words.forEach((w, i) => w.classList.toggle('on', i < n)); } });
     }
-    // Compare bars
-    $$('[data-bar]').forEach((b, i) => gsap.from(b, { scaleX: 0, duration: 1.6, delay: i * .2, ease: 'expo.out', scrollTrigger: { trigger: b, start: 'top 88%' } }));
+    // Ledger rows slide in
+    gsap.from('[data-ledger-row]', { opacity: 0, x: -16, duration: .9, stagger: .09, ease: 'expo.out', scrollTrigger: { trigger: '.ledger', start: 'top 80%' } });
+    // Blueprint leader lines draw in
+    const bpPaths = $$('.blueprint__lines path');
+    bpPaths.forEach(p => { p.style.strokeDasharray = 3000; p.style.strokeDashoffset = 3000; });
+    gsap.to(bpPaths, { strokeDashoffset: 0, duration: 2.4, stagger: .2, ease: 'power3.inOut', scrollTrigger: { trigger: '[data-blueprint]', start: 'top 70%' } });
+    gsap.from('.blueprint__lines circle:not(.ring)', { scale: 0, duration: .8, stagger: .2, ease: 'back.out(3)', scrollTrigger: { trigger: '[data-blueprint]', start: 'top 70%' } });
+    gsap.from('.fab-tile', { opacity: 0, y: 40, duration: 1.1, stagger: .07, ease: 'expo.out', scrollTrigger: { trigger: '.fabric-rail__list', start: 'top 88%' } });
+    // Price seal drifts
+    gsap.fromTo('[data-seal]', { yPercent: 30 }, { yPercent: -30, ease: 'none', scrollTrigger: { trigger: '.value__media', start: 'top bottom', end: 'bottom top', scrub: true } });
 
     // Shop the look: slow zoom
     gsap.fromTo('[data-look-img]', { scale: 1.12 }, { scale: 1, ease: 'none', scrollTrigger: { trigger: '.look', start: 'top bottom', end: 'center center', scrub: true } });
