@@ -453,26 +453,43 @@
     });
   });
 
-  /* ---------- Hotspots (shop the look) ---------- */
-  var hsCard = $('[data-hotspot-card]');
-  $$('[data-hotspot]').forEach(function (h) {
-    h.addEventListener('click', function (e) {
-      e.stopPropagation();
-      var p = byId(h.dataset.hotspot), was = h.classList.contains('is-active');
-      $$('[data-hotspot]').forEach(function (x) { x.classList.remove('is-active'); });
-      if (was) { hsCard.hidden = true; return; }
-      h.classList.add('is-active');
-      hsCard.innerHTML = '<img src="' + U(p.img, 160, 160) + '" alt="" width="72" height="72"><div><strong>' + p.title + '</strong><p>' + money(p.price) + ' · ' + p.type + '</p>' +
-        '<p><a href="#featured" data-quick="' + p.id + '" style="text-decoration:underline">Quick view</a></p></div>' +
-        (p.soldOut ? '<span class="badge badge--sold">Sold out</span>' : '<button class="hotspot-card__add" data-add="' + p.id + '" aria-label="Add ' + p.title + ' to cart">+</button>');
-      var m = h.parentElement.getBoundingClientRect(), r = h.getBoundingClientRect();
-      var x = r.left - m.left + 30, y = r.top - m.top - 20;
-      if (x + 290 > m.width) x = r.left - m.left - 290;
-      hsCard.style.left = Math.max(8, x) + 'px'; hsCard.style.top = Math.max(8, y) + 'px';
-      hsCard.hidden = false;
+  /* ---------- Shop the look (numbered pins <-> product rows) ---------- */
+  function lookActive(n) {
+    $$('[data-pin]').forEach(function (p) { p.classList.toggle('is-active', p.dataset.pin === String(n)); });
+    $$('[data-look]').forEach(function (r) { r.classList.toggle('is-active', r.dataset.look === String(n)); });
+  }
+  $$('[data-pin]').forEach(function (p) {
+    p.addEventListener('mouseenter', function () { lookActive(p.dataset.pin); });
+    p.addEventListener('click', function () {
+      lookActive(p.dataset.pin);
+      var row = $('[data-look="' + p.dataset.pin + '"]');
+      if (row && window.innerWidth < 990) row.scrollIntoView({ behavior: reduceMotion ? 'auto' : 'smooth', block: 'center' });
     });
   });
-  document.addEventListener('click', function (e) { if (!e.target.closest('[data-hotspot-card]') && !e.target.closest('[data-hotspot]')) { hsCard.hidden = true; $$('[data-hotspot]').forEach(function (x) { x.classList.remove('is-active'); }); } });
+  $$('[data-look]').forEach(function (r) { r.addEventListener('mouseenter', function () { lookActive(r.dataset.look); }); });
+  var lookWrap = $('.look'); if (lookWrap) lookWrap.addEventListener('mouseleave', function () { lookActive(0); });
+  $$('[data-add-look]').forEach(function (b) {
+    b.addEventListener('click', function () {
+      b.dataset.addLook.split(',').forEach(function (id) { addToCart(+id, 1, 0, { silent: true }); });
+      toast('Complete look added to your bag');
+      openLayerEl($('#cart-drawer'), '[data-close-drawer]');
+    });
+  });
+
+  /* ---------- Image strip drifts sideways on scroll ---------- */
+  (function () {
+    var track = $('[data-strip]'); if (!track || reduceMotion) return;
+    var ticking = false;
+    function move() {
+      var r = track.parentElement.getBoundingClientRect(), vh = window.innerHeight;
+      var p = Math.min(1, Math.max(0, (vh - r.top) / (vh + r.height)));
+      var max = Math.max(0, track.scrollWidth - window.innerWidth + 40);
+      track.style.transform = 'translate3d(' + (-p * max).toFixed(1) + 'px,0,0)';
+      ticking = false;
+    }
+    window.addEventListener('scroll', function () { if (!ticking) { ticking = true; requestAnimationFrame(move); } }, { passive: true });
+    window.addEventListener('resize', move); move();
+  })();
 
   /* ---------- Predictive search ---------- */
   var sInput = $('#search-input');
@@ -532,7 +549,7 @@
   }
 
   /* ---------- Reveal on scroll ---------- */
-  var revealSel = '.section-head, .concern-track > li, .statement__side, .statement__stats, .shoppable__media, .shoppable__copy, .feature, .bstep, .body-feature__media, .body-feature__copy, .reviews__head, .review, .post, .faq__aside, .newsletter__card, .footer__hero, .footer__top > *';
+  var revealSel = '.section-head, .concern-track > li, .statement__stats, .look__media, .look__panel, .tile, .bstep, .body-feature__media, .body-feature__copy, .reviews__head, .review, .jfeat, .jside, .faq__aside, .newsletter__card, .footer__hero, .footer__top > *';
   var targets = $$(revealSel);
   if ('IntersectionObserver' in window && !reduceMotion) {
     targets.forEach(function (el, i) { el.classList.add('reveal'); el.style.transitionDelay = ((i % 4) * 70) + 'ms'; });
