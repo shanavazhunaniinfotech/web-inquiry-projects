@@ -13,12 +13,12 @@
 
   /* ---------- Demo catalogue ---------- */
   var PRODUCTS = [
-    { id: 1, title: 'Tide Gel Cleanser', type: 'Face wash', benefit: 'pH 5.5 gel · sea minerals + 2% panthenol', price: 24, compare: 0, rating: 4.8, reviews: 1284, tags: ['face'], badge: 'Bestseller', sizes: ['100 ml', '200 ml'], unit: '$12.00 / 100 ml', img: '1540555700478-4be289fbecef', img2: '1590439471364-192aa70c0b53', step: 'cleanse' },
+    { id: 1, title: 'Tide Gel Cleanser', type: 'Face wash', benefit: 'pH 5.5 gel · sea minerals + 2% panthenol', price: 24, compare: 0, rating: 4.8, reviews: 1284, tags: ['face'], badge: 'Bestseller', sizes: ['100 ml', '200 ml'], unit: '$12.00 / 100 ml', img: '1540555700478-4be289fbecef', img2: '1512290923902-8a9f81dc236c', step: 'cleanse' },
     { id: 2, title: 'Niacinamide 10% + Sea Zinc Serum', type: 'Serum', benefit: 'Refines pores and balances shine', price: 32, compare: 0, rating: 4.9, reviews: 912, tags: ['face', 'new'], badge: 'New', sizes: ['30 ml'], img: '1576426863848-c21f53c60b19', img2: '1573461160327-b450ce3d8e7f', step: 'treat' },
-    { id: 3, title: 'Marine Repair Face Oil', type: 'Face oil', benefit: '5% squalane · overnight barrier repair', price: 38, compare: 46, rating: 4.7, reviews: 488, tags: ['face'], badge: 'Sale', sizes: ['30 ml'], img: '1608571423902-eed4a5ad8108', img2: '1617897903246-719242758050', step: 'treat' },
-    { id: 4, title: 'Barrier Balm', type: 'Moisturiser', benefit: 'Rich, fragrance-free comfort for dry patches', price: 29, compare: 0, rating: 4.8, reviews: 655, tags: ['face'], badge: '', sizes: ['50 ml'], img: '1599305090598-fe179d501227', img2: '1609097164673-7cfafb51b926', step: 'seal' },
+    { id: 3, title: 'Marine Repair Face Oil', type: 'Face oil', benefit: '5% squalane · overnight barrier repair', price: 38, compare: 46, rating: 4.7, reviews: 488, tags: ['face'], badge: 'Sale', sizes: ['30 ml'], img: '1608571423902-eed4a5ad8108', img2: '1515377905703-c4788e51af15', step: 'treat' },
+    { id: 4, title: 'Barrier Balm', type: 'Moisturiser', benefit: 'Rich, fragrance-free comfort for dry patches', price: 29, compare: 0, rating: 4.8, reviews: 655, tags: ['face'], badge: '', sizes: ['50 ml'], img: '1599305090598-fe179d501227', img2: '1616394584738-fc6e612e71b9', step: 'seal' },
     { id: 5, title: 'Sea Salt Body Bar', type: 'Body', benefit: 'Plastic-free mineral bar for body and hands', price: 14, compare: 0, rating: 4.7, reviews: 1023, tags: ['body'], badge: '', sizes: ['120 g', '3 × 120 g'], unit: '$11.67 / 100 g', img: '1607006344380-b6775a0824a7', img2: '1590439471364-192aa70c0b53' },
-    { id: 6, title: 'Aqua Gel Moisturiser', type: 'Moisturiser', benefit: 'Weightless 72-hour hydration', price: 34, compare: 0, rating: 4.8, reviews: 760, tags: ['face', 'new'], badge: 'New', sizes: ['50 ml'], img: '1619451334792-150fd785ee74', img2: '1609097164673-7cfafb51b926', step: 'seal' },
+    { id: 6, title: 'Aqua Gel Moisturiser', type: 'Moisturiser', benefit: 'Weightless 72-hour hydration', price: 34, compare: 0, rating: 4.8, reviews: 760, tags: ['face', 'new'], badge: 'New', sizes: ['50 ml'], img: '1619451334792-150fd785ee74', img2: '1570172619644-dfd03ed5d881', step: 'seal' },
     { id: 7, title: 'Calm Lip Mask', type: 'Lip care', benefit: 'Overnight lip treatment with sea fennel', price: 16, compare: 0, rating: 4.6, reviews: 341, tags: ['face'], badge: 'Sold out', soldOut: true, sizes: ['15 g'], img: '1611080541599-8c6dbde6ed28', img2: '1498843053639-170ff2122f35' },
     { id: 8, title: 'Body Ritual Oil', type: 'Body', benefit: 'Dry-touch oil with squalane and kelp', price: 36, compare: 0, rating: 4.6, reviews: 274, tags: ['body'], badge: '', sizes: ['100 ml'], img: '1617897903246-719242758050', img2: '1600334129128-685c5582fd35' },
     { id: 9, title: 'Gentle Exfoliating Cleanser', type: 'Face wash', benefit: 'PHA + sea salt for smoother skin', price: 26, compare: 0, rating: 4.7, reviews: 402, tags: ['face'], badge: '', sizes: ['150 ml'], img: '1512290923902-8a9f81dc236c', img2: '1590439471364-192aa70c0b53', step: 'cleanse', hidden: true },
@@ -111,7 +111,7 @@
       o.addEventListener('click', function () {
         if (o.dataset.country) {
           currency = { rate: +o.dataset.rate, symbol: o.dataset.symbol, code: o.dataset.code };
-          $$('[data-current-country]').forEach(function (s) { s.textContent = o.textContent; });
+          $$('[data-current-country]').forEach(function (s) { s.innerHTML = o.innerHTML; });
           $$('[data-country]').forEach(function (x) { x.setAttribute('aria-selected', String(x.dataset.country === o.dataset.country)); });
           refreshMoney(); renderGrid(); renderCart(); renderBuilder(); renderSearch($('#search-input').value);
           toast('Prices now shown in ' + currency.code);
@@ -158,9 +158,9 @@
   var hero = $('.hero');
   var slideImgs = $$('.hero__img'), slideTexts = $$('.hero__text'), dots = $$('.hero__dot');
   var slideChip = [
-    { id: 1, cta: 'Shop face wash' },
-    { id: 2, cta: 'Shop the serum' },
-    { id: 8, cta: 'Shop body care' }
+    { id: 1, cta: 'Shop face wash', eyebrow: 'New season · The Tide Edit' },
+    { id: 2, cta: 'Shop the serum', eyebrow: 'Best seller · 4.9 rated' },
+    { id: 8, cta: 'Shop body care', eyebrow: 'Just landed · Body collection' }
   ];
   var si = 0, SLIDE_MS = 6500, slideTimer = null, paused = reduceMotion;
   hero.style.setProperty('--slide-ms', SLIDE_MS + 'ms');
@@ -172,6 +172,9 @@
       d.classList.remove('is-active'); void d.offsetWidth; // restart progress animation
       d.classList.toggle('is-active', i === si); d.setAttribute('aria-selected', String(i === si));
     });
+    hero.setAttribute('data-slide', si);
+    $('[data-hero-num]').textContent = '0' + (si + 1);
+    $('[data-hero-eyebrow]').textContent = slideChip[si].eyebrow;
     var p = byId(slideChip[si].id);
     $('[data-chip-img]').src = U(p.img, 160, 160);
     $('[data-chip-name]').textContent = p.title.replace(' + Sea Zinc', '');
@@ -182,6 +185,8 @@
   }
   function schedule() { clearTimeout(slideTimer); if (!paused) slideTimer = setTimeout(function () { goSlide(si + 1); }, SLIDE_MS); }
   dots.forEach(function (d, i) { d.addEventListener('click', function () { goSlide(i); }); });
+  $('[data-hero-prev]').addEventListener('click', function () { goSlide(si - 1); });
+  $('[data-hero-next]').addEventListener('click', function () { goSlide(si + 1); });
   var pauseBtn = $('[data-hero-pause]');
   function setPaused(v) {
     paused = v; hero.classList.toggle('is-paused', v);
@@ -218,10 +223,10 @@
     return '<li class="card" style="animation-delay:' + (i * 70) + 'ms">' +
       '<div class="card__media">' +
         '<div class="card__badges">' + badgeHTML(p) + '</div>' +
-        '<img src="' + U(p.img, 700, 770) + '" srcset="' + U(p.img, 400, 440) + ' 400w, ' + U(p.img, 700, 770) + ' 700w" sizes="(min-width: 1200px) 25vw, (min-width: 750px) 33vw, 50vw" alt="' + p.title + ', ' + p.type.toLowerCase() + '" width="700" height="770" loading="lazy">' +
-        '<img class="card__img2" src="' + U(p.img2, 700, 770) + '" alt="" width="700" height="770" loading="lazy">' +
+        '<img src="' + U(p.img, 700, 875) + '" srcset="' + U(p.img, 400, 500) + ' 400w, ' + U(p.img, 700, 875) + ' 700w" sizes="(min-width: 1200px) 25vw, (min-width: 750px) 33vw, 50vw" alt="' + p.title + ', ' + p.type.toLowerCase() + '" width="700" height="770" loading="lazy">' +
+        '<img class="card__img2" src="' + U(p.img2, 700, 875) + '" alt="" width="700" height="770" loading="lazy">' +
         '<button class="card__quick" aria-label="Quick view ' + p.title + '" data-quick="' + p.id + '"><svg width="18" height="18" viewBox="0 0 24 24" aria-hidden="true"><path d="M2 12s3.6-7 10-7 10 7 10 7-3.6 7-10 7S2 12 2 12z" fill="none" stroke="currentColor" stroke-width="1.8"/><circle cx="12" cy="12" r="3" fill="none" stroke="currentColor" stroke-width="1.8"/></svg></button>' +
-        '<button class="card__add" data-add="' + p.id + '"' + (p.soldOut ? ' disabled' : '') + '>' + (p.soldOut ? 'Sold out' : 'Quick add · ' + money(p.price)) + '</button>' +
+        '<button class="card__add" data-add="' + p.id + '"' + (p.soldOut ? ' disabled' : '') + ' aria-label="' + (p.soldOut ? p.title + ' is sold out' : 'Add ' + p.title + ' to cart') + '"><span class="plus" aria-hidden="true">' + (p.soldOut ? '–' : '+') + '</span><span class="lbl" aria-hidden="true">' + (p.soldOut ? 'Sold out' : 'Add to cart · ' + money(p.price)) + '</span></button>' +
       '</div>' +
       '<div class="card__body">' +
         '<div class="card__top"><span class="card__type">' + p.type + '</span><span><span class="stars" aria-hidden="true">★</span> ' + p.rating + ' <span class="visually-hidden">out of 5,</span><span class="rc">(' + p.reviews.toLocaleString() + ')</span></span></div>' +
@@ -335,7 +340,7 @@
       return '<li class="line">' +
         '<img src="' + U(p.img, 200, 230) + '" alt="' + p.title + '" width="88" height="100" loading="lazy">' +
         '<div><p class="line__title">' + p.title + '</p><p class="line__meta">Size: ' + p.sizes[l.size] + '</p>' +
-        (l.bundle ? '<span class="line__tag">Routine bundle −15%</span>' : '') +
+        (l.bundle ? '<span class="line__tag">Bundle −15%</span>' : '') +
         '<div class="qty" role="group" aria-label="Quantity for ' + p.title + '"><button aria-label="Decrease quantity" data-qty="' + l.key + ':-1">−</button><span>' + l.qty + '</span><button aria-label="Increase quantity" data-qty="' + l.key + ':1">+</button></div></div>' +
         '<div class="line__right"><span class="line__price">' + money2(linePrice(l) * l.qty) + '</span><button class="line__remove" data-remove="' + l.key + '">Remove</button></div>' +
       '</li>';
@@ -360,7 +365,7 @@
     var inCart = cart.map(function (l) { return l.id; });
     var ups = UPSELL_ORDER.map(byId).filter(function (p) { return inCart.indexOf(p.id) === -1 && !p.soldOut; }).slice(0, 4);
     $('[data-upsell]').hidden = ups.length === 0;
-    var why = { 1: 'Step 1 · start every routine', 2: 'Pairs with any cleanser', 3: 'Night-time repair', 4: 'Seals in your serum', 5: 'Customers also add', 6: 'Lightweight daily hydration', 8: 'For body after the shower' };
+    var why = { 1: 'Best seller', 2: 'Frequently bought together', 3: 'On sale', 4: 'Customers also add', 5: 'Under $15', 6: 'New arrival', 8: 'Pairs well' };
     $('[data-upsell-track]').innerHTML = ups.map(function (p) {
       return '<li class="up"><img src="' + U(p.img, 160, 160) + '" alt="' + p.title + '" width="64" height="64" loading="lazy">' +
         '<div><p class="up__name">' + p.title + '</p><p class="up__why">' + (why[p.id] || '') + '</p><p class="up__price">' + money(p.price) + '</p></div>' +
@@ -382,36 +387,39 @@
   $('[data-checkout]').addEventListener('click', function () { toast('Checkout is handled by Shopify in the live theme'); });
   $$('.accel__btn').forEach(function (b) { b.addEventListener('click', function () { toast('Accelerated checkout runs on Shopify'); }); });
 
-  /* ---------- Routine builder ---------- */
+  /* ---------- Bundle builder ---------- */
   var STEPS = [
-    { key: 'cleanse', title: 'Cleanse', ids: [1, 9] },
-    { key: 'treat', title: 'Treat', ids: [2, 3] },
-    { key: 'seal', title: 'Moisturise', ids: [6, 4] }
+    { key: 'cleanse', title: 'Cleanse', hint: 'Start with a base', ids: [1, 9] },
+    { key: 'treat', title: 'Treat', hint: 'Add a targeted extra', ids: [2, 3] },
+    { key: 'seal', title: 'Moisturise', hint: 'Finish the set', ids: [6, 4] }
   ];
   var picked = { cleanse: 1, treat: null, seal: null };
   function renderBuilder() {
     $('#builder-steps').innerHTML = STEPS.map(function (s, i) {
       return '<div class="bstep' + (picked[s.key] ? ' is-done' : '') + '">' +
-        '<div class="bstep__head"><span class="bstep__num">' + (picked[s.key] ? '✓' : i + 1) + '</span><p class="bstep__title">Step ' + (i + 1) + ' · ' + s.title + '</p></div>' +
+        '<div class="bstep__head"><span class="bstep__num">' + (picked[s.key] ? '✓' : '0' + (i + 1)) + '</span><p class="bstep__title">' + s.title + '<span class="bstep__hint">Step ' + (i + 1) + ' · ' + s.hint + '</span></p></div>' +
         '<div class="bstep__opts">' + s.ids.map(function (id) {
           var p = byId(id);
           return '<button class="bopt" aria-pressed="' + (picked[s.key] === id) + '" data-pick="' + s.key + ':' + id + '">' +
-            '<img src="' + U(p.img, 160, 160) + '" alt="" width="64" height="64" loading="lazy">' +
-            '<span><strong>' + p.title + '</strong><span>' + money(p.price) + ' · ' + p.type + '</span></span><span class="bopt__check" aria-hidden="true"></span></button>';
+            '<img src="' + U(p.img, 200, 200) + '" alt="" width="84" height="84" loading="lazy">' +
+            '<span><strong>' + p.title + '</strong><span class="bopt__type">' + p.type + '</span><span class="bopt__price">' + money(p.price) + '</span></span><span class="bopt__check" aria-hidden="true"></span></button>';
         }).join('') + '</div></div>';
     }).join('');
     var full = 0, n = 0;
-    $('#builder-picked').innerHTML = STEPS.map(function (s) {
+    $('#builder-picked').innerHTML = STEPS.map(function (s, i) {
       var p = picked[s.key] ? byId(picked[s.key]) : null;
-      if (!p) return '<li class="is-empty">Choose a product to ' + s.title.toLowerCase() + '</li>';
+      if (!p) return '<li aria-label="Step ' + (i + 1) + ' empty">' + (i + 1) + '</li>';
       full += p.price; n++;
-      return '<li><img src="' + U(p.img, 100, 100) + '" alt="" width="40" height="40"><span>' + p.title + '</span><span>' + money(p.price) + '</span></li>';
+      return '<li class="is-filled"><img src="' + U(p.img, 120, 120) + '" alt="' + p.title + '" width="56" height="56"></li>';
     }).join('');
-    var done = n === STEPS.length;
+    var done = n === STEPS.length, left = STEPS.length - n;
+    $$('[data-mini]').forEach(function (li, i) { li.classList.toggle('is-on', !!picked[STEPS[i].key]); });
+    $('#builder-count').textContent = n + '/' + STEPS.length;
+    $('#builder-meter').style.width = (n / STEPS.length * 100) + '%';
     $('#builder-compare').textContent = money2(full);
     $('#builder-compare').style.visibility = done ? 'visible' : 'hidden';
     $('#builder-total').textContent = money2(done ? full * 0.85 : full);
-    $('#builder-save').textContent = done ? 'You save ' + money2(full * 0.15) + ' with the bundle' : 'Choose ' + (STEPS.length - n) + ' more step' + (STEPS.length - n > 1 ? 's' : '') + ' to unlock 15% off';
+    $('#builder-save').textContent = done ? 'Bundle unlocked: you save ' + money2(full * 0.15) : 'Choose ' + left + ' more to unlock 15% off';
     $('#builder-add').disabled = !done;
   }
   $('#builder-steps').addEventListener('click', function (e) {
@@ -421,8 +429,28 @@
   });
   $('#builder-add').addEventListener('click', function () {
     STEPS.forEach(function (s) { addToCart(picked[s.key], 1, 0, { bundle: true, silent: true }); });
-    toast('Routine added, 15% bundle discount applied');
+    toast('Bundle added, 15% discount applied');
     openLayerEl($('#cart-drawer'), '[data-close-drawer]');
+  });
+
+  /* ---------- Scroll-track progress bars ---------- */
+  $$('[data-track-bar]').forEach(function (bar) {
+    var tr = $(bar.dataset.trackBar);
+    function upd() {
+      var w = tr.clientWidth / tr.scrollWidth, max = tr.scrollWidth - tr.clientWidth;
+      bar.style.width = (w * 100) + '%';
+      bar.style.left = (max > 0 ? (tr.scrollLeft / max) * (1 - w) * 100 : 0) + '%';
+    }
+    tr.addEventListener('scroll', upd, { passive: true }); window.addEventListener('resize', upd); upd();
+  });
+
+  /* ---------- FAQ category tabs ---------- */
+  $$('[data-faq]').forEach(function (t) {
+    t.addEventListener('click', function () {
+      var cat = t.dataset.faq;
+      $$('[data-faq]').forEach(function (x) { var on = x === t; x.classList.toggle('is-active', on); x.setAttribute('aria-selected', String(on)); });
+      $$('.faq__list details').forEach(function (d) { d.hidden = !(cat === 'all' || d.dataset.cat === cat); });
+    });
   });
 
   /* ---------- Hotspots (shop the look) ---------- */
@@ -489,10 +517,8 @@
     var words = $$('.w', el);
     if (reduceMotion) { words.forEach(function (w) { w.classList.add('is-lit'); }); return; }
     function lit() {
-      var r = el.getBoundingClientRect(), vh = window.innerHeight;
-      var p = Math.min(1, Math.max(0, (vh * 0.85 - r.top) / (r.height + vh * 0.35)));
-      var n = Math.round(p * words.length);
-      words.forEach(function (w, i) { w.classList.toggle('is-lit', i < n); });
+      var line = window.innerHeight * 0.82;
+      words.forEach(function (w) { w.classList.toggle('is-lit', w.getBoundingClientRect().top < line); });
     }
     window.addEventListener('scroll', lit, { passive: true }); lit();
   })();
@@ -506,7 +532,7 @@
   }
 
   /* ---------- Reveal on scroll ---------- */
-  var revealSel = '.section-head, .concern-track > li, .statement .center, .shoppable__media, .shoppable__copy, .ingredient, .bstep, .builder__summary, .body-feature__media, .body-feature__copy, .review, .post, .faq > div, .faq__list details, .newsletter__card, .footer__top > *';
+  var revealSel = '.section-head, .concern-track > li, .statement__side, .statement__stats, .shoppable__media, .shoppable__copy, .feature, .bstep, .body-feature__media, .body-feature__copy, .reviews__head, .review, .post, .faq__aside, .newsletter__card, .footer__hero, .footer__top > *';
   var targets = $$(revealSel);
   if ('IntersectionObserver' in window && !reduceMotion) {
     targets.forEach(function (el, i) { el.classList.add('reveal'); el.style.transitionDelay = ((i % 4) * 70) + 'ms'; });

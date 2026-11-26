@@ -29,15 +29,15 @@
     <div class="announcement__localization">
       <div class="dropdown" data-dropdown>
         <button class="dropdown__toggle" aria-expanded="false" aria-haspopup="listbox" aria-label="Country / currency">
-          <span data-current-country>🇺🇸 United States (USD $)</span>
+          <span data-current-country><span class="flag flag--us" aria-hidden="true"></span>United States (USD $)</span>
           <svg width="10" height="10" viewBox="0 0 10 10" aria-hidden="true"><path d="M1 3l4 4 4-4" fill="none" stroke="currentColor" stroke-width="1.5"/></svg>
         </button>
         <ul class="dropdown__menu" role="listbox" aria-label="Choose country">
-          <li><button role="option" data-country="US" data-rate="1" data-symbol="$" data-code="USD">🇺🇸 United States (USD $)</button></li>
-          <li><button role="option" data-country="GB" data-rate="0.79" data-symbol="£" data-code="GBP">🇬🇧 United Kingdom (GBP £)</button></li>
-          <li><button role="option" data-country="EU" data-rate="0.92" data-symbol="€" data-code="EUR">🇪🇺 Europe (EUR €)</button></li>
-          <li><button role="option" data-country="CA" data-rate="1.37" data-symbol="CA$" data-code="CAD">🇨🇦 Canada (CAD $)</button></li>
-          <li><button role="option" data-country="AU" data-rate="1.52" data-symbol="A$" data-code="AUD">🇦🇺 Australia (AUD $)</button></li>
+          <li><button role="option" data-country="US" data-rate="1" data-symbol="$" data-code="USD"><span class="flag flag--us" aria-hidden="true"></span>United States (USD $)</button></li>
+          <li><button role="option" data-country="GB" data-rate="0.79" data-symbol="£" data-code="GBP"><span class="flag flag--gb" aria-hidden="true"></span>United Kingdom (GBP £)</button></li>
+          <li><button role="option" data-country="EU" data-rate="0.92" data-symbol="€" data-code="EUR"><span class="flag flag--eu" aria-hidden="true"></span>Europe (EUR €)</button></li>
+          <li><button role="option" data-country="CA" data-rate="1.37" data-symbol="CA$" data-code="CAD"><span class="flag flag--ca" aria-hidden="true"></span>Canada (CAD $)</button></li>
+          <li><button role="option" data-country="AU" data-rate="1.52" data-symbol="A$" data-code="AUD"><span class="flag flag--au" aria-hidden="true"></span>Australia (AUD $)</button></li>
         </ul>
       </div>
       <div class="dropdown" data-dropdown>
@@ -55,7 +55,7 @@
     <div class="announcement__slider" aria-live="polite">
       <p class="announcement__msg is-active">Free carbon-neutral shipping on orders over <span data-money="60">$60</span></p>
       <p class="announcement__msg">New: Niacinamide 10% + Sea Zinc Serum — <a href="#featured">shop the launch</a></p>
-      <p class="announcement__msg">Build a 3-step routine and save 15%</p>
+      <p class="announcement__msg">Build a bundle of 3 and save 15%</p>
     </div>
     <a class="announcement__link" href="#faq">Help &amp; FAQ</a>
   </div>
@@ -101,7 +101,7 @@
                 </ul>
               </div>
               <div class="mega__col">
-                <p class="mega__title">Shop by concern</p>
+                <p class="mega__title">Featured</p>
                 <ul>
                   <li><a href="#concerns">Breakouts &amp; oiliness</a></li>
                   <li><a href="#concerns">Dryness &amp; flaking</a></li>
@@ -109,16 +109,16 @@
                   <li><a href="#concerns">Dullness &amp; uneven tone</a></li>
                 </ul>
               </div>
-              <a class="mega__feature" href="#routine">
+              <a class="mega__feature" href="#bundle">
                 <img src="https://images.unsplash.com/photo-1600428877878-1a0fd85beda8?auto=format&fit=crop&w=700&q=75" alt="Face oil and rose quartz roller on a white surface" width="350" height="420" loading="lazy">
-                <span class="mega__feature-text"><small>Save 15%</small>Build your routine <span aria-hidden="true">→</span></span>
+                <span class="mega__feature-text"><small>Save 15%</small>Build a bundle <span aria-hidden="true">→</span></span>
               </a>
             </div>
           </div>
         </li>
-        <li class="nav__item"><a class="nav__link" href="#concerns">Concerns</a></li>
-        <li class="nav__item"><a class="nav__link" href="#ingredients">Ingredients</a></li>
-        <li class="nav__item"><a class="nav__link" href="#routine">Routine builder</a></li>
+        <li class="nav__item"><a class="nav__link" href="#concerns">Collections</a></li>
+        <li class="nav__item"><a class="nav__link" href="#features">About</a></li>
+        <li class="nav__item"><a class="nav__link" href="#bundle">Bundles</a></li>
         <li class="nav__item"><a class="nav__link" href="#journal">Journal</a></li>
       </ul>
     </nav>
@@ -141,54 +141,63 @@
 <main id="main">
 
 <!-- ============ 01 SLIDESHOW ============ -->
-<section class="hero" data-section="Slideshow" aria-roledescription="carousel" aria-label="Featured">
+<section class="hero" data-section="Slideshow" data-slide="0" aria-roledescription="carousel" aria-label="Featured">
+  <div class="hero__ripples" aria-hidden="true"><span></span><span></span><span></span></div>
   <div class="container hero__grid">
     <div class="hero__copy">
-      <p class="eyebrow"><span class="dot"></span> Marine skincare, clinically gentle</p>
+      <p class="eyebrow"><span class="dot"></span> <span data-hero-eyebrow>New season · The Tide Edit</span></p>
       <div class="hero__slides-text">
         <div class="hero__text is-active" data-slide-text="0">
           <h1 class="display">Skin, <em>rinsed</em> in calm.</h1>
-          <p class="lead">A pH 5.5 gel cleanser with sea minerals and 2% panthenol. It removes sunscreen and makeup without the tight, squeaky feeling.</p>
+          <p class="lead">A gentle gel cleanser with sea minerals that removes sunscreen and makeup without the tight, squeaky feeling.</p>
         </div>
         <div class="hero__text" data-slide-text="1" aria-hidden="true">
           <p class="display" role="heading" aria-level="2">Ten percent <em>clarity.</em></p>
-          <p class="lead">Niacinamide 10% with sea zinc evens tone and controls shine, in a water-light serum that layers under anything.</p>
+          <p class="lead">Our best-selling serum evens tone and controls shine in a water-light texture that layers under anything.</p>
         </div>
         <div class="hero__text" data-slide-text="2" aria-hidden="true">
           <p class="display" role="heading" aria-level="2">Body care, <em>tidal</em> strength.</p>
-          <p class="lead">Mineral body bars and a fast-absorbing body oil for skin that feels like it just came back from the sea.</p>
+          <p class="lead">Mineral body bars and a fast-absorbing oil for skin that feels like it just came back from the sea.</p>
         </div>
       </div>
       <div class="hero__ctas">
         <a class="btn btn--primary" href="#featured" data-hero-cta>Shop face wash</a>
-        <a class="btn btn--ghost" href="#routine">Build a routine</a>
+        <a class="btn btn--ghost" href="#bundle">Build a bundle</a>
       </div>
-      <ul class="ticks hero__ticks">
-        <li>Dermatologist tested</li>
-        <li>Fragrance-free</li>
-        <li>Vegan &amp; cruelty-free</li>
-      </ul>
+      <div class="hero__proof">
+        <div class="avatars" aria-hidden="true">
+          <img src="https://images.unsplash.com/photo-1531123897727-8f129e1688ce?auto=format&fit=crop&w=96&h=96&q=80" alt="" width="40" height="40">
+          <img src="https://images.unsplash.com/photo-1594744803329-e58b31de8bf5?auto=format&fit=crop&w=96&h=96&q=80" alt="" width="40" height="40">
+          <img src="https://images.unsplash.com/photo-1508214751196-bcfd4ca60f91?auto=format&fit=crop&w=96&h=96&q=80" alt="" width="40" height="40">
+          <span>+3k</span>
+        </div>
+        <p><span class="stars" aria-hidden="true">★★★★★</span> <strong>4.8/5</strong><br><span class="muted">from 3,210 verified reviews</span></p>
+      </div>
     </div>
 
     <div class="hero__media">
+      <div class="hero__backdrop" aria-hidden="true"></div>
       <div class="hero__frame">
-        <img class="hero__img is-active" src="https://images.unsplash.com/photo-1521146764736-56c929d59c83?auto=format&fit=crop&w=1400&q=80" srcset="https://images.unsplash.com/photo-1521146764736-56c929d59c83?auto=format&fit=crop&w=700&q=80 700w, https://images.unsplash.com/photo-1521146764736-56c929d59c83?auto=format&fit=crop&w=1400&q=80 1400w" sizes="(min-width: 990px) 50vw, 100vw" alt="Woman with freckles and clear, natural skin looking at the camera" width="1400" height="1600" fetchpriority="high">
-        <img class="hero__img" src="https://images.unsplash.com/photo-1576426863848-c21f53c60b19?auto=format&fit=crop&w=1400&q=80" alt="White dropper bottle of serum on a marble block" width="1400" height="1600" loading="lazy">
+        <img class="hero__img is-active" src="https://images.unsplash.com/photo-1521146764736-56c929d59c83?auto=format&fit=crop&w=1400&q=80" srcset="https://images.unsplash.com/photo-1521146764736-56c929d59c83?auto=format&fit=crop&w=700&q=80 700w, https://images.unsplash.com/photo-1521146764736-56c929d59c83?auto=format&fit=crop&w=1400&q=80 1400w" sizes="(min-width: 990px) 46vw, 100vw" alt="Woman with freckles and clear, natural skin looking at the camera" width="1400" height="1600" fetchpriority="high">
+        <img class="hero__img" src="https://images.unsplash.com/photo-1608571423902-eed4a5ad8108?auto=format&fit=crop&w=1400&q=80" alt="Amber serum bottle on a turned wooden stand with palm-leaf shadows" width="1400" height="1600" loading="lazy">
         <img class="hero__img" src="https://images.unsplash.com/photo-1507652313519-d4e9174996dd?auto=format&fit=crop&w=1400&q=80" alt="Freestanding bathtub in a calm stone bathroom with a palm" width="1400" height="1600" loading="lazy">
       </div>
+      <figure class="hero__mini" aria-hidden="true"><img src="https://images.unsplash.com/photo-1609097164673-7cfafb51b926?auto=format&fit=crop&w=400&h=400&q=80" alt="" width="200" height="200" loading="lazy"></figure>
+      <p class="hero__counter" aria-hidden="true"><strong data-hero-num>01</strong><span>/ 03</span></p>
 
       <div class="hero__chip" data-hero-chip>
-        <img src="https://images.unsplash.com/photo-1540555700478-4be289fbecef?auto=format&fit=crop&w=160&h=160&q=70" alt="" width="64" height="64" data-chip-img>
+        <img src="https://images.unsplash.com/photo-1540555700478-4be289fbecef?auto=format&fit=crop&w=160&h=160&q=80" alt="" width="64" height="64" data-chip-img>
         <div>
+          <p class="hero__chip-label">Featured product</p>
           <p class="hero__chip-name" data-chip-name>Tide Gel Cleanser</p>
           <p class="hero__chip-meta"><span class="stars" aria-label="Rated 4.8 out of 5">★★★★★</span> <span data-chip-price data-money="24">$24</span></p>
         </div>
-        <button class="hero__chip-add" aria-label="Add Tide Gel Cleanser to cart" data-chip-add data-add="1">+</button>
+        <button class="hero__chip-add" aria-label="Add Tide Gel Cleanser to cart" data-chip-add data-add="1"><span aria-hidden="true">+</span></button>
       </div>
 
       <div class="hero__badge" aria-hidden="true">
-        <svg viewBox="0 0 120 120"><defs><path id="circ" d="M60 60 m-46 0 a46 46 0 1 1 92 0 a46 46 0 1 1 -92 0"/></defs><text><textPath href="#circ">pH 5.5 · SEA MINERALS · PANTHENOL ·</textPath></text></svg>
-        <span>5.5</span>
+        <svg viewBox="0 0 120 120"><defs><path id="circ" d="M60 60 m-46 0 a46 46 0 1 1 92 0 a46 46 0 1 1 -92 0"/></defs><text><textPath href="#circ" textLength="286" lengthAdjust="spacing">FREE SHIPPING · 60-DAY RETURNS ·</textPath></text></svg>
+        <svg class="hero__badge-icon" width="30" height="30" viewBox="0 0 24 24"><path d="M7 17L17 7M9 7h8v8" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>
       </div>
     </div>
   </div>
@@ -199,10 +208,14 @@
       <button class="hero__dot" role="tab" aria-selected="false" aria-label="Slide 2: Serum"><span></span><em>02 Serum</em></button>
       <button class="hero__dot" role="tab" aria-selected="false" aria-label="Slide 3: Body"><span></span><em>03 Body</em></button>
     </div>
-    <button class="icon-btn hero__pause" aria-label="Pause slideshow" data-hero-pause>
-      <svg class="i-pause" width="18" height="18" viewBox="0 0 24 24" aria-hidden="true"><path d="M8 5v14M16 5v14" stroke="currentColor" stroke-width="2.4" stroke-linecap="round"/></svg>
-      <svg class="i-play" width="18" height="18" viewBox="0 0 24 24" aria-hidden="true"><path d="M7 5l12 7-12 7z" fill="currentColor"/></svg>
-    </button>
+    <div class="hero__arrows">
+      <button class="icon-btn icon-btn--outline" aria-label="Previous slide" data-hero-prev><svg width="18" height="18" viewBox="0 0 24 24" aria-hidden="true"><path d="M15 5l-7 7 7 7" fill="none" stroke="currentColor" stroke-width="1.8"/></svg></button>
+      <button class="icon-btn icon-btn--outline hero__pause" aria-label="Pause slideshow" data-hero-pause>
+        <svg class="i-pause" width="16" height="16" viewBox="0 0 24 24" aria-hidden="true"><path d="M8 5v14M16 5v14" stroke="currentColor" stroke-width="2.4" stroke-linecap="round"/></svg>
+        <svg class="i-play" width="16" height="16" viewBox="0 0 24 24" aria-hidden="true"><path d="M7 5l12 7-12 7z" fill="currentColor"/></svg>
+      </button>
+      <button class="icon-btn icon-btn--outline" aria-label="Next slide" data-hero-next><svg width="18" height="18" viewBox="0 0 24 24" aria-hidden="true"><path d="M9 5l7 7-7 7" fill="none" stroke="currentColor" stroke-width="1.8"/></svg></button>
+    </div>
   </div>
 </section>
 
@@ -223,11 +236,11 @@
   <div class="container">
     <div class="section-head">
       <div>
-        <p class="eyebrow"><span class="idx">(01)</span> Shop by concern</p>
-        <h2 class="h2">What does your skin<br>need today?</h2>
+        <p class="eyebrow"><span class="idx">(01)</span> Shop by category</p>
+        <h2 class="h2">Find your<br>next favourite.</h2>
       </div>
       <div class="section-head__side">
-        <p class="muted">Six edits, written by our formulators. Each one starts with a cleanser and builds from there.</p>
+        <p class="muted">Six collections, each one curated by our team. Start anywhere — everything works together.</p>
         <div class="slider-nav">
           <button class="icon-btn icon-btn--outline" aria-label="Previous collections" data-scroll="#concern-track" data-dir="-1"><svg width="18" height="18" viewBox="0 0 24 24" aria-hidden="true"><path d="M15 5l-7 7 7 7" fill="none" stroke="currentColor" stroke-width="1.8"/></svg></button>
           <button class="icon-btn icon-btn--outline" aria-label="Next collections" data-scroll="#concern-track" data-dir="1"><svg width="18" height="18" viewBox="0 0 24 24" aria-hidden="true"><path d="M9 5l7 7-7 7" fill="none" stroke="currentColor" stroke-width="1.8"/></svg></button>
@@ -286,16 +299,27 @@
 
 <!-- ============ 05 RICH TEXT — STATEMENT ============ -->
 <section class="section statement" data-section="Rich text">
-  <div class="container container--narrow">
-    <p class="eyebrow center"><span class="idx">(03)</span> Our philosophy</p>
-    <p class="statement__text" data-words>
-      We borrow from the sea
-      <span class="pill-img"><img src="https://images.unsplash.com/photo-1484291470158-b8f8d608850d?auto=format&fit=crop&w=240&h=120&q=70" alt="" width="120" height="60" loading="lazy"></span>
-      what skin already knows: minerals, moisture and rhythm. Fewer ingredients, every one at a percentage that works
-      <span class="pill-img"><img src="https://images.unsplash.com/photo-1576426863848-c21f53c60b19?auto=format&fit=crop&w=240&h=120&q=70" alt="" width="120" height="60" loading="lazy"></span>
-      and nothing added for the sake of a label.
-    </p>
-    <div class="center mt-32"><a class="link-arrow" href="#ingredients">Read our formulation standards <span aria-hidden="true">→</span></a></div>
+  <div class="container statement__grid">
+    <div class="statement__side">
+      <p class="eyebrow"><span class="idx">(03)</span> About the brand</p>
+      <div class="seal" aria-hidden="true">
+        <svg viewBox="0 0 120 120"><defs><path id="circ2" d="M60 60 m-46 0 a46 46 0 1 1 92 0 a46 46 0 1 1 -92 0"/></defs><text><textPath href="#circ2" textLength="286" lengthAdjust="spacing">LESS, BUT BETTER · MADE WITH CARE ·</textPath></text></svg>
+        <svg class="seal__mark" width="34" height="34" viewBox="0 0 32 32"><path d="M5 18c3.5-4 7-4 11 0s7.5 4 11 0" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round"/><path d="M5 12.5c3.5-4 7-4 11 0s7.5 4 11 0" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" opacity=".5"/></svg>
+      </div>
+    </div>
+    <div class="statement__main">
+      <p class="statement__text" data-words>We make fewer things,
+        <span class="pill-img"><img src="https://images.unsplash.com/photo-1484291470158-b8f8d608850d?auto=format&fit=crop&w=240&h=120&q=80" alt="" width="120" height="60" loading="lazy"></span>
+        and make them properly. Every product earns its place with honest ingredients, recyclable packaging
+        <span class="pill-img"><img src="https://images.unsplash.com/photo-1607006344380-b6775a0824a7?auto=format&fit=crop&w=240&h=120&q=80" alt="" width="120" height="60" loading="lazy"></span>
+        and a price that feels fair.</p>
+      <ul class="statement__stats">
+        <li><strong>12</strong><span>Products, never more</span></li>
+        <li><strong>100%</strong><span>Recyclable packaging</span></li>
+        <li><strong>60</strong><span>Day no-quibble returns</span></li>
+      </ul>
+      <a class="link-arrow" href="#features">Read our story <span aria-hidden="true">→</span></a>
+    </div>
   </div>
 </section>
 
@@ -310,85 +334,87 @@
       <div class="hotspot-card" role="dialog" aria-live="polite" hidden data-hotspot-card></div>
     </div>
     <div class="shoppable__copy">
-      <p class="eyebrow"><span class="idx">(04)</span> The 7am ritual</p>
+      <p class="eyebrow"><span class="idx">(04)</span> Shop the look</p>
       <h2 class="h2">Four minutes.<br>Three steps.<br><em>Zero guesswork.</em></h2>
       <ol class="steps">
         <li><span>01</span><div><strong>Cleanse</strong><p>Massage the Tide Gel into damp skin for 60 seconds, then rinse with cool water.</p></div></li>
         <li><span>02</span><div><strong>Treat</strong><p>Press three drops of face oil or serum into skin while it is still a little damp.</p></div></li>
         <li><span>03</span><div><strong>Seal</strong><p>Finish with Barrier Balm on dry areas and the lip mask before you head out.</p></div></li>
       </ol>
-      <a class="btn btn--primary" href="#routine">Shop the ritual</a>
+      <a class="btn btn--primary" href="#bundle">Shop the look</a>
     </div>
   </div>
 </section>
 
-<!-- ============ 07 MULTICOLUMN — INGREDIENTS (dark scheme) ============ -->
-<section class="section scheme-3 ingredients" id="ingredients" data-section="Multicolumn">
-  <div class="ingredients__bg" aria-hidden="true"></div>
+<!-- ============ 07 MULTICOLUMN (dark scheme) ============ -->
+<section class="section scheme-3 features" id="features" data-section="Multicolumn">
+  <div class="features__bg" aria-hidden="true"></div>
   <div class="container">
     <div class="section-head section-head--light">
       <div>
-        <p class="eyebrow"><span class="idx">(05)</span> Active ingredients</p>
-        <h2 class="h2">Four actives.<br><em>No filler.</em></h2>
+        <p class="eyebrow"><span class="idx">(05)</span> Why customers stay</p>
+        <h2 class="h2">Made better.<br><em>Priced fairly.</em></h2>
       </div>
-      <p class="muted section-head__side">Every percentage is printed on the front of the pack, because you should know exactly what you are putting on your skin.</p>
+      <p class="muted section-head__side">Four promises we print on every order, so you always know what you're getting.</p>
     </div>
-    <ul class="ingredient-grid">
-      <li class="ingredient">
-        <p class="ingredient__pct"><span data-count="10">0</span>%</p>
-        <h3>Niacinamide</h3>
-        <p>Vitamin B3 helps refine the look of pores, balance oil and even out tone without irritation.</p>
-        <span class="ingredient__tag">In: Serum</span>
+    <ul class="feature-grid">
+      <li class="feature">
+        <span class="feature__icon" aria-hidden="true"><svg width="26" height="26" viewBox="0 0 24 24"><path d="M3 7h11v9H3zM14 10h4l3 3v3h-7" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linejoin="round"/><circle cx="7" cy="17.5" r="1.8" fill="none" stroke="currentColor" stroke-width="1.6"/><circle cx="17" cy="17.5" r="1.8" fill="none" stroke="currentColor" stroke-width="1.6"/></svg></span>
+        <p class="feature__num"><span data-count="48">0</span><small>h</small></p>
+        <h3>Fast dispatch</h3>
+        <p>Orders placed before 2pm leave our warehouse within 48 hours, carbon-neutral.</p>
       </li>
-      <li class="ingredient">
-        <p class="ingredient__pct"><span data-count="2">0</span>%</p>
-        <h3>Panthenol</h3>
-        <p>Pro-vitamin B5 draws in water and calms skin straight after cleansing, so it never feels stripped.</p>
-        <span class="ingredient__tag">In: Cleanser</span>
+      <li class="feature">
+        <span class="feature__icon" aria-hidden="true"><svg width="26" height="26" viewBox="0 0 24 24"><path d="M4 12a8 8 0 1 0 2.3-5.7M4 4v4h4" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/></svg></span>
+        <p class="feature__num"><span data-count="60">0</span><small>days</small></p>
+        <h3>Easy returns</h3>
+        <p>Changed your mind? Send it back within 60 days for a full refund.</p>
       </li>
-      <li class="ingredient">
-        <p class="ingredient__pct"><span data-count="1">0</span>%</p>
-        <h3>Sea minerals</h3>
-        <p>Magnesium, zinc and calcium from Atlantic sea water support the skin barrier and add a clean, soft finish.</p>
-        <span class="ingredient__tag">In: Every formula</span>
+      <li class="feature">
+        <span class="feature__icon" aria-hidden="true"><svg width="26" height="26" viewBox="0 0 24 24"><path d="M12 3l7 3v6c0 4.5-3 7.5-7 9-4-1.5-7-4.5-7-9V6z M9 12l2 2 4-4" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linejoin="round" stroke-linecap="round"/></svg></span>
+        <p class="feature__num"><span data-count="100">0</span><small>%</small></p>
+        <h3>Tested &amp; certified</h3>
+        <p>Every product is independently tested before it reaches you.</p>
       </li>
-      <li class="ingredient">
-        <p class="ingredient__pct"><span data-count="5">0</span>%</p>
-        <h3>Squalane</h3>
-        <p>A plant-derived lipid that mimics skin's own oils. Weightless, non-comedogenic and gentle around the eyes.</p>
-        <span class="ingredient__tag">In: Oil &amp; balm</span>
+      <li class="feature">
+        <span class="feature__icon" aria-hidden="true"><svg width="26" height="26" viewBox="0 0 24 24"><path d="M5 19c8 0 14-6 14-14C11 5 5 11 5 19zm0 0l7-7" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/></svg></span>
+        <p class="feature__num"><span data-count="0">0</span><small>plastic</small></p>
+        <h3>Low-waste packaging</h3>
+        <p>Aluminium, glass and paper only. Everything is recyclable at home.</p>
       </li>
     </ul>
   </div>
 </section>
 
-<!-- ============ 08 ROUTINE BUILDER (bundle) ============ -->
-<section class="section" id="routine" data-section="Bundle builder">
+<!-- ============ 08 BUNDLE BUILDER ============ -->
+<section class="section" id="bundle" data-section="Bundle builder">
   <div class="container">
     <div class="section-head">
       <div>
-        <p class="eyebrow"><span class="idx">(06)</span> Routine builder</p>
-        <h2 class="h2">Build your routine.<br><em>Save 15%.</em></h2>
+        <p class="eyebrow"><span class="idx">(06)</span> Bundle builder</p>
+        <h2 class="h2">Build your bundle.<br><em>Save 15%.</em></h2>
       </div>
-      <p class="muted section-head__side">Choose one product for each step. The bundle discount is applied automatically at checkout.</p>
+      <div class="section-head__side">
+        <p class="muted">Pick one product from each step. The discount is applied automatically.</p>
+        <ol class="bsteps-mini" aria-hidden="true"><li data-mini="0">1</li><li data-mini="1">2</li><li data-mini="2">3</li></ol>
+      </div>
     </div>
 
     <div class="builder">
       <div class="builder__steps" id="builder-steps"></div>
-      <aside class="builder__summary" aria-label="Your routine">
-        <p class="builder__label">Your routine</p>
+      <div class="builder__bar" aria-label="Your bundle">
+        <div class="builder__bar-info">
+          <p class="builder__label">Your bundle <span id="builder-count">1/3</span></p>
+          <div class="builder__meter"><span id="builder-meter"></span></div>
+          <p class="builder__save" id="builder-save">Choose 2 more to unlock 15% off</p>
+        </div>
         <ul class="builder__picked" id="builder-picked"></ul>
         <div class="builder__totals">
-          <p><span>Subtotal</span><s id="builder-compare">$0</s></p>
-          <p class="builder__total"><span>Bundle price</span><strong id="builder-total">$0</strong></p>
-          <p class="builder__save" id="builder-save">Choose 3 steps to unlock 15% off</p>
+          <s id="builder-compare">$0</s>
+          <strong id="builder-total">$0</strong>
         </div>
-        <button class="btn btn--primary btn--block" id="builder-add" disabled>Add routine to cart</button>
-        <ul class="ticks ticks--small">
-          <li>Free shipping on this bundle</li>
-          <li>60-day "love it" guarantee</li>
-        </ul>
-      </aside>
+        <button class="btn btn--light" id="builder-add" disabled>Add bundle to cart</button>
+      </div>
     </div>
   </div>
 </section>
@@ -425,13 +451,13 @@
     <div class="reviews__head">
       <div>
         <p class="eyebrow"><span class="idx">(08)</span> Reviews</p>
-        <h2 class="h2">Real skin.<br><em>Real routines.</em></h2>
+        <h2 class="h2">Loved by real<br><em>customers.</em></h2>
       </div>
       <div class="reviews__score">
         <p class="reviews__big">4.8</p>
         <div>
           <p class="stars stars--lg" aria-label="Average rating 4.8 out of 5">★★★★★</p>
-          <p class="muted">From 3,210 verified reviews</p>
+          <p class="muted">3,210 verified reviews</p>
           <div class="bars" aria-hidden="true">
             <span style="--w:86%">5</span><span style="--w:10%">4</span><span style="--w:3%">3</span><span style="--w:1%">2</span>
           </div>
@@ -441,46 +467,73 @@
 
     <ul class="review-track" id="review-track">
       <li class="review">
-        <img class="review__photo" src="https://images.unsplash.com/photo-1531123897727-8f129e1688ce?auto=format&fit=crop&w=600&h=600&q=75" alt="Reviewer Amara smiling" width="300" height="300" loading="lazy">
+        <div class="review__media">
+          <img src="https://images.unsplash.com/photo-1531123897727-8f129e1688ce?auto=format&fit=crop&w=700&h=560&q=80" alt="Reviewer Amara smiling" width="350" height="280" loading="lazy">
+          <span class="review__chip"><img src="https://images.unsplash.com/photo-1540555700478-4be289fbecef?auto=format&fit=crop&w=80&h=80&q=80" alt="" width="28" height="28" loading="lazy">Tide Gel Cleanser</span>
+        </div>
         <div class="review__body">
-          <p class="stars" aria-label="5 out of 5">★★★★★</p>
-          <h3>"My skin doesn't feel tight anymore"</h3>
-          <p>I've tried every gel cleanser out there. This is the first one that takes off sunscreen and still leaves my skin soft. The pump bottle lasts about three months.</p>
-          <p class="review__who">Amara O. <span class="verified">Verified buyer</span></p>
-          <p class="review__product">Tide Gel Cleanser</p>
+          <div class="review__top"><span class="stars" aria-label="5 out of 5">★★★★★</span><span class="review__date">2 weeks ago</span></div>
+          <h3>“My skin doesn’t feel tight anymore”</h3>
+          <p>I’ve tried every gel cleanser out there. This is the first one that takes off sunscreen and still leaves my skin soft.</p>
+          <p class="review__who"><span class="review__avatar" aria-hidden="true">AO</span>Amara O. <span class="verified">Verified buyer</span></p>
         </div>
       </li>
       <li class="review">
-        <img class="review__photo" src="https://images.unsplash.com/photo-1519699047748-de8e457a634e?auto=format&fit=crop&w=600&h=600&q=75" alt="Reviewer Lena in soft light" width="300" height="300" loading="lazy">
+        <div class="review__media">
+          <img src="https://images.unsplash.com/photo-1519699047748-de8e457a634e?auto=format&fit=crop&w=700&h=560&q=80" alt="Reviewer Lena in soft light" width="350" height="280" loading="lazy">
+          <span class="review__chip"><img src="https://images.unsplash.com/photo-1576426863848-c21f53c60b19?auto=format&fit=crop&w=80&h=80&q=80" alt="" width="28" height="28" loading="lazy">Niacinamide Serum</span>
+        </div>
         <div class="review__body">
-          <p class="stars" aria-label="5 out of 5">★★★★★</p>
-          <h3>"Shine under control by lunch"</h3>
-          <p>Lightweight, no pilling under makeup and my T-zone stays matte much longer. I use it every morning after cleansing.</p>
-          <p class="review__who">Lena K. <span class="verified">Verified buyer</span></p>
-          <p class="review__product">Niacinamide 10% Serum</p>
+          <div class="review__top"><span class="stars" aria-label="5 out of 5">★★★★★</span><span class="review__date">1 month ago</span></div>
+          <h3>“Shine under control by lunch”</h3>
+          <p>Lightweight, no pilling under makeup, and my T-zone stays matte much longer. I use it every single morning.</p>
+          <p class="review__who"><span class="review__avatar" aria-hidden="true">LK</span>Lena K. <span class="verified">Verified buyer</span></p>
         </div>
       </li>
       <li class="review">
-        <img class="review__photo" src="https://images.unsplash.com/photo-1594744803329-e58b31de8bf5?auto=format&fit=crop&w=600&h=600&q=75" alt="Reviewer Sophie sitting by a window" width="300" height="300" loading="lazy">
+        <div class="review__media">
+          <img src="https://images.unsplash.com/photo-1594744803329-e58b31de8bf5?auto=format&fit=crop&w=700&h=560&q=80" alt="Reviewer Sophie by a window" width="350" height="280" loading="lazy">
+          <span class="review__chip"><img src="https://images.unsplash.com/photo-1607006344380-b6775a0824a7?auto=format&fit=crop&w=80&h=80&q=80" alt="" width="28" height="28" loading="lazy">Sea Salt Body Bar</span>
+        </div>
         <div class="review__body">
-          <p class="stars" aria-label="4 out of 5">★★★★☆</p>
-          <h3>"The body bar is a whole mood"</h3>
-          <p>Creamy lather, lasts for weeks and doesn't turn mushy in the dish. I'd love a bigger size, but I'll keep buying.</p>
-          <p class="review__who">Sophie R. <span class="verified">Verified buyer</span></p>
-          <p class="review__product">Sea Salt Body Bar</p>
+          <div class="review__top"><span class="stars" aria-label="4 out of 5">★★★★☆</span><span class="review__date">3 weeks ago</span></div>
+          <h3>“The body bar is a whole mood”</h3>
+          <p>Creamy lather, lasts for weeks and doesn’t turn mushy in the dish. I’d love a bigger size, but I’ll keep buying.</p>
+          <p class="review__who"><span class="review__avatar" aria-hidden="true">SR</span>Sophie R. <span class="verified">Verified buyer</span></p>
         </div>
       </li>
       <li class="review">
-        <img class="review__photo" src="https://images.unsplash.com/photo-1508214751196-bcfd4ca60f91?auto=format&fit=crop&w=600&h=600&q=75" alt="Reviewer Claire outdoors at golden hour" width="300" height="300" loading="lazy">
+        <div class="review__media">
+          <img src="https://images.unsplash.com/photo-1508214751196-bcfd4ca60f91?auto=format&fit=crop&w=700&h=560&q=80" alt="Reviewer Claire outdoors" width="350" height="280" loading="lazy">
+          <span class="review__chip"><img src="https://images.unsplash.com/photo-1619451334792-150fd785ee74?auto=format&fit=crop&w=80&h=80&q=80" alt="" width="28" height="28" loading="lazy">Bundle · 3 products</span>
+        </div>
         <div class="review__body">
-          <p class="stars" aria-label="5 out of 5">★★★★★</p>
-          <h3>"Finally, products for 50+ skin that don't sting"</h3>
-          <p>My skin reacts to almost everything. The routine bundle was a good way to try all three, and nothing has caused redness.</p>
-          <p class="review__who">Claire M. <span class="verified">Verified buyer</span></p>
-          <p class="review__product">Routine bundle</p>
+          <div class="review__top"><span class="stars" aria-label="5 out of 5">★★★★★</span><span class="review__date">2 months ago</span></div>
+          <h3>“Nothing has caused redness”</h3>
+          <p>My skin reacts to almost everything. The bundle was a good way to try three products, and all of them are now staples.</p>
+          <p class="review__who"><span class="review__avatar" aria-hidden="true">CM</span>Claire M. <span class="verified">Verified buyer</span></p>
+        </div>
+      </li>
+      <li class="review">
+        <div class="review__media">
+          <img src="https://images.unsplash.com/photo-1616683693504-3ea7e9ad6fec?auto=format&fit=crop&w=700&h=560&q=80" alt="Reviewer Nadia portrait" width="350" height="280" loading="lazy">
+          <span class="review__chip"><img src="https://images.unsplash.com/photo-1617897903246-719242758050?auto=format&fit=crop&w=80&h=80&q=80" alt="" width="28" height="28" loading="lazy">Body Ritual Oil</span>
+        </div>
+        <div class="review__body">
+          <div class="review__top"><span class="stars" aria-label="5 out of 5">★★★★★</span><span class="review__date">1 week ago</span></div>
+          <h3>“Packaging that feels like a gift”</h3>
+          <p>Arrived in two days, no plastic anywhere, and the oil smells of absolutely nothing — exactly what I wanted.</p>
+          <p class="review__who"><span class="review__avatar" aria-hidden="true">NF</span>Nadia F. <span class="verified">Verified buyer</span></p>
         </div>
       </li>
     </ul>
+    <div class="track-foot">
+      <div class="track-progress" aria-hidden="true"><span data-track-bar="#review-track"></span></div>
+      <div class="slider-nav">
+        <button class="icon-btn icon-btn--outline" aria-label="Previous reviews" data-scroll="#review-track" data-dir="-1"><svg width="18" height="18" viewBox="0 0 24 24" aria-hidden="true"><path d="M15 5l-7 7 7 7" fill="none" stroke="currentColor" stroke-width="1.8"/></svg></button>
+        <button class="icon-btn icon-btn--outline" aria-label="Next reviews" data-scroll="#review-track" data-dir="1"><svg width="18" height="18" viewBox="0 0 24 24" aria-hidden="true"><path d="M9 5l7 7-7 7" fill="none" stroke="currentColor" stroke-width="1.8"/></svg></button>
+      </div>
+    </div>
   </div>
 </section>
 
@@ -515,31 +568,46 @@
 <!-- ============ 12 COLLAPSIBLE CONTENT (FAQ) ============ -->
 <section class="section" id="faq" data-section="Collapsible content">
   <div class="container faq">
-    <div>
-      <p class="eyebrow"><span class="idx">(10)</span> Good to know</p>
+    <div class="faq__aside">
+      <p class="eyebrow"><span class="idx">(10)</span> Help centre</p>
       <h2 class="h2">Questions,<br><em>answered.</em></h2>
-      <p class="muted mt-24">Can't find what you're looking for? Our skin specialists reply within one business day.</p>
-      <a class="btn btn--outline mt-24" href="#footer">Contact us</a>
+      <div class="faq__tabs" role="tablist" aria-label="Question categories">
+        <button class="tab is-active" role="tab" aria-selected="true" data-faq="all">All</button>
+        <button class="tab" role="tab" aria-selected="false" data-faq="products">Products</button>
+        <button class="tab" role="tab" aria-selected="false" data-faq="orders">Orders &amp; shipping</button>
+      </div>
+      <div class="faq__card">
+        <img src="https://images.unsplash.com/photo-1594824476967-48c8b964273f?auto=format&fit=crop&w=300&h=300&q=80" alt="Smiling customer care specialist" width="72" height="72" loading="lazy">
+        <div>
+          <p class="faq__card-title">Still need help?</p>
+          <p class="muted">Our team replies within one business day, Monday to Friday.</p>
+          <a class="link-arrow" href="#footer">Send us a message <span aria-hidden="true">→</span></a>
+        </div>
+      </div>
     </div>
     <div class="faq__list">
-      <details open>
-        <summary>Is Ocean suitable for sensitive or acne-prone skin?</summary>
-        <p>Yes. Every formula is fragrance-free, non-comedogenic and tested under dermatological control on sensitive skin. If you have a known allergy, check the full ingredient list on each product page.</p>
+      <details data-cat="products" open>
+        <summary><span class="faq__num">01</span><span class="faq__q">Are your products suitable for sensitive skin?</span></summary>
+        <p>Yes. Every formula is fragrance-free and tested on sensitive skin. If you have a known allergy, check the full ingredient list on each product page.</p>
       </details>
-      <details>
-        <summary>How long does one cleanser last?</summary>
-        <p>With one pump morning and evening, the 200 ml Tide Gel Cleanser lasts around 12 weeks. You can subscribe and save 10% so you never run out.</p>
+      <details data-cat="products">
+        <summary><span class="faq__num">02</span><span class="faq__q">How long does one bottle last?</span></summary>
+        <p>With daily use, most products last 10–12 weeks. You can subscribe and save 10% so you never run out.</p>
       </details>
-      <details>
-        <summary>Can I use the niacinamide serum with retinol or vitamin C?</summary>
-        <p>Yes. Use niacinamide in the morning and retinol at night, or layer it after vitamin C once the first serum has absorbed.</p>
+      <details data-cat="products">
+        <summary><span class="faq__num">03</span><span class="faq__q">Can I combine products from different collections?</span></summary>
+        <p>Absolutely. Everything is designed to work together, and the bundle builder saves you 15% when you pick three.</p>
       </details>
-      <details>
-        <summary>What is your returns policy?</summary>
-        <p>If you don't love a product, contact us within 60 days of delivery and we'll refund you. You don't need to send opened products back.</p>
+      <details data-cat="orders">
+        <summary><span class="faq__num">04</span><span class="faq__q">When will my order arrive?</span></summary>
+        <p>Orders placed before 2pm ship the same working day. Standard delivery takes 2–4 working days; express is next day.</p>
       </details>
-      <details>
-        <summary>Do you ship internationally?</summary>
+      <details data-cat="orders">
+        <summary><span class="faq__num">05</span><span class="faq__q">What is your returns policy?</span></summary>
+        <p>If you are not happy, contact us within 60 days of delivery for a full refund. Opened products are welcome back too.</p>
+      </details>
+      <details data-cat="orders">
+        <summary><span class="faq__num">06</span><span class="faq__q">Do you ship internationally?</span></summary>
         <p>We ship to 32 countries. Prices, duties and taxes are shown in your local currency at checkout.</p>
       </details>
     </div>
@@ -571,55 +639,64 @@
 <!-- ============ FOOTER (section group) ============ -->
 <footer class="footer scheme-4" id="footer" data-section="Footer">
   <div class="container">
+    <div class="footer__hero">
+      <p class="footer__tag">Good things,<br><em>made calmly.</em></p>
+      <ul class="footer__quick">
+        <li><a href="#faq"><span>Help centre</span><small>Answers in minutes</small><i aria-hidden="true">→</i></a></li>
+        <li><a href="#footer"><span>Track an order</span><small>Live delivery updates</small><i aria-hidden="true">→</i></a></li>
+        <li><a href="#footer"><span>Contact us</span><small>Reply within 1 business day</small><i aria-hidden="true">→</i></a></li>
+      </ul>
+    </div>
+
     <div class="footer__top">
       <div class="footer__brand">
         <a class="logo logo--light" href="#main" aria-label="Ocean home">
           <svg class="logo__mark" width="30" height="30" viewBox="0 0 32 32" aria-hidden="true"><rect width="32" height="32" rx="9" fill="currentColor"/><path d="M5 18c3.5-4 7-4 11 0s7.5 4 11 0" fill="none" stroke="#0d1422" stroke-width="3" stroke-linecap="round"/></svg>
           <span class="logo__word">OCEAN</span>
         </a>
-        <p class="footer__about">Marine skincare and body care, formulated with sea minerals and a short list of proven actives.</p>
-        <a class="follow-shop" href="#footer" aria-label="Follow on Shop">
-          <svg width="16" height="16" viewBox="0 0 24 24" aria-hidden="true"><path d="M12 21s-7-4.4-9.5-9A5.5 5.5 0 0 1 12 6a5.5 5.5 0 0 1 9.5 6C19 16.6 12 21 12 21z" fill="currentColor"/></svg>
-          Follow on <strong>shop</strong>
-        </a>
-        <ul class="socials" aria-label="Social media">
-          <li><a href="#footer" aria-label="Instagram"><svg width="18" height="18" viewBox="0 0 24 24" aria-hidden="true"><rect x="3" y="3" width="18" height="18" rx="5" fill="none" stroke="currentColor" stroke-width="1.8"/><circle cx="12" cy="12" r="4" fill="none" stroke="currentColor" stroke-width="1.8"/><circle cx="17.5" cy="6.5" r="1.2" fill="currentColor"/></svg></a></li>
-          <li><a href="#footer" aria-label="TikTok"><svg width="18" height="18" viewBox="0 0 24 24" aria-hidden="true"><path d="M14 3v11.5a3.5 3.5 0 1 1-3-3.46M14 3c.5 2.6 2.4 4.4 5 4.6" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/></svg></a></li>
-          <li><a href="#footer" aria-label="Pinterest"><svg width="18" height="18" viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="12" r="9" fill="none" stroke="currentColor" stroke-width="1.8"/><path d="M11 8.5c3-1 5 .8 4.5 3.3-.4 2-2.4 3-3.7 1.6M11.5 10l-2 10" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/></svg></a></li>
-          <li><a href="#footer" aria-label="YouTube"><svg width="18" height="18" viewBox="0 0 24 24" aria-hidden="true"><rect x="2.5" y="5.5" width="19" height="13" rx="4" fill="none" stroke="currentColor" stroke-width="1.8"/><path d="M10 9.5v5l4.5-2.5z" fill="currentColor"/></svg></a></li>
-        </ul>
+        <p class="footer__about">Thoughtfully made essentials for face and body, delivered carbon-neutral to 32 countries.</p>
+        <div class="footer__social-row">
+          <a class="follow-shop" href="#footer" aria-label="Follow on Shop">
+            <svg width="16" height="16" viewBox="0 0 24 24" aria-hidden="true"><path d="M12 21s-7-4.4-9.5-9A5.5 5.5 0 0 1 12 6a5.5 5.5 0 0 1 9.5 6C19 16.6 12 21 12 21z" fill="currentColor"/></svg>
+            Follow on <strong>shop</strong>
+          </a>
+          <ul class="socials" aria-label="Social media">
+            <li><a href="#footer" aria-label="Instagram"><svg width="18" height="18" viewBox="0 0 24 24" aria-hidden="true"><rect x="3" y="3" width="18" height="18" rx="5" fill="none" stroke="currentColor" stroke-width="1.8"/><circle cx="12" cy="12" r="4" fill="none" stroke="currentColor" stroke-width="1.8"/><circle cx="17.5" cy="6.5" r="1.2" fill="currentColor"/></svg></a></li>
+            <li><a href="#footer" aria-label="TikTok"><svg width="18" height="18" viewBox="0 0 24 24" aria-hidden="true"><path d="M14 3v11.5a3.5 3.5 0 1 1-3-3.46M14 3c.5 2.6 2.4 4.4 5 4.6" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/></svg></a></li>
+            <li><a href="#footer" aria-label="Pinterest"><svg width="18" height="18" viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="12" r="9" fill="none" stroke="currentColor" stroke-width="1.8"/><path d="M11 8.5c3-1 5 .8 4.5 3.3-.4 2-2.4 3-3.7 1.6M11.5 10l-2 10" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/></svg></a></li>
+            <li><a href="#footer" aria-label="YouTube"><svg width="18" height="18" viewBox="0 0 24 24" aria-hidden="true"><rect x="2.5" y="5.5" width="19" height="13" rx="4" fill="none" stroke="currentColor" stroke-width="1.8"/><path d="M10 9.5v5l4.5-2.5z" fill="currentColor"/></svg></a></li>
+          </ul>
+        </div>
       </div>
       <nav class="footer__col" aria-label="Shop">
         <p class="footer__title">Shop</p>
-        <ul><li><a href="#featured">Face wash</a></li><li><a href="#featured">Serums</a></li><li><a href="#featured">Moisturisers</a></li><li><a href="#body">Body care</a></li><li><a href="#routine">Routine bundles</a></li><li><a href="#featured">Gift cards</a></li></ul>
+        <ul><li><a href="#featured">New arrivals</a></li><li><a href="#featured">Best sellers</a></li><li><a href="#concerns">Face</a></li><li><a href="#body">Body</a></li><li><a href="#bundle">Bundles</a></li><li><a href="#featured">Gift cards</a></li></ul>
       </nav>
       <nav class="footer__col" aria-label="Help">
         <p class="footer__title">Help</p>
-        <ul><li><a href="#faq">FAQ</a></li><li><a href="#footer">Shipping &amp; returns</a></li><li><a href="#footer">Track your order</a></li><li><a href="#footer">Contact form</a></li></ul>
+        <ul><li><a href="#faq">FAQ</a></li><li><a href="#footer">Shipping</a></li><li><a href="#footer">Returns</a></li><li><a href="#footer">Contact form</a></li></ul>
       </nav>
-      <nav class="footer__col" aria-label="About">
-        <p class="footer__title">About</p>
-        <ul><li><a href="#ingredients">Ingredients</a></li><li><a href="#journal">The Journal</a></li><li><a href="#footer">Sustainability</a></li><li><a href="#footer">Stockists</a></li></ul>
+      <nav class="footer__col" aria-label="Company">
+        <p class="footer__title">Company</p>
+        <ul><li><a href="#features">Our story</a></li><li><a href="#journal">Journal</a></li><li><a href="#footer">Sustainability</a></li><li><a href="#footer">Stockists</a></li></ul>
       </nav>
     </div>
 
     <div class="footer__bottom">
       <div class="footer__loc">
         <div class="dropdown dropdown--up" data-dropdown>
-          <button class="dropdown__toggle" aria-expanded="false" aria-haspopup="listbox" aria-label="Country / currency"><span data-current-country>🇺🇸 United States (USD $)</span></button>
-          <ul class="dropdown__menu" role="listbox" aria-label="Choose country">
-            <li><button role="option" data-country="US" data-rate="1" data-symbol="$" data-code="USD">🇺🇸 United States (USD $)</button></li>
-            <li><button role="option" data-country="GB" data-rate="0.79" data-symbol="£" data-code="GBP">🇬🇧 United Kingdom (GBP £)</button></li>
-            <li><button role="option" data-country="EU" data-rate="0.92" data-symbol="€" data-code="EUR">🇪🇺 Europe (EUR €)</button></li>
-            <li><button role="option" data-country="CA" data-rate="1.37" data-symbol="CA$" data-code="CAD">🇨🇦 Canada (CAD $)</button></li>
-            <li><button role="option" data-country="AU" data-rate="1.52" data-symbol="A$" data-code="AUD">🇦🇺 Australia (AUD $)</button></li>
-          </ul>
+          <button class="dropdown__toggle" aria-expanded="false" aria-haspopup="listbox" aria-label="Country / currency"><span data-current-country><span class="flag flag--us" aria-hidden="true"></span>United States (USD $)</span><svg width="10" height="10" viewBox="0 0 10 10" aria-hidden="true"><path d="M1 7l4-4 4 4" fill="none" stroke="currentColor" stroke-width="1.5"/></svg></button>
+          <ul class="dropdown__menu" role="listbox" aria-label="Choose country"><li><button role="option" data-country="US" data-rate="1" data-symbol="$" data-code="USD"><span class="flag flag--us" aria-hidden="true"></span>United States (USD $)</button></li><li><button role="option" data-country="GB" data-rate="0.79" data-symbol="£" data-code="GBP"><span class="flag flag--gb" aria-hidden="true"></span>United Kingdom (GBP £)</button></li><li><button role="option" data-country="EU" data-rate="0.92" data-symbol="€" data-code="EUR"><span class="flag flag--eu" aria-hidden="true"></span>Europe (EUR €)</button></li><li><button role="option" data-country="CA" data-rate="1.37" data-symbol="CA$" data-code="CAD"><span class="flag flag--ca" aria-hidden="true"></span>Canada (CAD $)</button></li><li><button role="option" data-country="AU" data-rate="1.52" data-symbol="A$" data-code="AUD"><span class="flag flag--au" aria-hidden="true"></span>Australia (AUD $)</button></li></ul>
+        </div>
+        <div class="dropdown dropdown--up" data-dropdown>
+          <button class="dropdown__toggle" aria-expanded="false" aria-haspopup="listbox" aria-label="Language"><span data-current-lang>English</span><svg width="10" height="10" viewBox="0 0 10 10" aria-hidden="true"><path d="M1 7l4-4 4 4" fill="none" stroke="currentColor" stroke-width="1.5"/></svg></button>
+          <ul class="dropdown__menu" role="listbox" aria-label="Choose language"><li><button role="option" data-lang="English">English</button></li><li><button role="option" data-lang="Français">Français</button></li><li><button role="option" data-lang="Deutsch">Deutsch</button></li></ul>
         </div>
       </div>
       <ul class="payments" aria-label="Payment methods accepted">
         <li>Visa</li><li>Mastercard</li><li>Amex</li><li>PayPal</li><li>Apple Pay</li><li class="pay-shop">Shop Pay</li>
       </ul>
-      <p class="footer__copy">© 2026 Ocean. Theme prototype.</p>
+      <p class="footer__copy">© 2026 Ocean · <a href="#footer">Privacy</a> · <a href="#footer">Terms</a></p>
     </div>
   </div>
   <p class="footer__giant" aria-hidden="true">OCEAN</p>
@@ -634,9 +711,9 @@
   <nav class="drawer__body mobile-nav" aria-label="Mobile">
     <details><summary>Face</summary><ul><li><a href="#featured">Face wash &amp; cleansers</a></li><li><a href="#featured">Serums</a></li><li><a href="#featured">Moisturisers</a></li><li><a href="#featured">Face oils</a></li></ul></details>
     <details><summary>Body</summary><ul><li><a href="#body">Body wash</a></li><li><a href="#body">Body bars</a></li><li><a href="#body">Body oils</a></li></ul></details>
-    <details><summary>Shop by concern</summary><ul><li><a href="#concerns">Breakouts</a></li><li><a href="#concerns">Dryness</a></li><li><a href="#concerns">Sensitivity</a></li><li><a href="#concerns">Dullness</a></li></ul></details>
-    <a href="#ingredients">Ingredients</a>
-    <a href="#routine">Routine builder</a>
+    <details><summary>Featured</summary><ul><li><a href="#concerns">Breakouts</a></li><li><a href="#concerns">Dryness</a></li><li><a href="#concerns">Sensitivity</a></li><li><a href="#concerns">Dullness</a></li></ul></details>
+    <a href="#features">Ingredients</a>
+    <a href="#bundle">Bundles</a>
     <a href="#journal">Journal</a>
     <a href="#footer">Account</a>
   </nav>
@@ -700,7 +777,7 @@
 
     <div class="upsell" data-upsell>
       <div class="upsell__head">
-        <p class="mini-title">Complete your routine</p>
+        <p class="mini-title">You may also like</p>
         <div class="slider-nav slider-nav--sm">
           <button class="icon-btn icon-btn--outline" aria-label="Previous suggestion" data-scroll="#upsell-track" data-dir="-1"><svg width="14" height="14" viewBox="0 0 24 24" aria-hidden="true"><path d="M15 5l-7 7 7 7" fill="none" stroke="currentColor" stroke-width="2"/></svg></button>
           <button class="icon-btn icon-btn--outline" aria-label="Next suggestion" data-scroll="#upsell-track" data-dir="1"><svg width="14" height="14" viewBox="0 0 24 24" aria-hidden="true"><path d="M9 5l7 7-7 7" fill="none" stroke="currentColor" stroke-width="2"/></svg></button>
@@ -723,7 +800,7 @@
   </div>
   <div class="cart-drawer__foot">
     <div class="cart-drawer__row"><span>Subtotal</span><strong data-cart-subtotal>$0.00</strong></div>
-    <div class="cart-drawer__row cart-drawer__row--discount" data-bundle-row hidden><span>Routine bundle (−15%)</span><strong data-cart-discount>−$0.00</strong></div>
+    <div class="cart-drawer__row cart-drawer__row--discount" data-bundle-row hidden><span>Bundle discount (−15%)</span><strong data-cart-discount>−$0.00</strong></div>
     <p class="cart-drawer__tax">Taxes included. Discounts and shipping calculated at checkout.</p>
     <button class="btn btn--primary btn--block btn--lg" data-checkout>Check out · <span data-cart-total>$0.00</span></button>
     <div class="accel">
