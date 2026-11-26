@@ -6,6 +6,12 @@
   /* =================== i18n =================== */
   // HU text is read from the HTML on load; EN lives here.
   const EN = {
+    heroPill: "Hungary’s #1 at-home skin tag remover",
+    heroH1: "Clear skin. <em>No clinic needed.</em>",
+    heroSub: "Professional-grade skin tag removal at home – safe, painless and with scar-free results.",
+    heroBtn: "Shop now", heroBtn2: "How does it work?", heroFrom: "Now only",
+    co1: "Painless", co1s: "Light pressure at most", co2: "Scar-free", co2s: "No cutting or burning", co3: "Sterile", co3s: "With antiseptic wipes",
+    co4: "3–14 days", co4s: "Falls off on its own", co5: "1–8 mm", co5s: "Two adapter heads", co6: "40× treatments", co6s: "With a single kit",
     promo: "−50% on every NUVAI kit + free e-book over 25,000 Ft",
     endsIn: "Ends in:", cdD: "d", cdH: "h", cdM: "m", cdS: "s",
     nav1: "Skin tags", nav2: "Ear & nose", nav3: "How it works", nav4: "Reviews", nav5: "FAQ",
