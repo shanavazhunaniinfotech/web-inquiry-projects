@@ -1,0 +1,102 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+  <meta name="robots" content="noindex, nofollow">
+  <title>Projects That Prove the Build</title>
+  <meta name="description" content="A feature demo for a Dallas home builder: projects on a map of DFW, and a follow-the-build timeline that shows quality at every stage.">
+  <meta name="theme-color" content="#1c2430">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Libre+Caslon+Display&family=Red+Hat+Text:wght@400;500;600;700&display=swap">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/leaflet/1.9.4/leaflet.min.css">
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <header class="hero">
+    <div class="wrap">
+      <p class="kind"><span>FEATURE DEMO</span>Project showcase for a Dallas home builder · made for Sean by Riyaz Lohiya</p>
+      <h1>Don't just show the finished home. <em>Show how you built it.</em></h1>
+      <p class="lede">You want a website to host your projects. Here's an idea for making that section win buyers: every project sits on a map of DFW, and each one has a build timeline, from slab to keys, so buyers can see the quality that goes into every stage.</p>
+    </div>
+  </header>
+
+  <main>
+    <section class="sec wrap" id="map-sec">
+      <p class="eyebrow">01 · Where you build</p>
+      <h2>Your projects, on the map buyers search by.</h2>
+      <p class="sub">People look for builders by area: "new homes in Prosper", "custom builder Frisco". Each project shows its city, so the site works for every area you build in. Tap a pin or a project.</p>
+      <div class="filters" role="group" aria-label="Filter projects"><button type="button" data-f="all" aria-pressed="true">All</button><button type="button" data-f="Available" aria-pressed="false">Available now</button><button type="button" data-f="Under construction" aria-pressed="false">Under construction</button><button type="button" data-f="Completed" aria-pressed="false">Completed</button></div>
+      <div class="mapwrap">
+        <div id="map" aria-label="Map of projects in Dallas–Fort Worth"></div>
+        <div class="list" id="list"></div>
+      </div>
+    </section>
+
+    <section class="sec sec--blue" id="build">
+      <div class="wrap">
+        <p class="eyebrow eyebrow--light">02 · Follow the build</p>
+        <h2 class="light">Every stage, documented.</h2>
+        <div class="proj" id="proj">
+          <div class="proj__head">
+            <div><span class="status" id="pStatus"></span><h3 id="pName"></h3><p id="pMeta"></p></div>
+            <a class="btn" href="#cta" id="pAsk">Ask about this home</a>
+          </div>
+          <div class="viewer">
+            <svg id="house" viewBox="0 0 600 340" role="img" aria-label="Illustration of the home at the selected build stage">
+              <defs>
+                <pattern id="brick" width="24" height="12" patternUnits="userSpaceOnUse"><rect width="24" height="12" fill="#b8664b"/><path d="M0 0H24M0 6H24M6 0V6M18 6V12" stroke="#9d5440" stroke-width="1"/></pattern>
+                <pattern id="osb" width="14" height="14" patternUnits="userSpaceOnUse"><rect width="14" height="14" fill="#d9b47e"/><path d="M2 3l4 1M8 9l3-1M5 11l2 1M10 3l2 2" stroke="#c49a5e" stroke-width="1.2"/></pattern>
+                <pattern id="shingle" width="16" height="8" patternUnits="userSpaceOnUse"><rect width="16" height="8" fill="#3b4048"/><path d="M0 7.5H16M8 0V7.5" stroke="#2c3036" stroke-width="1"/></pattern>
+              </defs>
+              <rect class="sky" width="600" height="340"/>
+              <rect x="0" y="300" width="600" height="40" class="dirt"/>
+              <g class="L L1"><rect x="110" y="290" width="380" height="14" fill="#a9a9a5"/><rect x="110" y="290" width="380" height="3" fill="#c2c2bd"/><path d="M180 290v-10M250 290v-8M420 290v-12" stroke="#5b8bc6" stroke-width="4"/></g>
+              <g class="L L2" stroke="#c9a36a" stroke-width="4" fill="none"><path d="M120 290V170h360v120M120 170h360"/><path d="M144 290V170M168 290V170M192 290V170M216 290V170M240 290V170M264 290V170M288 290V170M312 290V170M336 290V170M360 290V170M384 290V170M408 290V170M432 290V170M456 290V170"/><path d="M110 172L300 78L490 172M160 172L300 104L440 172M300 78V172M205 150L240 172M395 150L360 172"/></g>
+              <g class="L L3"><path d="M104 174L300 76L496 174Z" fill="url(#osb)"/><rect x="120" y="170" width="360" height="120" fill="url(#osb)"/><rect x="150" y="200" width="54" height="56" fill="#2b313a"/><rect x="396" y="200" width="54" height="56" fill="#2b313a"/><rect x="276" y="214" width="48" height="76" fill="#2b313a"/><rect x="120" y="170" width="360" height="120" fill="none" stroke="#e8e6e0" stroke-width="3" stroke-dasharray="6 6" opacity=".7"/></g>
+              <g class="L L4"><path d="M100 176L300 72L500 176Z" fill="url(#shingle)"/><rect x="120" y="170" width="360" height="120" fill="url(#brick)"/><rect x="150" y="200" width="54" height="56" fill="#9fc3df" stroke="#f4f1ea" stroke-width="5"/><rect x="396" y="200" width="54" height="56" fill="#9fc3df" stroke="#f4f1ea" stroke-width="5"/><path d="M177 200v56M150 228h54M423 200v56M396 228h54" stroke="#f4f1ea" stroke-width="3"/><rect x="276" y="214" width="48" height="76" fill="#3c2a20"/><circle cx="315" cy="254" r="3" fill="#d8b46a"/><path d="M262 214h76" stroke="#f4f1ea" stroke-width="6"/><rect x="270" y="120" width="60" height="34" fill="#9fc3df" stroke="#f4f1ea" stroke-width="5"/></g>
+              <g class="L L5"><rect x="0" y="304" width="600" height="36" fill="#7fa35b"/><path d="M276 304L250 340H350L324 304Z" fill="#cfcac0"/><circle cx="70" cy="250" r="40" fill="#5f8a45"/><rect x="66" y="270" width="8" height="36" fill="#6b4d33"/><circle cx="535" cy="262" r="30" fill="#6e9a50"/><rect x="531" y="280" width="7" height="26" fill="#6b4d33"/><path d="M140 304q20-14 40 0M420 304q20-14 40 0" fill="#7fa35b"/><circle cx="160" cy="300" r="10" fill="#5f8a45"/><circle cx="440" cy="300" r="10" fill="#5f8a45"/><circle cx="262" cy="232" r="4" fill="#ffd27a"/><circle cx="338" cy="232" r="4" fill="#ffd27a"/></g>
+            </svg>
+            <div class="stage">
+              <p class="stage__k" id="sK"></p>
+              <h4 id="sT"></h4>
+              <p id="sD"></p>
+              <p class="stage__date" id="sDate"></p>
+            </div>
+          </div>
+          <div class="chips" id="chips" role="tablist" aria-label="Build stages"></div>
+          <div class="photos">
+            <p class="k">Site photos</p>
+            <div class="photos__row">
+              <figure><img src="assets/framing.jpg" alt="Wall framing going up on a new home"><figcaption>Framing</figcaption></figure>
+              <figure><img src="assets/dried-in.jpg" alt="New home dried in with roof and sheathing"><figcaption>Dried in</figcaption></figure>
+              <figure class="add"><span>+</span><figcaption>Your crew snaps a photo on site, and the timeline moves forward</figcaption></figure>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section class="sec wrap" id="why">
+      <p class="eyebrow">03 · Why it works for a Texas builder</p>
+      <h2>Proof buyers can see.</h2>
+      <div class="why">
+        <article><b>Show the work behind the finish</b><span>Texas doesn't license home builders, so buyers decide who to trust by what they can see. Foundation, framing and finishes, photographed as you go, show quality a finished photo can't.</span></article>
+        <article><b>Found in every city you build</b><span>Each project lives in its city, so your site can show up when people search for new homes in Frisco, Prosper, Celina or wherever you build next.</span></article>
+        <article><b>Easy to keep up to date</b><span>Add a project, pick its city and stage, upload photos from your phone. The map, the timeline and the status update themselves.</span></article>
+        <article><b>Turns interest into calls</b><span>Every available home has its own "Ask about this home" button, so you know exactly which house a buyer is calling about.</span></article>
+      </div>
+    </section>
+
+    <section class="wrap cta" id="cta">
+      <h2>Projects, your story, and a clear way to reach you.</h2>
+      <p>Exactly what you asked for, built so buyers can see the quality that goes into every home. Happy to walk you through it on a call.</p>
+    </section>
+  </main>
+
+  <footer class="wrap foot">Made for Sean by Riyaz Lohiya · November 2026 · Projects, names and specs are samples · Site photos: public domain via Openverse · Map © OpenStreetMap contributors</footer>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/leaflet/1.9.4/leaflet.min.js"></script>
+  <script src="script.js"></script>
+</body>
+</html>
