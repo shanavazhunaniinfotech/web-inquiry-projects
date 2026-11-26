@@ -1,0 +1,394 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="robots" content="noindex, nofollow">
+<title>Multi-Vendor Marketplace MVP – Live Prototype for Mohammed</title>
+<meta name="description" content="Clickable prototype of a Shopify multi-vendor marketplace: custom UI, vendor storefronts, vendor dashboards with SMS OTP login, customer accounts and admin panel, on desktop and mobile.">
+<link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Instrument+Serif:ital@0;1&family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="assets/style.css">
+<style>
+  .hnav { position: sticky; top: 0; z-index: 60; background: rgba(247,245,240,.86); backdrop-filter: blur(16px); -webkit-backdrop-filter: blur(16px); border-bottom: 1px solid var(--line); }
+  .hnav .wrap { display: flex; align-items: center; gap: 28px; height: 70px; }
+  .hnav nav { display: flex; gap: 24px; font-size: 14px; font-weight: 600; color: var(--ink-2); margin-left: auto; }
+  .hnav nav a:hover { color: var(--brand); }
+  .hnav .brand small { font-size: 11px; font-weight: 700; letter-spacing: .08em; text-transform: uppercase; color: var(--muted); background: var(--bg-2); padding: 3px 8px; border-radius: 6px; }
+
+  .hhero { padding: 75px 0; position: relative; overflow: hidden; }
+  .hhero::before { content: ""; position: absolute; width: 900px; height: 900px; right: -300px; top: -380px; border-radius: 50%; background: radial-gradient(circle, rgba(14,107,90,.14), transparent 62%); }
+  .hhero .wrap { position: relative; }
+  .hh-top { text-align: center; max-width: 920px; margin: 0 auto; }
+  .for { display: inline-flex; align-items: center; gap: 10px; padding: 6px 14px 6px 6px; border-radius: 99px; background: #fff; border: 1px solid var(--line); font-size: 13px; font-weight: 600; box-shadow: var(--sh-1); }
+  .for i { width: 28px; height: 28px; border-radius: 50%; background: var(--ink); color: #fff; display: grid; place-items: center; font-style: normal; font-size: 11px; font-weight: 800; }
+  .for .live { display: inline-flex; align-items: center; gap: 6px; color: var(--ok); }
+  .for .live::before { content: ""; width: 7px; height: 7px; border-radius: 50%; background: var(--ok); animation: pulse 2s infinite; box-shadow: 0 0 0 4px rgba(29,154,104,.2); }
+  .hh-top h1 { font-size: clamp(38px, 5.6vw, 76px); font-weight: 750; letter-spacing: -.05em; line-height: 1.02; margin: 24px 0 20px; }
+  .hh-top h1 em { font-family: var(--serif); font-weight: 400; font-style: italic; color: var(--brand); letter-spacing: -.02em; }
+  .hh-top p { font-size: 18.5px; color: var(--muted); max-width: 720px; margin: 0 auto; }
+  .hh-ctas { display: flex; gap: 12px; justify-content: center; margin: 32px 0 0; flex-wrap: wrap; }
+  .hh-ctas .btn { height: 52px; padding: 0 26px; font-size: 15px; }
+  .devices { position: relative; margin: 64px auto 0; max-width: 1120px; height: 600px; }
+  .browser { position: absolute; left: 0; right: 110px; top: 0; border-radius: 18px; background: #fff; box-shadow: var(--sh-3); overflow: hidden; border: 1px solid var(--line); }
+  .browser-bar { height: 40px; background: #f1efe9; display: flex; align-items: center; gap: 7px; padding: 0 14px; border-bottom: 1px solid var(--line); }
+  .browser-bar i { width: 11px; height: 11px; border-radius: 50%; background: #e2ddd2; }
+  .browser-bar span { margin: 0 auto; background: #fff; border-radius: 8px; padding: 4px 40px; font-size: 12px; color: var(--muted); }
+  .scaled { position: relative; overflow: hidden; }
+  .scaled iframe { border: 0; transform-origin: 0 0; pointer-events: none; display: block; }
+  .phone { position: absolute; right: 0; bottom: -30px; width: 270px; background: #050608; border-radius: 44px; padding: 10px; box-shadow: 0 40px 80px -20px rgba(0,0,0,.5); }
+  .phone .scaled { border-radius: 35px; }
+  .phone::before { content: ""; position: absolute; top: 18px; left: 50%; transform: translateX(-50%); width: 80px; height: 22px; background: #050608; border-radius: 14px; z-index: 2; }
+  .dev-link { position: absolute; inset: 0; z-index: 3; }
+  .badge-float { position: absolute; z-index: 4; background: #fff; border-radius: 14px; box-shadow: var(--sh-2); padding: 10px 14px; font-size: 13px; font-weight: 650; display: flex; gap: 8px; align-items: center; animation: bob 6s ease-in-out infinite; }
+  .badge-float svg { width: 18px; height: 18px; color: var(--brand); }
+  .bf1 { left: -20px; bottom: 120px; } .bf2 { right: 230px; top: -18px; animation-delay: -3s; }
+  @keyframes bob { 50% { transform: translateY(-8px); } }
+
+  .brief { display: grid; grid-template-columns: 1fr 1.1fr; gap: 56px; align-items: start; }
+  .quote { background: #fff; border: 1px solid var(--line); border-radius: 26px; padding: 30px; position: relative; box-shadow: var(--sh-1); }
+  .quote::before { content: "“"; position: absolute; top: -12px; left: 24px; font-family: var(--serif); font-size: 110px; line-height: 1; color: var(--brand); }
+  .quote p { font-family: var(--serif); font-size: 25px; line-height: 1.35; letter-spacing: -.01em; padding-top: 22px; }
+  .quote footer { display: flex; gap: 10px; align-items: center; margin-top: 20px; font-size: 14px; color: var(--muted); }
+  .quote footer i { width: 36px; height: 36px; border-radius: 50%; background: var(--ink); color: #fff; display: grid; place-items: center; font-style: normal; font-weight: 800; font-size: 13px; }
+  .heard { display: grid; gap: 12px; }
+  .heard-item { display: grid; grid-template-columns: 44px 1fr; gap: 14px; padding: 16px 18px; border-radius: 18px; background: #fff; border: 1px solid var(--line); }
+  .heard-item .ic { width: 44px; height: 44px; border-radius: 13px; background: var(--brand-soft); color: var(--brand); display: grid; place-items: center; }
+  .heard-item .ic svg { width: 21px; height: 21px; }
+  .heard-item b { display: block; font-size: 15.5px; }
+  .heard-item span { color: var(--muted); font-size: 14px; }
+
+  .bg-ink { background: var(--ink); color: #fff; }
+  .bg-ink .sec-head p { color: #9ea2b3; }
+  .bg-ink .eyebrow { color: #3ddc97; }
+  .req-grid { display: grid; grid-template-columns: repeat(2, 1fr); gap: 12px; }
+  .req { display: grid; grid-template-columns: 40px 1fr auto; gap: 14px; align-items: center; padding: 16px 18px; border-radius: 18px; background: rgba(255,255,255,.05); border: 1px solid rgba(255,255,255,.08); transition: background .25s, border-color .25s; }
+  .req:hover { background: rgba(255,255,255,.08); border-color: rgba(255,255,255,.18); }
+  .req .n { width: 40px; height: 40px; border-radius: 12px; background: rgba(61,220,151,.14); color: #3ddc97; display: grid; place-items: center; font-weight: 800; font-size: 14px; }
+  .req b { font-size: 15px; display: block; }
+  .req small { color: #8d91a3; font-size: 12.5px; }
+  .req-links { display: flex; gap: 6px; }
+  .req-links a { display: inline-flex; align-items: center; gap: 5px; height: 32px; padding: 0 11px; border-radius: 99px; font-size: 12px; font-weight: 700; background: rgba(255,255,255,.1); color: #fff; white-space: nowrap; }
+  .req-links a:hover { background: #fff; color: var(--ink); }
+  .req-links svg { width: 14px; height: 14px; }
+  .req-sum { display: flex; gap: 14px; flex-wrap: wrap; margin-top: 26px; }
+  .req-sum span { display: inline-flex; gap: 8px; align-items: center; font-size: 14px; color: #c6c9d4; }
+  .req-sum b { color: #3ddc97; font-size: 22px; }
+
+  .roles { display: grid; grid-template-columns: repeat(3, 1fr); gap: 20px; }
+  .role { background: #fff; border: 1px solid var(--line); border-radius: 26px; padding: 26px; display: flex; flex-direction: column; }
+  .role-top { display: flex; align-items: center; gap: 12px; margin-bottom: 18px; }
+  .role-top .ic { width: 48px; height: 48px; border-radius: 14px; display: grid; place-items: center; }
+  .role-top .ic svg { width: 24px; height: 24px; }
+  .role h3 { font-size: 21px; } .role-top small { color: var(--muted); font-size: 13px; display: block; }
+  .journey { list-style: none; padding: 0; margin: 0 0 20px; display: grid; gap: 0; }
+  .journey li { display: grid; grid-template-columns: 26px 1fr; gap: 12px; padding-bottom: 14px; position: relative; font-size: 14px; }
+  .journey li::before { content: ""; position: absolute; left: 12px; top: 26px; bottom: 0; width: 2px; background: var(--line); }
+  .journey li:last-child::before { display: none; }
+  .journey i { width: 26px; height: 26px; border-radius: 50%; border: 2px solid var(--line-2); display: grid; place-items: center; font-style: normal; font-size: 11px; font-weight: 800; background: #fff; }
+  .journey a { font-weight: 650; } .journey a:hover { color: var(--brand); text-decoration: underline; }
+  .journey small { display: block; color: var(--muted); font-size: 12.5px; }
+  .role .btn { margin-top: auto; }
+
+  .screens { display: grid; grid-template-columns: repeat(3, 1fr); gap: 18px; }
+  .scr { background: #fff; border: 1px solid var(--line); border-radius: 22px; overflow: hidden; display: flex; flex-direction: column; transition: transform .35s var(--ease), box-shadow .35s; }
+  .scr:hover { transform: translateY(-4px); box-shadow: var(--sh-2); }
+  .scr-prev { height: 190px; position: relative; background: var(--bg-2); overflow: hidden; border-bottom: 1px solid var(--line); }
+  .scr-prev iframe { position: absolute; top: 0; left: 0; width: 1280px; height: 760px; border: 0; transform: scale(.3); transform-origin: 0 0; pointer-events: none; }
+  .scr-prev .ph { position: absolute; inset: 0; display: grid; place-items: center; color: var(--faint); font-size: 12px; }
+  .scr-body { padding: 18px 20px 20px; display: grid; gap: 6px; flex: 1; }
+  .scr-body .tag { width: max-content; }
+  .scr-body h4 { font-size: 17px; }
+  .scr-body p { color: var(--muted); font-size: 13.5px; }
+  .scr-btns { display: flex; gap: 8px; margin-top: 10px; }
+  .scr-btns .btn { flex: 1; height: 40px; font-size: 13px; }
+  .scr-btns svg { width: 15px; height: 15px; }
+
+  .arch { display: grid; grid-template-columns: 1fr 1.2fr 1fr; gap: 18px; align-items: stretch; }
+  .arch-col { display: grid; gap: 12px; align-content: center; }
+  .node { background: #fff; border: 1px solid var(--line); border-radius: 18px; padding: 16px 18px; font-size: 13.5px; position: relative; }
+  .node b { display: block; font-size: 15px; margin-bottom: 2px; }
+  .node span { color: var(--muted); }
+  .node .tag { margin-top: 8px; }
+  .core { background: var(--ink); color: #fff; border-radius: 26px; padding: 26px; display: grid; gap: 12px; align-content: center; position: relative; }
+  .core h3 { font-size: 22px; display: flex; gap: 10px; align-items: center; }
+  .core h3 span { width: 36px; height: 36px; border-radius: 10px; background: #5e8e3e; display: grid; place-items: center; font-size: 16px; }
+  .core .mods { display: grid; grid-template-columns: 1fr 1fr; gap: 8px; }
+  .core .mods div { background: rgba(255,255,255,.07); border-radius: 12px; padding: 10px 12px; font-size: 13px; }
+  .core .mv { background: linear-gradient(135deg, rgba(14,107,90,.6), rgba(14,107,90,.25)); border: 1px solid rgba(61,220,151,.4); border-radius: 14px; padding: 14px; font-size: 13.5px; }
+  .core .mv b { display: block; font-size: 15px; }
+  .arch-note { margin-top: 26px; display: grid; grid-template-columns: 1fr 1fr; gap: 18px; }
+  .opt-card { border-radius: 22px; padding: 24px; border: 1.5px solid var(--line-2); background: #fff; }
+  .opt-card.rec { border-color: var(--brand); box-shadow: 0 0 0 4px rgba(14,107,90,.08); }
+  .opt-card h4 { font-size: 18px; margin: 10px 0 8px; }
+  .opt-card ul { margin: 0; padding-left: 18px; color: var(--ink-2); font-size: 14px; display: grid; gap: 5px; }
+
+  .phases { display: grid; grid-template-columns: 1.15fr 1fr; gap: 20px; }
+  .phase { border-radius: 26px; padding: 28px; }
+  .phase.p1 { background: var(--brand); color: #fff; }
+  .phase.p2 { background: #fff; border: 1px solid var(--line); }
+  .phase h3 { font-size: 26px; margin: 10px 0 6px; letter-spacing: -.03em; }
+  .phase > p { opacity: .8; font-size: 14.5px; margin-bottom: 18px; }
+  .phase ul { list-style: none; padding: 0; margin: 0; display: grid; grid-template-columns: 1fr 1fr; gap: 9px 16px; font-size: 14px; }
+  .phase li { display: flex; gap: 8px; align-items: flex-start; }
+  .phase li svg { width: 16px; height: 16px; margin-top: 2px; flex: none; }
+  .phase.p1 li svg { color: #9ff0cf; } .phase.p2 li svg { color: var(--accent); }
+  .phase.p1 .tag { background: rgba(255,255,255,.18); color: #fff; }
+  .steps-line { display: grid; grid-template-columns: repeat(5, 1fr); gap: 12px; margin-top: 30px; }
+  .sl { background: #fff; border: 1px solid var(--line); border-radius: 18px; padding: 18px; position: relative; }
+  .sl b.n { font-size: 12px; font-weight: 800; color: var(--brand); letter-spacing: .1em; }
+  .sl h5 { font-size: 15px; margin: 6px 0 4px; }
+  .sl p { font-size: 13px; color: var(--muted); }
+
+  .next { display: grid; grid-template-columns: 1fr 1fr; gap: 24px; align-items: start; }
+  .next-card { background: #fff; border: 1px solid var(--line); border-radius: 26px; padding: 30px; }
+  .next-card h3 { font-size: 22px; margin-bottom: 6px; }
+  .next-card > p { color: var(--muted); margin-bottom: 18px; font-size: 14.5px; }
+  .chk { display: grid; gap: 10px; }
+  .chk label { display: flex; gap: 12px; align-items: flex-start; padding: 12px 14px; border-radius: 14px; background: var(--bg); cursor: pointer; font-size: 14px; transition: background .2s; }
+  .chk label:hover { background: var(--bg-2); }
+  .chk input { width: 18px; height: 18px; accent-color: var(--brand); margin-top: 1px; flex: none; }
+  .chk small { display: block; color: var(--muted); font-size: 12.5px; }
+  .qs { display: grid; gap: 10px; counter-reset: q; }
+  .qs div { display: grid; grid-template-columns: 30px 1fr; gap: 10px; font-size: 14.5px; padding-bottom: 10px; border-bottom: 1px solid var(--line); }
+  .qs div:last-child { border: 0; }
+  .qs div::before { counter-increment: q; content: counter(q); width: 26px; height: 26px; border-radius: 8px; background: var(--accent-soft); color: #a3640c; display: grid; place-items: center; font-size: 12px; font-weight: 800; }
+  .closing { text-align: center; background: var(--ink); color: #fff; border-radius: 32px; padding: 60px 30px; position: relative; overflow: hidden; }
+  .closing::before { content: ""; position: absolute; width: 600px; height: 600px; border-radius: 50%; background: radial-gradient(circle, rgba(14,107,90,.5), transparent 62%); left: 50%; top: -300px; transform: translateX(-50%); }
+  .closing > * { position: relative; }
+  .closing h2 { font-size: clamp(30px, 4vw, 50px); letter-spacing: -.04em; }
+  .closing h2 em { font-family: var(--serif); font-weight: 400; color: var(--accent); }
+  .closing p { color: #b9bccb; max-width: 560px; margin: 14px auto 26px; }
+  .hfoot { padding: 30px 0 110px; text-align: center; font-size: 13px; color: var(--muted); }
+
+  @media (max-width: 1100px) {
+    .screens { grid-template-columns: 1fr 1fr; }
+    .arch { grid-template-columns: 1fr; }
+    .steps-line { grid-template-columns: 1fr 1fr; }
+  }
+  @media (max-width: 960px) {
+    .hnav nav { display: none; }
+    .hnav .btn { margin-left: auto; }
+    .brief, .roles, .phases, .next, .arch-note { grid-template-columns: 1fr; }
+    .req-grid { grid-template-columns: 1fr; }
+    .devices { height: 430px; }
+    .browser { right: 70px; }
+    .phone { width: 190px; border-radius: 34px; padding: 7px; } .phone .scaled { border-radius: 28px; }
+    .bf2 { display: none; }
+  }
+  @media (max-width: 760px) {
+    .hnav .brand small { display: none; }
+    .hnav .btn { height: 38px; padding: 0 14px; font-size: 13px; }
+    .hh-top h1 { font-size: 38px; }
+    .hh-top p { font-size: 16px; }
+    .hh-ctas .btn { width: 100%; }
+    .devices { height: 330px; margin-top: 40px; }
+    .browser { right: 40px; border-radius: 12px; }
+    .browser-bar { height: 26px; } .browser-bar span { display: none; }
+    .phone { width: 128px; border-radius: 24px; padding: 5px; bottom: -14px; } .phone .scaled { border-radius: 20px; } .phone::before { width: 40px; height: 11px; top: 9px; }
+    .bf1 { left: 4px; bottom: 30px; font-size: 11.5px; }
+    .quote p { font-size: 21px; }
+    .req { grid-template-columns: 36px 1fr; }
+    .req .n { width: 36px; height: 36px; }
+    .req-links { grid-column: 1 / -1; }
+    .req-links a { flex: 1; justify-content: center; }
+    .screens { grid-template-columns: 1fr; }
+    .phase ul { grid-template-columns: 1fr; }
+    .steps-line { grid-template-columns: 1fr; }
+    .next-card, .phase, .role { padding: 22px; }
+    .closing { padding: 44px 20px; border-radius: 24px; }
+  }
+</style>
+</head>
+<body data-root="" data-screen="hub" data-cart="off">
+
+<header class="hnav"><div class="wrap">
+  <a class="brand" href="#top"><span class="brand-mark">S</span><span>Souqna</span> <small>Prototype</small></a>
+  <nav><a href="#brief">Your brief</a><a href="#requirements">Requirements</a><a href="#screens">Screens</a><a href="#build">How it's built</a><a href="#mvp">MVP plan</a><a href="#next">Next steps</a></nav>
+  <a class="btn btn-dark btn-sm" href="store/">Open live prototype</a>
+</div></header>
+
+<section class="hhero" id="top">
+  <div class="wrap">
+    <div class="hh-top rv">
+      <span class="for"><i>MA</i>Prepared for Mohammed Almutairi <span class="live">Live & clickable</span></span>
+      <h1>Your multi-vendor marketplace, <em>already working.</em></h1>
+      <p>A clickable prototype of everything in your brief: a custom-designed Shopify marketplace, individual vendor storefronts, vendor dashboards with SMS OTP login, customer accounts and an admin panel. Scoped as an MVP, on desktop, tablet and mobile.</p>
+      <div class="hh-ctas"><a class="btn btn-primary" href="store/">Start the guided tour <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M5 12h14M13 6l6 6-6 6"/></svg></a><a class="btn btn-ghost" href="mobile/">View on mobile</a><a class="btn btn-ghost" href="#requirements">See requirement checklist</a></div>
+    </div>
+    <div class="devices rv">
+      <div class="browser"><div class="browser-bar"><i></i><i></i><i></i><span>souqna.com</span></div><div class="scaled" id="deskPrev"><iframe src="store/" title="Desktop preview" loading="lazy" tabindex="-1"></iframe></div><a class="dev-link" href="store/" aria-label="Open desktop marketplace"></a></div>
+      <div class="phone"><div class="scaled" id="phonePrev"><iframe src="vendor-login/" title="Mobile preview" loading="lazy" tabindex="-1"></iframe></div><a class="dev-link" href="mobile/?s=vendor-login" aria-label="Open mobile preview"></a></div>
+      <div class="badge-float bf1"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="m5 12.5 4.5 4.5L19 7.5"/></svg>14 of 14 requirements covered</div>
+      <div class="badge-float bf2"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><rect x="5" y="11" width="14" height="10" rx="2"/><path d="M8 11V8a4 4 0 0 1 8 0v3"/></svg>SMS OTP vendor login</div>
+    </div>
+  </div>
+</section>
+
+<section class="section" id="brief" style="background:#fff;border-top:1px solid var(--line);border-bottom:1px solid var(--line)">
+  <div class="wrap brief">
+    <div class="rv">
+      <span class="eyebrow">Your brief</span>
+      <h2 style="font-size:clamp(28px,3.4vw,42px);margin:12px 0 24px">What you asked for</h2>
+      <blockquote class="quote" style="margin:0"><p>I'm looking to build a multi-vendor marketplace using Shopify, with a custom UI, individual vendor storefronts, and vendor dashboards with SMS OTP login. I already have design references and want to launch an MVP first.</p><footer><i>MA</i>Mohammed Almutairi</footer></blockquote>
+    </div>
+    <div class="rv">
+      <span class="eyebrow">What I understood</span>
+      <h2 style="font-size:clamp(28px,3.4vw,42px);margin:12px 0 24px">Five things that must be right</h2>
+      <div class="heard">
+        <div class="heard-item"><span class="ic">${S}</span><div><b>Built on Shopify</b><span>Shopify runs products, checkout, payments and orders. A multi-vendor layer adds vendors, order splitting and commissions.</span></div></div>
+        <div class="heard-item"><span class="ic">${U}</span><div><b>A custom UI, not a stock theme</b><span>Your own marketplace look, built from your design references.</span></div></div>
+        <div class="heard-item"><span class="ic">${V}</span><div><b>Every vendor gets a storefront</b><span>Branded page, profile, catalogue, reviews and policies.</span></div></div>
+        <div class="heard-item"><span class="ic">${D}</span><div><b>Vendor dashboards with SMS OTP login</b><span>Password-free login. Vendors manage products, stock, orders, sales and payouts.</span></div></div>
+        <div class="heard-item"><span class="ic">${M}</span><div><b>MVP first, then grow</b><span>Launch the essentials fast, then add features as the marketplace grows.</span></div></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="section bg-ink" id="requirements">
+  <div class="wrap">
+    <div class="sec-head rv"><div><span class="eyebrow">Requirement checklist</span><h2>Every requirement, and where to see it working</h2><p>Each item opens the exact screen in the prototype, on desktop or on a phone.</p></div></div>
+    <div class="req-grid rv" id="reqGrid"></div>
+    <div class="req-sum rv"><span><b>14/14</b> requirements in the prototype</span><span><b>10</b> connected screens</span><span><b>3</b> user roles: customer, vendor, admin</span><span><b>3</b> devices: desktop, tablet, mobile</span></div>
+  </div>
+</section>
+
+<section class="section" id="journeys">
+  <div class="wrap">
+    <div class="sec-head rv"><div><span class="eyebrow">Three roles, one platform</span><h2>Walk through it as each user</h2><p>Follow a journey from start to finish. Everything is clickable.</p></div></div>
+    <div class="roles rv" id="roles"></div>
+  </div>
+</section>
+
+<section class="section" id="screens" style="background:#fff;border-top:1px solid var(--line);border-bottom:1px solid var(--line)">
+  <div class="wrap">
+    <div class="sec-head rv"><div><span class="eyebrow">All screens</span><h2>10 screens, each on desktop & mobile</h2><p>Live previews below. Open any screen full size or on a phone.</p></div><a class="btn btn-dark" href="mobile/">Open mobile & tablet preview</a></div>
+    <div class="screens" id="screenGrid"></div>
+  </div>
+</section>
+
+<section class="section" id="build">
+  <div class="wrap">
+    <div class="sec-head rv"><div><span class="eyebrow">How it's built</span><h2>Shopify at the core, a custom <em class="h-em">marketplace</em> on top</h2><p>Shopify isn't multi-vendor out of the box, so a marketplace layer adds vendors, order splitting, commissions and payouts. The custom UI and SMS OTP connect to both.</p></div></div>
+    <div class="arch rv">
+      <div class="arch-col">
+        <div class="node"><b>Customer storefront</b><span>Custom Shopify theme (Online Store 2.0): homepage, collections, search, product pages, vendor storefronts</span><br><span class="tag info">Custom UI</span></div>
+        <div class="node"><b>Customer accounts</b><span>Sign up, login, order history, tracking per vendor</span></div>
+        <div class="node"><b>Checkout & payments</b><span>Shopify checkout with mada, Apple Pay, cards, BNPL</span></div>
+      </div>
+      <div class="core">
+        <h3><span>S</span>Shopify</h3>
+        <div class="mods"><div>Products & variants</div><div>Inventory</div><div>Orders</div><div>Customers</div><div>Checkout</div><div>Payments</div></div>
+        <div class="mv"><b>+ Multi-vendor layer</b>Vendor accounts · product ownership · order splitting · commission rules · payouts</div>
+      </div>
+      <div class="arch-col">
+        <div class="node"><b>Vendor dashboard</b><span>Custom UI: products, inventory, orders, sales, payouts, storefront settings</span><br><span class="tag info">Custom UI</span></div>
+        <div class="node"><b>SMS OTP login</b><span>SMS gateway (e.g. Unifonic, Msegat or Twilio) sends one-time codes</span><br><span class="tag warn">Vendor auth</span></div>
+        <div class="node"><b>Admin panel</b><span>Vendor approvals, commissions, payouts, moderation, integrations</span></div>
+      </div>
+    </div>
+    <div class="arch-note rv">
+      <div class="opt-card rec"><span class="tag ok">Recommended for the MVP</span><h4>Shopify + proven marketplace app, custom-designed</h4><ul><li>Fastest way to launch with reliable vendor, commission & payout logic</li><li>Custom theme and custom vendor dashboard UI from your references</li><li>SMS OTP connected to the vendor login</li><li>Lower build cost, easy to grow later</li></ul></div>
+      <div class="opt-card"><span class="tag">Option for later</span><h4>Shopify + fully custom marketplace app</h4><ul><li>Full control of vendor logic and data</li><li>Best when rules become very specific (custom commissions, logistics, APIs)</li><li>More build time, so better after the MVP proves the model</li><li>The final choice depends on your design references and workflow</li></ul></div>
+    </div>
+  </div>
+</section>
+
+<section class="section" id="mvp" style="background:#fff;border-top:1px solid var(--line);border-bottom:1px solid var(--line)">
+  <div class="wrap">
+    <div class="sec-head rv"><div><span class="eyebrow">MVP plan</span><h2>Launch the essentials, then grow</h2><p>The prototype shows Phase 1. Phase 2 ideas are suggestions, to decide together after launch.</p></div></div>
+    <div class="phases rv">
+      <div class="phase p1"><span class="tag">Phase 1 · MVP launch</span><h3>Everything needed to go live</h3><p>What you can click through in this prototype.</p><ul id="p1"></ul></div>
+      <div class="phase p2"><span class="tag warn">Phase 2 · Growth</span><h3>Added as you scale</h3><p class="muted">Optional, prioritised with you after launch.</p><ul id="p2"></ul></div>
+    </div>
+    <div class="steps-line rv">
+      <div class="sl"><b class="n">STEP 1</b><h5>Discovery</h5><p>Review your design references, vendor workflow and commission model.</p></div>
+      <div class="sl"><b class="n">STEP 2</b><h5>UI design</h5><p>Marketplace, storefront and dashboard designs for approval.</p></div>
+      <div class="sl"><b class="n">STEP 3</b><h5>Build</h5><p>Shopify theme, marketplace setup, vendor dashboard, SMS OTP.</p></div>
+      <div class="sl"><b class="n">STEP 4</b><h5>Test</h5><p>End-to-end orders with test vendors on all devices.</p></div>
+      <div class="sl"><b class="n">STEP 5</b><h5>Launch</h5><p>Onboard first vendors, go live, then plan Phase 2.</p></div>
+    </div>
+  </div>
+</section>
+
+<section class="section" id="next">
+  <div class="wrap">
+    <div class="sec-head rv"><div><span class="eyebrow">Next steps</span><h2>To turn this into your marketplace</h2><p>The prototype uses placeholder branding ("Souqna"), products and vendors. Your design references will shape the final look.</p></div></div>
+    <div class="next rv">
+      <div class="next-card"><h3>Please share</h3><p>Tick them off as you send them (just for you, it's saved in your browser).</p><div class="chk" id="chk"></div></div>
+      <div class="next-card"><h3>A few quick questions</h3><p>These help confirm the MVP scope.</p><div class="qs">
+        <div>Which countries will you sell in, and should the site be Arabic, English, or both (with right-to-left layout)?</div>
+        <div>How should vendors join: open registration with approval (as shown), or invite-only?</div>
+        <div>What commission model do you have in mind: one rate for all, per category, or per vendor?</div>
+        <div>Do vendors ship themselves, or will you handle delivery centrally?</div>
+        <div>Do you have a preferred SMS provider and payment gateway?</div>
+        <div>Should customers also be able to log in with an SMS code?</div>
+      </div></div>
+    </div>
+  </div>
+</section>
+
+<section class="section" style="padding-top:0">
+  <div class="wrap"><div class="closing rv"><span class="eyebrow" style="color:var(--accent)">Ready when you are</span><h2 style="margin-top:12px">Click through it, then send your <em>design references.</em></h2><p>Once I've reviewed them, I'll confirm the MVP scope and plan, and move to the final designs.</p><div class="hh-ctas" style="margin:0"><a class="btn btn-accent" href="store/">Start the guided tour</a><a class="btn btn-light" href="mobile/">View on mobile</a></div></div></div>
+</section>
+<footer class="hfoot">Interactive prototype prepared by Liza Tharadiya for Mohammed Almutairi · November 2026 · All brand names, products, vendors and prices are placeholders.</footer>
+
+<script src="assets/data.js"></script>
+<script src="assets/app.js"></script>
+<script>
+  const ICON = {
+    S: '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linejoin="round"><path d="M5 8h14l-1 12H6L5 8Z"/><path d="M9 8V6a3 3 0 0 1 6 0v2"/></svg>',
+    U: '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round"><rect x="3" y="4" width="18" height="16" rx="2"/><path d="M3 9h18M9 9v11"/></svg>',
+    V: I.store,
+    D: '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><rect x="5" y="11" width="14" height="10" rx="2"/><path d="M8 11V8a4 4 0 0 1 8 0v3"/></svg>',
+    M: '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round"><path d="M4 20V10M10 20V4M16 20v-7M22 20H2"/></svg>'
+  };
+  document.querySelectorAll('.heard-item .ic').forEach(el => { const k = el.textContent.match(/\$\{(\w)\}/); if (k) el.innerHTML = ICON[k[1]]; });
+
+  const sc = k => SCREENS.find(s => s.key === k);
+  const pathOf = k => k === 'mobile' ? 'mobile/' : k === 'hub' ? '#mvp' : sc(k).path;
+  document.getElementById('reqGrid').innerHTML = REQS.map(r => { const k = r.s[0]; const title = k === 'mobile' ? 'Phone & tablet preview' : k === 'hub' ? 'MVP plan below' : sc(k).title;
+    return `<div class="req"><span class="n">${String(r.id).padStart(2, '0')}</span><div><b>${r.t}</b><small>See it: ${title}</small></div><div class="req-links">${k === 'mobile' ? `<a href="mobile/">${I.phone}Phone</a><a href="mobile/?s=store&d=tablet">${I.desk}Tablet</a>` : k === 'hub' ? `<a href="#mvp">${I.arrow}View plan</a>` : `<a href="${pathOf(k)}">${I.desk}Desktop</a><a href="mobile/?s=${k}">${I.phone}Mobile</a>`}</div></div>`; }).join('');
+
+  const R = [
+    ['Customer', 'Shops across vendors', '#e2f1ec', 'var(--brand)', I.user, [['store', 'Lands on the marketplace homepage', 'Custom UI, categories, featured vendors'], ['shop', 'Searches & filters products', 'Category, vendor, price, rating, sort'], ['vendor', 'Visits a vendor storefront', 'Branded page with own catalogue'], ['product', 'Adds to cart, sees upsells', 'Side cart groups items by vendor'], ['checkout', 'Pays once for all vendors', 'Mada, Apple Pay, cards, tabby, COD'], ['account', 'Tracks each shipment', 'Live status per vendor']], 'store/'],
+    ['Vendor', 'Sells on the marketplace', '#fcf0dc', '#a3640c', I.store, [['sell', 'Registers & onboards', 'Store details, phone OTP, documents, payouts'], ['admin', 'Gets approved by admin', 'Approval queue in the admin panel'], ['vendor-login', 'Logs in with an SMS code', 'No password, 6-digit OTP'], ['vendor-dashboard', 'Manages products & stock', 'Add, edit, hide, adjust inventory'], ['vendor-dashboard', 'Fulfils orders', 'Accept, ship, add tracking'], ['vendor-dashboard', 'Gets paid', 'Earnings, commission, payouts']], 'sell/'],
+    ['Admin', 'Runs the marketplace', '#e3ecfc', '#2552a8', '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linejoin="round"><path d="M12 3 4.5 6v6c0 4.5 3.2 7.8 7.5 9 4.3-1.2 7.5-4.5 7.5-9V6L12 3Z"/><path d="m9 12 2 2 4-4"/></svg>', [['admin', 'Sees marketplace numbers', 'Sales, commission, vendors, orders'], ['admin', 'Approves new vendors', 'Approve, reject, request documents'], ['admin', 'Manages vendors & products', 'Custom commission, suspend, feature'], ['admin', 'Monitors all orders', 'Split by vendor shipment'], ['admin', 'Sets commission & pays vendors', 'Default rate, payout schedule'], ['admin', 'Connects apps & APIs', 'Shopify, SMS, payments, shipping']], 'admin/']
+  ];
+  const hashes = { 'Approves new vendors': '#approvals', 'Manages vendors & products': '#vendors', 'Monitors all orders': '#orders', 'Sets commission & pays vendors': '#commission', 'Connects apps & APIs': '#integrations', 'Manages products & stock': '#products', 'Fulfils orders': '#orders', 'Gets paid': '#earnings', 'Gets approved by admin': '#approvals' };
+  document.getElementById('roles').innerHTML = R.map(r => `<div class="role"><div class="role-top"><span class="ic" style="background:${r[2]};color:${r[3]}">${r[4]}</span><div><h3>${r[0]}</h3><small>${r[1]}</small></div></div>
+    <ol class="journey">${r[5].map((s, i) => `<li><i>${i + 1}</i><span><a href="${sc(s[0]).path}${hashes[s[1]] || ''}">${s[1]}</a><small>${s[2]}</small></span></li>`).join('')}</ol>
+    <a class="btn btn-dark btn-block" href="${r[6]}">Start as ${r[0].toLowerCase()}</a></div>`).join('');
+
+  const DESC = { store: 'Custom homepage with search, categories, vendors, bestsellers and a premium side cart.', shop: 'Collections with search, filters (category, vendor, price, rating) and sorting.', product: 'Gallery, sold-by vendor card, bundle upsell, more from vendor, reviews.', vendor: 'Each vendor’s branded storefront with products, about, reviews and policies.', checkout: 'One Shopify checkout for many vendors, split into shipments, local payments.', account: 'Customer sign up / login, orders with live tracking per vendor, wishlist.', sell: 'Vendor registration wizard with SMS phone verification and approval flow.', 'vendor-login': 'Password-free vendor login with a 6-digit SMS code (simulated).', 'vendor-dashboard': 'Overview, products, inventory, orders, earnings & payouts, storefront.', admin: 'Approvals, vendors, products, orders, commission, payouts and integrations.' };
+  document.getElementById('screenGrid').innerHTML = SCREENS.filter(s => s.key !== 'hub').map((s, i) => `<div class="scr"><a class="scr-prev" href="${s.path}" data-prev="${s.path}"><span class="ph">Loading preview…</span></a><div class="scr-body"><span class="tag ${{ Customer: 'ok', Vendor: 'warn', Admin: 'info' }[s.role]}">${s.role} · ${i + 1}</span><h4>${s.title}</h4><p>${DESC[s.key]}</p><div class="scr-btns"><a class="btn btn-dark" href="${s.path}">${I.desk}Desktop</a><a class="btn btn-ghost" href="mobile/?s=${s.key}">${I.phone}Mobile</a></div></div></div>`).join('') +
+    `<div class="scr" style="background:var(--ink);color:#fff;border-color:var(--ink)"><a class="scr-prev" href="mobile/" style="background:radial-gradient(circle at 50% 30%,#1f6b5a,#12141d 70%);display:grid;place-items:center;gap:0"><span style="display:flex;gap:14px;align-items:flex-end"><span style="width:58px;height:110px;border:3px solid #fff;border-radius:14px;opacity:.95"></span><span style="width:96px;height:130px;border:3px solid #fff;border-radius:12px;opacity:.6"></span></span></a><div class="scr-body"><span class="tag ok">All devices</span><h4>Mobile & tablet preview</h4><p style="color:#b9bccb">Every screen above running live inside a phone or tablet frame. Switch device with one tap.</p><div class="scr-btns"><a class="btn btn-light" href="mobile/">${I.phone}Phone</a><a class="btn btn-ghost" style="background:transparent;color:#fff;border-color:rgba(255,255,255,.3)" href="mobile/?s=store&d=tablet">${I.desk}Tablet</a></div></div></div>`;
+  // Lazy-load screen thumbnails
+  const io = new IntersectionObserver(es => es.forEach(en => { if (en.isIntersecting) { const a = en.target; a.insertAdjacentHTML('beforeend', `<iframe src="${a.dataset.prev}" title="" loading="lazy" tabindex="-1" aria-hidden="true"></iframe>`); io.unobserve(a); } }), { rootMargin: '200px' });
+  document.querySelectorAll('[data-prev]').forEach(a => io.observe(a));
+  function fitThumbs() { document.querySelectorAll('.scr-prev').forEach(a => { const f = a.querySelector('iframe'); if (f) f.style.transform = `scale(${a.clientWidth / 1280})`; }); }
+  new MutationObserver(fitThumbs).observe(document.getElementById('screenGrid'), { subtree: true, childList: true });
+
+  // Hero device previews
+  function fitHero() {
+    const d = document.getElementById('deskPrev'), df = d.querySelector('iframe'), w = d.clientWidth;
+    df.width = 1440; df.height = 900; df.style.transform = `scale(${w / 1440})`; d.style.height = (900 * w / 1440) + 'px';
+    const p = document.getElementById('phonePrev'), pf = p.querySelector('iframe'), pw = p.clientWidth;
+    pf.width = 390; pf.height = 844; pf.style.transform = `scale(${pw / 390})`; p.style.height = (844 * pw / 390) + 'px';
+    fitThumbs();
+  }
+  addEventListener('resize', fitHero); fitHero();
+
+  const P1 = ['Custom marketplace homepage & UI', 'Collections, search, filters & sorting', 'Product pages with vendor info', 'Individual vendor storefronts', 'Side cart with upsells', 'One checkout, payment gateway', 'Customer accounts & order tracking', 'Vendor registration & approval', 'Vendor SMS OTP login', 'Vendor dashboard: products, stock, orders, sales', 'Commission & vendor payouts', 'Admin panel & core integrations'];
+  const P2 = ['Arabic / RTL version (if not in MVP)', 'Shipping integrations (SMSA, Aramex)', 'Product reviews & vendor ratings', 'Vendor subscription plans', 'Vendor-run coupons & promotions', 'Advanced analytics & reports', 'Customer SMS OTP login', 'Mobile app (iOS / Android)'];
+  const ck = '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="m5 12.5 4.5 4.5L19 7.5"/></svg>';
+  document.getElementById('p1').innerHTML = P1.map(x => `<li>${ck}${x}</li>`).join('');
+  document.getElementById('p2').innerHTML = P2.map(x => `<li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round"><path d="M12 5v14M5 12h14"/></svg>${x}</li>`).join('');
+  const CK = [['Design references', 'Figma files, screenshots or links to sites you like'], ['Logo & brand', 'Logo, colours, fonts, marketplace name'], ['Vendor workflow', 'How vendors join, get approved and fulfil orders'], ['Commission & payouts', 'Rates and how often vendors are paid'], ['Shopify store access', 'Collaborator access, or we set up a new store'], ['Providers', 'Preferred SMS provider and payment gateway']];
+  const saved = store.get('chk', []);
+  document.getElementById('chk').innerHTML = CK.map((c, i) => `<label><input type="checkbox" data-ck="${i}" ${saved.includes(i) ? 'checked' : ''}><span><b>${c[0]}</b><small>${c[1]}</small></span></label>`).join('');
+  document.getElementById('chk').addEventListener('change', e => { const s = [...document.querySelectorAll('[data-ck]:checked')].map(x => +x.dataset.ck); store.set('chk', s); });
+</script>
+</body>
+</html>

@@ -1,0 +1,170 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="robots" content="noindex, nofollow">
+<title>Souqna – Shop, Search & Filters</title>
+<link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Instrument+Serif:ital@0;1&family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="../assets/style.css">
+<style>
+  .shop-hero { padding: 75px 0 36px; }
+  .crumbs { font-size: 13px; color: var(--muted); display: flex; gap: 8px; margin-bottom: 14px; }
+  .crumbs a:hover { color: var(--ink); }
+  .shop-hero h1 { font-size: clamp(32px, 4vw, 52px); font-weight: 750; letter-spacing: -.04em; }
+  .shop-hero h1 em { font-family: var(--serif); font-weight: 400; color: var(--brand); }
+  .shop-hero p { color: var(--muted); margin-top: 8px; }
+  .cat-chips { display: flex; gap: 8px; margin-top: 24px; overflow-x: auto; scrollbar-width: none; padding-bottom: 4px; }
+  .cat-chips .chip { flex: none; white-space: nowrap; }
+  .shop-layout { display: grid; grid-template-columns: 260px 1fr; gap: 36px; padding-bottom: 75px; align-items: start; }
+  .filters { position: sticky; top: 140px; display: grid; gap: 4px; }
+  .fgroup { border-bottom: 1px solid var(--line); padding: 16px 0; }
+  .fgroup h4 { font-size: 14px; margin-bottom: 12px; display: flex; justify-content: space-between; }
+  .fgroup .check { font-size: 14px; padding: 4px 0; align-items: center; }
+  .fgroup .check small { margin-left: auto; color: var(--faint); }
+  .fgroup .check input { margin-top: 0; }
+  .range { width: 100%; accent-color: var(--brand); }
+  .range-vals { display: flex; justify-content: space-between; font-size: 13px; color: var(--muted); margin-top: 4px; }
+  .rating-opts { display: flex; gap: 6px; flex-wrap: wrap; }
+  .toolbar { display: flex; justify-content: space-between; align-items: center; gap: 12px; margin-bottom: 20px; flex-wrap: wrap; }
+  .toolbar .count { font-size: 14px; color: var(--muted); }
+  .toolbar .count b { color: var(--ink); }
+  .active-f { display: flex; gap: 6px; flex-wrap: wrap; }
+  .active-f button { display: inline-flex; gap: 6px; align-items: center; height: 30px; padding: 0 10px; border-radius: 99px; background: var(--ink); color: #fff; font-size: 12.5px; font-weight: 600; }
+  .active-f button svg { width: 12px; height: 12px; }
+  .sort { display: flex; align-items: center; gap: 8px; font-size: 13.5px; }
+  .sort select { height: 40px; border-radius: 99px; border: 1.5px solid var(--line-2); padding: 0 14px; background: #fff; font-weight: 600; }
+  .fbtn { display: none; }
+  .empty { text-align: center; padding: 60px 20px; border: 1.5px dashed var(--line-2); border-radius: 20px; }
+  .empty h3 { margin-bottom: 6px; }
+  .empty p { color: var(--muted); margin-bottom: 18px; }
+  .sheet-head, .sheet-foot { display: none; }
+  .scrim { position: fixed; display: none; }
+  .pgrid.three { grid-template-columns: repeat(3, 1fr); }
+  @media (max-width: 960px) {
+    .shop-layout { grid-template-columns: 1fr; }
+    .pgrid.three { grid-template-columns: repeat(3, 1fr); }
+    .fbtn { display: inline-flex; }
+    .filters { position: fixed; inset: auto 0 0 0; top: auto; z-index: 210; background: #fff; border-radius: 24px 24px 0 0; padding: 0 20px; max-height: 84vh; overflow: auto; transform: translateY(105%); transition: transform .45s var(--ease); box-shadow: var(--sh-3); display: block; }
+    .filters.open { transform: none; }
+    .sheet-head { display: flex; justify-content: space-between; align-items: center; position: sticky; top: 0; background: #fff; padding: 16px 0 8px; z-index: 1; }
+    .sheet-head::before { content: ""; position: absolute; top: 6px; left: 50%; width: 40px; height: 4px; border-radius: 4px; background: var(--line-2); transform: translateX(-50%); }
+    .sheet-foot { display: flex; gap: 10px; position: sticky; bottom: 0; background: #fff; padding: 14px 0 18px; }
+    .sheet-foot .btn { flex: 1; }
+    .scrim { display: block; position: fixed; inset: 0; background: rgba(18,20,29,.45); z-index: 205; opacity: 0; pointer-events: none; transition: opacity .3s; }
+    .scrim.open { opacity: 1; pointer-events: auto; }
+  }
+  @media (max-width: 760px) {
+    .pgrid.three { grid-template-columns: repeat(2, 1fr); }
+    .sort span { display: none; }
+    .shop-hero { padding: 40px 0 24px; }
+  }
+</style>
+</head>
+<body data-root="../" data-screen="shop">
+<div id="site-header"></div>
+<main>
+  <section class="shop-hero">
+    <div class="wrap">
+      <div class="crumbs"><a href="../store/">Home</a><span>/</span><span id="crumb">All products</span></div>
+      <h1 id="shopTitle">All products</h1>
+      <p id="shopSub">Products from every vendor, searchable in one place.</p>
+      <div class="cat-chips" id="catChips"></div>
+    </div>
+  </section>
+  <div class="wrap shop-layout">
+    <div class="scrim" id="scrim"></div>
+    <aside class="filters" id="filters" aria-label="Filters">
+      <div class="sheet-head"><h3>Filters</h3><button class="icon-btn" id="closeF" aria-label="Close filters"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M6 6l12 12M18 6 6 18"/></svg></button></div>
+      <div class="fgroup"><h4>Category</h4><div id="fCat"></div></div>
+      <div class="fgroup"><h4>Vendor</h4><div id="fVendor"></div></div>
+      <div class="fgroup"><h4>Max price <span id="priceLbl" style="color:var(--brand)"></span></h4><input type="range" class="range" id="fPrice" min="50" max="3500" step="50" value="3500"><div class="range-vals"><span>SAR 50</span><span>SAR 3,500</span></div></div>
+      <div class="fgroup"><h4>Rating</h4><div class="rating-opts" id="fRating"></div></div>
+      <div class="fgroup"><h4>Availability</h4><label class="check"><input type="checkbox" id="fStock"> In stock only</label><label class="check"><input type="checkbox" id="fSale"> On sale</label></div>
+      <div class="sheet-foot"><button class="btn btn-ghost" id="resetF">Reset</button><button class="btn btn-dark" id="applyF">Show results</button></div>
+    </aside>
+    <div>
+      <div class="toolbar">
+        <div style="display:flex;gap:12px;align-items:center;flex-wrap:wrap">
+          <button class="btn btn-ghost btn-sm fbtn" id="openF"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M4 6h16M7 12h10M10 18h4"/></svg>Filters</button>
+          <span class="count" id="count"></span>
+          <div class="active-f" id="activeF"></div>
+        </div>
+        <label class="sort"><span>Sort by</span>
+          <select id="sort"><option value="popular">Most popular</option><option value="new">Newest</option><option value="price-asc">Price: low to high</option><option value="price-desc">Price: high to low</option><option value="rating">Top rated</option><option value="deals">Biggest deals</option></select>
+        </label>
+      </div>
+      <div class="pgrid three" id="grid"></div>
+    </div>
+  </div>
+</main>
+<div id="site-footer"></div>
+<script src="../assets/data.js"></script>
+<script src="../assets/app.js"></script>
+<script>
+  const qs = new URLSearchParams(location.search);
+  const S = { q: qs.get('q') || '', cats: qs.get('cat') ? [qs.get('cat')] : [], vendors: qs.get('vendor') ? [qs.get('vendor')] : [], price: 3500, rating: 0, stock: false, sale: qs.get('sort') === 'deals', sort: qs.get('sort') || 'popular' };
+  const $ = id => document.getElementById(id);
+  $('sort').value = S.sort;
+  $('fSale').checked = S.sale;
+  const xs = '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round"><path d="M6 6l12 12M18 6 6 18"/></svg>';
+
+  function renderFilters() {
+    $('catChips').innerHTML = [`<button class="chip${!S.cats.length ? ' on' : ''}" data-cc="">All</button>`, ...CATEGORIES.map(c => `<button class="chip${S.cats.length === 1 && S.cats[0] === c.name ? ' on' : ''}" data-cc="${c.name}">${c.name}</button>`)].join('');
+    $('fCat').innerHTML = CATEGORIES.map(c => `<label class="check"><input type="checkbox" data-fc="${c.name}" ${S.cats.includes(c.name) ? 'checked' : ''}> ${c.name}<small>${PRODUCTS.filter(p => p.cat === c.name).length}</small></label>`).join('');
+    $('fVendor').innerHTML = VENDORS.map(v => `<label class="check"><input type="checkbox" data-fv="${v.id}" ${S.vendors.includes(v.id) ? 'checked' : ''}> ${v.name}<small>${PRODUCTS.filter(p => p.vendor === v.id).length}</small></label>`).join('');
+    $('fRating').innerHTML = [0, 4.5, 4.7, 4.8].map(r => `<button class="chip${S.rating === r ? ' on' : ''}" data-fr="${r}">${r ? r + '★ +' : 'Any'}</button>`).join('');
+    $('priceLbl').textContent = S.price >= 3500 ? 'Any' : money(S.price);
+  }
+  function apply() {
+    const q = S.q.toLowerCase();
+    let list = PRODUCTS.filter(p => {
+      const v = vendorById(p.vendor);
+      return (!q || (p.name + ' ' + p.cat + ' ' + v.name).toLowerCase().includes(q)) &&
+        (!S.cats.length || S.cats.includes(p.cat)) && (!S.vendors.length || S.vendors.includes(p.vendor)) &&
+        p.price <= S.price && p.rating >= S.rating && (!S.stock || p.stock > 0) && (!S.sale || p.compare);
+    });
+    const sorters = { popular: (a, b) => b.reviews - a.reviews, new: (a, b) => (b.badge === 'New') - (a.badge === 'New') || b.id.localeCompare(a.id), 'price-asc': (a, b) => a.price - b.price, 'price-desc': (a, b) => b.price - a.price, rating: (a, b) => b.rating - a.rating, deals: (a, b) => ((b.compare || b.price) - b.price) / b.price - ((a.compare || a.price) - a.price) / a.price };
+    list.sort(sorters[S.sort] || sorters.popular);
+    $('grid').innerHTML = list.length ? list.map(p => productCard(p)).join('') : `<div class="empty" style="grid-column:1/-1"><h3>No products match</h3><p>Try removing a filter or searching for something else.</p><button class="btn btn-dark" id="clearAll">Clear all filters</button></div>`;
+    $('count').innerHTML = `<b>${list.length}</b> product${list.length !== 1 ? 's' : ''}${S.q ? ` for “${S.q}”` : ''}`;
+    const title = S.q ? `Results for <em>“${S.q}”</em>` : S.cats.length === 1 ? S.cats[0] : S.vendors.length === 1 ? vendorById(S.vendors[0]).name : 'All products';
+    $('shopTitle').innerHTML = title; $('crumb').textContent = S.q ? 'Search' : S.cats.length === 1 ? S.cats[0] : 'All products';
+    $('shopSub').textContent = S.q ? `Searching products, vendors and categories across the marketplace.` : `Products from ${new Set(list.map(p => p.vendor)).size} vendors, all in one checkout.`;
+    const act = [];
+    if (S.q) act.push([`“${S.q}”`, () => { S.q = ''; const i = $('searchInput'); if (i) i.value = ''; }]);
+    S.cats.forEach(c => act.push([c, () => S.cats = S.cats.filter(x => x !== c)]));
+    S.vendors.forEach(v => act.push([vendorById(v).name, () => S.vendors = S.vendors.filter(x => x !== v)]));
+    if (S.price < 3500) act.push([`≤ ${money(S.price)}`, () => S.price = 3500]);
+    if (S.rating) act.push([`${S.rating}★ +`, () => S.rating = 0]);
+    if (S.stock) act.push(['In stock', () => S.stock = false]);
+    if (S.sale) act.push(['On sale', () => S.sale = false]);
+    $('activeF').innerHTML = act.map((a, i) => `<button data-af="${i}">${a[0]} ${xs}</button>`).join('');
+    $('activeF').onclick = e => { const b = e.target.closest('[data-af]'); if (b) { act[+b.dataset.af][1](); sync(); } };
+    const ca = $('clearAll'); if (ca) ca.onclick = reset;
+    const u = new URL(location); u.search = ''; if (S.q) u.searchParams.set('q', S.q); if (S.cats.length === 1) u.searchParams.set('cat', S.cats[0]); history.replaceState(null, '', u);
+  }
+  function sync() { $('fPrice').value = S.price; $('fStock').checked = S.stock; $('fSale').checked = S.sale; renderFilters(); apply(); }
+  function reset() { Object.assign(S, { q: '', cats: [], vendors: [], price: 3500, rating: 0, stock: false, sale: false }); const i = $('searchInput'); if (i) i.value = ''; sync(); }
+  document.addEventListener('change', e => {
+    const t = e.target;
+    if (t.dataset.fc) { S.cats = t.checked ? [...S.cats, t.dataset.fc] : S.cats.filter(x => x !== t.dataset.fc); sync(); }
+    if (t.dataset.fv) { S.vendors = t.checked ? [...S.vendors, t.dataset.fv] : S.vendors.filter(x => x !== t.dataset.fv); sync(); }
+    if (t.id === 'fStock') { S.stock = t.checked; apply(); }
+    if (t.id === 'fSale') { S.sale = t.checked; apply(); }
+    if (t.id === 'sort') { S.sort = t.value; apply(); }
+  });
+  $('fPrice').addEventListener('input', e => { S.price = +e.target.value; $('priceLbl').textContent = S.price >= 3500 ? 'Any' : money(S.price); apply(); });
+  document.addEventListener('click', e => {
+    const cc = e.target.closest('[data-cc]'); if (cc) { S.cats = cc.dataset.cc ? [cc.dataset.cc] : []; sync(); }
+    const fr = e.target.closest('[data-fr]'); if (fr) { S.rating = +fr.dataset.fr; sync(); }
+  });
+  const sf = document.querySelector('.sh-search');
+  if (sf) sf.addEventListener('submit', e => { e.preventDefault(); S.q = $('searchInput').value.trim(); document.getElementById('suggest').classList.remove('open'); apply(); });
+  const openF = () => { $('filters').classList.add('open'); $('scrim').classList.add('open'); }, closeF = () => { $('filters').classList.remove('open'); $('scrim').classList.remove('open'); };
+  $('openF').onclick = openF; $('closeF').onclick = closeF; $('scrim').onclick = closeF; $('applyF').onclick = closeF; $('resetF').onclick = reset;
+  sync();
+</script>
+</body>
+</html>

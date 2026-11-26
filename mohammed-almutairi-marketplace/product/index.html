@@ -1,0 +1,218 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="robots" content="noindex, nofollow">
+<title>Souqna – Product Page</title>
+<link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Instrument+Serif:ital@0;1&family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="../assets/style.css">
+<style>
+  .pdp { padding: 40px 0 75px; }
+  .crumbs { font-size: 13px; color: var(--muted); display: flex; gap: 8px; margin-bottom: 22px; flex-wrap: wrap; }
+  .pdp-grid { display: grid; grid-template-columns: 1.1fr 1fr; gap: 56px; align-items: start; }
+  .gallery { display: grid; grid-template-columns: 84px 1fr; gap: 14px; position: sticky; top: 140px; }
+  .thumbs { display: grid; gap: 10px; align-content: start; }
+  .thumbs button { border-radius: 14px; overflow: hidden; aspect-ratio: 1; border: 2px solid transparent; transition: border-color .2s; }
+  .thumbs button.on { border-color: var(--ink); }
+  .thumbs img { width: 100%; height: 100%; object-fit: cover; }
+  .main-img { border-radius: 26px; overflow: hidden; aspect-ratio: 4/5; background: var(--bg-2); position: relative; }
+  .main-img img { width: 100%; height: 100%; object-fit: cover; transition: opacity .3s; }
+  .main-img .pbadge { left: 18px; top: 18px; }
+  .soldby { display: inline-flex; align-items: center; gap: 10px; padding: 6px 12px 6px 6px; border-radius: 99px; background: #fff; border: 1px solid var(--line); font-size: 13px; font-weight: 600; }
+  .soldby i { width: 28px; height: 28px; border-radius: 8px; display: grid; place-items: center; color: #fff; font-style: normal; font-weight: 800; font-size: 12px; }
+  .soldby .vtick svg { width: 15px; height: 15px; }
+  .info h1 { font-size: clamp(28px, 3vw, 40px); font-weight: 750; letter-spacing: -.035em; margin: 16px 0 10px; }
+  .rating-row { display: flex; gap: 12px; align-items: center; font-size: 13.5px; color: var(--muted); }
+  .rating-row .stars svg { width: 15px; height: 15px; }
+  .price-row { display: flex; align-items: baseline; gap: 12px; margin: 20px 0 6px; }
+  .price-row .now { font-size: 30px; font-weight: 800; letter-spacing: -.03em; }
+  .price-row s { color: var(--faint); font-size: 18px; }
+  .tax { font-size: 13px; color: var(--muted); }
+  .bnpl { margin-top: 10px; font-size: 13px; padding: 10px 12px; border-radius: 12px; background: var(--bg-2); display: flex; gap: 8px; align-items: center; }
+  .bnpl b.t { background: #3bffc1; color: #111; padding: 2px 7px; border-radius: 6px; font-size: 11px; }
+  .opt { margin: 22px 0 0; }
+  .opt h4 { font-size: 13.5px; margin-bottom: 10px; }
+  .opt h4 span { color: var(--muted); font-weight: 500; }
+  .swatches { display: flex; gap: 10px; }
+  .swatches button { width: 38px; height: 38px; border-radius: 50%; border: 3px solid #fff; box-shadow: 0 0 0 1.5px var(--line-2); }
+  .swatches button.on { box-shadow: 0 0 0 2px var(--ink); }
+  .buy-row { display: flex; gap: 10px; margin-top: 24px; }
+  .buy-row .qty { height: 52px; }
+  .buy-row .qty button { width: 40px; }
+  .buy-row .btn { height: 52px; flex: 1; }
+  .stock { margin-top: 16px; font-size: 13px; }
+  .stock .bar { height: 6px; background: var(--bg-2); border-radius: 9px; overflow: hidden; margin-top: 6px; }
+  .stock .bar i { display: block; height: 100%; background: var(--warn); border-radius: 9px; }
+  .perks { display: grid; grid-template-columns: 1fr 1fr; gap: 10px; margin-top: 22px; }
+  .perks div { display: flex; gap: 10px; align-items: center; padding: 12px; border-radius: 14px; border: 1px solid var(--line); background: #fff; font-size: 13px; }
+  .perks svg { width: 20px; height: 20px; color: var(--brand); }
+  .perks b { display: block; }
+  details { border-bottom: 1px solid var(--line); padding: 16px 0; }
+  details summary { cursor: pointer; font-weight: 700; list-style: none; display: flex; justify-content: space-between; }
+  details summary::after { content: "+"; font-size: 20px; line-height: 1; }
+  details[open] summary::after { content: "−"; }
+  details p { margin-top: 10px; color: var(--muted); font-size: 14px; }
+  .vbox { display: grid; grid-template-columns: auto 1fr auto; gap: 14px; align-items: center; padding: 18px; border-radius: 18px; background: #fff; border: 1px solid var(--line); margin-top: 22px; }
+  .vbox .logo { width: 52px; height: 52px; border-radius: 14px; display: grid; place-items: center; color: #fff; font-weight: 800; }
+  .vbox b { display: flex; gap: 6px; align-items: center; }
+  .vbox small { color: var(--muted); font-size: 12.5px; display: block; }
+  .fbt { background: #fff; border: 1px solid var(--line); border-radius: 26px; padding: 30px; display: grid; grid-template-columns: 1fr 300px; gap: 30px; align-items: center; }
+  .fbt-items { display: flex; align-items: center; gap: 14px; flex-wrap: wrap; }
+  .fbt-item { width: 170px; position: relative; }
+  .fbt-item img { width: 100%; aspect-ratio: 1; object-fit: cover; border-radius: 16px; }
+  .fbt-item label { position: absolute; top: 10px; left: 10px; width: 26px; height: 26px; border-radius: 8px; background: #fff; display: grid; place-items: center; box-shadow: var(--sh-1); }
+  .fbt-item input { width: 16px; height: 16px; accent-color: var(--brand); }
+  .fbt-item b { display: block; font-size: 13px; margin-top: 8px; line-height: 1.3; }
+  .fbt-item span { font-size: 13px; color: var(--muted); }
+  .fbt-plus { font-size: 26px; color: var(--faint); }
+  .fbt-sum { background: var(--bg); border-radius: 18px; padding: 22px; display: grid; gap: 10px; }
+  .fbt-sum .tot { font-size: 26px; font-weight: 800; }
+  .fbt-sum .save { color: var(--ok); font-size: 13px; font-weight: 700; }
+  .reviews { display: grid; grid-template-columns: 300px 1fr; gap: 40px; }
+  .rv-sum .big { font-size: 56px; font-weight: 800; letter-spacing: -.04em; }
+  .rv-bars { display: grid; gap: 6px; margin-top: 14px; font-size: 13px; }
+  .rv-bars div { display: grid; grid-template-columns: 24px 1fr 34px; gap: 10px; align-items: center; }
+  .rv-bars i { height: 7px; background: var(--bg-2); border-radius: 9px; overflow: hidden; display: block; }
+  .rv-bars i b { display: block; height: 100%; background: var(--accent); }
+  .rv-list { display: grid; gap: 14px; }
+  .rv-item { background: #fff; border: 1px solid var(--line); border-radius: 18px; padding: 18px 20px; }
+  .rv-item header { display: flex; justify-content: space-between; margin-bottom: 8px; font-size: 13px; color: var(--muted); }
+  .rv-item header b { color: var(--ink); }
+  .rv-item p { font-size: 14.5px; }
+  .sticky-buy { display: none; }
+  .bg-white { background: #fff; border-top: 1px solid var(--line); }
+  @media (max-width: 960px) {
+    .pdp-grid, .fbt, .reviews { grid-template-columns: 1fr; }
+    .gallery { position: static; }
+  }
+  @media (max-width: 760px) {
+    .pdp { padding: 16px 0 75px; }
+    .gallery { grid-template-columns: 1fr; }
+    .thumbs { order: 2; grid-template-columns: repeat(4, 1fr); }
+    .main-img { border-radius: 20px; margin: 0 -4px; }
+    .perks { grid-template-columns: 1fr; }
+    .fbt { padding: 20px; }
+    .fbt-item { width: calc(50% - 30px); }
+    .sticky-buy { display: flex; position: fixed; left: 0; right: 0; bottom: 64px; z-index: 70; background: #fff; border-top: 1px solid var(--line); padding: 10px 16px; gap: 12px; align-items: center; transform: translateY(150%); transition: transform .4s var(--ease); }
+    .sticky-buy.show { transform: none; }
+    .sticky-buy img { width: 44px; height: 44px; border-radius: 10px; object-fit: cover; }
+    .sticky-buy div { flex: 1; min-width: 0; font-size: 13px; }
+    .sticky-buy div b { display: block; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+    .guide { bottom: 136px; }
+  }
+</style>
+</head>
+<body data-root="../" data-screen="product">
+<div id="site-header"></div>
+<main>
+  <section class="pdp">
+    <div class="wrap">
+      <div class="crumbs" id="crumbs"></div>
+      <div class="pdp-grid">
+        <div class="gallery"><div class="thumbs" id="thumbs"></div><div class="main-img"><img id="mainImg" alt=""><span id="mainBadge"></span></div></div>
+        <div class="info" id="info"></div>
+      </div>
+    </div>
+  </section>
+
+  <section class="section bg-white">
+    <div class="wrap">
+      <div class="sec-head"><div><span class="eyebrow">Frequently bought together</span><h2>Complete the set</h2></div></div>
+      <div class="fbt" id="fbt"></div>
+    </div>
+  </section>
+
+  <section class="section">
+    <div class="wrap">
+      <div class="sec-head"><div><span class="eyebrow" id="moreEyebrow">More from this vendor</span><h2 id="moreTitle"></h2></div><a class="link-arrow" id="moreLink">Visit storefront <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M5 12h14M13 6l6 6-6 6"/></svg></a></div>
+      <div class="pgrid" id="more"></div>
+    </div>
+  </section>
+
+  <section class="section bg-white">
+    <div class="wrap">
+      <div class="sec-head"><div><span class="eyebrow">Verified reviews</span><h2>What customers say</h2></div></div>
+      <div class="reviews" id="reviews"></div>
+    </div>
+  </section>
+</main>
+<div class="sticky-buy" id="stickyBuy"></div>
+<div id="site-footer"></div>
+<script src="../assets/data.js"></script>
+<script src="../assets/app.js"></script>
+<script>
+  const p = productById(new URLSearchParams(location.search).get('id')) || productById('over-ear');
+  const v = vendorById(p.vendor);
+  document.title = `${p.name} – ${v.name} | Souqna`;
+  const $ = id => document.getElementById(id);
+  const off = p.compare ? Math.round((1 - p.price / p.compare) * 100) : 0;
+  $('crumbs').innerHTML = `<a href="../store/">Home</a><span>/</span><a href="../shop/?cat=${encodeURIComponent(p.cat)}">${p.cat}</a><span>/</span><a href="../vendor/?v=${v.id}">${v.name}</a>`;
+  const shots = [IMG(p.img, 1000, 1250), IMG(p.img, 1000, 1250) + '&crop=focalpoint&fp-x=.5&fp-y=.5&fp-z=1.8', IMG(v.banner, 1000, 1250), IMG(p.img, 1000, 1250) + '&sat=-100'];
+  $('thumbs').innerHTML = shots.map((s, i) => `<button class="${i ? '' : 'on'}" data-s="${i}"><img src="${s.replace('w=1000', 'w=200').replace('h=1250', 'h=200')}" alt=""></button>`).join('');
+  $('mainImg').src = shots[0];
+  $('mainBadge').outerHTML = off ? `<span class="pbadge sale">-${off}%</span>` : p.badge && p.badge !== 'Add-on' ? `<span class="pbadge">${p.badge}</span>` : '';
+  $('thumbs').onclick = e => { const b = e.target.closest('[data-s]'); if (!b) return; document.querySelectorAll('.thumbs button').forEach(x => x.classList.toggle('on', x === b)); $('mainImg').style.opacity = 0; setTimeout(() => { $('mainImg').src = shots[+b.dataset.s]; $('mainImg').style.opacity = 1; }, 150); };
+  const d = new Date(); d.setDate(d.getDate() + 3); const d2 = new Date(); d2.setDate(d2.getDate() + 5);
+  const fmt = x => x.toLocaleDateString('en-GB', { weekday: 'short', day: 'numeric', month: 'short' });
+  $('info').innerHTML = `
+    <a class="soldby" href="../vendor/?v=${v.id}"><i style="background:${v.color}">${v.name[0]}</i>Sold by ${v.name} <span class="vtick">${I.verified}</span></a>
+    <h1>${p.name}</h1>
+    <div class="rating-row">${stars(p.rating)}<a href="#reviews" style="text-decoration:underline">${p.reviews} reviews</a><span>·</span><span>${(p.reviews * 7).toLocaleString()} sold</span></div>
+    <div class="price-row"><span class="now">${money(p.price)}</span>${p.compare ? `<s>${money(p.compare)}</s><span class="tag bad">Save ${money(p.compare - p.price)}</span>` : ''}</div>
+    <div class="tax">VAT included. Delivery calculated at checkout.</div>
+    <div class="bnpl"><b class="t">tabby</b> or 4 interest-free payments of <b>${money(Math.ceil(p.price / 4))}</b></div>
+    <div class="opt"><h4>Colour: <span id="colName">Original</span></h4><div class="swatches"><button class="on" style="background:#2a2e3b" data-c="Original"></button><button style="background:#d9d3c6" data-c="Sand"></button><button style="background:#0e6b5a" data-c="Forest"></button></div></div>
+    <div class="buy-row"><div class="qty"><button id="qm">−</button><span id="qv">1</span><button id="qp">+</button></div><button class="btn btn-dark" id="addBtn">${I.bag} Add to cart</button></div>
+    <a class="btn btn-primary btn-block" style="height:52px;margin-top:10px" href="../checkout/" id="buyNow">Buy it now</a>
+    <div class="stock">${p.stock < 10 ? `<b style="color:var(--warn)">Only ${p.stock} left</b> from ${v.name}` : `<b style="color:var(--ok)">In stock</b> · ships from ${v.city}`}<div class="bar"><i style="width:${Math.min(100, p.stock * 3)}%;${p.stock >= 10 ? 'background:var(--ok)' : ''}"></i></div></div>
+    <div class="perks">
+      <div>${I.truck}<span><b>Arrives ${fmt(d)} – ${fmt(d2)}</b>Shipped by ${v.name}</span></div>
+      <div>${I.shield}<span><b>Buyer protection</b>Secure Shopify checkout</span></div>
+    </div>
+    <div class="vbox"><span class="logo" style="background:${v.color}">${v.name.split(' ').map(w => w[0]).join('').replace('&', '').slice(0, 2)}</span><div><b>${v.name} <span class="vtick">${I.verified}</span></b><small>${stars(v.rating)} · ${v.reviews.toLocaleString()} reviews · ${v.followers} followers · ${v.city}</small></div><a class="btn btn-ghost btn-sm" href="../vendor/?v=${v.id}">Visit store</a></div>
+    <details open><summary>Description</summary><p>${p.name} from ${v.name}. ${v.tagline} Each listing on Souqna is created and managed by the vendor from their own dashboard, including photos, variants, price and stock.</p></details>
+    <details><summary>Delivery & returns</summary><p>Delivered by ${v.name} in 2–4 business days across the Kingdom. 14-day returns, started from your Souqna account.</p></details>
+    <details><summary>Vendor policies</summary><p>${v.name} has sold on Souqna since ${v.since}. Questions go straight to the vendor through your order page.</p></details>`;
+  let qty = 1;
+  $('qm').onclick = () => { qty = Math.max(1, qty - 1); $('qv').textContent = qty; };
+  $('qp').onclick = () => { qty++; $('qv').textContent = qty; };
+  $('addBtn').onclick = () => Cart.add(p.id, qty);
+  $('buyNow').onclick = () => Cart.add(p.id, qty, true);
+  document.querySelector('.swatches').onclick = e => { const b = e.target.closest('[data-c]'); if (!b) return; document.querySelectorAll('.swatches button').forEach(x => x.classList.toggle('on', x === b)); $('colName').textContent = b.dataset.c; };
+
+  // Frequently bought together
+  const pair = [p, ...PRODUCTS.filter(x => x.vendor === p.vendor && x.id !== p.id).sort((a, b) => a.price - b.price).slice(0, 1), ...PRODUCTS.filter(x => x.badge === 'Add-on' && x.vendor !== p.vendor).slice(0, 1)];
+  function drawFbt() {
+    const sel = [...document.querySelectorAll('[data-fbt]:checked')].map(i => i.dataset.fbt);
+    const ids = sel.length ? sel : pair.map(x => x.id);
+    const tot = ids.reduce((a, id) => a + productById(id).price, 0);
+    const save = ids.length === 3 ? Math.round(tot * .1) : 0;
+    $('fbtSum').innerHTML = `<span class="muted">${ids.length} item${ids.length > 1 ? 's' : ''} from ${new Set(ids.map(i => productById(i).vendor)).size} vendor(s)</span><span class="tot">${money(tot - save)}</span>${save ? `<span class="save">Bundle saves ${money(save)} (10%)</span>` : '<span class="muted" style="font-size:13px">Add all 3 to save 10%</span>'}<button class="btn btn-primary btn-block" id="fbtAdd">Add ${ids.length} to cart</button>`;
+    $('fbtAdd').onclick = () => { ids.forEach((id, i) => Cart.add(id, 1, i < ids.length - 1)); };
+  }
+  $('fbt').innerHTML = `<div class="fbt-items">${pair.map((x, i) => `${i ? '<span class="fbt-plus">+</span>' : ''}<div class="fbt-item"><img src="${IMG(x.img, 340, 340)}" alt=""><label><input type="checkbox" data-fbt="${x.id}" checked></label><b>${i ? '' : 'This item: '}${x.name}</b><span>${vendorById(x.vendor).name} · ${money(x.price)}</span></div>`).join('')}</div><div class="fbt-sum" id="fbtSum"></div>`;
+  $('fbt').addEventListener('change', drawFbt); drawFbt();
+
+  // More from vendor
+  $('moreTitle').innerHTML = `More from <em class="h-em">${v.name}</em>`;
+  $('moreLink').href = `../vendor/?v=${v.id}`;
+  let more = PRODUCTS.filter(x => x.vendor === v.id && x.id !== p.id);
+  if (more.length < 4) more = more.concat(PRODUCTS.filter(x => x.vendor !== v.id).sort((a, b) => b.reviews - a.reviews)).slice(0, 4);
+  $('more').innerHTML = more.slice(0, 4).map(x => productCard(x)).join('');
+
+  // Reviews
+  const R = [['Faisal A.', 5, 'Exactly as described and arrived a day early. The vendor even added a thank-you note.'], ['Noura K.', 5, 'Great quality. Loved that I could order from two shops and pay once.'], ['Omar S.', 4, 'Very good. Tracking updates came by SMS for each parcel.']];
+  $('reviews').innerHTML = `<div class="rv-sum" id="reviews-anchor"><div class="big">${p.rating.toFixed(1)}</div>${stars(p.rating)}<p class="muted" style="margin-top:6px;font-size:13.5px">Based on ${p.reviews} verified purchases</p>
+    <div class="rv-bars">${[[5, 78], [4, 15], [3, 5], [2, 1], [1, 1]].map(([s, w]) => `<div><span>${s}★</span><i><b style="width:${w}%"></b></i><span>${w}%</span></div>`).join('')}</div></div>
+    <div class="rv-list">${R.map(r => `<div class="rv-item"><header><span><b>${r[0]}</b> · Verified buyer</span>${stars(r[1])}</header><p>${r[2]}</p></div>`).join('')}</div>`;
+  document.querySelector('.reviews').id = 'reviews';
+
+  // Sticky mobile bar
+  $('stickyBuy').innerHTML = `<img src="${IMG(p.img, 100, 100)}" alt=""><div><b>${p.name}</b>${money(p.price)}</div><button class="btn btn-dark btn-sm" data-add="${p.id}">Add to cart</button>`;
+  const addEl = $('addBtn');
+  new IntersectionObserver(([en]) => $('stickyBuy').classList.toggle('show', !en.isIntersecting && en.boundingClientRect.top < 0)).observe(addEl);
+</script>
+</body>
+</html>

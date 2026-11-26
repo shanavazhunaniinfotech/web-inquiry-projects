@@ -1,0 +1,195 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="robots" content="noindex, nofollow">
+<title>Sell on Souqna – Vendor Registration</title>
+<link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Instrument+Serif:ital@0;1&family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="../assets/style.css">
+<style>
+  .s-hero { padding: 75px 0; background: var(--ink); color: #fff; position: relative; overflow: hidden; }
+  .s-hero::before { content: ""; position: absolute; width: 700px; height: 700px; border-radius: 50%; background: radial-gradient(circle, rgba(14,107,90,.55), transparent 62%); right: -200px; top: -260px; }
+  .s-hero .wrap { position: relative; display: grid; grid-template-columns: 1.2fr 1fr; gap: 50px; align-items: center; }
+  .s-hero h1 { font-size: clamp(36px, 4.6vw, 62px); letter-spacing: -.045em; line-height: 1.03; margin: 16px 0; }
+  .s-hero h1 em { font-family: var(--serif); font-weight: 400; color: var(--accent); }
+  .s-hero p { color: #b9bccb; font-size: 17px; max-width: 520px; }
+  .s-hero .eyebrow { color: var(--accent); }
+  .s-stats { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; }
+  .s-stats div { background: rgba(255,255,255,.06); border: 1px solid rgba(255,255,255,.1); border-radius: 20px; padding: 20px; }
+  .s-stats b { font-size: 30px; letter-spacing: -.03em; display: block; }
+  .s-stats span { color: #b9bccb; font-size: 13.5px; }
+  .how { display: grid; grid-template-columns: repeat(4, 1fr); gap: 16px; }
+  .how div { background: #fff; border: 1px solid var(--line); border-radius: 20px; padding: 22px; position: relative; }
+  .how b.n { width: 34px; height: 34px; border-radius: 10px; background: var(--brand-soft); color: var(--brand); display: grid; place-items: center; margin-bottom: 14px; font-weight: 800; }
+  .how h4 { margin-bottom: 6px; } .how p { color: var(--muted); font-size: 14px; }
+  .reg { display: grid; grid-template-columns: 1fr 380px; gap: 40px; align-items: start; }
+  .wiz { background: #fff; border: 1px solid var(--line); border-radius: 28px; padding: 34px; box-shadow: var(--sh-1); }
+  .wsteps { display: grid; grid-template-columns: repeat(4, 1fr); gap: 8px; margin-bottom: 30px; }
+  .wsteps div { display: grid; gap: 8px; font-size: 12.5px; font-weight: 650; color: var(--faint); }
+  .wsteps div::before { content: ""; height: 5px; border-radius: 5px; background: var(--bg-2); transition: background .4s; }
+  .wsteps div.on { color: var(--ink); } .wsteps div.on::before, .wsteps div.done::before { background: var(--brand); }
+  .wsteps div.done { color: var(--brand); }
+  .wpane { display: none; } .wpane.on { display: block; animation: pop .4s var(--ease); }
+  .wpane h3 { font-size: 24px; letter-spacing: -.03em; } .wpane > p { color: var(--muted); margin: 6px 0 22px; }
+  .wnav { display: flex; justify-content: space-between; margin-top: 28px; gap: 10px; }
+  .cats-pick { display: flex; flex-wrap: wrap; gap: 8px; }
+  .preview { position: sticky; top: 24px; }
+  .preview h6 { font-size: 11.5px; text-transform: uppercase; letter-spacing: .1em; color: var(--muted); margin-bottom: 10px; }
+  .pv { background: #fff; border: 1px solid var(--line); border-radius: 24px; overflow: hidden; box-shadow: var(--sh-2); }
+  .pv-banner { height: 120px; background: linear-gradient(135deg, var(--brand), #2bb48f); position: relative; }
+  .pv-logo { position: absolute; left: 20px; bottom: -28px; width: 62px; height: 62px; border-radius: 18px; background: var(--accent); border: 4px solid #fff; display: grid; place-items: center; font-weight: 800; font-size: 22px; transition: background .3s; }
+  .pv-body { padding: 40px 20px 20px; }
+  .pv-body b { font-size: 19px; display: block; }
+  .pv-body p { color: var(--muted); font-size: 13.5px; margin: 4px 0 14px; min-height: 20px; }
+  .pv-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 8px; }
+  .pv-grid i { aspect-ratio: 1; border-radius: 12px; background: var(--bg-2); }
+  .colors { display: flex; gap: 8px; }
+  .colors button { width: 32px; height: 32px; border-radius: 50%; border: 3px solid #fff; box-shadow: 0 0 0 1.5px var(--line-2); }
+  .colors button.on { box-shadow: 0 0 0 2px var(--ink); }
+  .verified-row { display: flex; gap: 12px; align-items: center; padding: 14px; background: #e9f7f0; border-radius: 14px; color: #137a50; font-weight: 650; }
+  .verified-row svg { width: 22px; height: 22px; }
+  .terms { background: var(--bg); border-radius: 16px; padding: 16px 18px; font-size: 13.5px; margin-top: 16px; display: grid; gap: 6px; }
+  .terms b { font-size: 14px; }
+  .status { text-align: center; padding: 10px 0; }
+  .status .ok { width: 80px; height: 80px; border-radius: 50%; background: var(--accent-soft); color: #a3640c; display: grid; place-items: center; margin: 0 auto 18px; }
+  .status .ok svg { width: 36px; height: 36px; }
+  .timeline { text-align: left; display: grid; gap: 0; margin: 26px auto; max-width: 420px; }
+  .tl { display: grid; grid-template-columns: 30px 1fr; gap: 14px; padding-bottom: 18px; position: relative; }
+  .tl::before { content: ""; position: absolute; left: 14px; top: 30px; bottom: 0; width: 2px; background: var(--line); }
+  .tl:last-child::before { display: none; }
+  .tl i { width: 30px; height: 30px; border-radius: 50%; display: grid; place-items: center; background: var(--bg-2); font-style: normal; }
+  .tl i svg { width: 15px; height: 15px; }
+  .tl.done i { background: var(--brand); color: #fff; }
+  .tl.cur i { background: var(--accent); }
+  .tl small { display: block; color: var(--muted); font-size: 13px; }
+  @media (max-width: 960px) {
+    .s-hero .wrap, .reg { grid-template-columns: 1fr; }
+    .how { grid-template-columns: 1fr 1fr; }
+    .preview { position: static; order: -1; display: none; }
+  }
+  @media (max-width: 760px) {
+    .how { grid-template-columns: 1fr; }
+    .wiz { padding: 22px 18px; border-radius: 22px; }
+    .wsteps span { display: none; }
+    .s-stats b { font-size: 24px; }
+  }
+</style>
+</head>
+<body data-root="../" data-screen="sell">
+<div id="site-header"></div>
+<main>
+  <section class="s-hero">
+    <div class="wrap">
+      <div><span class="eyebrow">Sell on Souqna</span><h1>Open your own store. <em>Reach every customer</em> on the marketplace.</h1><p>Register once, get approved, and manage your storefront, products, orders and payouts from your own vendor dashboard.</p>
+        <div style="display:flex;gap:12px;margin-top:28px;flex-wrap:wrap"><a class="btn btn-accent" href="#register">Start registration</a><a class="btn btn-light" href="../vendor-login/">I already sell here</a></div></div>
+      <div class="s-stats"><div><b>12%</b><span>simple commission per sale, no monthly fee</span></div><div><b>Weekly</b><span>payouts to your bank account</span></div><div><b>24h</b><span>typical approval time</span></div><div><b>SMS OTP</b><span>secure, password-free login</span></div></div>
+    </div>
+  </section>
+
+  <section class="section">
+    <div class="wrap">
+      <div class="sec-head"><div><span class="eyebrow">How it works</span><h2>From sign-up to first sale</h2></div></div>
+      <div class="how">
+        <div><b class="n">1</b><h4>Register</h4><p>Tell us about your store and verify your mobile number by SMS.</p></div>
+        <div><b class="n">2</b><h4>Get approved</h4><p>Our team reviews your documents, usually within 24 hours.</p></div>
+        <div><b class="n">3</b><h4>List products</h4><p>Add products, prices and stock from your dashboard.</p></div>
+        <div><b class="n">4</b><h4>Sell & get paid</h4><p>Fulfil orders and receive weekly payouts, minus commission.</p></div>
+      </div>
+    </div>
+  </section>
+
+  <section class="section" id="register" style="padding-top:0">
+    <div class="wrap reg">
+      <div class="wiz">
+        <div class="wsteps" id="wsteps"><div class="on"><span>1. Store</span></div><div><span>2. Verify phone</span></div><div><span>3. Business</span></div><div><span>4. Payouts</span></div></div>
+
+        <form class="wpane on" data-p="0">
+          <h3>Tell us about your store</h3><p>This becomes your public storefront. You can change it later.</p>
+          <div class="form-grid">
+            <div class="field full"><label>Store name</label><input class="input" id="sName" value="Oud & Amber House" required></div>
+            <div class="field full"><label>Short tagline</label><input class="input" id="sTag" value="Hand-blended oud oils and home fragrance."></div>
+            <div class="field full"><label>Main category</label><div class="cats-pick" id="sCats"></div></div>
+            <div class="field"><label>City</label><select class="input select"><option>Riyadh</option><option>Jeddah</option><option>Dammam</option><option>Khobar</option><option>Mecca</option></select></div>
+            <div class="field"><label>Brand colour</label><div class="colors" id="sColors"></div></div>
+            <div class="field full"><label>Contact email</label><input class="input" type="email" value="hello@oudamber.sa" required></div>
+          </div>
+          <div class="wnav"><span></span><button class="btn btn-dark" type="submit">Continue</button></div>
+        </form>
+
+        <div class="wpane" data-p="1">
+          <h3>Verify your mobile number</h3><p>This number becomes your login. You'll sign in with an SMS code each time, no password needed.</p>
+          <div id="phoneStep"><div class="field"><label>Mobile number</label><div style="display:flex;gap:10px"><select class="input select" style="width:120px"><option>+966</option><option>+971</option><option>+965</option></select><input class="input" id="regPhone" value="55 987 6543"></div></div>
+            <button class="btn btn-primary" style="margin-top:16px" id="sendReg">Send verification code</button></div>
+          <div id="regOtp" style="display:none"></div>
+          <div class="wnav"><button class="btn btn-ghost" data-back>Back</button><button class="btn btn-dark" id="p1Next" disabled style="opacity:.4">Continue</button></div>
+        </div>
+
+        <form class="wpane" data-p="2">
+          <h3>Business details</h3><p>Needed to approve your store and issue VAT invoices.</p>
+          <div class="form-grid">
+            <div class="field"><label>Legal business name</label><input class="input" value="Oud & Amber Trading Est."></div>
+            <div class="field"><label>Commercial registration (CR)</label><input class="input" value="1010 456 789"></div>
+            <div class="field"><label>VAT number</label><input class="input" value="3101 2345 6700 003"></div>
+            <div class="field"><label>Business type</label><select class="input select"><option>Establishment</option><option>Company (LLC)</option><option>Freelancer / Maroof</option></select></div>
+            <div class="field full"><label>Upload CR & ID</label><div class="dropzone" id="drop"><b>Click to upload</b> or drag files here<br><small>PDF, JPG up to 10MB</small></div></div>
+          </div>
+          <div class="wnav"><button class="btn btn-ghost" type="button" data-back>Back</button><button class="btn btn-dark" type="submit">Continue</button></div>
+        </form>
+
+        <form class="wpane" data-p="3">
+          <h3>Where should we send your payouts?</h3><p>Payouts are sent weekly for delivered orders, after commission.</p>
+          <div class="form-grid">
+            <div class="field"><label>Bank</label><select class="input select"><option>Al Rajhi Bank</option><option>SNB</option><option>Riyad Bank</option><option>SAB</option></select></div>
+            <div class="field"><label>Account holder</label><input class="input" value="Oud & Amber Trading Est."></div>
+            <div class="field full"><label>IBAN</label><input class="input" value="SA03 8000 0000 6080 1016 7519"></div>
+          </div>
+          <div class="terms"><b>Your commission plan</b><span>12% per item sold · No listing or monthly fees · Payouts every Sunday · Returns deducted from next payout</span></div>
+          <label class="check" style="margin-top:16px"><input type="checkbox" required checked> I agree to the vendor terms and marketplace policies</label>
+          <div class="wnav"><button class="btn btn-ghost" type="button" data-back>Back</button><button class="btn btn-primary" type="submit">Submit application</button></div>
+        </form>
+
+        <div class="wpane status" data-p="4">
+          <div class="ok"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><circle cx="12" cy="12" r="9"/><path d="M12 7v5l3 2"/></svg></div>
+          <h3>Application submitted</h3><p style="color:var(--muted);margin-top:6px">We'll text you as soon as your store is approved.</p>
+          <div class="timeline">
+            <div class="tl done"><i>✓</i><div><b>Registration received</b><small>Store details, phone verified, documents uploaded</small></div></div>
+            <div class="tl cur"><i>•</i><div><b>Admin review</b><small>Usually within 24 hours. Shows up in the admin's approval queue</small></div></div>
+            <div class="tl"><i>3</i><div><b>Approved & storefront live</b><small>SMS + email confirmation, then add your products</small></div></div>
+          </div>
+          <div style="display:flex;gap:10px;justify-content:center;flex-wrap:wrap"><a class="btn btn-dark" href="../admin/#approvals">See it in the admin approval queue</a><a class="btn btn-ghost" href="../vendor-login/">Go to vendor login</a></div>
+        </div>
+      </div>
+
+      <aside class="preview"><h6>Live storefront preview</h6>
+        <div class="pv"><div class="pv-banner"><div class="pv-logo" id="pvLogo">OA</div></div><div class="pv-body"><b id="pvName">Oud & Amber House</b><p id="pvTag"></p><div style="display:flex;gap:8px;margin-bottom:14px"><span class="tag" id="pvCat">Beauty & Fragrance</span><span class="tag warn">Pending approval</span></div><div class="pv-grid"><i></i><i></i><i></i><i></i><i></i><i></i></div></div></div>
+      </aside>
+    </div>
+  </section>
+</main>
+<div id="site-footer"></div>
+<script src="../assets/data.js"></script>
+<script src="../assets/app.js"></script>
+<script>
+  const $ = id => document.getElementById(id);
+  let step = 0, cat = 'Beauty & Fragrance', col = '#e8a13a';
+  const panes = [...document.querySelectorAll('.wpane')];
+  function go(n) { step = n; panes.forEach(p => p.classList.toggle('on', +p.dataset.p === n)); [...$('wsteps').children].forEach((d, i) => { d.classList.toggle('on', i === n); d.classList.toggle('done', i < n); }); if (n === 4) [...$('wsteps').children].forEach(d => d.classList.add('done')); document.getElementById('register').scrollIntoView({ behavior: 'smooth' }); }
+  $('sCats').innerHTML = CATEGORIES.map(c => `<button type="button" class="chip${c.name === cat ? ' on' : ''}" data-c="${c.name}">${c.name}</button>`).join('');
+  $('sCats').onclick = e => { const b = e.target.closest('[data-c]'); if (!b) return; cat = b.dataset.c; $('sCats').querySelectorAll('.chip').forEach(x => x.classList.toggle('on', x === b)); pv(); };
+  $('sColors').innerHTML = ['#e8a13a', '#0e6b5a', '#a2504a', '#2b3a67', '#12141d'].map((c, i) => `<button type="button" style="background:${c}" class="${i ? '' : 'on'}" data-col="${c}"></button>`).join('');
+  $('sColors').onclick = e => { const b = e.target.closest('[data-col]'); if (!b) return; col = b.dataset.col; $('sColors').querySelectorAll('button').forEach(x => x.classList.toggle('on', x === b)); pv(); };
+  function pv() { const n = $('sName').value || 'Your store'; $('pvName').textContent = n; $('pvTag').textContent = $('sTag').value; $('pvCat').textContent = cat; $('pvLogo').textContent = n.split(/\s+/).filter(w => /\w/.test(w)).map(w => w[0]).join('').slice(0, 2).toUpperCase(); $('pvLogo').style.background = col; $('pvLogo').style.color = col === '#e8a13a' ? '#12141d' : '#fff'; }
+  $('sName').oninput = pv; $('sTag').oninput = pv; pv();
+  panes.forEach(p => { if (p.tagName === 'FORM') p.onsubmit = e => { e.preventDefault(); if (+p.dataset.p === 3) toast('Application submitted for approval'); go(+p.dataset.p + 1); }; });
+  document.addEventListener('click', e => { if (e.target.closest('[data-back]')) { e.preventDefault(); go(step - 1); } });
+  $('sendReg').onclick = () => {
+    $('phoneStep').style.display = 'none'; $('regOtp').style.display = 'block';
+    mountOTP($('regOtp'), { onSuccess: () => { $('regOtp').innerHTML = `<div class="verified-row">${I.verified}<span>+966 ${$('regPhone').value} verified. This is now your login number.</span></div>`; const b = $('p1Next'); b.disabled = false; b.style.opacity = 1; } });
+  };
+  $('p1Next').onclick = () => go(2);
+  $('drop').onclick = () => { $('drop').innerHTML = `<b style="color:var(--ok)">✓ CR-certificate.pdf</b> · <b style="color:var(--ok)">✓ National-ID.jpg</b><br><small>2 files uploaded</small>`; };
+</script>
+</body>
+</html>

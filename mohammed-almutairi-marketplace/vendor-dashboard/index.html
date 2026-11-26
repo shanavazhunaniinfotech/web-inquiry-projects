@@ -1,0 +1,234 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="robots" content="noindex, nofollow">
+<title>Souqna Vendor Dashboard – Nook & Grain</title>
+<link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Instrument+Serif:ital@0;1&family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="../assets/style.css">
+<style>
+  .alert { display: flex; gap: 12px; align-items: center; padding: 14px 18px; border-radius: 14px; background: var(--accent-soft); font-size: 14px; margin-bottom: 20px; flex-wrap: wrap; }
+  .alert b { font-weight: 700; } .alert .btn { margin-left: auto; }
+  .otp-chip { display: inline-flex; gap: 6px; align-items: center; font-size: 12px; font-weight: 650; color: #137a50; background: #e1f4ea; padding: 5px 10px; border-radius: 99px; }
+  .otp-chip svg { width: 14px; height: 14px; }
+  .stock-ctl { display: inline-flex; align-items: center; gap: 4px; }
+  .stock-ctl button { width: 30px; height: 30px; border-radius: 8px; border: 1.5px solid var(--line-2); font-weight: 700; }
+  .stock-ctl input { width: 56px; height: 30px; text-align: center; border: 1.5px solid var(--line-2); border-radius: 8px; font-weight: 700; }
+  .ord-items { display: flex; gap: -6px; }
+  .ord-items img { width: 34px; height: 34px; border-radius: 9px; object-fit: cover; border: 2px solid #fff; margin-left: -8px; }
+  .ord-items img:first-child { margin-left: 0; }
+  .earn-break { display: grid; gap: 0; }
+  .earn-break div { display: flex; justify-content: space-between; padding: 11px 0; border-bottom: 1px solid var(--line); font-size: 14px; }
+  .earn-break div:last-child { border: 0; font-weight: 800; font-size: 16px; }
+  .payout-card { background: var(--ink); color: #fff; border-radius: var(--r); padding: 22px; position: relative; overflow: hidden; }
+  .payout-card::after { content: ""; position: absolute; width: 260px; height: 260px; border-radius: 50%; background: radial-gradient(circle, rgba(14,107,90,.7), transparent 65%); right: -80px; top: -90px; }
+  .payout-card > * { position: relative; z-index: 1; }
+  .payout-card span { color: #b9bccb; font-size: 13px; }
+  .payout-card b { display: block; font-size: 34px; letter-spacing: -.03em; margin: 6px 0; }
+  .sf-prev { border-radius: 18px; overflow: hidden; border: 1px solid var(--line); }
+  .sf-prev .bn { height: 110px; background-size: cover; background-position: center; }
+  .sf-prev .bd { padding: 0 18px 18px; }
+  .sf-prev .lg { width: 58px; height: 58px; border-radius: 16px; margin-top: -29px; border: 4px solid #fff; display: grid; place-items: center; color: #fff; font-weight: 800; }
+  .mob-top-btn { display: none; }
+  @media (max-width: 960px) { .mob-top-btn { display: inline-flex; } .dash-top .sub { display: none; } .otp-chip span { display: none; } }
+  @media (max-width: 760px) { .dash-top h1 { font-size: 18px; } .card { padding: 16px; } .tbl-wrap { margin: 0 -16px; padding: 0 16px; } }
+</style>
+</head>
+<body data-root="../" data-screen="vendor-dashboard" data-cart="off" class="has-bnav">
+<div class="dash">
+  <aside class="dash-side">
+    <a class="brand" href="../store/"><span class="brand-mark">S</span><span>Souqna</span> <small>Vendor</small></a>
+    <div class="dash-store"><i style="background:#7a5a3a">NG</i><div><b>Nook & Grain</b><small>Store live</small></div></div>
+    <div id="sideNav"></div>
+    <div class="dash-side-foot"><a class="dnav" href="../vendor/?v=nook-grain"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round"><path d="M14 4h6v6M20 4l-9 9M18 14v6H4V6h6"/></svg>View my storefront</a><a class="dnav" href="../vendor-login/"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round"><path d="M15 4h4v16h-4M10 8l-4 4 4 4M6 12h10"/></svg>Sign out</a></div>
+  </aside>
+  <div class="dash-main">
+    <header class="dash-top">
+      <div><h1 id="pTitle">Overview</h1><div class="sub">Welcome back, Hana · Thursday, 26 Nov</div></div>
+      <div class="dash-top-r"><span class="otp-chip"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><rect x="5" y="11" width="14" height="10" rx="2"/><path d="M8 11V8a4 4 0 0 1 8 0v3"/></svg><span>Signed in with SMS OTP</span></span><a class="btn btn-ghost btn-sm mob-top-btn" href="../vendor/?v=nook-grain">Store</a><span class="avatar">H</span></div>
+    </header>
+    <div class="dash-body">
+
+      <section class="dpanel on" id="p-overview">
+        <div class="alert"><span>⚠️</span><span><b>2 products are low on stock</b> and 3 new orders need accepting.</span><button class="btn btn-dark btn-sm" data-goto="orders">Review orders</button></div>
+        <div class="kpis">
+          <div class="kpi"><span>Sales (30 days)</span><b>SAR 48,210</b><small>▲ 18.4% vs last month</small></div>
+          <div class="kpi"><span>Orders</span><b>126</b><small>▲ 12 this week</small></div>
+          <div class="kpi"><span>Store visits</span><b>9,842</b><small>▲ 6.1%</small></div>
+          <div class="kpi"><span>Conversion</span><b>3.2%</b><small class="down">▼ 0.2 pts</small></div>
+        </div>
+        <div class="dgrid">
+          <div class="card"><div class="card-head"><div><h3>Sales</h3><p id="chartSub">Last 7 days · SAR</p></div><div class="seg" id="rangeSeg"><button class="on" data-r="7">7 days</button><button data-r="12">12 months</button></div></div><div class="bars" id="bars"></div></div>
+          <div class="card"><div class="card-head"><h3>Top products</h3></div><div class="list" id="topList"></div></div>
+        </div>
+        <div class="dgrid-2">
+          <div class="card"><div class="card-head"><h3>Recent orders</h3><button class="btn btn-ghost btn-sm" data-goto="orders">All orders</button></div><div class="list" id="recent"></div></div>
+          <div class="card"><div class="card-head"><h3>Notifications</h3></div><div class="list">
+            <div class="list-row"><span class="grow">SMS me when a new order arrives<small>Sent to +966 •• ••• 4547</small></span><label class="switch"><input type="checkbox" checked><span></span></label></div>
+            <div class="list-row"><span class="grow">Low stock alerts<small>When stock drops below 5</small></span><label class="switch"><input type="checkbox" checked><span></span></label></div>
+            <div class="list-row"><span class="grow">Payout confirmations<small>Email + SMS</small></span><label class="switch"><input type="checkbox" checked><span></span></label></div>
+            <div class="list-row"><span class="grow">Customer messages<small>Reply within 24h to keep your rating</small></span><label class="switch"><input type="checkbox"><span></span></label></div>
+          </div></div>
+        </div>
+      </section>
+
+      <section class="dpanel" id="p-products">
+        <div class="card"><div class="card-head"><div><h3>Products</h3><p>Listed on your storefront and in marketplace search. Synced to Shopify.</p></div><button class="btn btn-primary btn-sm" id="addProd">+ Add product</button></div>
+          <div class="tbl-wrap"><table class="tbl"><thead><tr><th>Product</th><th>Price</th><th>Stock</th><th>Sales</th><th>Visible</th><th></th></tr></thead><tbody id="prodRows"></tbody></table></div></div>
+      </section>
+
+      <section class="dpanel" id="p-inventory">
+        <div class="kpis"><div class="kpi"><span>SKUs</span><b id="invSku">6</b></div><div class="kpi"><span>Units in stock</span><b id="invUnits"></b></div><div class="kpi"><span>Low stock</span><b id="invLow" style="color:var(--warn)"></b></div><div class="kpi"><span>Out of stock</span><b>0</b></div></div>
+        <div class="card"><div class="card-head"><div><h3>Inventory</h3><p>Adjust stock. Changes update the storefront instantly.</p></div><button class="btn btn-dark btn-sm" data-toast="Inventory saved and synced">Save changes</button></div>
+          <div class="tbl-wrap"><table class="tbl"><thead><tr><th>Product</th><th>SKU</th><th>Status</th><th>In stock</th></tr></thead><tbody id="invRows"></tbody></table></div></div>
+      </section>
+
+      <section class="dpanel" id="p-orders">
+        <div class="card"><div class="card-head"><div><h3>Orders</h3><p>Only the items customers bought from your store. Shopify handles payment.</p></div><div class="seg" id="ordSeg"></div></div>
+          <div class="tbl-wrap"><table class="tbl"><thead><tr><th>Order</th><th>Customer</th><th>Items</th><th>Total</th><th>Status</th><th>Action</th></tr></thead><tbody id="ordRows"></tbody></table></div></div>
+      </section>
+
+      <section class="dpanel" id="p-earnings">
+        <div class="dgrid">
+          <div class="card"><div class="card-head"><div><h3>Payout history</h3><p>Weekly payouts to Al Rajhi Bank •••• 7519</p></div><button class="btn btn-ghost btn-sm" data-toast="Statement downloaded (CSV)">Download statement</button></div>
+            <div class="tbl-wrap"><table class="tbl"><thead><tr><th>Period</th><th>Gross sales</th><th>Commission (12%)</th><th>Net payout</th><th>Status</th></tr></thead><tbody id="payRows"></tbody></table></div></div>
+          <div style="display:grid;gap:20px;align-content:start">
+            <div class="payout-card"><span>Next payout · Sunday 29 Nov</span><b>SAR 9,140</b><span>From 23 delivered orders</span></div>
+            <div class="card"><div class="card-head"><h3>How an order pays out</h3></div><div class="earn-break"><div><span>Order #SQ-1042 (your items)</span><b>SAR 3,490</b></div><div><span>Marketplace commission 12%</span><b style="color:var(--rose)">− SAR 419</b></div><div><span>Payment processing (paid by marketplace)</span><b>SAR 0</b></div><div><span>Your payout</span><b>SAR 3,071</b></div></div></div>
+          </div>
+        </div>
+      </section>
+
+      <section class="dpanel" id="p-storefront">
+        <div class="dgrid">
+          <div class="card"><div class="card-head"><div><h3>Storefront settings</h3><p>Customise how your store looks to customers.</p></div></div>
+            <div class="form-grid"><div class="field full"><label>Store name</label><input class="input" value="Nook & Grain"></div><div class="field full"><label>Tagline</label><input class="input" id="sfTag" value="Slow-made furniture and ceramics for calm homes."></div>
+              <div class="field"><label>Store URL</label><input class="input" value="souqna.com/vendors/nook-grain"></div><div class="field"><label>Ships from</label><input class="input" value="Riyadh"></div>
+              <div class="field full"><label>Banner image</label><div class="dropzone"><b>Replace banner</b> · recommended 1800 × 500</div></div>
+              <div class="field full"><label>Return policy</label><textarea class="input">14-day returns on unused items. Large furniture collected by our team.</textarea></div></div>
+            <button class="btn btn-primary" style="margin-top:16px" data-toast="Storefront updated">Save storefront</button></div>
+          <div class="card"><div class="card-head"><h3>Preview</h3><a class="btn btn-ghost btn-sm" href="../vendor/?v=nook-grain">Open live</a></div>
+            <div class="sf-prev"><div class="bn" style="background-image:url(https://images.unsplash.com/photo-1524758631624-e2822e304c36?w=800&q=70&auto=format&fit=crop)"></div><div class="bd"><div class="lg" style="background:#7a5a3a">NG</div><b style="display:block;margin-top:10px">Nook & Grain</b><p class="muted" id="sfPrevTag" style="font-size:13px">Slow-made furniture and ceramics for calm homes.</p></div></div></div>
+        </div>
+      </section>
+    </div>
+  </div>
+</div>
+<nav class="dash-bnav" id="bnav"></nav>
+
+<div class="modal" id="modal"><div class="modal-box">
+  <div class="modal-head"><h3 id="mTitle">Add product</h3><button class="icon-btn" data-close-modal>✕</button></div>
+  <form id="mForm"><div class="form-grid">
+    <div class="field full"><label>Product title</label><input class="input" id="mName" value="Linen Cushion Cover, Sand" required></div>
+    <div class="field"><label>Price (SAR)</label><input class="input" id="mPrice" type="number" value="129" required></div>
+    <div class="field"><label>Compare-at price</label><input class="input" type="number" placeholder="Optional"></div>
+    <div class="field"><label>Stock</label><input class="input" id="mStock" type="number" value="40"></div>
+    <div class="field"><label>Category</label><select class="input select"><option>Home & Living</option></select></div>
+    <div class="field full"><label>Images</label><div class="dropzone"><b>Upload images</b> or drag & drop · up to 8</div></div>
+    <div class="field full"><label>Description</label><textarea class="input">Stonewashed linen cover with hidden zip. 50 × 50 cm.</textarea></div>
+  </div><div class="wnav" style="display:flex;justify-content:flex-end;gap:10px;margin-top:20px"><button type="button" class="btn btn-ghost" data-close-modal>Cancel</button><button class="btn btn-primary" type="submit" id="mSubmit">Publish product</button></div></form>
+</div></div>
+
+<script src="../assets/data.js"></script>
+<script src="../assets/app.js"></script>
+<script>
+  const $ = id => document.getElementById(id);
+  const NAV = [
+    ['overview', 'Overview', '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linejoin="round"><path d="M4 11 12 4l8 7v9h-5v-6H9v6H4v-9Z"/></svg>'],
+    ['products', 'Products', I.grid],
+    ['inventory', 'Inventory', '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linejoin="round"><path d="m12 3 8 4.5v9L12 21l-8-4.5v-9L12 3Z"/><path d="m4 7.5 8 4.5 8-4.5M12 12v9"/></svg>'],
+    ['orders', 'Orders', I.bag],
+    ['earnings', 'Earnings & payouts', '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round"><rect x="3" y="6" width="18" height="13" rx="2"/><path d="M3 10h18M7 15h3"/></svg>'],
+    ['storefront', 'Storefront', I.store]
+  ];
+  const mine = PRODUCTS.filter(p => p.vendor === 'nook-grain').map((p, i) => ({ ...p, sales: [64, 41, 88, 37, 210, 96][i], on: true }));
+  const ORDERS = [
+    ['SQ-1061', 'Reem A.', ['stone-mug', 'cup-set'], 'New', '12 min ago'], ['SQ-1059', 'Majed K.', ['oak-stool'], 'New', '48 min ago'], ['SQ-1057', 'Lama S.', ['shell-chair', 'stone-mug'], 'New', '2 h ago'],
+    ['SQ-1052', 'Turki F.', ['terracotta-sofa'], 'Processing', 'Yesterday'], ['SQ-1048', 'Dana H.', ['cup-set'], 'Shipped', '24 Nov'], ['SQ-1042', 'Faisal A.', ['velvet-sofa'], 'Shipped', '23 Nov'],
+    ['SQ-1031', 'Nasser B.', ['oak-stool', 'oak-stool'], 'Delivered', '20 Nov'], ['SQ-1027', 'Hessa M.', ['stone-mug'], 'Delivered', '19 Nov']
+  ].map(o => ({ no: o[0], cust: o[1], items: o[2], status: o[3], when: o[4], total: o[2].reduce((a, id) => a + productById(id).price, 0) }));
+  const ST = { New: 'warn', Processing: 'info', Shipped: 'dark', Delivered: 'ok' };
+
+  $('sideNav').innerHTML = NAV.map((n, i) => `<button class="dnav${i ? '' : ' on'}" data-goto="${n[0]}">${n[2]}${n[1]}${n[0] === 'orders' ? '<span class="tag" id="newBadge">3</span>' : ''}</button>`).join('');
+  $('bnav').innerHTML = NAV.slice(0, 5).map((n, i) => `<button class="${i ? '' : 'on'}" data-goto="${n[0]}">${n[2]}${n[1].split(' ')[0]}</button>`).join('');
+  function goto(k) {
+    document.querySelectorAll('.dpanel').forEach(p => p.classList.toggle('on', p.id === 'p-' + k));
+    document.querySelectorAll('[data-goto]').forEach(b => { if (b.closest('#sideNav, #bnav')) b.classList.toggle('on', b.dataset.goto === k); });
+    $('pTitle').textContent = NAV.find(n => n[0] === k)[1]; window.scrollTo(0, 0);
+    history.replaceState(null, '', '#' + k);
+  }
+  document.addEventListener('click', e => {
+    const g = e.target.closest('[data-goto]'); if (g) goto(g.dataset.goto);
+    const t = e.target.closest('[data-toast]'); if (t) toast(t.dataset.toast);
+    if (e.target.closest('[data-close-modal]') || e.target.id === 'modal') $('modal').classList.remove('open');
+  });
+
+  // Overview chart
+  function bars(r) {
+    const d = r === 7 ? [['Fri', 4.1], ['Sat', 6.2], ['Sun', 3.4], ['Mon', 5.1], ['Tue', 7.4], ['Wed', 6.6], ['Thu', 8.9]] : [['Dec', 22], ['Jan', 25], ['Feb', 21], ['Mar', 28], ['Apr', 30], ['May', 27], ['Jun', 33], ['Jul', 31], ['Aug', 36], ['Sep', 38], ['Oct', 41], ['Nov', 48]];
+    const max = Math.max(...d.map(x => x[1]));
+    $('bars').innerHTML = d.map((x, i) => `<div class="${i === d.length - 1 ? '' : ''}" title="SAR ${x[1]}k"><small style="font-weight:700;color:var(--ink)">${x[1]}k</small><i style="height:0"></i><span>${x[0]}</span></div>`).join('');
+    requestAnimationFrame(() => $('bars').querySelectorAll('i').forEach((el, i) => el.style.height = (d[i][1] / max * 150) + 'px'));
+    $('chartSub').textContent = r === 7 ? 'Last 7 days · SAR thousands' : 'Last 12 months · SAR thousands';
+  }
+  $('rangeSeg').onclick = e => { const b = e.target.closest('[data-r]'); if (!b) return; $('rangeSeg').querySelectorAll('button').forEach(x => x.classList.toggle('on', x === b)); bars(+b.dataset.r); };
+  bars(7);
+  $('topList').innerHTML = [...mine].sort((a, b) => b.sales * b.price - a.sales * a.price).slice(0, 4).map(p => `<div class="list-row"><div class="tprod grow"><img src="${IMG(p.img, 90, 90)}" alt=""><span>${p.name}<small>${p.sales} sold</small></span></div><b>${money(p.sales * p.price)}</b></div>`).join('');
+
+  function drawRecent() { $('recent').innerHTML = ORDERS.slice(0, 4).map(o => `<div class="list-row"><span class="grow"><b>#${o.no}</b> · ${o.cust}<small>${o.items.length} item(s) · ${o.when}</small></span><b>${money(o.total)}</b><span class="tag ${ST[o.status]}">${o.status}</span></div>`).join(''); }
+
+  // Products
+  function drawProducts() {
+    $('prodRows').innerHTML = mine.map((p, i) => `<tr><td><div class="tprod"><img src="${p.img.startsWith('http') ? p.img : IMG(p.img, 90, 90)}" alt=""><span>${p.name}<small>${p.cat}</small></span></div></td><td><b>${money(p.price)}</b></td><td>${p.stock < 10 ? `<span class="tag warn">${p.stock} left</span>` : p.stock}</td><td>${p.sales}</td><td><label class="switch"><input type="checkbox" ${p.on ? 'checked' : ''} data-vis="${i}"><span></span></label></td><td><button class="btn btn-ghost btn-sm" data-edit="${i}">Edit</button></td></tr>`).join('');
+  }
+  $('prodRows').addEventListener('change', e => { const i = e.target.dataset.vis; if (i !== undefined) { mine[i].on = e.target.checked; toast(e.target.checked ? `${mine[i].name} is visible` : `${mine[i].name} hidden from storefront`); } });
+  let editing = null;
+  $('prodRows').addEventListener('click', e => { const b = e.target.closest('[data-edit]'); if (!b) return; editing = +b.dataset.edit; const p = mine[editing]; $('mTitle').textContent = 'Edit product'; $('mName').value = p.name; $('mPrice').value = p.price; $('mStock').value = p.stock; $('mSubmit').textContent = 'Save changes'; $('modal').classList.add('open'); });
+  $('addProd').onclick = () => { editing = null; $('mTitle').textContent = 'Add product'; $('mName').value = 'Linen Cushion Cover, Sand'; $('mPrice').value = 129; $('mStock').value = 40; $('mSubmit').textContent = 'Publish product'; $('modal').classList.add('open'); };
+  $('mForm').onsubmit = e => {
+    e.preventDefault();
+    const d = { name: $('mName').value, price: +$('mPrice').value, stock: +$('mStock').value };
+    if (editing === null) { mine.unshift({ id: 'new' + Date.now(), cat: 'Home & Living', img: '1513694203232-719a280e022f', sales: 0, on: true, ...d }); toast('Product published to your storefront'); }
+    else { Object.assign(mine[editing], d); toast('Product updated'); }
+    $('modal').classList.remove('open'); drawProducts(); drawInv();
+  };
+
+  // Inventory
+  function drawInv() {
+    $('invRows').innerHTML = mine.map((p, i) => `<tr><td><div class="tprod"><img src="${IMG(p.img, 90, 90)}" alt=""><span>${p.name}</span></div></td><td class="muted">NG-${String(i + 101)}</td><td>${p.stock === 0 ? '<span class="tag bad">Out of stock</span>' : p.stock < 10 ? '<span class="tag warn">Low stock</span>' : '<span class="tag ok">In stock</span>'}</td><td><div class="stock-ctl"><button data-inv="${i}" data-d="-1">−</button><input value="${p.stock}" data-invset="${i}"><button data-inv="${i}" data-d="1">+</button></div></td></tr>`).join('');
+    $('invSku').textContent = mine.length; $('invUnits').textContent = mine.reduce((a, p) => a + p.stock, 0); $('invLow').textContent = mine.filter(p => p.stock < 10).length;
+  }
+  $('invRows').addEventListener('click', e => { const b = e.target.closest('[data-inv]'); if (!b) return; const p = mine[b.dataset.inv]; p.stock = Math.max(0, p.stock + +b.dataset.d); drawInv(); drawProducts(); });
+  $('invRows').addEventListener('change', e => { const i = e.target.dataset.invset; if (i !== undefined) { mine[i].stock = Math.max(0, parseInt(e.target.value) || 0); drawInv(); drawProducts(); } });
+
+  // Orders
+  let ordF = 'All';
+  function drawOrders() {
+    const counts = s => ORDERS.filter(o => s === 'All' || o.status === s).length;
+    $('ordSeg').innerHTML = ['All', 'New', 'Processing', 'Shipped', 'Delivered'].map(s => `<button class="${s === ordF ? 'on' : ''}" data-of="${s}">${s} ${counts(s)}</button>`).join('');
+    const act = { New: ['Accept order', 'btn-primary'], Processing: ['Mark as shipped', 'btn-dark'], Shipped: ['Mark delivered', 'btn-ghost'], Delivered: ['View', 'btn-ghost'] };
+    $('ordRows').innerHTML = ORDERS.filter(o => ordF === 'All' || o.status === ordF).map(o => `<tr><td><b>#${o.no}</b><br><small class="muted">${o.when}</small></td><td>${o.cust}</td><td><div class="ord-items">${o.items.map(id => `<img src="${IMG(productById(id).img, 80, 80)}" alt="" title="${productById(id).name}">`).join('')}</div></td><td><b>${money(o.total)}</b></td><td><span class="tag ${ST[o.status]}">${o.status}</span></td><td><button class="btn ${act[o.status][1]} btn-sm" data-ord="${o.no}">${act[o.status][0]}</button></td></tr>`).join('');
+    const n = ORDERS.filter(o => o.status === 'New').length; $('newBadge').textContent = n; $('newBadge').style.display = n ? '' : 'none';
+    drawRecent();
+  }
+  $('ordSeg').onclick = e => { const b = e.target.closest('[data-of]'); if (b) { ordF = b.dataset.of; drawOrders(); } };
+  $('ordRows').onclick = e => {
+    const b = e.target.closest('[data-ord]'); if (!b) return; const o = ORDERS.find(x => x.no === b.dataset.ord);
+    const next = { New: 'Processing', Processing: 'Shipped', Shipped: 'Delivered' }[o.status];
+    if (!next) { toast(`Order #${o.no}: ${o.items.map(id => productById(id).name).join(', ')}`, I.info); return; }
+    o.status = next;
+    toast({ Processing: `Order #${o.no} accepted. Customer notified by SMS`, Shipped: `Tracking added. ${o.cust} gets an SMS with the link`, Delivered: `Order #${o.no} delivered. Added to next payout` }[next]);
+    drawOrders();
+  };
+
+  // Earnings
+  $('payRows').innerHTML = [['16–22 Nov', 10840, 'Paid'], ['9–15 Nov', 12130, 'Paid'], ['2–8 Nov', 9620, 'Paid'], ['26 Oct – 1 Nov', 11410, 'Paid']].map(r => `<tr><td>${r[0]}</td><td>${money(r[1])}</td><td style="color:var(--rose)">− ${money(r[1] * .12)}</td><td><b>${money(r[1] * .88)}</b></td><td><span class="tag ok">${r[2]}</span></td></tr>`).join('');
+  $('sfTag').oninput = e => $('sfPrevTag').textContent = e.target.value;
+
+  drawProducts(); drawInv(); drawOrders();
+  const h = location.hash.slice(1); if (NAV.some(n => n[0] === h)) goto(h);
+</script>
+</body>
+</html>

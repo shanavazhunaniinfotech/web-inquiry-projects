@@ -1,0 +1,180 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="robots" content="noindex, nofollow">
+<title>Souqna – Checkout</title>
+<link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Instrument+Serif:ital@0;1&family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="../assets/style.css">
+<style>
+  body { background: #fff; }
+  .co-head { border-bottom: 1px solid var(--line); }
+  .co-head .wrap { display: flex; align-items: center; justify-content: space-between; height: 72px; }
+  .co-head .secure { display: flex; gap: 8px; align-items: center; font-size: 13px; color: var(--muted); font-weight: 600; }
+  .co-head .secure svg { width: 18px; height: 18px; color: var(--ok); }
+  .co { display: grid; grid-template-columns: 1fr 460px; min-height: calc(100vh - 72px); }
+  .co-main { padding: 40px 56px 75px max(28px, calc((100vw - 1280px) / 2 + 28px)); }
+  .co-side { background: var(--bg); border-left: 1px solid var(--line); padding: 40px max(28px, calc((100vw - 1280px) / 2 + 28px)) 75px 40px; }
+  .co-side-in { position: sticky; top: 24px; }
+  .steps { display: flex; gap: 8px; font-size: 13px; color: var(--muted); margin-bottom: 26px; flex-wrap: wrap; }
+  .steps b { color: var(--ink); }
+  .express { display: grid; grid-template-columns: repeat(3, 1fr); gap: 10px; }
+  .express button { height: 50px; border-radius: 12px; font-weight: 800; font-size: 15px; }
+  .ex-apple { background: #000; color: #fff; } .ex-tabby { background: #3bffc1; } .ex-mada { background: #fff; border: 1.5px solid var(--line-2) !important; color: #1b3e8f; }
+  .or { display: flex; align-items: center; gap: 12px; color: var(--faint); font-size: 12.5px; margin: 22px 0; }
+  .or::before, .or::after { content: ""; flex: 1; height: 1px; background: var(--line); }
+  .co-sec { margin-bottom: 30px; }
+  .co-sec h2 { font-size: 19px; margin-bottom: 14px; display: flex; justify-content: space-between; align-items: baseline; }
+  .co-sec h2 a { font-size: 13px; color: var(--brand); font-weight: 600; }
+  .ship-v { border: 1.5px solid var(--line-2); border-radius: 14px; overflow: hidden; margin-bottom: 10px; }
+  .ship-v header { padding: 10px 14px; background: var(--bg); font-size: 13px; font-weight: 650; display: flex; gap: 8px; align-items: center; }
+  .ship-v header i { width: 22px; height: 22px; border-radius: 6px; color: #fff; display: grid; place-items: center; font-style: normal; font-size: 11px; font-weight: 800; }
+  .ship-opt { display: flex; align-items: center; gap: 12px; padding: 12px 14px; border-top: 1px solid var(--line); cursor: pointer; font-size: 14px; }
+  .ship-opt input { accent-color: var(--brand); width: 18px; height: 18px; }
+  .ship-opt span { flex: 1; } .ship-opt small { display: block; color: var(--muted); font-size: 12.5px; }
+  .pay { border: 1.5px solid var(--line-2); border-radius: 14px; overflow: hidden; }
+  .pay label { display: flex; align-items: center; gap: 12px; padding: 15px 16px; border-bottom: 1px solid var(--line); cursor: pointer; font-weight: 600; font-size: 14.5px; }
+  .pay label:last-of-type { border-bottom: 0; }
+  .pay label input { accent-color: var(--brand); width: 18px; height: 18px; }
+  .pay-detail .form-grid { gap: 12px; }
+  .pay .logos { margin-left: auto; display: flex; gap: 5px; }
+  .pay .logos span { font-size: 10.5px; font-weight: 800; padding: 4px 7px; border-radius: 5px; background: var(--bg-2); }
+  .pay-detail { padding: 16px; background: var(--bg); display: none; border-bottom: 1px solid var(--line); }
+  .pay-detail.on { display: grid; gap: 12px; }
+  .pay-detail p { font-size: 13.5px; color: var(--muted); }
+  .co-item { display: grid; grid-template-columns: 64px 1fr auto; gap: 14px; align-items: center; padding: 8px 0; }
+  .co-item .im { position: relative; }
+  .co-item img { width: 64px; height: 64px; border-radius: 12px; object-fit: cover; border: 1px solid var(--line); }
+  .co-item .im b { position: absolute; top: -7px; right: -7px; width: 22px; height: 22px; border-radius: 50%; background: var(--muted); color: #fff; font-size: 11.5px; display: grid; place-items: center; }
+  .co-item span { font-size: 14px; font-weight: 600; line-height: 1.3; }
+  .co-item small { display: block; color: var(--muted); font-weight: 500; font-size: 12.5px; }
+  .co-vgroup { padding: 10px 0; border-bottom: 1px solid var(--line); }
+  .co-vgroup h6 { font-size: 11.5px; text-transform: uppercase; letter-spacing: .08em; color: var(--muted); margin-bottom: 4px; }
+  .disc { display: flex; gap: 10px; margin: 18px 0; }
+  .disc .input { height: 46px; }
+  .tot-row { display: flex; justify-content: space-between; font-size: 14px; padding: 5px 0; }
+  .tot-row.big { font-size: 20px; font-weight: 800; padding-top: 14px; margin-top: 8px; border-top: 1px solid var(--line-2); }
+  .tot-row.big small { font-size: 12px; color: var(--muted); font-weight: 500; margin-right: 6px; }
+  .demo-note { font-size: 12.5px; background: var(--accent-soft); padding: 10px 12px; border-radius: 10px; margin-bottom: 14px; }
+  .done { max-width: 720px; margin: 0 auto; padding: 75px 28px; text-align: center; display: none; }
+  .done.on { display: block; animation: pop .5s var(--ease); }
+  .done .ok { width: 84px; height: 84px; border-radius: 50%; background: var(--brand-soft); color: var(--brand); display: grid; place-items: center; margin: 0 auto 20px; }
+  .done .ok svg { width: 40px; height: 40px; }
+  .done h1 { font-size: 38px; letter-spacing: -.035em; }
+  .done h1 em { font-family: var(--serif); font-weight: 400; color: var(--brand); }
+  .done > p { color: var(--muted); margin: 10px 0 28px; }
+  .shipments { display: grid; gap: 12px; text-align: left; margin-bottom: 28px; }
+  .shipment { border: 1px solid var(--line); border-radius: 18px; padding: 16px 18px; display: flex; gap: 14px; align-items: center; }
+  .shipment i { width: 40px; height: 40px; border-radius: 12px; color: #fff; display: grid; place-items: center; font-style: normal; font-weight: 800; }
+  .shipment div { flex: 1; } .shipment small { color: var(--muted); display: block; font-size: 13px; }
+  .done-ctas { display: flex; gap: 10px; justify-content: center; flex-wrap: wrap; }
+  .mob-sum { display: none; }
+  @media (max-width: 960px) {
+    .co { grid-template-columns: 1fr; }
+    .co-main { padding: 24px 16px 75px; order: 2; }
+    .co-side { order: 1; padding: 0 16px; border-left: 0; border-bottom: 1px solid var(--line); }
+    .co-side-in { position: static; display: none; padding-bottom: 20px; }
+    .co-side-in.open { display: block; }
+    .mob-sum { display: flex; justify-content: space-between; align-items: center; width: 100%; padding: 16px 0; font-weight: 650; color: var(--brand); font-size: 14px; }
+    .mob-sum b { color: var(--ink); font-size: 17px; }
+    .express { grid-template-columns: 1fr; }
+  }
+</style>
+</head>
+<body data-root="../" data-screen="checkout" data-cart="off">
+<header class="co-head"><div class="wrap"><a class="brand" href="../store/"><span class="brand-mark">S</span><span>Souqna</span></a><span class="secure"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><rect x="5" y="11" width="14" height="10" rx="2"/><path d="M8 11V8a4 4 0 0 1 8 0v3"/></svg>Secure Shopify checkout</span></div></header>
+
+<div class="co" id="coWrap">
+  <main class="co-main">
+    <div class="steps"><a href="../store/">Cart</a><span>›</span><b>Information & payment</b><span>›</span><span>Confirmation</span></div>
+    <p class="muted" style="font-size:13px;margin-bottom:10px">Express checkout</p>
+    <div class="express"><button class="ex-apple" data-pay-express> Pay</button><button class="ex-mada" data-pay-express>mada Pay</button><button class="ex-tabby" data-pay-express>tabby</button></div>
+    <div class="or">or pay another way</div>
+    <form id="coForm">
+      <div class="co-sec"><h2>Contact <a href="../account/">Sign in</a></h2>
+        <div class="form-grid"><div class="field full"><input class="input" type="email" placeholder="Email" value="faisal@example.com" required></div><div class="field full"><input class="input" placeholder="Mobile (for SMS delivery updates)" value="+966 55 123 4567"></div>
+        <label class="check full"><input type="checkbox" checked> Send me order and tracking updates by SMS</label></div></div>
+      <div class="co-sec"><h2>Delivery address</h2>
+        <div class="form-grid"><div class="field"><input class="input" placeholder="First name" value="Faisal"></div><div class="field"><input class="input" placeholder="Last name" value="Al-Harbi"></div>
+          <div class="field full"><input class="input" placeholder="Address" value="King Fahd Road, Al Olaya"></div>
+          <div class="field"><select class="input select"><option>Riyadh</option><option>Jeddah</option><option>Dammam</option><option>Khobar</option></select></div><div class="field"><input class="input" placeholder="Postal code" value="12214"></div></div></div>
+      <div class="co-sec"><h2>Delivery method</h2><p class="muted" style="font-size:13.5px;margin:-6px 0 12px">Your order ships from each vendor separately. Choose a speed per shipment.</p><div id="shipOpts"></div></div>
+      <div class="co-sec"><h2>Payment</h2><p class="muted" style="font-size:13.5px;margin:-6px 0 12px">All transactions are secure and encrypted.</p>
+        <div class="pay" id="pay">
+          <label><input type="radio" name="pay" value="card" checked> Credit / debit card<span class="logos"><span>VISA</span><span>MC</span><span>mada</span></span></label>
+          <div class="pay-detail on" data-pd="card"><input class="input" placeholder="Card number" value="4242 4242 4242 4242"><div class="form-grid"><input class="input" placeholder="MM / YY" value="12 / 28"><input class="input" placeholder="CVC" value="123"></div><input class="input" placeholder="Name on card" value="Faisal Al-Harbi"></div>
+          <label><input type="radio" name="pay" value="apple"> Apple Pay<span class="logos"><span> Pay</span></span></label>
+          <div class="pay-detail" data-pd="apple"><p>You'll confirm with Face ID after clicking “Pay now”.</p></div>
+          <label><input type="radio" name="pay" value="tabby"> Pay in 4 with tabby<span class="logos"><span>tabby</span></span></label>
+          <div class="pay-detail" data-pd="tabby"><p>4 interest-free payments. No fees.</p></div>
+          <label><input type="radio" name="pay" value="cod"> Cash on delivery</label>
+          <div class="pay-detail" data-pd="cod"><p>Pay the courier when each vendor's parcel arrives. SAR 10 COD fee.</p></div>
+        </div>
+        <p class="muted" style="font-size:12.5px;margin-top:10px">Payment methods are set up in Shopify Payments or your chosen gateway (e.g. HyperPay, Tap, PayTabs, Checkout.com).</p></div>
+      <button class="btn btn-primary btn-block" style="height:56px;font-size:16px" type="submit" id="payBtn">Pay now</button>
+    </form>
+  </main>
+  <aside class="co-side">
+    <button class="mob-sum" id="mobSum" type="button"><span>Show order summary ▾</span><b id="mobTot"></b></button>
+    <div class="co-side-in" id="sideIn"></div>
+  </aside>
+</div>
+
+<section class="done" id="done"></section>
+
+<script src="../assets/data.js"></script>
+<script src="../assets/app.js"></script>
+<script>
+  const $ = id => document.getElementById(id);
+  let demo = false;
+  if (!Cart.items.length) { Cart.items = [{ id: 'over-ear', qty: 1 }, { id: 'glow-serum', qty: 2 }, { id: 'single-origin', qty: 1 }]; Cart.save(); demo = true; }
+  const ship = {};
+  function groups() { const g = {}; Cart.items.forEach(i => { const p = productById(i.id); (g[p.vendor] = g[p.vendor] || []).push({ ...i, p }); }); return g; }
+  function draw() {
+    const g = groups(); const sub = Cart.subtotal();
+    $('shipOpts').innerHTML = Object.keys(g).map(vid => { const v = vendorById(vid); ship[vid] = ship[vid] || 'std'; const vsub = g[vid].reduce((a, l) => a + l.p.price * l.qty, 0);
+      return `<div class="ship-v"><header><i style="background:${v.color}">${v.name[0]}</i>Shipment from ${v.name} · ${g[vid].reduce((a, l) => a + l.qty, 0)} item(s)</header>
+        <label class="ship-opt"><input type="radio" name="s-${vid}" value="std" ${ship[vid] === 'std' ? 'checked' : ''} data-ship="${vid}"><span>Standard<small>2–4 business days</small></span><b>${sub >= FREE_SHIP ? 'Free' : 'SAR 19'}</b></label>
+        <label class="ship-opt"><input type="radio" name="s-${vid}" value="exp" ${ship[vid] === 'exp' ? 'checked' : ''} data-ship="${vid}"><span>Express<small>Next day in ${v.city}</small></span><b>SAR 35</b></label></div>`; }).join('');
+    const shipCost = Object.keys(g).reduce((a, vid) => a + (ship[vid] === 'exp' ? 35 : sub >= FREE_SHIP ? 0 : 19), 0);
+    const disc = window._disc ? Math.round(sub * .1) : 0;
+    const total = sub + shipCost - disc;
+    $('mobTot').textContent = money(total);
+    $('sideIn').innerHTML = (demo ? `<div class="demo-note">Demo: sample items from 3 vendors were added so you can see a multi-vendor order.</div>` : '') +
+      Object.entries(g).map(([vid, ls]) => `<div class="co-vgroup"><h6>${vendorById(vid).name}</h6>${ls.map(l => `<div class="co-item"><div class="im"><img src="${IMG(l.p.img, 140, 140)}" alt=""><b>${l.qty}</b></div><span>${l.p.name}<small>Sold by ${vendorById(vid).name}</small></span><b>${money(l.p.price * l.qty)}</b></div>`).join('')}</div>`).join('') +
+      `<div class="disc"><input class="input" id="code" placeholder="Discount code (try WELCOME10)"><button class="btn btn-ghost" id="applyCode" type="button">Apply</button></div>
+      <div class="tot-row"><span>Subtotal · ${Cart.count()} items</span><b>${money(sub)}</b></div>
+      ${disc ? `<div class="tot-row" style="color:var(--ok)"><span>WELCOME10</span><b>− ${money(disc)}</b></div>` : ''}
+      <div class="tot-row"><span>Delivery · ${Object.keys(g).length} shipments</span><b>${shipCost ? money(shipCost) : 'Free'}</b></div>
+      <div class="tot-row big"><span>Total</span><span><small>SAR · incl. ${money(total * .15 / 1.15)} VAT</small>${money(total)}</span></div>`;
+    $('payBtn').textContent = `Pay now · ${money(total)}`;
+    $('applyCode').onclick = () => { if ($('code').value.trim().toUpperCase() === 'WELCOME10') { window._disc = true; toast('Discount applied: 10% off'); draw(); } else toast('Try the code WELCOME10', I.info); };
+    return total;
+  }
+  draw();
+  document.addEventListener('change', e => {
+    if (e.target.dataset.ship) { ship[e.target.dataset.ship] = e.target.value; draw(); }
+    if (e.target.name === 'pay') document.querySelectorAll('.pay-detail').forEach(d => d.classList.toggle('on', d.dataset.pd === e.target.value));
+  });
+  $('mobSum').onclick = () => $('sideIn').classList.toggle('open');
+  function placeOrder() {
+    const g = groups(), total = draw(), no = 1000 + Math.floor(Math.random() * 8999);
+    $('payBtn').innerHTML = '<span style="width:18px;height:18px;border:2.5px solid rgba(255,255,255,.4);border-top-color:#fff;border-radius:50%;animation:spin .8s linear infinite"></span> Processing…';
+    setTimeout(() => {
+      store.set('lastOrder', { no, total, date: new Date().toISOString(), lines: Cart.items, vendors: Object.keys(g) });
+      $('coWrap').style.display = 'none';
+      $('done').innerHTML = `<div class="ok">${I.check}</div><span class="eyebrow">Order #SQ-${no} confirmed</span><h1 style="margin-top:10px">Thank you, <em>Faisal!</em></h1>
+        <p>We've charged ${money(total)} once. Your order was split into ${Object.keys(g).length} shipments and each vendor has been notified in their dashboard.</p>
+        <div class="shipments">${Object.keys(g).map((vid, i) => { const v = vendorById(vid); return `<div class="shipment"><i style="background:${v.color}">${v.name[0]}</i><div><b>${v.name}</b><small>${g[vid].map(l => l.p.name).join(', ')}</small></div><span class="tag ${i ? 'warn' : 'info'}">${i ? 'Awaiting vendor' : 'Accepted'}</span></div>`; }).join('')}</div>
+        <div class="done-ctas"><a class="btn btn-dark" href="../account/">Track my order</a><a class="btn btn-ghost" href="../store/">Continue shopping</a><a class="btn btn-ghost" href="../vendor-dashboard/">See it in the vendor dashboard</a></div>`;
+      $('done').classList.add('on');
+      Cart.items = []; Cart.save(); window.scrollTo(0, 0);
+    }, 1300);
+  }
+  $('coForm').onsubmit = e => { e.preventDefault(); placeOrder(); };
+  document.querySelectorAll('[data-pay-express]').forEach(b => b.onclick = placeOrder);
+</script>
+</body>
+</html>

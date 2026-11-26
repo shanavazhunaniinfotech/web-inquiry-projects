@@ -1,0 +1,162 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="robots" content="noindex, nofollow">
+<title>Souqna – My Account & Order Tracking</title>
+<link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Instrument+Serif:ital@0;1&family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="../assets/style.css">
+<style>
+  .auth { padding: 75px 0; display: grid; grid-template-columns: 1fr 1fr; gap: 60px; align-items: center; }
+  .auth-art { border-radius: 30px; overflow: hidden; position: relative; min-height: 560px; }
+  .auth-art img { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; }
+  .auth-art::after { content: ""; position: absolute; inset: 0; background: linear-gradient(180deg, transparent 40%, rgba(10,12,18,.8)); }
+  .auth-art div { position: absolute; left: 32px; right: 32px; bottom: 32px; z-index: 1; color: #fff; }
+  .auth-art h2 { font-size: 34px; letter-spacing: -.03em; } .auth-art h2 em { font-family: var(--serif); font-weight: 400; color: var(--accent); }
+  .auth-art ul { list-style: none; padding: 0; margin: 14px 0 0; display: grid; gap: 6px; font-size: 14px; opacity: .9; }
+  .auth-card { max-width: 440px; width: 100%; }
+  .auth-card h1 { font-size: 34px; letter-spacing: -.035em; margin-bottom: 6px; }
+  .auth-card > p { color: var(--muted); margin-bottom: 24px; }
+  .atabs { display: grid; grid-template-columns: 1fr 1fr; background: var(--bg-2); border-radius: 14px; padding: 4px; margin-bottom: 22px; }
+  .atabs button { height: 42px; border-radius: 11px; font-weight: 650; color: var(--muted); }
+  .atabs button.on { background: #fff; color: var(--ink); box-shadow: var(--sh-1); }
+  .aform { display: none; gap: 14px; } .aform.on { display: grid; }
+  .alt-login { display: flex; gap: 10px; } .alt-login .btn { flex: 1; }
+  .divider { display: flex; align-items: center; gap: 10px; font-size: 12.5px; color: var(--faint); }
+  .divider::before, .divider::after { content: ""; flex: 1; height: 1px; background: var(--line); }
+  .acc { padding: 40px 0 75px; display: grid; grid-template-columns: 260px 1fr; gap: 36px; align-items: start; }
+  .acc-side { background: #fff; border: 1px solid var(--line); border-radius: 22px; padding: 20px; position: sticky; top: 140px; }
+  .acc-user { display: flex; gap: 12px; align-items: center; padding-bottom: 16px; border-bottom: 1px solid var(--line); margin-bottom: 10px; }
+  .acc-user .avatar { width: 46px; height: 46px; }
+  .acc-user small { display: block; color: var(--muted); font-size: 12.5px; }
+  .atab { display: flex; gap: 10px; align-items: center; width: 100%; padding: 11px 12px; border-radius: 12px; font-weight: 600; font-size: 14px; color: var(--ink-2); }
+  .atab svg { width: 18px; height: 18px; }
+  .atab.on { background: var(--brand-soft); color: var(--brand-2); }
+  .atab:hover:not(.on) { background: var(--bg); }
+  .apanel { display: none; } .apanel.on { display: block; animation: pop .35s var(--ease); }
+  .apanel > h2 { font-size: 28px; letter-spacing: -.03em; margin-bottom: 6px; }
+  .apanel > p { color: var(--muted); margin-bottom: 22px; }
+  .order { background: #fff; border: 1px solid var(--line); border-radius: 22px; margin-bottom: 18px; overflow: hidden; }
+  .order-head { display: flex; justify-content: space-between; gap: 12px; flex-wrap: wrap; padding: 18px 22px; background: var(--bg); border-bottom: 1px solid var(--line); font-size: 13.5px; }
+  .order-head div span { display: block; color: var(--muted); font-size: 12px; }
+  .order-head b { font-size: 14.5px; }
+  .shp { padding: 20px 22px; border-bottom: 1px dashed var(--line-2); }
+  .shp:last-child { border-bottom: 0; }
+  .shp-top { display: flex; gap: 12px; align-items: center; margin-bottom: 18px; flex-wrap: wrap; }
+  .shp-top i { width: 34px; height: 34px; border-radius: 10px; display: grid; place-items: center; color: #fff; font-style: normal; font-weight: 800; }
+  .shp-top .grow { flex: 1; } .shp-top small { display: block; color: var(--muted); font-size: 12.5px; }
+  .shp-items { display: flex; gap: 8px; }
+  .shp-items img { width: 46px; height: 46px; border-radius: 10px; object-fit: cover; }
+  .track { display: grid; grid-template-columns: repeat(5, 1fr); position: relative; }
+  .track::before { content: ""; position: absolute; top: 13px; left: 10%; right: 10%; height: 3px; background: var(--bg-2); border-radius: 3px; }
+  .track .fill { position: absolute; top: 13px; left: 10%; height: 3px; background: var(--brand); border-radius: 3px; transition: width 1s var(--ease); }
+  .tstep { display: grid; justify-items: center; gap: 8px; text-align: center; font-size: 12px; color: var(--muted); position: relative; z-index: 1; }
+  .tstep i { width: 29px; height: 29px; border-radius: 50%; background: #fff; border: 3px solid var(--bg-2); display: grid; place-items: center; font-style: normal; }
+  .tstep i svg { width: 14px; height: 14px; color: #fff; }
+  .tstep.done i { background: var(--brand); border-color: var(--brand); }
+  .tstep.cur i { border-color: var(--brand); box-shadow: 0 0 0 5px rgba(14,107,90,.15); }
+  .tstep.done, .tstep.cur { color: var(--ink); font-weight: 650; }
+  .tstep small { display: block; font-weight: 500; color: var(--muted); font-size: 11px; }
+  .shp-foot { display: flex; gap: 10px; margin-top: 16px; flex-wrap: wrap; }
+  .wish-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 18px; }
+  .addr { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; }
+  .addr div { background: #fff; border: 1px solid var(--line); border-radius: 18px; padding: 20px; font-size: 14px; }
+  .addr .new { border-style: dashed; display: grid; place-items: center; color: var(--muted); font-weight: 600; cursor: pointer; min-height: 150px; }
+  .prof { background: #fff; border: 1px solid var(--line); border-radius: 22px; padding: 24px; max-width: 640px; }
+  @media (max-width: 960px) {
+    .auth { grid-template-columns: 1fr; padding: 40px 0 75px; }
+    .auth-art { min-height: 260px; order: 2; }
+    .auth-card { margin: 0 auto; }
+    .acc { grid-template-columns: 1fr; padding-top: 20px; }
+    .acc-side { position: static; display: flex; overflow-x: auto; gap: 6px; padding: 8px; scrollbar-width: none; }
+    .acc-user { display: none; }
+    .atab { white-space: nowrap; width: auto; }
+    .acc-side .logout { display: none; }
+    .wish-grid { grid-template-columns: 1fr 1fr; }
+  }
+  @media (max-width: 760px) {
+    .addr { grid-template-columns: 1fr; }
+    .track .tstep span small { display: none; }
+    .tstep { font-size: 10.5px; }
+    .order-head, .shp { padding: 16px; }
+  }
+</style>
+</head>
+<body data-root="../" data-screen="account">
+<div id="site-header"></div>
+<main class="wrap" id="root"></main>
+<div id="site-footer"></div>
+<script src="../assets/data.js"></script>
+<script src="../assets/app.js"></script>
+<script>
+  const root = document.getElementById('root');
+  function authView() {
+    root.innerHTML = `<section class="auth">
+      <div class="auth-card rv in">
+        <span class="eyebrow">Customer account</span>
+        <h1 style="margin-top:12px">Welcome to Souqna</h1><p>Track orders from every vendor, save favourites and check out faster.</p>
+        <div class="atabs"><button class="on" data-at="in">Sign in</button><button data-at="up">Create account</button></div>
+        <form class="aform on" id="f-in"><div class="field"><label>Email or mobile</label><input class="input" value="faisal@example.com" required></div>
+          <div class="field"><label>Password</label><input class="input" type="password" value="demo-password" required></div>
+          <button class="btn btn-dark btn-block" type="submit">Sign in</button>
+          <div class="divider">or</div>
+          <div class="alt-login"><button class="btn btn-ghost" type="button" data-demo>${I.phone} Code by SMS</button><button class="btn btn-ghost" type="button" data-demo>Google</button><button class="btn btn-ghost" type="button" data-demo></button></div></form>
+        <form class="aform" id="f-up"><div class="form-grid"><div class="field"><label>First name</label><input class="input" value="Faisal" required></div><div class="field"><label>Last name</label><input class="input" value="Al-Harbi"></div></div>
+          <div class="field"><label>Email</label><input class="input" type="email" value="faisal@example.com" required></div>
+          <div class="field"><label>Mobile</label><input class="input" value="+966 55 123 4567"></div>
+          <div class="field"><label>Password</label><input class="input" type="password" value="demo-password" required></div>
+          <label class="check"><input type="checkbox" checked> Email me new arrivals from vendors I follow</label>
+          <button class="btn btn-primary btn-block" type="submit">Create account</button></form>
+        <p class="muted" style="font-size:12.5px;margin-top:16px">Demo: details are pre-filled, just press the button.</p>
+      </div>
+      <div class="auth-art"><img src="${IMG('1472851294608-062f824d29cc', 1000, 1100)}" alt=""><div><h2>One account, <em>every vendor.</em></h2><ul><li>✓ All your orders in one place</li><li>✓ Live tracking for each shipment</li><li>✓ Easy returns & saved addresses</li></ul></div></div>
+    </section>`;
+    root.querySelector('.atabs').onclick = e => { const b = e.target.closest('[data-at]'); if (!b) return; root.querySelectorAll('.atabs button').forEach(x => x.classList.toggle('on', x === b)); root.querySelectorAll('.aform').forEach(f => f.classList.toggle('on', f.id === 'f-' + b.dataset.at)); };
+    root.querySelectorAll('.aform').forEach(f => f.onsubmit = e => { e.preventDefault(); login(f.id === 'f-up' ? 'Account created. Welcome, Faisal!' : 'Signed in'); });
+    root.querySelectorAll('[data-demo]').forEach(b => b.onclick = () => login('Signed in'));
+  }
+  function login(msg) { store.set('cust', true); toast(msg); accountView(); window.scrollTo(0, 0); }
+
+  const STEPS = ['Placed', 'Accepted', 'Shipped', 'Out for delivery', 'Delivered'];
+  function shipmentHTML(vid, items, stage, eta) {
+    const v = vendorById(vid);
+    const tag = stage >= 4 ? '<span class="tag ok">Delivered</span>' : stage >= 2 ? '<span class="tag info">In transit</span>' : '<span class="tag warn">Preparing</span>';
+    return `<div class="shp"><div class="shp-top"><i style="background:${v.color}">${v.name[0]}</i><div class="grow"><b>${v.name}</b><small>${stage >= 2 ? 'SMSA · tracking SM' + (8801234 + vid.length * 13) : 'Vendor is preparing your items'} · ${eta}</small></div>${tag}<div class="shp-items">${items.map(id => `<img src="${IMG(productById(id).img, 100, 100)}" alt="">`).join('')}</div></div>
+      <div class="track"><div class="fill" style="width:${stage * 20}%"></div>${STEPS.map((s, i) => `<div class="tstep ${i < stage ? 'done' : i === stage ? 'cur' : ''}"><i>${i <= stage && i < stage ? I.check : ''}</i><span>${s}<small>${i <= stage ? ['Mon 9:14', 'Mon 11:02', 'Tue 08:30', 'Wed 07:55', 'Wed 15:20'][i] : ''}</small></span></div>`).join('')}</div>
+      <div class="shp-foot"><button class="btn btn-ghost btn-sm" data-toast="Message sent to ${v.name}">Message vendor</button>${stage >= 4 ? `<button class="btn btn-ghost btn-sm" data-toast="Return started. ${v.name} will confirm within 24h">Start a return</button><button class="btn btn-ghost btn-sm" data-toast="Thanks for your review!">Write a review</button>` : `<button class="btn btn-ghost btn-sm" data-toast="Live tracking opens the courier page">Track parcel</button>`}</div></div>`;
+  }
+  function accountView() {
+    const last = store.get('lastOrder', null);
+    let ordersHTML = '';
+    if (last) {
+      const byV = {}; last.lines.forEach(l => { const p = productById(l.id); (byV[p.vendor] = byV[p.vendor] || []).push(l.id); });
+      ordersHTML += `<div class="order"><div class="order-head"><div><span>Order</span><b>#SQ-${last.no}</b></div><div><span>Placed</span><b>Just now</b></div><div><span>Total</span><b>${money(last.total)}</b></div><div><span>Shipments</span><b>${Object.keys(byV).length} vendors</b></div></div>
+        ${Object.entries(byV).map(([vid, ids], i) => shipmentHTML(vid, ids, i ? 0 : 1, 'Est. 2–4 days')).join('')}</div>`;
+    }
+    ordersHTML += `<div class="order"><div class="order-head"><div><span>Order</span><b>#SQ-1042</b></div><div><span>Placed</span><b>Mon, 23 Nov</b></div><div><span>Total</span><b>SAR 1,327</b></div><div><span>Shipments</span><b>3 vendors</b></div></div>
+      ${shipmentHTML('volt-supply', ['over-ear'], 3, 'Arriving today')}${shipmentHTML('rawda-beauty', ['glow-serum', 'body-lotion'], 2, 'Arriving Thu')}${shipmentHTML('bean-republic', ['single-origin'], 1, 'Ships tomorrow')}</div>
+      <div class="order"><div class="order-head"><div><span>Order</span><b>#SQ-0987</b></div><div><span>Placed</span><b>2 Nov</b></div><div><span>Total</span><b>SAR 3,490</b></div><div><span>Shipments</span><b>1 vendor</b></div></div>${shipmentHTML('nook-grain', ['velvet-sofa'], 4, 'Delivered 6 Nov')}</div>`;
+    const wish = store.get('wish', []);
+    const wl = (wish.length ? wish : ['red-oud', 'smartwatch', 'cup-set']).map(productById).filter(Boolean);
+    const T = [['orders', 'Orders & tracking', I.truck], ['wishlist', 'Wishlist', I.heart], ['addresses', 'Addresses', I.home], ['profile', 'Profile & security', I.user]];
+    root.innerHTML = `<section class="acc">
+      <aside class="acc-side"><div class="acc-user"><span class="avatar">FA</span><div><b>Faisal Al-Harbi</b><small>faisal@example.com</small></div></div>
+        ${T.map((t, i) => `<button class="atab ${i ? '' : 'on'}" data-ap="${t[0]}">${t[2]}${t[1]}</button>`).join('')}
+        <button class="atab logout" id="logout">${I.x}Sign out</button></aside>
+      <div>
+        <div class="apanel on" id="ap-orders"><h2>Orders & tracking</h2><p>Each vendor ships separately, so every shipment has its own live status.</p>${ordersHTML}</div>
+        <div class="apanel" id="ap-wishlist"><h2>Wishlist</h2><p>Saved from across the marketplace.</p><div class="wish-grid">${wl.map(p => productCard(p)).join('')}</div></div>
+        <div class="apanel" id="ap-addresses"><h2>Addresses</h2><p>Used at checkout.</p><div class="addr"><div><span class="tag dark">Default</span><p style="margin-top:10px"><b>Home</b><br>Faisal Al-Harbi<br>King Fahd Road, Al Olaya<br>Riyadh 12214<br>+966 55 123 4567</p></div><div><p><b>Office</b><br>Faisal Al-Harbi<br>Olaya Towers, Tower B, Floor 9<br>Riyadh 12213</p></div><div class="new" data-toast="Address form opens here">+ Add a new address</div></div></div>
+        <div class="apanel" id="ap-profile"><h2>Profile & security</h2><p>Manage your details and how you sign in.</p><div class="prof"><div class="form-grid"><div class="field"><label>First name</label><input class="input" value="Faisal"></div><div class="field"><label>Last name</label><input class="input" value="Al-Harbi"></div><div class="field full"><label>Email</label><input class="input" value="faisal@example.com"></div><div class="field full"><label>Mobile</label><input class="input" value="+966 55 123 4567"></div>
+          <label class="check full"><input type="checkbox" checked> Sign in with SMS code instead of password</label><label class="check full"><input type="checkbox" checked> Order updates by SMS</label></div><button class="btn btn-dark" style="margin-top:18px" data-toast="Profile saved">Save changes</button></div></div>
+      </div></section>`;
+    root.querySelector('.acc-side').onclick = e => { const b = e.target.closest('[data-ap]'); if (!b) return; root.querySelectorAll('[data-ap]').forEach(x => x.classList.toggle('on', x === b)); root.querySelectorAll('.apanel').forEach(p => p.classList.toggle('on', p.id === 'ap-' + b.dataset.ap)); };
+    document.getElementById('logout').onclick = () => { store.set('cust', false); authView(); };
+  }
+  document.addEventListener('click', e => { const t = e.target.closest('[data-toast]'); if (t) toast(t.dataset.toast); });
+  store.get('cust', false) ? accountView() : authView();
+</script>
+</body>
+</html>

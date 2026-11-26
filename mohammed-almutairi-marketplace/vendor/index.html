@@ -1,0 +1,126 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="robots" content="noindex, nofollow">
+<title>Souqna – Vendor Storefront</title>
+<link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Instrument+Serif:ital@0;1&family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="../assets/style.css">
+<style>
+  .vs-banner { height: 340px; position: relative; overflow: hidden; }
+  .vs-banner img { width: 100%; height: 100%; object-fit: cover; }
+  .vs-banner::after { content: ""; position: absolute; inset: 0; background: linear-gradient(180deg, rgba(0,0,0,.05), rgba(0,0,0,.45)); }
+  .vs-head { position: relative; margin-top: -86px; z-index: 2; }
+  .vs-card { background: #fff; border: 1px solid var(--line); border-radius: 28px; padding: 28px; display: grid; grid-template-columns: auto 1fr auto; gap: 26px; align-items: center; box-shadow: var(--sh-2); }
+  .vs-logo { width: 116px; height: 116px; border-radius: 30px; display: grid; place-items: center; color: #fff; font-size: 38px; font-weight: 800; letter-spacing: -.03em; border: 5px solid #fff; box-shadow: var(--sh-2); margin-top: -64px; }
+  .vs-card h1 { font-size: clamp(26px, 3vw, 38px); font-weight: 750; letter-spacing: -.035em; display: flex; gap: 10px; align-items: center; }
+  .vs-card h1 .vtick svg { width: 24px; height: 24px; }
+  .vs-card .tagline { color: var(--muted); margin: 6px 0 12px; font-size: 15.5px; }
+  .vs-meta { display: flex; gap: 18px; flex-wrap: wrap; font-size: 13.5px; color: var(--muted); }
+  .vs-meta b { color: var(--ink); }
+  .vs-actions { display: flex; gap: 10px; }
+  .vs-tabs { display: flex; gap: 30px; border-bottom: 1px solid var(--line); margin: 36px 0 0; overflow-x: auto; scrollbar-width: none; }
+  .vs-tabs button { padding: 14px 0; font-weight: 650; font-size: 15px; color: var(--muted); border-bottom: 2.5px solid transparent; white-space: nowrap; }
+  .vs-tabs button.on { color: var(--ink); border-color: var(--ink); }
+  .vs-tabs button span { font-size: 12px; background: var(--bg-2); padding: 2px 7px; border-radius: 99px; margin-left: 6px; }
+  .vtab { display: none; padding: 32px 0 75px; }
+  .vtab.on { display: block; animation: pop .35s var(--ease); }
+  .vs-tools { display: flex; justify-content: space-between; gap: 12px; margin-bottom: 22px; flex-wrap: wrap; }
+  .vs-search { display: flex; align-items: center; gap: 8px; height: 44px; padding: 0 14px; border: 1.5px solid var(--line-2); border-radius: 99px; background: #fff; min-width: 280px; }
+  .vs-search input { border: 0; outline: 0; flex: 1; background: transparent; }
+  .vs-search svg { color: var(--muted); width: 18px; height: 18px; }
+  .vs-tools select { height: 44px; border-radius: 99px; border: 1.5px solid var(--line-2); padding: 0 14px; background: #fff; font-weight: 600; }
+  .about-grid { display: grid; grid-template-columns: 1.3fr 1fr; gap: 40px; }
+  .about-grid h2 { font-size: 30px; margin-bottom: 14px; }
+  .about-grid h2 em { font-family: var(--serif); font-weight: 400; }
+  .about-grid p { color: var(--ink-2); margin-bottom: 12px; font-size: 15.5px; }
+  .facts { display: grid; gap: 10px; }
+  .facts div { display: flex; justify-content: space-between; padding: 14px 18px; border-radius: 14px; background: #fff; border: 1px solid var(--line); font-size: 14px; }
+  .facts span { color: var(--muted); }
+  .pol { display: grid; grid-template-columns: repeat(3, 1fr); gap: 16px; }
+  .pol div { background: #fff; border: 1px solid var(--line); border-radius: 20px; padding: 22px; }
+  .pol svg { width: 24px; height: 24px; color: var(--brand); margin-bottom: 12px; }
+  .pol h4 { margin-bottom: 6px; } .pol p { color: var(--muted); font-size: 14px; }
+  .revs { display: grid; grid-template-columns: repeat(2, 1fr); gap: 14px; }
+  .rev { background: #fff; border: 1px solid var(--line); border-radius: 18px; padding: 20px; }
+  .rev header { display: flex; justify-content: space-between; font-size: 13px; color: var(--muted); margin-bottom: 8px; }
+  .rev header b { color: var(--ink); }
+  .rev small { display: block; margin-top: 10px; color: var(--muted); font-size: 12.5px; }
+  .other-v { display: flex; gap: 10px; flex-wrap: wrap; margin-top: 10px; }
+  .other-v a { display: inline-flex; align-items: center; gap: 8px; padding: 6px 12px 6px 6px; border: 1px solid var(--line); border-radius: 99px; background: #fff; font-size: 13px; font-weight: 600; }
+  .other-v i { width: 26px; height: 26px; border-radius: 8px; color: #fff; display: grid; place-items: center; font-style: normal; font-weight: 800; font-size: 11px; }
+  @media (max-width: 960px) {
+    .vs-card { grid-template-columns: 1fr; text-align: left; gap: 14px; }
+    .about-grid, .pol, .revs { grid-template-columns: 1fr; }
+  }
+  @media (max-width: 760px) {
+    .vs-banner { height: 200px; }
+    .vs-head { margin-top: -60px; }
+    .vs-card { padding: 20px; border-radius: 22px; }
+    .vs-logo { width: 84px; height: 84px; border-radius: 22px; font-size: 28px; margin-top: -58px; }
+    .vs-actions .btn { flex: 1; }
+    .vs-search { min-width: 0; flex: 1; }
+    .vs-tabs { gap: 22px; margin-top: 24px; }
+  }
+</style>
+</head>
+<body data-root="../" data-screen="vendor">
+<div id="site-header"></div>
+<main>
+  <div class="vs-banner"><img id="vsBanner" alt=""></div>
+  <div class="wrap">
+    <div class="vs-head"><div class="vs-card" id="vsCard"></div></div>
+    <div class="vs-tabs" id="vsTabs">
+      <button class="on" data-tab="products">Products <span id="pc"></span></button>
+      <button data-tab="about">About</button>
+      <button data-tab="reviews">Reviews <span id="rc"></span></button>
+      <button data-tab="policies">Shipping & policies</button>
+    </div>
+    <div class="vtab on" id="t-products">
+      <div class="vs-tools"><label class="vs-search"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><circle cx="11" cy="11" r="7"/><path d="m20 20-3.5-3.5"/></svg><input id="vq" placeholder="Search this store"></label>
+        <select id="vsort"><option value="popular">Most popular</option><option value="price-asc">Price: low to high</option><option value="price-desc">Price: high to low</option><option value="rating">Top rated</option></select></div>
+      <div class="pgrid" id="vgridP"></div>
+    </div>
+    <div class="vtab" id="t-about"></div>
+    <div class="vtab" id="t-reviews"></div>
+    <div class="vtab" id="t-policies"></div>
+  </div>
+</main>
+<div id="site-footer"></div>
+<script src="../assets/data.js"></script>
+<script src="../assets/app.js"></script>
+<script>
+  const v = vendorById(new URLSearchParams(location.search).get('v')) || VENDORS[0];
+  const $ = id => document.getElementById(id);
+  document.title = `${v.name} – Storefront | Souqna`;
+  $('vsBanner').src = IMG(v.banner, 1800, 500);
+  const initials = v.name.split(' ').map(w => w[0]).join('').replace('&', '').slice(0, 2);
+  const following = store.get('follow', []).includes(v.id);
+  $('vsCard').innerHTML = `<div class="vs-logo" style="background:${v.color}">${initials}</div>
+    <div><h1>${v.name} <span class="vtick">${I.verified}</span></h1><p class="tagline">${v.tagline}</p>
+      <div class="vs-meta"><span>${stars(v.rating)} <b>${v.reviews.toLocaleString()}</b> reviews</span><span><b id="fc">${v.followers}</b> followers</span><span><b>${v.cat}</b></span><span>📍 ${v.city}</span><span>On Souqna since <b>${v.since}</b></span><span>Ships in <b>1–2 days</b></span></div></div>
+    <div class="vs-actions"><button class="btn ${following ? 'btn-ghost' : 'btn-dark'}" id="follow">${following ? 'Following' : '+ Follow store'}</button><button class="btn btn-ghost" id="share">Share</button></div>`;
+  $('follow').onclick = e => { let f = store.get('follow', []); const on = !f.includes(v.id); f = on ? [...f, v.id] : f.filter(x => x !== v.id); store.set('follow', f); e.target.textContent = on ? 'Following' : '+ Follow store'; e.target.className = 'btn ' + (on ? 'btn-ghost' : 'btn-dark'); toast(on ? `You are following ${v.name}` : 'Unfollowed'); };
+  $('share').onclick = () => { try { navigator.clipboard.writeText(location.href); } catch (e) {} toast('Storefront link copied'); };
+  const mine = PRODUCTS.filter(p => p.vendor === v.id);
+  $('pc').textContent = mine.length; $('rc').textContent = v.reviews.toLocaleString();
+  function drawP() {
+    const q = $('vq').value.toLowerCase(), s = $('vsort').value;
+    const l = mine.filter(p => p.name.toLowerCase().includes(q)).sort({ popular: (a, b) => b.reviews - a.reviews, 'price-asc': (a, b) => a.price - b.price, 'price-desc': (a, b) => b.price - a.price, rating: (a, b) => b.rating - a.rating }[s]);
+    $('vgridP').innerHTML = l.length ? l.map(p => productCard(p)).join('') : `<p class="muted" style="grid-column:1/-1;padding:40px 0;text-align:center">No products in ${v.name} match “${q}”.</p>`;
+  }
+  $('vq').oninput = drawP; $('vsort').onchange = drawP; drawP();
+  $('t-about').innerHTML = `<div class="about-grid"><div><span class="eyebrow">Our story</span><h2>About <em>${v.name}</em></h2>
+    <p>${v.tagline} Founded in ${v.city} in ${v.since}, we started with a small studio and a handful of loyal customers.</p>
+    <p>Souqna lets us run our own branded store while customers check out alongside other vendors they love. We manage everything (products, stock, orders and payouts) from one dashboard.</p>
+    <div style="margin-top:20px"><span class="eyebrow">Other vendors you may like</span><div class="other-v">${VENDORS.filter(x => x.id !== v.id).slice(0, 3).map(x => `<a href="./?v=${x.id}"><i style="background:${x.color}">${x.name[0]}</i>${x.name}</a>`).join('')}</div></div></div>
+    <div class="facts"><div><span>Category</span><b>${v.cat}</b></div><div><span>Based in</span><b>${v.city}</b></div><div><span>Products</span><b>${mine.length}</b></div><div><span>Orders fulfilled</span><b>${(v.reviews * 4).toLocaleString()}</b></div><div><span>On-time shipping</span><b>98%</b></div><div><span>Response time</span><b>&lt; 3 hours</b></div></div></div>`;
+  const RV = [['Sara M.', 5, 'Beautiful quality and packaging. Will order again.', mine[0]], ['Abdullah R.', 5, 'Fast delivery and the vendor answered my question in an hour.', mine[1] || mine[0]], ['Huda T.', 4, 'Lovely product, colour slightly lighter than the photo.', mine[2] || mine[0]], ['Khalid N.', 5, 'Ordered with items from another store, came in two neat parcels.', mine[0]]];
+  $('t-reviews').innerHTML = `<div class="revs">${RV.map(r => `<div class="rev"><header><span><b>${r[0]}</b> · Verified buyer</span>${stars(r[1])}</header><p>${r[2]}</p><small>Purchased: ${r[3].name}</small></div>`).join('')}</div>`;
+  $('t-policies').innerHTML = `<div class="pol"><div>${I.truck}<h4>Shipping</h4><p>Ships from ${v.city} within 1–2 business days. Delivered in 2–4 days. Free over SAR 300 per order.</p></div><div><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round"><path d="M4 12a8 8 0 0 1 14-5.3M20 12a8 8 0 0 1-14 5.3"/><path d="M18 3v4h-4M6 21v-4h4"/></svg><h4>Returns</h4><p>14-day returns on unused items. Start a return from your Souqna account.</p></div><div>${I.shield}<h4>Buyer protection</h4><p>Payments are held by Souqna and released to ${v.name} after delivery.</p></div></div>`;
+  $('vsTabs').onclick = e => { const b = e.target.closest('[data-tab]'); if (!b) return; document.querySelectorAll('#vsTabs button').forEach(x => x.classList.toggle('on', x === b)); document.querySelectorAll('.vtab').forEach(t => t.classList.toggle('on', t.id === 't-' + b.dataset.tab)); };
+</script>
+</body>
+</html>

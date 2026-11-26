@@ -1,0 +1,214 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="robots" content="noindex, nofollow">
+<title>Souqna Admin – Marketplace Control Panel</title>
+<link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Instrument+Serif:ital@0;1&family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="../assets/style.css">
+<style>
+  .dash-side { background: #0b0d14; }
+  .app-card { display: grid; grid-template-columns: auto 1fr auto; gap: 16px; align-items: center; padding: 18px; border: 1px solid var(--line); border-radius: 16px; margin-bottom: 12px; background: #fff; }
+  .app-card .lg { width: 50px; height: 50px; border-radius: 14px; display: grid; place-items: center; color: #fff; font-weight: 800; font-size: 17px; }
+  .app-card small { display: block; color: var(--muted); font-size: 13px; }
+  .app-meta { display: flex; gap: 6px; flex-wrap: wrap; margin-top: 8px; }
+  .app-actions { display: flex; gap: 8px; }
+  .docs { display: flex; gap: 6px; flex-wrap: wrap; }
+  .empty-q { text-align: center; padding: 40px 10px; color: var(--muted); }
+  .rate { width: 64px; height: 34px; text-align: center; border: 1.5px solid var(--line-2); border-radius: 9px; font-weight: 700; }
+  .comm-big { display: flex; align-items: baseline; gap: 10px; margin: 10px 0; }
+  .comm-big b { font-size: 46px; letter-spacing: -.04em; }
+  .slider { width: 100%; accent-color: var(--brand); }
+  .calc { background: var(--bg); border-radius: 14px; padding: 16px; display: grid; gap: 8px; font-size: 14px; margin-top: 16px; }
+  .calc div { display: flex; justify-content: space-between; }
+  .calc div:last-child { font-weight: 800; border-top: 1px solid var(--line-2); padding-top: 8px; }
+  .integ { display: grid; grid-template-columns: repeat(3, 1fr); gap: 16px; }
+  .integ > div { background: #fff; border: 1px solid var(--line); border-radius: 18px; padding: 20px; display: grid; gap: 10px; align-content: start; }
+  .integ .top { display: flex; justify-content: space-between; align-items: center; }
+  .integ .ic { width: 44px; height: 44px; border-radius: 12px; display: grid; place-items: center; font-weight: 800; color: #fff; font-size: 15px; }
+  .integ p { color: var(--muted); font-size: 13.5px; }
+  .integ small { font-size: 12px; font-weight: 700; color: var(--brand); }
+  .flow { display: grid; grid-template-columns: repeat(4, 1fr); gap: 10px; margin-bottom: 20px; }
+  .flow div { background: #fff; border: 1px solid var(--line); border-radius: 14px; padding: 14px; font-size: 13px; position: relative; }
+  .flow b { display: block; font-size: 14px; margin-bottom: 2px; }
+  .flow div:not(:last-child)::after { content: "→"; position: absolute; right: -12px; top: 50%; transform: translateY(-50%); color: var(--faint); font-weight: 700; z-index: 1; }
+  .vendor-mini { display: flex; gap: 10px; align-items: center; font-weight: 650; }
+  .vendor-mini i { width: 32px; height: 32px; border-radius: 9px; display: grid; place-items: center; color: #fff; font-style: normal; font-weight: 800; font-size: 12px; }
+  .vendor-mini small { display: block; color: var(--muted); font-weight: 500; font-size: 12px; }
+  @media (max-width: 1180px) { .integ { grid-template-columns: 1fr 1fr; } }
+  @media (max-width: 760px) {
+    .integ, .flow { grid-template-columns: 1fr; }
+    .flow div::after { display: none; }
+    .app-card { grid-template-columns: auto 1fr; }
+    .app-actions { grid-column: 1 / -1; } .app-actions .btn { flex: 1; }
+    .dash-top h1 { font-size: 18px; } .card { padding: 16px; } .tbl-wrap { margin: 0 -16px; padding: 0 16px; }
+    .dash-top .sub { display: none; }
+  }
+</style>
+</head>
+<body data-root="../" data-screen="admin" data-cart="off" class="has-bnav">
+<div class="dash">
+  <aside class="dash-side">
+    <a class="brand" href="../store/"><span class="brand-mark">S</span><span>Souqna</span> <small>Admin</small></a>
+    <div id="sideNav"></div>
+    <div class="dash-side-foot"><a class="dnav" href="../store/"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round"><path d="M14 4h6v6M20 4l-9 9M18 14v6H4V6h6"/></svg>View marketplace</a></div>
+  </aside>
+  <div class="dash-main">
+    <header class="dash-top"><div><h1 id="pTitle">Marketplace overview</h1><div class="sub">Shopify store: souqna.myshopify.com · all vendors</div></div><div class="dash-top-r"><span class="tag ok">Shopify connected</span><span class="avatar" style="background:var(--brand);color:#fff">MA</span></div></header>
+    <div class="dash-body">
+
+      <section class="dpanel on" id="p-overview">
+        <div class="kpis">
+          <div class="kpi"><span>Marketplace sales (GMV, 30d)</span><b>SAR 234,390</b><small>▲ 21%</small></div>
+          <div class="kpi"><span>Commission earned</span><b>SAR 28,127</b><small>▲ 19%</small></div>
+          <div class="kpi"><span>Active vendors</span><b id="kVend">5</b><small id="kPend">3 pending approval</small></div>
+          <div class="kpi"><span>Orders (30d)</span><b>1,284</b><small>▲ 9%</small></div>
+        </div>
+        <div class="dgrid">
+          <div class="card"><div class="card-head"><div><h3>Sales by vendor</h3><p>Last 30 days</p></div><button class="btn btn-ghost btn-sm" data-goto="vendors">Manage vendors</button></div><div class="list" id="byVendor"></div></div>
+          <div class="card"><div class="card-head"><h3>Needs your attention</h3></div><div class="list">
+            <div class="list-row"><span class="grow"><b id="attPend">3 vendor applications</b><small>Waiting for approval</small></span><button class="btn btn-primary btn-sm" data-goto="approvals">Review</button></div>
+            <div class="list-row"><span class="grow"><b>SAR 41,880 in payouts due</b><small>5 vendors · Sunday</small></span><button class="btn btn-ghost btn-sm" data-goto="commission">Open</button></div>
+            <div class="list-row"><span class="grow"><b>2 products flagged</b><small>Missing images / pricing check</small></span><button class="btn btn-ghost btn-sm" data-goto="products">Check</button></div>
+            <div class="list-row"><span class="grow"><b>1 late shipment</b><small>Thread & Co · order #SQ-1033</small></span><button class="btn btn-ghost btn-sm" data-goto="orders">View</button></div>
+          </div></div>
+        </div>
+        <div class="card"><div class="card-head"><div><h3>How an order flows through the system</h3><p>One Shopify checkout, then each vendor sees and fulfils only their part.</p></div></div>
+          <div class="flow"><div><b>1. Customer pays once</b>Shopify checkout, all vendors</div><div><b>2. Order split</b>By vendor, automatically</div><div><b>3. Vendors fulfil</b>From their dashboards</div><div><b>4. Payouts</b>Sale − commission, weekly</div></div></div>
+      </section>
+
+      <section class="dpanel" id="p-approvals">
+        <div class="card"><div class="card-head"><div><h3>Vendor applications</h3><p>New vendors from the registration form. Approving sends an SMS + email and puts their storefront live.</p></div></div><div id="appList"></div></div>
+      </section>
+
+      <section class="dpanel" id="p-vendors">
+        <div class="card"><div class="card-head"><div><h3>Vendors</h3><p>Set a custom commission per vendor or suspend a store.</p></div><button class="btn btn-ghost btn-sm" data-toast="Invite link copied">Invite vendor</button></div>
+          <div class="tbl-wrap"><table class="tbl"><thead><tr><th>Vendor</th><th>Products</th><th>Sales (30d)</th><th>Rating</th><th>Commission</th><th>Active</th></tr></thead><tbody id="vendRows"></tbody></table></div></div>
+      </section>
+
+      <section class="dpanel" id="p-products">
+        <div class="card"><div class="card-head"><div><h3>All products</h3><p>Every vendor's listings in one place. Approve, hide or feature.</p></div><div class="seg" id="prodSeg"><button class="on" data-pf="all">All</button><button data-pf="flag">Flagged 2</button><button data-pf="feat">Featured</button></div></div>
+          <div class="tbl-wrap"><table class="tbl"><thead><tr><th>Product</th><th>Vendor</th><th>Price</th><th>Stock</th><th>Status</th><th>Featured</th></tr></thead><tbody id="prodRows"></tbody></table></div></div>
+      </section>
+
+      <section class="dpanel" id="p-orders">
+        <div class="card"><div class="card-head"><div><h3>All orders</h3><p>Marketplace view: each order and its vendor shipments.</p></div><button class="btn btn-ghost btn-sm" data-toast="Orders exported (CSV)">Export</button></div>
+          <div class="tbl-wrap"><table class="tbl"><thead><tr><th>Order</th><th>Customer</th><th>Vendors</th><th>Total</th><th>Commission</th><th>Status</th></tr></thead><tbody id="ordRows"></tbody></table></div></div>
+      </section>
+
+      <section class="dpanel" id="p-commission">
+        <div class="dgrid">
+          <div class="card"><div class="card-head"><div><h3>Payouts due · Sunday 29 Nov</h3><p>Delivered orders only, after commission & returns.</p></div><button class="btn btn-primary btn-sm" id="payAll">Pay all vendors</button></div>
+            <div class="tbl-wrap"><table class="tbl"><thead><tr><th>Vendor</th><th>Gross</th><th>Commission</th><th>Net payout</th><th></th></tr></thead><tbody id="payRows"></tbody></table></div></div>
+          <div class="card"><div class="card-head"><div><h3>Default commission</h3><p>Applies to vendors without a custom rate.</p></div></div>
+            <div class="comm-big"><b id="commVal">12%</b><span class="muted">per item sold</span></div>
+            <input type="range" class="slider" id="comm" min="5" max="25" value="12">
+            <div class="calc" id="calc"></div>
+            <div class="field" style="margin-top:16px"><label>Payout schedule</label><select class="input select"><option>Weekly (Sunday)</option><option>Every 2 weeks</option><option>Monthly</option></select></div>
+            <button class="btn btn-dark btn-block" style="margin-top:14px" data-toast="Commission settings saved">Save settings</button></div>
+        </div>
+      </section>
+
+      <section class="dpanel" id="p-integrations">
+        <div class="integ" id="integ"></div>
+      </section>
+    </div>
+  </div>
+</div>
+<nav class="dash-bnav" id="bnav"></nav>
+<script src="../assets/data.js"></script>
+<script src="../assets/app.js"></script>
+<script>
+  const $ = id => document.getElementById(id);
+  const ic = p => `<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round">${p}</svg>`;
+  const NAV = [
+    ['overview', 'Overview', ic('<path d="M4 11 12 4l8 7v9h-5v-6H9v6H4v-9Z"/>')],
+    ['approvals', 'Vendor approvals', ic('<path d="M12 3 4.5 6v6c0 4.5 3.2 7.8 7.5 9 4.3-1.2 7.5-4.5 7.5-9V6L12 3Z"/><path d="m9 12 2 2 4-4"/>')],
+    ['vendors', 'Vendors', I.store],
+    ['products', 'Products', I.grid],
+    ['orders', 'Orders', I.bag],
+    ['commission', 'Commission & payouts', ic('<rect x="3" y="6" width="18" height="13" rx="2"/><path d="M3 10h18M7 15h3"/>')],
+    ['integrations', 'Apps & integrations', ic('<path d="M9 3v4M15 3v4M7 7h10v4a5 5 0 0 1-10 0V7ZM12 16v5"/>')]
+  ];
+  let APPS = [
+    { name: 'Oud & Amber House', cat: 'Beauty & Fragrance', city: 'Riyadh', color: '#e8a13a', when: 'Just now', phone: true, docs: ['CR', 'ID', 'VAT', 'IBAN'] },
+    { name: 'Palm Weave Studio', cat: 'Home & Living', city: 'Al Ahsa', color: '#3f5f4a', when: '3 h ago', phone: true, docs: ['CR', 'ID', 'IBAN'] },
+    { name: 'Kicks Lab', cat: 'Fashion', city: 'Jeddah', color: '#2b3a67', when: 'Yesterday', phone: true, docs: ['ID', 'IBAN'], missing: 'CR missing' }
+  ];
+  const vendors = VENDORS.map(v => ({ ...v, rate: v.id === 'volt-supply' ? 8 : v.id === 'bean-republic' ? 10 : 12, on: true }));
+  const prods = PRODUCTS.map((p, i) => ({ ...p, flag: i === 4 || i === 16, feat: p.badge === 'Bestseller' }));
+
+  $('sideNav').innerHTML = NAV.map((n, i) => `<button class="dnav${i ? '' : ' on'}" data-goto="${n[0]}">${n[2]}${n[1]}${n[0] === 'approvals' ? '<span class="tag" id="appBadge">3</span>' : ''}</button>`).join('');
+  $('bnav').innerHTML = NAV.filter(n => n[0] !== 'products' && n[0] !== 'orders').map((n, i) => `<button class="${i ? '' : 'on'}" data-goto="${n[0]}">${n[2]}${{ overview: 'Home', approvals: 'Approvals', vendors: 'Vendors', commission: 'Payouts', integrations: 'Apps' }[n[0]]}</button>`).join('');
+  function goto(k) {
+    document.querySelectorAll('.dpanel').forEach(p => p.classList.toggle('on', p.id === 'p-' + k));
+    document.querySelectorAll('#sideNav [data-goto], #bnav [data-goto]').forEach(b => b.classList.toggle('on', b.dataset.goto === k));
+    $('pTitle').textContent = k === 'overview' ? 'Marketplace overview' : NAV.find(n => n[0] === k)[1]; window.scrollTo(0, 0); history.replaceState(null, '', '#' + k);
+  }
+  document.addEventListener('click', e => { const g = e.target.closest('[data-goto]'); if (g) goto(g.dataset.goto); const t = e.target.closest('[data-toast]'); if (t) toast(t.dataset.toast); });
+
+  const total = vendors.reduce((a, v) => a + v.sales, 0);
+  $('byVendor').innerHTML = [...vendors].sort((a, b) => b.sales - a.sales).map(v => `<div class="list-row"><div class="vendor-mini grow"><i style="background:${v.color}">${v.name[0]}</i><span>${v.name}<small>${v.cat}</small></span></div><div style="flex:1;max-width:180px;height:8px;background:var(--bg-2);border-radius:9px;overflow:hidden"><div style="height:100%;width:${v.sales / total * 100 * 2.2}%;background:var(--brand);border-radius:9px"></div></div><b style="min-width:100px;text-align:right">${money(v.sales)}</b></div>`).join('');
+
+  function drawApps() {
+    $('appList').innerHTML = APPS.length ? APPS.map((a, i) => `<div class="app-card"><span class="lg" style="background:${a.color}">${a.name.split(/\s+/).filter(w => /\w/.test(w)).map(w => w[0]).join('').slice(0, 2)}</span>
+      <div><b>${a.name}</b><small>${a.cat} · ${a.city} · applied ${a.when}</small><div class="app-meta"><span class="tag ok">✓ Phone verified (OTP)</span>${a.docs.map(d => `<span class="tag">${d}</span>`).join('')}${a.missing ? `<span class="tag bad">${a.missing}</span>` : ''}</div></div>
+      <div class="app-actions"><button class="btn btn-ghost btn-sm" data-rej="${i}">${a.missing ? 'Request docs' : 'Reject'}</button><button class="btn btn-primary btn-sm" data-app="${i}">Approve</button></div></div>`).join('') : `<div class="empty-q"><b style="color:var(--ink);font-size:17px">All caught up</b><p>No vendor applications waiting.</p></div>`;
+    $('appBadge').textContent = APPS.length; $('appBadge').style.display = APPS.length ? '' : 'none';
+    $('kPend').textContent = `${APPS.length} pending approval`; $('attPend').textContent = `${APPS.length} vendor application${APPS.length !== 1 ? 's' : ''}`;
+  }
+  $('appList').onclick = e => {
+    const a = e.target.closest('[data-app]'), r = e.target.closest('[data-rej]');
+    if (a) { const v = APPS[+a.dataset.app]; APPS.splice(+a.dataset.app, 1); vendors.push({ id: 'n' + Date.now(), name: v.name, cat: v.cat, color: v.color, products: 0, sales: 0, rating: 0, rate: 12, on: true }); $('kVend').textContent = vendors.length; toast(`${v.name} approved. SMS sent, storefront is live`); drawApps(); drawVendors(); }
+    if (r) { const v = APPS[+r.dataset.rej]; APPS.splice(+r.dataset.rej, 1); toast(v.missing ? `Document request sent to ${v.name}` : `${v.name} rejected with a note`, I.info); drawApps(); }
+  };
+  function drawVendors() {
+    $('vendRows').innerHTML = vendors.map((v, i) => `<tr><td><div class="vendor-mini"><i style="background:${v.color}">${v.name[0]}</i><span>${v.name}<small>${v.cat}</small></span></div></td><td>${v.products}</td><td><b>${money(v.sales)}</b></td><td>${v.rating ? stars(v.rating) : '<span class="tag info">New</span>'}</td><td><input class="rate" value="${v.rate}%" data-rate="${i}"></td><td><label class="switch"><input type="checkbox" ${v.on ? 'checked' : ''} data-von="${i}"><span></span></label></td></tr>`).join('');
+  }
+  $('vendRows').addEventListener('change', e => {
+    if (e.target.dataset.von !== undefined) { const v = vendors[e.target.dataset.von]; v.on = e.target.checked; toast(v.on ? `${v.name} reactivated` : `${v.name} suspended. Storefront hidden`, v.on ? I.check : I.info); }
+    if (e.target.dataset.rate !== undefined) { const v = vendors[e.target.dataset.rate]; v.rate = parseFloat(e.target.value) || 12; e.target.value = v.rate + '%'; toast(`${v.name} commission set to ${v.rate}%`); drawPay(); }
+  });
+  let pf = 'all';
+  function drawProds() {
+    $('prodRows').innerHTML = prods.filter(p => pf === 'all' || (pf === 'flag' ? p.flag : p.feat)).map(p => { const v = vendorById(p.vendor); const i = prods.indexOf(p); return `<tr><td><div class="tprod"><img src="${IMG(p.img, 90, 90)}" alt=""><span>${p.name}</span></div></td><td>${v.name}</td><td>${money(p.price)}</td><td>${p.stock}</td><td>${p.flag ? `<button class="btn btn-ghost btn-sm" data-unflag="${i}">⚑ Flagged · resolve</button>` : '<span class="tag ok">Live</span>'}</td><td><label class="switch"><input type="checkbox" ${p.feat ? 'checked' : ''} data-feat="${i}"><span></span></label></td></tr>`; }).join('');
+  }
+  $('prodSeg').onclick = e => { const b = e.target.closest('[data-pf]'); if (!b) return; pf = b.dataset.pf; $('prodSeg').querySelectorAll('button').forEach(x => x.classList.toggle('on', x === b)); drawProds(); };
+  $('prodRows').addEventListener('change', e => { if (e.target.dataset.feat !== undefined) { const p = prods[e.target.dataset.feat]; p.feat = e.target.checked; toast(p.feat ? `${p.name} featured on the homepage` : 'Removed from featured'); } });
+  $('prodRows').addEventListener('click', e => { const b = e.target.closest('[data-unflag]'); if (b) { prods[b.dataset.unflag].flag = false; toast('Flag resolved, product is live'); drawProds(); } });
+
+  const ORD = [['SQ-1061', 'Reem A.', ['nook-grain'], 258, 'Paid'], ['SQ-1060', 'Ali M.', ['volt-supply', 'thread-co'], 1448, 'Paid'], ['SQ-1058', 'Sara M.', ['rawda-beauty', 'bean-republic', 'nook-grain'], 703, 'Partially shipped'], ['SQ-1042', 'Faisal A.', ['volt-supply', 'rawda-beauty', 'bean-republic'], 1327, 'Partially shipped'], ['SQ-1033', 'Hind Q.', ['thread-co'], 389, 'Late'], ['SQ-1031', 'Nasser B.', ['nook-grain'], 840, 'Delivered']];
+  const last = store.get('lastOrder', null);
+  if (last) ORD.unshift(['SQ-' + last.no, 'Faisal A.', last.vendors, last.total, 'Paid']);
+  $('ordRows').innerHTML = ORD.map(o => `<tr><td><b>#${o[0]}</b></td><td>${o[1]}</td><td><div style="display:flex;gap:4px">${o[2].map(id => { const v = vendorById(id); return `<span class="tag" style="background:${v.color};color:#fff" title="${v.name}">${v.name.split(' ')[0]}</span>`; }).join('')}</div></td><td><b>${money(o[3])}</b></td><td>${money(o[3] * .12)}</td><td><span class="tag ${{ Paid: 'info', 'Partially shipped': 'warn', Late: 'bad', Delivered: 'ok' }[o[4]]}">${o[4]}</span></td></tr>`).join('');
+
+  const paid = new Set();
+  function drawPay() {
+    $('payRows').innerHTML = vendors.filter(v => v.sales).map((v, i) => { const g = Math.round(v.sales * .2); return `<tr><td><div class="vendor-mini"><i style="background:${v.color}">${v.name[0]}</i><span>${v.name}<small>${v.rate}% rate</small></span></div></td><td>${money(g)}</td><td style="color:var(--rose)">− ${money(g * v.rate / 100)}</td><td><b>${money(g * (1 - v.rate / 100))}</b></td><td>${paid.has(v.name) ? '<span class="tag ok">Paid</span>' : `<button class="btn btn-ghost btn-sm" data-pay="${v.name}">Pay</button>`}</td></tr>`; }).join('');
+  }
+  $('payRows').onclick = e => { const b = e.target.closest('[data-pay]'); if (b) { paid.add(b.dataset.pay); toast(`Payout sent to ${b.dataset.pay}`); drawPay(); } };
+  $('payAll').onclick = () => { vendors.forEach(v => paid.add(v.name)); toast('All payouts sent via bank transfer'); drawPay(); };
+  function calc() { const r = +$('comm').value; $('commVal').textContent = r + '%'; $('calc').innerHTML = `<div><span>Example sale</span><b>SAR 1,000</b></div><div><span>Marketplace keeps (${r}%)</span><b>SAR ${r * 10}</b></div><div><span>Vendor receives</span><b>SAR ${1000 - r * 10}</b></div>`; }
+  $('comm').oninput = calc; calc();
+
+  const INT = [
+    ['Shopify', '#5e8e3e', 'S', 'Products, checkout, orders, customers', true, 'Core platform'],
+    ['Multi-vendor engine', '#12141d', 'MV', 'Vendor accounts, order splitting, commissions (marketplace app or custom Shopify app)', true, 'Core'],
+    ['SMS gateway', '#e8a13a', 'SMS', 'OTP login codes & order alerts (e.g. Unifonic, Msegat, Twilio)', true, 'OTP + notifications'],
+    ['Payment gateway', '#2f6fde', '₤', 'mada, Apple Pay, cards (Shopify Payments, HyperPay, Tap or PayTabs)', true, 'Checkout'],
+    ['Buy now, pay later', '#3bffc1', 't', 'tabby / Tamara instalments at checkout', false, 'Optional'],
+    ['Shipping & tracking', '#d9534a', '🚚', 'SMSA / Aramex labels and live tracking per vendor', false, 'Phase 2'],
+    ['Email marketing', '#7a5a3a', '✉', 'Klaviyo / Shopify Email flows', false, 'Phase 2'],
+    ['Analytics', '#0e6b5a', '◔', 'GA4, Meta & TikTok pixels', true, 'Tracking'],
+    ['Custom API', '#2a2e3b', '{ }', 'Webhooks & API for ERP, accounting or a mobile app later', false, 'On request']
+  ];
+  $('integ').innerHTML = INT.map((x, i) => `<div><div class="top"><span class="ic" style="background:${x[1]};${x[1] === '#3bffc1' ? 'color:#111' : ''}">${x[2]}</span><label class="switch"><input type="checkbox" ${x[4] ? 'checked' : ''} data-int="${i}"><span></span></label></div><b>${x[0]}</b><p>${x[3]}</p><small>${x[5]}</small></div>`).join('');
+  $('integ').addEventListener('change', e => { const x = INT[e.target.dataset.int]; toast(`${x[0]} ${e.target.checked ? 'connected' : 'disconnected'}`); });
+
+  drawApps(); drawVendors(); drawProds(); drawPay();
+  const h = location.hash.slice(1); if (NAV.some(n => n[0] === h)) goto(h);
+</script>
+</body>
+</html>
