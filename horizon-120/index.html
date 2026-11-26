@@ -37,7 +37,7 @@
         <a href="#areas">Wellness Areas <svg viewBox="0 0 24 24" class="chev"><path d="m6 9 6 6 6-6"/></svg></a>
         <div class="mega">
           <div class="mega__cols" id="megaList"></div>
-          <a href="#bestsellers" class="mega__feature">
+          <a href="#areas" class="mega__feature">
             <img src="images/damiana.webp" alt="">
             <span class="eyebrow">Bestseller</span>
             <strong>Damiana</strong>
@@ -45,7 +45,7 @@
           </a>
         </div>
       </div>
-      <a href="#bestsellers">Shop All</a>
+      <a href="#areas">Shop by Goal</a>
       <a href="#why">Why Horizon</a>
       <a href="#quality">Our Quality</a>
       <a href="#reviews">Reviews</a>
@@ -72,7 +72,7 @@
     <p class="mnav__label">Shop by wellness area</p>
     <div class="mnav__areas" id="mnavAreas"></div>
     <nav class="mnav__links">
-      <a href="#bestsellers">Shop All</a>
+      <a href="#areas">Shop by Goal</a>
       <a href="#why">Why Horizon</a>
       <a href="#quality">Our Quality</a>
       <a href="#reviews">Reviews</a>
@@ -94,7 +94,7 @@
       <h1>Your best decades<br><em>start here.</em></h1>
       <p class="hero__sub">Standardized botanical formulas for energy, focus, joints, heart and vitality — lab-tested on every batch and made in Spain to the strictest European standards.</p>
       <div class="hero__ctas">
-        <a href="#bestsellers" class="btn btn--gold btn--lg">Shop Bestsellers <svg viewBox="0 0 24 24"><path d="M5 12h14M13 6l6 6-6 6"/></svg></a>
+        <a href="#areas" class="btn btn--gold btn--lg">Shop by goal <svg viewBox="0 0 24 24"><path d="M5 12h14M13 6l6 6-6 6"/></svg></a>
         <a href="#quiz" class="btn btn--ghost-light btn--lg">Find my formula · 60 sec</a>
       </div>
       <div class="hero__proof">
@@ -127,95 +127,124 @@
   </div>
 </div>
 
-<!-- Shop by wellness area -->
-<section class="section areas" id="areas">
+<!-- Shop by goal -->
+<section class="section goals" id="areas">
   <div class="container">
-    <div class="section-head section-head--split">
+    <div class="goals__head">
       <div>
-        <span class="eyebrow">Shop by need</span>
-        <h2>What would you like to <em>feel better</em> at?</h2>
+        <span class="eyebrow eyebrow--line">Wellness areas</span>
+        <h2>Shop by <em>goal</em>.</h2>
+        <p class="muted">Choose what matters most to you — each goal has one formula, designed for it.</p>
       </div>
-      <div class="slider-nav">
-        <button class="round-btn" data-scroll="areaTrack" data-dir="-1" aria-label="Previous"><svg viewBox="0 0 24 24"><path d="m15 6-6 6 6 6"/></svg></button>
-        <button class="round-btn" data-scroll="areaTrack" data-dir="1" aria-label="Next"><svg viewBox="0 0 24 24"><path d="m9 6 6 6-6 6"/></svg></button>
-      </div>
-    </div>
-  </div>
-  <div class="area-track" id="areaTrack"></div>
-</section>
-
-<!-- Bestsellers -->
-<section class="section section--cream bestsellers" id="bestsellers">
-  <div class="container">
-    <div class="section-head center">
-      <span class="eyebrow">The collection</span>
-      <h2>13 formulas. <em>One purpose.</em></h2>
-      <p>Each formula targets a single area of well-being with clinically studied, standardized ingredients — so you only take what you need.</p>
-    </div>
-    <div class="tabs" role="tablist" id="tabs">
-      <button class="tab is-active" data-filter="all" role="tab">All formulas</button>
-      <button class="tab" data-filter="vitality" role="tab">Vitality</button>
-      <button class="tab" data-filter="mind" role="tab">Mind &amp; Mood</button>
-      <button class="tab" data-filter="body" role="tab">Body &amp; Heart</button>
-      <button class="tab" data-filter="daily" role="tab">Daily Essentials</button>
-    </div>
-    <div class="grid products" id="productGrid"></div>
-  </div>
-</section>
-
-<!-- Featured product -->
-<section class="section feature" id="featured">
-  <div class="container feature__grid">
-    <div class="feature__gallery">
-      <div class="feature__main">
-        <span class="badge badge--dark">#1 Bestseller</span>
-        <img src="images/damiana.webp" alt="Horizon 120 Damiana bottle" id="featImg">
-        <div class="feature__seal"><svg viewBox="0 0 100 100"><defs><path id="circ" d="M50 50m-36 0a36 36 0 1 1 72 0a36 36 0 1 1-72 0"/></defs><text><textPath href="#circ">LAB-TESTED · MADE IN SPAIN · STANDARDIZED ·</textPath></text></svg><b>120</b></div>
-      </div>
-      <div class="feature__facts">
-        <div><b>60</b><span>veg capsules</span></div>
-        <div><b>2</b><span>capsules a day</span></div>
-        <div><b>30</b><span>day supply</span></div>
+      <div class="goal-filters" role="tablist" aria-label="Filter wellness areas" id="goalFilters">
+        <button class="gf is-active" data-g="all" role="tab">All <span>13</span></button>
+        <button class="gf" data-g="body" role="tab">Body <span>7</span></button>
+        <button class="gf" data-g="mind" role="tab">Mind &amp; rest <span>3</span></button>
+        <button class="gf" data-g="hs" role="tab">He &amp; She <span>3</span></button>
       </div>
     </div>
-    <div class="feature__info">
-      <span class="eyebrow">Male vitality</span>
-      <h2>Damiana</h2>
-      <div class="rating-row"><span class="stars">★★★★★</span> <a href="#reviews">21 reviews</a></div>
-      <p class="lead">Energy, vitality and natural drive in a single formula. Combines Liboost® standardized Damiana with L-Citrulline and Vitamins B5 &amp; B6.</p>
-      <ul class="checks">
-        <li><b>Standardized extract</b> — Liboost® standardized to ≥1.5% flavonoids (HPLC)</li>
-        <li><b>Targeted synergy</b> — supports nitric oxide release, circulation and mental energy</li>
-        <li><b>Certified quality</b> — sourced in Mexico, made in Spain, every batch screened for adulterants</li>
-      </ul>
-
-      <div class="buy-box">
-        <p class="buy-box__label">Choose your plan</p>
-        <label class="plan is-selected">
-          <input type="radio" name="plan" value="sub" checked>
-          <span class="plan__radio"></span>
-          <span class="plan__body">
-            <b>Subscribe &amp; save 15% <span class="tag">Most popular</span></b>
-            <small>Delivered every 30 days · free shipping · cancel anytime</small>
-          </span>
-          <span class="plan__price"><s>€32,00</s> €27,20</span>
-        </label>
-        <label class="plan">
-          <input type="radio" name="plan" value="once">
-          <span class="plan__radio"></span>
-          <span class="plan__body"><b>One-time purchase</b><small>Single bottle · 30-day supply</small></span>
-          <span class="plan__price">€32,00</span>
-        </label>
-        <div class="qty-bundles" role="radiogroup" aria-label="Bundle size">
-          <button class="qb is-selected" data-qty="1"><b>1 bottle</b><small>30 days</small></button>
-          <button class="qb" data-qty="2"><b>2 bottles</b><small>Save 5%</small></button>
-          <button class="qb" data-qty="3"><span class="qb__flag">Best value</span><b>3 bottles</b><small>Save 10%</small></button>
+    <div class="goal-grid" id="goalGrid"></div>
+    <div class="goal-panel" id="goalPanel" aria-live="polite">
+      <div class="gp-media">
+        <span class="gp-chip"><i id="gpChipIcon"></i><span id="gpChip">Essential integration</span></span>
+        <span class="gp-count"><b id="gpIndex">01</b> / 13</span>
+        <div class="gp-ring"></div>
+        <img id="gpImg" src="images/multivitamin.webp" alt="">
+        <div class="gp-nav">
+          <button class="round-btn round-btn--sm" id="gpPrev" aria-label="Previous formula"><svg viewBox="0 0 24 24"><path d="m15 6-6 6 6 6"/></svg></button>
+          <button class="round-btn round-btn--sm" id="gpNext" aria-label="Next formula"><svg viewBox="0 0 24 24"><path d="m9 6 6 6-6 6"/></svg></button>
         </div>
-        <button class="btn btn--dark btn--block btn--lg" id="featAdd">Add to cart — <span id="featTotal">€27,20</span></button>
-        <div class="buy-box__trust">
-          <span><svg viewBox="0 0 24 24"><path d="M3 7h11v9H3zM14 10h4l3 3v3h-7z"/><circle cx="7" cy="18" r="1.6"/><circle cx="17" cy="18" r="1.6"/></svg>Discreet shipping</span>
-          <span><svg viewBox="0 0 24 24"><path d="M12 3 4 6v6c0 5 3.5 8 8 9 4.5-1 8-4 8-9V6l-8-3Z"/></svg>30-day guarantee</span>
-          <span><svg viewBox="0 0 24 24"><path d="M9 3h6M10 3v6l-5 9a2 2 0 0 0 1.8 3h10.4A2 2 0 0 0 19 18l-5-9V3"/></svg>Lab-tested</span>
+      </div>
+      <div class="gp-info">
+        <span class="eyebrow eyebrow--line" id="gpEyebrow">The formula for essential integration</span>
+        <h3 id="gpName">Multivitamin</h3>
+        <div class="gp-rating"><span class="stars">★★★★★</span> <span id="gpRating">4.8 · 16 reviews</span></div>
+        <p class="gp-desc" id="gpDesc"></p>
+        <div class="gp-chips" id="gpChips"></div>
+        <ul class="gp-facts">
+          <li><svg viewBox="0 0 24 24"><rect x="7" y="3" width="10" height="18" rx="5"/><path d="M7 12h10"/></svg>60 veg capsules</li>
+          <li><svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="9"/><path d="M12 7v5l3 2"/></svg>2 a day · 30-day supply</li>
+          <li><svg viewBox="0 0 24 24"><path d="M9 3h6M10 3v6l-5 9a2 2 0 0 0 1.8 3h10.4A2 2 0 0 0 19 18l-5-9V3"/></svg>Lab-tested batch</li>
+        </ul>
+        <div class="gp-buy">
+          <div class="gp-price"><b id="gpPrice">€54,00</b><small id="gpSub">or €45,90 with Subscribe &amp; Save</small></div>
+          <button class="btn btn--dark btn--lg" id="gpAdd">Add to cart <svg viewBox="0 0 24 24"><path d="M5 8h14l-1.2 11.2a2 2 0 0 1-2 1.8H8.2a2 2 0 0 1-2-1.8L5 8Z"/><path d="M9 8V6a3 3 0 0 1 6 0v2"/></svg></button>
+          <a href="#quality" class="btn btn--outline btn--lg">Discover the formula</a>
+        </div>
+        <div class="gp-pairs">
+          <span>Pairs well with</span>
+          <div id="gpPairs"></div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- Quiz -->
+<section class="section quiz" id="quiz">
+  <div class="container">
+    <div class="quiz-shell">
+      <aside class="quiz-side">
+        <div class="quiz-side__bg"></div>
+        <div class="quiz-side__inner">
+          <span class="eyebrow">Personalized in 60 seconds</span>
+          <h2>Not sure where to start? <em>Find your formula.</em></h2>
+          <p>Three quick questions. One routine built around your priorities — with 10% off when you take 2 or more.</p>
+          <ol class="quiz-steps" id="quizSteps">
+            <li class="is-active"><span>01</span>Your priority</li>
+            <li><span>02</span>Who it's for</li>
+            <li><span>03</span>Your daily base</li>
+            <li><span>✓</span>Your routine</li>
+          </ol>
+          <div class="quiz-stack" id="quizStack" aria-hidden="true">
+            <img src="images/bacopa.webp" alt=""><img src="images/multivitamin.webp" alt=""><img src="images/boswellia.webp" alt="">
+          </div>
+        </div>
+      </aside>
+      <div class="quiz-main" id="quizCard">
+        <div class="quiz-top">
+          <button class="quiz-back" id="quizBack" aria-label="Back"><svg viewBox="0 0 24 24"><path d="m15 6-6 6 6 6"/></svg> Back</button>
+          <div class="quiz__progress"><span id="quizBar"></span></div>
+          <span class="quiz-num" id="quizNum">1 / 3</span>
+        </div>
+        <div class="quiz__step is-active" data-step="1">
+          <p class="quiz__q">What would you most like to improve?</p>
+          <div class="quiz__opts quiz__opts--6">
+            <button data-v="energy"><i data-ic="vitality"></i><b>Energy &amp; drive</b><small>Feel lively all day</small></button>
+            <button data-v="mind"><i data-ic="memory"></i><b>Memory &amp; focus</b><small>Stay sharp</small></button>
+            <button data-v="joints"><i data-ic="joints"></i><b>Joints &amp; mobility</b><small>Move with ease</small></button>
+            <button data-v="sleep"><i data-ic="sleep"></i><b>Sleep</b><small>Rest deeply</small></button>
+            <button data-v="heart"><i data-ic="heart"></i><b>Heart &amp; circulation</b><small>Support your heart</small></button>
+            <button data-v="mood"><i data-ic="mood"></i><b>Mood</b><small>Feel balanced</small></button>
+          </div>
+        </div>
+        <div class="quiz__step" data-step="2">
+          <p class="quiz__q">Who is this routine for?</p>
+          <div class="quiz__opts quiz__opts--2">
+            <button data-v="m"><i data-ic="male"></i><b>For him</b><small>Men 50+</small></button>
+            <button data-v="f"><i data-ic="female"></i><b>For her</b><small>Women 50+</small></button>
+          </div>
+        </div>
+        <div class="quiz__step" data-step="3">
+          <p class="quiz__q">Do you already take a daily multivitamin?</p>
+          <div class="quiz__opts quiz__opts--2">
+            <button data-v="yes"><i data-ic="check"></i><b>Yes, I do</b><small>Keep my routine lean</small></button>
+            <button data-v="no"><i data-ic="daily"></i><b>Not yet</b><small>Add a daily base</small></button>
+          </div>
+        </div>
+        <div class="quiz__step quiz__result" data-step="4">
+          <p class="quiz__q">Your personal routine is ready ✨</p>
+          <div class="quiz__recs" id="quizRecs"></div>
+          <div class="quiz-total">
+            <div><small>Routine total</small><b><s id="quizWas">€0</s> <span id="quizNow">€0</span></b></div>
+            <button class="btn btn--gold btn--lg" id="quizAddAll">Add routine · save 10%</button>
+          </div>
+          <button class="link-btn" id="quizRestart">Start over</button>
+        </div>
+        <div class="quiz-foot">
+          <span><svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="9"/><path d="M12 7v5l3 2"/></svg>Takes 60 seconds</span>
+          <span><svg viewBox="0 0 24 24"><rect x="5" y="11" width="14" height="9" rx="2"/><path d="M8 11V8a4 4 0 0 1 8 0v3"/></svg>Your answers stay private</span>
+          <span><svg viewBox="0 0 24 24"><path d="M12 3 4 6v6c0 5 3.5 8 8 9 4.5-1 8-4 8-9V6l-8-3Z"/></svg>30-day money-back guarantee</span>
         </div>
       </div>
     </div>
@@ -225,159 +254,183 @@
 <!-- Stats band -->
 <section class="section stats">
   <div class="container">
-    <div class="section-head center light">
-      <span class="eyebrow">The science</span>
-      <h2>Ingredients chosen for <em>evidence</em>, not trends.</h2>
-    </div>
     <div class="stats__grid">
-      <div class="stat"><b data-count="40">40</b><span class="pct">%</span><p>increase in IIEF index recorded in a 4-week study on the Liboost® ingredient*</p></div>
-      <div class="stat"><b data-count="45">45</b><span class="pct">%</span><p>increase in overall SDI score recorded in the same 4-week study*</p></div>
-      <div class="stat"><b data-count="100">100</b><span class="pct">%</span><p>of batches lab-tested for active content and screened for adulterants</p></div>
+      <div class="stat"><b data-count="13">13</b><p>targeted formulas, one for each wellness goal</p></div>
+      <div class="stat"><b data-count="100">100</b><span class="pct">%</span><p>of batches lab-tested and screened for adulterants</p></div>
+      <div class="stat"><b data-count="2">2</b><p>capsules a day — simple to fit into any routine</p></div>
+      <div class="stat"><b data-count="30">30</b><p>day money-back guarantee on every order</p></div>
     </div>
-    <p class="footnote">*Study on the standardized Damiana ingredient. Individual results may vary. Food supplements are not a substitute for a varied, balanced diet and a healthy lifestyle.</p>
   </div>
 </section>
 
 <!-- Why Horizon -->
 <section class="section why" id="why">
   <div class="container">
-    <div class="section-head section-head--split">
+    <div class="why__head">
       <div>
-        <span class="eyebrow">Why Horizon 120</span>
-        <h2>Made for the body you have <em>now</em> — not the one you had at 25.</h2>
+        <span class="eyebrow eyebrow--line">Why Horizon 120</span>
+        <h2>Made for the body you have <em>now</em>.</h2>
       </div>
-      <p class="muted max-420">After 50, absorption, energy and recovery change. Generic supplements ignore that. We don't.</p>
+      <p class="muted">After 50, absorption, energy and recovery change. Generic supplements ignore that — every Horizon 120 formula starts from it.</p>
     </div>
-    <div class="why__grid">
-      <article class="why-card why-card--tall">
-        <div class="why-card__img" style="background-image:url(images/hero.jpg)"></div>
-        <div class="why-card__body">
-          <span class="num">01</span>
-          <h3>Designed for people over 50</h3>
-          <p>Every formula is built around the specific needs of people over 50 — doses, forms and combinations chosen for this stage of life.</p>
-        </div>
-      </article>
-      <article class="why-card">
-        <span class="num">02</span>
-        <div class="why-card__icon"><svg viewBox="0 0 24 24"><path d="M9 3h6M10 3v6l-5 9a2 2 0 0 0 1.8 3h10.4A2 2 0 0 0 19 18l-5-9V3"/><path d="M7.5 14h9"/></svg></div>
-        <h3>Uncompromising quality</h3>
-        <p>Botanical extracts with a guaranteed minimum active-ingredient content, verified in a laboratory.</p>
-      </article>
-      <article class="why-card why-card--gold">
-        <span class="num">03</span>
-        <div class="why-card__icon"><svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="9"/><path d="M12 3v18M3 12h18"/><path d="M5.6 5.6c3.5 2.5 9.3 2.5 12.8 0M5.6 18.4c3.5-2.5 9.3-2.5 12.8 0"/></svg></div>
-        <h3>European production</h3>
-        <p>Manufactured in Spain under the most stringent European manufacturing standards.</p>
-      </article>
-      <article class="why-card why-card--wide">
-        <div>
-          <span class="num">04</span>
-          <h3>Only what works. Nothing you don't need.</h3>
-          <p>No proprietary blends, no hidden doses. One formula per need, so you can build a routine that fits you.</p>
-        </div>
-        <a href="#quiz" class="btn btn--dark">Build my routine</a>
-      </article>
+    <div class="why__wrap">
+      <div class="why-stage" id="whyStage">
+        <div class="why-stage__bg"></div>
+        <div class="why-stage__ring"><span></span></div>
+        <img src="images/multivitamin.webp" alt="" id="whyImg">
+        <div class="why-stage__badge" id="whyBadge"><b>50+</b><span>Formulated for this stage of life</span></div>
+        <div class="why-stage__tag"><img src="images/logo-inv.png" alt="Horizon 120"></div>
+      </div>
+      <div class="why-list" id="whyList">
+        <button class="why-item is-active" data-img="images/multivitamin.webp" data-b="50+" data-s="Formulated for this stage of life">
+          <span class="why-item__n">01</span>
+          <span class="why-item__body"><b>Designed for people over 50</b><span>Doses, forms and combinations chosen for the specific needs of people over 50 — not adapted from products made for 25-year-olds.</span></span>
+          <span class="why-item__bar"><i></i></span>
+        </button>
+        <button class="why-item" data-img="images/bacopa.webp" data-b="≥ min." data-s="Guaranteed active content, lab-verified">
+          <span class="why-item__n">02</span>
+          <span class="why-item__body"><b>Uncompromising quality</b><span>Botanical extracts with a guaranteed minimum active-ingredient content, verified in a laboratory on every batch.</span></span>
+          <span class="why-item__bar"><i></i></span>
+        </button>
+        <button class="why-item" data-img="images/boswellia.webp" data-b="EU" data-s="Made in Spain to strict EU standards">
+          <span class="why-item__n">03</span>
+          <span class="why-item__body"><b>European production</b><span>Manufactured in Spain in accordance with the most stringent European manufacturing standards.</span></span>
+          <span class="why-item__bar"><i></i></span>
+        </button>
+        <button class="why-item" data-img="images/saffron.webp" data-b="1:1" data-s="One formula for each goal">
+          <span class="why-item__n">04</span>
+          <span class="why-item__body"><b>Only what you need</b><span>No proprietary blends, no hidden doses. One formula per goal, so you can build a routine that fits you.</span></span>
+          <span class="why-item__bar"><i></i></span>
+        </button>
+        <a href="#areas" class="btn btn--dark btn--lg why-cta">Shop by goal <svg viewBox="0 0 24 24"><path d="M5 12h14M13 6l6 6-6 6"/></svg></a>
+      </div>
     </div>
   </div>
 </section>
 
-<!-- Quality journey -->
-<section class="section section--cream journey" id="quality">
-  <div class="container">
-    <div class="section-head center">
-      <span class="eyebrow">From source to capsule</span>
+<!-- Source to capsule -->
+<section class="section journey" id="quality">
+  <div class="container journey__wrap">
+    <div class="journey__aside">
+      <span class="eyebrow eyebrow--line">From source to capsule</span>
       <h2>Quality you can <em>trace</em>.</h2>
+      <p>Every bottle follows the same four-step path — so what's on the label is what's in the capsule.</p>
+      <ol class="journey__index" id="journeyIndex">
+        <li class="is-active"><span>01</span>Sourced</li>
+        <li><span>02</span>Standardized</li>
+        <li><span>03</span>Made in Spain</li>
+        <li><span>04</span>Lab-tested</li>
+      </ol>
+      <a href="#areas" class="btn btn--gold">Shop lab-tested formulas</a>
     </div>
-    <ol class="journey__steps">
-      <li><span class="step-n">1</span><div class="step-ic"><svg viewBox="0 0 24 24"><path d="M12 21V11M12 11c0-4 3-7 8-7 0 5-3 7-8 7ZM12 14c0-3-2.5-5.5-7-5.5 0 4 2.5 5.5 7 5.5Z"/></svg></div><h4>Sourced</h4><p>Raw botanicals selected from their origin — like Damiana from Mexico.</p></li>
-      <li><span class="step-n">2</span><div class="step-ic"><svg viewBox="0 0 24 24"><path d="M4 20h16M6 20V9l6-5 6 5v11"/><path d="M10 20v-5h4v5"/></svg></div><h4>Standardized</h4><p>Extracts standardized to a guaranteed minimum of active compounds.</p></li>
-      <li><span class="step-n">3</span><div class="step-ic"><svg viewBox="0 0 24 24"><rect x="4" y="4" width="16" height="16" rx="3"/><path d="M4 10h16M10 4v16"/></svg></div><h4>Made in Spain</h4><p>Formulated and encapsulated under strict European GMP standards.</p></li>
-      <li><span class="step-n">4</span><div class="step-ic"><svg viewBox="0 0 24 24"><path d="M9 3h6M10 3v6l-5 9a2 2 0 0 0 1.8 3h10.4A2 2 0 0 0 19 18l-5-9V3"/></svg></div><h4>Lab-tested</h4><p>Every batch tested for titration and screened for adulterants.</p></li>
-    </ol>
-
-    <div class="compare">
-      <div class="compare__head">
-        <h3>Horizon 120 vs. typical supplements</h3>
-      </div>
-      <table>
-        <thead><tr><th></th><th class="us"><img src="images/logo.png" alt="Horizon 120"></th><th>Typical brands</th></tr></thead>
-        <tbody>
-          <tr><td>Formulated specifically for 50+</td><td class="us"><i class="y">✓</i></td><td><i class="n">✕</i></td></tr>
-          <tr><td>Standardized, patented extracts</td><td class="us"><i class="y">✓</i></td><td><i class="n">✕</i></td></tr>
-          <tr><td>Every batch lab-tested</td><td class="us"><i class="y">✓</i></td><td><i class="n">Sometimes</i></td></tr>
-          <tr><td>Made in the EU</td><td class="us"><i class="y">✓</i></td><td><i class="n">Rarely</i></td></tr>
-          <tr><td>Transparent doses, no proprietary blends</td><td class="us"><i class="y">✓</i></td><td><i class="n">✕</i></td></tr>
-          <tr><td>30-day money-back guarantee</td><td class="us"><i class="y">✓</i></td><td><i class="n">✕</i></td></tr>
-        </tbody>
-      </table>
+    <div class="journey__cards">
+      <article class="jc" data-i="0">
+        <div class="jc__visual jc__visual--1">
+          <svg viewBox="0 0 24 24"><path d="M12 21V11M12 11c0-4 3-7 8-7 0 5-3 7-8 7ZM12 14c0-3-2.5-5.5-7-5.5 0 4 2.5 5.5 7 5.5Z"/></svg>
+          <span class="jc__loc">Origin · e.g. Damiana from Mexico</span>
+          <span class="jc__num">01</span>
+        </div>
+        <div class="jc__body">
+          <h3>Sourced at origin</h3>
+          <p>Raw botanicals are selected from where they grow best, with traceable supply for every ingredient.</p>
+          <div class="jc__tags"><span>Traceable</span><span>Selected botanicals</span></div>
+        </div>
+      </article>
+      <article class="jc" data-i="1">
+        <div class="jc__visual jc__visual--2">
+          <svg viewBox="0 0 24 24"><path d="M4 19h16M7 19V9M12 19V5M17 19v-7"/></svg>
+          <span class="jc__loc">Guaranteed minimum active content</span>
+          <span class="jc__num">02</span>
+        </div>
+        <div class="jc__body">
+          <h3>Standardized extracts</h3>
+          <p>Extracts are standardized to a guaranteed minimum of active compounds — like Liboost® Damiana at ≥1.5% flavonoids (HPLC).</p>
+          <div class="jc__tags"><span>Patented extracts</span><span>Consistent dose</span></div>
+        </div>
+      </article>
+      <article class="jc" data-i="2">
+        <div class="jc__visual jc__visual--3">
+          <svg viewBox="0 0 24 24"><rect x="7" y="3" width="10" height="18" rx="5"/><path d="M7 12h10"/></svg>
+          <span class="jc__loc">Made in Spain · EU standards</span>
+          <span class="jc__num">03</span>
+        </div>
+        <div class="jc__body">
+          <h3>Made in Spain</h3>
+          <p>Formulated and encapsulated in vegetarian capsules under the most stringent European manufacturing standards.</p>
+          <div class="jc__tags"><span>EU manufacturing</span><span>Vegetarian capsules</span></div>
+        </div>
+      </article>
+      <article class="jc" data-i="3">
+        <div class="jc__visual jc__visual--4">
+          <svg viewBox="0 0 24 24"><path d="M9 3h6M10 3v6l-5 9a2 2 0 0 0 1.8 3h10.4A2 2 0 0 0 19 18l-5-9V3"/><path d="M7.5 14h9"/></svg>
+          <span class="jc__loc">Every batch · titration + adulterant screening</span>
+          <span class="jc__num">04</span>
+        </div>
+        <div class="jc__body">
+          <h3>Lab-tested, every batch</h3>
+          <p>Each batch is laboratory-tested for titration and screened for adulterants before it ever reaches your door.</p>
+          <div class="jc__tags"><span>Batch tested</span><span>Purity screened</span></div>
+        </div>
+      </article>
     </div>
   </div>
-</section>
 
-<!-- Quiz -->
-<section class="section quiz" id="quiz">
-  <div class="container quiz__grid">
-    <div class="quiz__intro">
-      <span class="eyebrow">Personalized in 60 seconds</span>
-      <h2>Find the formula that's <em>right for you</em>.</h2>
-      <p>Answer three quick questions and we'll recommend a routine built around your priorities.</p>
-      <div class="quiz__bottles" aria-hidden="true">
-        <img src="images/bacopa.webp" alt=""><img src="images/boswellia.webp" alt=""><img src="images/melatonin.webp" alt="">
+  <div class="container">
+    <div class="vs">
+      <div class="vs__card vs__card--us">
+        <img src="images/logo-inv.png" alt="Horizon 120" class="vs__logo">
+        <ul>
+          <li>Formulated specifically for 50+</li>
+          <li>Standardized, patented extracts</li>
+          <li>Every batch lab-tested</li>
+          <li>Made in the EU (Spain)</li>
+          <li>Transparent doses, no proprietary blends</li>
+          <li>30-day money-back guarantee</li>
+        </ul>
       </div>
-    </div>
-    <div class="quiz__card" id="quizCard">
-      <div class="quiz__progress"><span id="quizBar"></span></div>
-      <div class="quiz__step is-active" data-step="1">
-        <p class="quiz__q"><span>1/3</span> What's your top priority right now?</p>
-        <div class="quiz__opts">
-          <button data-v="energy">⚡ More energy &amp; drive</button>
-          <button data-v="mind">🧠 Sharper memory &amp; focus</button>
-          <button data-v="joints">🦴 Comfortable joints</button>
-          <button data-v="sleep">🌙 Deeper sleep</button>
-          <button data-v="heart">❤️ Heart &amp; circulation</button>
-          <button data-v="mood">☀️ A brighter mood</button>
-        </div>
-      </div>
-      <div class="quiz__step" data-step="2">
-        <p class="quiz__q"><span>2/3</span> Who is this routine for?</p>
-        <div class="quiz__opts quiz__opts--2">
-          <button data-v="m">For a man</button>
-          <button data-v="f">For a woman</button>
-        </div>
-      </div>
-      <div class="quiz__step" data-step="3">
-        <p class="quiz__q"><span>3/3</span> Do you already take a daily multivitamin?</p>
-        <div class="quiz__opts quiz__opts--2">
-          <button data-v="yes">Yes, I do</button>
-          <button data-v="no">Not yet</button>
-        </div>
-      </div>
-      <div class="quiz__step quiz__result" data-step="4">
-        <p class="eyebrow">Your recommended routine</p>
-        <div class="quiz__recs" id="quizRecs"></div>
-        <button class="btn btn--gold btn--block btn--lg" id="quizAddAll">Add routine to cart — save 10%</button>
-        <button class="link-btn" id="quizRestart">Start over</button>
+      <div class="vs__badge">VS</div>
+      <div class="vs__card vs__card--them">
+        <p class="vs__title">Typical supplements</p>
+        <ul>
+          <li>One-size-fits-all formulas</li>
+          <li>Unstandardized raw powders</li>
+          <li>Testing rarely disclosed</li>
+          <li>Often made outside the EU</li>
+          <li>Hidden "proprietary blends"</li>
+          <li>Limited or no guarantee</li>
+        </ul>
       </div>
     </div>
   </div>
 </section>
 
 <!-- Reviews -->
-<section class="section section--cream reviews" id="reviews">
-  <div class="container">
-    <div class="section-head section-head--split">
-      <div>
-        <span class="eyebrow">Real customers</span>
-        <h2>Feeling the difference, <em>after 50</em>.</h2>
-        <div class="rating-summary"><span class="big">4.9</span><div><span class="stars">★★★★★</span><small>Average customer rating</small></div></div>
-      </div>
-      <div class="slider-nav">
-        <button class="round-btn" data-scroll="reviewTrack" data-dir="-1" aria-label="Previous"><svg viewBox="0 0 24 24"><path d="m15 6-6 6 6 6"/></svg></button>
-        <button class="round-btn" data-scroll="reviewTrack" data-dir="1" aria-label="Next"><svg viewBox="0 0 24 24"><path d="m9 6 6 6-6 6"/></svg></button>
+<section class="section reviews" id="reviews">
+  <div class="container reviews__grid">
+    <div class="rv-left">
+      <div class="rv-thumbs" id="rvThumbs"></div>
+      <h2>Loved by thousands <em>after 50</em>.</h2>
+      <p class="muted">Real customers, real routines. Here's how Horizon 120 fits into their day.</p>
+      <div class="rv-summary"><span class="big">4.9</span><div><span class="stars">★★★★★</span><small>Average rating from verified buyers</small></div></div>
+      <div class="rv-controls">
+        <button class="round-btn" id="rvPrev" aria-label="Previous review"><svg viewBox="0 0 24 24"><path d="m15 6-6 6 6 6"/></svg></button>
+        <span class="rv-count"><b id="rvIdx">01</b> / <span id="rvTotal">08</span></span>
+        <button class="round-btn" id="rvNext" aria-label="Next review"><svg viewBox="0 0 24 24"><path d="m9 6 6 6-6 6"/></svg></button>
       </div>
     </div>
+    <div class="rv-product" id="rvProduct">
+      <div class="rv-product__bg"></div>
+      <img src="images/damiana.webp" alt="" id="rvImg">
+      <span class="rv-highlight" id="rvHighlight">my energy is back</span>
+      <a href="#areas" class="rv-product__tag" id="rvTag"><span id="rvProdName">Damiana</span> · Shop now →</a>
+    </div>
+    <figure class="rv-quote" id="rvQuote">
+      <div class="stars">★★★★★</div>
+      <blockquote id="rvText"></blockquote>
+      <figcaption><b id="rvName"></b><span id="rvMeta"></span></figcaption>
+      <span class="rv-progress"><i id="rvBar"></i></span>
+    </figure>
   </div>
-  <div class="review-track" id="reviewTrack"></div>
 </section>
 
 <!-- Guide / newsletter -->
@@ -428,32 +481,68 @@
 <!-- Footer -->
 <footer class="footer">
   <div class="container">
-    <div class="footer__top">
-      <div class="footer__brand">
-        <img src="images/logo-inv.png" alt="Horizon 120" height="34">
-        <p>Vitality and well-being after 50. Standardized botanical formulas, made in Spain.</p>
-        <div class="socials">
-          <a href="https://www.instagram.com/horizon120.eu/" target="_blank" rel="noopener" aria-label="Instagram"><svg viewBox="0 0 24 24"><rect x="3" y="3" width="18" height="18" rx="5"/><circle cx="12" cy="12" r="4"/><circle cx="17.5" cy="6.5" r=".8"/></svg></a>
-          <a href="https://www.facebook.com/profile.php?id=61595916462884" target="_blank" rel="noopener" aria-label="Facebook"><svg viewBox="0 0 24 24"><path d="M14 8h3V4h-3a4 4 0 0 0-4 4v2H7v4h3v7h4v-7h3l1-4h-4V8Z"/></svg></a>
+    <div class="footer__cta">
+      <div>
+        <span class="eyebrow">Horizon 120</span>
+        <h2>Feel your best, <em>after 50</em>.</h2>
+        <div class="footer__cta-btns">
+          <a href="#areas" class="btn btn--gold btn--lg">Shop by goal</a>
+          <a href="#quiz" class="btn btn--ghost-light btn--lg">Take the quiz</a>
         </div>
       </div>
-      <div class="footer__col"><h5>Shop</h5><a href="#bestsellers">All formulas</a><a href="#areas">Wellness areas</a><a href="#featured">Bestsellers</a><a href="#quiz">Formula quiz</a></div>
-      <div class="footer__col"><h5>About</h5><a href="#why">Why Horizon</a><a href="#quality">Our quality</a><a href="#guide">Journal</a><a href="#reviews">Reviews</a></div>
-      <div class="footer__col"><h5>Help</h5><a href="#faq">FAQ</a><a href="#faq">Shipping policy</a><a href="#faq">Refund policy</a><a href="#faq">Contact us</a></div>
+      <form class="footer__news" id="footNews">
+        <b>Get 10% off your first order</b>
+        <small>Plus wellness tips for life after 50. No spam, ever.</small>
+        <div class="footer__news-row">
+          <input type="email" required placeholder="Your email address" aria-label="Email address">
+          <button class="btn btn--gold" type="submit">Join</button>
+        </div>
+      </form>
     </div>
-    <p class="footer__disc">Food supplements should not be used as a substitute for a varied, balanced diet and a healthy lifestyle. Do not exceed the recommended daily dose. Keep out of reach of young children. Consult your doctor if you are taking medication.</p>
+
+    <div class="footer__trust">
+      <span><svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="9"/><path d="M3 12h18M12 3c3 3 3 15 0 18M12 3c-3 3-3 15 0 18"/></svg>Made in Spain</span>
+      <span><svg viewBox="0 0 24 24"><path d="M9 3h6M10 3v6l-5 9a2 2 0 0 0 1.8 3h10.4A2 2 0 0 0 19 18l-5-9V3"/></svg>Lab-tested every batch</span>
+      <span><svg viewBox="0 0 24 24"><path d="M5 19c0-8 6-14 14-14 0 8-6 14-14 14Z"/><path d="M5 19 13 11"/></svg>Vegetarian capsules</span>
+      <span><svg viewBox="0 0 24 24"><path d="M3 7h11v9H3zM14 10h4l3 3v3h-7z"/><circle cx="7" cy="18" r="1.6"/><circle cx="17" cy="18" r="1.6"/></svg>Discreet shipping</span>
+      <span><svg viewBox="0 0 24 24"><path d="M12 3 4 6v6c0 5 3.5 8 8 9 4.5-1 8-4 8-9V6l-8-3Z"/><path d="m8.5 12 2.5 2.5 4.5-5"/></svg>30-day guarantee</span>
+    </div>
+
+    <div class="footer__top">
+      <div class="footer__brand">
+        <img src="images/logo-inv.png" alt="Horizon 120" height="30">
+        <p>Science-backed botanical formulas for vitality and well-being after 50. Standardized, lab-tested and made in Spain.</p>
+        <div class="footer__help">
+          <b>Questions about a formula?</b>
+          <span>Our team replies confidentially within 24 hours.</span>
+          <a href="#faq">Contact us →</a>
+        </div>
+      </div>
+      <div class="footer__col"><h5>Body</h5><a href="#areas" data-goal="multivitamin">Essential integration</a><a href="#areas" data-goal="boswellia">Joints</a><a href="#areas" data-goal="black-garlic">Heart</a><a href="#areas" data-goal="carob">Blood sugar</a><a href="#areas" data-goal="creatine">Muscles &amp; strength</a><a href="#areas" data-goal="echinacea">Immune system</a><a href="#areas" data-goal="lutein">Vision</a></div>
+      <div class="footer__col"><h5>Mind, He &amp; She</h5><a href="#areas" data-goal="bacopa">Memory &amp; focus</a><a href="#areas" data-goal="melatonin">Sleep</a><a href="#areas" data-goal="saffron">Mood</a><a href="#areas" data-goal="damiana-her">Female vitality</a><a href="#areas" data-goal="damiana">Male vitality</a><a href="#areas" data-goal="saw-palmetto">Prostate</a></div>
+      <div class="footer__col"><h5>About</h5><a href="#why">Why Horizon</a><a href="#quality">Our quality</a><a href="#reviews">Reviews</a><a href="#guide">Wellness guide</a><a href="#quiz">Formula quiz</a></div>
+      <div class="footer__col"><h5>Help</h5><a href="#faq">FAQ</a><a href="#faq">Shipping policy</a><a href="#faq">Refund policy</a><a href="#faq">Privacy policy</a><a href="#faq">Terms of service</a></div>
+    </div>
+
+    <div class="footer__mark" aria-hidden="true">HORIZON<span>120</span></div>
+
     <div class="footer__bottom">
       <span>© 2026 Horizon 120. All rights reserved.</span>
+      <div class="socials">
+        <a href="https://www.instagram.com/horizon120.eu/" target="_blank" rel="noopener" aria-label="Instagram"><svg viewBox="0 0 24 24"><rect x="3" y="3" width="18" height="18" rx="5"/><circle cx="12" cy="12" r="4"/><circle cx="17.5" cy="6.5" r=".8"/></svg></a>
+        <a href="https://www.facebook.com/profile.php?id=61595916462884" target="_blank" rel="noopener" aria-label="Facebook"><svg viewBox="0 0 24 24"><path d="M14 8h3V4h-3a4 4 0 0 0-4 4v2H7v4h3v7h4v-7h3l1-4h-4V8Z"/></svg></a>
+      </div>
       <div class="pay"><span>VISA</span><span>Mastercard</span><span>PayPal</span><span>Apple Pay</span><span>Klarna</span></div>
     </div>
+    <p class="footer__disc">Food supplements should not be used as a substitute for a varied, balanced diet and a healthy lifestyle. Do not exceed the recommended daily dose. Keep out of reach of young children. Consult your doctor if you are pregnant, breastfeeding or taking medication.</p>
   </div>
 </footer>
 
 <!-- Sticky mobile ATC -->
 <div class="sticky-atc" id="stickyAtc">
-  <img src="images/damiana.webp" alt="">
-  <div><b>Damiana</b><small><span class="stars">★★★★★</span> €27,20 w/ subscription</small></div>
-  <button class="btn btn--dark" data-add="damiana">Add to cart</button>
+  <img src="images/multivitamin.webp" alt="" id="stImg">
+  <div><b id="stName">Multivitamin</b><small><span class="stars">★★★★★</span> <span id="stPrice">€54,00</span></small></div>
+  <button class="btn btn--dark" id="stAdd">Add to cart</button>
 </div>
 
 <!-- Side cart -->
@@ -472,7 +561,7 @@
     <div class="cart__empty" id="cartEmpty">
       <img src="images/logo.png" alt="" height="26">
       <p>Your cart is empty.</p>
-      <a href="#bestsellers" class="btn btn--dark" data-close-cart>Shop bestsellers</a>
+      <a href="#areas" class="btn btn--dark" data-close-cart>Shop bestsellers</a>
     </div>
     <ul class="cart__items" id="cartItems"></ul>
     <div class="upsell">
