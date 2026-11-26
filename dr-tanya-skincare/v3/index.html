@@ -1,0 +1,568 @@
+<!doctype html>
+<html lang="en-IN">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+  <title>Dr Tanya Skincare | Just What the Doctor Ordered</title>
+  <meta name="description" content="Doctor-formulated skincare by Dr Tanya. Super C Serum, Advanced Retinol Serum, Hyaluronic Acid Serum, Holy Basil Day & Night Cream, hair care and skin tools. No BS. Just better skin. From a doctor.">
+  <meta name="robots" content="noindex, nofollow">
+  <meta name="theme-color" content="#0b2221">
+  <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Crect width='64' height='64' rx='14' fill='%23296361'/%3E%3Cpath d='M14 17h26M27 17v32M27 17c22 0 22 32 0 32' fill='none' stroke='%23e8d3a2' stroke-width='4' stroke-linecap='round'/%3E%3C/svg%3E">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link rel="preconnect" href="https://cdnjs.cloudflare.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,500;0,600;1,300;1,400;1,500&family=IBM+Plex+Mono:wght@400;500&family=Poppins:wght@300;400;500;600&family=Quicksand:wght@500;600;700&display=swap" rel="stylesheet">
+  <link rel="preload" as="image" href="img/super-c.webp">
+  <link rel="stylesheet" href="style.css">
+  <script type="importmap">
+  { "imports": {
+      "three": "https://cdn.jsdelivr.net/npm/three@0.160.0/build/three.module.js",
+      "three/addons/": "https://cdn.jsdelivr.net/npm/three@0.160.0/examples/jsm/"
+  } }
+  </script>
+</head>
+<body class="is-loading">
+<a class="skip" href="#main">Skip to content</a>
+
+<!-- ================= PRELOADER ================= -->
+<div class="loader" id="loader" aria-hidden="true">
+  <div class="loader__in">
+    <svg class="loader__mark" viewBox="0 0 120 120">
+      <path class="lm lm--bar" d="M22 26H66"/>
+      <path class="lm lm--stem" d="M46 26V96"/>
+      <path class="lm lm--bowl" d="M46 26C104 26 104 96 46 96"/>
+    </svg>
+    <p class="loader__word"><span>Just what the doctor ordered</span></p>
+    <p class="loader__count"><span id="loadNum">000</span><i>%</i></p>
+  </div>
+  <div class="loader__bar"><span id="loadBar"></span></div>
+</div>
+
+<!-- ================= CURSOR ================= -->
+<div class="cursor" aria-hidden="true"><span class="cursor__dot"></span><span class="cursor__ring"><em class="cursor__label"></em></span></div>
+<div class="progress" aria-hidden="true"><span id="progressBar"></span></div>
+
+<!-- ================= HEADER ================= -->
+<header class="hdr" id="hdr" data-theme="dark">
+  <div class="hdr__note">
+    <div class="hdr__ticker">
+      <div class="hdr__set"><span>Just what the doctor ordered — shop our bestsellers</span><i>✦</i><span>Glow by Dr Tanya is here</span><i>✦</i><span>Doctor-led. Skin-first. Done properly.</span><i>✦</i><span>No BS. Just better skin. From a doctor.</span><i>✦</i></div>
+      <div class="hdr__set" aria-hidden="true"><span>Just what the doctor ordered — shop our bestsellers</span><i>✦</i><span>Glow by Dr Tanya is here</span><i>✦</i><span>Doctor-led. Skin-first. Done properly.</span><i>✦</i><span>No BS. Just better skin. From a doctor.</span><i>✦</i></div>
+    </div>
+  </div>
+  <div class="hdr__bar">
+    <nav class="hdr__nav" aria-label="Primary">
+      <a href="#shop" class="nlink" data-roll>Shop</a>
+      <a href="#concerns" class="nlink" data-roll>Concerns</a>
+      <a href="#studio" class="nlink" data-roll>360° Studio</a>
+      <a href="#protocol" class="nlink" data-roll>Protocol</a>
+    </nav>
+    <a href="#top" class="hdr__logo" aria-label="By Dr Tanya — back to top"><img src="img/logo.webp" alt="By Dr Tanya" width="1200" height="136"></a>
+    <div class="hdr__actions">
+      <a href="#journal" class="nlink hide-md" data-roll>Journal</a>
+      <a href="#concerns" class="pill hide-sm" data-magnetic><span class="pill__dot"></span><span data-roll>Find my routine</span></a>
+      <button class="bagbtn" id="bagBtn" aria-label="Open bag, 0 items" data-magnetic>
+        <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M5 8.5h14l-1.1 11.2a1.5 1.5 0 0 1-1.5 1.3H7.6a1.5 1.5 0 0 1-1.5-1.3L5 8.5Z"/><path d="M9 8.5V7a3 3 0 0 1 6 0v1.5"/></svg>
+        <span class="bagbtn__n" id="bagN"><span>0</span></span>
+      </button>
+      <button class="burger" id="burger" aria-label="Open menu" aria-expanded="false"><span></span><span></span></button>
+    </div>
+  </div>
+</header>
+
+<!-- mobile menu -->
+<div class="mnav" id="mnav" aria-hidden="true">
+  <nav class="mnav__links" aria-label="Mobile">
+    <a href="#shop"><i>01</i>Shop</a>
+    <a href="#concerns"><i>02</i>Concerns</a>
+    <a href="#studio"><i>03</i>360° Studio</a>
+    <a href="#protocol"><i>04</i>Protocol</a>
+    <a href="#journal"><i>05</i>Journal</a>
+  </nav>
+  <div class="mnav__foot">
+    <img src="img/super-c.webp" alt="" width="252" height="741" loading="lazy">
+    <p><span class="mono">Doctor's pick</span>Super C Serum<br><b>₹4,300</b></p>
+    <button class="btn btn--light btn--sm" data-add="super-c">Add to bag</button>
+  </div>
+</div>
+
+<main id="main">
+
+<!-- ================= 1. CINEMATIC HERO ================= -->
+<section class="hero" id="top" data-header="dark" aria-label="Introduction">
+  <div class="hero__pin">
+    <div class="hero__bg" aria-hidden="true"></div>
+    <div class="hero__light" id="heroLight" aria-hidden="true"></div>
+    <canvas class="hero__particles" id="particles" aria-hidden="true"></canvas>
+    <div class="hero__beam" aria-hidden="true"></div>
+
+    <div class="hero__stage" id="stage">
+      <div class="hero__top"><p class="hero__eyebrow" data-hero-ui><span class="mono">℞ No. 001</span><span class="sep"></span>Doctor-formulated skincare</p></div>
+
+      <h1 class="hero__title" aria-label="Just what the doctor ordered.">
+        <span class="hero__line hero__line--1" data-depth="-14" aria-hidden="true">Just what the</span>
+        <span class="hero__line hero__line--2a" data-depth="16" aria-hidden="true"><em>doctor</em></span>
+        <span class="hero__line hero__line--2b" data-depth="16" aria-hidden="true">ordered.</span>
+      </h1>
+
+      <div class="hero__products" id="heroProducts">
+        <figure class="hp hp--retinol" data-depth="-8" data-blur="1">
+          <div class="hp__in"><img src="img/retinol.webp" alt="Advanced Retinol Serum" width="266" height="776"><span class="hp__shine" style="-webkit-mask-image:url(img/retinol.webp);mask-image:url(img/retinol.webp)"></span></div>
+          <span class="hp__shadow"></span>
+        </figure>
+        <figure class="hp hp--hyaluronic" data-depth="-10">
+          <div class="hp__in"><img src="img/hyaluronic.webp" alt="Hyaluronic Acid Serum" width="249" height="750"><span class="hp__shine" style="-webkit-mask-image:url(img/hyaluronic.webp);mask-image:url(img/hyaluronic.webp)"></span></div>
+          <span class="hp__shadow"></span>
+        </figure>
+        <figure class="hp hp--hair" data-depth="6">
+          <div class="hp__in"><img src="img/hair-serum.webp" alt="Holy Basil Hair Serum" width="273" height="671"><span class="hp__shine" style="-webkit-mask-image:url(img/hair-serum.webp);mask-image:url(img/hair-serum.webp)"></span></div>
+          <span class="hp__shadow"></span>
+        </figure>
+        <figure class="hp hp--superc" data-depth="0">
+          <div class="hp__in"><img src="img/super-c.webp" alt="Super C Serum" width="252" height="741" fetchpriority="high"><span class="hp__shine" style="-webkit-mask-image:url(img/super-c.webp);mask-image:url(img/super-c.webp)"></span></div>
+          <span class="hp__shadow"></span>
+        </figure>
+        <figure class="hp hp--cream" data-depth="22">
+          <div class="hp__in"><img src="img/cream.webp" alt="Holy Basil Day &amp; Night Cream" width="674" height="744"><span class="hp__shine" style="-webkit-mask-image:url(img/cream.webp);mask-image:url(img/cream.webp)"></span></div>
+          <span class="hp__shadow"></span>
+        </figure>
+        <figure class="hp hp--nusonic" data-depth="34">
+          <div class="hp__in"><img src="img/nusonic.webp" alt="NuSonic Facial Exfoliator" width="900" height="686"></div>
+        </figure>
+      </div>
+      <div class="hero__floor" aria-hidden="true"></div>
+    </div>
+
+    <div class="hero__ui">
+      <div class="hero__intro" data-hero-ui>
+        <p class="hero__sub">No BS. Just better skin.<br>From a doctor.</p>
+        <div class="hero__ctas">
+          <a href="#shop" class="btn btn--pink" data-magnetic><span data-roll>Shop bestsellers</span><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M5 12h14M13 6l6 6-6 6"/></svg></a>
+          <a href="#studio" class="btn btn--ghost" data-magnetic><span data-roll>Explore in 360°</span></a>
+        </div>
+      </div>
+      <a href="#pillars" class="hero__scroll" data-hero-ui aria-label="Scroll to explore"><span class="mono">Scroll</span><i></i></a>
+      <div class="hero__feature" data-hero-ui>
+        <span class="hero__feature-img"><img src="img/super-c.webp" alt="" width="252" height="741"></span>
+        <div>
+          <span class="mono">Bestseller · Vitamin C</span>
+          <strong>Super C Serum</strong>
+          <span class="hero__feature-price">₹4,300</span>
+        </div>
+        <button class="plus" data-add="super-c" aria-label="Add Super C Serum to bag"><svg viewBox="0 0 24 24"><path d="M12 5v14M5 12h14"/></svg></button>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ================= 2. PILLARS / KINETIC BAND ================= -->
+<section class="pillars sec" id="pillars" data-header="dark" aria-label="Our philosophy">
+  <div class="ribbons" aria-hidden="true">
+    <div class="ribbon ribbon--a"><div class="ribbon__track" data-marquee="1">
+      <span>Doctor-led</span><i>✦</i><span class="o">Skin-first</span><i>✦</i><span>Simple routines</span><i>✦</i><span class="o">Done properly</span><i>✦</i>
+      <span>Doctor-led</span><i>✦</i><span class="o">Skin-first</span><i>✦</i><span>Simple routines</span><i>✦</i><span class="o">Done properly</span><i>✦</i>
+    </div></div>
+    <div class="ribbon ribbon--b"><div class="ribbon__track" data-marquee="-1">
+      <em>just what the doctor ordered</em><b>℞</b><em>just what the doctor ordered</em><b>℞</b><em>just what the doctor ordered</em><b>℞</b><em>just what the doctor ordered</em><b>℞</b>
+    </div></div>
+  </div>
+
+  <div class="wrap pillars__grid">
+    <div class="pillars__lead">
+      <p class="eyebrow eyebrow--light"><span class="mono">01</span> The philosophy</p>
+      <h2 class="h2 h2--light" data-split>Care for your skin, <em>done properly.</em></h2>
+    </div>
+    <ul class="pillars__list">
+      <li class="pillar" data-reveal>
+        <span class="pillar__ico"><img src="../images/icon-doctor.webp" alt="" width="200" height="200" loading="lazy"></span>
+        <span class="mono">01</span><h3>Doctor-led</h3>
+        <p>Every formula is selected by Dr Tanya to target real concerns.</p>
+      </li>
+      <li class="pillar" data-reveal>
+        <span class="pillar__ico"><img src="../images/icon-skin.webp" alt="" width="200" height="200" loading="lazy"></span>
+        <span class="mono">02</span><h3>Skin-first</h3>
+        <p>Built around what your skin actually needs — not what's trending.</p>
+      </li>
+      <li class="pillar" data-reveal>
+        <span class="pillar__ico"><img src="../images/icon-routine.webp" alt="" width="200" height="200" loading="lazy"></span>
+        <span class="mono">03</span><h3>Simple routines</h3>
+        <p>A few hard-working steps, morning and night. Nothing you won't use.</p>
+      </li>
+      <li class="pillar" data-reveal>
+        <span class="pillar__ico"><img src="../images/icon-done.webp" alt="" width="200" height="200" loading="lazy"></span>
+        <span class="mono">04</span><h3>Done properly</h3>
+        <p>No BS. Just better skin. From a doctor.</p>
+      </li>
+    </ul>
+  </div>
+</section>
+
+<!-- ================= 3. SCROLL STORY — THE FORMULARY ================= -->
+<section class="story" id="formulary" data-header="light" aria-label="The Formulary">
+  <div class="story__pin" id="storyPin">
+    <div class="story__bg" id="storyBg" aria-hidden="true"></div>
+    <div class="story__words" aria-hidden="true">
+      <span class="sw" data-i="0">Vitamin C</span>
+      <span class="sw" data-i="1">Vitamin A</span>
+      <span class="sw" data-i="2">Hyaluronic</span>
+      <span class="sw" data-i="3">Holy Basil</span>
+    </div>
+
+    <div class="story__top wrap">
+      <p class="eyebrow"><span class="mono">02</span> The Formulary</p>
+      <p class="story__count mono"><span class="story__num" id="storyNum">01</span> / 04</p>
+    </div>
+
+    <div class="story__chapters wrap">
+      <article class="ch" data-i="0">
+        <figure class="ch__fig" aria-hidden="true"><img src="img/super-c.webp" alt="" width="252" height="741" loading="lazy"></figure>
+        <p class="ch__kicker mono">Chapter 01 — Day serum</p>
+        <h3 class="ch__title"><span>Super C</span> <em>Serum</em></h3>
+        <p class="ch__line">Brighten. Firm. Glow.</p>
+        <p class="ch__desc">Reap the reward of brighter, firmer and more hydrated-looking skin with Dr Tanya's antioxidant-rich Vitamin C day serum.</p>
+        <ul class="ch__chips"><li>Vitamin C</li><li>Antioxidant-rich</li><li>AM</li></ul>
+        <div class="ch__buy"><span class="ch__price">₹4,300</span><button class="btn btn--dark btn--sm" data-add="super-c"><span data-roll>Add to bag</span></button><button class="link360" data-view360="super-c">View in 360°</button></div>
+      </article>
+      <article class="ch" data-i="1">
+        <figure class="ch__fig" aria-hidden="true"><img src="img/retinol.webp" alt="" width="266" height="776" loading="lazy"></figure>
+        <p class="ch__kicker mono">Chapter 02 — Night serum</p>
+        <h3 class="ch__title"><span>Advanced</span> <em>Retinol</em></h3>
+        <p class="ch__line">Rewind. Renew. Reveal.</p>
+        <p class="ch__desc">The ultimate overnight elixir — rewind, renew and achieve a more radiant you while you sleep.</p>
+        <ul class="ch__chips"><li>Vitamin A</li><li>Overnight</li><li>PM</li></ul>
+        <div class="ch__buy"><span class="ch__price">₹4,500</span><button class="btn btn--dark btn--sm" data-add="retinol"><span data-roll>Add to bag</span></button><button class="link360" data-view360="retinol">View in 360°</button></div>
+      </article>
+      <article class="ch" data-i="2">
+        <figure class="ch__fig" aria-hidden="true"><img src="img/hyaluronic.webp" alt="" width="249" height="750" loading="lazy"></figure>
+        <p class="ch__kicker mono">Chapter 03 — Hydration</p>
+        <h3 class="ch__title"><span>Hyaluronic</span> <em>Acid</em></h3>
+        <p class="ch__line">Hydrate. Plump. Restore.</p>
+        <p class="ch__desc">A comprehensive, doctor-formulated serum for optimal hydration, plumpness and anti-ageing support. For all skin types.</p>
+        <ul class="ch__chips"><li>Hyaluronic Acid</li><li>Vitamin B5</li><li>AM + PM</li></ul>
+        <div class="ch__buy"><span class="ch__price">₹3,700</span><button class="btn btn--dark btn--sm" data-add="hyaluronic"><span data-roll>Add to bag</span></button><button class="link360" data-view360="hyaluronic">View in 360°</button></div>
+      </article>
+      <article class="ch" data-i="3">
+        <figure class="ch__fig" aria-hidden="true"><img src="img/cream.webp" alt="" width="674" height="744" loading="lazy"></figure>
+        <p class="ch__kicker mono">Chapter 04 — Signature range</p>
+        <h3 class="ch__title"><span>Day &amp; Night</span> <em>Cream</em></h3>
+        <p class="ch__line">Moisturise. Restore. Repeat.</p>
+        <p class="ch__desc">A gentle, results-driven hydrating cream with ancient Holy Basil — keeping skin moisturised, restored and youthful from AM to PM.</p>
+        <ul class="ch__chips"><li>Holy Basil</li><li>Vitamin E</li><li>AM + PM</li></ul>
+        <div class="ch__buy"><span class="ch__price">₹2,500</span><button class="btn btn--light btn--sm" data-add="cream"><span data-roll>Add to bag</span></button><button class="link360" data-view360="cream">View in 360°</button></div>
+      </article>
+    </div>
+
+    <div class="story__visual" aria-hidden="true">
+      <div class="story__cone"></div>
+      <svg class="story__orbit" viewBox="0 0 600 200" preserveAspectRatio="none"><ellipse cx="300" cy="100" rx="296" ry="96"/></svg>
+      <div class="story__plinth"><span></span></div>
+      <figure class="sv" data-i="0"><img src="img/super-c.webp" alt="" width="252" height="741" loading="lazy"></figure>
+      <figure class="sv" data-i="1"><img src="img/retinol.webp" alt="" width="266" height="776" loading="lazy"></figure>
+      <figure class="sv" data-i="2"><img src="img/hyaluronic.webp" alt="" width="249" height="750" loading="lazy"></figure>
+      <figure class="sv sv--wide" data-i="3"><img src="img/cream.webp" alt="" width="674" height="744" loading="lazy"></figure>
+      <div class="story__tags">
+        <span class="stag" data-i="0" style="--x:-1;--y:-.6">Vitamin C</span><span class="stag" data-i="0" style="--x:1;--y:-.15">Vitamin E</span><span class="stag" data-i="0" style="--x:-.85;--y:.45">Day serum</span>
+        <span class="stag" data-i="1" style="--x:-1;--y:-.6">Vitamin A</span><span class="stag" data-i="1" style="--x:1;--y:-.15">Overnight</span><span class="stag" data-i="1" style="--x:-.85;--y:.45">Renew</span>
+        <span class="stag" data-i="2" style="--x:-1;--y:-.6">Hyaluronic Acid</span><span class="stag" data-i="2" style="--x:1;--y:-.15">Vitamin B5</span><span class="stag" data-i="2" style="--x:-.85;--y:.45">All skin types</span>
+        <span class="stag" data-i="3" style="--x:-1;--y:-.6">Holy Basil</span><span class="stag" data-i="3" style="--x:1;--y:-.15">Tulsi Complex</span><span class="stag" data-i="3" style="--x:-.85;--y:.45">Vitamin E</span>
+      </div>
+    </div>
+
+    <ol class="story__rail" aria-hidden="true"><li></li><li></li><li></li><li></li></ol>
+  </div>
+</section>
+
+<!-- ================= 4. 360° STUDIO ================= -->
+<section class="studio sec" id="studio" data-header="dark" data-light="studio" aria-label="360 degree product studio">
+  <div class="wrap studio__grid">
+    <div class="studio__intro">
+      <p class="eyebrow eyebrow--light"><span class="mono">03</span> The 360° Studio</p>
+      <h2 class="h2 h2--light" data-split>Every angle, <em>considered.</em></h2>
+      <p class="studio__lede">Drag to turn the bottle, pinch or use + / − to move closer, and tap the glowing points to see what's inside.</p>
+      <div class="studio__tabs" role="tablist" aria-label="Choose a product" id="studioTabs">
+        <button role="tab" aria-selected="true" data-model="super-c"><img src="img/super-c.webp" alt="" width="252" height="741" loading="lazy"><span>Super C</span></button>
+        <button role="tab" aria-selected="false" data-model="retinol"><img src="img/retinol.webp" alt="" width="266" height="776" loading="lazy"><span>Retinol</span></button>
+        <button role="tab" aria-selected="false" data-model="hyaluronic"><img src="img/hyaluronic.webp" alt="" width="249" height="750" loading="lazy"><span>Hyaluronic</span></button>
+        <button role="tab" aria-selected="false" data-model="cream"><img src="img/cream.webp" alt="" width="674" height="744" loading="lazy"><span>Day &amp; Night</span></button>
+        <button role="tab" aria-selected="false" data-model="hair-serum"><img src="img/hair-serum.webp" alt="" width="273" height="671" loading="lazy"><span>Hair Serum</span></button>
+      </div>
+    </div>
+
+    <div class="studio__stage" id="studioStage" data-cursor="Drag">
+      <div class="studio__halo" aria-hidden="true"></div>
+      <canvas id="studioCanvas" aria-label="Interactive 3D model. Drag to rotate." role="img"></canvas>
+      <div class="studio__hotspots" id="hotspots"></div>
+      <div class="studio__fallback" id="studioFallback"><img src="img/super-c.webp" alt="Super C Serum" width="252" height="741" loading="lazy"></div>
+      <div class="studio__loading" id="studioLoading"><span></span>Preparing studio</div>
+      <div class="studio__hint" id="studioHint" aria-hidden="true">
+        <svg viewBox="0 0 64 24"><path d="M6 12h52M12 6l-6 6 6 6M52 6l6 6-6 6"/></svg>
+        <span>Drag to rotate</span>
+      </div>
+      <div class="studio__dial" aria-hidden="true">
+        <svg viewBox="0 0 100 100"><circle class="d-bg" cx="50" cy="50" r="44"/><circle class="d-fg" id="dialArc" cx="50" cy="50" r="44"/></svg>
+        <span class="mono" id="dialDeg">000°</span>
+      </div>
+    </div>
+
+    <aside class="studio__info" id="studioInfo">
+      <p class="mono studio__cat" id="siCat">Vitamin C · Day serum</p>
+      <h3 class="studio__name" id="siName">Super C Serum</h3>
+      <p class="studio__desc" id="siDesc">Antioxidant-rich Vitamin C day serum for brighter, firmer, more hydrated-looking skin.</p>
+      <div class="studio__views" role="group" aria-label="Snap to angle">
+        <button data-angle="0" class="is-on">Front</button><button data-angle="90">Side</button><button data-angle="180">Back</button>
+      </div>
+      <div class="studio__lights" role="group" aria-label="Lighting">
+        <span class="mono">Light</span>
+        <button data-light="studio" class="is-on" aria-label="Studio light"><i></i>Studio</button>
+        <button data-light="sunrise" aria-label="Morning light"><i></i>AM</button>
+        <button data-light="midnight" aria-label="Night light"><i></i>PM</button>
+      </div>
+      <div class="studio__buy">
+        <span class="studio__price" id="siPrice">₹4,300</span>
+        <button class="btn btn--pink" id="siAdd" data-add="super-c" data-magnetic><span data-roll>Add to bag</span></button>
+      </div>
+      <div class="studio__zoom">
+        <button id="zoomOut" aria-label="Zoom out">−</button>
+        <button id="autoSpin" class="is-on" aria-label="Toggle auto rotate"><svg viewBox="0 0 24 24"><path d="M20 12a8 8 0 1 1-2.3-5.7M20 4v5h-5"/></svg></button>
+        <button id="zoomIn" aria-label="Zoom in">+</button>
+      </div>
+    </aside>
+  </div>
+</section>
+
+<!-- ================= 5. SHOP BY CONCERN ================= -->
+<section class="concerns sec" id="concerns" data-header="light" aria-label="Shop by concern">
+  <div class="wrap">
+    <header class="sechead">
+      <p class="eyebrow"><span class="mono">04</span> Shop by concern</p>
+      <h2 class="h2" data-split>Skin isn't one-size-<em>fits-all.</em></h2>
+      <p class="sechead__p">Shop by what your skin needs and build a routine that actually works.</p>
+    </header>
+    <ol class="clist" id="clist"></ol>
+  </div>
+  <div class="cfloat" id="cfloat" aria-hidden="true"><div class="cfloat__in"><img src="../images/concern-acne.webp" alt="" width="430" height="640"></div></div>
+</section>
+
+<!-- ================= 6. BESTSELLERS ================= -->
+<section class="shop sec" id="shop" data-header="light" aria-label="Bestsellers">
+  <div class="wrap">
+    <header class="sechead sechead--row">
+      <div>
+        <p class="eyebrow"><span class="mono">05</span> Bestsellers</p>
+        <h2 class="h2" data-split>The prescriptions <em>everyone's repeating.</em></h2>
+      </div>
+      <div class="filters" role="tablist" aria-label="Filter products" id="filters">
+        <span class="filters__ind" aria-hidden="true"></span>
+        <button role="tab" aria-selected="true" data-f="all">All</button>
+        <button role="tab" aria-selected="false" data-f="skin">Skin</button>
+        <button role="tab" aria-selected="false" data-f="hair">Hair</button>
+        <button role="tab" aria-selected="false" data-f="tools">Tools</button>
+      </div>
+    </header>
+  </div>
+  <div class="rail" id="rail" data-cursor="Drag">
+    <div class="rail__track" id="railTrack"></div>
+  </div>
+  <div class="wrap rail__ctrl">
+    <div class="rail__bar"><span id="railBar"></span></div>
+    <div class="rail__btns">
+      <button id="railPrev" aria-label="Previous products"><svg viewBox="0 0 24 24"><path d="M19 12H5M11 6l-6 6 6 6"/></svg></button>
+      <button id="railNext" aria-label="Next products"><svg viewBox="0 0 24 24"><path d="M5 12h14M13 6l6 6-6 6"/></svg></button>
+    </div>
+  </div>
+</section>
+
+<!-- ================= 7. SKIN DOCTOR PROTOCOL ================= -->
+<section class="protocol sec" id="protocol" data-mode="am" data-header="light" aria-label="Skin Doctor Protocol">
+  <div class="protocol__sky" aria-hidden="true"><span class="sun"></span><span class="moon"></span><i></i><i></i><i></i><i></i><i></i><i></i></div>
+  <div class="wrap">
+    <header class="sechead sechead--row">
+      <div>
+        <p class="eyebrow"><span class="mono">06</span> Skin Doctor Protocol</p>
+        <h2 class="h2" data-split>Four steps. <em>Morning &amp; night.</em></h2>
+      </div>
+      <div class="ampm" role="group" aria-label="Choose routine">
+        <button class="is-on" data-mode="am" aria-pressed="true"><svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="4"/><path d="M12 2v2M12 20v2M2 12h2M20 12h2M4.9 4.9l1.4 1.4M17.7 17.7l1.4 1.4M4.9 19.1l1.4-1.4M17.7 6.3l1.4-1.4"/></svg>AM</button>
+        <button data-mode="pm" aria-pressed="false"><svg viewBox="0 0 24 24"><path d="M20 14.5A8 8 0 0 1 9.5 4a8 8 0 1 0 10.5 10.5Z"/></svg>PM</button>
+        <span class="ampm__knob" aria-hidden="true"></span>
+      </div>
+    </header>
+
+    <div class="steps">
+      <svg class="steps__line" viewBox="0 0 1000 60" preserveAspectRatio="none" aria-hidden="true"><path id="stepsPath" d="M0 30 C 125 -10, 250 70, 375 30 S 625 -10, 750 30 S 900 60, 1000 30"/></svg>
+      <ol class="steps__list" id="stepsList"></ol>
+    </div>
+
+    <div class="bundle" id="bundle">
+      <div class="bundle__imgs" id="bundleImgs"></div>
+      <div class="bundle__txt">
+        <span class="mono" id="bundleKick">The morning protocol</span>
+        <strong id="bundleTitle">4 products · ₹13,200</strong>
+      </div>
+      <button class="btn btn--dark" id="bundleAdd" data-magnetic><span data-roll>Add the full routine</span></button>
+    </div>
+  </div>
+</section>
+
+<!-- ================= 8. REAL SKIN STORIES ================= -->
+<section class="proof sec" id="proof" data-header="light" aria-label="Real skin stories">
+  <div class="wrap proof__grid">
+    <figure class="proof__media" data-cursor="Real skin">
+      <div class="proof__clip" id="proofClip"><img src="img/before-after.webp" alt="Side-by-side skin portraits with Super C Serum" width="1200" height="1200" loading="lazy"></div>
+      <figcaption><span class="mono">Real skin in action</span><a href="#proof">@bydrtanya.au</a></figcaption>
+    </figure>
+    <div class="proof__copy">
+      <p class="eyebrow"><span class="mono">07</span> Real skin stories</p>
+      <div class="stars" aria-label="5 out of 5 stars"><i></i><i></i><i></i><i></i><i></i></div>
+      <blockquote class="proof__quote" id="proofQuote">“I've been really wanting a good brightening serum and this new Super C Serum came out at the perfect time. It's really lightweight and feels <em>amazing on my skin.</em>”</blockquote>
+      <div class="proof__who">
+        <span class="proof__avatar">EK</span>
+        <div><strong>Emily K</strong><span class="mono">Verified buyer · Super C Serum</span></div>
+      </div>
+      <div class="proof__prod">
+        <img src="img/super-c.webp" alt="" width="252" height="741" loading="lazy">
+        <div><span class="mono">Reviewed</span><strong>Super C Serum</strong></div>
+        <button class="btn btn--dark btn--sm" data-add="super-c"><span data-roll>Add · ₹4,300</span></button>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ================= 9. MEET DR TANYA ================= -->
+<section class="doctor sec" id="doctor" data-header="dark" aria-label="Meet Dr Tanya">
+  <div class="wrap doctor__grid">
+    <div class="doctor__media">
+      <div class="doctor__clip" id="docClip"><img src="img/dr-tanya.webp" alt="Dr Tanya in her clinic holding a green folder" width="1536" height="1024" loading="lazy"></div>
+      <div class="doctor__seal" aria-hidden="true">
+        <svg viewBox="0 0 200 200"><defs><path id="sealPath" d="M100 100m-74 0a74 74 0 1 1 148 0a74 74 0 1 1-148 0"/></defs><text><textPath href="#sealPath">Doctor-led · Skin-first · Simple routines · Done properly ·</textPath></text></svg>
+        <span>℞</span>
+      </div>
+    </div>
+    <div class="doctor__copy">
+      <p class="eyebrow eyebrow--light"><span class="mono">08</span> Meet Dr Tanya</p>
+      <h2 class="h2 h2--light h2--xl" data-split>The doctor you <em>wished you had seen.</em></h2>
+      <p class="doctor__manifesto" id="manifesto">Every formula is selected by Dr Tanya to target real concerns — from breakouts and dullness to dryness and sensitivity. Modern therapeutics, ancient botanicals like Holy Basil, and routines simple enough to actually stick. No BS. Just better skin. From a doctor.</p>
+      <svg class="doctor__sign" viewBox="0 0 320 90" aria-hidden="true"><path id="signPath" d="M10 62c18-30 34-44 40-36s-12 40-4 42 26-38 34-34-6 30 2 30 18-22 26-22-4 20 4 20 16-16 22-16c6 0-2 14 4 14s14-12 20-14c8-2 2 12 8 12 10 0 20-24 34-26 10-1-6 22 2 22s22-18 36-20c10-1 26 6 44 2"/></svg>
+      <div class="doctor__ctas">
+        <a href="#protocol" class="btn btn--light" data-magnetic><span data-roll>The Skin Doctor Protocol</span></a>
+        <a href="#concerns" class="btn btn--ghost" data-magnetic><span data-roll>Find my routine</span></a>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ================= 10. GLOW ================= -->
+<section class="glow sec" id="glow" data-header="light" aria-label="Glow by Dr Tanya">
+  <div class="glow__stickers" aria-hidden="true">
+    <svg class="stk stk--1" viewBox="0 0 100 100"><path d="M50 8c6 18 12 24 30 30-18 6-24 12-30 30-6-18-12-24-30-30 18-6 24-12 30-30Z"/></svg>
+    <svg class="stk stk--2" viewBox="0 0 100 100"><path d="M50 14a14 14 0 0 1 14 14 14 14 0 0 1 14 14 14 14 0 0 1-14 14 14 14 0 0 1-14 14 14 14 0 0 1-14-14 14 14 0 0 1-14-14 14 14 0 0 1 14-14 14 14 0 0 1 14-14Z"/></svg>
+    <svg class="stk stk--3" viewBox="0 0 100 100"><circle cx="50" cy="50" r="34"/></svg>
+    <svg class="stk stk--4" viewBox="0 0 100 100"><path d="M50 6l9 27 28-6-19 21 19 21-28-6-9 27-9-27-28 6 19-21-19-21 28 6Z"/></svg>
+  </div>
+  <div class="wrap glow__grid">
+    <div class="glow__copy">
+      <p class="eyebrow"><span class="mono">09</span> New · Glow by Dr Tanya</p>
+      <h2 class="glow__word" id="glowWord" aria-label="glow"><span>g</span><span>l</span><span>o</span><span>w</span></h2>
+      <p class="glow__line">Glow by Dr Tanya is here. Doctor-made skincare for skin that <em>always glows.</em></p>
+      <a href="#glow" class="btn btn--orange" data-magnetic><span data-roll>Shop Glow</span><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M5 12h14M13 6l6 6-6 6"/></svg></a>
+    </div>
+    <div class="glow__media">
+      <figure class="glow__card glow__card--a" data-depth="-0.6"><img src="../images/glow-m.webp" alt="Glow by Dr Tanya — because healthy skin always glows" width="900" height="1125" loading="lazy"></figure>
+      <figure class="glow__card glow__card--b" data-depth="0.8"><img src="../images/glow-friends.webp" alt="Friends smiling with Glow skincare" width="900" height="375" loading="lazy"></figure>
+    </div>
+  </div>
+</section>
+
+<!-- ================= 11. JOURNAL ================= -->
+<section class="journal sec" id="journal" data-header="light" aria-label="The Skin Journal">
+  <div class="wrap">
+    <header class="sechead sechead--row">
+      <div>
+        <p class="eyebrow"><span class="mono">10</span> The Skin Journal</p>
+        <h2 class="h2" data-split>Skin education, <em>straight from Dr Tanya.</em></h2>
+      </div>
+      <a href="#journal" class="btn btn--line" data-magnetic><span data-roll>Read the Skin Journal</span></a>
+    </header>
+    <div class="jgrid">
+      <a class="jcard jcard--lg" href="#journal" data-cursor="Read"><span class="jcard__img"><img src="../images/j-acne-30s.webp" alt="" width="900" height="750" loading="lazy"></span><span class="mono">Acne · 5 min read</span><strong>Why am I suddenly breaking out in my 30s?</strong></a>
+      <a class="jcard" href="#journal" data-cursor="Read"><span class="jcard__img"><img src="../images/j-hair.webp" alt="" width="900" height="488" loading="lazy"></span><span class="mono">Hair · 4 min read</span><strong>4 common causes of hair thinning (and what you can do about it)</strong></a>
+      <a class="jcard" href="#journal" data-cursor="Read"><span class="jcard__img"><img src="../images/j-dry.webp" alt="" width="900" height="488" loading="lazy"></span><span class="mono">Routine · 6 min read</span><strong>Skincare routine for dry skin: Dr Tanya's guide to what actually helps</strong></a>
+      <a class="jcard" href="#journal" data-cursor="Read"><span class="jcard__img"><img src="../images/j-dull.webp" alt="" width="900" height="488" loading="lazy"></span><span class="mono">Glow · 4 min read</span><strong>The causes of dull skin, and what actually helps</strong></a>
+      <a class="jcard" href="#journal" data-cursor="Read"><span class="jcard__img"><img src="../images/j-kakadu.webp" alt="" width="900" height="900" loading="lazy"></span><span class="mono">Ingredients · 3 min read</span><strong>Kakadu plum benefits for skin: is it worth adding to your routine?</strong></a>
+    </div>
+  </div>
+</section>
+
+</main>
+
+<!-- ================= FOOTER ================= -->
+<footer class="foot" id="footer" data-header="dark">
+  <div class="wrap">
+    <div class="foot__top">
+      <div class="foot__news">
+        <p class="eyebrow eyebrow--light"><span class="mono">℞</span> Daily Dose by Dr Tanya</p>
+        <h2 class="h2 h2--light" data-split>A little skin education, <em>delivered.</em></h2>
+        <form class="news" id="news" novalidate>
+          <label class="sr" for="newsEmail">Email address</label>
+          <input id="newsEmail" type="email" placeholder="Your email address" autocomplete="email" required>
+          <button type="submit" aria-label="Subscribe"><span>Subscribe</span><svg viewBox="0 0 24 24"><path d="M5 12h14M13 6l6 6-6 6"/></svg></button>
+          <p class="news__msg" id="newsMsg" role="status"></p>
+        </form>
+      </div>
+      <nav class="foot__cols" aria-label="Footer">
+        <div><h4>Shop</h4><a href="#shop">Skincare</a><a href="#shop">Hair care</a><a href="#shop">Skin tools</a><a href="#glow">Glow</a></div>
+        <div><h4>Learn</h4><a href="#journal">Your FAQs answered</a><a href="#journal">Ingredients glossary</a><a href="#protocol">Skin Doctor Protocol</a><a href="#journal">The Skin Journal</a></div>
+        <div><h4>Brand</h4><a href="#doctor">Meet Dr Tanya</a><a href="#footer">As seen in</a><a href="#proof">@bydrtanya.au</a></div>
+      </nav>
+    </div>
+    <p class="foot__tag">Care for your skin, <em>done properly.</em></p>
+  </div>
+  <div class="foot__mark" id="footMark" aria-hidden="true"><span>D</span><span>r</span><span>&nbsp;</span><span>T</span><span>a</span><span>n</span><span>y</span><span>a</span></div>
+  <div class="wrap foot__base">
+    <span>© 2026 Dr Tanya Skincare</span>
+    <span class="foot__legal"><a href="#footer">Refund policy</a><a href="#footer">Privacy policy</a><a href="#footer">Terms of service</a><a href="#footer">Shipping policy</a></span>
+    <a href="#top" class="foot__up">Back to top ↑</a>
+  </div>
+</footer>
+
+<!-- ================= SIDE CART ================= -->
+<aside class="cart" id="cart" aria-hidden="true">
+  <div class="cart__scrim" data-close-cart></div>
+  <div class="cart__panel" role="dialog" aria-modal="true" aria-labelledby="cartTitle">
+    <header class="cart__head">
+      <h2 id="cartTitle">Your bag <sup id="cartCount">0</sup></h2>
+      <button class="cart__close" data-close-cart aria-label="Close bag"><span></span><span></span></button>
+    </header>
+    <div class="ship" id="ship">
+      <p class="ship__msg" id="shipMsg">Free shipping on orders over ₹5,000</p>
+      <div class="ship__bar"><span class="ship__fill" id="shipFill"></span><span class="ship__van" id="shipVan"><svg viewBox="0 0 24 24"><path d="M3 7h11v9H3zM14 10h4l3 3v3h-7z"/><circle cx="7" cy="17.5" r="1.6"/><circle cx="17" cy="17.5" r="1.6"/></svg></span></div>
+    </div>
+    <div class="cart__scroll" data-lenis-prevent>
+      <ul class="cart__items" id="cartItems"></ul>
+      <div class="cart__empty" id="cartEmpty">
+        <svg viewBox="0 0 80 120" aria-hidden="true"><path d="M30 8h20v14l6 4v8H24v-8l6-4z"/><rect x="18" y="34" width="44" height="78" rx="12"/><path d="M28 70h24M32 80h16"/></svg>
+        <h3>Your bag is empty</h3>
+        <p>Start with the bestsellers Dr Tanya prescribes most.</p>
+      </div>
+      <section class="ups" id="ups">
+        <div class="ups__head"><h3 id="upsTitle">Complete your protocol</h3><span class="mono" id="upsSub">Picked for your routine</span></div>
+        <div class="ups__rail" id="upsRail"></div>
+      </section>
+    </div>
+    <footer class="cart__foot" id="cartFoot">
+      <div class="cart__row"><span>Subtotal</span><strong id="cartSub">₹0</strong></div>
+      <p class="cart__fine">Taxes included. Shipping calculated at checkout.</p>
+      <button class="btn btn--pink btn--block" id="checkout"><span data-roll>Checkout securely</span><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M5 12h14M13 6l6 6-6 6"/></svg></button>
+      <button class="cart__keep" data-close-cart>or continue shopping</button>
+    </footer>
+  </div>
+</aside>
+
+<div class="toast" id="toast" role="status" aria-live="polite"></div>
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.13.0/gsap.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.13.0/ScrollTrigger.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/lenis@1.1.13/dist/lenis.min.js"></script>
+<script src="script.js"></script>
+</body>
+</html>
