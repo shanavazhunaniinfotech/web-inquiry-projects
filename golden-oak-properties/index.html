@@ -1,0 +1,729 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+  <title>Golden Oak Properties | Off-Plan &amp; Luxury Real Estate in Dubai</title>
+  <meta name="description" content="Golden Oak Properties is a Dubai real estate agency for off-plan villas and residences from Dubai's leading developers. Guided from booking to handover.">
+  <meta name="theme-color" content="#0b0f14">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,500;0,600;1,500;1,600&family=Manrope:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+<!-- ============ LOADER ============ -->
+<div class="loader" id="loader" aria-hidden="true">
+  <div class="loader__inner">
+    <svg class="loader__mark" viewBox="0 0 64 64"><use href="#logo-mark"/></svg>
+    <div class="loader__bar"><span id="loaderBar"></span></div>
+    <p class="loader__txt">Surveying the plot <b id="loaderPct">0</b>%</p>
+  </div>
+</div>
+
+<!-- SVG sprite -->
+<svg width="0" height="0" style="position:absolute" aria-hidden="true">
+  <defs>
+    <linearGradient id="goldGrad" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0" stop-color="#f1d79a"/><stop offset=".5" stop-color="#c9a35b"/><stop offset="1" stop-color="#9c7434"/>
+    </linearGradient>
+  </defs>
+  <symbol id="logo-mark" viewBox="0 0 64 64">
+    <circle cx="32" cy="32" r="30" fill="none" stroke="url(#goldGrad)" stroke-width="2"/>
+    <path d="M32 12c-3 4-9 5-9 11 0 3 2 4 2 6-3 0-6 2-6 6 0 5 5 8 10 8h6c5 0 10-3 10-8 0-4-3-6-6-6 0-2 2-3 2-6 0-6-6-7-9-11z" fill="url(#goldGrad)"/>
+    <path d="M32 22v30M32 30l-5-4M32 36l6-5M32 43l-5-4" stroke="#0b0f14" stroke-width="1.6" stroke-linecap="round" fill="none"/>
+  </symbol>
+  <symbol id="i-arrow" viewBox="0 0 24 24"><path d="M5 12h14M13 6l6 6-6 6" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></symbol>
+  <symbol id="i-phone" viewBox="0 0 24 24"><path d="M5 4h4l2 5-2.5 1.5a11 11 0 005 5L15 13l5 2v4a2 2 0 01-2 2A16 16 0 013 6a2 2 0 012-2" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linejoin="round"/></symbol>
+  <symbol id="i-wa" viewBox="0 0 24 24"><path d="M20 12a8 8 0 01-11.8 7L4 20l1.1-4A8 8 0 1120 12z" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linejoin="round"/><path d="M9 9c0 3 3 6 6 6l1-1.3-1.8-1-1 .8c-1-.4-2-1.4-2.4-2.4l.8-1-1-1.8z" fill="currentColor"/></symbol>
+  <symbol id="i-pin" viewBox="0 0 24 24"><path d="M12 21s-7-6.2-7-11.5a7 7 0 0114 0C19 14.8 12 21 12 21z" fill="none" stroke="currentColor" stroke-width="1.7"/><circle cx="12" cy="9.5" r="2.5" fill="none" stroke="currentColor" stroke-width="1.7"/></symbol>
+  <symbol id="i-star" viewBox="0 0 24 24"><path d="M12 3l2.7 5.6 6.1.9-4.4 4.3 1 6.1L12 17l-5.4 2.9 1-6.1-4.4-4.3 6.1-.9z" fill="currentColor"/></symbol>
+  <symbol id="i-check" viewBox="0 0 24 24"><path d="M5 12.5l4.5 4.5L19 7.5" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></symbol>
+  <symbol id="i-bed" viewBox="0 0 24 24"><path d="M3 18V7M3 14h18v4M21 14v-2a3 3 0 00-3-3h-7v5M7 11.5a1.5 1.5 0 100-.1" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round"/></symbol>
+  <symbol id="i-mail" viewBox="0 0 24 24"><rect x="3" y="5" width="18" height="14" rx="2" fill="none" stroke="currentColor" stroke-width="1.7"/><path d="M4 7l8 6 8-6" fill="none" stroke="currentColor" stroke-width="1.7"/></symbol>
+</svg>
+
+<!-- ============ HEADER ============ -->
+<header class="hdr" id="hdr">
+  <a class="brand" href="#top" aria-label="Golden Oak Properties home">
+    <svg class="brand__mark" viewBox="0 0 64 64"><use href="#logo-mark"/></svg>
+    <span class="brand__txt"><b>GOLDEN OAK</b><small>PROPERTIES · DUBAI</small></span>
+  </a>
+  <nav class="nav" aria-label="Main">
+    <a href="#projects">Off-Plan</a>
+    <a href="#projects" data-filter="villa">Villas</a>
+    <a href="#projects" data-filter="apartment">Apartments</a>
+    <a href="#areas">Areas</a>
+    <a href="#sell">Sell / List</a>
+    <a href="#about">About</a>
+  </nav>
+  <div class="hdr__cta">
+    <a class="hdr__phone" href="tel:+97144227328"><svg><use href="#i-phone"/></svg><span>+971 4 422 7328</span></a>
+    <a class="btn btn--gold btn--sm magnetic" href="#consult">Book a consultation</a>
+    <button class="burger" id="burger" aria-label="Open menu" aria-expanded="false"><span></span><span></span></button>
+  </div>
+</header>
+
+<div class="mnav" id="mnav" aria-hidden="true">
+  <nav>
+    <a href="#projects">Off-Plan Projects</a>
+    <a href="#projects" data-filter="villa">Villas</a>
+    <a href="#projects" data-filter="apartment">Apartments</a>
+    <a href="#areas">Where to invest</a>
+    <a href="#calc">Payment plan</a>
+    <a href="#sell">Sell or list</a>
+    <a href="#about">About</a>
+    <a href="#consult">Book a consultation</a>
+  </nav>
+  <div class="mnav__foot">
+    <a href="tel:+97144227328">+971 4 422 7328</a>
+    <a href="mailto:info@goldenoakproperties.com">info@goldenoakproperties.com</a>
+  </div>
+</div>
+
+<main id="top">
+
+<!-- ============ BUILD SCENE (pinned, scroll-driven) ============ -->
+<section class="build" id="build" aria-label="From empty plot to handover">
+  <div class="build__stage">
+    <div class="sky" aria-hidden="true"><i class="sky__dawn"></i><i class="sky__day" id="skyDayDiv"></i><i class="sky__dusk" id="skyDuskDiv"></i></div>
+
+    <svg class="scene" id="scene" viewBox="0 0 1600 900" preserveAspectRatio="xMidYMax slice" aria-hidden="true">
+      <defs>
+        <linearGradient id="skyDawn" x1="0" y1="0" x2="0" y2="1">
+          <stop offset="0" stop-color="#e9dcc8"/><stop offset=".55" stop-color="#f3dcbc"/><stop offset="1" stop-color="#f4c995"/>
+        </linearGradient>
+        <linearGradient id="skyDay" x1="0" y1="0" x2="0" y2="1">
+          <stop offset="0" stop-color="#9ec3dd"/><stop offset=".6" stop-color="#d9e6ea"/><stop offset="1" stop-color="#f5e7cf"/>
+        </linearGradient>
+        <linearGradient id="skyDusk" x1="0" y1="0" x2="0" y2="1">
+          <stop offset="0" stop-color="#070b14"/><stop offset=".45" stop-color="#16213a"/><stop offset=".78" stop-color="#4a3b4d"/><stop offset="1" stop-color="#d28b4c"/>
+        </linearGradient>
+        <linearGradient id="sand" x1="0" y1="0" x2="0" y2="1">
+          <stop offset="0" stop-color="#e5cfa6"/><stop offset="1" stop-color="#caa673"/>
+        </linearGradient>
+        <linearGradient id="sandBack" x1="0" y1="0" x2="0" y2="1">
+          <stop offset="0" stop-color="#ecd9b6"/><stop offset="1" stop-color="#dcc196"/>
+        </linearGradient>
+        <linearGradient id="glass" x1="0" y1="0" x2="1" y2="1">
+          <stop offset="0" stop-color="#b9d7e6"/><stop offset=".5" stop-color="#5d88a3"/><stop offset="1" stop-color="#2b4a61"/>
+        </linearGradient>
+        <linearGradient id="concrete" x1="0" y1="0" x2="1" y2="0">
+          <stop offset="0" stop-color="#b9b2a6"/><stop offset="1" stop-color="#8f897f"/>
+        </linearGradient>
+        <linearGradient id="gold" x1="0" y1="0" x2="0" y2="1">
+          <stop offset="0" stop-color="#f4dc9f"/><stop offset="1" stop-color="#b8893f"/>
+        </linearGradient>
+        <linearGradient id="pool" x1="0" y1="0" x2="1" y2="0">
+          <stop offset="0" stop-color="#5fd0e0"/><stop offset="1" stop-color="#2a9bb8"/>
+        </linearGradient>
+        <radialGradient id="sunGlow">
+          <stop offset="0" stop-color="#fff3d6"/><stop offset=".35" stop-color="#ffd896" stop-opacity=".9"/><stop offset="1" stop-color="#ffc67a" stop-opacity="0"/>
+        </radialGradient>
+        <radialGradient id="lampGlow">
+          <stop offset="0" stop-color="#ffe3a3" stop-opacity=".9"/><stop offset="1" stop-color="#ffcf73" stop-opacity="0"/>
+        </radialGradient>
+        <pattern id="lattice" width="14" height="14" patternUnits="userSpaceOnUse">
+          <path d="M0 0L14 14M14 0L0 14" stroke="#d1a03c" stroke-width="1.4"/>
+        </pattern>
+        <pattern id="bpGrid" width="20" height="20" patternUnits="userSpaceOnUse">
+          <path d="M20 0H0V20" fill="none" stroke="#2f6d9a" stroke-width=".5" opacity=".5"/>
+        </pattern>
+        <filter id="glow" x="-50%" y="-50%" width="200%" height="200%">
+          <feGaussianBlur stdDeviation="3" result="b"/><feMerge><feMergeNode in="b"/><feMergeNode in="SourceGraphic"/></feMerge>
+        </filter>
+      </defs>
+
+      <!-- sky -->
+      <rect id="skyDawnR" y="-800" width="1600" height="1700" fill="url(#skyDawn)"/>
+      <rect id="skyDayR" y="-800" width="1600" height="1700" fill="url(#skyDay)" opacity="0"/>
+      <rect id="skyDuskR" y="-800" width="1600" height="1700" fill="url(#skyDusk)" opacity="0"/>
+      <g id="stars" opacity="0"></g>
+      <g id="sun" transform="translate(1290 330)">
+        <circle r="150" fill="url(#sunGlow)"/>
+        <circle r="46" fill="#fff1cf"/>
+      </g>
+      <g id="birds" fill="none" stroke="#6b5a45" stroke-width="2" stroke-linecap="round" opacity=".55">
+        <path d="M0 0q8-8 16 0q8-8 16 0"/>
+        <path d="M44 -18q6-6 12 0q6-6 12 0"/>
+        <path d="M30 22q5-5 10 0q5-5 10 0"/>
+      </g>
+
+      <!-- distant skyline -->
+      <g id="skyline"></g>
+      <g id="skylineLights" opacity="0"></g>
+
+      <!-- dunes -->
+      <path d="M0 720 C 200 690 360 705 520 715 S 900 700 1100 712 S 1450 690 1600 705 V900 H0Z" fill="url(#sandBack)"/>
+      <path id="ground" d="M0 790 H1600 V900 H0Z" fill="url(#sand)"/>
+      <path d="M0 790 H1600" stroke="#b8935e" stroke-width="2" opacity=".6"/>
+
+      <!-- plot: stakes + tape -->
+      <g id="plot">
+        <g id="tape" fill="none" stroke="#c0392b" stroke-width="2" stroke-dasharray="10 6" opacity=".85">
+          <path class="draw" d="M690 778 H985"/>
+          <path class="draw" d="M1030 778 H1390"/>
+        </g>
+        <g id="stakes" fill="#8a6a3c">
+          <rect x="686" y="760" width="5" height="32"/><rect x="982" y="760" width="5" height="32"/>
+          <rect x="1027" y="760" width="5" height="32"/><rect x="1387" y="760" width="5" height="32"/>
+          <path d="M691 760l14 5-14 5z" fill="#d6492f"/><path d="M987 760l14 5-14 5z" fill="#d6492f"/>
+          <path d="M1032 760l14 5-14 5z" fill="#d6492f"/><path d="M1392 760l14 5-14 5z" fill="#d6492f"/>
+        </g>
+        <text x="838" y="772" text-anchor="middle" class="svg-small" fill="#7b5d34">PLOT 0427 · 2,400 m²</text>
+      </g>
+
+      <!-- billboard -->
+      <g id="billboard">
+        <rect x="470" y="752" width="5" height="38" fill="#6d5536"/><rect x="586" y="752" width="5" height="38" fill="#6d5536"/>
+        <rect x="440" y="688" width="180" height="68" rx="4" fill="#0f141b"/>
+        <rect x="445" y="693" width="170" height="58" rx="2" fill="none" stroke="url(#gold)" stroke-width="1.2"/>
+        <g id="bbSoon">
+          <text x="530" y="710" text-anchor="middle" class="svg-eyebrow" fill="#c9a35b">COMING SOON</text>
+          <text x="530" y="731" text-anchor="middle" class="svg-title" fill="#f5efe3">Golden Oak</text>
+          <text x="530" y="745" text-anchor="middle" class="svg-small" fill="#bdb3a3">RESIDENCES · OFF-PLAN</text>
+        </g>
+        <g id="bbSold" opacity="0">
+          <text x="530" y="710" text-anchor="middle" class="svg-eyebrow" fill="#c9a35b">HANDOVER COMPLETE</text>
+          <text x="530" y="731" text-anchor="middle" class="svg-title" fill="#f5efe3">Welcome home</text>
+          <text x="530" y="745" text-anchor="middle" class="svg-small" fill="#bdb3a3">100% SOLD · KEYS READY</text>
+        </g>
+      </g>
+
+      <!-- blueprint ghost of the future tower -->
+      <g id="blueprint" opacity="0">
+        <rect x="730" y="300" width="200" height="490" fill="url(#bpGrid)" opacity=".7"/>
+        <g fill="none" stroke="#2f6d9a" stroke-width="1.6">
+          <path class="draw" d="M730 790 V300 H930 V790"/>
+          <path class="draw" d="M760 300 L780 250 H880 L900 300"/>
+          <path class="draw" d="M830 250 V205"/>
+          <path class="draw" d="M1060 790 V700 H1100 V620 H1330 V700 H1360 V790"/>
+        </g>
+        <g fill="#2f6d9a" class="svg-small">
+          <text x="945" y="545">H 186 m</text>
+          <text x="742" y="292">G+42 · Sky crown</text>
+          <text x="1140" y="612">Villa · 5 BR</text>
+        </g>
+      </g>
+
+      <!-- excavation & foundation -->
+      <rect id="pit" x="705" y="790" width="250" height="30" fill="#a9875a" opacity="0"/>
+      <g id="piles" stroke="#7d776d" stroke-width="5"></g>
+      <rect id="foundation" x="712" y="782" width="236" height="12" fill="#8c867c"/>
+
+      <!-- tower crane -->
+      <g id="crane">
+        <rect x="978" y="190" width="18" height="600" fill="url(#lattice)" stroke="#c9952f" stroke-width="2"/>
+        <g id="craneTop">
+          <path d="M987 150 L978 190 H996Z" fill="#d1a03c"/>
+          <rect x="690" y="186" width="560" height="10" fill="url(#lattice)" stroke="#c9952f" stroke-width="2"/>
+          <rect x="1180" y="196" width="46" height="24" fill="#5b5f66"/>
+          <rect x="996" y="196" width="26" height="20" rx="2" fill="#e9b949"/>
+          <rect x="1002" y="200" width="14" height="9" fill="#9fc3d9"/>
+          <path d="M987 150 L700 186 M987 150 L1240 186" stroke="#c9952f" stroke-width="1.5"/>
+          <g id="trolley" transform="translate(850 196)">
+            <rect x="-10" y="0" width="20" height="8" fill="#5b5f66"/>
+            <line id="cable" x1="0" y1="8" x2="0" y2="200" stroke="#33363b" stroke-width="1.5"/>
+            <g id="hook" transform="translate(0 200)">
+              <path d="M-3 0h6v6a5 5 0 11-6 6" fill="none" stroke="#33363b" stroke-width="2.5"/>
+              <rect x="-34" y="14" width="68" height="7" fill="#7d776d"/>
+            </g>
+          </g>
+        </g>
+      </g>
+
+      <!-- tower floors (generated) -->
+      <g id="scaffold" opacity="0"></g>
+      <g id="tower"></g>
+      <g id="fins" opacity="0"></g>
+      <g id="crown" opacity="0">
+        <path d="M740 300 L770 252 H890 L920 300Z" fill="#0f141b"/>
+        <path d="M770 252 H890" stroke="url(#gold)" stroke-width="4"/>
+        <path d="M740 300 H920" stroke="url(#gold)" stroke-width="4"/>
+        <rect x="827" y="196" width="6" height="58" fill="url(#gold)"/>
+        <circle cx="830" cy="194" r="4" fill="#ffe3a3"/>
+        <text x="830" y="284" text-anchor="middle" class="svg-crown" fill="#e2c27d">GOLDEN OAK</text>
+      </g>
+
+      <!-- villa -->
+      <g id="villa">
+        <g id="villaFrame" opacity="0" stroke="#8f897f" stroke-width="6" fill="none">
+          <path d="M1060 790 V700 M1180 790 V700 M1360 790 V700 M1100 700 V620 M1220 700 V620 M1330 700 V620"/>
+          <path d="M1040 700 H1380 M1085 618 H1350" stroke-width="9"/>
+        </g>
+        <g id="villaSkin" opacity="0">
+          <rect x="1060" y="702" width="300" height="88" fill="#f6f1e7"/>
+          <rect x="1100" y="622" width="230" height="78" fill="#fbf8f2"/>
+          <rect x="1075" y="716" width="150" height="66" fill="url(#glass)"/>
+          <rect x="1240" y="716" width="100" height="66" fill="url(#glass)"/>
+          <rect x="1115" y="636" width="120" height="52" fill="url(#glass)"/>
+          <rect x="1250" y="636" width="64" height="52" fill="#6b4f2e"/>
+          <path d="M1250 636 v52 M1266 636 v52 M1282 636 v52 M1298 636 v52" stroke="#4d381f" stroke-width="2"/>
+          <rect x="1036" y="694" width="348" height="9" fill="#e9e1d2"/>
+          <rect x="1082" y="614" width="270" height="9" fill="#e9e1d2"/>
+          <rect x="1036" y="694" width="348" height="2" fill="url(#gold)"/>
+        </g>
+        <rect id="poolR" x="1030" y="800" width="360" height="16" rx="3" fill="url(#pool)" opacity="0"/>
+      </g>
+
+      <!-- palms (grow at handover) -->
+      <g id="palms"></g>
+
+      <!-- road -->
+      <g id="road" opacity="0">
+        <rect x="0" y="842" width="1600" height="34" fill="#2b2a29"/>
+        <path d="M0 859 H1600" stroke="#e2c27d" stroke-width="2" stroke-dasharray="26 22"/>
+        <g id="lamps"></g>
+      </g>
+
+      <!-- dusk tint -->
+      <rect id="dusk" y="-800" width="1600" height="1700" fill="#0e1830" opacity="0" style="mix-blend-mode:multiply"/>
+
+      <!-- lights layer (sits above dusk tint) -->
+      <g id="lights" filter="url(#glow)"></g>
+      <g id="lampGlows" opacity="0"></g>
+      <g id="car" opacity="0">
+        <rect x="-60" y="846" width="52" height="14" rx="5" fill="#1a1a1a"/>
+        <circle cx="-8" cy="853" r="3" fill="#fff4cc"/>
+        <path d="M-6 853 L80 842 L80 864Z" fill="#fff1c2" opacity=".35"/>
+      </g>
+    </svg>
+
+    <!-- vignette for text legibility -->
+    <div class="build__veil"></div>
+
+    <!-- stage copy -->
+    <div class="stages">
+      <article class="stage stage--hero is-on" data-stage="0">
+        <p class="eyebrow"><span class="dot"></span>Dubai off-plan &amp; luxury real estate</p>
+        <h1 class="h-display">Own Dubai's next landmark, <em>before it rises.</em></h1>
+        <p class="lead">Hand-picked off-plan villas and residences from Dubai's leading developers. One advisor with you from the first payment to handover day.</p>
+        <div class="cta-row">
+          <a class="btn btn--gold magnetic" href="#projects">Explore off-plan projects <svg><use href="#i-arrow"/></svg></a>
+          <a class="btn btn--ghost magnetic" href="#consult">Free consultation</a>
+        </div>
+        <ul class="hero-trust">
+          <li><svg><use href="#i-check"/></svg>Direct developer access</li>
+          <li><svg><use href="#i-check"/></svg>Payment plans from 10%</li>
+          <li><svg><use href="#i-check"/></svg>Business Bay office</li>
+        </ul>
+      </article>
+
+      <article class="stage" data-stage="1">
+        <p class="stage__no">02 <span>Foundation</span></p>
+        <h2 class="h-stage">Break ground with a <em>10% booking.</em></h2>
+        <p class="lead">Reserve your unit at launch price. We check the developer, the escrow account and your SPA with you before you sign anything.</p>
+      </article>
+
+      <article class="stage" data-stage="2">
+        <p class="stage__no">03 <span>Structure</span></p>
+        <h2 class="h-stage">Watch it rise, <em>floor by floor.</em></h2>
+        <p class="lead">Pay in milestones while it's built, with regular site updates from our team. You always know where your money is.</p>
+      </article>
+
+      <article class="stage" data-stage="3">
+        <p class="stage__no">04 <span>Facade</span></p>
+        <h2 class="h-stage">Glass, gold, and <em>the view you chose.</em></h2>
+        <p class="lead">Finishes, snagging and handover inspection handled on your behalf, even if you're buying from abroad.</p>
+      </article>
+
+      <article class="stage stage--final" data-stage="4">
+        <p class="stage__no">05 <span>Handover</span></p>
+        <h2 class="h-stage">Keys in hand. <em>Welcome home.</em></h2>
+        <p class="lead">Move in, rent it out or resell. Find the project that's at the empty-plot stage today.</p>
+        <div class="cta-row">
+          <a class="btn btn--gold magnetic" href="#projects">See projects launching now <svg><use href="#i-arrow"/></svg></a>
+          <a class="btn btn--ghost btn--light magnetic" href="#consult">Talk to an advisor</a>
+        </div>
+      </article>
+    </div>
+
+    <!-- journey HUD -->
+    <aside class="hud" aria-hidden="true">
+      <div class="hud__head">
+        <span>Your off-plan journey</span>
+        <b id="hudPct">0%</b>
+      </div>
+      <div class="hud__bar"><span id="hudBar"></span></div>
+      <ol class="hud__steps" id="hudSteps">
+        <li class="is-on">Plot</li><li>Foundation</li><li>Structure</li><li>Facade</li><li>Handover</li>
+      </ol>
+      <div class="hud__pay">
+        <div><small>Paid so far</small><b id="hudPaid">0%</b></div>
+        <div><small>Example plan</small><b>10 / 50 / 40</b></div>
+      </div>
+    </aside>
+
+    <div class="scrollcue" id="scrollcue">
+      <span>Scroll to break ground</span>
+      <i></i>
+    </div>
+    <a class="skip" href="#trust">Skip the build ↓</a>
+  </div>
+</section>
+
+<!-- ============ TRUST ============ -->
+<section class="trust" id="trust">
+  <div class="marquee" aria-label="Developers we work with">
+    <div class="marquee__track">
+      <span>Emaar</span><i>✦</i><span>DAMAC</span><i>✦</i><span>Meraas</span><i>✦</i><span>Dar Al Arkan</span><i>✦</i><span>Select Group</span><i>✦</i><span>Binghatti</span><i>✦</i><span>Omniyat</span><i>✦</i><span>Nakheel</span><i>✦</i>
+      <span>Emaar</span><i>✦</i><span>DAMAC</span><i>✦</i><span>Meraas</span><i>✦</i><span>Dar Al Arkan</span><i>✦</i><span>Select Group</span><i>✦</i><span>Binghatti</span><i>✦</i><span>Omniyat</span><i>✦</i><span>Nakheel</span><i>✦</i>
+    </div>
+  </div>
+  <div class="wrap stats">
+    <div class="stat reveal"><b><span class="count" data-to="11">0</span></b><p>Curated projects across Dubai's prime areas</p></div>
+    <div class="stat reveal"><b>AED <span class="count" data-to="1.45" data-dec="2">0</span>M</b><p>Entry price for waterfront off-plan homes</p></div>
+    <div class="stat reveal"><b><span class="count" data-to="10">0</span>-yr</b><p>Golden Visa eligibility from AED 2M property</p></div>
+    <div class="stat reveal"><b><span class="count" data-to="1">0</span> advisor</b><p>With you from booking day to handover day</p></div>
+  </div>
+</section>
+
+<!-- ============ SEARCH + PROJECTS ============ -->
+<section class="projects" id="projects">
+  <div class="wrap">
+    <div class="sec-head">
+      <div>
+        <p class="eyebrow">Featured projects</p>
+        <h2 class="h-sec reveal">Launches worth <em>moving early on.</em></h2>
+      </div>
+      <div class="cur" role="group" aria-label="Currency">
+        <button class="is-on" data-cur="AED">AED</button><button data-cur="USD">USD</button><button data-cur="EUR">EUR</button>
+      </div>
+    </div>
+
+    <form class="finder reveal" id="finder" autocomplete="off">
+      <div class="finder__tabs" role="tablist">
+        <button type="button" class="is-on" data-status="all">All</button>
+        <button type="button" data-status="offplan">Off-plan</button>
+        <button type="button" data-status="ready">Ready</button>
+      </div>
+      <label class="fld"><span>Area</span>
+        <select id="fArea"><option value="">Anywhere in Dubai</option></select>
+      </label>
+      <label class="fld"><span>Type</span>
+        <select id="fType"><option value="">Any type</option><option value="apartment">Apartment</option><option value="villa">Villa / Townhouse</option></select>
+      </label>
+      <label class="fld"><span>Budget (AED)</span>
+        <select id="fBudget"><option value="">Any budget</option><option value="0-2000000">Up to 2M</option><option value="2000000-5000000">2M – 5M</option><option value="5000000-10000000">5M – 10M</option><option value="10000000-999999999">10M+</option></select>
+      </label>
+      <button class="btn btn--dark finder__go" type="submit">Search <span id="resCount">11</span> projects</button>
+    </form>
+
+    <div class="grid" id="grid"></div>
+    <p class="empty" id="empty" hidden>No exact match. <a href="#consult">Tell us your brief</a> and we'll send off-market options within 24 hours.</p>
+    <div class="more"><button class="btn btn--line" id="showAll">View all projects</button></div>
+  </div>
+</section>
+
+<!-- ============ WHY OFF-PLAN + CALCULATOR ============ -->
+<section class="why" id="calc">
+  <div class="wrap why__grid">
+    <div class="why__copy">
+      <p class="eyebrow">Why buy off-plan</p>
+      <h2 class="h-sec reveal">Pay as it rises. <em>Own it when it's ready.</em></h2>
+      <ul class="why__list">
+        <li class="reveal"><b>01</b><div><h3>Launch-day pricing</h3><p>Early buyers get the first pick of floors, views and layouts at the developer's opening price.</p></div></li>
+        <li class="reveal"><b>02</b><div><h3>Spread the cost</h3><p>Typical plans ask 10–20% upfront, the rest in milestones during construction and at handover.</p></div></li>
+        <li class="reveal"><b>03</b><div><h3>Protected payments</h3><p>Off-plan payments in Dubai go into a RERA-regulated escrow account tied to the project.</p></div></li>
+      </ul>
+    </div>
+
+    <div class="calc reveal" id="calcCard">
+      <div class="calc__head">
+        <p class="eyebrow">Payment plan estimator</p>
+        <select id="cProject" aria-label="Choose a project"></select>
+      </div>
+      <label class="rng"><span>Property price <b id="cPriceOut">AED 1,922,888</b></span>
+        <input type="range" id="cPrice" min="800000" max="30000000" step="10000" value="1922888">
+      </label>
+      <label class="rng"><span>Down payment <b id="cDownOut">10%</b></span>
+        <input type="range" id="cDown" min="10" max="30" step="5" value="10">
+      </label>
+      <div class="calc__plan">
+        <div class="seg" id="sBook"><span></span></div>
+        <div class="seg seg--b" id="sBuild"><span></span></div>
+        <div class="seg seg--c" id="sHand"><span></span></div>
+      </div>
+      <dl class="calc__rows">
+        <div><dt><i class="sw sw--a"></i>On booking</dt><dd id="oBook">–</dd></div>
+        <div><dt><i class="sw sw--b"></i>During construction</dt><dd id="oBuild">–</dd></div>
+        <div><dt><i class="sw sw--c"></i>On handover</dt><dd id="oHand">–</dd></div>
+        <div class="muted"><dt>DLD registration fee (4%)</dt><dd id="oDld">–</dd></div>
+      </dl>
+      <div class="visa" id="visa"><svg><use href="#i-check"/></svg><span id="visaTxt"></span></div>
+      <a class="btn btn--gold btn--block" href="#consult" id="calcCta">Get the exact plan for this project</a>
+      <p class="fine">Example split for illustration. Each developer sets its own plan; ask us for the official one.</p>
+    </div>
+  </div>
+</section>
+
+<!-- ============ AREAS ============ -->
+<section class="areas" id="areas">
+  <div class="wrap">
+    <div class="sec-head">
+      <div>
+        <p class="eyebrow">Where to invest</p>
+        <h2 class="h-sec reveal">Six addresses <em>we know street by street.</em></h2>
+      </div>
+      <p class="sec-sub">Hover (or tap) an area to preview it, then see what's launching there.</p>
+    </div>
+    <ul class="alist" id="alist">
+      <li data-img="img/palm.webp" data-area="Palm Jumeirah"><span class="alist__n">01</span><h3>Palm Jumeirah</h3><p>Branded beachfront living</p><b>from AED 9.4M</b><img src="img/palm.webp" alt="" loading="lazy"></li>
+      <li data-img="img/downtown.webp" data-area="Downtown"><span class="alist__n">02</span><h3>Downtown Dubai</h3><p>Burj views, city energy</p><b>from AED 1.67M</b><img src="img/downtown.webp" alt="" loading="lazy"></li>
+      <li data-img="img/marina-night.webp" data-area="Dubai Marina"><span class="alist__n">03</span><h3>Dubai Marina</h3><p>High-yield waterfront towers</p><b>from AED 2.94M</b><img src="img/marina-night.webp" alt="" loading="lazy"></li>
+      <li data-img="img/hills-vista.webp" data-area="Dubai Hills"><span class="alist__n">04</span><h3>Dubai Hills Estate</h3><p>Golf-course mansions</p><b>from AED 27.6M</b><img src="img/hills-vista.webp" alt="" loading="lazy"></li>
+      <li data-img="img/elie-saab.webp" data-area="Arabian Ranches"><span class="alist__n">05</span><h3>Arabian Ranches III</h3><p>Family villas, designer finishes</p><b>from AED 4.65M</b><img src="img/elie-saab.webp" alt="" loading="lazy"></li>
+      <li data-img="img/creek.webp" data-area="Creek Beach"><span class="alist__n">06</span><h3>Dubai Creek Beach</h3><p>Lagoon beach, entry prices</p><b>from AED 1.45M</b><img src="img/creek.webp" alt="" loading="lazy"></li>
+    </ul>
+  </div>
+  <div class="afloat" id="afloat" aria-hidden="true"><img id="afloatImg" src="img/palm.webp" alt=""></div>
+</section>
+
+<!-- ============ GOLDEN VISA ============ -->
+<section class="visa-band">
+  <div class="visa-band__bg" style="background-image:url(img/burj.webp)"></div>
+  <div class="wrap visa-band__in">
+    <p class="eyebrow eyebrow--gold">UAE Golden Visa</p>
+    <h2 class="h-sec reveal">Buy a home. <em>Get ten years of residency.</em></h2>
+    <p class="lead">Property investments of AED 2 million or more can qualify you and your family for a renewable 10-year UAE Golden Visa. We guide you through the application with your purchase.</p>
+    <a class="btn btn--gold magnetic" href="#consult" data-goal="Golden Visa">Check my eligibility <svg><use href="#i-arrow"/></svg></a>
+  </div>
+</section>
+
+<!-- ============ PROCESS ============ -->
+<section class="process">
+  <div class="wrap">
+    <div class="sec-head sec-head--center">
+      <p class="eyebrow">How we work</p>
+      <h2 class="h-sec reveal">From first call to <em>keys in hand.</em></h2>
+    </div>
+    <div class="steps" id="steps">
+      <svg class="steps__line" viewBox="0 0 1000 20" preserveAspectRatio="none" aria-hidden="true"><path id="stepsPath" d="M0 10 H1000" stroke="url(#goldGrad)" stroke-width="2" fill="none"/></svg>
+      <div class="step reveal"><span>1</span><h3>Discovery call</h3><p>Your budget, timeline and goal: home, rental yield or Golden Visa.</p></div>
+      <div class="step reveal"><span>2</span><h3>Curated shortlist</h3><p>3–5 projects that fit, with floor plans, payment plans and honest pros and cons.</p></div>
+      <div class="step reveal"><span>3</span><h3>Reserve &amp; SPA</h3><p>We secure the unit, check the contract and handle DLD registration.</p></div>
+      <div class="step reveal"><span>4</span><h3>Handover &amp; beyond</h3><p>Snagging, keys, furnishing and leasing, or resale when you're ready.</p></div>
+    </div>
+  </div>
+</section>
+
+<!-- ============ ABOUT + REVIEWS ============ -->
+<section class="about" id="about">
+  <div class="wrap about__grid">
+    <div class="founder reveal">
+      <div class="founder__arch">
+        <img src="img/interior.webp" alt="Luxury Dubai interior" loading="lazy">
+        <div class="founder__seal">
+          <svg viewBox="0 0 120 120"><defs><path id="circ" d="M60 60m-46 0a46 46 0 1192 0a46 46 0 11-92 0"/></defs><text><textPath href="#circ">GOLDEN OAK PROPERTIES · BUSINESS BAY · DUBAI · </textPath></text></svg>
+          <svg class="founder__seal-mark" viewBox="0 0 64 64"><use href="#logo-mark"/></svg>
+        </div>
+      </div>
+    </div>
+    <div class="about__copy">
+      <p class="eyebrow">About Golden Oak</p>
+      <h2 class="h-sec reveal">Integrity first. <em>Then the deal.</em></h2>
+      <p class="lead">Golden Oak Properties is a Dubai-based agency known for integrity and reliability. Our long-standing relationships with Dubai's leading developers give clients early access to launches, better units and clear payment plans.</p>
+      <div class="sig">
+        <div class="sig__avatar">SJ</div>
+        <div><b>Soufie Jnidee</b><small>Owner &amp; Lead Property Advisor</small></div>
+        <a class="btn btn--line btn--sm" href="#consult">Book a call with Soufie</a>
+      </div>
+
+      <div class="reviews">
+        <div class="reviews__head">
+          <div class="g"><b>G</b><span>Google reviews</span></div>
+          <div class="stars"><svg><use href="#i-star"/></svg><svg><use href="#i-star"/></svg><svg><use href="#i-star"/></svg><svg><use href="#i-star"/></svg><svg><use href="#i-star"/></svg></div>
+          <div class="reviews__nav"><button id="revPrev" aria-label="Previous review">←</button><button id="revNext" aria-label="Next review">→</button></div>
+        </div>
+        <div class="reviews__track" id="revTrack">
+          <blockquote class="rev is-on"><p>"Very professional team and the best opportunity I got as an investment. The owner made sure of all documents and got me the best offer and payment plan."</p><cite>Mohammed · Investor</cite></blockquote>
+          <blockquote class="rev"><p>"Our family bought a villa in Arabian Ranches. The owner made the whole process easy and got us the best deal."</p><cite>Sandi · Villa buyer</cite></blockquote>
+          <blockquote class="rev"><p>"So professional and knowledgeable people. Easy process and a great deal we got."</p><cite>Jehad Khalifa · Buyer</cite></blockquote>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ============ SELL ============ -->
+<section class="sell" id="sell">
+  <div class="wrap sell__in">
+    <div class="sell__img reveal"><img src="img/port-de-la-mer.webp" alt="Dubai waterfront" loading="lazy"></div>
+    <div class="sell__copy">
+      <p class="eyebrow eyebrow--gold">For owners</p>
+      <h2 class="h-sec reveal">Selling or renting out? <em>List with Golden Oak.</em></h2>
+      <p class="lead">A free valuation, professional photography and our buyer network from day one, so you get the right buyer or tenant at the right price.</p>
+      <ul class="ticks">
+        <li><svg><use href="#i-check"/></svg>Free valuation within 48 hours</li>
+        <li><svg><use href="#i-check"/></svg>Marketed to our investor database</li>
+        <li><svg><use href="#i-check"/></svg>Off-plan resale and assignment support</li>
+      </ul>
+      <a class="btn btn--gold magnetic" href="#consult" data-goal="Sell">Get a free valuation <svg><use href="#i-arrow"/></svg></a>
+    </div>
+  </div>
+</section>
+
+<!-- ============ CONSULTATION FORM ============ -->
+<section class="consult" id="consult">
+  <div class="wrap consult__grid">
+    <div class="consult__info">
+      <p class="eyebrow">Free consultation</p>
+      <h2 class="h-sec reveal">Tell us what you're building <em>towards.</em></h2>
+      <p class="lead">Three quick questions. An advisor replies within one business day with a shortlist, not a sales pitch.</p>
+      <ul class="contact">
+        <li><svg><use href="#i-phone"/></svg><a href="tel:+97144227328">+971 4 422 7328</a></li>
+        <li><svg><use href="#i-mail"/></svg><a href="mailto:info@goldenoakproperties.com">info@goldenoakproperties.com</a></li>
+        <li><svg><use href="#i-pin"/></svg><a href="https://maps.app.goo.gl/mBS5VxgBb5bS4Nsu8" target="_blank" rel="noopener">Office 1002, The Binary by Omniyat, Business Bay, Dubai</a></li>
+      </ul>
+    </div>
+
+    <form class="wizard" id="wizard" novalidate>
+      <div class="wizard__prog"><span id="wzBar"></span></div>
+      <p class="wizard__step-no"><b id="wzNo">1</b> / 3</p>
+
+      <fieldset class="wz is-on" data-step="1">
+        <legend>What are you looking to do?</legend>
+        <div class="chips" data-name="goal">
+          <button type="button" data-v="Buy off-plan">Buy off-plan</button>
+          <button type="button" data-v="Buy ready">Buy ready</button>
+          <button type="button" data-v="Rent">Rent</button>
+          <button type="button" data-v="Sell">Sell / list</button>
+          <button type="button" data-v="Golden Visa">Golden Visa</button>
+          <button type="button" data-v="Mortgage">Mortgage advice</button>
+        </div>
+      </fieldset>
+
+      <fieldset class="wz" data-step="2">
+        <legend>What's your budget?</legend>
+        <div class="chips" data-name="budget">
+          <button type="button" data-v="Under AED 2M">Under AED 2M</button>
+          <button type="button" data-v="AED 2M – 5M">AED 2M – 5M</button>
+          <button type="button" data-v="AED 5M – 10M">AED 5M – 10M</button>
+          <button type="button" data-v="AED 10M+">AED 10M+</button>
+          <button type="button" data-v="Not sure yet">Not sure yet</button>
+        </div>
+        <label class="fld fld--line"><span>Project or area in mind (optional)</span><input id="wzProject" type="text" placeholder="e.g. Palm Jumeirah, Six Senses"></label>
+      </fieldset>
+
+      <fieldset class="wz" data-step="3">
+        <legend>Where should we send your shortlist?</legend>
+        <div class="row2">
+          <label class="fld fld--line"><span>Full name</span><input id="wzName" type="text" required autocomplete="name"></label>
+          <label class="fld fld--line"><span>Mobile / WhatsApp</span><input id="wzPhone" type="tel" required placeholder="+971" autocomplete="tel"></label>
+        </div>
+        <label class="fld fld--line"><span>Email</span><input id="wzEmail" type="email" required autocomplete="email"></label>
+        <label class="consent"><input type="checkbox" id="wzConsent" required> I agree to be contacted about my enquiry.</label>
+      </fieldset>
+
+      <div class="wz wz--done" data-step="4">
+        <div class="done-mark"><svg><use href="#i-check"/></svg></div>
+        <h3>Thank you, <span id="doneName">friend</span>.</h3>
+        <p>An advisor will be in touch within one business day. Need us sooner? Call <a href="tel:+97144227328">+971 4 422 7328</a>.</p>
+      </div>
+
+      <div class="wizard__nav">
+        <button type="button" class="btn btn--line" id="wzBack" hidden>Back</button>
+        <button type="button" class="btn btn--gold" id="wzNext">Continue <svg><use href="#i-arrow"/></svg></button>
+      </div>
+      <p class="wizard__err" id="wzErr" role="alert"></p>
+    </form>
+  </div>
+</section>
+
+<!-- ============ FAQ ============ -->
+<section class="faq">
+  <div class="wrap faq__grid">
+    <div>
+      <p class="eyebrow">FAQ</p>
+      <h2 class="h-sec reveal">Good questions <em>to ask first.</em></h2>
+    </div>
+    <div class="acc" id="acc">
+      <details><summary>Can I buy property in Dubai as a foreigner?<i></i></summary><p>Yes. Foreign nationals can buy freehold property in designated areas such as Palm Jumeirah, Downtown, Dubai Marina, Dubai Hills and Creek Beach, without needing UAE residency.</p></details>
+      <details><summary>How safe is buying off-plan?<i></i></summary><p>Off-plan projects must be registered with RERA, and buyer payments go into a project escrow account. We also check the developer's track record and the SPA terms with you before you commit.</p></details>
+      <details><summary>What costs are there on top of the price?<i></i></summary><p>The main one is the 4% Dubai Land Department registration fee, plus smaller admin and Oqood registration fees. We give you the full breakdown for each project.</p></details>
+      <details><summary>Can I buy remotely from overseas?<i></i></summary><p>Yes. Reservation, contracts and payments can be done remotely, and we handle inspections and handover for you.</p></details>
+      <details><summary>Do you help with mortgages and the Golden Visa?<i></i></summary><p>Yes. We connect you with mortgage advisors and guide the Golden Visa process for qualifying purchases of AED 2M and above.</p></details>
+    </div>
+  </div>
+</section>
+
+</main>
+
+<!-- ============ FOOTER ============ -->
+<footer class="ftr">
+  <div class="wrap ftr__top">
+    <div class="ftr__brand">
+      <a class="brand brand--light" href="#top"><svg class="brand__mark" viewBox="0 0 64 64"><use href="#logo-mark"/></svg><span class="brand__txt"><b>GOLDEN OAK</b><small>PROPERTIES · DUBAI</small></span></a>
+      <p>Off-plan, luxury and resale property in Dubai, with integrity from launch to handover.</p>
+      <form class="news" id="news"><input type="email" placeholder="Get new launches by email" aria-label="Email" required><button class="btn btn--gold btn--sm">Join</button></form>
+    </div>
+    <div><h4>Explore</h4><a href="#projects">Off-plan projects</a><a href="#areas">Areas</a><a href="#calc">Payment plans</a><a href="#about">About us</a></div>
+    <div><h4>Services</h4><a href="#consult">Buy</a><a href="#consult">Rent</a><a href="#sell">Sell / list</a><a href="#consult">Golden Visa</a></div>
+    <div><h4>Contact</h4><a href="tel:+97144227328">+971 4 422 7328</a><a href="mailto:info@goldenoakproperties.com">info@goldenoakproperties.com</a><a href="https://maps.app.goo.gl/mBS5VxgBb5bS4Nsu8" target="_blank" rel="noopener">Office 1002, The Binary, Business Bay</a>
+      <div class="socials">
+        <a href="https://www.instagram.com/goldenoak.properties/" target="_blank" rel="noopener" aria-label="Instagram">IG</a>
+        <a href="https://www.linkedin.com/company/golden-oak-properties-com" target="_blank" rel="noopener" aria-label="LinkedIn">in</a>
+        <a href="https://www.facebook.com/profile.php?id=100076858968999" target="_blank" rel="noopener" aria-label="Facebook">f</a>
+        <a href="https://www.youtube.com/channel/UCzOvbGYFUixBBrss9fuXbSg" target="_blank" rel="noopener" aria-label="YouTube">▶</a>
+      </div>
+    </div>
+  </div>
+  <div class="ftr__word" aria-hidden="true">GOLDEN OAK</div>
+  <div class="wrap ftr__bot"><span>© 2026 Golden Oak Properties. All rights reserved.</span><span>Homepage design concept · images for illustration</span></div>
+</footer>
+
+<!-- mobile sticky bar -->
+<div class="mbar" id="mbar">
+  <a href="tel:+97144227328"><svg><use href="#i-phone"/></svg>Call</a>
+  <a href="https://wa.me/97144227328" target="_blank" rel="noopener"><svg><use href="#i-wa"/></svg>WhatsApp</a>
+  <a class="mbar__main" href="#consult">Free consultation</a>
+</div>
+
+<!-- floating WhatsApp (desktop) -->
+<a class="wa" href="https://wa.me/97144227328" target="_blank" rel="noopener" aria-label="Chat on WhatsApp"><svg><use href="#i-wa"/></svg><span>Chat with an advisor</span></a>
+
+<!-- project modal -->
+<div class="modal" id="modal" aria-hidden="true">
+  <div class="modal__card" role="dialog" aria-modal="true" aria-labelledby="mTitle">
+    <button class="modal__x" id="mClose" aria-label="Close">×</button>
+    <img id="mImg" src="" alt="">
+    <div class="modal__body">
+      <p class="eyebrow" id="mArea"></p>
+      <h3 id="mTitle"></h3>
+      <p class="modal__price" id="mPrice"></p>
+      <p>Get the brochure, floor plans and the developer's payment plan on WhatsApp or email.</p>
+      <form id="mForm" class="mform">
+        <input type="text" placeholder="Your name" required aria-label="Your name">
+        <input type="tel" placeholder="Mobile / WhatsApp" required aria-label="Mobile">
+        <button class="btn btn--gold btn--block">Send me the brochure</button>
+      </form>
+      <p class="mform__ok" id="mOk" hidden>Thanks! The brochure is on its way.</p>
+    </div>
+  </div>
+</div>
+
+<!-- design notes -->
+<button class="notes-btn" id="notesBtn">Why this layout?</button>
+<aside class="notes" id="notes" aria-hidden="true">
+  <button class="notes__x" id="notesX" aria-label="Close notes">×</button>
+  <h3>Design &amp; CRO notes</h3>
+  <ol>
+    <li><b>Scroll-built hero.</b> The empty plot turns into a finished tower and villa as you scroll, which is how off-plan buying works. The HUD shows the payment plan progressing with it, so the story also explains the product.</li>
+    <li><b>Two CTAs at the start and end of the build.</b> "Explore projects" for browsers, "Free consultation" for ready buyers. A "Skip the build" link keeps returning visitors fast.</li>
+    <li><b>Developer marquee + stats</b> right after the hero for instant trust.</li>
+    <li><b>Search + filters + AED/USD/EUR switch</b> for overseas buyers. Cards open a brochure request (lead capture) instead of a dead-end page.</li>
+    <li><b>Payment plan estimator</b> answers "how much do I need now?" and flags Golden Visa eligibility at AED 2M+.</li>
+    <li><b>Areas list</b> with hover preview supports SEO landing pages per community.</li>
+    <li><b>Real Google reviews + owner presence</b> build trust for a relationship-led business.</li>
+    <li><b>3-step consultation wizard</b> qualifies leads (goal, budget) before asking for contact details, which raises completion.</li>
+    <li><b>Mobile sticky bar</b> (Call, WhatsApp, Consultation) because most Dubai property leads come from mobile and WhatsApp.</li>
+  </ol>
+</aside>
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/gsap.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/ScrollTrigger.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/lenis@1.1.13/dist/lenis.min.js"></script>
+<script src="script.js"></script>
+</body>
+</html>

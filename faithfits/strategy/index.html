@@ -1,0 +1,138 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="robots" content="noindex, nofollow">
+  <title>FaithFits Home Page Rationale</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Instrument+Sans:wght@400;500;600;700&family=Instrument+Serif:ital@0;1&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="../style.css">
+  <style>
+    .doc { max-width: 920px; margin: 0 auto; padding: 56px 16px 96px; }
+    .doc__top { display: flex; justify-content: space-between; align-items: center; gap: 12px; margin-bottom: 48px; flex-wrap: wrap; }
+    .doc h1 { font-size: clamp(2.4rem, 6vw, 4rem); line-height: 1; letter-spacing: -.035em; font-weight: 500; margin: 0 0 18px; }
+    .doc .lead { font-size: 1.15rem; color: var(--ink-2); max-width: 40em; margin: 0 0 40px; }
+    .doc h2 { font-size: 1.7rem; letter-spacing: -.02em; font-weight: 500; margin: 64px 0 18px; }
+    .kpis { display: grid; grid-template-columns: repeat(3, 1fr); gap: 12px; }
+    .kpi { background: var(--paper); border: 1px solid var(--line); border-radius: 16px; padding: 20px; }
+    .kpi strong { display: block; font-size: 1.05rem; margin-bottom: 4px; }
+    .kpi span { color: var(--ink-2); font-size: .92rem; }
+    .issues { display: grid; gap: 10px; padding: 0; list-style: none; margin: 0; }
+    .issues li { display: grid; grid-template-columns: 1fr 1fr; gap: 0; border: 1px solid var(--line); border-radius: 14px; overflow: hidden; background: var(--paper); font-size: .94rem; }
+    .issues li > div { padding: 14px 16px; }
+    .issues li > div:first-child { border-right: 1px solid var(--line); color: var(--ink-2); }
+    .issues b { display: block; font-size: .7rem; letter-spacing: .14em; text-transform: uppercase; margin-bottom: 4px; }
+    .issues .was b { color: #a23b3b; }
+    .issues .now b { color: var(--ok); }
+    .flow { counter-reset: s; list-style: none; padding: 0; margin: 0; display: grid; gap: 12px; }
+    .flow li { counter-increment: s; position: relative; padding: 18px 20px 18px 66px; background: var(--paper); border: 1px solid var(--line); border-radius: 14px; }
+    .flow li::before { content: counter(s); position: absolute; left: 18px; top: 18px; width: 32px; height: 32px; border-radius: 50%; background: var(--gold); color: #fff; display: grid; place-items: center; font-weight: 700; font-size: .85rem; }
+    .flow strong { display: block; margin-bottom: 2px; }
+    .flow span { color: var(--ink-2); font-size: .94rem; }
+    .next { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; }
+    .next div { background: var(--night); color: #d9d4ca; border-radius: 16px; padding: 22px; font-size: .93rem; }
+    .next strong { color: #fff; display: block; font-size: 1.05rem; margin-bottom: 6px; }
+    .placeholder { background: #fffbe9; border: 1.5px solid var(--gold); border-radius: 14px; padding: 18px 20px; font-size: .93rem; }
+    .placeholder ul { margin: 8px 0 0; padding-left: 18px; }
+    @media (max-width: 700px) { .kpis, .next { grid-template-columns: 1fr; } .issues li { grid-template-columns: 1fr; } .issues li > div:first-child { border-right: 0; border-bottom: 1px solid var(--line); } }
+  </style>
+</head>
+<body>
+  <main class="doc">
+    <div class="doc__top">
+      <a class="logo" href="../"><span class="logo__mark">FF</span><span class="logo__word">FAITHFITS</span></a>
+      <span style="display:flex;gap:8px;flex-wrap:wrap"><a class="btn btn--line" href="../product/?p=w-maroon">View the PDP</a><a class="btn btn--dark" href="../">View the home page →</a></span>
+    </div>
+
+    <p class="eyebrow">Home page + product page concept · Design rationale</p>
+    <h1>Built to turn visitors into <em>customers.</em></h1>
+    <p class="lead">FaithFits already has the hardest things to copy: beautiful product photography, a meaningful mission and a verse on every sleeve. The new home page keeps all of it and puts it in the order a shopper needs to say yes. Every section below has one job.</p>
+
+    <div class="kpis">
+      <div class="kpi"><strong>Faster to product</strong><span>Women / Men split in the hero and a Quick Add on every card: from landing to cart in 3 taps.</span></div>
+      <div class="kpi"><strong>Stronger reasons to buy</strong><span>Fabric, fit, reviews and a comparison answer “why $120?” before the shopper has to ask.</span></div>
+      <div class="kpi"><strong>The brand's unfair advantage</strong><span>Each color is named for a promise. We made choosing a color feel like choosing a verse.</span></div>
+    </div>
+
+    <h2>What we found on the current home page</h2>
+    <ul class="issues">
+      <li><div class="was"><b>Today</b>Hero says “Wear your faith” with one generic “Shop collection” button.</div><div class="now"><b>New</b>A clear promise (who it's for and why it's different) plus separate Shop Women / Shop Men buttons.</div></li>
+      <li><div class="was"><b>Today</b>Every product reads “Sale price $120”, but nothing is on sale, which quietly hurts trust.</div><div class="now"><b>New</b>Clean “$120 · top + pants” pricing that sells the set value instead.</div></li>
+      <li><div class="was"><b>Today</b>“Choose options” sends shoppers off to another page to pick sizes.</div><div class="now"><b>New</b>Quick Add with separate top and pants sizes, right on the home page, then a slide-out cart.</div></li>
+      <li><div class="was"><b>Today</b>No reviews, ratings or customer voices anywhere on the page.</div><div class="now"><b>New</b>Rating in the hero, on every card, and a reviews section showing each reviewer's role (RN, CNA, Paramedic).</div></li>
+      <li><div class="was"><b>Today</b>A countdown sitting at 00:00:00 and a blank “Wear your faith” banner.</div><div class="now"><b>New</b>Removed. Empty or broken elements make a store look abandoned.</div></li>
+      <li><div class="was"><b>Today</b>The scripture sleeve, the strongest differentiator, is barely shown.</div><div class="now"><b>New</b>A close-up “Look closer” section with tappable hotspots, plus the verse on every product card.</div></li>
+      <li><div class="was"><b>Today</b>Story and commitments come before shoppers know if the scrubs are good.</div><div class="now"><b>New</b>Product proof first, then the mission, so the story turns a purchase into belonging.</div></li>
+    </ul>
+
+    <h2>Section order, and why</h2>
+    <ol class="flow">
+      <li><strong>Announcement bar</strong><span>Free US shipping and 15% off first order are seen before anything else, removing the two most common reasons to hesitate.</span></li>
+      <li><strong>Hero</strong><span>Promise, Women / Men buttons, star rating and free shipping in one screen. Real FaithFits photography with color tags introduces the product names.</span></li>
+      <li><strong>Trust strip</strong><span>Shipping, stretch, anti-microbial and scripture: four buying questions answered in four seconds.</span></li>
+      <li><strong>Find your fit (Women · Men · Wide Leg)</strong><span>A second, visual path into the catalogue. Wide Leg is flagged NEW to push the newest collection.</span></li>
+      <li><strong>Best sellers with Quick Add</strong><span>Tabs by category, hover to see a second photo, color dots, the verse reference and one-tap sizing. Shorter path = more orders.</span></li>
+      <li><strong>Find your calling color</strong><span>The signature, interactive moment: tap a color, see the verse and the photo change, add to cart from right there. No other scrub brand can do this.</span></li>
+      <li><strong>Look closer</strong><span>Online shoppers can't touch fabric. Close-up photography and specs (72/21/7 blend, 4-way stretch, anti-microbial, pockets) replace the fitting room.</span></li>
+      <li><strong>Reviews by role</strong><span>A nurse trusts a nurse. Showing the reviewer's job makes social proof far more persuasive.</span></li>
+      <li><strong>Comparison table</strong><span>Answers “why not cheaper scrubs?” without naming competitors.</span></li>
+      <li><strong>Our story + prayer</strong><span>The FaithFits prayer runs as a moving line and the mission follows, once the shopper already trusts the product.</span></li>
+      <li><strong>Fit finder + size chart</strong><span>“Will it fit?” is the biggest reason apparel shoppers leave. Two quick questions give a size.</span></li>
+      <li><strong>FAQ</strong><span>FaithFits' own six questions, answered on the page.</span></li>
+      <li><strong>Email capture (15% off)</strong><span>Visitors not ready today join the list, so Klaviyo flows can bring them back.</span></li>
+      <li><strong>Final call to action</strong><span>“Your shift. His strength.” with the same Women / Men buttons, so no one has to scroll back up.</span></li>
+    </ol>
+
+    <h2>Always-on conversion helpers</h2>
+    <ol class="flow">
+      <li><strong>Sticky header with live cart count</strong><span>Navigation and cart are always one tap away.</span></li>
+      <li><strong>Slide-out cart with “Complete your rotation”</strong><span>Suggests a second color, since healthcare workers need several sets a week. Raises average order value.</span></li>
+      <li><strong>Sticky Shop bar on mobile</strong><span>Appears after the hero so the next step is always visible on phones, where most traffic is.</span></li>
+      <li><strong>Welcome offer, shown politely</strong><span>Only after 30 seconds or when leaving, once per visit, never on arrival.</span></li>
+      <li><strong>Color search</strong><span>Shoppers usually know the color their hospital requires. Typing “navy” finds it instantly.</span></li>
+    </ol>
+
+    <h2 id="pdp">Product page (PDP), section by section</h2>
+    <p class="lead" style="margin-bottom:20px">The product page is where the sale is won or lost. <a class="link-btn--u" href="../product/?p=w-maroon">Open the PDP concept →</a> It works for every color and style (Women, Men, Wide Leg) from one template.</p>
+    <ol class="flow">
+      <li><strong>Gallery with 5 photos</strong><span>Full look, lifestyle, sleeve verse close-up and the woven care label. Thumbnails on desktop, swipe + counter on mobile, tap to zoom.</span></li>
+      <li><strong>Rating under the title</strong><span>Social proof before the price, clickable to the reviews.</span></li>
+      <li><strong>Value-framed price</strong><span>“$120 · top + pants set” with pay-in-4 via Shop Pay ($30). The misleading “Sale price” label is gone.</span></li>
+      <li><strong>The promise behind the color</strong><span>The verse card sits right above the size choice, where the emotional reason to buy can tip the decision.</span></li>
+      <li><strong>Color swatches + style switch</strong><span>Jump to any color, or between Women jogger, Men jogger and Wide leg, without going back to a collection page.</span></li>
+      <li><strong>Separate top and pants sizes</strong><span>Size chart one tap away and a “runs true to size” note. Pants size is pre-selected to match the top. If someone taps Add to cart without sizes, the size rows shake and highlight instead of showing an error page.</span></li>
+      <li><strong>Add to cart + Shop Pay express</strong><span>Shop Pay buyers check out in one tap, which is the fastest route on mobile.</span></li>
+      <li><strong>Delivery date and guarantees</strong><span>A concrete “Arrives Dec 1 – Dec 4” converts better than “ships soon”, plus free shipping, size exchanges and secure checkout right under the button.</span></li>
+      <li><strong>Complete your rotation</strong><span>Add a second or third color in the same sizes with one tap. Raises average order value without discounting.</span></li>
+      <li><strong>Accordions</strong><span>Details, fabric &amp; care, fit and shipping are all there for detail-seekers but don't push the buy button down.</span></li>
+      <li><strong>Sticky add-to-cart bar</strong><span>Once the main button scrolls away, a bar with the product and button stays at the bottom of the screen.</span></li>
+      <li><strong>“The meaning behind the color” band</strong><span>The brand story told through this product: the reason to choose FaithFits over any other scrubs, and a great gifting angle.</span></li>
+      <li><strong>Reviews built for apparel</strong><span>Score, star breakdown, fit meter, filters by job role, and every review shows the sizes bought, so shoppers find someone like them and copy their size.</span></li>
+      <li><strong>Build your rotation + recently viewed</strong><span>If this color isn't right, the next click is another FaithFits product, not the back button.</span></li>
+      <li><strong>Shared cart</strong><span>The cart follows the shopper between the home page and product pages.</span></li>
+    </ol>
+
+    <h2>Next steps we'd propose</h2>
+    <div class="next">
+      <div><strong>Collection pages</strong>Same system for Women, Men, Wide Leg and Shop by Color: filters by color and size, verse on every card, Quick Add.</div>
+      <div><strong>Klaviyo flows</strong>Welcome series (15% code + brand story), browse and cart abandonment, post-purchase care tips, review request and a 60-day replenishment / new color flow.</div>
+      <div><strong>Shopify clean-up</strong>Remove duplicate product listings, fix the “Sale price” label, tidy collections (Women, Men, Wide Leg, by color) and set up reviews.</div>
+      <div><strong>Measure and test</strong>Track add-to-cart and conversion rate before and after launch, then A/B test the hero headline and offer.</div>
+    </div>
+
+    <h2>Placeholders to confirm with FaithFits</h2>
+    <div class="placeholder">
+      All photos, product names, prices, fabric details, the prayer and FAQ questions come from faithfitswear.com. These items are placeholders for the concept:
+      <ul>
+        <li>Star rating (4.9), review count (128), star breakdown and all reviews: samples to show the layout. Real reviews would come from Judge.me, Okendo or similar.</li>
+        <li>Delivery dates (3–6 business days), Shop Pay installments and the exchange wording need confirming against the store's real settings.</li>
+        <li>The real sleeve and care-label verses differ from our suggested pairings (e.g. the Maroon sleeve reads Isaiah 41:10); we'd align the copy with what is actually stitched.</li>
+        <li>Verse pairings per color (e.g. Chosen → 1 Peter 2:9) are our suggestion; we'll match whatever is actually embroidered.</li>
+        <li>Size chart measurements, the exchange wording and the “FAITH15” code.</li>
+      </ul>
+    </div>
+  </main>
+</body>
+</html>

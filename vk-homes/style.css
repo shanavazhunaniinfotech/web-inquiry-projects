@@ -126,6 +126,15 @@ body.menu-open .header { background: var(--bg); }
   .hero__text { top: auto; bottom: 14%; transform: none; }
   .footer__base { flex-direction: column; }
 }
+/* Phones (portrait): show the whole photo full-width under the menu, text below — no tall crop */
+@media (max-width: 768px) and (orientation: portrait) {
+  .hero { height: auto; min-height: 0; padding-top: calc(var(--header-h) + 62.5vw); }
+  .slide { top: var(--header-h); bottom: auto; height: 62.5vw; }
+  .slide img { object-position: center; }
+  .hero::after { top: var(--header-h); bottom: auto; height: 62.5vw; background: linear-gradient(0deg, rgba(14, 15, 13, .55), rgba(14, 15, 13, 0) 30%); }
+  .hero__text { position: relative; top: auto; bottom: auto; transform: none; padding-top: 28px; padding-bottom: 8px; }
+  .header:not(.is-solid) { background: var(--bg); }
+}
 @media (prefers-reduced-motion: reduce) {
   html { scroll-behavior: auto; }
   .slide img, .slide.is-active img { transform: none; transition: none; }
