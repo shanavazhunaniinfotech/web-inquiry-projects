@@ -1,0 +1,182 @@
+/* ==========================================================================
+   Home District — Version C "Quiet luxury"
+   Built from Version B after the client call: fewer buttons, more space for
+   images, one clear action per section, storytelling order.
+   Layers on ../b/b.css
+   ========================================================================== */
+.vc .mbar { display: none !important; }
+.clabel { font-size: 12px; letter-spacing: .16em; text-transform: uppercase; color: var(--grey); font-weight: 500; margin-bottom: 18px; }
+.clabel--light { color: rgba(255,255,255,.7); }
+.chead { margin-bottom: clamp(32px, 3.6vw, 56px); }
+.chead--row { display: flex; justify-content: space-between; align-items: flex-end; gap: 24px; flex-wrap: wrap; }
+.chead__aside { color: var(--text-2); }
+.vc .btitle { font-size: clamp(34px, 4.2vw, 64px); }
+
+/* Header: logo, four links, search and cart. Nothing else. */
+.vc .bh__inner { background: rgba(255,255,255,.9); }
+.vc .bh__nav { gap: 12px; }
+.vc .bh__nav a { font-size: 15px; }
+.vc .announce { height: 32px; font-size: 12px; letter-spacing: .04em; }
+.vc .announce p { line-height: 32px; }
+
+/* Hero: headline + one action, sitting low */
+.chero .bhero__shade { background: linear-gradient(90deg, rgba(0,0,0,.42) 0%, rgba(0,0,0,0) 65%), linear-gradient(180deg, rgba(0,0,0,.2) 0%, rgba(0,0,0,0) 35%, rgba(0,0,0,.1) 55%, rgba(0,0,0,.66) 100%); }
+.chero__content { position: absolute; left: 0; right: 0; bottom: 0; z-index: 3; padding-bottom: clamp(28px, 3.4vw, 52px); }
+.chero__title { font-size: clamp(48px, 7.2vw, 124px); line-height: .94; letter-spacing: -0.06em; font-weight: 500; }
+.chero__title .g { color: rgba(255,255,255,.62); }
+.chero__bottom { display: flex; justify-content: space-between; align-items: flex-end; gap: 20px; flex-wrap: wrap; margin-top: clamp(24px, 3vw, 40px); }
+.chero__lede { color: rgba(255,255,255,.85); font-size: clamp(15px, 1.2vw, 18px); max-width: 34ch; }
+.chero__cta { min-height: 58px; padding: 0 30px; }
+.chero__bars { display: flex; gap: 8px; margin-top: clamp(24px, 3vw, 36px); }
+.chero__bars button { width: 48px; height: 24px; padding: 0; background: none; border: 0; display: grid; align-items: center; }
+.chero__bars i { display: block; height: 2px; background: rgba(255,255,255,.3); border-radius: 2px; position: relative; overflow: hidden; }
+.chero__bars i::after { content: ""; position: absolute; inset: 0; background: #fff; transform: scaleX(0); transform-origin: left; }
+.chero__bars button.is-done i::after { transform: scaleX(1); }
+.chero__bars button[aria-selected="true"] i::after { animation: barfill var(--dur, 7s) linear forwards; }
+
+/* Rooms: names only */
+.vc .bento__meta strong { font-size: clamp(20px, 1.6vw, 26px); }
+.vc .bento__tile--xl .bento__meta strong { font-size: clamp(28px, 2.6vw, 40px); }
+
+/* Most loved: quiet product cards (image, name, colour, price) */
+.ctabs { gap: 4px; }
+.vc .ctabs button { border: 0; background: none; border-radius: 0; padding: 0 10px; min-height: 40px; color: var(--grey); position: relative; }
+.vc .ctabs button::after { content: ""; position: absolute; left: 10px; right: 10px; bottom: 6px; height: 1px; background: var(--black); transform: scaleX(0); transition: transform .4s var(--ease); }
+.vc .ctabs button[aria-selected="true"] { background: none; color: var(--black); }
+.vc .ctabs button[aria-selected="true"]::after { transform: scaleX(1); }
+.cgrid.edit__grid { grid-template-columns: repeat(4, minmax(0, 1fr)); gap: 44px 20px; }
+.mcard .pcard__media { display: block; aspect-ratio: 4 / 5; border-radius: var(--rm); }
+.mcard .pcard__badge { top: 14px; left: 14px; background: rgba(255,255,255,.92); color: var(--black); }
+.mcard__info { display: flex; justify-content: space-between; gap: 12px; padding-top: 16px; }
+.mcard__info .pcard__name { font-size: 16px; font-weight: 500; letter-spacing: -0.01em; }
+.mcard__sub { font-size: 13px; color: var(--grey); }
+.mcard__right { display: grid; justify-items: end; gap: 8px; }
+.mcard__right .pcard__price { font-size: 15px; font-weight: 500; }
+.mcard__dots { display: flex; gap: 6px; }
+.mcard__dots button { position: relative; width: 14px; height: 14px; border-radius: 50%; padding: 0; border: 0; background: var(--c); box-shadow: inset 0 0 0 1px rgba(0,0,0,.12); transition: box-shadow .3s; }
+.mcard__dots button::after { content: ""; position: absolute; inset: -15px; }
+.mcard__dots button[aria-pressed="true"] { box-shadow: 0 0 0 2px #fff, 0 0 0 3px var(--black); }
+
+/* Promise: one calm line, after the products */
+.cpromise { padding-block: clamp(8px, 1vw, 16px) var(--sec); }
+.cpromise__list { display: grid; grid-template-columns: repeat(4, 1fr); border-block: 1px solid var(--mist); }
+.cpromise__list li { display: grid; justify-items: center; text-align: center; gap: 4px; padding: clamp(28px, 3vw, 44px) 16px; }
+.cpromise__list li + li { border-left: 1px solid var(--mist); }
+.cpromise__list svg { width: 30px; height: 30px; margin-bottom: 10px; }
+.cpromise__list strong { font-size: 15px; font-weight: 500; }
+.cpromise__list span { font-size: 13px; color: var(--text-2); }
+
+/* Why it costs less: image + one comparison */
+.cvalue__grid { display: grid; grid-template-columns: 1.05fr 1fr; gap: clamp(32px, 6vw, 112px); align-items: center; }
+.cvalue__img { border-radius: var(--rl); overflow: hidden; aspect-ratio: 5 / 4; background: var(--cloud); }
+.cvalue__img img { width: 100%; height: 100%; object-fit: cover; object-position: 50% 65%; }
+.cvalue__text { color: var(--text-2); font-size: clamp(16px, 1.2vw, 18px); max-width: 42ch; margin-top: 20px; }
+.cvalue__cmp { display: grid; grid-template-columns: 1fr 1fr; margin: 32px 0 12px; border-top: 1px solid var(--black); }
+.cvalue__cmp div { padding-top: 18px; display: grid; gap: 6px; }
+.cvalue__cmp span { font-size: 13px; color: var(--grey); letter-spacing: .04em; }
+.cvalue__cmp s { font-size: clamp(26px, 2.4vw, 36px); color: var(--soft); letter-spacing: -0.04em; text-decoration-thickness: 2px; }
+.cvalue__cmp strong { font-size: clamp(26px, 2.4vw, 36px); font-weight: 500; letter-spacing: -0.04em; }
+
+/* Shop the room: quieter panel */
+.vc .blook__panel { background: #fff; border: 1px solid var(--mist); }
+
+/* Considered details: words only, the sofa does the talking */
+.cfeats { gap: 0; padding-block: 0; }
+.cfeats .bfeat { grid-template-columns: 1fr; padding: 22px 0; border: 0; border-top: 1px solid var(--mist); border-radius: 0; background: none; box-shadow: none !important; transform: none !important; opacity: .4; }
+.cfeats .bfeat.is-on { opacity: 1; }
+.cfeats .bfeat h3 { font-size: clamp(20px, 1.8vw, 26px); }
+.cfeats .bfeat p { font-size: 15px; }
+.cfeats__link { justify-self: start; margin-top: 18px; }
+
+/* Tailor-made: same studio, fewer controls */
+.ctailor .config__btns .btn { flex: 1; }
+.ctailor .config .link-btn { margin-top: -8px; }
+
+/* Reviews: one quote at a time */
+.cquote { grid-template-columns: .9fr 1.1fr; gap: clamp(32px, 6vw, 112px); }
+.cquote .quote__media { border-radius: var(--rl); aspect-ratio: 4 / 5; }
+.cquote__score { display: flex; align-items: center; gap: 10px; font-size: 14px; color: var(--text-2); margin-bottom: 28px; }
+.cquote .quote__text { font-family: var(--sans); font-weight: 500; font-size: clamp(24px, 2.4vw, 38px); line-height: 1.2; letter-spacing: -0.035em; min-height: 4.8em; }
+.cquote .quote__who { border-top: 0; padding-top: 0; margin-top: 24px; }
+
+/* Story */
+.cstory .bstory__text { max-width: 24ch; }
+
+/* Home visit: a calm invitation, the form opens in a side panel */
+.cvisit__card { position: relative; border-radius: 28px; overflow: hidden; min-height: clamp(460px, 46vw, 640px); display: flex; align-items: flex-end; color: #fff; background: #2a2724; }
+.cvisit__card > img { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; object-position: 50% 62%; }
+.cvisit__card::after { content: ""; position: absolute; inset: 0; background: linear-gradient(90deg, rgba(10,10,10,.72), rgba(10,10,10,.15) 75%); }
+.cvisit__card .btitle--light .g { color: rgba(255,255,255,.7); }
+.cvisit__body { position: relative; z-index: 1; padding: clamp(28px, 5vw, 72px); max-width: 640px; }
+.cvisit__text { color: rgba(255,255,255,.85); margin: 18px 0 28px; max-width: 40ch; }
+.cvisit-drawer { width: min(520px, 100vw); }
+.cvisit-drawer__body { padding: 20px; display: grid; gap: 16px; }
+.cstylist { color: var(--black); background: var(--cloud); border-color: var(--mist); border-radius: var(--rm); width: 100%; backdrop-filter: none; -webkit-backdrop-filter: none; }
+.cstylist div span { color: var(--text-2); }
+.vc .cvisit-drawer .bsteps { border: 0; padding: 0; box-shadow: none; }
+
+/* FAQ */
+.cfaq__grid { display: grid; grid-template-columns: .8fr 1.2fr; gap: clamp(32px, 6vw, 112px); align-items: start; }
+.cfaq__list { border-top: 1px solid var(--black); }
+.cfaq__list details { border-bottom: 1px solid var(--mist); }
+.cfaq__list summary { list-style: none; display: flex; justify-content: space-between; align-items: center; gap: 16px; min-height: 76px; font-size: 18px; font-weight: 500; letter-spacing: -0.015em; cursor: pointer; }
+.cfaq__list summary::-webkit-details-marker { display: none; }
+.cfaq__list summary i { position: relative; width: 18px; height: 18px; flex: none; }
+.cfaq__list summary i::before, .cfaq__list summary i::after { content: ""; position: absolute; left: 0; right: 0; top: 50%; height: 1.4px; background: var(--black); transition: transform .45s var(--ease); }
+.cfaq__list summary i::after { transform: rotate(90deg); }
+.cfaq__list details[open] summary i::after { transform: none; }
+.cfaq__list p { color: var(--text-2); padding-bottom: 24px; max-width: 56ch; }
+
+/* Launch: one line, one field */
+.claunch__inner { text-align: center; display: grid; justify-items: center; gap: 14px; }
+.claunch__inner .btitle { max-width: none; }
+.claunch__form { display: flex; gap: 8px; width: min(520px, 100%); margin-top: 12px; }
+.vc .claunch__form input { flex: 1; min-height: 54px; border: 1px solid #D6D6D6; border-radius: var(--rs); padding: 0 16px; font-size: 16px; color: var(--black); background: #fff; }
+.vc .claunch__form input:focus { outline: none; border-color: var(--black); }
+.vc .launch__msg { color: var(--text-2); min-height: 1.4em; }
+
+/* Footer: simpler */
+.cfooter .footer__grid { grid-template-columns: 1.6fr 1fr 1fr 1.2fr; }
+.cfooter { border-top: 1px solid var(--mist); }
+
+/* Floating helpers: one small WhatsApp circle, a discreet notes pill */
+.cwa.wa-float { width: 52px; height: 52px; padding: 0; justify-content: center; }
+.cwa.wa-float svg { width: 24px; height: 24px; }
+.cnotes.notes-toggle { left: 20px; right: auto; bottom: calc(20px + env(safe-area-inset-bottom)); min-height: 40px; padding: 0 14px; font-size: 12px; font-weight: 500; border-color: var(--mist); box-shadow: none; }
+.cnotes.notes-toggle::after { content: none !important; }
+.cnotes .notes-toggle__txt { display: inline !important; }
+.vc .notes-panel { left: 20px; right: auto; bottom: 72px; }
+
+@media (max-width: 1100px) {
+  .cgrid.edit__grid { grid-template-columns: repeat(3, minmax(0, 1fr)); }
+  .cvalue__grid, .cquote, .cfaq__grid { grid-template-columns: 1fr; }
+}
+@media (max-width: 760px) {
+  .chero__title { font-size: clamp(42px, 11.5vw, 60px); }
+  .chero__cta { width: 100%; }
+  .cgrid.edit__grid { grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 32px 12px; }
+  .mcard__info { flex-direction: column; gap: 6px; }
+  .mcard__right { justify-items: start; grid-auto-flow: column; align-items: center; gap: 10px; }
+  .vc .ctabs { flex-wrap: nowrap; overflow-x: auto; scrollbar-width: none; margin-inline: calc(var(--g) * -1); padding-inline: calc(var(--g) - 10px); width: calc(100% + var(--g) * 2); }
+  .vc .ctabs button { flex: none; }
+  .cpromise__list { grid-template-columns: 1fr 1fr; }
+  .cpromise__list li:nth-child(3) { border-left: 0; }
+  .cpromise__list li:nth-child(n+3) { border-top: 1px solid var(--mist); }
+  .cvalue__cmp s, .cvalue__cmp strong { font-size: 24px; }
+  .cquote .quote__media { aspect-ratio: 16 / 11; }
+  .cquote .quote__text { min-height: 6em; }
+  .cvisit__card { border-radius: 20px; min-height: 520px; }
+  .cvisit__card::after { background: linear-gradient(180deg, rgba(10,10,10,.05) 20%, rgba(10,10,10,.7)); }
+  .claunch__form { flex-direction: column; }
+  .cfooter .footer__grid { grid-template-columns: 1fr 1fr; }
+  .cfooter .footer__intro { grid-column: 1 / -1; }
+  .vc .footer__bottom { padding-bottom: calc(24px + env(safe-area-inset-bottom)); }
+  .vc .toast { bottom: calc(24px + env(safe-area-inset-bottom)); }
+  .vc .notes-panel { left: 12px; right: 12px; bottom: 70px; }
+}
+/* Design notes are hidden for the client view; add ?notes=1 to the link to show them */
+.vc .cnotes.notes-toggle { display: none; }
+.vc.notes-url .cnotes.notes-toggle { display: flex; }
+@media (max-width: 760px) {
+  .chero .bhero__slide[data-slide="0"] img { object-position: 52% 78%; }
+}

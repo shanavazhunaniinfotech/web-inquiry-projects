@@ -53,7 +53,7 @@
   const params = new URLSearchParams(location.search);
   const id = P[params.get('id')] ? params.get('id') : 'coast-sofa';
   const p = P[id];
-  const st = { v: 0, s: p.sizes ? Math.min(1, p.sizes.length - 1) : -1, l: 0, qty: 1 };
+  const st = { v: Math.max(0, Math.min(+params.get('v') || 0, p.variants.length - 1)), s: p.sizes ? Math.min(1, p.sizes.length - 1) : -1, l: 0, qty: 1 };
   const price = () => p.variants[st.v].price + (p.sizes ? p.sizes[st.s].add : 0) + (p.legs ? p.legs[st.l].add : 0);
   const sizeLabel = () => (p.sizes ? p.sizes[st.s].label : '') + (p.legs ? ' · ' + p.legs[st.l].label + ' legs' : '');
   const W = () => p.sizes ? p.sizes[st.s].w : p.dims.w;
@@ -146,7 +146,7 @@
   if (p.badge) { const b = $('[data-p-badge]'); b.textContent = p.badge; b.hidden = false; }
   $('[data-wa-product]').href = `https://wa.me/971500000000?text=${encodeURIComponent('Hi Home District, I have a question about the ' + p.name)}`;
 
-  $('[data-p-variants]').innerHTML = p.variants.map((v, i) => `<button type="button" style="--c:${v.c}" aria-label="${v.label}" aria-pressed="${i === 0}" data-pv="${i}"><span class="tip">${v.label}</span></button>`).join('');
+  $('[data-p-variants]').innerHTML = p.variants.map((v, i) => `<button type="button" style="--c:${v.c}" aria-label="${v.label}" aria-pressed="${i === st.v}" data-pv="${i}"><span class="tip">${v.label}</span></button>`).join('');
   if (p.sizes) { $('[data-opt-size]').hidden = false; $('[data-p-sizes]').innerHTML = p.sizes.map((s, i) => `<button type="button" aria-pressed="${i === st.s}" data-ps="${i}">${s.label}<small>${s.add > 0 ? '+' + aed(s.add) : s.add < 0 ? '−' + aed(-s.add) : s.note}</small></button>`).join(''); }
   if (p.legs) { $('[data-opt-legs]').hidden = false; $('[data-p-legs]').innerHTML = p.legs.map((l, i) => `<button type="button" aria-pressed="${i === 0}" data-pl="${i}">${l.label}<small>${l.add ? '+' + aed(l.add) : 'Included'}</small></button>`).join(''); }
   if (p.variants.length === 1) $('[data-opt-variant] .opt__head > span').textContent = 'Finish';
@@ -342,7 +342,7 @@
     ['How firm is the seat?', 'Medium. A high-resilience foam core keeps its shape; the feather wrap gives a soft, relaxed top. Most owners say "just right".'],
     ['Can I get a different size or fabric?', 'Yes. Every sofa can be tailor-made in your width and any of our 24 fabrics, in 6–8 weeks.']
   ];
-  $('[data-faq]').innerHTML = FAQ.map(([q, a], i) => `<details ${i ? '' : 'open'}><summary>${q}<i></i></summary><p>${a}</p></details>`).join('');
+  if ($('[data-faq]')) $('[data-faq]').innerHTML = FAQ.map(([q, a], i) => `<details ${i ? '' : 'open'}><summary>${q}<i></i></summary><p>${a}</p></details>`).join('');
 
   /* ======================= RELATED ======================= */
   const REL = Object.keys(P).filter(x => x !== id).sort((a, b) => (P[b].cat === p.cat) - (P[a].cat === p.cat)).slice(0, 8);

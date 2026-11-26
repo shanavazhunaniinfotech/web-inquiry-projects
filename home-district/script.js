@@ -224,7 +224,25 @@
 
   /* ======================= THE EDIT (product grid) ======================= */
   const grid = $('[data-products]');
+  const MINIMAL = document.documentElement.dataset.card === 'minimal';
+  function cardMinimal(id) {
+    const p = P[id], v = p.variants[0];
+    const dots = p.variants.length > 1 ? `<span class="mcard__dots">${p.variants.map((x, i) => `<button type="button" style="--c:${x.c}" aria-label="${x.label}" aria-pressed="${i === 0}" data-sw="${i}"></button>`).join('')}</span>` : '';
+    return `<article class="pcard mcard" data-id="${id}" data-cat="${p.cat}">
+      <a class="pcard__media" href="${PDP}?id=${id}" data-cursor-text="View">
+        <img src="${v.img}" alt="${p.name} in ${v.label}" loading="lazy" width="900" height="900">
+        ${p.alt ? `<img class="alt" src="${p.alt}" alt="" loading="lazy">` : ''}
+        ${p.badge ? `<span class="pcard__badge">${p.badge}</span>` : ''}
+      </a>
+      <div class="mcard__info">
+        <div><h3 class="pcard__name"><a href="${PDP}?id=${id}">${p.name}</a></h3><span class="mcard__sub" data-vname>${v.label}</span></div>
+        <div class="mcard__right"><span class="pcard__price" data-price>${aed(v.price)}</span>${dots}</div>
+      </div>
+      <span hidden data-tabby></span>
+    </article>`;
+  }
   function card(id, feature) {
+    if (MINIMAL) return cardMinimal(id);
     const p = P[id], v = p.variants[0];
     const sw = p.variants.length > 1
       ? `<div class="sw" role="group" aria-label="Colours">${p.variants.map((x, i) => `<button type="button" style="--c:${x.c}" aria-label="${x.label}" aria-pressed="${i === 0}" data-sw="${i}"></button>`).join('')}${feature ? `<span class="pcard__vname" data-vname>${v.label}</span>` : ''}</div>`
@@ -254,8 +272,8 @@
   }
   function renderGrid(filter = 'all') {
     let ids = filter === 'all' ? FEATURED : Object.keys(P).filter(id => P[id].cat === filter && id !== 'mara-sofa-room');
-    ids = ids.slice(0, 9);
-    const featureFirst = filter === 'all' || filter === 'sofas';
+    ids = ids.slice(0, MINIMAL ? 8 : 9);
+    const featureFirst = !MINIMAL && (filter === 'all' || filter === 'sofas');
     grid.innerHTML = ids.map((id, i) => card(id, featureFirst && i === 0)).join('');
     syncWish();
     if (hasGsap() && !reduce) gsap.fromTo(grid.children, { opacity: 0, y: 32 }, { opacity: 1, y: 0, duration: .9, stagger: .06, ease: 'power3.out', clearProps: 'transform' });
@@ -272,13 +290,16 @@
       e.stopPropagation();
       const c = sw.closest('.pcard'), id = c.dataset.id, v = P[id].variants[+sw.dataset.sw];
       $$('[data-sw]', c).forEach(b => b.setAttribute('aria-pressed', b === sw));
+      if (MINIMAL) e.preventDefault();
       const img = $('.pcard__media img', c);
       const swap = () => { img.src = v.img; img.alt = `${P[id].name} in ${v.label}`; };
       if (hasGsap() && !reduce) gsap.to(img, { opacity: 0, duration: .25, onComplete: () => { swap(); gsap.to(img, { opacity: 1, duration: .5 }); } }); else swap();
       $('[data-price]', c).textContent = aed(v.price);
       $('[data-tabby]', c).textContent = q4(v.price);
       const vn = $('[data-vname]', c); vn && (vn.textContent = v.label);
-      c.dataset.v = sw.dataset.sw; return;
+      c.dataset.v = sw.dataset.sw;
+      if (MINIMAL) $$('a[href*="?id="]', c).forEach(l => l.href = `${PDP}?id=${id}&v=${sw.dataset.sw}`);
+      return;
     }
     const add = e.target.closest('[data-add]');
     if (add) { e.stopPropagation(); addToCart(add.dataset.add, +(add.closest('.pcard').dataset.v || 0)); }

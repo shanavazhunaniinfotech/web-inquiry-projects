@@ -1,0 +1,59 @@
+/* Home District — Version C product page: decluttered buy box, no sticky bar, calmer sections. */
+.vc-pdp .satc { display: none !important; }
+
+/* Buy box: open layout, one action */
+.vc-pdp .buy { background: none; padding: 4px 0 0; gap: 20px; }
+.vc-pdp .buy__top { gap: 10px; }
+.vc-pdp .buy__badge { background: var(--cloud); color: var(--black); }
+.vc-pdp .buy__rating { font-size: 13px; }
+.vc-pdp .buy__name { font-size: clamp(34px, 3.2vw, 50px); }
+.vc-pdp .buy__sub { font-size: 15px; }
+.vc-pdp .buy__anchor { display: none; }
+.vc-pdp .buy__price { padding-top: 0; }
+.vc-pdp .buy__price strong { font-size: 28px; }
+.vc-pdp .bnpl { border: 0; background: none; padding: 0; margin-top: -10px; font-size: 13px; min-height: 0; }
+.vc-pdp .bnpl svg { display: none; }
+.vc-pdp .bnpl .pill-tabby, .vc-pdp .bnpl .pill-tamara { font-size: 10px; padding: 1px 6px; }
+.vc-pdp .bnpl > span:nth-child(3) { flex: none; text-decoration: underline; text-underline-offset: 3px; text-decoration-color: var(--soft); }
+.vc-pdp .opt { border-top: 1px solid var(--mist); padding-top: 20px; }
+.vc-pdp [data-opt-legs] { display: none !important; }
+.vc-pdp .opt__swatches { gap: 14px; }
+.vc-pdp .opt__swatches button { width: 48px; height: 48px; }
+.vc-pdp .seg-light button { min-height: 52px; background: #fff; }
+.vc-pdp .seg-light button small { display: none; }
+.vc-pdp .deliver { background: none; border: 0; padding: 0; font-size: 13px; }
+.vc-pdp .deliver__dot { margin-top: 6px; }
+.vc-pdp .buy__actions { grid-template-columns: 1fr auto; }
+.vc-pdp .buy__actions .qty { display: none; }
+.vc-pdp .buy__add { min-height: 58px; font-size: 16px; }
+.vc-pdp .buy__wish { width: 58px; height: 58px; background: #fff; border: 1px solid var(--mist); }
+.vc-pdp [data-p-buynow] { display: none; }
+.vc-pdp .buy__trust { grid-template-columns: repeat(3, 1fr); gap: 0; padding: 18px 0; border-block: 1px solid var(--mist); }
+.vc-pdp .buy__trust li { background: none; padding: 0 10px; border-radius: 0; flex-direction: column; gap: 6px; font-size: 12px; text-align: left; }
+.vc-pdp .buy__trust li + li { border-left: 1px solid var(--mist); }
+.vc-pdp .buy__trust li:last-child { display: none; }
+.vc-pdp .buy__trust svg { width: 22px; height: 22px; }
+.vc-pdp .buy__trust b { font-size: 13px; }
+.vc-pdp .help { background: none; padding: 0; align-items: center; }
+.vc-pdp .help img { width: 40px; height: 40px; }
+.vc-pdp .help strong { font-size: 14px; }
+.vc-pdp .help__links { margin-top: 2px; }
+
+/* Gallery: smooth colour change */
+.vc-pdp .gallery__track { transition: opacity .35s ease; }
+.vc-pdp .gallery__track.is-swapping { opacity: 0; }
+.vc-pdp .gallery__item figcaption { transition: opacity .3s; }
+
+/* Sections below: calmer */
+.vc-pdp .hl:first-child { background: var(--cloud); color: var(--black); }
+.vc-pdp .hl:first-child p { color: var(--text-2); }
+.vc-pdp .hl strong { font-size: clamp(40px, 4vw, 64px); }
+.vc-pdp .rv__filters { display: none; }
+.vc-pdp .rv__fit { display: none; }
+.vc-pdp .rv__summary { grid-template-columns: auto 1fr; }
+.vc-pdp .rv__bars { grid-row: auto; }
+
+@media (max-width: 860px) {
+  .vc-pdp .buy__trust li { padding: 0 8px; }
+  .vc-pdp .rv__summary { grid-template-columns: 1fr; }
+}
