@@ -8,7 +8,7 @@
   <meta name="theme-color" content="#0b0f14">
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,500;0,600;1,500;1,600&family=Manrope:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Bodoni+Moda:ital,opsz,wght@0,6..96,400..600;1,6..96,400..600&family=Jost:wght@300..700&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="style.css">
 </head>
 <body>
@@ -18,7 +18,7 @@
   <div class="loader__inner">
     <svg class="loader__mark" viewBox="0 0 64 64"><use href="#logo-mark"/></svg>
     <div class="loader__bar"><span id="loaderBar"></span></div>
-    <p class="loader__txt">Surveying the plot <b id="loaderPct">0</b>%</p>
+    <p class="loader__txt">Golden Oak Properties <b id="loaderPct">0</b>%</p>
   </div>
 </div>
 
@@ -84,282 +84,73 @@
 
 <main id="top">
 
-<!-- ============ BUILD SCENE (pinned, scroll-driven) ============ -->
+<!-- ============ BUILD (pinned, real time-lapse) ============ -->
 <section class="build" id="build" aria-label="From empty plot to handover">
   <div class="build__stage">
-    <div class="sky" aria-hidden="true"><i class="sky__dawn"></i><i class="sky__day" id="skyDayDiv"></i><i class="sky__dusk" id="skyDuskDiv"></i></div>
-
-    <svg class="scene" id="scene" viewBox="0 0 1600 900" preserveAspectRatio="xMidYMax slice" aria-hidden="true">
-      <defs>
-        <linearGradient id="skyDawn" x1="0" y1="0" x2="0" y2="1">
-          <stop offset="0" stop-color="#e9dcc8"/><stop offset=".55" stop-color="#f3dcbc"/><stop offset="1" stop-color="#f4c995"/>
-        </linearGradient>
-        <linearGradient id="skyDay" x1="0" y1="0" x2="0" y2="1">
-          <stop offset="0" stop-color="#9ec3dd"/><stop offset=".6" stop-color="#d9e6ea"/><stop offset="1" stop-color="#f5e7cf"/>
-        </linearGradient>
-        <linearGradient id="skyDusk" x1="0" y1="0" x2="0" y2="1">
-          <stop offset="0" stop-color="#070b14"/><stop offset=".45" stop-color="#16213a"/><stop offset=".78" stop-color="#4a3b4d"/><stop offset="1" stop-color="#d28b4c"/>
-        </linearGradient>
-        <linearGradient id="sand" x1="0" y1="0" x2="0" y2="1">
-          <stop offset="0" stop-color="#e5cfa6"/><stop offset="1" stop-color="#caa673"/>
-        </linearGradient>
-        <linearGradient id="sandBack" x1="0" y1="0" x2="0" y2="1">
-          <stop offset="0" stop-color="#ecd9b6"/><stop offset="1" stop-color="#dcc196"/>
-        </linearGradient>
-        <linearGradient id="glass" x1="0" y1="0" x2="1" y2="1">
-          <stop offset="0" stop-color="#b9d7e6"/><stop offset=".5" stop-color="#5d88a3"/><stop offset="1" stop-color="#2b4a61"/>
-        </linearGradient>
-        <linearGradient id="concrete" x1="0" y1="0" x2="1" y2="0">
-          <stop offset="0" stop-color="#b9b2a6"/><stop offset="1" stop-color="#8f897f"/>
-        </linearGradient>
-        <linearGradient id="gold" x1="0" y1="0" x2="0" y2="1">
-          <stop offset="0" stop-color="#f4dc9f"/><stop offset="1" stop-color="#b8893f"/>
-        </linearGradient>
-        <linearGradient id="pool" x1="0" y1="0" x2="1" y2="0">
-          <stop offset="0" stop-color="#5fd0e0"/><stop offset="1" stop-color="#2a9bb8"/>
-        </linearGradient>
-        <radialGradient id="sunGlow">
-          <stop offset="0" stop-color="#fff3d6"/><stop offset=".35" stop-color="#ffd896" stop-opacity=".9"/><stop offset="1" stop-color="#ffc67a" stop-opacity="0"/>
-        </radialGradient>
-        <radialGradient id="lampGlow">
-          <stop offset="0" stop-color="#ffe3a3" stop-opacity=".9"/><stop offset="1" stop-color="#ffcf73" stop-opacity="0"/>
-        </radialGradient>
-        <pattern id="lattice" width="14" height="14" patternUnits="userSpaceOnUse">
-          <path d="M0 0L14 14M14 0L0 14" stroke="#d1a03c" stroke-width="1.4"/>
-        </pattern>
-        <pattern id="bpGrid" width="20" height="20" patternUnits="userSpaceOnUse">
-          <path d="M20 0H0V20" fill="none" stroke="#2f6d9a" stroke-width=".5" opacity=".5"/>
-        </pattern>
-        <filter id="glow" x="-50%" y="-50%" width="200%" height="200%">
-          <feGaussianBlur stdDeviation="3" result="b"/><feMerge><feMergeNode in="b"/><feMergeNode in="SourceGraphic"/></feMerge>
-        </filter>
-      </defs>
-
-      <!-- sky -->
-      <rect id="skyDawnR" y="-800" width="1600" height="1700" fill="url(#skyDawn)"/>
-      <rect id="skyDayR" y="-800" width="1600" height="1700" fill="url(#skyDay)" opacity="0"/>
-      <rect id="skyDuskR" y="-800" width="1600" height="1700" fill="url(#skyDusk)" opacity="0"/>
-      <g id="stars" opacity="0"></g>
-      <g id="sun" transform="translate(1290 330)">
-        <circle r="150" fill="url(#sunGlow)"/>
-        <circle r="46" fill="#fff1cf"/>
-      </g>
-      <g id="birds" fill="none" stroke="#6b5a45" stroke-width="2" stroke-linecap="round" opacity=".55">
-        <path d="M0 0q8-8 16 0q8-8 16 0"/>
-        <path d="M44 -18q6-6 12 0q6-6 12 0"/>
-        <path d="M30 22q5-5 10 0q5-5 10 0"/>
-      </g>
-
-      <!-- distant skyline -->
-      <g id="skyline"></g>
-      <g id="skylineLights" opacity="0"></g>
-
-      <!-- dunes -->
-      <path d="M0 720 C 200 690 360 705 520 715 S 900 700 1100 712 S 1450 690 1600 705 V900 H0Z" fill="url(#sandBack)"/>
-      <path id="ground" d="M0 790 H1600 V900 H0Z" fill="url(#sand)"/>
-      <path d="M0 790 H1600" stroke="#b8935e" stroke-width="2" opacity=".6"/>
-
-      <!-- plot: stakes + tape -->
-      <g id="plot">
-        <g id="tape" fill="none" stroke="#c0392b" stroke-width="2" stroke-dasharray="10 6" opacity=".85">
-          <path class="draw" d="M690 778 H985"/>
-          <path class="draw" d="M1030 778 H1390"/>
-        </g>
-        <g id="stakes" fill="#8a6a3c">
-          <rect x="686" y="760" width="5" height="32"/><rect x="982" y="760" width="5" height="32"/>
-          <rect x="1027" y="760" width="5" height="32"/><rect x="1387" y="760" width="5" height="32"/>
-          <path d="M691 760l14 5-14 5z" fill="#d6492f"/><path d="M987 760l14 5-14 5z" fill="#d6492f"/>
-          <path d="M1032 760l14 5-14 5z" fill="#d6492f"/><path d="M1392 760l14 5-14 5z" fill="#d6492f"/>
-        </g>
-        <text x="838" y="772" text-anchor="middle" class="svg-small" fill="#7b5d34">PLOT 0427 · 2,400 m²</text>
-      </g>
-
-      <!-- billboard -->
-      <g id="billboard">
-        <rect x="470" y="752" width="5" height="38" fill="#6d5536"/><rect x="586" y="752" width="5" height="38" fill="#6d5536"/>
-        <rect x="440" y="688" width="180" height="68" rx="4" fill="#0f141b"/>
-        <rect x="445" y="693" width="170" height="58" rx="2" fill="none" stroke="url(#gold)" stroke-width="1.2"/>
-        <g id="bbSoon">
-          <text x="530" y="710" text-anchor="middle" class="svg-eyebrow" fill="#c9a35b">COMING SOON</text>
-          <text x="530" y="731" text-anchor="middle" class="svg-title" fill="#f5efe3">Golden Oak</text>
-          <text x="530" y="745" text-anchor="middle" class="svg-small" fill="#bdb3a3">RESIDENCES · OFF-PLAN</text>
-        </g>
-        <g id="bbSold" opacity="0">
-          <text x="530" y="710" text-anchor="middle" class="svg-eyebrow" fill="#c9a35b">HANDOVER COMPLETE</text>
-          <text x="530" y="731" text-anchor="middle" class="svg-title" fill="#f5efe3">Welcome home</text>
-          <text x="530" y="745" text-anchor="middle" class="svg-small" fill="#bdb3a3">100% SOLD · KEYS READY</text>
-        </g>
-      </g>
-
-      <!-- blueprint ghost of the future tower -->
-      <g id="blueprint" opacity="0">
-        <rect x="730" y="300" width="200" height="490" fill="url(#bpGrid)" opacity=".7"/>
-        <g fill="none" stroke="#2f6d9a" stroke-width="1.6">
-          <path class="draw" d="M730 790 V300 H930 V790"/>
-          <path class="draw" d="M760 300 L780 250 H880 L900 300"/>
-          <path class="draw" d="M830 250 V205"/>
-          <path class="draw" d="M1060 790 V700 H1100 V620 H1330 V700 H1360 V790"/>
-        </g>
-        <g fill="#2f6d9a" class="svg-small">
-          <text x="945" y="545">H 186 m</text>
-          <text x="742" y="292">G+42 · Sky crown</text>
-          <text x="1140" y="612">Villa · 5 BR</text>
-        </g>
-      </g>
-
-      <!-- excavation & foundation -->
-      <rect id="pit" x="705" y="790" width="250" height="30" fill="#a9875a" opacity="0"/>
-      <g id="piles" stroke="#7d776d" stroke-width="5"></g>
-      <rect id="foundation" x="712" y="782" width="236" height="12" fill="#8c867c"/>
-
-      <!-- tower crane -->
-      <g id="crane">
-        <rect x="978" y="190" width="18" height="600" fill="url(#lattice)" stroke="#c9952f" stroke-width="2"/>
-        <g id="craneTop">
-          <path d="M987 150 L978 190 H996Z" fill="#d1a03c"/>
-          <rect x="690" y="186" width="560" height="10" fill="url(#lattice)" stroke="#c9952f" stroke-width="2"/>
-          <rect x="1180" y="196" width="46" height="24" fill="#5b5f66"/>
-          <rect x="996" y="196" width="26" height="20" rx="2" fill="#e9b949"/>
-          <rect x="1002" y="200" width="14" height="9" fill="#9fc3d9"/>
-          <path d="M987 150 L700 186 M987 150 L1240 186" stroke="#c9952f" stroke-width="1.5"/>
-          <g id="trolley" transform="translate(850 196)">
-            <rect x="-10" y="0" width="20" height="8" fill="#5b5f66"/>
-            <line id="cable" x1="0" y1="8" x2="0" y2="200" stroke="#33363b" stroke-width="1.5"/>
-            <g id="hook" transform="translate(0 200)">
-              <path d="M-3 0h6v6a5 5 0 11-6 6" fill="none" stroke="#33363b" stroke-width="2.5"/>
-              <rect x="-34" y="14" width="68" height="7" fill="#7d776d"/>
-            </g>
-          </g>
-        </g>
-      </g>
-
-      <!-- tower floors (generated) -->
-      <g id="scaffold" opacity="0"></g>
-      <g id="tower"></g>
-      <g id="fins" opacity="0"></g>
-      <g id="crown" opacity="0">
-        <path d="M740 300 L770 252 H890 L920 300Z" fill="#0f141b"/>
-        <path d="M770 252 H890" stroke="url(#gold)" stroke-width="4"/>
-        <path d="M740 300 H920" stroke="url(#gold)" stroke-width="4"/>
-        <rect x="827" y="196" width="6" height="58" fill="url(#gold)"/>
-        <circle cx="830" cy="194" r="4" fill="#ffe3a3"/>
-        <text x="830" y="284" text-anchor="middle" class="svg-crown" fill="#e2c27d">GOLDEN OAK</text>
-      </g>
-
-      <!-- villa -->
-      <g id="villa">
-        <g id="villaFrame" opacity="0" stroke="#8f897f" stroke-width="6" fill="none">
-          <path d="M1060 790 V700 M1180 790 V700 M1360 790 V700 M1100 700 V620 M1220 700 V620 M1330 700 V620"/>
-          <path d="M1040 700 H1380 M1085 618 H1350" stroke-width="9"/>
-        </g>
-        <g id="villaSkin" opacity="0">
-          <rect x="1060" y="702" width="300" height="88" fill="#f6f1e7"/>
-          <rect x="1100" y="622" width="230" height="78" fill="#fbf8f2"/>
-          <rect x="1075" y="716" width="150" height="66" fill="url(#glass)"/>
-          <rect x="1240" y="716" width="100" height="66" fill="url(#glass)"/>
-          <rect x="1115" y="636" width="120" height="52" fill="url(#glass)"/>
-          <rect x="1250" y="636" width="64" height="52" fill="#6b4f2e"/>
-          <path d="M1250 636 v52 M1266 636 v52 M1282 636 v52 M1298 636 v52" stroke="#4d381f" stroke-width="2"/>
-          <rect x="1036" y="694" width="348" height="9" fill="#e9e1d2"/>
-          <rect x="1082" y="614" width="270" height="9" fill="#e9e1d2"/>
-          <rect x="1036" y="694" width="348" height="2" fill="url(#gold)"/>
-        </g>
-        <rect id="poolR" x="1030" y="800" width="360" height="16" rx="3" fill="url(#pool)" opacity="0"/>
-      </g>
-
-      <!-- palms (grow at handover) -->
-      <g id="palms"></g>
-
-      <!-- road -->
-      <g id="road" opacity="0">
-        <rect x="0" y="842" width="1600" height="34" fill="#2b2a29"/>
-        <path d="M0 859 H1600" stroke="#e2c27d" stroke-width="2" stroke-dasharray="26 22"/>
-        <g id="lamps"></g>
-      </g>
-
-      <!-- dusk tint -->
-      <rect id="dusk" y="-800" width="1600" height="1700" fill="#0e1830" opacity="0" style="mix-blend-mode:multiply"/>
-
-      <!-- lights layer (sits above dusk tint) -->
-      <g id="lights" filter="url(#glow)"></g>
-      <g id="lampGlows" opacity="0"></g>
-      <g id="car" opacity="0">
-        <rect x="-60" y="846" width="52" height="14" rx="5" fill="#1a1a1a"/>
-        <circle cx="-8" cy="853" r="3" fill="#fff4cc"/>
-        <path d="M-6 853 L80 842 L80 864Z" fill="#fff1c2" opacity=".35"/>
-      </g>
-    </svg>
-
-    <!-- vignette for text legibility -->
-    <div class="build__veil"></div>
-
-    <!-- stage copy -->
-    <div class="stages">
-      <article class="stage stage--hero is-on" data-stage="0">
-        <p class="eyebrow"><span class="dot"></span>Dubai off-plan &amp; luxury real estate</p>
-        <h1 class="h-display">Own Dubai's next landmark, <em>before it rises.</em></h1>
-        <p class="lead">Hand-picked off-plan villas and residences from Dubai's leading developers. One advisor with you from the first payment to handover day.</p>
-        <div class="cta-row">
-          <a class="btn btn--gold magnetic" href="#projects">Explore off-plan projects <svg><use href="#i-arrow"/></svg></a>
-          <a class="btn btn--ghost magnetic" href="#consult">Free consultation</a>
+    <div class="build__grid">
+      <div class="build__copy">
+        <div class="stages">
+          <article class="stage stage--hero is-on" data-stage="0">
+            <p class="eyebrow eyebrow--plain"><span class="dot"></span>Dubai off-plan &amp; luxury real estate</p>
+            <h1 class="h-display">Own Dubai's next landmark, <em>before it rises.</em></h1>
+            <p class="lead">Hand-picked off-plan villas and residences from Dubai's leading developers. One advisor beside you from the first payment to handover day.</p>
+            <div class="cta-row">
+              <a class="btn btn--gold magnetic" href="#projects">Explore off-plan projects <svg><use href="#i-arrow"/></svg></a>
+              <a class="btn btn--ghost magnetic" href="#consult">Free consultation</a>
+            </div>
+            <ul class="hero-trust">
+              <li><svg><use href="#i-check"/></svg>Direct developer access</li>
+              <li><svg><use href="#i-check"/></svg>Payment plans from 10%</li>
+              <li><svg><use href="#i-check"/></svg>RERA-regulated escrow</li>
+            </ul>
+          </article>
+          <article class="stage" data-stage="1">
+            <p class="stage__no">02 <span>Foundation</span></p>
+            <h2 class="h-stage">Break ground with a <em>10% booking.</em></h2>
+            <p class="lead">Reserve your unit at launch price. We check the developer, the escrow account and your SPA with you before you sign anything.</p>
+          </article>
+          <article class="stage" data-stage="2">
+            <p class="stage__no">03 <span>Structure</span></p>
+            <h2 class="h-stage">Watch it rise, <em>floor by floor.</em></h2>
+            <p class="lead">Pay in milestones while it's built, with regular site updates from our team. You always know where your money is.</p>
+          </article>
+          <article class="stage" data-stage="3">
+            <p class="stage__no">04 <span>Facade</span></p>
+            <h2 class="h-stage">Glass, light and <em>the view you chose.</em></h2>
+            <p class="lead">Finishes, snagging and the handover inspection handled on your behalf, even if you're buying from abroad.</p>
+          </article>
+          <article class="stage" data-stage="4">
+            <p class="stage__no">05 <span>Handover</span></p>
+            <h2 class="h-stage">Keys in hand. <em>Welcome home.</em></h2>
+            <p class="lead">Move in, rent it out or resell. Start with a project that's breaking ground today.</p>
+            <div class="cta-row">
+              <a class="btn btn--gold magnetic" href="#projects">See projects launching now <svg><use href="#i-arrow"/></svg></a>
+              <a class="btn btn--ghost magnetic" href="#consult">Talk to an advisor</a>
+            </div>
+          </article>
         </div>
-        <ul class="hero-trust">
-          <li><svg><use href="#i-check"/></svg>Direct developer access</li>
-          <li><svg><use href="#i-check"/></svg>Payment plans from 10%</li>
-          <li><svg><use href="#i-check"/></svg>Business Bay office</li>
-        </ul>
-      </article>
 
-      <article class="stage" data-stage="1">
-        <p class="stage__no">02 <span>Foundation</span></p>
-        <h2 class="h-stage">Break ground with a <em>10% booking.</em></h2>
-        <p class="lead">Reserve your unit at launch price. We check the developer, the escrow account and your SPA with you before you sign anything.</p>
-      </article>
+        <ol class="journey" id="journey" aria-label="Your off-plan journey">
+          <li class="is-on"><span>Plot</span></li><li><span>Foundation</span></li><li><span>Structure</span></li><li><span>Facade</span></li><li><span>Handover</span></li>
+          <i class="journey__bar"><b id="journeyBar"></b></i>
+        </ol>
+      </div>
 
-      <article class="stage" data-stage="2">
-        <p class="stage__no">03 <span>Structure</span></p>
-        <h2 class="h-stage">Watch it rise, <em>floor by floor.</em></h2>
-        <p class="lead">Pay in milestones while it's built, with regular site updates from our team. You always know where your money is.</p>
-      </article>
-
-      <article class="stage" data-stage="3">
-        <p class="stage__no">04 <span>Facade</span></p>
-        <h2 class="h-stage">Glass, gold, and <em>the view you chose.</em></h2>
-        <p class="lead">Finishes, snagging and handover inspection handled on your behalf, even if you're buying from abroad.</p>
-      </article>
-
-      <article class="stage stage--final" data-stage="4">
-        <p class="stage__no">05 <span>Handover</span></p>
-        <h2 class="h-stage">Keys in hand. <em>Welcome home.</em></h2>
-        <p class="lead">Move in, rent it out or resell. Find the project that's at the empty-plot stage today.</p>
-        <div class="cta-row">
-          <a class="btn btn--gold magnetic" href="#projects">See projects launching now <svg><use href="#i-arrow"/></svg></a>
-          <a class="btn btn--ghost btn--light magnetic" href="#consult">Talk to an advisor</a>
+      <div class="build__media" id="media">
+        <figure class="shot is-on" data-shot="0"><video muted playsinline loop autoplay preload="auto" poster="media/site-poster.webp"><source src="media/site-timelapse.webm" type="video/webm"><source src="media/site-timelapse.mp4" type="video/mp4"></video></figure>
+        <figure class="shot" data-shot="1"><img src="img/site.webp" alt="" loading="eager"></figure>
+        <figure class="shot" data-shot="2"><video muted playsinline loop preload="metadata" poster="media/tower-poster.webp"><source src="media/tower-timelapse.webm" type="video/webm"><source src="media/tower-timelapse.mp4" type="video/mp4"></video></figure>
+        <figure class="shot" data-shot="3"><img src="img/davinci.webp" alt="" loading="eager"></figure>
+        <figure class="shot" data-shot="4"><img src="img/marina-night.webp" alt="" loading="eager"></figure>
+        <div class="media__veil" aria-hidden="true"></div>
+        <div class="media__tag" aria-hidden="true"><span class="rec"></span>Site time-lapse <i>·</i> <b id="clock">Month 0</b>&nbsp;of 30</div>
+        <div class="media__pay" aria-hidden="true">
+          <div><small>Paid so far</small><b id="hudPaid">0%</b></div>
+          <div><small>Example plan</small><b>10 / 50 / 40</b></div>
         </div>
-      </article>
-    </div>
-
-    <!-- journey HUD -->
-    <aside class="hud" aria-hidden="true">
-      <div class="hud__head">
-        <span>Your off-plan journey</span>
-        <b id="hudPct">0%</b>
       </div>
-      <div class="hud__bar"><span id="hudBar"></span></div>
-      <ol class="hud__steps" id="hudSteps">
-        <li class="is-on">Plot</li><li>Foundation</li><li>Structure</li><li>Facade</li><li>Handover</li>
-      </ol>
-      <div class="hud__pay">
-        <div><small>Paid so far</small><b id="hudPaid">0%</b></div>
-        <div><small>Example plan</small><b>10 / 50 / 40</b></div>
-      </div>
-    </aside>
-
-    <div class="scrollcue" id="scrollcue">
-      <span>Scroll to break ground</span>
-      <i></i>
     </div>
-    <a class="skip" href="#trust">Skip the build ↓</a>
+    <a class="skip" href="#trust">Skip the journey <span>↓</span></a>
   </div>
 </section>
 
@@ -477,8 +268,7 @@
       <li data-img="img/creek.webp" data-area="Creek Beach"><span class="alist__n">06</span><h3>Dubai Creek Beach</h3><p>Lagoon beach, entry prices</p><b>from AED 1.45M</b><img src="img/creek.webp" alt="" loading="lazy"></li>
     </ul>
   </div>
-  <div class="afloat" id="afloat" aria-hidden="true"><img id="afloatImg" src="img/palm.webp" alt=""></div>
-</section>
+  </section>
 
 <!-- ============ GOLDEN VISA ============ -->
 <section class="visa-band">
