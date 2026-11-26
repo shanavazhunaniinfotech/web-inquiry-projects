@@ -3,445 +3,224 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<title>Herby – Gyógynövényes inhalátorok | Black Friday −50%</title>
-<meta name="description" content="Herby gyógynövényes inhalátorok: 4 formula, 0 mg nikotin. Black Friday 1+1 · 2+2 · 3+3. GLS 1–2 nap, utánvét, 30 napos pénzvisszafizetési garancia.">
+<title>Herby – Nikotin? Nem köszi. | Black Friday −50%</title>
+<meta name="description" content="Herby gyógynövényes inhalátorok: 4 formula, 0 mg nikotin, nem éghető. Black Friday 1+1 · 2+2 · 3+3. GLS 1–2 nap, utánvét, 30 nap garancia.">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link rel="preconnect" href="https://cdn.shopify.com">
-<link href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,400..800&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Archivo:wdth,wght@62..125,400..900&display=swap" rel="stylesheet">
 <link rel="stylesheet" href="style.css">
 </head>
 <body>
 
-<!-- ============ ANNOUNCEMENT ============ -->
-<div class="ann">
-  <div class="ann__in">
-    <div class="ann__rot" id="annRot">
-      <span class="is-on" data-i18n="ann1">🔥 Black Friday: 1+1 · 2+2 · 3+3 – a második inhalátor ajándék</span>
-      <span data-i18n="ann2">🚚 Ingyenes GLS szállítás 14.990 Ft felett · 1–2 munkanap</span>
-      <span data-i18n="ann3">🛡️ 30 napos pénzvisszafizetési garancia · utánvét is</span>
-    </div>
-    <div class="ann__cd"><span data-i18n="annEnds">Vége:</span> <b id="annCd">0n 00:00:00</b></div>
+<!-- PROMO -->
+<div class="promo">
+  <div class="promo__track">
+    <span data-i18n="pr1">BLACK FRIDAY · A MÁSODIK INGYEN</span><b>✺</b><span data-i18n="pr2">INGYEN SZÁLLÍTÁS 14.990 FT FELETT</span><b>✺</b><span data-i18n="pr3">30 NAP GARANCIA</span><b>✺</b><span data-i18n="pr4">UTÁNVÉT IS</span><b>✺</b>
+    <span data-i18n="pr1">BLACK FRIDAY · A MÁSODIK INGYEN</span><b>✺</b><span data-i18n="pr2">INGYEN SZÁLLÍTÁS 14.990 FT FELETT</span><b>✺</b><span data-i18n="pr3">30 NAP GARANCIA</span><b>✺</b><span data-i18n="pr4">UTÁNVÉT IS</span><b>✺</b>
   </div>
 </div>
 
-<!-- ============ HEADER ============ -->
+<!-- HEADER -->
 <header class="hdr" id="hdr">
-  <div class="wrap hdr__in">
-    <button class="ibtn hdr__burger" id="burger" aria-label="Menu"><svg viewBox="0 0 24 24"><path d="M4 7h16M4 12h16M4 17h10"/></svg></button>
-    <a class="logo" href="index.html" aria-label="Herby"><img src="https://cdn.shopify.com/s/files/1/1082/3408/0595/files/ezgif.com-webp-maker_-_2026-06-24T163141.639.webp?v=1782311552&width=280" alt="Herby" width="120" height="48"></a>
-    <nav class="nav" id="nav">
-      <div class="nav__item nav__item--mega">
-        <a href="#shop" class="nav__link"><span data-i18n="navShop">Vásárlás</span> <svg viewBox="0 0 24 24" class="chev"><path d="m6 9 6 6 6-6"/></svg></a>
-        <div class="mega">
-          <div class="mega__grid" id="megaGrid"></div>
-          <a href="#bundle" class="mega__promo">
-            <span class="sticker sticker--sm">−50%</span>
-            <b data-i18n="megaT">Black Friday csomagok</b>
-            <small data-i18n="megaS">1+1 · 2+2 · 3+3 – már 4.495 Ft/db</small>
-            <span class="mega__cta" data-i18n="megaCta">Csomag összeállítása →</span>
-          </a>
-        </div>
-      </div>
-      <a href="#bundle" class="nav__link nav__link--hot" data-i18n="navBf">Black Friday</a>
-      <a href="#quiz" class="nav__link" data-i18n="navQuiz">Formula-kereső</a>
-      <a href="#reviews" class="nav__link" data-i18n="navRev">Vélemények</a>
-      <a href="#faq" class="nav__link" data-i18n="navFaq">GYIK</a>
-    </nav>
-    <div class="hdr__tools">
-      <div class="lang" id="lang" role="group" aria-label="Language">
-        <button data-l="hu" class="on" aria-pressed="true"><span class="flag flag--hu"></span>HU</button>
-        <button data-l="en" aria-pressed="false"><span class="flag flag--en"></span>EN</button>
-        <i class="lang__ind"></i>
-      </div>
-      <button class="ibtn hide-sm" aria-label="Search"><svg viewBox="0 0 24 24"><circle cx="11" cy="11" r="7"/><path d="m20 20-4-4"/></svg></button>
-      <button class="ibtn hide-sm" aria-label="Account"><svg viewBox="0 0 24 24"><circle cx="12" cy="8" r="4"/><path d="M4 21c1.5-4 4.5-6 8-6s6.5 2 8 6"/></svg></button>
-      <button class="ibtn cartbtn" id="cartBtn" aria-label="Cart"><svg viewBox="0 0 24 24"><path d="M5 8h14l-1.3 11a2 2 0 0 1-2 1.8H8.3a2 2 0 0 1-2-1.8z"/><path d="M9 8V7a3 3 0 0 1 6 0v1"/></svg><b id="cartCount">0</b></button>
-    </div>
+  <a href="index.html" class="logo" aria-label="Herby"><img src="https://cdn.shopify.com/s/files/1/1082/3408/0595/files/ezgif.com-webp-maker_-_2026-06-24T163141.639.webp?v=1782311552&width=280" alt="Herby" width="120" height="48"></a>
+  <nav class="nav">
+    <a href="#formulas" data-i18n="n1">Formulák</a>
+    <a href="#bundle" data-i18n="n2">Csomagok</a>
+    <a href="#reviews" data-i18n="n3">Vélemények</a>
+  </nav>
+  <div class="hdr__r">
+    <div class="lang" id="lang"><button data-l="hu" class="on">HU</button><button data-l="en">EN</button></div>
+    <button class="cartbtn" id="cartBtn" aria-label="Cart"><span data-i18n="cart">Kosár</span><b id="cartCount">0</b></button>
   </div>
 </header>
 
 <main>
-<!-- ============ HERO ============ -->
+<!-- HERO -->
 <section class="hero" id="top">
-  <div class="wrap hero__card" id="heroCard" style="--hc:#e4f1d8;--hd:#5aa53c">
-    <div class="hero__copy">
-      <div class="hero__badges">
-        <span class="pillbadge pillbadge--hot">🔥 Black Friday −50%</span>
-        <a href="#reviews" class="pillbadge"><span class="stars">★★★★★</span> <b>4,9</b> <span data-i18n="heroRev">· 1 000+ értékelés</span></a>
-      </div>
-      <h1 class="hero__h1"><span data-i18n="h1a">A szokás marad.</span><br><span data-i18n="h1b">A nikotin</span> <span class="scribble"><span data-i18n="h1c">nem.</span><svg viewBox="0 0 220 30" preserveAspectRatio="none" aria-hidden="true"><path d="M4 20c40-12 90-16 210-8"/></svg></span></h1>
-      <p class="hero__sub" data-i18n="heroSub">Gyógynövényes inhalátor 4 célzott formulában. Az ismerős kéz–száj mozdulat – nikotin, füst és égés nélkül.</p>
-      <ul class="hero__ticks">
-        <li><i>✓</i><span data-i18n="ht1">0 mg nikotin, nem éghető</span></li>
-        <li><i>✓</i><span data-i18n="ht2">Magyar gyártás, GLS 1–2 nap</span></li>
-        <li><i>✓</i><span data-i18n="ht3">30 nap pénzvisszafizetési garancia</span></li>
-      </ul>
-      <div class="hero__ctas">
-        <a href="#bundle" class="btn btn--primary btn--xl"><span data-i18n="heroCta">Kérem a 2+2 csomagot</span><span class="btn__price">17.980 Ft</span></a>
-        <a href="#quiz" class="btn btn--ghost btn--xl" data-i18n="heroCta2">Melyik illik hozzám?</a>
-      </div>
-      <div class="hero__pay">
-        <span class="pay">VISA</span><span class="pay">Mastercard</span><span class="pay"> Pay</span><span class="pay">G Pay</span><span class="pay" data-i18n="cod">Utánvét</span>
-      </div>
+  <div class="hero__bgword" aria-hidden="true">HERBY HERBY HERBY</div>
+  <div class="hero__in">
+    <h1 class="hero__h1">
+      <span class="ln"><span data-i18n="h1a">NIKOTIN?</span></span>
+      <span class="ln ln--2"><span data-i18n="h1b">NEM</span> <em data-i18n="h1c">KÖSZI.</em></span>
+    </h1>
+    <div class="hero__prod" id="heroProd">
+      <img src="https://cdn.shopify.com/s/files/1/1082/3408/0595/files/uj.webp?v=1788009251&width=900" alt="Herby Tüdőtisztító inhalátor">
     </div>
-
-    <div class="hero__stage" id="heroStage">
-      <div class="hero__disc"></div>
-      <div class="hero__orbit" aria-hidden="true"></div>
-      <button class="cut cut--1" data-f="sleep" data-c="#dde9f9" data-d="#3f7fd0" aria-label="Alvástámogató"><img src="https://cdn.shopify.com/s/files/1/1082/3408/0595/files/Kaching-Bundles-ezgif-1cedbac2471da28e.webp?v=1788775577&width=520" alt=""></button>
-      <button class="cut cut--2" data-f="liver" data-c="#ece2f7" data-d="#8a5cc0" aria-label="Májtámogató"><img src="https://cdn.shopify.com/s/files/1/1082/3408/0595/files/ezgif-3b6a1156b1892a5d.webp?v=1788542558&width=520" alt=""></button>
-      <button class="cut cut--3" data-f="energy" data-c="#fde6c8" data-d="#ef8a1f" aria-label="Energizáló"><img src="https://cdn.shopify.com/s/files/1/1082/3408/0595/files/ezgif-12dcdb7b1051afe8.webp?v=1788634410&width=520" alt=""></button>
-      <button class="cut cut--4 is-on" data-f="lung" data-c="#e4f1d8" data-d="#5aa53c" aria-label="Tüdőtisztító"><img src="https://cdn.shopify.com/s/files/1/1082/3408/0595/files/uj.webp?v=1788009251&width=620" alt=""></button>
-      <div class="sticker sticker--spin"><svg viewBox="0 0 120 120"><defs><path id="sc" d="M60,60 m-44,0 a44,44 0 1,1 88,0 a44,44 0 1,1 -88,0"/></defs><text><textPath href="#sc">BLACK FRIDAY • BLACK FRIDAY • </textPath></text></svg><b>−50%</b></div>
-      <div class="chipcard chipcard--a"><span class="dot"></span><div><b id="heroFName">Tüdőtisztító</b><small id="heroFTag">Menta · Kakukkfű · Ökörfarkkóró</small></div></div>
-      <div class="chipcard chipcard--b"><b>0 mg</b><small data-i18n="nic">nikotin</small></div>
-      <p class="hero__hint" data-i18n="heroHint">↑ Vidd az egeret egy formulára</p>
+    <div class="stk stk--sale"><b>−50%</b><small>BLACK<br>FRIDAY</small></div>
+    <div class="stk stk--zero"><b>0</b><small data-i18n="mgNic">MG<br>NIKOTIN</small></div>
+    <div class="hero__foot">
+      <p class="hero__sub" data-i18n="heroSub">Gyógynövényes inhalátor. Az ismerős mozdulat marad – a nikotin, a füst és az égés nem.</p>
+      <div class="hero__cta">
+        <a href="#bundle" class="btn btn--black btn--xl"><span data-i18n="heroCta">Kérem a 2+2 csomagot</span><span class="btn__tag">17.980 Ft</span></a>
+        <a href="#reviews" class="rate"><span class="stars">★★★★★</span><b>4,9</b><span data-i18n="heroRate">1 000+ vásárló</span></a>
+      </div>
     </div>
   </div>
 </section>
 
-<!-- ============ USP MARQUEE ============ -->
-<div class="usp" aria-hidden="true">
-  <div class="usp__track">
-    <span>🌿 <b data-i18n="u1">Nikotinmentes</b></span><span>🇭🇺 <b data-i18n="u2">Magyarországon gyártva</b></span><span>🚚 <b data-i18n="u3">GLS 1–2 munkanap</b></span><span>💳 <b data-i18n="u4">Utánvét is</b></span><span>🛡️ <b data-i18n="u5">30 nap garancia</b></span><span>⭐ <b data-i18n="u6">4,9 / 5 – 1 000+ vásárló</b></span>
-    <span>🌿 <b data-i18n="u1">Nikotinmentes</b></span><span>🇭🇺 <b data-i18n="u2">Magyarországon gyártva</b></span><span>🚚 <b data-i18n="u3">GLS 1–2 munkanap</b></span><span>💳 <b data-i18n="u4">Utánvét is</b></span><span>🛡️ <b data-i18n="u5">30 nap garancia</b></span><span>⭐ <b data-i18n="u6">4,9 / 5 – 1 000+ vásárló</b></span>
+<!-- MARQUEE -->
+<div class="mq" aria-hidden="true">
+  <div class="mq__track">
+    <span data-i18n="m1">0 MG NIKOTIN</span><i>●</i><span data-i18n="m2">NEM ÉGHETŐ</span><i>●</i><span data-i18n="m3">FÜSTMENTES</span><i>●</i><span data-i18n="m4">MAGYAR GYÁRTÁS</span><i>●</i>
+    <span data-i18n="m1">0 MG NIKOTIN</span><i>●</i><span data-i18n="m2">NEM ÉGHETŐ</span><i>●</i><span data-i18n="m3">FÜSTMENTES</span><i>●</i><span data-i18n="m4">MAGYAR GYÁRTÁS</span><i>●</i>
   </div>
 </div>
 
-<!-- ============ SHOP BY MOMENT ============ -->
-<section class="sec moments" id="moments">
+<!-- FORMULAS (stacking cards) -->
+<section class="formulas" id="formulas">
+  <div class="formulas__head">
+    <p class="kick" data-i18n="fKick">4 FORMULA · 4 PILLANAT</p>
+    <h2 class="big" data-i18n="fTitle">VÁLASZD A <span class="mark">HANGULATOD.</span></h2>
+  </div>
+  <div class="stack" id="stack"></div>
+</section>
+
+<!-- BUNDLE -->
+<section class="bundle sec" id="bundle">
   <div class="wrap">
-    <div class="shead">
-      <div><span class="eyebrow" data-i18n="momEy">Vásárolj pillanat szerint</span><h2 class="h2" data-i18n="momT">Minden késztetésre <span class="hl">van egy formula.</span></h2></div>
-      <a href="#shop" class="link-arrow" data-i18n="momAll">Összes termék →</a>
+    <div class="bundle__head">
+      <span class="chip chip--red">⏱ <span data-i18n="ends">Vége:</span> <b id="cd">0n 00:00:00</b></span>
+      <h2 class="big big--dark" data-i18n="bTitle">EGYET FIZETSZ, <span class="mark mark--green">KETTŐT KAPSZ.</span></h2>
+      <p class="lead" data-i18n="bLead">Válassz csomagot – az ízeket alább keverheted.</p>
     </div>
-    <div class="moments__grid" id="momentsGrid"></div>
+    <div class="plans" id="plans">
+      <button class="plan" data-t="1">
+        <span class="plan__deal">1+1</span>
+        <span class="plan__qty" data-i18n="p1q">2 inhalátor</span>
+        <span class="plan__price">8.990<small>Ft</small></span>
+        <s>35.960 Ft</s>
+        <span class="plan__per" data-i18n="per">4.495 Ft / db</span>
+      </button>
+      <button class="plan on" data-t="2">
+        <span class="plan__flag" data-i18n="pop">★ LEGNÉPSZERŰBB</span>
+        <span class="plan__deal">2+2</span>
+        <span class="plan__qty" data-i18n="p2q">4 inhalátor · ingyen szállítás</span>
+        <span class="plan__price">17.980<small>Ft</small></span>
+        <s>71.920 Ft</s>
+        <span class="plan__per" data-i18n="per">4.495 Ft / db</span>
+      </button>
+      <button class="plan" data-t="3">
+        <span class="plan__flag plan__flag--y" data-i18n="best">LEGJOBB ÉRTÉK</span>
+        <span class="plan__deal">3+3</span>
+        <span class="plan__qty" data-i18n="p3q">6 inhalátor · ingyen szállítás + útmutató</span>
+        <span class="plan__price">26.970<small>Ft</small></span>
+        <s>107.880 Ft</s>
+        <span class="plan__per" data-i18n="per">4.495 Ft / db</span>
+      </button>
+    </div>
+    <div class="mixer">
+      <p class="mixer__t" data-i18n="mixT">Melyik ízek legyenek benne?</p>
+      <div class="mixer__chips" id="mixChips"></div>
+    </div>
+    <div class="bundle__buy">
+      <button class="btn btn--black btn--xxl" id="bAdd"><span data-i18n="addCart">Kosárba</span><span class="btn__tag" id="bPrice">17.980 Ft</span></button>
+      <ul class="bundle__trust">
+        <li data-i18n="bt1">🚚 GLS 1–2 munkanap</li><li data-i18n="bt2">💳 Kártya vagy utánvét</li><li data-i18n="bt3">🛡️ 30 nap pénzvisszafizetés</li>
+      </ul>
+    </div>
   </div>
 </section>
 
-<!-- ============ BESTSELLERS ============ -->
-<section class="sec shop" id="shop">
-  <div class="wrap">
-    <div class="shead">
-      <div><span class="eyebrow" data-i18n="shopEy">Bestsellerek</span><h2 class="h2" data-i18n="shopT">Kedvencek, <span class="hl">féláron.</span></h2></div>
-      <div class="tabs" id="tabs" role="tablist">
-        <button class="on" data-tab="all" data-i18n="tabAll">Összes</button>
-        <button data-tab="inhaler" data-i18n="tabInh">Inhalátorok</button>
-        <button data-tab="bundle" data-i18n="tabBun">Csomagok</button>
-        <button data-tab="acc" data-i18n="tabAcc">Kiegészítők</button>
-      </div>
+<!-- REVIEWS -->
+<section class="reviews sec" id="reviews">
+  <div class="wrap reviews__in">
+    <div class="reviews__score">
+      <b>4,9</b>
+      <span class="stars stars--xl">★★★★★</span>
+      <small data-i18n="rvBased">1 000+ értékelés alapján</small>
     </div>
-    <div class="pgrid" id="pgrid"></div>
-  </div>
-</section>
-
-<!-- ============ BUNDLE PDP ============ -->
-<section class="sec bundle" id="bundle">
-  <div class="wrap bundle__grid">
-    <div class="gallery">
-      <div class="gallery__main">
-        <img id="galMain" src="https://cdn.shopify.com/s/files/1/1082/3408/0595/files/ezgif-8c598b2ba6afbc63.webp?v=1788516127&width=1100" alt="Herby 4 az 1-ben">
-        <button class="gal-nav gal-nav--p" id="galPrev" aria-label="prev">‹</button>
-        <button class="gal-nav gal-nav--n" id="galNext" aria-label="next">›</button>
-      </div>
-      <div class="gallery__thumbs" id="galThumbs"></div>
-    </div>
-
-    <div class="buybox" id="buybox">
-      <div class="bb__top">
-        <span class="pillbadge pillbadge--hot">🔥 Black Friday</span>
-        <a href="#reviews" class="bb__rating"><span class="stars">★★★★★</span> 4,9 <u data-i18n="bbRev">(1 000+ értékelés)</u></a>
-      </div>
-      <h2 class="bb__title" data-i18n="bbT">Herby Black Friday csomag – keverd a formulákat</h2>
-      <p class="bb__sub" data-i18n="bbS">Válaszd ki a csomagot és az ízeket. Minden második inhalátor ajándék.</p>
-
-      <div class="bb__cd">
-        <span data-i18n="bbCd">Az ajánlat lejár:</span>
-        <div class="cdbox"><b id="cdD">0</b><small data-i18n="dd">nap</small></div>
-        <div class="cdbox"><b id="cdH">00</b><small data-i18n="hh">óra</small></div>
-        <div class="cdbox"><b id="cdM">00</b><small data-i18n="mm">perc</small></div>
-        <div class="cdbox"><b id="cdS">00</b><small data-i18n="ss">mp</small></div>
-      </div>
-
-      <div class="tiers" id="tiers" role="radiogroup">
-        <button class="tier" data-t="1" role="radio">
-          <span class="tier__r"></span>
-          <span class="tier__info"><b>1+1</b><small data-i18n="t1">2 inhalátor</small></span>
-          <span class="tier__per">4.495 Ft<small data-i18n="perPc">/db</small></span>
-          <span class="tier__p"><b>8.990 Ft</b><s>35.960 Ft</s></span>
-        </button>
-        <button class="tier on" data-t="2" role="radio">
-          <span class="tier__flag" data-i18n="popular">⭐ Legnépszerűbb</span>
-          <span class="tier__r"></span>
-          <span class="tier__info"><b>2+2</b><small data-i18n="t2">4 inhalátor · ingyenes szállítás</small></span>
-          <span class="tier__per">4.495 Ft<small data-i18n="perPc">/db</small></span>
-          <span class="tier__p"><b>17.980 Ft</b><s>71.920 Ft</s></span>
-        </button>
-        <button class="tier" data-t="3" role="radio">
-          <span class="tier__flag tier__flag--g" data-i18n="bestVal">💎 Legjobb érték</span>
-          <span class="tier__r"></span>
-          <span class="tier__info"><b>3+3</b><small data-i18n="t3">6 inhalátor · ingyen szállítás + útmutató</small></span>
-          <span class="tier__per">4.495 Ft<small data-i18n="perPc">/db</small></span>
-          <span class="tier__p"><b>26.970 Ft</b><s>107.880 Ft</s></span>
-        </button>
-      </div>
-
-      <div class="slots">
-        <div class="slots__h"><b data-i18n="pickF">Válaszd ki az ízeket</b><button class="linkbtn" id="mixAll" data-i18n="mixAll">Mind a 4 íz ↻</button></div>
-        <div id="slots"></div>
-      </div>
-
-      <div class="bb__buy">
-        <div class="qty"><button id="qMinus" aria-label="−">−</button><span id="qVal">1</span><button id="qPlus" aria-label="+">+</button></div>
-        <button class="btn btn--primary btn--xl btn--grow" id="bbAdd"><span data-i18n="addCart">Kosárba</span><span class="btn__price" id="bbPrice">17.980 Ft</span></button>
-      </div>
-      <button class="btn btn--express" id="bbExpress"><span data-i18n="buyNow">Vásárlás most</span> · <b> Pay</b> / <b>G Pay</b></button>
-      <p class="bb__save" id="bbSave"></p>
-
-      <div class="ship-est">
-        <svg viewBox="0 0 24 24"><path d="M3 7h11v9H3zM14 10h4l3 3v3h-7z"/><circle cx="7" cy="17.5" r="1.8"/><circle cx="17" cy="17.5" r="1.8"/></svg>
-        <p id="shipEst"></p>
-      </div>
-      <div class="bb__trust">
-        <div><b>🛡️ 30</b><small data-i18n="tr1">nap garancia</small></div>
-        <div><b>🇭🇺</b><small data-i18n="tr2">magyar gyártás</small></div>
-        <div><b>💳</b><small data-i18n="tr3">utánvét is</small></div>
-        <div><b>🔒 SSL</b><small data-i18n="tr4">biztonságos</small></div>
-      </div>
-      <div class="acc">
-        <details open><summary data-i18n="accA">Mit tartalmaz a csomag?</summary><p data-i18n="accAp">A kiválasztott számú Herby gyógynövényes inhalátort, ízenként külön dobozban. A 3+3 csomag mellé ajándék 21 napos útmutató jár.</p></details>
-        <details><summary data-i18n="accB">Összetevők</summary><p data-i18n="accBp">Tüdőtisztító: ökörfarkkóró, kakukkfű, menta · Energizáló: guarana, zöld tea, kávébab · Májtámogató: máriatövis, articsóka, gyermekláncfű, kamilla · Alvástámogató: levendula, kamilla, ashwagandha. Mind: növényi glicerin, tisztított víz.</p></details>
-        <details><summary data-i18n="accC">Szállítás és visszaküldés</summary><p data-i18n="accCp">GLS házhozszállítás vagy csomagpont 1–2 munkanap alatt. Fizetés kártyával vagy utánvéttel. 30 napos pénzvisszafizetési garancia.</p></details>
+    <div class="quote" id="quote">
+      <div class="quote__body" id="quoteBody"></div>
+      <div class="quote__nav">
+        <button id="qPrev" aria-label="prev">←</button>
+        <div class="quote__dots" id="qDots"></div>
+        <button id="qNext" aria-label="next">→</button>
       </div>
     </div>
   </div>
 </section>
 
-<!-- ============ QUIZ ============ -->
-<section class="sec quiz" id="quiz">
-  <div class="wrap">
-    <div class="quiz__card">
-      <div class="quiz__left">
-        <span class="eyebrow eyebrow--light" data-i18n="qzEy">30 másodperces formula-kereső</span>
-        <h2 class="h2 h2--light" data-i18n="qzT">Melyik Herby <span class="hl hl--lime">illik hozzád?</span></h2>
-        <div class="qz__prog"><i id="qzProg"></i></div>
-        <div id="qzBody"></div>
-      </div>
-      <div class="quiz__right" id="qzRight">
-        <div class="qz__stack" id="qzStack">
-          <img src="https://cdn.shopify.com/s/files/1/1082/3408/0595/files/Kaching-Bundles-ezgif-1cedbac2471da28e.webp?v=1788775577&width=420" alt="">
-          <img src="https://cdn.shopify.com/s/files/1/1082/3408/0595/files/ezgif-3b6a1156b1892a5d.webp?v=1788542558&width=420" alt="">
-          <img src="https://cdn.shopify.com/s/files/1/1082/3408/0595/files/ezgif-12dcdb7b1051afe8.webp?v=1788634410&width=420" alt="">
-          <img src="https://cdn.shopify.com/s/files/1/1082/3408/0595/files/uj.webp?v=1788009251&width=480" alt="">
-        </div>
-      </div>
-    </div>
+<!-- STATS -->
+<section class="stats sec">
+  <div class="wrap stats__grid">
+    <div class="stat stat--green"><b>0<small>mg</small></b><span data-i18n="s1">nikotin. Egyetlen szippantásban sem.</span></div>
+    <div class="stat stat--orange"><b>30<small data-i18n="dayU">nap</small></b><span data-i18n="s2">pénzvisszafizetési garancia. Kockázat nélkül.</span></div>
+    <div class="stat stat--blue"><b>1–2<small data-i18n="dayU">nap</small></b><span data-i18n="s3">és GLS-sel nálad. Házhoz vagy csomagpontra.</span></div>
   </div>
 </section>
 
-<!-- ============ HOW IT WORKS ============ -->
-<section class="sec how">
-  <div class="wrap how__grid">
-    <div class="how__media">
-      <img src="https://cdn.shopify.com/s/files/1/1082/3408/0595/files/ezgif-4470daf8e7212ecb_7985f913-aabf-405e-8957-cf833c8c3518.webp?v=1782319799&width=1600" alt="" loading="lazy">
-      <div class="float float--a"><b>3</b><small data-i18n="howF1">lépés, 0 előkészület</small></div>
-      <div class="float float--b"><span class="stars">★★★★★</span><small data-i18n="howF2">„Pont a reggeli kávés pillanatot vette át.”</small></div>
-    </div>
-    <div class="how__copy">
-      <span class="eyebrow" data-i18n="howEy">Így működik</span>
-      <h2 class="h2" data-i18n="howT">Egyszerű, mint <span class="hl">egy mély levegő.</span></h2>
-      <ol class="steps">
-        <li><span class="steps__n">01</span><div><h3 data-i18n="s1t">Jön a késztetés</h3><p data-i18n="s1p">Kávé mellett, vezetés közben vagy egy stresszes nap után – vedd elő a Herbyt.</p></div></li>
-        <li><span class="steps__n">02</span><div><h3 data-i18n="s2t">Lélegezz át rajta</h3><p data-i18n="s2p">Néhány lassú szippantás az ismerős mozdulattal. Nincs töltés, nincs füst, nincs égés.</p></div></li>
-        <li><span class="steps__n">03</span><div><h3 data-i18n="s3t">Haladj tovább</h3><p data-i18n="s3p">A rituálé megmarad, a nikotin nem. Válts formulát a napszakhoz igazodva.</p></div></li>
-      </ol>
-      <a href="#bundle" class="btn btn--primary btn--xl" data-i18n="howCta">Kipróbálom kockázat nélkül</a>
-    </div>
-  </div>
-</section>
-
-<!-- ============ COMPARE ============ -->
-<section class="sec compare">
-  <div class="wrap">
-    <div class="shead shead--c"><div><span class="eyebrow" data-i18n="cmpEy">Összehasonlítás</span><h2 class="h2" data-i18n="cmpT">Miért választják <span class="hl">a Herbyt?</span></h2></div></div>
-    <div class="ctable" role="table">
-      <div class="ctable__row ctable__head" role="row"><span></span><span class="ctable__herby"><img src="https://cdn.shopify.com/s/files/1/1082/3408/0595/files/ezgif.com-webp-maker_-_2026-06-24T163141.639.webp?v=1782311552&width=200" alt="Herby"></span><span data-i18n="cig">Cigaretta</span><span data-i18n="ecig">E-cigaretta</span></div>
-      <div class="ctable__row" role="row"><span data-i18n="c1">0 mg nikotin</span><span class="ctable__herby"><i class="y">✓</i></span><span><i class="n">✕</i></span><span><i class="n">✕</i></span></div>
-      <div class="ctable__row" role="row"><span data-i18n="c2">Nem éghető, füstmentes</span><span class="ctable__herby"><i class="y">✓</i></span><span><i class="n">✕</i></span><span><i class="m">~</i></span></div>
-      <div class="ctable__row" role="row"><span data-i18n="c3">Ismerős kéz–száj mozdulat</span><span class="ctable__herby"><i class="y">✓</i></span><span><i class="y2">✓</i></span><span><i class="y2">✓</i></span></div>
-      <div class="ctable__row" role="row"><span data-i18n="c4">4 célzott gyógynövényes formula</span><span class="ctable__herby"><i class="y">✓</i></span><span><i class="n">✕</i></span><span><i class="n">✕</i></span></div>
-      <div class="ctable__row" role="row"><span data-i18n="c5">Nincs töltés, nincs töltő</span><span class="ctable__herby"><i class="y">✓</i></span><span><i class="y2">✓</i></span><span><i class="n">✕</i></span></div>
-      <div class="ctable__row" role="row"><span data-i18n="c6">30 napos pénzvisszafizetés</span><span class="ctable__herby"><i class="y">✓</i></span><span><i class="n">✕</i></span><span><i class="n">✕</i></span></div>
-    </div>
-  </div>
-</section>
-
-<!-- ============ REVIEWS ============ -->
-<section class="sec reviews" id="reviews">
-  <div class="wrap">
-    <div class="rv__top">
-      <div class="rv__sum">
-        <span class="eyebrow" data-i18n="rvEy">Vásárlói vélemények</span>
-        <div class="rv__score"><b>4,9</b><div><span class="stars stars--lg">★★★★★</span><small data-i18n="rvBased">1 000+ ellenőrzött értékelés</small></div></div>
-        <div class="rv__bars">
-          <div><span>5★</span><i style="--w:89%"></i><em>89%</em></div>
-          <div><span>4★</span><i style="--w:8%"></i><em>8%</em></div>
-          <div><span>3★</span><i style="--w:2%"></i><em>2%</em></div>
-          <div><span>2★</span><i style="--w:1%"></i><em>1%</em></div>
-        </div>
-        <p class="rv__rec"><b>97%</b> <span data-i18n="rvRec">ajánlaná ismerősének</span></p>
-      </div>
-      <div class="rv__ugc">
-        <img src="https://cdn.shopify.com/s/files/1/1082/3408/0595/files/ezgif-42d94357e6c43ad1_e495384f-c03d-49c0-937e-4587de6dff9a.webp?v=1782319799&width=900" alt="" loading="lazy">
-        <div class="rv__ugc-tag">#herbyhungary</div>
-      </div>
-    </div>
-    <div class="rv__filters" id="rvFilters">
-      <button class="on" data-rf="all" data-i18n="rfAll">Összes</button>
-      <button data-rf="lung" data-i18n="fLung">Tüdőtisztító</button>
-      <button data-rf="energy" data-i18n="fEnergy">Energizáló</button>
-      <button data-rf="liver" data-i18n="fLiver">Májtámogató</button>
-      <button data-rf="sleep" data-i18n="fSleep">Alvástámogató</button>
-    </div>
-    <div class="rv__grid" id="rvGrid"></div>
-  </div>
-</section>
-
-<!-- ============ GUARANTEE ============ -->
-<section class="sec guarantee">
-  <div class="wrap">
-    <div class="g__card">
-      <div class="g__seal"><svg viewBox="0 0 160 160"><defs><path id="gs" d="M80,80 m-62,0 a62,62 0 1,1 124,0 a62,62 0 1,1 -124,0"/></defs><text><textPath href="#gs" data-i18n="gSeal">PÉNZVISSZAFIZETÉSI GARANCIA • 30 NAP • KOCKÁZATMENTES • </textPath></text></svg><b>30</b><small data-i18n="gDays">NAP</small></div>
-      <div class="g__copy">
-        <h2 class="h2 h2--light" data-i18n="gT">Próbáld ki 30 napig. <span class="hl hl--lime">Kockázat nélkül.</span></h2>
-        <p data-i18n="gP">Ha nem válik be, visszafizetjük az árát. Nincs apró betű, nincs kérdezősködés – csak írj nekünk.</p>
-      </div>
-      <a href="#bundle" class="btn btn--lime btn--xl" data-i18n="gCta">Csomag választása →</a>
-    </div>
-  </div>
-</section>
-
-<!-- ============ FAQ ============ -->
-<section class="sec faq" id="faq">
-  <div class="wrap faq__grid">
-    <div>
-      <span class="eyebrow" data-i18n="faqEy">GYIK</span>
-      <h2 class="h2" data-i18n="faqT">Gyakori <span class="hl">kérdések.</span></h2>
-      <div class="help">
-        <div class="help__av"><span>H</span><i></i></div>
-        <div><b data-i18n="helpT">Segítünk választani</b><small data-i18n="helpS">Általában néhány órán belül válaszolunk.</small></div>
-        <a href="mailto:info@herbymagyarorszag.com" class="btn btn--primary btn--sm" data-i18n="helpBtn">Írj nekünk</a>
-      </div>
-    </div>
-    <div class="faq__list" id="faqList">
+<!-- FAQ -->
+<section class="faq sec" id="faq">
+  <div class="wrap faq__in">
+    <h2 class="big big--dark" data-i18n="faqT">KÉRDÉS?</h2>
+    <div class="faq__list">
       <details open><summary data-i18n="q1">Hogyan kell használni?</summary><p data-i18n="a1">Amikor jön a késztetés, vedd elő, és szívj rajta néhányszor lassan. Nincs töltés, nincs előkészület.</p></details>
       <details><summary data-i18n="q2">Tartalmaz nikotint?</summary><p data-i18n="a2">Nem. A Herby teljesen nikotinmentes, nem éghető és füst nélküli.</p></details>
-      <details><summary data-i18n="q3">Melyik formulát válasszam?</summary><p data-i18n="a3">A Tüdőtisztító friss, mentás. Az Energizáló a lendületes napokra, az Alvástámogató estére, a Májtámogató a mindennapi egyensúlyhoz való. A 2+2 csomaggal mind a négyet kipróbálhatod – vagy töltsd ki a formula-keresőt.</p></details>
+      <details><summary data-i18n="q3">Melyik formulát válasszam?</summary><p data-i18n="a3">Friss és mentás: Tüdőtisztító. Reggelre: Energizáló. Napközben: Májtámogató. Estére: Alvástámogató. Ha nem tudod eldönteni, a 2+2 csomagban mind a négy benne van.</p></details>
       <details><summary data-i18n="q4">Mi van, ha nem válik be?</summary><p data-i18n="a4">30 napos pénzvisszafizetési garanciát adunk. Ha nem tetszik, visszafizetjük az árát.</p></details>
-      <details><summary data-i18n="q5">Mennyi idő a szállítás és hogyan fizethetek?</summary><p data-i18n="a5">GLS futárral 1–2 munkanapon belül, házhoz vagy csomagpontra. Fizethetsz bankkártyával, Apple Pay-jel, Google Pay-jel vagy utánvéttel.</p></details>
-      <details><summary data-i18n="q6">Meddig tart egy inhalátor?</summary><p data-i18n="a6">Használattól függően több hétig is kitarthat. Ha naponta többször használod, a 2+2 vagy 3+3 csomag a legkedvezőbb.</p></details>
+      <details><summary data-i18n="q5">Mennyi a szállítás?</summary><p data-i18n="a5">GLS-sel 1–2 munkanap, házhoz vagy csomagpontra. Kártyával vagy utánvéttel is fizethetsz.</p></details>
     </div>
   </div>
 </section>
 
-<!-- ============ NEWSLETTER ============ -->
-<section class="sec nlsec">
-  <div class="wrap">
-    <div class="nl">
-      <img class="nl__img" src="https://cdn.shopify.com/s/files/1/1082/3408/0595/files/uj.webp?v=1788009251&width=400" alt="" loading="lazy">
-      <div class="nl__copy">
-        <h2 class="h2" data-i18n="nlT">−10% az első rendelésedből.</h2>
-        <p data-i18n="nlP">Iratkozz fel, és elsőként értesülsz az akciókról, újdonságokról és a füstmentes napokat segítő tippekről.</p>
-      </div>
-      <form class="nl__form" id="nlForm">
-        <input type="email" required data-i18n-ph="nlPh" placeholder="E-mail címed" aria-label="Email">
-        <button class="btn btn--primary" data-i18n="nlBtn">Kérem a kódot</button>
-        <small data-i18n="nlNote">Bármikor leiratkozhatsz. Nem küldünk spamet.</small>
-      </form>
+<!-- FINAL -->
+<section class="final">
+  <div class="final__in">
+    <h2 class="final__h" data-i18n="finT">KEZDD<br>HOLNAP.</h2>
+    <div class="final__side">
+      <p data-i18n="finP">Rendeld meg ma, holnap már nálad lehet. Ha nem válik be, visszakapod a pénzed.</p>
+      <a href="#bundle" class="btn btn--lime btn--xl"><span data-i18n="finCta">Csomag választása</span><span class="btn__tag btn__tag--dark">−50%</span></a>
+      <form class="nl" id="nl"><input type="email" required data-i18n-ph="nlPh" placeholder="E-mail címed (−10%)" aria-label="Email"><button data-i18n="nlBtn">Feliratkozom</button></form>
     </div>
   </div>
 </section>
 </main>
 
-<!-- ============ FOOTER ============ -->
 <footer class="ft">
-  <div class="wrap">
-    <div class="ft__grid">
-      <div class="ft__brand">
-        <img src="https://cdn.shopify.com/s/files/1/1082/3408/0595/files/ezgif.com-webp-maker_-_2026-06-24T163141.639.webp?v=1782311552&width=260" alt="Herby" width="120" height="48">
-        <p data-i18n="ftAbout">Gyógynövényes inhalátorok a füstmentes mindennapokért. Magyarországon fejlesztve és gyártva.</p>
-        <div class="ft__rating"><span class="stars">★★★★★</span> 4,9 · 1 000+</div>
-      </div>
-      <div><h4 data-i18n="ftShop">Vásárlás</h4><a href="#shop" data-i18n="fLung">Tüdőtisztító</a><a href="#shop" data-i18n="fEnergy">Energizáló</a><a href="#shop" data-i18n="fLiver">Májtámogató</a><a href="#shop" data-i18n="fSleep">Alvástámogató</a><a href="#bundle" data-i18n="navBf">Black Friday</a></div>
-      <div><h4 data-i18n="ftInfo">Információ</h4><a href="#" data-i18n="ft1">ÁSZF</a><a href="#" data-i18n="ft2">Adatvédelem</a><a href="#" data-i18n="ft3">Szállítás</a><a href="#" data-i18n="ft4">Elállás és visszaküldés</a><a href="#" data-i18n="ft5">Jogi nyilatkozat</a></div>
-      <div><h4 data-i18n="ftContact">Kapcsolat</h4><p>Herby Magyarország Kft.<br>2225 Üllő, Régész utca 1.<br><a href="mailto:info@herbymagyarorszag.com">info@herbymagyarorszag.com</a></p></div>
-    </div>
-    <div class="ft__bottom">
-      <span>© 2026 Herby Magyarország Kft. · <span data-i18n="ftRights">Minden jog fenntartva.</span></span>
-      <div class="ft__pay"><span class="pay">VISA</span><span class="pay">Mastercard</span><span class="pay">AMEX</span><span class="pay"> Pay</span><span class="pay">G Pay</span><span class="pay">GLS</span></div>
+  <div class="ft__in">
+    <div class="ft__word" aria-hidden="true">HERBY</div>
+    <div class="ft__row">
+      <span>© 2026 Herby Magyarország Kft. · 2225 Üllő, Régész utca 1. · <a href="mailto:info@herbymagyarorszag.com">info@herbymagyarorszag.com</a></span>
+      <span class="ft__links"><a href="#" data-i18n="ft1">ÁSZF</a><a href="#" data-i18n="ft2">Adatvédelem</a><a href="#" data-i18n="ft3">Szállítás</a><a href="#" data-i18n="ft4">Visszaküldés</a></span>
     </div>
   </div>
 </footer>
 
-<!-- ============ STICKY ATC ============ -->
-<div class="satc" id="satc">
-  <div class="wrap satc__in">
-    <img src="https://cdn.shopify.com/s/files/1/1082/3408/0595/files/ezgif-8c598b2ba6afbc63.webp?v=1788516127&width=120" alt="">
-    <div class="satc__t"><b id="satcName">Black Friday 2+2</b><small><span class="stars">★★★★★</span> 4,9 · <span id="satcPrice">17.980 Ft</span> <s id="satcCmp">71.920 Ft</s></small></div>
-    <span class="satc__cd hide-sm">⏱ <b id="satcCd">00:00:00</b></span>
-    <button class="btn btn--primary" id="satcBtn" data-i18n="addCart">Kosárba</button>
-  </div>
-</div>
+<!-- MOBILE STICKY -->
+<a href="#bundle" class="mbar" id="mbar"><span><b>2+2 · 17.980 Ft</b> <s>71.920 Ft</s></span><span class="mbar__go" data-i18n="mbar">Kérem →</span></a>
 
-<!-- ============ QUICK VIEW ============ -->
-<div class="modal" id="qv" aria-hidden="true">
-  <div class="modal__veil" data-close></div>
-  <div class="modal__box" role="dialog" aria-modal="true">
-    <button class="modal__x" data-close aria-label="Close">✕</button>
-    <div class="qv" id="qvBody"></div>
-  </div>
-</div>
-
-<!-- ============ SIDE CART ============ -->
+<!-- SIDE CART -->
 <div class="veil" id="veil"></div>
 <aside class="cart" id="cart" aria-hidden="true" aria-label="Cart">
-  <div class="cart__hd">
-    <div><h3 data-i18n="cartT">Kosarad</h3><small id="cartSub"></small></div>
-    <button class="ibtn" id="cartX" aria-label="Close"><svg viewBox="0 0 24 24"><path d="M6 6l12 12M18 6 6 18"/></svg></button>
+  <div class="cart__top">
+    <h3 data-i18n="cartT">KOSÁR</h3><span class="cart__n" id="cartN">0</span>
+    <button class="cart__x" id="cartX" aria-label="Close">✕</button>
   </div>
-  <div class="cart__timer" id="cartTimer"><span data-i18n="cartTimer">🔥 A Black Friday árak vége:</span> <b id="cartCd">0n 00:00:00</b></div>
-  <div class="goals">
-    <p id="goalMsg"></p>
-    <div class="goals__bar"><i id="goalFill"></i>
-      <span class="goals__pt" id="gp1" style="--p:60%"><em>🚚</em></span>
-      <span class="goals__pt" id="gp2" style="--p:100%"><em>🎁</em></span>
-    </div>
-    <div class="goals__lbl"><span data-i18n="g1">Ingyen szállítás</span><span data-i18n="g2">Ajándék szájspray</span></div>
+  <div class="cart__ship">
+    <p id="shipMsg"></p>
+    <div class="bar"><i id="shipFill"></i></div>
   </div>
   <div class="cart__body">
     <div id="lines"></div>
     <div class="cart__empty" id="cartEmpty">
-      <div class="cart__emptyimg"><img src="https://cdn.shopify.com/s/files/1/1082/3408/0595/files/uj.webp?v=1788009251&width=240" alt=""></div>
-      <b data-i18n="emptyT">Még üres a kosarad</b>
-      <small data-i18n="emptyS">A legtöbben a 2+2 csomaggal kezdik.</small>
-      <button class="btn btn--primary" id="emptyAdd" data-i18n="emptyCta">2+2 csomag a kosárba – 17.980 Ft</button>
+      <img src="https://cdn.shopify.com/s/files/1/1082/3408/0595/files/uj.webp?v=1788009251&width=240" alt="">
+      <b data-i18n="emptyT">Üres a kosarad.</b>
+      <button class="btn btn--black" id="emptyAdd" data-i18n="emptyCta">2+2 csomag – 17.980 Ft</button>
     </div>
     <div id="nudge"></div>
-    <div class="xsell">
-      <div class="xsell__hd"><h4 data-i18n="xsT">Tedd teljessé a rutinod</h4><div><button id="xsP" aria-label="prev">‹</button><button id="xsN" aria-label="next">›</button></div></div>
-      <div class="xsell__track" id="xsell"></div>
+    <div class="ups">
+      <h4 data-i18n="upsT">GYAKRAN EGYÜTT VESZIK</h4>
+      <div class="ups__track" id="ups"></div>
     </div>
   </div>
-  <div class="cart__ft">
-    <label class="prot"><input type="checkbox" id="prot" checked><span class="prot__sw"></span><span class="prot__t"><b data-i18n="protT">Csomagvédelem</b><small data-i18n="protS">Sérült vagy elveszett csomag esetén újraküldjük</small></span><em>890 Ft</em></label>
-    <div class="tot"><span data-i18n="sub">Részösszeg</span><span id="tSub">0 Ft</span></div>
-    <div class="tot tot--save" id="tSaveRow"><span data-i18n="saved">Megtakarítás</span><span id="tSave">0 Ft</span></div>
-    <div class="tot"><span data-i18n="ship">Szállítás</span><span id="tShip">–</span></div>
-    <div class="tot tot--big"><span data-i18n="total">Összesen</span><span id="tTotal">0 Ft</span></div>
-    <button class="btn btn--primary btn--xl btn--block" id="checkout"><svg viewBox="0 0 24 24" width="18" height="18"><rect x="5" y="11" width="14" height="9" rx="2"/><path d="M8 11V8a4 4 0 0 1 8 0v3"/></svg><span data-i18n="checkout">Biztonságos fizetés</span></button>
-    <div class="express"><button class="express__b express__b--a"> Pay</button><button class="express__b express__b--g">G Pay</button></div>
-    <p class="cart__trust" data-i18n="cartTrust">🛡️ 30 nap garancia · 💳 Utánvét · 🔒 SSL</p>
+  <div class="cart__foot">
+    <label class="prot"><input type="checkbox" id="prot" checked><span class="prot__box"></span><span><b data-i18n="protT">Csomagvédelem</b> <small data-i18n="protS">sérülés és elvesztés ellen</small></span><em>890 Ft</em></label>
+    <div class="sum"><span data-i18n="sub">Részösszeg</span><span id="sSub">0 Ft</span></div>
+    <div class="sum sum--save" id="sSaveRow"><span data-i18n="saved">Megtakarítás</span><span id="sSave">0 Ft</span></div>
+    <div class="sum"><span data-i18n="ship">Szállítás</span><span id="sShip">–</span></div>
+    <button class="btn btn--black btn--block btn--xl" id="checkout"><span data-i18n="checkout">Pénztár</span><span class="btn__tag" id="sTotal">0 Ft</span></button>
+    <p class="cart__trust" data-i18n="cartTrust">🔒 Biztonságos fizetés · 💳 Utánvét · 🛡️ 30 nap garancia</p>
   </div>
 </aside>
 
