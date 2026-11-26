@@ -220,13 +220,15 @@
 <div class="dr" id="cart" aria-hidden="true">
   <aside class="dr__p" role="dialog" aria-label="Your cart">
     <div class="dr__h"><b>Your cart <span id="cartN"></span></b><button class="ib" data-close-cart aria-label="Close cart"><svg class="ic"><use href="#i-x"/></svg></button></div>
-    <div class="dr__ship"><svg class="ic"><use href="#i-truck"/></svg>Free Regular Shipping (8–10 days) on eligible orders</div>
+    <div class="sb" id="shipBar"></div>
     <div class="dr__i" id="cartItems"></div>
-    <div class="dr__f">
-      <div class="dr__s"><span>Subtotal</span><b id="cartSub">$0.00</b></div>
-      <p class="dr__n">Taxes and shipping calculated at checkout.</p>
-      <button class="bt bt--dark bt--lg bt--block" id="checkout"><svg class="ic"><use href="#i-lock"/></svg>Secure checkout</button>
-      <a class="bt bt--line bt--block" href="../cart/">View cart</a>
+    <div class="dr__f" id="cartFoot">
+      <div class="dr__s"><span>Subtotal <small id="cartNi"></small></span><b id="cartSub">$0.00</b></div>
+      <div class="dr__r"><span>Shipping</span><span id="cartShip">Calculated at checkout</span></div>
+      <p class="dr__n">Taxes calculated at checkout. Expedited (2–4 days) from $14.99.</p>
+      <button class="bt bt--dark bt--lg bt--block" id="checkout"><svg class="ic"><use href="#i-lock"/></svg>Secure checkout · <span id="cartSub2">$0.00</span></button>
+      <a class="bt bt--line bt--block" href="../cart/">View full cart</a>
+      <ul class="dr__ok"><li><svg class="ic"><use href="#i-lock"/></svg>Secure checkout</li><li><svg class="ic"><use href="#i-return"/></svg>30-day returns</li><li><svg class="ic"><use href="#i-truck"/></svg>Ships to 50 states</li></ul>
     </div>
   </aside>
 </div>

@@ -225,14 +225,39 @@
     const ex = cart.find(i => i.h === h && i.v === v); ex ? ex.q += q : cart.push({ h, q, v });
     save(); renderCart();
     const c = $('#cartCount'); c.classList.remove('bump'); void c.offsetWidth; c.classList.add('bump');
-    toast(`Added ${q > 1 ? q + ' × ' : ''}${short(p).slice(0, 44)}${short(p).length > 44 ? '…' : ''}`);
+    if (!$('#cart').classList.contains('is-open')) openCart();
+  }
+  /* free-shipping goal: set to 0 to show "free shipping" on every order */
+  const FREE_SHIP = 50;
+  const UPSELL = { pet: ['dots', 'glass', 'paper'], glass: ['pet', 'dots', 'paper'], paper: ['pet', 'dots', 'glass'], dots: ['pet', 'glass', 'paper'], netting: ['spiral', 'pet', 'dots'], spiral: ['netting', 'pet'], spline: ['tool', 'clips', 'bugseal'], flat: ['tool', 'clips', 'bugseal'], smooth: ['tool', 'clips', 'bugseal'], tool: ['spline', 'clips'], clips: ['spline', 'tool'], bugseal: ['spline', 'tool'], spring: ['pet', 'dots'] };
+  const pickOf = f => { const l = singles(f).filter(p => p.a); return l.find(p => p.s === '1"') || l.sort((a, b) => a.p - b.p)[0]; };
+  const prodOf = f => PRODUCTS.find(p => p.fam === f);
+  function upsells() {
+    const fams = [...new Set(cart.map(i => BY[i.h].f))];
+    const want = [...new Set((fams.length ? fams : ['pet']).flatMap(f => UPSELL[f] || ['pet', 'dots', 'paper']).concat(['pet', 'dots', 'paper']))].filter(f => !fams.includes(f));
+    return want.map(f => [f, pickOf(f), prodOf(f)]).filter(x => x[1] && x[2]).slice(0, 3);
   }
   function renderCart() {
-    const n = cart.reduce((a, i) => a + i.q, 0);
+    const n = cart.reduce((a, i) => a + i.q, 0), sub = cart.reduce((a, i) => a + BY[i.h].p * i.q, 0);
     $('#cartCount').textContent = n; $('#cartN').textContent = n ? `(${n})` : '';
-    $('#cartItems').innerHTML = cart.length ? cart.map((i, x) => { const p = BY[i.h]; return `<div class="ci"><img src="${im(imgFor(p))}" alt=""><div><b>${short(p)}</b><small>${[p.s && fmtSize(p.s), i.v, p.k && p.k !== 'Single roll' ? fmtLen(p.k) : 'Single roll'].filter(Boolean).join(' · ')}</small><div class="qty"><button data-q="-1" data-i="${x}" aria-label="Decrease">${icon('minus')}</button><span>${i.q}</span><button data-q="1" data-i="${x}" aria-label="Increase">${icon('plus')}</button></div></div><div class="ci__p">${money(p.p * i.q)}<button class="ci__rm" data-rm="${x}">Remove</button></div></div>`; }).join('')
-      : `<div class="ce">${icon('cart')}<p><b>Your cart is empty</b></p><a class="bt bt--dark bt--sm" href="#masking" data-close-cart>Shop masking tapes</a></div>`;
-    $('#cartSub').textContent = money(cart.reduce((a, i) => a + BY[i.h].p * i.q, 0));
+    // shipping bar
+    const left = Math.max(0, FREE_SHIP - sub), pct = FREE_SHIP ? Math.min(100, sub / FREE_SHIP * 100) : 100;
+    $('#shipBar').innerHTML = `<p>${icon('truck')}<span>${left > 0 ? `You're <b>${money(left)}</b> away from <b>FREE shipping</b>` : `<b>You've unlocked FREE Regular Shipping!</b> (8–10 days)`}</span></p><div class="sb__t" role="progressbar" aria-valuemin="0" aria-valuemax="100" aria-valuenow="${Math.round(pct)}"><i style="width:${pct}%"></i></div>${left > 0 ? '' : '<small>Need it sooner? Choose Expedited (2–4 days) at checkout.</small>'}`;
+    $('#shipBar').classList.toggle('is-done', left <= 0);
+    // items
+    const ups = upsells();
+    const upHtml = ups.length ? `<div class="up"><p class="up__h">${cart.length ? 'Customers also add' : 'Popular picks'}</p><div class="up__l">${ups.map(([f, p, P]) => `<div class="up__i"><a href="${purl(P.id)}"><img src="${im(imgFor(p))}" alt=""></a><div><a href="${purl(P.id)}"><b>${P.n}</b></a><small>${[p.s && fmtSize(p.s), f === 'dots' ? dotsCount(p) : p.k === 'Single roll' ? 'single roll' : p.k && fmtLen(p.k)].filter(Boolean).join(' · ')}</small><span>${money(p.p)}</span></div><button class="up__a" data-add="${p.h}" data-variant="${esc((p.v || [])[0] || '')}" aria-label="Add ${esc(P.n)}">${icon('plus')}Add</button></div>`).join('')}</div></div>` : '';
+    $('#cartItems').innerHTML = cart.length ? cart.map((i, x) => {
+      const p = BY[i.h], P = PRODUCTS.find(q => q.fam === p.f), m = P && MK[P.id], ni = p.f === 'netting' && netInfo(p.s), pn = partNo(p.f, p.s);
+      const det = [p.s && fmtSize(p.s), i.v, ni ? ni[2] + ' · ' + ftLen(ni[3]) + ' roll' : m && m.yd ? fmtYd(m.yd) + ' roll' : p.f === 'dots' ? dotsCount(p) : p.k && p.k !== 'Single roll' ? fmtLen(p.k) : 'Single roll'].filter(Boolean).join(' · ');
+      return `<div class="ci"><a href="${P ? purl(P.id) : '#'}"><img src="${im(imgFor(p))}" alt=""></a><div class="ci__b"><a href="${P ? purl(P.id) : '#'}"><b>${P ? P.n : short(p)}</b></a><small>${det}</small>${pn ? `<small class="ci__pn">Part no. ${pn}</small>` : ''}<small class="ci__u">${money(p.p)} each · ${p.a ? '<i class="ok"></i>In stock' : 'Ships when available'}</small>
+        <div class="ci__row"><div class="qty"><button data-q="-1" data-i="${x}" aria-label="Decrease">${icon('minus')}</button><span>${i.q}</span><button data-q="1" data-i="${x}" aria-label="Increase">${icon('plus')}</button></div><button class="ci__rm" data-rm="${x}">Remove</button></div></div><div class="ci__p">${money(p.p * i.q)}</div></div>`;
+    }).join('') + (n >= 10 ? `<div class="ci__bulk">${icon('chat')}<span><b>Ordering ${n}+ rolls?</b> You may qualify for bulk pricing. <button class="bulk__a" data-quote="Bulk order from cart" data-note="${n} items in cart">Get a quote</button></span></div>` : '') + upHtml
+      : `<div class="ce">${icon('cart')}<p><b>Your cart is empty</b></p><p>Masking tape sold by the single roll, at a flat price.</p><div class="ce__b"><a class="bt bt--dark bt--sm" href="${B}masking-tapes/">Shop masking tapes</a><a class="bt bt--line bt--sm" href="${B}shop/">Shop all</a></div></div>` + upHtml;
+    $('#cartSub').textContent = money(sub); $('#cartSub2').textContent = money(sub);
+    $('#cartNi').textContent = n ? `(${n} item${n > 1 ? 's' : ''})` : '';
+    $('#cartShip').innerHTML = !n ? '—' : left <= 0 ? '<b class="g">FREE</b>' : 'Calculated at checkout';
+    $('#cartFoot').classList.toggle('is-empty', !cart.length);
   }
   $('#cartItems').addEventListener('click', e => {
     const q = e.target.closest('[data-q]'), rm = e.target.closest('[data-rm]');
