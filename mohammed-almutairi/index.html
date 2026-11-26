@@ -1,0 +1,484 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="robots" content="noindex, nofollow">
+<title>Multi-Vendor Marketplace MVP – Concept for Mohammed</title>
+<meta name="description" content="Interactive concept for a Shopify-powered multi-vendor marketplace: custom storefront, vendor storefronts, vendor dashboards with SMS OTP login, and an admin panel, scoped as an MVP.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,400;0,9..144,500;0,9..144,600;1,9..144,400;1,9..144,500&family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+<!-- NAV -->
+<header class="nav">
+  <div class="nav-in">
+    <a class="logo" href="#top"><b>M</b><span>Marketplace MVP <small>· concept</small></span></a>
+    <nav class="nav-links">
+      <a href="#roles">Overview</a>
+      <a href="#prototype">Prototype</a>
+      <a href="#architecture">How it's built</a>
+      <a href="#mvp">MVP scope</a>
+      <a href="#roadmap">Roadmap</a>
+      <a href="#faq">FAQ</a>
+    </nav>
+    <a class="btn btn-primary" href="#prototype">Try the prototype</a>
+  </div>
+</header>
+
+<!-- HERO -->
+<section class="hero" id="top">
+  <div class="wrap">
+    <div class="hero-grid">
+      <div class="rv">
+        <span class="eyebrow"><i></i>Concept prepared for Mohammed Almutairi</span>
+        <h1>Your multi-vendor marketplace on Shopify. <em>Launched as an MVP.</em></h1>
+        <p class="lead">A custom-designed marketplace where vendors get their own storefronts and a dashboard they sign in to with an SMS code. Shopify handles products, checkout and orders. Click through every screen below.</p>
+        <div class="hero-ctas">
+          <a class="btn btn-primary" href="#prototype">Open the clickable prototype
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round"><path d="M5 12h14M13 6l6 6-6 6"/></svg></a>
+          <a class="btn btn-ghost" href="#mvp">Plan the MVP scope</a>
+        </div>
+      </div>
+      <div class="stage rv" aria-hidden="true">
+        <div class="mock-browser">
+          <div class="mb-bar"><i></i><i></i><i></i><span>yourmarket.com</span></div>
+          <div class="mb-body">
+            <div class="mb-hero">Independent makers.<br>One checkout.<small>4 vendors · 120+ products</small></div>
+            <div class="mb-vendors" id="heroVendors"></div>
+            <div class="mb-grid" id="heroGrid"></div>
+          </div>
+        </div>
+        <div class="mock-phone">
+          <div class="mp-screen">
+            <div class="mp-sms"><b>MESSAGES · now</b>YourMarket: <strong>482 913</strong> is your vendor login code.</div>
+            <div class="mp-title">Vendor login</div>
+            <div class="mp-sub">Enter the 6-digit code sent to +•• ••• ••• 47</div>
+            <div class="mp-otp"><i>4</i><i>8</i><i>2</i><i>9</i><i>1</i><i class="f">3</i></div>
+            <div class="mp-btn">Verify &amp; sign in</div>
+          </div>
+        </div>
+        <div class="chip-float"><span class="dot">+</span><span><b>New order · $84.00</b>Kiln &amp; Co. · 2 items</span></div>
+      </div>
+    </div>
+    <div class="hero-stats rv">
+      <div><b>3 portals</b><span>Storefront, vendor dashboard and admin</span></div>
+      <div><b>SMS OTP</b><span>Password-free vendor login</span></div>
+      <div><b>Shopify core</b><span>Checkout, payments, orders</span></div>
+      <div><b>~10 weeks</b><span>Indicative MVP timeline</span></div>
+    </div>
+  </div>
+</section>
+
+<!-- ROLES -->
+<section id="roles">
+  <div class="wrap">
+    <div class="sec-head rv">
+      <div>
+        <span class="eyebrow"><i></i>What we're building</span>
+        <h2>One platform, <em>three</em> experiences.</h2>
+        <p class="lead">Everything you described in your message, split by who uses it. Each one works on desktop, tablet and phone.</p>
+      </div>
+    </div>
+    <div class="roles">
+      <article class="role rv" style="--c:var(--accent)">
+        <div class="role-ic" style="background:#FFE9DF;color:var(--accent)"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M6 7h12l-1 13H7L6 7z"/><path d="M9 7a3 3 0 0 1 6 0"/></svg></div>
+        <span class="tag">Customers</span>
+        <h3>Custom marketplace UI</h3>
+        <p>Built from your design references, not a stock theme.</p>
+        <ul>
+          <li>Browse every vendor's products in one place</li>
+          <li>Search, categories and filters</li>
+          <li>Visit each vendor's own storefront</li>
+          <li>One cart and one Shopify checkout, even across vendors</li>
+        </ul>
+      </article>
+      <article class="role rv" style="--c:var(--accent-2)">
+        <div class="role-ic" style="background:#E1F0EA;color:var(--accent-2)"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M3 9l1.5-5h15L21 9"/><path d="M4 9v11h16V9"/><path d="M3 9h18"/><path d="M10 20v-6h4v6"/></svg></div>
+        <span class="tag">Vendors</span>
+        <h3>Storefront + dashboard</h3>
+        <p>Vendors sign in with their phone number and a one-time SMS code. No passwords.</p>
+        <ul>
+          <li>Branded storefront: logo, cover, bio, products</li>
+          <li>Add, edit and delete products, prices and stock</li>
+          <li>View orders and update their status</li>
+          <li>Sales tracking and payout statements</li>
+        </ul>
+      </article>
+      <article class="role rv" style="--c:var(--violet)">
+        <div class="role-ic" style="background:#EAE8FD;color:var(--violet)"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 3l8 4v5c0 5-3.5 8-8 9-4.5-1-8-4-8-9V7l8-4z"/><path d="M9 12l2 2 4-4"/></svg></div>
+        <span class="tag">You (admin)</span>
+        <h3>Marketplace control</h3>
+        <p>Central control over who sells, what goes live, and what you earn.</p>
+        <ul>
+          <li>Approve or reject vendor applications</li>
+          <li>Approve products before they go live</li>
+          <li>Set the commission rate</li>
+          <li>See every order and payout in one place</li>
+        </ul>
+      </article>
+    </div>
+  </div>
+</section>
+
+<!-- PROTOTYPE -->
+<section class="proto-sec" id="prototype">
+  <div class="wrap">
+    <div class="sec-head rv">
+      <div>
+        <span class="eyebrow"><i></i>Clickable prototype</span>
+        <h2>Click through <em>every</em> screen.</h2>
+        <p class="lead">The screens are connected. Add a product as a vendor, approve it as admin, and it appears in the marketplace. The commission you set changes the vendor's payout. Branding and data are placeholders until we have your design references.</p>
+      </div>
+    </div>
+
+    <div class="ptabs rv" role="tablist">
+      <button class="ptab on" data-go="market"><small>01</small>Marketplace</button>
+      <button class="ptab" data-go="vendor"><small>02</small>Vendor storefront</button>
+      <button class="ptab" data-go="otp"><small>03</small>Vendor login (SMS OTP)</button>
+      <button class="ptab" data-go="dash"><small>04</small>Vendor dashboard</button>
+      <button class="ptab" data-go="admin"><small>05</small>Admin panel</button>
+    </div>
+
+    <div class="frame rv">
+      <div class="fbar"><i></i><i></i><i></i>
+        <div class="furl"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4"><rect x="5" y="11" width="14" height="10" rx="2"/><path d="M8 11V7a4 4 0 0 1 8 0v4"/></svg><span id="furl">yourmarket.com</span></div>
+      </div>
+      <div class="fbody" id="fbody">
+
+        <!-- 01 MARKETPLACE -->
+        <div class="pv on" data-view="market">
+          <div class="mk-top">
+            <div class="mk-logo">your<span>market</span></div>
+            <label class="mk-search"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="11" cy="11" r="7"/><path d="M20 20l-3.5-3.5"/></svg><input id="mkSearch" placeholder="Search products or vendors"></label>
+            <div class="mk-acts">
+              <button class="sell-link" data-go="otp">Sell with us</button>
+              <button class="icon-btn" data-open-cart aria-label="Open cart"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M6 7h12l-1 13H7L6 7z"/><path d="M9 7a3 3 0 0 1 6 0"/></svg><span class="badge" data-count>0</span></button>
+            </div>
+          </div>
+          <div class="mk-pad">
+            <div class="mk-banner">
+              <div class="mk-b1">
+                <h3>Independent makers. One checkout.</h3>
+                <p>Shop from verified vendors. Each one has their own storefront, and you pay once.</p>
+                <button class="btn" data-scroll-products>Shop all products</button>
+                <svg class="deco" viewBox="0 0 200 200"><circle cx="100" cy="100" r="90" fill="rgba(255,255,255,.08)"/><circle cx="100" cy="100" r="60" fill="rgba(255,255,255,.08)"/><path d="M70 80h60l-6 70H76z" fill="#E8B04A"/><path d="M85 80a15 15 0 0 1 30 0" stroke="#fff" stroke-width="6" fill="none"/></svg>
+              </div>
+              <div class="mk-b2">
+                <div><b>Become a vendor</b><p>Open your storefront in minutes. Sign in with your phone, no password needed.</p></div>
+                <div style="display:flex;justify-content:space-between;align-items:flex-end;gap:10px">
+                  <div class="row" id="b2Avatars"></div>
+                  <button class="btn btn-dark btn-sm" data-go="otp">Start selling</button>
+                </div>
+              </div>
+            </div>
+            <div class="mk-h"><h4>Featured vendors</h4><a data-go="vendor">View storefronts</a></div>
+            <div class="vend-row" id="vendRow"></div>
+            <div class="mk-h" id="productsAnchor"><h4>Trending now</h4><span id="pCount" class="rate"></span></div>
+            <div class="chips" id="catChips"></div>
+            <div class="pgrid" id="pGrid"></div>
+          </div>
+        </div>
+
+        <!-- 02 VENDOR STOREFRONT -->
+        <div class="pv" data-view="vendor">
+          <div class="vs-switch" id="vsSwitch"></div>
+          <div class="vs-cover" id="vsCover"></div>
+          <div class="vs-head">
+            <div class="vs-logo" id="vsLogo"></div>
+            <div class="vs-meta">
+              <h3><span id="vsName"></span><svg viewBox="0 0 24 24" fill="currentColor"><path d="M12 2l2.4 2.1 3.2-.3.9 3.1 2.8 1.6-1.1 3 1.1 3-2.8 1.6-.9 3.1-3.2-.3L12 22l-2.4-2.1-3.2.3-.9-3.1-2.8-1.6 1.1-3-1.1-3 2.8-1.6.9-3.1 3.2.3z"/><path d="M8.5 12l2.3 2.3 4.7-4.6" stroke="#fff" stroke-width="2" fill="none" stroke-linecap="round"/></svg></h3>
+              <p id="vsBio"></p>
+              <div class="vs-stats" id="vsStats"></div>
+            </div>
+            <div class="vs-acts">
+              <button class="btn btn-ghost btn-sm follow" id="followBtn">+ Follow</button>
+              <button class="icon-btn" data-open-cart aria-label="Open cart"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M6 7h12l-1 13H7L6 7z"/><path d="M9 7a3 3 0 0 1 6 0"/></svg><span class="badge" data-count>0</span></button>
+            </div>
+          </div>
+          <div class="vs-tabs" id="vsTabs">
+            <button class="on" data-vt="products">Products</button>
+            <button data-vt="about">About</button>
+            <button data-vt="reviews">Reviews</button>
+          </div>
+          <div class="mk-pad" id="vsBody"></div>
+        </div>
+
+        <!-- 03 OTP LOGIN -->
+        <div class="pv" data-view="otp">
+          <div class="otp-wrap">
+            <div class="otp-art">
+              <div>
+                <span class="eyebrow" style="color:rgba(255,255,255,.6)"><i></i>Vendor portal</span>
+                <h3 style="margin-top:16px">Sign in with your phone. No passwords.</h3>
+                <p>Vendors enter their mobile number and get a 6-digit code by SMS. That's the whole login.</p>
+              </div>
+              <ul>
+                <li><span><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="6" y="2" width="12" height="20" rx="3"/><path d="M11 18h2"/></svg></span>Code expires after 5 minutes</li>
+                <li><span><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 3l8 4v5c0 5-3.5 8-8 9-4.5-1-8-4-8-9V7l8-4z"/></svg></span>Rate-limited resends and attempts</li>
+                <li><span><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M4 12a8 8 0 1 0 16 0 8 8 0 0 0-16 0z"/><path d="M2 12h20"/></svg></span>Works with any SMS provider in your region</li>
+              </ul>
+            </div>
+            <div class="otp-form">
+              <div class="otp-card">
+                <div class="otp-step on" id="step1">
+                  <h4>Vendor login</h4>
+                  <p>Enter the mobile number on your vendor account.</p>
+                  <label class="lbl" for="phone">Mobile number</label>
+                  <div class="field">
+                    <select id="cc" aria-label="Country code"><option>+966</option><option>+971</option><option>+965</option><option>+974</option><option>+44</option><option>+1</option><option>+91</option></select>
+                    <input id="phone" inputmode="numeric" placeholder="5X XXX XXXX" maxlength="12" autocomplete="tel">
+                  </div>
+                  <button class="otp-btn" id="sendBtn" disabled>Send code</button>
+                  <div class="otp-hint">Demo: type any number (at least 7 digits). A pretend SMS will appear at the top of this window.</div>
+                </div>
+                <div class="otp-step" id="step2">
+                  <h4>Enter the code</h4>
+                  <p>Sent to <b id="sentTo"></b> · <button id="editNum" style="text-decoration:underline;font-weight:600">Change</button></p>
+                  <div class="otp-boxes" id="boxes"></div>
+                  <div class="otp-meta"><span id="expiry">Expires in 5:00</span><button id="resend" disabled>Resend in 30s</button></div>
+                  <button class="otp-btn" id="verifyBtn" disabled>Verify &amp; sign in</button>
+                </div>
+                <div class="otp-step" id="step3">
+                  <div class="otp-done">
+                    <div class="tick"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round"><path d="M5 12.5l4.5 4.5L19 7.5"/></svg></div>
+                    <h4>You're in</h4>
+                    <p style="color:var(--muted);font-size:14px">Opening your vendor dashboard…</p>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- 04 DASHBOARD -->
+        <div class="pv" data-view="dash" id="dashView"></div>
+
+        <!-- 05 ADMIN -->
+        <div class="pv" data-view="admin" id="adminView"></div>
+
+        <div class="sms-toast" id="smsToast"><div class="ic"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M12 3C6.5 3 2 6.6 2 11c0 2.4 1.3 4.6 3.4 6.1L4.5 21l4.2-2.2c1 .3 2.1.4 3.3.4 5.5 0 10-3.6 10-8.1S17.5 3 12 3z"/></svg></div><div><b>Messages <small>now</small></b><p id="smsText"></p></div></div>
+
+        <div class="modal" id="addModal">
+          <div class="modal-card">
+            <h5>Add a product</h5>
+            <p>New products go to the admin for approval before they appear in the marketplace.</p>
+            <div class="form-grid">
+              <div class="full"><label class="lbl">Product name</label><input class="inp" id="npName" placeholder="e.g. Hand-thrown serving bowl"></div>
+              <div><label class="lbl">Price ($)</label><input class="inp" id="npPrice" type="number" min="1" value="45"></div>
+              <div><label class="lbl">Stock</label><input class="inp" id="npStock" type="number" min="0" value="12"></div>
+              <div class="full"><label class="lbl">Product type (sets the placeholder image)</label>
+                <select class="inp" id="npType"><option value="bowl">Bowl</option><option value="mug">Mug</option><option value="candle">Candle</option><option value="lamp">Lamp</option><option value="plant">Plant</option><option value="bag">Bag</option></select></div>
+            </div>
+            <div class="modal-acts"><button class="btn btn-ghost btn-sm" id="npCancel">Cancel</button><button class="btn btn-dark btn-sm" id="npSave">Submit for approval</button></div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="proto-note rv"><b>Try this:</b> Add products to the cart → open the side cart → sign in with a pretend OTP → add a product → approve it in the Admin panel → find it in the Marketplace.</div>
+  </div>
+</section>
+
+<!-- ARCHITECTURE -->
+<section id="architecture">
+  <div class="wrap">
+    <div class="sec-head rv">
+      <div>
+        <span class="eyebrow"><i></i>How it's built</span>
+        <h2>Shopify does commerce.<br><em>We build the marketplace layer.</em></h2>
+        <p class="lead">Shopify doesn't support multiple vendors out of the box. The usual approach, and the one I'd use here, is to keep Shopify for products, checkout and payments, and add a custom marketplace app on top for vendors, OTP login and commissions.</p>
+      </div>
+    </div>
+    <div class="arch">
+      <div class="layer-label rv">What people see</div>
+      <div class="node rv"><div class="n-ic" style="background:#FFE9DF;color:var(--accent)"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M6 7h12l-1 13H7L6 7z"/><path d="M9 7a3 3 0 0 1 6 0"/></svg></div><h4>Marketplace storefront</h4><p>Your custom UI, built from your design references: home, categories, search, product pages, vendor pages and cart.</p><div class="tech">Custom Shopify theme (Liquid) or headless (Hydrogen)</div></div>
+      <div class="node rv"><div class="n-ic" style="background:#E1F0EA;color:var(--accent-2)"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="4" width="18" height="16" rx="2"/><path d="M3 9h18M9 20V9"/></svg></div><h4>Vendor dashboard</h4><p>A separate web app for vendors. Vendors don't need Shopify accounts or staff seats.</p><div class="tech">React web app, SMS OTP login</div></div>
+      <div class="node rv"><div class="n-ic" style="background:#EAE8FD;color:var(--violet)"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 3l8 4v5c0 5-3.5 8-8 9-4.5-1-8-4-8-9V7l8-4z"/></svg></div><h4>Admin panel</h4><p>Vendor and product approvals, commissions and payouts. Can live inside your Shopify admin as an embedded app.</p><div class="tech">Embedded Shopify app</div></div>
+      <div class="flow-arrow rv"><svg viewBox="0 0 22 30" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M11 2v24M4 19l7 7 7-7"/></svg></div>
+      <div class="node hl rv">
+        <div class="n-ic"><svg viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="2"><path d="M12 2l9 5v10l-9 5-9-5V7z"/><path d="M12 22V12M21 7l-9 5-9-5"/></svg></div>
+        <div>
+          <h4>Marketplace app (the custom part)</h4>
+          <p>A secure backend that connects everything. It links each product and order line to a vendor, splits multi-vendor orders, and keeps every vendor's records separate.</p>
+          <div class="mods"><span>Vendor accounts</span><span>SMS OTP auth</span><span>Product ↔ vendor mapping</span><span>Order splitting</span><span>Commission engine</span><span>Payout ledger</span><span>Webhooks &amp; notifications</span></div>
+        </div>
+      </div>
+      <div class="flow-arrow rv"><svg viewBox="0 0 22 30" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M11 2v24M4 19l7 7 7-7"/></svg></div>
+      <div class="layer-label rv">Services it connects to</div>
+      <div class="node rv"><div class="n-ic" style="background:#E6F4EE;color:#16624F"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M4 7l8-4 8 4-8 4z"/><path d="M4 7v10l8 4 8-4V7"/></svg></div><h4>Shopify</h4><p>Products, inventory, cart, checkout, payments, taxes and orders. Built on Shopify's reliable commerce platform.</p><div class="tech">Admin API · Storefront API · Webhooks</div></div>
+      <div class="node rv"><div class="n-ic" style="background:#FFF3DC;color:#8A5A00"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"/></svg></div><h4>SMS gateway</h4><p>Sends login codes and order alerts. We pick the provider with the best delivery and price in your country.</p><div class="tech">e.g. Twilio, Unifonic or MSG91</div></div>
+      <div class="node rv"><div class="n-ic" style="background:#E3EEFF;color:#1F55B8"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><ellipse cx="12" cy="5" rx="8" ry="3"/><path d="M4 5v14c0 1.7 3.6 3 8 3s8-1.3 8-3V5"/><path d="M4 12c0 1.7 3.6 3 8 3s8-1.3 8-3"/></svg></div><h4>Database &amp; hosting</h4><p>Stores vendor profiles, sessions and the payout ledger. Hosted on scalable cloud infrastructure with daily backups.</p><div class="tech">PostgreSQL · cloud hosting</div></div>
+    </div>
+
+    <div class="paths">
+      <div class="rv">
+        <span class="eyebrow"><i></i>Three ways to build it</span>
+        <h3 style="margin-top:12px">Which approach fits your MVP?</h3>
+        <p class="lead">There's more than one way to build a Shopify marketplace. Here's an honest comparison so we can pick the right one on our call.</p>
+      </div>
+      <div class="cmp">
+        <div class="opt rv">
+          <h4>A · Ready-made marketplace app</h4>
+          <p>A Shopify marketplace app from the App Store, plus theme customisation.</p>
+          <div class="meter">
+            <div><span>Speed to launch</span><span class="dots" data-v="5"></span></div>
+            <div><span>Custom UI freedom</span><span class="dots" data-v="2"></span></div>
+            <div><span>SMS OTP vendor login</span><span class="dots" data-v="1"></span></div>
+            <div><span>Low monthly fees</span><span class="dots" data-v="2"></span></div>
+          </div>
+          <ul><li><b>+</b>Fastest way to start</li><li><b>–</b>The vendor dashboard looks and works the way the app decides</li><li><b>–</b>OTP login and custom flows are usually not possible</li></ul>
+        </div>
+        <div class="opt rec rv">
+          <span class="rec-tag">Recommended for MVP</span>
+          <h4>B · Custom theme + custom app</h4>
+          <p>Your design built as a Shopify theme, plus our own marketplace app and vendor dashboard.</p>
+          <div class="meter">
+            <div><span>Speed to launch</span><span class="dots" data-v="4"></span></div>
+            <div><span>Custom UI freedom</span><span class="dots" data-v="4"></span></div>
+            <div><span>SMS OTP vendor login</span><span class="dots" data-v="5"></span></div>
+            <div><span>Low monthly fees</span><span class="dots" data-v="5"></span></div>
+          </div>
+          <ul><li><b>+</b>Matches your designs and flows exactly</li><li><b>+</b>You own the code, with no per-vendor fees</li><li><b>+</b>Can move to headless later without rebuilding the backend</li></ul>
+        </div>
+        <div class="opt rv">
+          <h4>C · Fully headless</h4>
+          <p>A Hydrogen / React front end using Shopify's Storefront API, plus the same custom app.</p>
+          <div class="meter">
+            <div><span>Speed to launch</span><span class="dots" data-v="2"></span></div>
+            <div><span>Custom UI freedom</span><span class="dots" data-v="5"></span></div>
+            <div><span>SMS OTP vendor login</span><span class="dots" data-v="5"></span></div>
+            <div><span>Low monthly fees</span><span class="dots" data-v="5"></span></div>
+          </div>
+          <ul><li><b>+</b>App-like speed and full design freedom</li><li><b>–</b>Longer build and more to maintain</li><li><b>–</b>Usually better for phase 2 than for the MVP</li></ul>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- MVP BUILDER -->
+<section class="mvp-sec" id="mvp">
+  <div class="wrap">
+    <div class="sec-head rv">
+      <div>
+        <span class="eyebrow"><i></i>MVP scope planner</span>
+        <h2>Launch lean. <em>Grow on real data.</em></h2>
+        <p class="lead">Turn features on or off to see how the build time changes. The pre-selected set is what I'd suggest for launch. Everything else can follow once real vendors and customers are using it.</p>
+      </div>
+    </div>
+    <div class="mvp">
+      <div class="rv">
+        <div class="feat-group"><h5>Core: recommended for launch</h5><div class="feats" id="featCore"></div></div>
+        <div class="feat-group"><h5>Phase 2: add after launch</h5><div class="feats" id="featLater"></div></div>
+      </div>
+      <aside class="summary rv">
+        <span class="eyebrow"><i></i>Indicative build time</span>
+        <div class="big-num"><span id="wk">10</span><small>weeks</small></div>
+        <p id="featCount"></p>
+        <div class="sum-bar" id="sumBar"></div>
+        <ul class="sum-list" id="sumList"></ul>
+        <p class="note">This is a rough guide for planning, not a quote. I'll give you a firm timeline and price after reviewing your design references.</p>
+      </aside>
+    </div>
+  </div>
+</section>
+
+<!-- ROADMAP -->
+<section id="roadmap">
+  <div class="wrap">
+    <div class="sec-head rv">
+      <div>
+        <span class="eyebrow"><i></i>Roadmap</span>
+        <h2>From design references <em>to launch.</em></h2>
+        <p class="lead">Based on the recommended MVP scope. You'll get a working staging link to review at the end of every phase.</p>
+      </div>
+    </div>
+    <div class="road">
+      <div class="step rv"><div class="num">W1</div><small>Week 1</small><h4>Discovery &amp; design</h4><ul><li>Review your design references</li><li>Agree final MVP scope</li><li>Shopify store and app setup</li></ul></div>
+      <div class="step rv"><div class="num">W2–4</div><small>Weeks 2–4</small><h4>Marketplace storefront</h4><ul><li>Home, category, product pages</li><li>Vendor storefront pages</li><li>Cart and Shopify checkout</li></ul></div>
+      <div class="step rv"><div class="num">W5–6</div><small>Weeks 5–6</small><h4>Vendor portal</h4><ul><li>SMS OTP login</li><li>Products, stock, orders</li><li>Store profile settings</li></ul></div>
+      <div class="step rv"><div class="num">W7–8</div><small>Weeks 7–8</small><h4>Admin &amp; money</h4><ul><li>Vendor and product approvals</li><li>Commissions and payout ledger</li><li>Order splitting and notifications</li></ul></div>
+      <div class="step rv"><div class="num">W9–10</div><small>Weeks 9–10</small><h4>QA &amp; launch</h4><ul><li>Testing on desktop, tablet and mobile</li><li>Onboard your first vendors</li><li>Go live, with support after launch</li></ul></div>
+    </div>
+  </div>
+</section>
+
+<!-- WORK -->
+<section class="work" id="work">
+  <div class="wrap">
+    <div class="sec-head rv">
+      <div>
+        <span class="eyebrow"><i></i>Similar work</span>
+        <h2>Marketplaces <em>we've shipped.</em></h2>
+        <p class="lead">Live marketplace and multi-vendor projects you can browse today.</p>
+      </div>
+    </div>
+    <div class="links" id="links"></div>
+  </div>
+</section>
+
+<!-- FAQ -->
+<section id="faq">
+  <div class="wrap faq-grid">
+    <div class="rv">
+      <span class="eyebrow"><i></i>Questions</span>
+      <h2 style="margin-top:14px">Things you'll <em>probably</em> ask.</h2>
+    </div>
+    <div class="rv" id="faqList"></div>
+  </div>
+</section>
+
+<!-- CTA -->
+<section class="cta" id="next">
+  <div class="wrap cta-grid">
+    <div class="rv">
+      <span class="eyebrow" style="color:rgba(255,255,255,.85)"><i style="background:#fff"></i>Next step</span>
+      <h2 style="margin:14px 0 16px">Send your design references and <em>we'll start.</em></h2>
+      <p class="lead">Once I've seen your references, I'll turn this concept into your design, confirm the MVP scope, and send a fixed timeline and price.</p>
+      <div class="hero-ctas"><a class="btn btn-dark" href="#prototype">Back to the prototype</a><a class="btn btn-ghost" href="#mvp">Revisit MVP scope</a></div>
+    </div>
+    <div class="need rv">
+      <h4>Helpful to have before our call</h4>
+      <label><input type="checkbox"><span>Design references<small>Figma, screenshots or links to sites you like</small></span></label>
+      <label><input type="checkbox"><span>Target country and currency<small>So we can choose the SMS provider and payment gateway</small></span></label>
+      <label><input type="checkbox"><span>Vendor rules<small>Commission %, how often payouts happen, who handles shipping</small></span></label>
+      <label><input type="checkbox"><span>Launch vendors<small>Roughly how many vendors and products at launch</small></span></label>
+      <label><input type="checkbox"><span>Shopify store<small>An existing store, or should we set up a new one</small></span></label>
+      <div class="prog" id="needProg">0 of 5 ready</div>
+    </div>
+  </div>
+</section>
+
+<footer>
+  <div class="wrap">
+    <span><b>Multi-vendor marketplace concept</b> · prepared for Mohammed Almutairi · November 2026</span>
+    <span>Brand, vendors, products and numbers are placeholders for this demo.</span>
+  </div>
+</footer>
+
+<!-- SIDE CART -->
+<div class="scrim" id="scrim"></div>
+<aside class="cart" id="cart" aria-label="Shopping cart" aria-hidden="true">
+  <div class="cart-h">
+    <div><h4>Your bag</h4><p id="cartSub">Empty for now</p></div>
+    <button class="x" id="cartClose" aria-label="Close cart"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round"><path d="M6 6l12 12M18 6L6 18"/></svg></button>
+  </div>
+  <div class="ship"><p id="shipMsg"></p><div class="bar"><i id="shipBar"></i></div></div>
+  <div class="cart-body" id="cartBody"></div>
+  <div class="cart-f">
+    <div class="tot"><span>Subtotal</span><span id="subT">$0.00</span></div>
+    <div class="tot"><span>Shipping</span><span id="shipT">—</span></div>
+    <div class="tot big"><span>Total</span><span id="totT">$0.00</span></div>
+    <button class="checkout" id="checkoutBtn" disabled><span>Secure checkout</span><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round"><path d="M5 12h14M13 6l6 6-6 6"/></svg></button>
+    <div class="secure"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2"><rect x="5" y="11" width="14" height="10" rx="2"/><path d="M8 11V7a4 4 0 0 1 8 0v4"/></svg>Shopify checkout · one payment for every vendor</div>
+  </div>
+</aside>
+
+<div class="toast" id="toast"><i></i><span id="toastText"></span></div>
+
+<script src="script.js"></script>
+</body>
+</html>
