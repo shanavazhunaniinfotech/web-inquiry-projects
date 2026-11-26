@@ -2,6 +2,13 @@
 (() => {
   const $ = (s, c = document) => c.querySelector(s);
   const $$ = (s, c = document) => [...c.querySelectorAll(s)];
+  const NS = 'http://www.w3.org/2000/svg';
+  const el = (tag, attrs = {}, parent) => {
+    const n = document.createElementNS(NS, tag);
+    for (const k in attrs) n.setAttribute(k, attrs[k]);
+    if (parent) parent.appendChild(n);
+    return n;
+  };
   const reduced = matchMedia('(prefers-reduced-motion: reduce)').matches;
   const fine = matchMedia('(pointer: fine)').matches;
   let buildST = null;
@@ -52,6 +59,105 @@
   }
 
   /* =======================================================
+     SCENE GENERATION
+     ======================================================= */
+  const scene = $('#scene');
+  const GROUND = 790, TOP = 300, FLOORS = 16, FH = (GROUND - TOP) / FLOORS;
+  const TX = 730, TW = 200;
+
+  // fit the scene: portrait screens get a taller viewBox so the tower sits below the copy
+  function fitScene() {
+    const r = innerWidth / innerHeight;
+    const H = r < 1 ? Math.min(Math.max(660 / r, 900), 1700) : 900;
+    scene.setAttribute('viewBox', `0 ${900 - H} 1600 ${H}`);
+  }
+  fitScene();
+  addEventListener('resize', fitScene);
+
+  // distant skyline
+  const sky = $('#skyline'), skyL = $('#skylineLights');
+  const blds = [[60,40,120],[110,28,80],[150,46,170],[205,30,95],[300,36,140],[345,24,70],[372,40,190],[420,30,110],[1150,40,150],[1200,26,90],[1235,44,210],[1290,30,120],[1330,40,170],[1380,24,80],[1410,50,240],[1470,32,130],[1510,40,180],[1560,40,100]];
+  blds.forEach(([x, w, h]) => {
+    el('rect', { x, y: 715 - h, width: w, height: h + 5, fill: '#c7b08b', opacity: .55 }, sky);
+    for (let i = 0; i < Math.floor(h / 22); i++) {
+      if (Math.random() > .55) el('rect', { x: x + 4 + Math.random() * (w - 10), y: 715 - h + 8 + i * 20, width: 3, height: 3, fill: '#ffd98f' }, skyL);
+    }
+  });
+  // Burj-like spire
+  el('path', { d: 'M238 715 L246 520 L252 430 L256 330 L258 250 L260 330 L264 430 L270 520 L280 715Z', fill: '#c2aa83', opacity: .6 }, sky);
+  for (let i = 0; i < 16; i++) el('rect', { x: 255 + (Math.random() * 6 - 3), y: 360 + i * 22, width: 2.5, height: 2.5, fill: '#ffd98f' }, skyL);
+  el('circle', { cx: 258, cy: 250, r: 2.5, fill: '#ff5a4a' }, skyL);
+
+  // stars
+  const stars = $('#stars');
+  for (let i = 0; i < 70; i++) el('circle', { cx: Math.random() * 1600, cy: Math.random() * 1200 - 780, r: Math.random() * 1.3 + .3, fill: '#fff', opacity: Math.random() * .7 + .3 }, stars);
+
+  // piles
+  const piles = $('#piles');
+  for (let i = 0; i < 9; i++) el('line', { x1: 722 + i * 27, y1: 792, x2: 722 + i * 27, y2: 822 }, piles);
+
+  // tower floors
+  const tower = $('#tower'), lights = $('#lights'), scaffold = $('#scaffold'), fins = $('#fins');
+  const floors = [], glassPanels = [], winLights = [];
+  for (let i = 0; i < FLOORS; i++) {
+    const y = GROUND - (i + 1) * FH;
+    const g = el('g', { class: 'floor' }, tower);
+    // columns
+    [0, 48, 96, 144, 193].forEach(cx => el('rect', { x: TX + cx, y: y + 4, width: 7, height: FH - 4, fill: 'url(#concrete)' }, g));
+    // slab
+    el('rect', { x: TX - 4, y, width: TW + 8, height: 5, fill: '#8a847a' }, g);
+    // glass
+    const gl = el('g', { opacity: 0 }, g);
+    el('rect', { x: TX + 2, y: y + 5, width: TW - 4, height: FH - 5, fill: 'url(#glass)' }, gl);
+    for (let m = 1; m < 6; m++) el('line', { x1: TX + m * 33.3, y1: y + 5, x2: TX + m * 33.3, y2: y + FH, stroke: '#1d3446', 'stroke-width': 1.2 }, gl);
+    el('line', { x1: TX, y1: y + 5.5, x2: TX + TW, y2: y + 5.5, stroke: '#e2c27d', 'stroke-width': 1, opacity: .7 }, gl);
+    floors.push({ g, y }); glassPanels.push(gl);
+    // window lights
+    for (let w = 0; w < 6; w++) {
+      if (Math.random() > .62) continue;
+      winLights.push(el('rect', { x: TX + 5 + w * 33.3, y: y + 8, width: 27, height: FH - 11, fill: Math.random() > .3 ? '#ffd88a' : '#fff0c8', opacity: 0 }, lights));
+    }
+  }
+  // scaffold
+  for (let i = 0; i <= FLOORS; i++) {
+    const y = GROUND - i * FH;
+    el('line', { x1: TX - 16, y1: y, x2: TX - 4, y2: y, stroke: '#a07c3b', 'stroke-width': 1.5 }, scaffold);
+    el('line', { x1: TX + TW + 4, y1: y, x2: TX + TW + 16, y2: y, stroke: '#a07c3b', 'stroke-width': 1.5 }, scaffold);
+    if (i < FLOORS) {
+      el('line', { x1: TX - 16, y1: y, x2: TX - 4, y2: y - FH, stroke: '#a07c3b', 'stroke-width': 1 }, scaffold);
+      el('line', { x1: TX + TW + 16, y1: y, x2: TX + TW + 4, y2: y - FH, stroke: '#a07c3b', 'stroke-width': 1 }, scaffold);
+    }
+  }
+  [TX - 16, TX - 4, TX + TW + 4, TX + TW + 16].forEach(x => el('line', { x1: x, y1: GROUND, x2: x, y2: TOP, stroke: '#a07c3b', 'stroke-width': 1.5 }, scaffold));
+  // fins
+  [TX + 1, TX + 99, TX + TW - 3].forEach(x => el('rect', { x, y: TOP, width: 3, height: GROUND - TOP, fill: 'url(#gold)' }, fins));
+
+  // villa + crown lights
+  [[1075, 716, 150, 66], [1240, 716, 100, 66], [1115, 636, 120, 52]].forEach(([x, y, w, h]) =>
+    winLights.push(el('rect', { x: x + 3, y: y + 3, width: w - 6, height: h - 6, fill: '#ffd98f', opacity: 0, class: 'vl' }, lights)));
+  const crownLight = el('path', { d: 'M770 252 H890', stroke: '#ffe3a3', 'stroke-width': 4, opacity: 0 }, lights);
+
+  // palms
+  const palms = $('#palms');
+  function palm(x, s, flip = 1) {
+    const outer = el('g', { transform: `translate(${x} ${GROUND + 4})` }, palms);
+    const g = el('g', { transform: `scale(${s * flip} ${s})` }, outer);
+    el('path', { d: 'M0 0 C 4 -40 -2 -80 8 -120', stroke: '#7a5b36', 'stroke-width': 7, fill: 'none', 'stroke-linecap': 'round' }, g);
+    for (let k = 0; k < 6; k++) el('path', { d: 'M8 -120 c 20 -10 40 -6 56 8 c -18 -6 -36 -4 -56 -8z', fill: k % 2 ? '#2f5a3a' : '#3e6f47', transform: `rotate(${-150 + k * 50} 8 -120)` }, g);
+    el('circle', { cx: 8, cy: -118, r: 5, fill: '#5d4426' }, g);
+    return outer;
+  }
+  const palmEls = [palm(650, .85), palm(1005, .95, -1), palm(1400, 1.05), palm(395, .7, -1), palm(1520, .8)];
+
+  // lamps
+  const lamps = $('#lamps'), lampGlows = $('#lampGlows');
+  for (let x = 80; x < 1600; x += 190) {
+    el('rect', { x, y: 800, width: 3, height: 42, fill: '#3a3a3a' }, lamps);
+    el('rect', { x: x - 6, y: 798, width: 14, height: 3, fill: '#3a3a3a' }, lamps);
+    el('circle', { cx: x + 1, cy: 806, r: 34, fill: 'url(#lampGlow)' }, lampGlows);
+  }
+
+  /* =======================================================
      NO-GSAP FALLBACK
      ======================================================= */
   if (!hasGSAP) {
@@ -81,58 +187,150 @@
   };
 
   /* =======================================================
-     BUILD — real time-lapse journey
+     BUILD TIMELINE
      ======================================================= */
   const build = $('#build');
-  const stages = $$('.stage'), shots = $$('.shot'), jLis = $$('#journey li');
-  const jBar = $('#journeyBar'), clock = $('#clock'), paidEl = $('#hudPaid');
-  const PAID = [0, 10, 30, 50, 100];
-  let cur = 0;
-  function setStage(n) {
-    if (n === cur) return;
-    cur = n;
-    stages.forEach((s, i) => s.classList.toggle('is-on', i === n));
-    shots.forEach((s, i) => {
-      const on = i === n, v = s.querySelector('video');
-      s.classList.toggle('is-on', on);
-      if (v) { if (on) { const pr = v.play(); if (pr) pr.catch(() => {}); } else v.pause(); }
-    });
-    jLis.forEach((li, i) => li.classList.toggle('is-on', i <= n));
-    paidEl.textContent = PAID[n] + '%';
-  }
-  function progress(p) {
-    jBar.style.width = (p * 100).toFixed(2) + '%';
-    clock.textContent = 'Month ' + Math.round(p * 30);
-    setStage(Math.min(4, Math.round(p * 4)));
-  }
-  // warm up the second clip once the page is idle
-  setTimeout(() => { const v = $('.shot[data-shot="2"] video'); if (v) v.preload = 'auto'; }, 2500);
+  const stages = $$('.stage');
+  const drawPaths = $$('#blueprint .draw');
+  drawPaths.forEach(p => { const L = p.getTotalLength(); p.style.strokeDasharray = L; p.style.strokeDashoffset = L; });
 
+  gsap.set('#crane > rect', { scaleY: 0, transformOrigin: '50% 100%' });
+  gsap.set('#craneTop', { autoAlpha: 0, y: -80 });
+  gsap.set('#foundation', { scaleY: 0, transformOrigin: '50% 100%' });
+  gsap.set('#piles line', { scaleY: 0, transformOrigin: '50% 0%' });
+  gsap.set(floors.map(f => f.g), { autoAlpha: 0, y: -26 });
+  gsap.set('#scaffold', { scaleY: 0, transformOrigin: '50% 100%' });
+  gsap.set('#fins rect', { scaleY: 0, transformOrigin: '50% 100%' });
+  gsap.set('#villaFrame', { scaleY: 0, transformOrigin: '50% 100%' });
+  gsap.set(palmEls, { scale: 0, transformOrigin: '50% 100%' });
+  gsap.set('#crown', { y: 24 });
+  gsap.set('#tape path', { scaleX: 0, transformOrigin: '0% 50%' });
+
+  gsap.set('#birds', { x: 1120, y: 250 });
+  const tl = gsap.timeline({ defaults: { ease: 'none' } });
+  tl.addLabel('s0', 0);
+
+  // --- 01 plot → 02 foundation
+  tl.to('#scrollcue', { autoAlpha: 0, duration: .3 }, 0)
+    .to(stages[0], { autoAlpha: 0, y: -40, duration: .6, ease: 'power1.in' }, 0)
+    .to('#birds', { x: 1560, y: 80, opacity: 0, duration: 1.4 }, .1)
+    .to('#tape path', { scaleX: 1, duration: .6, stagger: .15 }, .2)
+    .to('#blueprint', { opacity: 1, duration: .4 }, .3)
+    .to(drawPaths, { strokeDashoffset: 0, duration: 1.1, stagger: .12 }, .35)
+    .to(['#skyDayR', '#skyDayDiv'], { opacity: 1, duration: 1.4 }, .8)
+    .to('#sun', { x: 1330, y: 200, duration: 4 }, .8)
+    .fromTo(stages[1], { autoAlpha: 0, y: 40 }, { autoAlpha: 1, y: 0, duration: .5, ease: 'power2.out' }, .9)
+    .to('#pit', { opacity: 1, duration: .4 }, 1.1)
+    .to('#piles line', { scaleY: 1, duration: .3, stagger: .06 }, 1.3)
+    .to('#foundation', { scaleY: 1, duration: .4 }, 1.9)
+    .to(['#tape', '#plot text'], { opacity: 0, duration: .4 }, 2.2)
+    .to('#crane > rect', { scaleY: 1, duration: .7 }, 1.8)
+    .to('#craneTop', { autoAlpha: 1, y: 0, duration: .45, ease: 'power2.out' }, 2.45)
+    .addLabel('s1', 2.3);
+
+  // --- 03 structure
+  tl.to(stages[1], { autoAlpha: 0, y: -40, duration: .4 }, 3.1)
+    .fromTo(stages[2], { autoAlpha: 0, y: 40 }, { autoAlpha: 1, y: 0, duration: .5, ease: 'power2.out' }, 3.4)
+    .to('#scaffold', { opacity: 1, duration: .3 }, 3)
+    .to('#scaffold', { scaleY: 1, duration: 3.15 }, 3);
+  floors.forEach((f, i) => {
+    const t = 3 + i * .19;
+    const L = f.y - 25 - 196;
+    tl.to('#hook', { y: L, duration: .16, ease: 'power1.inOut' }, t - .02)
+      .to('#cable', { attr: { y2: L }, duration: .16, ease: 'power1.inOut' }, t - .02)
+      .to('#trolley', { x: 800 + (i % 3) * 30, duration: .16 }, t - .02)
+      .to(f.g, { autoAlpha: 1, y: 0, duration: .26, ease: 'power2.out' }, t);
+  });
+  tl.to('#villaFrame', { opacity: 1, scaleY: 1, duration: 1.2 }, 3.9)
+    .addLabel('s2', 5.3);
+
+  // --- 04 facade
+  tl.to(stages[2], { autoAlpha: 0, y: -40, duration: .4 }, 5.9)
+    .fromTo(stages[3], { autoAlpha: 0, y: 40 }, { autoAlpha: 1, y: 0, duration: .5, ease: 'power2.out' }, 6.1)
+    .to('#blueprint', { opacity: 0, duration: .5 }, 6.1)
+    .to(glassPanels, { opacity: 1, duration: .35, stagger: .08 }, 6.2)
+    .to('#fins', { opacity: 1, duration: .2 }, 6.4)
+    .to('#fins rect', { scaleY: 1, duration: 1.1, stagger: .1 }, 6.4)
+    .to('#crown', { opacity: 1, y: 0, duration: .5, ease: 'power2.out' }, 7.3)
+    .to('#scaffold', { opacity: 0, duration: .6 }, 7.1)
+    .to('#villaSkin', { opacity: 1, duration: .8 }, 6.6)
+    .to('#villaFrame', { opacity: 0, duration: .5 }, 7.0)
+    .to('#hook', { y: 20, duration: .5 }, 7.0)
+    .to('#cable', { attr: { y2: 20 }, duration: .5 }, 7.0)
+    .to('#craneTop', { autoAlpha: 0, y: -120, duration: .5 }, 7.5)
+    .to('#crane > rect', { scaleY: 0, duration: .5 }, 7.7)
+    .to(['#pit', '#piles', '#stakes'], { opacity: 0, duration: .4 }, 7.4)
+    .addLabel('s3', 7.6);
+
+  // --- 05 handover
+  tl.to(stages[3], { autoAlpha: 0, y: -40, duration: .4 }, 8.0)
+    .fromTo(stages[4], { autoAlpha: 0, y: 40 }, { autoAlpha: 1, y: 0, duration: .5, ease: 'power2.out' }, 8.3)
+    .to(['#skyDuskR', '#skyDuskDiv'], { opacity: 1, duration: 1.2 }, 8.0)
+    .to('#sun', { y: 760, opacity: 0, duration: 1.2 }, 8.0)
+    .to('#dusk', { opacity: .5, duration: 1.2 }, 8.0)
+    .to('#road', { opacity: 1, duration: .5 }, 8.1)
+    .to(palmEls, { scale: 1, duration: .6, stagger: .1, ease: 'back.out(1.6)' }, 8.2)
+    .to('#poolR', { opacity: 1, duration: .4 }, 8.4)
+    .to('#stars', { opacity: 1, duration: .8 }, 8.8)
+    .to('#skylineLights', { opacity: 1, duration: .6 }, 8.8)
+    .to('#lampGlows', { opacity: 1, duration: .5 }, 8.9)
+    .to(gsap.utils.shuffle(winLights.slice()), { opacity: 1, duration: .15, stagger: .012 }, 8.7)
+    .to(crownLight, { opacity: 1, duration: .3 }, 9.2)
+    .to('#bbSoon', { opacity: 0, duration: .25 }, 8.9)
+    .to('#bbSold', { opacity: 1, duration: .25 }, 9.15)
+    .to('#car', { opacity: 1, duration: .1 }, 9.0)
+    .fromTo('#car', { x: 0 }, { x: 1700, duration: 1 }, 9.0)
+    .addLabel('s4', 9.6)
+    .to({}, { duration: .4 }, 9.6);
+
+  // HUD
+  const hudPct = $('#hudPct'), hudBar = $('#hudBar'), hudPaid = $('#hudPaid'), hudSteps = $$('#hudSteps li');
+  let night = false, lastStep = -1;
+  function hud(p) {
+    hudPct.textContent = Math.round(p * 100) + '%';
+    hudBar.style.width = p * 100 + '%';
+    const step = p < .1 ? 0 : p < .3 ? 1 : p < .58 ? 2 : p < .8 ? 3 : 4;
+    if (step !== lastStep) { hudSteps.forEach((li, i) => li.classList.toggle('is-on', i <= step)); lastStep = step; }
+    let paid = 0;
+    if (p >= .9) paid = 100;
+    else if (p >= .8) paid = 60;
+    else if (p >= .3) paid = 10 + Math.round(((p - .3) / .5) * 10) * 5;
+    else if (p >= .12) paid = 10;
+    hudPaid.textContent = paid + '%';
+    const n = p > .82;
+    if (n !== night) { build.classList.toggle('is-night', n); document.body.classList.toggle('scene-night', n); night = n; }
+  }
+
+  const isMobile = () => window.innerWidth < 700;
   buildST = ScrollTrigger.create({
     trigger: build,
     start: 'top top',
-    end: () => '+=' + Math.round(window.innerHeight * 3.4),
+    end: () => '+=' + Math.round(window.innerHeight * (isMobile() ? 4 : 4.6)),
     pin: true,
-    scrub: true,
+    scrub: reduced ? true : 1,
+    animation: tl,
     anticipatePin: 1,
     invalidateOnRefresh: true,
-    snap: reduced ? false : { snapTo: 1 / 4, duration: { min: .4, max: .9 }, delay: .15, ease: 'power2.inOut' },
-    onUpdate: self => progress(self.progress),
-    onToggle: self => document.body.classList.toggle('in-build', self.isActive),
+    snap: reduced ? false : { snapTo: 'labelsDirectional', duration: { min: .35, max: 1 }, delay: .12, ease: 'power1.inOut' },
+    onUpdate: self => hud(self.progress),
+    onToggle: self => document.body.classList.toggle('scene-night', self.isActive && night),
   });
-  progress(0);
-  document.body.classList.toggle('in-build', buildST.isActive || scrollY < 10);
+  hud(0);
 
+  // skip link
   $('.skip').addEventListener('click', e => { e.preventDefault(); scrollTo('#trust'); });
 
   /* =======================================================
      INTRO
      ======================================================= */
   function intro() {
-    gsap.from('.hdr', { y: -24, opacity: 0, duration: 1, ease: 'power3.out', clearProps: 'transform,opacity' });
-    gsap.from(stages[0].children, { y: 30, opacity: 0, duration: 1.2, stagger: .08, ease: 'power3.out', delay: .15, clearProps: 'transform,opacity' });
-    gsap.from('#media', { clipPath: 'inset(10% 6% 10% 6% round 28px)', duration: 1.8, ease: 'expo.out', clearProps: 'clipPath' });
-    gsap.from('#journey', { opacity: 0, y: 16, duration: 1, delay: .6, ease: 'power3.out', clearProps: 'transform,opacity' });
+    const s0 = stages[0];
+    gsap.from(s0.children, { y: 40, opacity: 0, duration: 1.1, stagger: .09, ease: 'power3.out', delay: .1, clearProps: 'transform,opacity' });
+    gsap.from('.hdr', { y: -30, opacity: 0, duration: .9, ease: 'power3.out', clearProps: 'transform,opacity' });
+    gsap.from('.hud', { x: 30, opacity: 0, duration: 1, delay: .4, ease: 'power3.out', clearProps: 'transform,opacity' });
+    gsap.from('#sun', { scale: .6, opacity: 0, duration: 1.6, transformOrigin: '50% 50%', ease: 'power2.out' });
+    gsap.from('#billboard', { y: 60, opacity: 0, duration: 1, delay: .5, ease: 'power3.out' });
+    gsap.from('#stakes rect, #stakes path', { scaleY: 0, transformOrigin: '50% 100%', duration: .6, stagger: .05, delay: .6, ease: 'back.out(2)' });
   }
 
   initUI();
@@ -308,6 +506,16 @@
     calc();
 
     /* ---------- areas hover ---------- */
+    const afloat = $('#afloat'), aImg = $('#afloatImg');
+    if (fine && G) {
+      const qx = gsap.quickTo(afloat, 'x', { duration: .6, ease: 'power3' });
+      const qy = gsap.quickTo(afloat, 'y', { duration: .6, ease: 'power3' });
+      $('#alist').addEventListener('mousemove', e => { qx(e.clientX + 200); qy(e.clientY); });
+      $$('#alist li').forEach(li => {
+        li.addEventListener('mouseenter', () => { aImg.src = li.dataset.img; gsap.to(afloat, { opacity: 1, scale: 1, duration: .5, ease: 'power3.out' }); });
+        li.addEventListener('mouseleave', () => gsap.to(afloat, { opacity: 0, scale: .6, duration: .4 }));
+      });
+    }
     $$('#alist li').forEach(li => li.addEventListener('click', () => {
       const a = li.dataset.area;
       fArea.value = [...fArea.options].some(o => o.value === a) ? a : '';
