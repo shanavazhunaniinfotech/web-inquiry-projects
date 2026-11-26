@@ -12,6 +12,7 @@
   <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Anton&family=Instrument+Serif:ital@0;1&family=Inter+Tight:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap">
   <link rel="preload" as="image" href="img/cand-logo.png">
   <link rel="stylesheet" href="style.css">
+  <script>document.documentElement.classList.add('js')</script>
 </head>
 <body>
   <a class="skip" href="#main">Skip to content</a>
@@ -55,39 +56,56 @@
 
   <main id="main">
     <!-- ============ HERO ============ -->
-    <section class="hero" id="top">
-      <div class="hero__copy">
-        <p class="eyebrow"><span>Custom UV printed water cans</span><span>Australia</span></p>
-        <h1 class="hero__title" aria-label="Your logo. Your print. Your moment.">
-          <span class="hero__w" data-i="0">Your logo.</span>
-          <span class="hero__w" data-i="1">Your print.</span>
-          <span class="hero__w hero__w--serif" data-i="2">Your moment.</span>
-        </h1>
-        <p class="hero__lede">Your design is UV printed straight onto a 330ml sleek can of still water. No stickers, no sleeves, no peeling. <strong>From 24 cans to thousands.</strong></p>
-        <div class="hero__cta">
-          <a class="btn btn--red btn--lg" href="#enquire">Get a quote <span aria-hidden="true">→</span></a>
-          <a class="btn btn--line btn--lg" href="#try">Try your logo on a can</a>
-        </div>
-        <p class="hero__note">Replies within 24–48 hours · Nothing prints until you approve it</p>
+    <section class="hx" id="top" aria-labelledby="hx-title">
+      <div class="hx__bg" aria-hidden="true">
+        <div class="hx__grid"></div>
+        <div class="hx__sweep"></div>
+        <span class="hx__ghost">CAND.</span>
       </div>
 
-      <div class="hero__stage">
-        <div class="hero__glow" aria-hidden="true"></div>
-        <canvas class="hero__can" id="heroCan" width="520" height="900" role="img" aria-label="A brushed aluminium can being UV printed with sample artwork"></canvas>
-        <p class="hero__sample" id="heroSample" aria-live="polite">Sample artwork · CAND.</p>
+      <div class="hx__top">
+        <p class="eyebrow"><span>Custom UV printed water cans</span><span>Sydney · Australia-wide</span></p>
+        <div class="hud" aria-hidden="true">
+          <span class="hud__dot"></span>
+          <span class="hud__lab">UV print</span>
+          <span class="hud__num" id="hudNum">01 / 03</span>
+          <span class="hud__bar"><i id="hudBar"></i></span>
+        </div>
+      </div>
 
-        <!-- Spec panel styled like the small print on a can -->
-        <dl class="label" aria-label="Product at a glance">
-          <div><dt>Contents</dt><dd>Still water</dd></div>
-          <div><dt>Can</dt><dd>330ml sleek aluminium</dd></div>
-          <div><dt>Print</dt><dd>UV, direct to can</dd></div>
-          <div><dt>Minimum</dt><dd>24 cans</dd></div>
-          <div><dt>From</dt><dd>$6.50 / can</dd></div>
-          <div><dt>Turnaround</dt><dd>2–3 weeks</dd></div>
-        </dl>
+      <h1 class="hx__title" id="hx-title" aria-label="Your logo. Your print. Your moment.">
+        <span class="hx__line hx__line--1"><span class="hx__w" data-i="0">Your logo.</span></span>
+        <span class="hx__line hx__line--2"><span class="hx__w hx__w--out" data-i="1">Your print.</span></span>
+        <span class="hx__line hx__line--3"><span class="hx__w hx__w--serif" data-i="2">Your moment.</span></span>
+      </h1>
+
+      <div class="hx__stage">
+        <canvas class="hx__can" id="heroCan" role="img" aria-label="Three brushed aluminium cans on a reflective floor; the front can is UV printed with sample artwork. Drag to turn it."></canvas>
+        <div class="callout" id="callout" aria-hidden="true"><i></i><span><b>50 × 50 mm</b>UV print zone</span></div>
+        <span class="fchip fchip--a" aria-hidden="true"><i></i>From 24 cans</span>
+        <span class="fchip fchip--b" aria-hidden="true"><i></i>$6.50 / can</span>
+        <span class="fchip fchip--c" aria-hidden="true"><i></i>No stickers. No sleeves.</span>
+        <span class="fchip fchip--d" aria-hidden="true"><i></i>2–3 week turnaround</span>
+      </div>
+
+      <div class="hx__bottom">
+        <div class="hx__copy">
+          <p class="hx__lede">Your design, UV printed straight onto a 330ml sleek can of still water. <strong>From 24 cans to thousands.</strong></p>
+          <div class="hx__cta">
+            <a class="btn btn--red btn--lg magnet" href="#enquire"><span>Get a quote</span> <span aria-hidden="true">→</span></a>
+            <a class="btn btn--line btn--lg magnet" href="#try"><span>Try your logo on a can</span></a>
+          </div>
+          <p class="hx__note">Replies within 24–48 hours · Nothing prints until you approve it</p>
+        </div>
+        <div class="samples" role="group" aria-label="Sample artwork on the front can">
+          <span class="samples__lab">Sample artwork</span>
+          <button type="button" data-hs="0" aria-pressed="true"><b>CAND.</b><small>Brand</small><i></i></button>
+          <button type="button" data-hs="1" aria-pressed="false"><b>Monogram</b><small>Wedding</small><i></i></button>
+          <button type="button" data-hs="2" aria-pressed="false"><b>Launch night</b><small>Activation</small><i></i></button>
+        </div>
+        <a class="scue" href="#story" aria-label="Scroll to see how it's printed"><span class="scue__can"><i></i></span><span>Scroll to print</span></a>
       </div>
     </section>
-
     <!-- ============ TICKER ============ -->
     <div class="ticker" aria-hidden="true">
       <div class="ticker__track">
@@ -491,17 +509,54 @@
     </section>
   </main>
 
-  <footer class="foot">
-    <div class="foot__top">
-      <p class="foot__line">Your logo.<br>Your print.<br><em>Your moment.</em></p>
-      <div class="foot__cols">
-        <div><h3>Explore</h3><a href="#try">Try your logo</a><a href="#events">Events</a><a href="#how">How it works</a><a href="#faq">FAQ</a></div>
-        <div><h3>Talk to us</h3><a href="#enquire">Enquire now</a><a href="https://candevents.com/pages/contact" target="_blank" rel="noopener">Contact</a><a href="https://www.instagram.com/cand.events/" target="_blank" rel="noopener">Instagram @cand.events</a></div>
+  <footer class="fx" id="footer">
+    <div class="fx__cta">
+      <div class="fx__rows" aria-hidden="true">
+        <div class="fx__row fx__row--out" data-dir="-1"><div class="fx__track"><span>Your logo · Your print · Your moment ·&nbsp;</span><span>Your logo · Your print · Your moment ·&nbsp;</span></div></div>
+        <div class="fx__row" data-dir="1"><div class="fx__track"><span>Let's make your cans ·&nbsp;</span><span>Let's make your cans ·&nbsp;</span><span>Let's make your cans ·&nbsp;</span></div></div>
+      </div>
+      <a class="badge magnet" href="#enquire" aria-label="Get a quote">
+        <svg class="badge__ring" viewBox="0 0 200 200" aria-hidden="true">
+          <defs><path id="ringPath" d="M100,100 m-78,0 a78,78 0 1,1 156,0 a78,78 0 1,1 -156,0"/></defs>
+          <text><textPath href="#ringPath">GET A QUOTE · FROM 24 CANS · 2–3 WEEKS · </textPath></text>
+        </svg>
+        <span class="badge__core"><span aria-hidden="true">→</span></span>
+      </a>
+    </div>
+
+    <div class="fx__shelf">
+      <canvas id="shelf" aria-hidden="true"></canvas>
+      <p class="fx__shelfnote">Move across the shelf · every can turns to face you</p>
+    </div>
+
+    <div class="fx__main">
+      <div class="fx__brand">
+        <img src="img/cand-logo.png" alt="CAND." width="374" height="155" loading="lazy">
+        <p>Custom UV printed water cans for events, launches and brands. From 24 cans to 100,000+.</p>
+        <dl class="fx__spec">
+          <div><dt>Minimum</dt><dd>24 cans</dd></div>
+          <div><dt>From</dt><dd>$6.50 / can</dd></div>
+          <div><dt>Turnaround</dt><dd>2–3 weeks</dd></div>
+          <div><dt>Delivery</dt><dd>Sydney &amp; interstate</dd></div>
+        </dl>
+      </div>
+      <nav class="fx__cols" aria-label="Footer">
+        <div><h3>Explore</h3><a href="#try">Try your logo</a><a href="#for">Who it's for</a><a href="#events">Events</a><a href="#how">How it works</a><a href="#faq">FAQ</a></div>
+        <div><h3>Talk to us</h3><a href="#enquire">Enquire now</a><a href="https://candevents.com/pages/contact" target="_blank" rel="noopener">Contact</a><a href="https://www.instagram.com/cand.events/" target="_blank" rel="noopener">Instagram</a></div>
         <div><h3>Legal</h3><a href="https://candevents.com/policies/privacy-policy" target="_blank" rel="noopener">Privacy policy</a></div>
+      </nav>
+      <div class="fx__side">
+        <a class="ig magnet" href="https://www.instagram.com/cand.events/" target="_blank" rel="noopener"><span class="ig__icon" aria-hidden="true"></span><span><small>Follow along</small><b>@cand.events</b></span></a>
+        <a class="totop magnet" href="#top"><span aria-hidden="true">↑</span> Back to top</a>
       </div>
     </div>
-    <img class="foot__mark" src="img/cand-logo.png" alt="" width="374" height="155" loading="lazy">
-    <p class="foot__fine">© CAND. Custom UV printed water cans, Australia.</p>
+
+    <div class="fx__mark" aria-hidden="true"><span class="fx__word" data-text="CAND.">CAND.</span><i class="fx__uv"></i></div>
+
+    <div class="fx__fine">
+      <span>© 2026 CAND. Custom UV printed water cans, Australia.</span>
+      <span>Your logo. Your print. Your moment.</span>
+    </div>
   </footer>
 
   <div class="dock" id="dock">
