@@ -199,53 +199,52 @@
   });
   $('#quizRestart').addEventListener('click', function () { answers = []; $$('.is-picked').forEach(function (x) { x.classList.remove('is-picked'); }); quizGo(1); });
 
-  /* ---------- Why Horizon (auto-rotating pillars) ---------- */
-  var whyItems = $$('.why-item'), whyIdx = 0, whyTimer;
-  function setWhy(i) {
-    whyIdx = i;
-    var it = whyItems[i];
-    whyItems.forEach(function (x) { x.classList.toggle('is-active', x === it); });
-    var img = $('#whyImg'); img.classList.add('swap');
-    setTimeout(function () {
-      img.src = it.dataset.img;
-      $('#whyBadge b').textContent = it.dataset.b;
-      $('#whyBadge span').textContent = it.dataset.s;
-      img.classList.remove('swap');
-    }, 250);
-    clearTimeout(whyTimer);
-    whyTimer = setTimeout(function () { setWhy((whyIdx + 1) % whyItems.length); }, 6000);
-  }
-  whyItems.forEach(function (it, i) { it.addEventListener('click', function () { setWhy(i); }); });
-  setWhy(0);
+  /* ---------- Why Horizon: link cards to pins ---------- */
+  $$('.wf').forEach(function (card) {
+    var pin = $('.pin--' + card.dataset.pin);
+    card.addEventListener('mouseenter', function () { card.classList.add('is-hot'); if (pin) pin.classList.add('is-hot'); });
+    card.addEventListener('mouseleave', function () { card.classList.remove('is-hot'); if (pin) pin.classList.remove('is-hot'); });
+  });
 
-  /* ---------- Journey: highlight step in view ---------- */
-  var jcs = $$('.jc'), jIdx = $$('#journeyIndex li');
-  if ('IntersectionObserver' in window) {
-    var jio = new IntersectionObserver(function (es) {
-      es.forEach(function (en) {
-        if (!en.isIntersecting) return;
-        var i = +en.target.dataset.i;
-        jcs.forEach(function (c) { c.classList.toggle('is-active', c === en.target); });
-        jIdx.forEach(function (l, k) { l.classList.toggle('is-active', k === i); });
-      });
-    }, { rootMargin: '-45% 0px -45% 0px' });
-    jcs.forEach(function (c) { jio.observe(c); });
+  /* ---------- Source to capsule: auto-advancing stages ---------- */
+  var jTabs = $$('.jt__tab'), jPanels = $$('.jp'), jI = 0, jTimer = null, jStarted = false;
+  function setStage(i) {
+    jI = (i + jPanels.length) % jPanels.length;
+    jTabs.forEach(function (t, k) {
+      t.classList.remove('is-active');
+      t.classList.toggle('is-done', k < jI);
+      t.setAttribute('aria-selected', k === jI ? 'true' : 'false');
+    });
+    void jTabs[jI].offsetWidth;
+    jTabs[jI].classList.add('is-active');
+    jPanels.forEach(function (p, k) { p.classList.toggle('is-active', k === jI); });
+    clearTimeout(jTimer);
+    jTimer = setTimeout(function () { setStage(jI + 1); }, 7000);
   }
+  jTabs.forEach(function (t, k) { t.addEventListener('click', function () { setStage(k); }); });
+  var jStage = $('#jStage');
+  if ('IntersectionObserver' in window) {
+    new IntersectionObserver(function (es) {
+      es.forEach(function (en) {
+        if (en.isIntersecting && !jStarted) { jStarted = true; setStage(0); }
+      });
+    }, { threshold: 0.3 }).observe(jStage);
+  } else { setStage(0); }
 
   /* ---------- Reviews ---------- */
   var REVIEWS = [
-    { n: 'Marco R.', a: 58, c: 'Milan', p: 'damiana', h: 'my energy is back', t: 'After three weeks I noticed real, steady energy in the afternoons. I feel like myself again.' },
-    { n: 'Giulia B.', a: 61, c: 'Turin', p: 'saffron', h: 'calmer & brighter', t: 'I was skeptical, but my mood feels more even and I sleep better too. It has become part of my morning.' },
-    { n: 'Antonio L.', a: 66, c: 'Rome', p: 'boswellia', h: 'morning walks are back', t: 'My knees have been the issue for years. Two capsules with breakfast and mornings are so much easier.' },
-    { n: 'Lucia M.', a: 54, c: 'Bologna', p: 'bacopa', h: 'sharper at work', t: 'Names, appointments, details — I feel more focused. Paired with the Multivitamin, it is effortless.' },
-    { n: 'Franco D.', a: 63, c: 'Naples', p: 'melatonin', h: 'finally sleeping through', t: 'Falling asleep used to take an hour. Now I am out within 20 minutes and wake up without grogginess.' },
-    { n: 'Elena V.', a: 57, c: 'Verona', p: 'multivitamin', h: 'quality you can feel', t: 'You can tell this is formulated for our age. Fewer capsules than my old brand and I feel the difference.' },
-    { n: 'Paolo S.', a: 69, c: 'Genoa', p: 'black-garlic', h: 'no garlic breath!', t: 'My doctor suggested garlic for my heart. This one has no smell at all and the quality is obvious.' },
-    { n: 'Rita C.', a: 59, c: 'Florence', p: 'damiana-her', h: 'a real game changer', t: 'I feel more balanced and more like me. Discreet delivery and lovely, premium packaging.' }
+    { ph: 'marco', n: 'Marco R.', a: 58, c: 'Milan', p: 'damiana', h: 'my energy is back', t: 'After three weeks I noticed real, steady energy in the afternoons. I feel like myself again.' },
+    { ph: 'giulia', n: 'Giulia B.', a: 61, c: 'Turin', p: 'saffron', h: 'calmer & brighter', t: 'I was skeptical, but my mood feels more even and I sleep better too. It has become part of my morning.' },
+    { ph: 'antonio', n: 'Antonio L.', a: 66, c: 'Rome', p: 'boswellia', h: 'morning walks are back', t: 'My knees have been the issue for years. Two capsules with breakfast and mornings are so much easier.' },
+    { ph: 'lucia', n: 'Lucia M.', a: 54, c: 'Bologna', p: 'bacopa', h: 'sharper at work', t: 'Names, appointments, details — I feel more focused. Paired with the Multivitamin, it is effortless.' },
+    { ph: 'franco', n: 'Franco D.', a: 63, c: 'Naples', p: 'melatonin', h: 'finally sleeping through', t: 'Falling asleep used to take an hour. Now I am out within 20 minutes and wake up without grogginess.' },
+    { ph: 'elena', n: 'Elena V.', a: 57, c: 'Verona', p: 'multivitamin', h: 'quality you can feel', t: 'You can tell this is formulated for our age. Fewer capsules than my old brand and I feel the difference.' },
+    { ph: 'paolo', n: 'Paolo S.', a: 69, c: 'Genoa', p: 'black-garlic', h: 'no garlic breath!', t: 'My doctor suggested garlic for my heart. This one has no smell at all and the quality is obvious.' },
+    { ph: 'rita', n: 'Rita C.', a: 59, c: 'Florence', p: 'damiana-her', h: 'a real game changer', t: 'I feel more balanced and more like me. Discreet delivery and lovely, premium packaging.' }
   ];
   $('#rvTotal').textContent = pad(REVIEWS.length);
   $('#rvThumbs').innerHTML = REVIEWS.map(function (r, i) {
-    return '<button data-i="' + i + '" aria-label="Review by ' + r.n + '"><span><img src="' + byId[r.p].img + '" alt=""></span><em>' + r.n[0] + '</em></button>';
+    return '<button data-i="' + i + '" aria-label="Review by ' + r.n + '"><img src="images/customers/' + r.ph + '.webp" alt="' + r.n + '" loading="lazy"><em><img src="' + byId[r.p].img + '" alt=""></em></button>';
   }).join('');
   var rvI = 0, rvTimer;
   function setReview(i) {
@@ -261,6 +260,7 @@
       $('#rvTag').dataset.goal = p.id;
       $('#rvText').textContent = '“' + r.t + '”';
       $('#rvName').textContent = r.n;
+      $('#rvAvatar').src = 'images/customers/' + r.ph + '.webp'; $('#rvAvatar').alt = r.n;
       $('#rvMeta').textContent = r.a + ' · ' + r.c + ' · Verified buyer of ' + nm(p);
       $('#rvIdx').textContent = pad(rvI + 1);
       q.classList.remove('fade'); img.classList.remove('swap');
@@ -404,7 +404,7 @@
   }
 
   /* ---------- Reveal + counters ---------- */
-  $$('.goals__head, .goal-panel, .quiz-shell, .why__head, .why-stage, .why-list, .journey__aside, .jc, .vs, .rv-left, .rv-product, .rv-quote, .stat, .guide__grid, .accordion, .footer__cta').forEach(function (el) { el.classList.add('reveal'); });
+  $$('.goals__head, .goal-panel, .quiz-shell, .why__head, .wf, .why-core, .journey__head, .jt, .seals, .rv-left, .rv-product, .rv-quote, .stat, .guide__grid, .accordion, .footer__cta').forEach(function (el) { el.classList.add('reveal'); });
   function countUp(el) {
     var end = +el.dataset.count, t0 = null; el.textContent = '0';
     function step(t) { if (!t0) t0 = t; var p = Math.min(1, (t - t0) / 1400); el.textContent = Math.round(end * (1 - Math.pow(1 - p, 3))); if (p < 1) requestAnimationFrame(step); }
