@@ -1,0 +1,69 @@
+/* =========================================================
+   OCEAN — Banner V2: full-bleed cinematic slideshow
+   Loaded after ../style.css; only overrides the hero.
+   ========================================================= */
+.hero--v2 { --hero-accent: #7FE0D4; position: relative; display: flex; flex-direction: column; justify-content: flex-end; min-height: min(calc(100vh - 42px), 900px); padding-bottom: 24px; background: #0B1517; color: #fff; overflow: hidden; }
+.hero--v2[data-slide="1"] { --hero-accent: #F2C08F; }
+.hero--v2[data-slide="2"] { --hero-accent: #9FD0E6; }
+.hero--v2::after { display: none; }
+
+.hero--v2 .hero__media { position: absolute; inset: 0; padding: 0; max-width: none; margin: 0; }
+.hero--v2 .hero__frame { position: absolute; inset: 0; aspect-ratio: auto; border-radius: 0; box-shadow: none; background: #0B1517; }
+.hero--v2 .hero__img { object-position: var(--pos, center); transform: scale(1.14); transition: opacity 1.4s ease, transform 9s linear; }
+.hero--v2 .hero__img.is-active { transform: scale(1); }
+.hero__shade { position: absolute; inset: 0; pointer-events: none; background:
+  linear-gradient(90deg, rgba(6,16,18,.82) 0%, rgba(6,16,18,.5) 38%, rgba(6,16,18,0) 68%),
+  linear-gradient(0deg, rgba(6,16,18,.78) 0%, rgba(6,16,18,0) 42%),
+  linear-gradient(180deg, rgba(6,16,18,.45) 0%, rgba(6,16,18,0) 22%); }
+
+.hero--v2 .hero__content { position: relative; z-index: 2; display: flex; align-items: flex-end; justify-content: space-between; gap: 48px; }
+.hero--v2 .hero__copy { max-width: 780px; padding: 0; }
+.hero--v2 .eyebrow { color: #fff; }
+.hero--v2 .eyebrow .dot { background: var(--hero-accent); box-shadow: 0 0 0 4px color-mix(in srgb, var(--hero-accent) 30%, transparent); transition: background-color .8s; }
+.hero--v2 .display { color: #fff; font-size: clamp(52px, 8.2vw, 128px); line-height: .94; }
+.hero--v2 .display em { color: var(--hero-accent); transition: color .8s; }
+.hero--v2 .lead { color: rgba(255,255,255,.84); max-width: 46ch; }
+.hero--v2 .text-reveal { display: inline-block; }
+.hero--v2 .hero__ctas { margin-top: 34px; }
+.hero--v2 .btn--primary { background: #fff; color: var(--c-ink); }
+.hero--v2 .btn--primary::before { background: var(--hero-accent); }
+.hero--v2 .btn--primary:hover { color: var(--c-ink); box-shadow: 0 16px 40px -14px rgba(0,0,0,.6); }
+.hero--v2 .btn--ghost { color: #fff; box-shadow: inset 0 0 0 1.5px rgba(255,255,255,.55); backdrop-filter: blur(6px); }
+.hero--v2 .btn--ghost:hover { background: rgba(255,255,255,.12); box-shadow: inset 0 0 0 1.5px #fff; }
+
+.hero--v2 .hero__chip { position: relative; left: auto; bottom: auto; right: auto; flex: none; min-width: 320px; margin-bottom: 6px; animation: none; color: #fff; background: rgba(255,255,255,.12); backdrop-filter: blur(18px) saturate(1.4); -webkit-backdrop-filter: blur(18px) saturate(1.4); box-shadow: inset 0 0 0 1px rgba(255,255,255,.26), 0 30px 60px -30px rgba(0,0,0,.7); }
+.hero--v2 .hero__chip-label, .hero--v2 .hero__chip-meta { color: rgba(255,255,255,.72); }
+.hero--v2 .hero__chip-add { background: #fff; color: var(--c-ink); }
+.hero--v2 .hero__chip-add:hover { background: var(--hero-accent); }
+
+.hero--v2 .hero__controls { position: relative; z-index: 2; margin-top: 40px; padding-top: 22px; border-top: 1px solid rgba(255,255,255,.18); gap: 28px; }
+.hero--v2 .hero__progress { grid-template-columns: repeat(3, minmax(0, 220px)); }
+.hero--v2 .hero__dot span { background: rgba(255,255,255,.22); }
+.hero--v2 .hero__dot span::after { background: #fff; }
+.hero--v2 .hero__dot em { color: rgba(255,255,255,.6); }
+.hero--v2 .hero__dot.is-active em { color: #fff; }
+.hero--v2 .hero__counter { position: static; padding: 0; color: #fff; margin-left: auto; }
+.hero--v2 .hero__counter strong { font-size: 30px; }
+.hero--v2 .hero__arrows .icon-btn { color: #fff; background: rgba(255,255,255,.08); box-shadow: inset 0 0 0 1.5px rgba(255,255,255,.35); backdrop-filter: blur(6px); }
+.hero--v2 .hero__arrows .icon-btn:hover { background: #fff; color: var(--c-ink); }
+
+/* text entrance per slide */
+.hero--v2 .hero__text .display, .hero--v2 .hero__text .lead { transition: opacity .8s ease, transform 1s var(--ease); }
+.hero--v2 .hero__text:not(.is-active) .display { transform: translateY(40px); opacity: 0; }
+.hero--v2 .hero__text:not(.is-active) .lead { transform: translateY(24px); opacity: 0; }
+.hero--v2 .hero__text.is-active .lead { transition-delay: .12s; }
+
+/* settings panel: banner links */
+.seg--links a { display: block; }
+.seg--links a[aria-current="page"] span { background: #fff; font-weight: 700; box-shadow: var(--shadow-sm); }
+
+@media (max-width: 989px) {
+  .hero--v2 { min-height: 92vh; padding-bottom: 20px; }
+  .hero--v2 .hero__media { order: 0; }
+  .hero--v2 .hero__shade { background: linear-gradient(0deg, rgba(6,16,18,.9) 0%, rgba(6,16,18,.55) 45%, rgba(6,16,18,.15) 75%), linear-gradient(180deg, rgba(6,16,18,.45) 0%, rgba(6,16,18,0) 25%); }
+  .hero--v2 .hero__content { flex-direction: column; align-items: stretch; gap: 24px; }
+  .hero--v2 .hero__chip { min-width: 0; left: auto; right: auto; bottom: auto; }
+  .hero--v2 .display { font-size: clamp(44px, 12vw, 72px); }
+  .hero--v2 .hero__controls { margin-top: 28px; padding-top: 16px; }
+  .hero--v2 .hero__counter { display: none; }
+}
