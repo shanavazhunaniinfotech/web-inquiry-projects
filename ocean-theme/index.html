@@ -26,7 +26,20 @@
 <!-- ============ ANNOUNCEMENT BAR (section group: header) ============ -->
 <div class="announcement" data-section="Announcement bar">
   <div class="container announcement__inner">
-    <div class="announcement__localization">
+    <p class="announcement__proof"><span class="stars" aria-hidden="true">★★★★★</span> <strong>4.8</strong> from 3,210 reviews</p>
+    <div class="announcement__center">
+      <button class="announcement__arrow" aria-label="Previous announcement" data-ann="-1"><svg width="12" height="12" viewBox="0 0 24 24" aria-hidden="true"><path d="M15 5l-7 7 7 7" fill="none" stroke="currentColor" stroke-width="2.2"/></svg></button>
+      <div class="announcement__slider" aria-live="polite">
+        <p class="announcement__msg is-active"><span>Free carbon-neutral shipping on orders over <span data-money="60">$60</span></span></p>
+        <p class="announcement__msg"><span>New arrivals just landed — <a href="#featured">shop the launch</a></span></p>
+        <p class="announcement__msg"><span>Build a bundle of 3 and save 15%</span></p>
+      </div>
+      <button class="announcement__arrow" aria-label="Next announcement" data-ann="1"><svg width="12" height="12" viewBox="0 0 24 24" aria-hidden="true"><path d="M9 5l7 7-7 7" fill="none" stroke="currentColor" stroke-width="2.2"/></svg></button>
+    </div>
+    <div class="announcement__right">
+      <a class="announcement__link" href="#footer">Track order</a>
+      <a class="announcement__link" href="#faq">Help</a>
+      <span class="announcement__sep" aria-hidden="true"></span>
       <div class="dropdown" data-dropdown>
         <button class="dropdown__toggle" aria-expanded="false" aria-haspopup="listbox" aria-label="Country / currency">
           <span data-current-country><span class="flag flag--us" aria-hidden="true"></span>United States (USD $)</span>
@@ -51,89 +64,86 @@
           <li><button role="option" data-lang="Deutsch">Deutsch</button></li>
         </ul>
       </div>
+    
     </div>
-    <div class="announcement__slider" aria-live="polite">
-      <p class="announcement__msg is-active">Free carbon-neutral shipping on orders over <span data-money="60">$60</span></p>
-      <p class="announcement__msg">New: Niacinamide 10% + Sea Zinc Serum — <a href="#featured">shop the launch</a></p>
-      <p class="announcement__msg">Build a bundle of 3 and save 15%</p>
-    </div>
-    <a class="announcement__link" href="#faq">Help &amp; FAQ</a>
   </div>
 </div>
 
-<!-- ============ HEADER ============ -->
+<!-- ============ HEADER (floating bar, centred logo) ============ -->
 <header class="header" data-section="Header" id="header">
-  <div class="container header__inner">
-    <button class="icon-btn header__burger" aria-label="Open menu" aria-controls="mobile-menu" aria-expanded="false" data-open-menu>
-      <svg width="22" height="22" viewBox="0 0 24 24" aria-hidden="true"><path d="M3 7h18M3 12h18M3 17h12" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/></svg>
-    </button>
+  <div class="container">
+    <div class="header__inner">
+      <button class="icon-btn header__burger" aria-label="Open menu" aria-controls="mobile-menu" aria-expanded="false" data-open-menu>
+        <svg width="22" height="22" viewBox="0 0 24 24" aria-hidden="true"><path d="M3 7h18M3 12h18M3 17h12" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/></svg>
+      </button>
 
-    <a class="logo" href="#main" aria-label="Ocean home">
-      <svg class="logo__mark" width="30" height="30" viewBox="0 0 32 32" aria-hidden="true"><rect width="32" height="32" rx="9" fill="currentColor"/><path d="M5 18c3.5-4 7-4 11 0s7.5 4 11 0" fill="none" stroke="var(--c-bg)" stroke-width="3" stroke-linecap="round"/><path d="M5 12.5c3.5-4 7-4 11 0s7.5 4 11 0" fill="none" stroke="var(--c-bg)" stroke-width="2" stroke-linecap="round" opacity=".55"/></svg>
-      <span class="logo__word">OCEAN</span>
-    </a>
-
-    <nav class="nav" aria-label="Main">
-      <ul class="nav__list">
-        <li class="nav__item has-mega">
-          <button class="nav__link" aria-expanded="false" aria-controls="mega-shop">Shop
-            <svg width="10" height="10" viewBox="0 0 10 10" aria-hidden="true"><path d="M1 3l4 4 4-4" fill="none" stroke="currentColor" stroke-width="1.5"/></svg>
-          </button>
-          <div class="mega" id="mega-shop">
-            <div class="container mega__inner">
-              <div class="mega__col">
-                <p class="mega__title">Face</p>
-                <ul>
-                  <li><a href="#featured">Face wash &amp; cleansers</a></li>
-                  <li><a href="#featured">Serums &amp; treatments</a></li>
-                  <li><a href="#featured">Moisturisers</a></li>
-                  <li><a href="#featured">Face oils</a></li>
-                  <li><a href="#featured">Lip care</a></li>
-                </ul>
+      <nav class="nav" aria-label="Main">
+        <ul class="nav__list">
+          <li class="nav__item has-mega">
+            <button class="nav__link" aria-expanded="false" aria-controls="mega-shop">Shop <svg width="10" height="10" viewBox="0 0 10 10" aria-hidden="true"><path d="M1 3l4 4 4-4" fill="none" stroke="currentColor" stroke-width="1.5"/></svg></button>
+            <div class="mega" id="mega-shop">
+              <div class="mega__inner">
+                <div class="mega__cols">
+                  <div class="mega__col">
+                    <p class="mega__title">Face</p>
+                    <ul>
+                      <li><a href="#featured">Face wash &amp; cleansers</a></li>
+                      <li><a href="#featured">Serums &amp; treatments</a></li>
+                      <li><a href="#featured">Moisturisers <span class="mega__badge">New</span></a></li>
+                      <li><a href="#featured">Face oils</a></li>
+                      <li><a href="#featured">Lip care</a></li>
+                    </ul>
+                  </div>
+                  <div class="mega__col">
+                    <p class="mega__title">Body</p>
+                    <ul>
+                      <li><a href="#body">Body wash</a></li>
+                      <li><a href="#body">Body bars</a></li>
+                      <li><a href="#body">Body oils</a></li>
+                      <li><a href="#body">Hand &amp; foot care</a></li>
+                    </ul>
+                  </div>
+                  <div class="mega__col">
+                    <p class="mega__title">Featured</p>
+                    <ul>
+                      <li><a href="#featured">New arrivals</a></li>
+                      <li><a href="#featured">Best sellers</a></li>
+                      <li><a href="#bundle">Bundles &amp; sets <span class="mega__badge mega__badge--sale">−15%</span></a></li>
+                      <li><a href="#featured">Gift cards</a></li>
+                    </ul>
+                  </div>
+                  <a class="mega__all" href="#featured">Shop all products <span aria-hidden="true">→</span></a>
+                </div>
+                <a class="mega__feature" href="#featured">
+                  <img src="https://images.unsplash.com/photo-1608571423902-eed4a5ad8108?auto=format&fit=crop&w=600&h=760&q=75" alt="Amber serum bottle on a wooden stand" width="300" height="380" loading="lazy">
+                  <span class="mega__feature-text"><small>Best seller</small>Marine Repair Face Oil <span aria-hidden="true">→</span></span>
+                </a>
+                <a class="mega__feature" href="#bundle">
+                  <img src="https://images.unsplash.com/photo-1600428877878-1a0fd85beda8?auto=format&fit=crop&w=600&h=760&q=75" alt="Face oil and rose quartz roller on a white surface" width="300" height="380" loading="lazy">
+                  <span class="mega__feature-text"><small>Save 15%</small>Build a bundle <span aria-hidden="true">→</span></span>
+                </a>
               </div>
-              <div class="mega__col">
-                <p class="mega__title">Body</p>
-                <ul>
-                  <li><a href="#body">Body wash</a></li>
-                  <li><a href="#body">Mineral body bars</a></li>
-                  <li><a href="#body">Body oils</a></li>
-                  <li><a href="#body">Hand &amp; foot care</a></li>
-                </ul>
-              </div>
-              <div class="mega__col">
-                <p class="mega__title">Featured</p>
-                <ul>
-                  <li><a href="#concerns">Breakouts &amp; oiliness</a></li>
-                  <li><a href="#concerns">Dryness &amp; flaking</a></li>
-                  <li><a href="#concerns">Redness &amp; sensitivity</a></li>
-                  <li><a href="#concerns">Dullness &amp; uneven tone</a></li>
-                </ul>
-              </div>
-              <a class="mega__feature" href="#bundle">
-                <img src="https://images.unsplash.com/photo-1600428877878-1a0fd85beda8?auto=format&fit=crop&w=700&q=75" alt="Face oil and rose quartz roller on a white surface" width="350" height="420" loading="lazy">
-                <span class="mega__feature-text"><small>Save 15%</small>Build a bundle <span aria-hidden="true">→</span></span>
-              </a>
             </div>
-          </div>
-        </li>
-        <li class="nav__item"><a class="nav__link" href="#concerns">Collections</a></li>
-        <li class="nav__item"><a class="nav__link" href="#features">About</a></li>
-        <li class="nav__item"><a class="nav__link" href="#bundle">Bundles</a></li>
-        <li class="nav__item"><a class="nav__link" href="#journal">Journal</a></li>
-      </ul>
-    </nav>
+          </li>
+          <li class="nav__item"><a class="nav__link" href="#concerns">Collections</a></li>
+          <li class="nav__item"><a class="nav__link" href="#bundle">Bundles <span class="nav__dot" aria-hidden="true"></span></a></li>
+        </ul>
+      </nav>
 
-    <div class="header__icons">
-      <button class="icon-btn" aria-label="Search" data-open-search>
-        <svg width="21" height="21" viewBox="0 0 24 24" aria-hidden="true"><circle cx="11" cy="11" r="7" fill="none" stroke="currentColor" stroke-width="1.8"/><path d="M20 20l-3.6-3.6" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/></svg>
-      </button>
-      <a class="icon-btn header__account" href="#footer" aria-label="Account">
-        <svg width="21" height="21" viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="8" r="4" fill="none" stroke="currentColor" stroke-width="1.8"/><path d="M4 21c1.5-4 4.5-6 8-6s6.5 2 8 6" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/></svg>
+      <a class="logo" href="#main" aria-label="Ocean home">
+        <svg class="logo__mark" width="30" height="30" viewBox="0 0 32 32" aria-hidden="true"><rect width="32" height="32" rx="9" fill="currentColor"/><path d="M5 18c3.5-4 7-4 11 0s7.5 4 11 0" fill="none" stroke="#fff" stroke-width="3" stroke-linecap="round"/><path d="M5 12.5c3.5-4 7-4 11 0s7.5 4 11 0" fill="none" stroke="#fff" stroke-width="2" stroke-linecap="round" opacity=".55"/></svg>
+        <span class="logo__word">OCEAN</span>
       </a>
-      <button class="icon-btn cart-btn" aria-label="Open cart" data-open-cart>
-        <svg width="22" height="22" viewBox="0 0 24 24" aria-hidden="true"><path d="M5 8h14l-1.2 11.2a2 2 0 0 1-2 1.8H8.2a2 2 0 0 1-2-1.8L5 8z" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linejoin="round"/><path d="M9 8V6.5a3 3 0 0 1 6 0V8" fill="none" stroke="currentColor" stroke-width="1.8"/></svg>
-        <span class="cart-btn__count" data-cart-count>0</span>
-      </button>
+
+      <div class="header__right">
+        <ul class="nav__list nav__list--right">
+          <li class="nav__item"><a class="nav__link" href="#features">About</a></li>
+          <li class="nav__item"><a class="nav__link" href="#journal">Journal</a></li>
+        </ul>
+        <button class="search-pill" aria-label="Search" data-open-search><svg width="18" height="18" viewBox="0 0 24 24" aria-hidden="true"><circle cx="11" cy="11" r="7" fill="none" stroke="currentColor" stroke-width="1.8"/><path d="M20 20l-3.6-3.6" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/></svg><span>Search</span><kbd>/</kbd></button>
+        <a class="icon-btn header__account" href="#footer" aria-label="Account"><svg width="20" height="20" viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="8" r="4" fill="none" stroke="currentColor" stroke-width="1.8"/><path d="M4 21c1.5-4 4.5-6 8-6s6.5 2 8 6" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/></svg></a>
+        <button class="cart-btn cart-pill" aria-label="Open cart" data-open-cart><svg width="19" height="19" viewBox="0 0 24 24" aria-hidden="true"><path d="M5 8h14l-1.2 11.2a2 2 0 0 1-2 1.8H8.2a2 2 0 0 1-2-1.8L5 8z" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linejoin="round"/><path d="M9 8V6.5a3 3 0 0 1 6 0V8" fill="none" stroke="currentColor" stroke-width="1.8"/></svg><span class="cart-pill__label">Bag</span><span class="cart-btn__count" data-cart-count>0</span></button>
+      </div>
     </div>
   </div>
 </header>
@@ -297,23 +307,50 @@
   </div>
 </section>
 
-<!-- ============ 05 RICH TEXT — STATEMENT ============ -->
-<section class="section statement" data-section="Rich text">
-  <div class="container statement__inner">
-    <div class="seal" aria-hidden="true">
-      <svg viewBox="0 0 120 120"><defs><path id="circ2" d="M60 60 m-46 0 a46 46 0 1 1 92 0 a46 46 0 1 1 -92 0"/></defs><text><textPath href="#circ2" textLength="286" lengthAdjust="spacing">LESS, BUT BETTER · MADE WITH CARE ·</textPath></text></svg>
-      <svg class="seal__mark" width="34" height="34" viewBox="0 0 32 32"><path d="M5 18c3.5-4 7-4 11 0s7.5 4 11 0" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round"/><path d="M5 12.5c3.5-4 7-4 11 0s7.5 4 11 0" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" opacity=".5"/></svg>
+<!-- ============ 05 IMAGE WITH TEXT — BRAND STORY (collage) ============ -->
+<section class="section story" data-section="Image with text (collage)">
+  <div class="container story__grid">
+    <div class="story__copy">
+      <p class="eyebrow"><span class="idx">(03)</span> Our story</p>
+      <h2 class="h2">Less, but<br><em>better.</em></h2>
+      <p class="lead">A small range of everyday essentials, made properly and priced fairly.</p>
+      <ul class="story__points">
+        <li>
+          <span class="story__icon" aria-hidden="true"><svg width="22" height="22" viewBox="0 0 24 24"><path d="M5 19c8 0 14-6 14-14C11 5 5 11 5 19zm0 0l7-7" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"/></svg></span>
+          <div><strong>Honest ingredients</strong><p>Short lists, nothing hidden.</p></div>
+        </li>
+        <li>
+          <span class="story__icon" aria-hidden="true"><svg width="22" height="22" viewBox="0 0 24 24"><path d="M7 19H4l3-5M17 19h3l-3-5M9 5l3-2 3 2M12 3v6M7 14l-3 5h16l-3-5" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"/></svg></span>
+          <div><strong>Recyclable packaging</strong><p>Glass, aluminium and paper only.</p></div>
+        </li>
+        <li>
+          <span class="story__icon" aria-hidden="true"><svg width="22" height="22" viewBox="0 0 24 24"><path d="M3 12V4h8l10 10-8 8z" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linejoin="round"/><circle cx="7.5" cy="8.5" r="1.5" fill="currentColor"/></svg></span>
+          <div><strong>Fair pricing</strong><p>No mark-ups for a logo.</p></div>
+        </li>
+      </ul>
+      <div class="story__ctas">
+        <a class="btn btn--primary" href="#features">Read our story</a>
+        <a class="link-arrow" href="#journal">Visit the journal <span aria-hidden="true">→</span></a>
+      </div>
     </div>
-    <p class="eyebrow"><span class="idx">(03)</span> About the brand</p>
-    <p class="statement__text" data-words>We make fewer things, and make them properly. Every product earns its place with honest ingredients, recyclable packaging and a price that feels fair.</p>
-    <ul class="statement__stats">
-      <li><strong>12</strong><span>Products,<br>never more</span></li>
-      <li><strong>100%</strong><span>Recyclable<br>packaging</span></li>
-      <li><strong>60</strong><span>Day no-quibble<br>returns</span></li>
-    </ul>
-    <a class="btn btn--outline" href="#features">Read our story</a>
+
+    <div class="story__media">
+      <figure class="story__main"><img src="https://images.unsplash.com/photo-1617897903246-719242758050?auto=format&fit=crop&w=1000&h=1250&q=80" alt="Amber dropper bottle on a wooden tray with eucalyptus on soft linen" width="500" height="625" loading="lazy"></figure>
+      <figure class="story__second"><img src="https://images.unsplash.com/photo-1484291470158-b8f8d608850d?auto=format&fit=crop&w=600&h=600&q=80" alt="" width="300" height="300" loading="lazy"></figure>
+      <div class="story__stat">
+        <p class="story__stat-num">12</p>
+        <p class="story__stat-text">products.<br>Never more.</p>
+      </div>
+      <div class="story__rating">
+        <span class="stars" aria-hidden="true">★★★★★</span>
+        <p><strong>4.8</strong> from 3,210 reviews</p>
+      </div>
+      <div class="seal" aria-hidden="true">
+        <svg viewBox="0 0 120 120"><defs><path id="circ2" d="M60 60 m-46 0 a46 46 0 1 1 92 0 a46 46 0 1 1 -92 0"/></defs><text><textPath href="#circ2" textLength="286" lengthAdjust="spacing">LESS, BUT BETTER · MADE WITH CARE ·</textPath></text></svg>
+        <svg class="seal__mark" width="34" height="34" viewBox="0 0 32 32"><path d="M5 18c3.5-4 7-4 11 0s7.5 4 11 0" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round"/><path d="M5 12.5c3.5-4 7-4 11 0s7.5 4 11 0" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" opacity=".5"/></svg>
+      </div>
+    </div>
   </div>
-  <div class="strip" aria-hidden="true"><div class="strip__track" data-strip><figure class="strip__item strip__item--tall"><img src="https://images.unsplash.com/photo-1507652313519-d4e9174996dd?auto=format&fit=crop&w=700&q=80" alt="" width="350" height="420" loading="lazy"></figure><figure class="strip__item strip__item--sq"><img src="https://images.unsplash.com/photo-1617897903246-719242758050?auto=format&fit=crop&w=700&q=80" alt="" width="350" height="420" loading="lazy"></figure><figure class="strip__item strip__item--wide"><img src="https://images.unsplash.com/photo-1484291470158-b8f8d608850d?auto=format&fit=crop&w=700&q=80" alt="" width="350" height="420" loading="lazy"></figure><figure class="strip__item strip__item--tall"><img src="https://images.unsplash.com/photo-1600334129128-685c5582fd35?auto=format&fit=crop&w=700&q=80" alt="" width="350" height="420" loading="lazy"></figure><figure class="strip__item strip__item--sq"><img src="https://images.unsplash.com/photo-1607006344380-b6775a0824a7?auto=format&fit=crop&w=700&q=80" alt="" width="350" height="420" loading="lazy"></figure><figure class="strip__item strip__item--wide"><img src="https://images.unsplash.com/photo-1544367567-0f2fcb009e0b?auto=format&fit=crop&w=700&q=80" alt="" width="350" height="420" loading="lazy"></figure><figure class="strip__item strip__item--tall"><img src="https://images.unsplash.com/photo-1573461160327-b450ce3d8e7f?auto=format&fit=crop&w=700&q=80" alt="" width="350" height="420" loading="lazy"></figure></div></div>
 </section>
 
 <!-- ============ 06 SHOP THE LOOK ============ -->
