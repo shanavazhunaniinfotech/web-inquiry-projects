@@ -85,12 +85,12 @@
 
   /* ================= Masking tape types ================= */
   const MASK = [
-    { id: 'pet', n: 'Green Polyester (PET) Tape', s: 'Green PET', fam: 'pet', img: 'cut-green-tape', temp: 'Up to 400°F (204°C)', tnote: 'Holds through powder-coat and Cerakote cure cycles. Test on your process first.', adh: 'Silicone', yd: 72, badge: 'Best seller', thick: true,
-      d: 'High-temperature polyester tape with silicone adhesive for powder coating, Cerakote, plating and anodizing. Removes cleanly with no residue.' },
-    { id: 'glass', n: 'Glass Cloth Tape', s: 'Glass Cloth', fam: 'glass', img: 'cut-glass-cloth', temp: 'High temperature', tnote: 'For high-heat masking, flame and plasma spray work.', adh: 'Silicone', yd: 32,
-      d: 'Strong, tear-resistant glass cloth with silicone adhesive for high-heat masking, flame and plasma spray, and electrical insulation.' },
-    { id: 'paper', n: 'Paper Masking Tape', s: 'Paper', fam: 'paper', img: 'cut-paper-tape', temp: 'Low temperature', tnote: 'For painting and lower-heat finishing — not for oven cures.', adh: 'Water-based', yd: 54,
-      d: 'Crepe paper masking tape with strong hold and clean removal for painting and general finishing work.' },
+    { id: 'pet', n: 'Green Polyester (PET) Tape', s: 'Green PET', fam: 'pet', img: 'cut-green-tape', temp: 'Up to 428°F (220°C)', tnote: 'Continuous use to 356°F (180°C), short-term to 428°F (220°C). Holds through powder-coat, E-coat and Cerakote cures.', adh: 'Silicone', yd: 72, best: 'Powder coating, E-coating, plating', badge: 'Best seller', thick: true,
+      d: 'Strong green polyester (PET) film with silicone adhesive for powder coating, E-coating, Cerakote, anodizing and plating. Won\'t shrink in the oven and peels off clean with no residue.' },
+    { id: 'glass', n: 'Glass Cloth Tape', s: 'Glass Cloth', fam: 'glass', img: 'cut-glass-cloth', temp: '−100°F to 500°F (−73°C to 260°C)', tnote: 'For extreme heat where plastic or paper tapes would fail: thermal and plasma spray, heat treating.', adh: 'Silicone', yd: 32, best: 'Thermal spray, heavy industrial finishing',
+      d: 'Woven fiberglass cloth with silicone adhesive for extreme-heat masking. Flame-retardant, tough at high temperature and resistant to abrasion and solvents. Also used to insulate motors, coils and transformers.' },
+    { id: 'paper', n: 'Paper Masking Tape', s: 'Paper', fam: 'paper', img: 'cut-paper-tape', temp: 'Up to 176°F (80°C)', tnote: 'For painting and room-temperature curing — not for oven cures.', adh: 'Water-based', yd: 54, best: 'General painting, room-temp curing',
+      d: 'Easy-tear crepe paper masking tape with a water-based adhesive. Conforms to curves, holds well and removes cleanly. Great for painting, auto refinish and general finishing.' },
     { id: 'polyimide', n: 'Polyimide Tape', s: 'Polyimide', ill: 'polyimide', soon: true, opts: '1, 2, 3 & 5 mil' },
     { id: 'blue', n: 'Blue Polyester Tape', s: 'Blue Polyester', ill: 'blue', soon: true, opts: '1, 2 & 5 mil' },
     { id: 'hpaper', n: 'High-Temp Paper Masking Tape', s: 'High-Temp Paper', ill: 'hpaper', soon: true },
@@ -104,6 +104,14 @@
   const MK = Object.fromEntries(MASK.map(m => [m.id, m]));
   /* Poly netting roll chart (client sheet): stretch range start -> [part no., colour, feet per roll] */
   const NET = [[0.25, 'Poly32', 'Orange', 1500], [0.5, 'Poly50', 'Blue', 1500], [1, 'Poly100', 'Yellow', 1000], [2, 'Poly200', 'Green', 750], [2.5, 'Poly250', 'White', 500], [3, 'Poly300', 'Red', 600], [3.5, 'Poly350', 'Black', 450], [4, 'Poly400', 'Gray', 400], [4.5, 'Poly450', 'Brown', 300], [5, 'Poly500', 'Orange', 350]];
+  const PN = {
+    pet: { '0.5"': 'FGPT50072', '1"': 'FGPT100072', '2"': 'FGPT200072', '3"': 'FGPT300072', '5"': 'FGPT500072', '6"': 'FGPT600072' },
+    glass: { '1"': 'FGCT100032', '1.5"': 'FGCT150032', '2"': 'FGCT200032', '3"': 'FGCT300032', '4"': 'FGCT400032', '5"': 'FGCT500032', '6"': 'FGCT600032' },
+    paper: { '0.5"': 'FPTLP50054', '1"': 'FPTLP100054', '1.5"': 'FPTLP150054', '2"': 'FPTLP200054', '3"': 'FPTLP300054' },
+    dots: { '1"': 'FGD10005K', '1.5"': 'FGD15002K', '2"': 'FGD20001K', '3"': 'FGD30005H', '4"': 'FGD4000250H', '5"': 'FGD5000100H', '6"': 'FGD6000100H' }
+  };
+  const partNo = (fam, s) => fam === 'netting' ? ((netInfo(s) || [])[1] || '') : ((PN[fam] || {})[s] || '');
+  const NETIMG = { Orange: 'cut-netting-orange', Blue: 'cut-netting-blue', Yellow: 'cut-netting-yellow', Green: 'app-green-netting', White: 'app-white-netting', Red: 'cut-netting-red', Black: 'cut-black-spool', Gray: 'cut-netting-gray', Brown: 'cut-netting-brown' };
   const netInfo = s => NET.find(r => Math.abs(r[0] - num(s)) < .01);
   const ftLen = ft => UNIT === 'mm' ? Math.round(ft * 0.3048) + ' m' : ft.toLocaleString() + ' ft';
   const tapeItems = m => m.soon ? [] : singles(m.fam).sort((a, b) => num(a.s) - num(b.s));
@@ -144,20 +152,20 @@
     auto: { n: 'Automotive', page: B + 'shop/#auto', img: 'cut-tender-spring', d: 'Heavy-duty parts for trucks and trailers.' }
   };
   const FAMINFO = {
-    pet: { imgs: ['cut-pet-lineup', 'cut-green-tape', 'cut-pet-stack', 'cut-green-tape-2'], lbl: 'Width',
-      spec: [['Carrier', 'Polyester (PET) film'], ['Adhesive', 'Silicone'], ['Colour', 'Green'], ['Temperature', 'Up to 400°F (204°C)'], ['Roll length', '72 yd'], ['Thickness', '2 mil']],
-      uses: ['Powder coating', 'Cerakote & ceramic coating', 'Painting', 'Plating & anodizing', 'Sublimation', 'Die cutting'] },
-    glass: { imgs: ['cut-glass-cloth'], lbl: 'Width',
-      spec: [['Carrier', 'Woven glass cloth'], ['Adhesive', 'Silicone'], ['Colour', 'White'], ['Temperature', 'High temperature'], ['Roll length', '32 yd']],
-      uses: ['Flame & plasma spray', 'Electrical insulation', 'Motor & coil wrapping', 'Bundling', 'High-heat masking'] },
-    paper: { imgs: ['cut-paper-tape'], lbl: 'Width',
-      spec: [['Carrier', 'Crepe paper'], ['Adhesive', 'Water-based'], ['Colour', 'Natural'], ['Temperature', 'Low temperature'], ['Roll length', '54 yd'], ['Shelf life', '12 months (store at 60–80°F)']],
+    pet: { imgs: ['p-pet-1', 'p-pet-2', 'p-pet-3', 'p-pet-4', 'cut-pet-lineup'], lbl: 'Width',
+      spec: [['Carrier', 'Polyester (PET) film, 2 mil (50 micron)'], ['Total thickness', '3.5 mil (90 micron)'], ['Adhesive', 'Silicone'], ['Colour', 'Green'], ['Temperature', 'Continuous 356°F (180°C) · short-term 428°F (220°C)'], ['Adhesion to steel', '10 N/25 mm'], ['Elongation at break', '80%'], ['Roll length', '72 yd (66 m)'], ['Features', 'No residue, corrosion resistant, good insulation, easy to die-cut']],
+      uses: ['Powder coating', 'E-coating', 'Cerakote & ceramic coating', 'Plating & anodizing', 'Paint spray protection', 'Die cutting'] },
+    glass: { imgs: ['p-glass-2', 'p-glass-1', 'p-glass-3', 'cut-glass-cloth'], lbl: 'Width',
+      spec: [['Carrier', 'Woven glass cloth (fiberglass)'], ['Adhesive', 'Silicone'], ['Total thickness', '7 mil (0.18 mm)'], ['Colour', 'White'], ['Temperature', '−100°F to 500°F (−73°C to 260°C)'], ['Adhesion', '≥ 8 N/25 mm'], ['Voltage resistance', '≥ 3 kV'], ['Elongation', '≥ 5%'], ['Roll length', '32 yd (30 m)']],
+      uses: ['Thermal & plasma spray', 'Heat treating', 'Aerospace & heavy industrial finishing', 'Motor, coil & transformer insulation', 'Extreme high-heat masking'] },
+    paper: { imgs: ['p-paper-1', 'p-paper-2', 'p-paper-3', 'cut-paper-tape'], lbl: 'Width',
+      spec: [['Carrier', 'Crepe paper'], ['Adhesive', 'Water-based pressure-sensitive'], ['Thickness', '6.3 mil (160 micron)'], ['Colour', 'Beige'], ['Temperature', 'Up to 176°F (80°C)'], ['Peel strength', '6.5 N/25 mm'], ['Tensile strength', '≥ 28 N/cm'], ['Roll length', '54 yd (50 m)'], ['Shelf life', '12 months (store at 60–80°F, 40–50% RH)']],
       uses: ['Painting', 'Auto refinish', 'Appliances', 'Interior finishing'] },
-    dots: { n: 'Green Masking Dots', line: 'diecut', imgs: ['cut-dots-hero', 'cut-green-dots'], lbl: 'Dot diameter',
+    dots: { n: 'Green Masking Dots', line: 'diecut', imgs: ['p-dots-1', 'p-dots-2', 'cut-dots-hero', 'cut-green-dots'], lbl: 'Dot diameter',
       d: 'Pre-cut green polyester discs with silicone adhesive. They keep powder coat, Cerakote and paint off holes, nuts, mating surfaces and grounding points — no trimming needed.',
-      spec: [['Material', 'Polyester film, silicone adhesive'], ['Colour', 'Green'], ['Temperature', 'Oven cure up to 400°F for 20 min'], ['Sold as', 'Single roll']],
+      spec: [['Material', 'High-temperature polyester film, silicone adhesive'], ['Colour', 'Green'], ['Temperature', 'Up to 392°F (200°C)+ bake cycles'], ['Dots per roll', '1" × 5,000 · 1.5" × 2,000 · 2" × 1,000 · 3" × 500 · 4" × 250 · 5" & 6" × 100'], ['Sold as', 'Single roll']],
       uses: ['Holes & studs', 'Nuts & threads', 'Grounding points', 'Mating surfaces'] },
-    netting: { n: 'PE Protective Netting', line: 'protect', imgs: ['cut-netting-red', 'cut-netting-blue', 'cut-netting-yellow', 'cut-netting-gray', 'app-red-netting', 'app-green-netting'], lbl: 'Stretch range',
+    netting: { n: 'PE Protective Netting', line: 'protect', imgs: ['cut-netting-red', 'cut-netting-orange', 'cut-netting-blue', 'cut-netting-yellow', 'cut-netting-gray', 'cut-netting-brown', 'cut-black-spool', 'app-valve-netting', 'app-pump-netting', 'app-white-netting', 'app-red-netting', 'app-green-netting'], lbl: 'Stretch range',
       d: 'Expandable polyethylene mesh that slides over parts to stop scratches, scuffs and metal-on-metal contact. Open mesh keeps parts visible and lets air through. Colour-coded by size, sold by the full roll.',
       spec: [['Material', 'Polyethylene (PE)'], ['Type', 'Expandable open-mesh sleeve'], ['Sizes', '10 stretch ranges, 0.25" to 5.50"'], ['Roll length', '300 – 1,500 ft by size'], ['Reusable', 'Yes']],
       uses: ['Machined parts', 'Threaded components', 'Shafts & fasteners', 'Tooling', 'Warehouse & packing lines'] },
@@ -381,7 +389,7 @@
   /* ================= Init + shared API for page scripts ================= */
   const hooks = [];
   function renderAll() { renderCart(); hooks.forEach(f => f()); if (ps.classList.contains('is-open')) runSearch(); }
-  const FPS = window.FPS = { B, $, $$, esc, money, icon, im, fine, fmtSize, fmtLen, fmtYd, unitWord, CAT, BY, num, short, TAPE_F, singles, famAll, minP, imgFor, ILL, visual,
+  const FPS = window.FPS = { B, PN, partNo, NETIMG, $, $$, esc, money, icon, im, fine, fmtSize, fmtLen, fmtYd, unitWord, CAT, BY, num, short, TAPE_F, singles, famAll, minP, imgFor, ILL, visual,
     MASK, MK, NET, netInfo, ftLen, tapeItems, dotsCount, LINES, LINE_ORDER, INDS, ut, toast, addToCart, openQuote, cardItems, slug, CATS, FAMINFO, PRODUCTS, PBY, purl, pItems, pFrom,
     get cart() { return cart; }, setCart(c) { cart = c; save(); renderCart(); }, onUnit(f) { hooks.push(f); }, onTape: null, onLine: null };
   Object.defineProperty(FPS, 'UNIT', { get: () => UNIT });
