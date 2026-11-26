@@ -242,7 +242,7 @@
     $('#cartCount').textContent = n; $('#cartN').textContent = n ? `(${n})` : '';
     // shipping bar
     const left = Math.max(0, FREE_SHIP - sub), pct = FREE_SHIP ? Math.min(100, sub / FREE_SHIP * 100) : 100;
-    $('#shipBar').innerHTML = `<p>${icon('truck')}<span>${left > 0 ? `You're <b>${money(left)}</b> away from <b>FREE shipping</b>` : `<b>You've unlocked FREE Regular Shipping!</b> (8–10 days)`}</span></p><div class="sb__t" role="progressbar" aria-valuemin="0" aria-valuemax="100" aria-valuenow="${Math.round(pct)}"><i style="width:${pct}%"></i></div>${left > 0 ? '' : '<small>Need it sooner? Choose Expedited (2–4 days) at checkout.</small>'}`;
+    $('#shipBar').innerHTML = `<p>${icon('truck')}<span>${left > 0 ? `You're <b>${money(left)}</b> away from <b>FREE shipping</b>` : `<b>You've unlocked FREE shipping!</b>`}</span></p><div class="sb__t" role="progressbar" aria-valuemin="0" aria-valuemax="100" aria-valuenow="${Math.round(pct)}"><i style="width:${pct}%"></i></div>`;
     $('#shipBar').classList.toggle('is-done', left <= 0);
     // items
     const ups = upsells();
@@ -250,13 +250,13 @@
     $('#cartItems').innerHTML = cart.length ? cart.map((i, x) => {
       const p = BY[i.h], P = PRODUCTS.find(q => q.fam === p.f), m = P && MK[P.id], ni = p.f === 'netting' && netInfo(p.s), pn = partNo(p.f, p.s);
       const det = [p.s && fmtSize(p.s), i.v, ni ? ni[2] + ' · ' + ftLen(ni[3]) + ' roll' : m && m.yd ? fmtYd(m.yd) + ' roll' : p.f === 'dots' ? dotsCount(p) : p.k && p.k !== 'Single roll' ? fmtLen(p.k) : 'Single roll'].filter(Boolean).join(' · ');
-      return `<div class="ci"><a href="${P ? purl(P.id) : '#'}"><img src="${im(imgFor(p))}" alt=""></a><div class="ci__b"><a href="${P ? purl(P.id) : '#'}"><b>${P ? P.n : short(p)}</b></a><small>${det}</small>${pn ? `<small class="ci__pn">Part no. ${pn}</small>` : ''}<small class="ci__u">${money(p.p)} each · ${p.a ? '<i class="ok"></i>In stock' : 'Ships when available'}</small>
-        <div class="ci__row"><div class="qty"><button data-q="-1" data-i="${x}" aria-label="Decrease">${icon('minus')}</button><span>${i.q}</span><button data-q="1" data-i="${x}" aria-label="Increase">${icon('plus')}</button></div><button class="ci__rm" data-rm="${x}">Remove</button></div></div><div class="ci__p">${money(p.p * i.q)}</div></div>`;
+      return `<div class="ci"><a href="${P ? purl(P.id) : '#'}"><img src="${im(imgFor(p))}" alt=""></a><div class="ci__b"><a href="${P ? purl(P.id) : '#'}"><b>${P ? P.n : short(p)}</b></a><small>${det}</small><small class="ci__u">${pn ? `<span class="ci__pn">Part no. ${pn}</span> · ` : ''}${p.a ? '<i class="ok"></i>In stock' : 'Ships when available'}</small>
+        <div class="ci__row"><div class="qty"><button data-q="-1" data-i="${x}" aria-label="Decrease">${icon('minus')}</button><span>${i.q}</span><button data-q="1" data-i="${x}" aria-label="Increase">${icon('plus')}</button></div><button class="ci__rm" data-rm="${x}">Remove</button></div></div><div class="ci__p">${money(p.p * i.q)}${i.q > 1 ? `<small>${money(p.p)} each</small>` : ''}</div></div>`;
     }).join('') + (n >= 10 ? `<div class="ci__bulk">${icon('chat')}<span><b>Ordering ${n}+ rolls?</b> You may qualify for bulk pricing. <button class="bulk__a" data-quote="Bulk order from cart" data-note="${n} items in cart">Get a quote</button></span></div>` : '') + upHtml
       : `<div class="ce">${icon('cart')}<p><b>Your cart is empty</b></p><p>Masking tape sold by the single roll, at a flat price.</p><div class="ce__b"><a class="bt bt--dark bt--sm" href="${B}masking-tapes/">Shop masking tapes</a><a class="bt bt--line bt--sm" href="${B}shop/">Shop all</a></div></div>` + upHtml;
     $('#cartSub').textContent = money(sub); $('#cartSub2').textContent = money(sub);
     $('#cartNi').textContent = n ? `(${n} item${n > 1 ? 's' : ''})` : '';
-    $('#cartShip').innerHTML = !n ? '—' : left <= 0 ? '<b class="g">FREE</b>' : 'Calculated at checkout';
+    $('#cartShip').innerHTML = left <= 0 ? '<b class="g">FREE</b>' : 'calculated at checkout';
     $('#cartFoot').classList.toggle('is-empty', !cart.length);
   }
   $('#cartItems').addEventListener('click', e => {
