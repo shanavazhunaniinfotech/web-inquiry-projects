@@ -1,103 +1,100 @@
 /* Design notes: why each section is where it is (shown via the "Design notes" button and on /strategy/) */
 window.NOTES = [
   {
-    key: 'topbar',
-    title: 'Phone number above everything',
-    why: 'Most rental leads in this market still come in by phone. The number is the first thing visitors see, on every screen size, and is tap-to-call on mobile.',
-    cro: ['A green "live" dot signals a real person is reachable', 'Promises "personal advice from the owner": your biggest edge over national chains']
-  },
-  {
     key: 'header',
-    title: 'Sticky header with a quote list',
-    why: 'The menu follows the visitor down the page, so the phone number and the "Offerte" button are never more than one tap away. The counter works like a shopping cart: visitors collect wagons, then request one quote for all of them.',
-    cro: ['Menu items are the real questions people have: range, how many, prices, process, FAQ', 'Replaces the old flat "Uw offerte aanvraag" page with an e-commerce style flow WooCommerce can support (quote cart plugin)']
+    title: 'Floating header: phone + quote always in reach',
+    why: 'The header turns into a floating glass bar when you scroll, hides while reading down and comes back the moment you scroll up. The phone number (with a green "live" dot) and the gold "Offerte" button with a counter are always one click away.',
+    cro: ['Most toilet-trailer leads still come in by phone: it gets prime position', 'The counter works like a shopping cart: visitors collect models, then send one request']
   },
   {
     key: 'hero',
-    title: 'Hero: benefit first, price anchor visible',
-    why: 'The old site opens with a keyword-heavy headline. The new one sells the outcome ("toilets your guests talk about"), then answers the three questions every visitor has within 5 seconds: what does it cost (from €225), who does the work (we deliver, place and collect), and what is included (toilet paper, soap, dryers).',
-    cro: ['Real photo of your VIP Hout wagon instead of stock photos: builds trust', 'Two CTAs: one for people who need advice, one for people who already know what they want', 'Floating cards highlight the bestseller and what is included']
+    title: 'Cinematic hero: premium first impression',
+    why: 'Black and gold, a big confident headline ("Toiletwagens met de allure van een vijfsterrenhotel"), and your real wagons rotating in an arch frame. This lifts the brand above the typical "portable toilet" look of competitors and justifies your VIP prices from the very first second.',
+    cro: ['Within 5 seconds visitors know: what (luxury toilet trailers), price (from €225), service (delivered, placed, collected) and area (NL, BE, DE)', 'Two CTAs: "Bereken mijn toiletwagen" for people who need help, "Bekijk de collectie" for people who already know', 'The rotating "vanaf €225" seal anchors the price early', 'The "Nieuw: MIVA toilet" pill shows the company is active and current']
   },
   {
     key: 'booking',
     title: 'Hotel-style booking bar',
-    why: 'Borrowed from hotel and car-rental sites, which convert very well. Visitors enter event type, date, guests and location in 30 seconds. Clicking the button fills in the advisor and the quote form for them, so they never type the same thing twice.',
-    cro: ['Small "micro-commitment" that pulls people into the funnel', '"Vrijblijvend · geen account nodig" removes fear of commitment']
+    why: 'Borrowed from hotel and car-rental sites, which convert very well. Event type, date, guests and location take 30 seconds. One click fills in the advisor and the quote form, so visitors never type anything twice.',
+    cro: ['A small first commitment that pulls visitors into the funnel', '"Vrijblijvend · persoonlijk antwoord van de eigenaar" removes hesitation']
   },
   {
-    key: 'proof',
-    title: 'Proof in numbers',
-    why: 'Only real facts from your current site: 13 models, events up to 1000+ guests, 3 countries, from €225 a day. Big numbers make a small family business look established and capable of large events.',
-    cro: ['Event types scroll past to show "we have done your kind of event"', 'Can later add: years in business, number of events per year, Google score']
+    key: 'band',
+    title: 'Gold event band',
+    why: 'A slanted gold ribbon with event types reacts to scroll speed. It signals energy and shows instantly that you serve weddings, parties, festivals, companies and construction sites.'
+  },
+  {
+    key: 'statement',
+    title: 'The brand promise (scroll-revealed)',
+    why: '"Niemand onthoudt een goed toilet. Iedereen onthoudt een slecht toilet." The words light up as you scroll. It names the real fear of every host (embarrassing toilets) and positions you as the solution. Below it: big, real numbers (13 models, 1000+ guests, 3 countries, from €225).',
+    cro: ['Emotional hook before the product details', 'Numbers make a family business feel established and capable of large events']
+  },
+  {
+    key: 'collection',
+    title: 'The collection: pinned horizontal showcase',
+    why: 'Instead of a flat product grid, the 13 models are grouped into 7 series that glide sideways as you scroll, like a luxury car configurator. Each series has variant buttons (e.g. Mini: Grijs / Hout / Wit / Vacuüm) that switch the photo, layout and price instantly.',
+    cro: ['Fewer choices at once means less choice overload, but all 13 products stay available', 'Layout icons (ladies / gents / urinals) make comparing easy at a glance', 'Day / weekend price switch, "+ Offerte" on every card, detail popup with photos and specs', 'Ends with a "Twijfelt u?" card that sends undecided visitors to the advisor', 'On mobile it becomes a native swipe carousel']
   },
   {
     key: 'advisor',
-    title: 'Toilet advisor (the key conversion tool)',
-    why: 'The number one question customers ask is "how many toilets do I need?". Today they have to call or guess. The advisor answers it instantly with your real models and prices, and puts the advice in the quote with one click. Interactive tools like this keep people on the page and turn uncertain visitors into leads.',
-    cro: ['Uses common event guidelines (about 1 toilet per 75–100 guests, more with alcohol or long events)', 'Shows an indicative price right away: no surprise later', 'Upsells naturally: plaszuilen for big events, MIVA when guests have a disability', 'The formula is easy to adjust to your own experience']
-  },
-  {
-    key: 'products',
-    title: 'All 13 products with prices, filters and quick view',
-    why: 'All products, prices and specs come straight from your current WooCommerce store. Each card shows the layout (ladies / gents / urinals) and the price, so visitors can compare without opening 13 pages. "Snel bekijken" opens photos and full specs in a popup.',
-    cro: ['Filters by need (small party, luxury, large events, accessible) instead of by technical name', 'Day / weekend price switch', 'Badges guide the choice: "Meest gekozen", "Laagste prijs", "Nieuw"', '"+ Offerte" adds to the quote list without leaving the page']
+    title: 'Toilet advisor (the main conversion tool)',
+    why: 'The number one question is "how many toilets do I need?". The advisor answers it live: guests, duration, alcohol, accessibility and "luxury look". You see the number of toilet places light up as icons, an expected queue indicator, the recommended models and the price. One click puts it all in the quote.',
+    cro: ['Interactive tools keep people on the page and turn doubt into action', 'Shows price straight away: better-qualified leads', 'Natural upsells: plaszuilen for big events, MIVA for accessibility, VIP when "luxe" is on', 'Formula is based on common event guidelines and easy to tune to your experience']
   },
   {
     key: 'luxe',
     title: 'Luxury details: justify the premium',
-    why: 'Your VIP wagons cost €100–170 more per day than a mini. This dark, premium section shows why: LED lighting, wooden floors, design washbasins, waterless urinals. It moves the conversation from price to quality.',
-    cro: ['Interior photos (from your site) prove the claims', 'Strong line: "Not a site hut. A bathroom on wheels."', 'Button takes visitors straight to the luxury filter']
+    why: 'A sticky arch image changes as you read each detail: LED lighting, wooden floors, design washbasins, waterless urinals. All photos are your own interiors. This moves the conversation from price to quality.',
+    cro: ['Strong line: "Geen bouwkeet. Een badkamer op wielen."', 'Button jumps straight to the VIP series in the collection']
   },
   {
     key: 'occasions',
-    title: 'Choose by occasion',
-    why: 'People think in events, not in wagon types. Each tile shows what others usually choose. One click pre-fills the advisor for that type of event, so a bride and a festival organiser each get relevant advice.',
-    cro: ['Also good for SEO: later each tile can link to its own landing page ("toiletwagen huren bruiloft")', 'Event photos are placeholders from Unsplash: we can swap in your own event photos']
+    title: 'Choose by occasion (hover reveal)',
+    why: 'People think in events, not wagon types. Large rows per occasion show the usual guest count and the models others choose. On desktop a photo follows the cursor. One click fills the advisor for that event.',
+    cro: ['Good for SEO later: each row can get its own landing page ("toiletwagen huren bruiloft")', 'Event photos are Unsplash placeholders and can be swapped for your own event photos']
   },
   {
     key: 'process',
-    title: 'Process + what you need on site',
-    why: 'Four simple steps remove the fear that renting a toilet wagon is complicated. The "what do you need on location" box answers the technical questions (power, drainage, space) before they become a reason to delay.',
-    cro: ['Mentions the septic tank and the no-drain models, so nobody drops out because there is no sewer']
+    title: 'Four steps + what you need on site',
+    why: 'Removes the fear that renting is complicated. The gold line draws itself as you scroll. The chips below answer the technical questions (power, drain, no sewer, no-drain models) before they become a reason to delay.'
   },
   {
     key: 'pricing',
-    title: 'Clear pricing table',
-    why: 'Price is the main search intent ("toiletwagen huren prijs"). Showing all prices openly builds trust and pre-qualifies leads, so you spend less time on people who were never going to book. Click a row to see the full details.',
-    cro: ['Clear "always included" and "optional" lists', 'Good for Google: a clear price table can appear in search results']
+    title: 'Transparent price list',
+    why: 'All 13 models with day and weekend prices in one clean table, with "+" buttons to add straight to the quote. Price is the main search intent ("toiletwagen huren prijs"). Showing it openly builds trust and pre-qualifies leads.',
+    cro: ['"Always included" vs "optional" removes doubt about hidden costs', 'Click a row to see photos and specifications']
   },
   {
     key: 'reviews',
     title: 'Reviews (PLACEHOLDERS)',
-    why: 'Social proof is one of the strongest conversion factors. The three reviews shown are example texts only. They must be replaced with your real Google reviews (or a live Google reviews widget) before going live.',
-    cro: ['Each review mentions the event type, the number of guests and the model, so visitors find a review that matches their situation']
+    why: 'Large editorial quotes are social proof. The three reviews are example texts only. They must be replaced with your real Google reviews (or a live Google widget) before going live.'
   },
   {
     key: 'area',
     title: 'Service area + distance check',
-    why: 'Visitors from Belgium or Germany often wonder whether you deliver to them. The distance check answers instantly and shows the transport rate (€1 per km), so there are no surprises.',
-    cro: ['Shows you are local (Boxtel) and cover 3 countries', 'Distances are approximate and easy to adjust']
+    why: 'A radar map from Boxtel shows your reach across NL, BE and DE. Visitors type their town and get an instant answer with the distance and the transport rate.',
+    cro: ['Answers "do you deliver to me?" without a phone call', 'Distances are approximate and easy to adjust']
   },
   {
     key: 'faq',
-    title: 'FAQ: handles objections + SEO',
+    title: 'FAQ: objections + SEO',
     why: 'Answers the questions that stop people from booking: how many, how much, no sewer, accessibility, Belgium/Germany, long-term rental. In WordPress we add FAQ schema so Google can show these answers in search results.',
     cro: ['WhatsApp button for people who prefer chatting']
   },
   {
     key: 'final',
     title: 'Personal closing: the owner replies',
-    why: 'Your biggest advantage over large national companies is personal service. The final section puts you (Daan) in front, with phone, WhatsApp and a short form. The quote list is attached automatically. A real photo of you replaces the "DS" avatar.',
-    cro: ['Only 3 required fields: fewer fields means more requests', 'Clear "Vrijblijvend" label and a privacy line reduce hesitation', 'In WordPress this connects to Gravity Forms / WPForms + email notification']
+    why: 'Your biggest edge over large national companies is personal service. A huge closing headline, you (Daan) as the contact, phone and WhatsApp buttons, and a short form that already contains the visitor\'s quote list.',
+    cro: ['Only 3 required fields', '"Vrijblijvend" label and a privacy line reduce hesitation', 'Replace the "DS" circle with a real photo of you: faces increase trust']
   },
   {
     key: 'footer',
     title: 'Footer with your network of sites',
-    why: 'Keeps the links to Douchewagen Huren, Smulders Verhuur and Aquacore (cross-selling and SEO), plus complete contact details, which also help local SEO.'
+    why: 'Full contact details (local SEO), links to Douchewagen Huren, Smulders Verhuur and Aquacore, and a large brand wordmark to close the page with confidence.'
   },
   {
     key: 'mbar',
     title: 'Mobile action bar',
-    why: 'On phones a bar with Call, WhatsApp and Quote appears after the hero. Most event planning happens on mobile, and this keeps the main action one tap away at all times.'
+    why: 'On phones a bar with Call, WhatsApp and Quote appears after the hero, so the main action is always one tap away.'
   }
 ];
