@@ -1,0 +1,455 @@
+<!doctype html>
+<html lang="uz">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+  <meta name="robots" content="noindex, nofollow">
+  <title>TITAN SPORT — Gantellar, Shtangalar va Kuch Inventarlari</title>
+  <meta name="description" content="TITAN SPORT: 100% sifatli temir va fitnes inventarlari. Gantellar, olimpiya griflari, bumper blinlar, giryalar va skameykalar. Toshkentda 3 soatda yetkazib berish.">
+  <meta name="theme-color" content="#0a0a0b">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Anton&family=Manrope:wght@400;500;600;700;800&family=JetBrains+Mono:wght@400;500&display=swap">
+  <link rel="stylesheet" href="style.css">
+</head>
+<body class="is-loading">
+  <a class="skip" href="#main">Asosiy kontentga o'tish</a>
+
+  <!-- Loader -->
+  <div class="loader" id="loader" aria-hidden="true">
+    <div class="loader__inner">
+      <div class="loader__brand">TITAN<span>SPORT</span></div>
+      <div class="loader__bar"><i id="loaderFill"></i></div>
+      <div class="loader__count"><span id="loaderNum">0</span> KG</div>
+    </div>
+  </div>
+
+  <!-- Custom cursor (desktop only) -->
+  <div class="cursor" id="cursor" aria-hidden="true"><span class="cursor__dot"></span><span class="cursor__ring"><em id="cursorLabel"></em></span></div>
+
+  <!-- Top bar -->
+  <div class="topbar">
+    <div class="topbar__track">
+      <span>O'zbekiston bo'ylab tez yetkazish</span><b>•</b>
+      <span>1 000 000 so'mdan yuqori xaridlarda yetkazish <strong>bepul</strong></span><b>•</b>
+      <span>Toshkentda 3 soat ichida</span><b>•</b>
+      <span>2 yil kafolat</span><b>•</b>
+      <span>O'zbekiston bo'ylab tez yetkazish</span><b>•</b>
+      <span>1 000 000 so'mdan yuqori xaridlarda yetkazish <strong>bepul</strong></span><b>•</b>
+      <span>Toshkentda 3 soat ichida</span><b>•</b>
+      <span>2 yil kafolat</span><b>•</b>
+    </div>
+  </div>
+
+  <!-- Header -->
+  <header class="nav" id="nav">
+    <a class="nav__logo" href="#hero" data-magnetic aria-label="TITAN SPORT bosh sahifa">
+      <svg viewBox="0 0 40 24" aria-hidden="true"><rect x="0" y="6" width="5" height="12" rx="1"/><rect x="6" y="2" width="5" height="20" rx="1"/><rect x="11" y="10.5" width="18" height="3"/><rect x="29" y="2" width="5" height="20" rx="1"/><rect x="35" y="6" width="5" height="12" rx="1"/></svg>
+      <span>TITAN<b>SPORT</b></span>
+    </a>
+    <nav class="nav__links" aria-label="Asosiy menyu">
+      <a href="#viewer" data-link>360°</a>
+      <a href="#builder" data-link>Konstruktor</a>
+      <a href="#catalog" data-link>Katalog</a>
+      <a href="#quiz" data-link>Maslahatchi</a>
+      <a href="#guides" data-link>Qo'llanma</a>
+      <a href="#contact" data-link>Aloqa</a>
+    </nav>
+    <div class="nav__actions">
+      <a class="nav__phone" href="tel:+998907775544">+998 90 777 55 44</a>
+      <button class="cart-btn" id="cartOpen" data-magnetic aria-label="Savatni ochish">
+        <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M3 4h2l2.4 11.2a2 2 0 0 0 2 1.6h7.7a2 2 0 0 0 2-1.5L21 8H6.2" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/><circle cx="10" cy="20.5" r="1.3"/><circle cx="17" cy="20.5" r="1.3"/></svg>
+        <span class="cart-btn__count" id="cartCount">0</span>
+      </button>
+      <button class="burger" id="burger" aria-label="Menyuni ochish" aria-expanded="false"><span></span><span></span></button>
+    </div>
+  </header>
+
+  <!-- Mobile menu -->
+  <div class="menu" id="menu" aria-hidden="true">
+    <nav>
+      <a href="#viewer" data-link><small>01</small>360° ko'rish</a>
+      <a href="#builder" data-link><small>02</small>Konstruktor</a>
+      <a href="#catalog" data-link><small>03</small>Katalog</a>
+      <a href="#quiz" data-link><small>04</small>Maslahatchi</a>
+      <a href="#guides" data-link><small>05</small>Qo'llanma</a>
+      <a href="#contact" data-link><small>06</small>Aloqa</a>
+    </nav>
+    <div class="menu__foot">
+      <a href="tel:+998907775544">+998 (90) 777-55-44</a>
+      <a href="https://t.me/titansport_admin" target="_blank" rel="noopener">Telegram @titansport_admin</a>
+    </div>
+  </div>
+
+  <!-- Global 3D stage for hero + story -->
+  <canvas class="stage" id="stage" aria-hidden="true"></canvas>
+  <div class="stage-fallback" id="stageFallback" aria-hidden="true"></div>
+
+  <main id="main">
+    <div class="cine" id="cine">
+      <!-- HERO -->
+      <section class="hero" id="hero">
+        <div class="hero__glow" aria-hidden="true"></div>
+        <div class="hero__content">
+          <p class="eyebrow hero__eyebrow"><i></i> 100% sifatli temir &amp; fitnes inventarlari</p>
+          <h1 class="hero__title" aria-label="Temir. Kuch. Titan.">
+            <span class="line"><span class="split">TEMIR.</span></span>
+            <span class="line"><span class="split">KUCH.</span></span>
+            <span class="line line--accent"><span class="split">TITAN.</span></span>
+          </h1>
+          <div class="hero__bottom">
+            <p class="hero__lead">Uy, garaj va professional zallar uchun monolit cho'yan va po'latdan yasalgan inventar. Toshkentda eshigingizgacha — 3 soat ichida.</p>
+            <div class="hero__ctas">
+              <a href="#catalog" class="btn btn--primary" data-link data-magnetic><span>Katalogni ko'rish</span><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M5 12h14M13 6l6 6-6 6"/></svg></a>
+              <a href="#builder" class="btn btn--ghost" data-link data-magnetic><span>Shtanga konstruktori</span></a>
+            </div>
+          </div>
+        </div>
+        <ul class="hero__stats" aria-label="Raqamlarda">
+          <li><b data-count="50">0</b><sup>+</sup><span>tonna temir zaxirasi</span></li>
+          <li><b data-count="10000" data-format="space">0</b><sup>+</sup><span>mamnun sportchilar</span></li>
+          <li><b data-count="2">0</b><sup>yil</sup><span>kafolatlangan sifat</span></li>
+        </ul>
+        <div class="hero__scroll" aria-hidden="true"><span>Pastga aylantiring</span><i></i></div>
+        <div class="hero__tag hero__tag--a" aria-hidden="true"><b>Monolit</b>Cho'yan po'lat</div>
+        <div class="hero__tag hero__tag--b" aria-hidden="true"><b>3 soat</b>Toshkent bo'ylab</div>
+      </section>
+
+      <!-- SCROLL STORY -->
+      <section class="story" id="story" aria-label="TITAN SPORT haqida">
+        <div class="story__sticky">
+          <div class="story__progress" aria-hidden="true"><i id="storyBar"></i></div>
+          <div class="story__index" aria-hidden="true"><span id="storyIdx">01</span>/04</div>
+
+          <article class="chapter" data-ch="0">
+            <p class="chapter__num">01 — Material</p>
+            <h2 class="chapter__title">Monolit<br><em>po'lat.</em></h2>
+            <p class="chapter__text">Har bir grif, blin va gantel bir butun cho'yan va po'latdan quyilgan. Bo'shliq yo'q, tebranish yo'q — faqat sof temir.</p>
+            <div class="chapter__big"><b>50+</b><span>tonnalik temir zaxirasi omborda tayyor</span></div>
+          </article>
+
+          <article class="chapter chapter--right" data-ch="1">
+            <p class="chapter__num">02 — Aniqlik</p>
+            <h2 class="chapter__title">Har bir<br><em>kilogramm.</em></h2>
+            <p class="chapter__text">1,25 kg dan 25 kg gacha — 7 xil og'irlikdagi blinlar. Progressni grammgacha rejalashtiring.</p>
+            <div class="chapter__plates" aria-hidden="true"><i style="--c:#d9342b">25</i><i style="--c:#2f6fd6">20</i><i style="--c:#e7b416">15</i><i style="--c:#2fa25a">10</i><i>5</i><i>2,5</i><i>1,25</i></div>
+          </article>
+
+          <article class="chapter" data-ch="2">
+            <p class="chapter__num">03 — Yetkazish</p>
+            <h2 class="chapter__title">Eshigingizgacha<br><em>3 soatda.</em></h2>
+            <p class="chapter__text">Toshkent bo'ylab 3 soat ichida, viloyat markazlariga 24 soatda. 1 000 000 so'mdan yuqori buyurtmalarda yetkazish bepul.</p>
+            <div class="chapter__big"><b>24</b><span>soatda viloyat markazlariga</span></div>
+          </article>
+
+          <article class="chapter chapter--right" data-ch="3">
+            <p class="chapter__num">04 — Ishonch</p>
+            <h2 class="chapter__title">Yillar<br><em>uchun.</em></h2>
+            <p class="chapter__text">Har bir mahsulotga 2 yillik kafolat. 10 000 dan ortiq sportchi allaqachon TITAN bilan mashq qilmoqda.</p>
+            <a href="#catalog" class="btn btn--primary" data-link data-magnetic><span>Inventarni tanlash</span><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M5 12h14M13 6l6 6-6 6"/></svg></a>
+          </article>
+        </div>
+      </section>
+    </div>
+
+    <!-- Kinetic marquee -->
+    <section class="kinetic" aria-hidden="true">
+      <div class="kinetic__row" data-dir="1"><span>TEMIR <i>✦</i> KUCH <i>✦</i> INTIZOM <i>✦</i> TITAN <i>✦</i> TEMIR <i>✦</i> KUCH <i>✦</i> INTIZOM <i>✦</i> TITAN <i>✦</i>&nbsp;</span><span>TEMIR <i>✦</i> KUCH <i>✦</i> INTIZOM <i>✦</i> TITAN <i>✦</i> TEMIR <i>✦</i> KUCH <i>✦</i> INTIZOM <i>✦</i> TITAN <i>✦</i>&nbsp;</span></div>
+      <div class="kinetic__row kinetic__row--outline" data-dir="-1"><span>GANTEL — SHTANGA — GIRYA — BLIN — SKAMEYKA — GANTEL — SHTANGA — GIRYA — BLIN — SKAMEYKA —&nbsp;</span><span>GANTEL — SHTANGA — GIRYA — BLIN — SKAMEYKA — GANTEL — SHTANGA — GIRYA — BLIN — SKAMEYKA —&nbsp;</span></div>
+    </section>
+
+    <!-- 360 VIEWER -->
+    <section class="viewer section" id="viewer">
+      <div class="section__head">
+        <p class="eyebrow"><i></i> 360° interaktiv ko'rish</p>
+        <h2 class="display reveal-words">Qo'lingizda <em>aylantiring.</em></h2>
+        <p class="section__lead">Sotib olishdan oldin har bir detalni ko'ring. Sudrab aylantiring, nuqtalarni bosing.</p>
+      </div>
+      <div class="viewer__wrap">
+        <div class="viewer__tabs" role="tablist" aria-label="Mahsulotni tanlang">
+          <button role="tab" aria-selected="true" data-product="dumbbell" class="is-active"><small>01</small>Gantel</button>
+          <button role="tab" aria-selected="false" data-product="kettlebell"><small>02</small>Girya</button>
+          <button role="tab" aria-selected="false" data-product="plate"><small>03</small>Bumper blin</button>
+          <button role="tab" aria-selected="false" data-product="bar"><small>04</small>Olimpiya grifi</button>
+        </div>
+        <div class="viewer__stage" id="viewerStage">
+          <canvas id="viewerCanvas" aria-label="Mahsulotning 3D modeli. Aylantirish uchun sudrang."></canvas>
+          <div class="viewer__hotspots" id="hotspots"></div>
+          <div class="viewer__deg" aria-hidden="true"><span id="viewerDeg">0</span>°</div>
+          <div class="viewer__hint" id="viewerHint" aria-hidden="true"><svg viewBox="0 0 48 24"><path d="M4 12h40M10 6l-6 6 6 6M38 6l6 6-6 6"/></svg>Aylantirish uchun sudrang</div>
+          <div class="viewer__ring" aria-hidden="true"></div>
+        </div>
+        <aside class="viewer__info" id="viewerInfo" aria-live="polite">
+          <p class="viewer__cat" id="viewerCat">Gantellar</p>
+          <h3 class="viewer__name" id="viewerName">Olti qirrali gantel</h3>
+          <p class="viewer__desc" id="viewerDesc"></p>
+          <ul class="viewer__specs" id="viewerSpecs"></ul>
+          <div class="viewer__buy">
+            <p class="price"><span id="viewerPrice"></span> <small>so'm</small></p>
+            <button class="btn btn--primary" id="viewerAdd" data-magnetic><span>Savatga qo'shish</span></button>
+          </div>
+        </aside>
+      </div>
+    </section>
+
+    <!-- BUILDER -->
+    <section class="builder section" id="builder">
+      <div class="section__head">
+        <p class="eyebrow"><i></i> Shtanga konstruktori</p>
+        <h2 class="display reveal-words">O'z shtangangizni <em>yig'ing.</em></h2>
+        <p class="section__lead">Grifni tanlang, blin qo'shing — ikkala tomonga avtomatik. Umumiy og'irlik va narx darhol hisoblanadi.</p>
+      </div>
+      <div class="builder__grid">
+        <div class="builder__stage">
+          <canvas id="builderCanvas" aria-label="Yig'ilgan shtanganing 3D ko'rinishi"></canvas>
+          <div class="builder__total" aria-live="polite">
+            <span>Umumiy og'irlik</span>
+            <b><span id="builderKg">20</span><small>kg</small></b>
+          </div>
+          <div class="builder__warn" id="builderWarn" role="status"></div>
+        </div>
+        <div class="builder__panel">
+          <fieldset class="builder__bars">
+            <legend>1. Grif</legend>
+            <label><input type="radio" name="bar" value="olympic" checked><span><b>Olimpiya grifi</b><small>20 kg · 220 sm</small></span></label>
+            <label><input type="radio" name="bar" value="women"><span><b>Ayollar grifi</b><small>15 kg · 201 sm</small></span></label>
+          </fieldset>
+          <div class="builder__plates">
+            <p class="builder__legend">2. Blinlar <small>(juft qo'shiladi)</small></p>
+            <div class="plates" id="plateBtns">
+              <button data-kg="25" style="--c:#d9342b" data-magnetic><b>25</b><small>kg</small></button>
+              <button data-kg="20" style="--c:#2f6fd6" data-magnetic><b>20</b><small>kg</small></button>
+              <button data-kg="15" style="--c:#e7b416" data-magnetic><b>15</b><small>kg</small></button>
+              <button data-kg="10" style="--c:#2fa25a" data-magnetic><b>10</b><small>kg</small></button>
+              <button data-kg="5" data-magnetic><b>5</b><small>kg</small></button>
+              <button data-kg="2.5" data-magnetic><b>2,5</b><small>kg</small></button>
+              <button data-kg="1.25" data-magnetic><b>1,25</b><small>kg</small></button>
+            </div>
+            <div class="builder__tools">
+              <button class="link-btn" id="builderUndo">↶ Oxirgisini olib tashlash</button>
+              <button class="link-btn" id="builderReset">Tozalash</button>
+            </div>
+          </div>
+          <div class="builder__summary">
+            <ul id="builderList" aria-label="Tanlangan inventar"></ul>
+            <div class="builder__price"><span>Taxminiy narx</span><b><span id="builderPrice">0</span> so'm</b></div>
+            <button class="btn btn--primary btn--block" id="builderBuy" data-magnetic><span>Ushbu to'plamni xarid qilish</span><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M5 12h14M13 6l6 6-6 6"/></svg></button>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- CATALOG -->
+    <section class="catalog section" id="catalog">
+      <div class="section__head section__head--row">
+        <div>
+          <p class="eyebrow"><i></i> Katalog</p>
+          <h2 class="display reveal-words">Eng sifatli <em>temir.</em></h2>
+        </div>
+        <div class="catalog__controls">
+          <div class="chips" id="catFilters" role="group" aria-label="Kategoriya">
+            <button class="chip is-active" data-filter="all">Barchasi</button>
+            <button class="chip" data-filter="dumbbell">Gantellar</button>
+            <button class="chip" data-filter="bar">Shtangalar</button>
+            <button class="chip" data-filter="plate">Blinlar</button>
+            <button class="chip" data-filter="kettlebell">Giryalar</button>
+            <button class="chip" data-filter="bench">Skameykalar</button>
+          </div>
+          <label class="sort"><span>Saralash</span>
+            <select id="catSort">
+              <option value="pop">Ommabop</option>
+              <option value="asc">Narx: arzondan qimmatga</option>
+              <option value="desc">Narx: qimmatdan arzonga</option>
+              <option value="rating">Yuqori reytingli</option>
+            </select>
+          </label>
+        </div>
+      </div>
+      <div class="products" id="products"></div>
+      <p class="catalog__note">Narxlar dizayn konsepti uchun namuna sifatida ko'rsatilgan.</p>
+    </section>
+
+    <!-- QUIZ -->
+    <section class="quiz section" id="quiz">
+      <div class="quiz__card">
+        <div class="quiz__side">
+          <p class="eyebrow"><i></i> Aqlli maslahatchi</p>
+          <h2 class="display display--sm">3 savol.<br><em>Ideal to'plam.</em></h2>
+          <p>Qaysi inventar sizga mos ekanini bilmayapsizmi? Uchta savolga javob bering — biz tayyor to'plamni tavsiya qilamiz.</p>
+          <div class="quiz__steps" aria-hidden="true"><i class="is-on"></i><i></i><i></i></div>
+        </div>
+        <div class="quiz__main" id="quizMain">
+          <div class="quiz__q is-active" data-step="0">
+            <p class="quiz__label">1/3 · Qayerda mashq qilasiz?</p>
+            <div class="quiz__opts">
+              <button data-val="home"><b>Uyda</b><span>Kichik joy, xonada</span></button>
+              <button data-val="garage"><b>Garaj / alohida xona</b><span>O'rtacha joy</span></button>
+              <button data-val="gym"><b>Professional zal</b><span>Katta maydon</span></button>
+            </div>
+          </div>
+          <div class="quiz__q" data-step="1">
+            <p class="quiz__label">2/3 · Asosiy maqsadingiz?</p>
+            <div class="quiz__opts">
+              <button data-val="strength"><b>Kuch</b><span>Og'ir vazn, powerlifting</span></button>
+              <button data-val="mass"><b>Mushak massasi</b><span>Bodibilding</span></button>
+              <button data-val="fit"><b>Chidamlilik</b><span>Crossfit, ozish</span></button>
+            </div>
+          </div>
+          <div class="quiz__q" data-step="2">
+            <p class="quiz__label">3/3 · Tajribangiz?</p>
+            <div class="quiz__opts">
+              <button data-val="new"><b>Yangi boshlovchi</b><span>0–1 yil</span></button>
+              <button data-val="mid"><b>O'rta</b><span>1–3 yil</span></button>
+              <button data-val="pro"><b>Tajribali</b><span>3+ yil</span></button>
+            </div>
+          </div>
+          <div class="quiz__result" id="quizResult" aria-live="polite"></div>
+        </div>
+      </div>
+    </section>
+
+    <!-- BENEFITS -->
+    <section class="benefits section">
+      <div class="section__head">
+        <p class="eyebrow"><i></i> Nega aynan Titan Sport?</p>
+        <h2 class="display reveal-words">Kuch — <em>detallarda.</em></h2>
+      </div>
+      <div class="benefits__grid">
+        <article class="benefit" data-tilt>
+          <span class="benefit__n">01</span>
+          <svg viewBox="0 0 48 48" aria-hidden="true"><path d="M8 18h4v12H8zM12 14h5v20h-5zM17 22.5h14v3H17zM31 14h5v20h-5zM36 18h4v12h-4z"/></svg>
+          <h3>Monolit sifat</h3><p>Sof cho'yan va po'lat. Yorilmaydi, egilmaydi, yillar davomida xizmat qiladi.</p>
+        </article>
+        <article class="benefit" data-tilt>
+          <span class="benefit__n">02</span>
+          <svg viewBox="0 0 48 48" aria-hidden="true"><path d="M4 14h24v18H4zM28 20h8l6 6v6H28z"/><circle cx="12" cy="34" r="4"/><circle cx="34" cy="34" r="4"/></svg>
+          <h3>Tezkor yetkazish</h3><p>Toshkentda 3 soat, viloyatlarga 24 soat. 1 mln so'mdan yuqori — bepul.</p>
+        </article>
+        <article class="benefit" data-tilt>
+          <span class="benefit__n">03</span>
+          <svg viewBox="0 0 48 48" aria-hidden="true"><path d="M8 10h32v22H22l-8 7v-7H8z"/></svg>
+          <h3>Bepul maslahat</h3><p>Trenerlarimiz maqsadingizga mos inventarni tanlashda yordam beradi.</p>
+        </article>
+        <article class="benefit" data-tilt>
+          <span class="benefit__n">04</span>
+          <svg viewBox="0 0 48 48" aria-hidden="true"><path d="M6 12h36v24H6zM6 19h36"/><path d="M12 29h8"/></svg>
+          <h3>Qulay to'lov</h3><p>Naqd, Click, Payme yoki korxonalar uchun pul o'tkazish (perechisleniye).</p>
+        </article>
+      </div>
+    </section>
+
+    <!-- GUIDES -->
+    <section class="guides section" id="guides">
+      <div class="section__head section__head--row">
+        <div>
+          <p class="eyebrow"><i></i> Qo'llanma</p>
+          <h2 class="display reveal-words">To'g'ri <em>tanlang.</em></h2>
+        </div>
+        <p class="section__lead">Mutaxassislarimizdan qisqa va aniq maqolalar.</p>
+      </div>
+      <div class="guides__list">
+        <a class="guide" href="#contact" data-link data-cursor="O'qish">
+          <span class="guide__n">01</span>
+          <h3>Gantellar gidi</h3>
+          <p>Yig'ma yoki monolit? Uy uchun qaysi gantel to'plami mos?</p>
+          <span class="guide__time">4 daqiqa</span>
+          <span class="guide__arrow" aria-hidden="true">→</span>
+        </a>
+        <a class="guide" href="#contact" data-link data-cursor="O'qish">
+          <span class="guide__n">02</span>
+          <h3>Shtangalar gidi</h3>
+          <p>Olimpiya, ayollar va EZ griflari: farqi nimada va qaysi biri sizga kerak.</p>
+          <span class="guide__time">5 daqiqa</span>
+          <span class="guide__arrow" aria-hidden="true">→</span>
+        </a>
+        <a class="guide" href="#contact" data-link data-cursor="O'qish">
+          <span class="guide__n">03</span>
+          <h3>Vazn tanlash</h3>
+          <p>Boshlang'ich vaznni qanday aniqlash va xavfsiz progress qilish.</p>
+          <span class="guide__time">3 daqiqa</span>
+          <span class="guide__arrow" aria-hidden="true">→</span>
+        </a>
+      </div>
+    </section>
+
+    <!-- CONTACT -->
+    <section class="contact section" id="contact">
+      <div class="contact__grid">
+        <div class="contact__info">
+          <p class="eyebrow"><i></i> Aloqa</p>
+          <h2 class="display reveal-words">Savollaringiz <em>bormi?</em></h2>
+          <p class="section__lead">Raqamingizni qoldiring — mutaxassisimiz 15 daqiqa ichida qo'ng'iroq qiladi.</p>
+          <ul class="contact__list">
+            <li><span>Telefon</span><a href="tel:+998907775544">+998 (90) 777-55-44</a></li>
+            <li><span>Telegram · 24/7</span><a href="https://t.me/titansport_admin" target="_blank" rel="noopener">@titansport_admin</a></li>
+            <li><span>Email</span><a href="mailto:info@titansport.uz">info@titansport.uz</a></li>
+            <li><span>Manzil</span><p>Toshkent sh., Bunyodkor shoh ko'chasi 42-uy (Sport majmuasi ro'parasida)</p></li>
+            <li><span>Ish vaqti</span><p>Har kuni: 09:00 – 21:00</p></li>
+          </ul>
+        </div>
+        <form class="form" id="contactForm" novalidate>
+          <h3>Bepul maslahat oling</h3>
+          <label class="field"><input name="name" required autocomplete="name" placeholder=" "><span>Ismingiz</span></label>
+          <label class="field"><input name="phone" required type="tel" autocomplete="tel" inputmode="tel" placeholder=" "><span>Telefon raqam</span></label>
+          <label class="field"><textarea name="msg" rows="3" placeholder=" "></textarea><span>Savolingiz (ixtiyoriy)</span></label>
+          <button class="btn btn--primary btn--block" type="submit" data-magnetic><span>Qo'ng'iroq buyurtma qilish</span><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M5 12h14M13 6l6 6-6 6"/></svg></button>
+          <p class="form__ok" role="status"></p>
+        </form>
+      </div>
+    </section>
+  </main>
+
+  <footer class="footer">
+    <div class="footer__big" aria-hidden="true">TITAN<span>SPORT</span></div>
+    <div class="footer__grid">
+      <div><h4>Katalog</h4><a href="#catalog" data-link>Gantellar</a><a href="#catalog" data-link>Shtangalar &amp; griflar</a><a href="#catalog" data-link>Og'irlik disklari</a><a href="#catalog" data-link>Giryalar</a><a href="#catalog" data-link>Skameykalar</a></div>
+      <div><h4>Foydali</h4><a href="#builder" data-link>Shtanga konstruktori</a><a href="#quiz" data-link>Aqlli maslahatchi</a><a href="#guides" data-link>Qo'llanma</a><a href="#viewer" data-link>360° ko'rish</a></div>
+      <div><h4>Aloqa</h4><a href="tel:+998907775544">+998 (90) 777-55-44</a><a href="https://t.me/titansport_admin" target="_blank" rel="noopener">Telegram</a><a href="mailto:info@titansport.uz">info@titansport.uz</a><p>Har kuni 09:00 – 21:00</p></div>
+    </div>
+    <div class="footer__bottom"><span>© 2026 TITAN SPORT</span><a href="#hero" data-link>Yuqoriga ↑</a></div>
+  </footer>
+
+  <!-- Mobile sticky CTA -->
+  <div class="dock" id="dock">
+    <a href="tel:+998907775544" class="dock__btn" aria-label="Qo'ng'iroq qilish"><svg viewBox="0 0 24 24"><path d="M5 4h4l2 5-2.5 1.5a11 11 0 0 0 5 5L15 13l5 2v4a2 2 0 0 1-2 2A16 16 0 0 1 3 6a2 2 0 0 1 2-2"/></svg></a>
+    <a href="https://t.me/titansport_admin" target="_blank" rel="noopener" class="dock__btn" aria-label="Telegram"><svg viewBox="0 0 24 24"><path d="M21 4 3 11l6 2 2 6 3-4 5 4z"/></svg></a>
+    <a href="#catalog" data-link class="dock__main">Katalog</a>
+  </div>
+
+  <!-- Cart drawer -->
+  <div class="drawer" id="drawer" aria-hidden="true">
+    <div class="drawer__bg" data-close></div>
+    <aside class="drawer__panel" role="dialog" aria-modal="true" aria-labelledby="drawerTitle">
+      <header class="drawer__head"><h3 id="drawerTitle">Savatingiz</h3><button class="icon-btn" data-close aria-label="Yopish">✕</button></header>
+      <div class="drawer__ship"><p id="shipText"></p><div class="drawer__shipbar"><i id="shipBar"></i></div></div>
+      <ul class="drawer__items" id="cartItems"></ul>
+      <div class="drawer__checkout" id="checkout">
+        <form class="form form--compact" id="checkoutForm" novalidate>
+          <label class="field"><input name="name" required placeholder=" "><span>Ism</span></label>
+          <label class="field"><input name="phone" type="tel" required placeholder=" "><span>Telefon</span></label>
+          <label class="field"><input name="addr" required placeholder=" "><span>Yetkazish manzili</span></label>
+          <div class="pay" role="radiogroup" aria-label="To'lov usuli">
+            <label><input type="radio" name="pay" value="cash" checked><span>Naqd</span></label>
+            <label><input type="radio" name="pay" value="click"><span>Click</span></label>
+            <label><input type="radio" name="pay" value="payme"><span>Payme</span></label>
+            <label><input type="radio" name="pay" value="bank"><span>Perechisleniye</span></label>
+          </div>
+        </form>
+      </div>
+      <footer class="drawer__foot">
+        <div class="drawer__total"><span>Jami</span><b><span id="cartTotal">0</span> so'm</b></div>
+        <button class="btn btn--primary btn--block" id="checkoutBtn"><span>Buyurtmani rasmiylashtirish</span></button>
+      </footer>
+    </aside>
+  </div>
+
+  <div class="toast" id="toast" role="status" aria-live="polite"></div>
+
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/gsap.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/ScrollTrigger.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/Flip.min.js"></script>
+  <script src="https://unpkg.com/lenis@1.1.13/dist/lenis.min.js"></script>
+  <script src="script.js"></script>
+</body>
+</html>
