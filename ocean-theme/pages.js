@@ -6,6 +6,7 @@
   'use strict';
   var D = window.OCEAN, U = window.OceanUI;
   if (!U) return;
+  var R = U.R || '';
   var $ = U.$, $$ = U.$$, on = U.on, esc = U.esc, money = U.money;
   var body = document.body;
   var is = function (t) { return body.classList.contains('template-' + t); };
@@ -211,7 +212,7 @@
       var prods = c.match ? D.PRODUCTS.filter(function (p) { return !p.hidden && c.match(p); }) : D.PRODUCTS.filter(function (p) { return !p.hidden; });
       var imgId = c.image || (prods.filter(function (p) { return p.photo; })[0] || {}).photo;
       var fallback = !c.image && imgId ? '<span class="ccard__note">Using first product image</span>' : '';
-      return '<li class="ccard' + (i === 0 ? ' ccard--wide' : '') + (imgId ? '' : ' ccard--noimg') + '"><a href="collection.html?c=' + c.handle + '">' +
+      return '<li class="ccard' + (i === 0 ? ' ccard--wide' : '') + (imgId ? '' : ' ccard--noimg') + '"><a href="' + R + 'collection/?c=' + c.handle + '">' +
         '<div class="ccard__media">' + (imgId ? '<img src="' + D.img(imgId, 900, 1000) + '" alt="" width="450" height="500" loading="lazy">' : '<span class="ccard__mono" aria-hidden="true">' + c.title.charAt(0) + '</span>') + fallback + '</div>' +
         '<div class="ccard__body"><h2>' + esc(c.title) + '</h2><p>' + prods.length + ' product' + (prods.length === 1 ? '' : 's') + '</p><span class="ccard__arrow" aria-hidden="true">→</span></div></a></li>';
     }).join('');
@@ -225,7 +226,7 @@
     var firstAvail = p.sizes.filter(function (s) { return U.variantState(p, p.metals[0], s) === 'available'; })[0] || p.sizes[0];
     var sel = { metal: p.metals[0], size: firstAvail, qty: 1 };
     document.title = p.title + ' | Ocean Fine Jewellery';
-    $('[data-p-crumb-type]').textContent = p.type; $('[data-p-crumb-type]').href = 'collection.html?c=' + p.type.toLowerCase();
+    $('[data-p-crumb-type]').textContent = p.type; $('[data-p-crumb-type]').href = R + 'collection/?c=' + p.type.toLowerCase();
     $('[data-p-crumb]').textContent = p.title;
 
     /* gallery */
@@ -260,7 +261,7 @@
         '<a class="pinfo__rating" href="#reviews"><span class="stars" aria-hidden="true">★★★★★</span> ' + p.rating.toFixed(1) + ' <span>(' + p.reviews + ' reviews)</span></a>' +
         '<div class="pinfo__price">' + U.priceHTML(p) + (off ? '<span class="badge badge--sale">Save ' + off + '%</span>' : '') + '</div>' +
         (p.unitPer ? '<p class="pinfo__unit">Unit price ' + U.unitPrice(p) + '</p>' : '') +
-        '<p class="pinfo__tax">Tax included. <a href="page.html#shipping">Shipping</a> calculated at checkout.</p>' +
+        '<p class="pinfo__tax">Tax included. <a href="' + R + 'page/#shipping">Shipping</a> calculated at checkout.</p>' +
         '<p class="pinfo__instal">Pay in 4 interest-free instalments of <strong>' + money(p.price / 4) + '</strong> with <span class="shop-pay-mark">shop<b>Pay</b></span></p>' +
         '<form class="pinfo__form" data-pform novalidate>' +
           U.optionHTML(p, sel, 'p') +
@@ -334,7 +335,7 @@
     /* complementary + recommendations + recently viewed */
     var comp = D.PRODUCTS.filter(function (x) { return x.id !== p.id && !x.hidden && x.type !== p.type && !U.isSoldOut(x); }).slice(0, 3);
     $('[data-complementary]').innerHTML = comp.map(function (x) {
-      return '<li class="comp"><a href="product.html?id=' + x.id + '" tabindex="-1"><img src="' + U.primaryImg(x, 160, 160) + '" alt="" width="64" height="64" loading="lazy"></a><div><a class="comp__t" href="product.html?id=' + x.id + '">' + esc(x.title) + '</a><p>' + U.priceHTML(x) + '</p></div><button class="comp__add" ' + (x.sizes.length > 1 || x.metals.length > 1 ? 'data-quick' : 'data-add') + '="' + x.id + '" aria-label="Add ' + esc(x.title) + '">+</button></li>';
+      return '<li class="comp"><a href="' + R + 'product/?id=' + x.id + '" tabindex="-1"><img src="' + U.primaryImg(x, 160, 160) + '" alt="" width="64" height="64" loading="lazy"></a><div><a class="comp__t" href="' + R + 'product/?id=' + x.id + '">' + esc(x.title) + '</a><p>' + U.priceHTML(x) + '</p></div><button class="comp__add" ' + (x.sizes.length > 1 || x.metals.length > 1 ? 'data-quick' : 'data-add') + '="' + x.id + '" aria-label="Add ' + esc(x.title) + '">+</button></li>';
     }).join('');
     var recs = D.PRODUCTS.filter(function (x) { return x.id !== p.id && !x.hidden && x.type === p.type; }).concat(D.PRODUCTS.filter(function (x) { return x.id !== p.id && !x.hidden && x.type !== p.type; })).slice(0, 4);
     $('[data-recs]').innerHTML = recs.map(U.cardHTML).join('');
@@ -391,11 +392,11 @@
     $('#search-page-input').value = q;
     var res = q ? U.searchProducts(q) : [];
     var arts = q ? D.ARTICLES.filter(function (a) { return (a.title + ' ' + a.tag + ' ' + a.excerpt).toLowerCase().indexOf(q.toLowerCase()) > -1; }) : [];
-    var pages = q ? [{ t: 'Size guide', u: 'page.html#size-guide', k: 'size ring guide measure' }, { t: 'Shipping & returns', u: 'page.html#shipping', k: 'shipping returns delivery' }, { t: 'Contact us', u: 'contact.html', k: 'contact help email' }].filter(function (x) { return (x.t + ' ' + x.k).toLowerCase().indexOf(q.toLowerCase()) > -1; }) : [];
+    var pages = q ? [{ t: 'Size guide', u: R + 'page/#size-guide', k: 'size ring guide measure' }, { t: 'Shipping & returns', u: R + 'page/#shipping', k: 'shipping returns delivery' }, { t: 'Contact us', u: R + 'contact/', k: 'contact help email' }].filter(function (x) { return (x.t + ' ' + x.k).toLowerCase().indexOf(q.toLowerCase()) > -1; }) : [];
     $('[data-sq]').textContent = q ? '“' + q + '”' : 'Search our store';
     $('[data-s-summary]').textContent = q ? (res.length + arts.length + pages.length) + ' results' : 'Start typing to find rings, necklaces, earrings and more.';
     $$('[data-stab-count]').forEach(function (el) { el.textContent = { products: res.length, articles: arts.length, pages: pages.length }[el.dataset.stabCount]; });
-    $('[data-s-articles]').innerHTML = arts.map(function (a) { return '<li><a class="srow" href="article.html?id=' + a.id + '"><img src="' + D.img(a.image, 200, 150) + '" alt="" width="100" height="75" loading="lazy"><div><p class="post__meta">' + a.tag + '</p><p class="srow__t">' + esc(a.title) + '</p></div></a></li>'; }).join('') || '<li class="muted">No articles match.</li>';
+    $('[data-s-articles]').innerHTML = arts.map(function (a) { return '<li><a class="srow" href="' + R + 'article/?id=' + a.id + '"><img src="' + D.img(a.image, 200, 150) + '" alt="" width="100" height="75" loading="lazy"><div><p class="post__meta">' + a.tag + '</p><p class="srow__t">' + esc(a.title) + '</p></div></a></li>'; }).join('') || '<li class="muted">No articles match.</li>';
     $('[data-s-pages]').innerHTML = pages.map(function (x) { return '<li><a class="srow srow--page" href="' + x.u + '"><span class="srow__ic" aria-hidden="true">¶</span><p class="srow__t">' + x.t + '</p></a></li>'; }).join('') || '<li class="muted">No pages match.</li>';
     var hasAny = res.length || arts.length || pages.length;
     if (!q) { $('[data-s-results]').hidden = true; $('[data-s-start]').hidden = false; }
@@ -416,7 +417,7 @@
      BLOG + ARTICLE
      ========================================================= */
   function postCard(a, big) {
-    return '<li class="bpost' + (big ? ' bpost--feat' : '') + '"><a href="article.html?id=' + a.id + '"><div class="bpost__img"><img src="' + D.img(a.image, big ? 1400 : 800, big ? 900 : 600) + '" alt="" width="' + (big ? 700 : 400) + '" height="' + (big ? 450 : 300) + '" loading="lazy"><span class="bpost__tag">' + a.tag + '</span></div>' +
+    return '<li class="bpost' + (big ? ' bpost--feat' : '') + '"><a href="' + R + 'article/?id=' + a.id + '"><div class="bpost__img"><img src="' + D.img(a.image, big ? 1400 : 800, big ? 900 : 600) + '" alt="" width="' + (big ? 700 : 400) + '" height="' + (big ? 450 : 300) + '" loading="lazy"><span class="bpost__tag">' + a.tag + '</span></div>' +
       '<div class="bpost__body"><p class="bpost__meta">' + a.date + ' · ' + a.read + ' min read</p><h2>' + esc(a.title) + '</h2><p class="muted">' + esc(a.excerpt) + '</p><span class="bpost__more">Read article <span aria-hidden="true">→</span></span></div></a></li>';
   }
   if (is('blog')) {

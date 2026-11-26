@@ -6,6 +6,7 @@
   'use strict';
 
   var D = window.OCEAN;
+  var R = document.documentElement.getAttribute('data-root') || '';
   var $ = function (s, r) { return (r || document).querySelector(s); };
   var $$ = function (s, r) { return Array.prototype.slice.call((r || document).querySelectorAll(s)); };
   var reduceMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
@@ -157,7 +158,7 @@
       : '<strong data-money="' + p.price + '">' + money(p.price) + '</strong>';
   }
   function cardHTML(p, i) {
-    var url = 'product.html?id=' + p.id;
+    var url = R + 'product/?id=' + p.id;
     var media = p.photo
       ? '<img src="' + primaryImg(p, 700, 875) + '" srcset="' + primaryImg(p, 420, 525) + ' 420w, ' + primaryImg(p, 700, 875) + ' 700w" sizes="(min-width: 1200px) 25vw, (min-width: 750px) 33vw, 50vw" alt="' + esc(p.title) + '" width="700" height="875" loading="lazy">' +
         '<img class="card__img2" src="' + D.img(p.photo, 700, 875, p.detail[0]) + '" alt="" width="700" height="875" loading="lazy">'
@@ -224,7 +225,7 @@
           '<p class="qv__tax">Tax included. Shipping calculated at checkout.</p>' +
           optionHTML(p, sel, 'qv') +
           '<div class="qv__actions">' + atcButton(st, p) + '</div>' +
-          '<a class="link-arrow" href="product.html?id=' + p.id + '">View full details <span aria-hidden="true">→</span></a>' +
+          '<a class="link-arrow" href="' + R + 'product/?id=' + p.id + '">View full details <span aria-hidden="true">→</span></a>' +
         '</div>';
       bindOptions(box, p, sel, render);
       var b = $('[data-qv-add]', box);
@@ -242,7 +243,7 @@
     var metalRow = '<fieldset class="opt"><legend class="opt__label">Metal: <strong>' + D.METALS[sel.metal].label + '</strong></legend><div class="opt__row">' +
       p.metals.map(function (m) { return '<label class="swatch"><input type="radio" name="' + ns + '-metal" value="' + m + '"' + (m === sel.metal ? ' checked' : '') + '><span style="--sw:' + D.METALS[m].hex + '"></span><span class="visually-hidden">' + D.METALS[m].label + '</span></label>'; }).join('') + '</div></fieldset>';
     var sizeLabel = p.type === 'Rings' ? 'Ring size' : (p.type === 'Necklaces' ? 'Length' : 'Size');
-    var sizeRow = '<fieldset class="opt"><legend class="opt__label">' + sizeLabel + ': <strong>' + sel.size + '</strong>' + (p.type === 'Rings' ? ' <a class="opt__guide" href="page.html#size-guide">Size guide</a>' : '') + '</legend><div class="opt__row">' +
+    var sizeRow = '<fieldset class="opt"><legend class="opt__label">' + sizeLabel + ': <strong>' + sel.size + '</strong>' + (p.type === 'Rings' ? ' <a class="opt__guide" href="' + R + 'page/#size-guide">Size guide</a>' : '') + '</legend><div class="opt__row">' +
       p.sizes.map(function (s) {
         var st = variantState(p, sel.metal, s);
         return '<label class="pill' + (st !== 'available' ? ' is-out' : '') + '"><input type="radio" name="' + ns + '-size" value="' + s + '"' + (s === sel.size ? ' checked' : '') + '><span>' + s + (st === 'soldout' ? '<span class="visually-hidden"> (sold out)</span>' : st === 'unavailable' ? '<span class="visually-hidden"> (unavailable)</span>' : '') + '</span></label>';
@@ -301,8 +302,8 @@
     var p = byId(l.id), opts = D.METALS[l.metal].label + ' · ' + l.size;
     var imgH = p.photo ? '<img src="' + primaryImg(p, 220, 260) + '" alt="' + esc(p.title) + '" width="88" height="104" loading="lazy">' : '<div class="line__ph">' + PLACEHOLDER + '</div>';
     return '<li class="line" data-line="' + esc(l.key) + '">' +
-      '<a class="line__img" href="product.html?id=' + p.id + '" tabindex="-1">' + imgH + '</a>' +
-      '<div class="line__info"><a class="line__title" href="product.html?id=' + p.id + '">' + esc(p.title) + '</a>' +
+      '<a class="line__img" href="' + R + 'product/?id=' + p.id + '" tabindex="-1">' + imgH + '</a>' +
+      '<div class="line__info"><a class="line__title" href="' + R + 'product/?id=' + p.id + '">' + esc(p.title) + '</a>' +
         '<p class="line__meta">' + opts + (l.engraving ? ' · Engraving: “' + esc(l.engraving) + '”' : '') + '</p>' +
         '<p class="line__unit">' + money(p.price) + (p.compare ? ' <s>' + money(p.compare) + '</s>' : '') + '</p>' +
         (l.bundle ? '<span class="line__tag">Stack discount −15% (−' + money(p.price * l.qty * 0.15) + ')</span>' : '') +
@@ -336,8 +337,8 @@
       var gw = $('[data-gift]', drawer); if (gw) gw.checked = giftWrap;
       var ups = upsellList(4); $('[data-upsell]', drawer).hidden = !ups.length;
       $('[data-upsell-track]', drawer).innerHTML = ups.map(function (p) {
-        return '<li class="up"><a href="product.html?id=' + p.id + '" tabindex="-1"><img src="' + primaryImg(p, 160, 160) + '" alt="' + esc(p.title) + '" width="64" height="64" loading="lazy"></a>' +
-          '<div><a class="up__name" href="product.html?id=' + p.id + '">' + esc(p.title) + '</a><p class="up__why">' + p.type + '</p><p class="up__price">' + money(p.price) + '</p></div>' +
+        return '<li class="up"><a href="' + R + 'product/?id=' + p.id + '" tabindex="-1"><img src="' + primaryImg(p, 160, 160) + '" alt="' + esc(p.title) + '" width="64" height="64" loading="lazy"></a>' +
+          '<div><a class="up__name" href="' + R + 'product/?id=' + p.id + '">' + esc(p.title) + '</a><p class="up__why">' + p.type + '</p><p class="up__price">' + money(p.price) + '</p></div>' +
           '<button class="up__add" ' + (p.sizes.length > 1 || p.metals.length > 1 ? 'data-quick="' + p.id + '"' : 'data-add="' + p.id + '"') + ' aria-label="Add ' + esc(p.title) + '">Add</button></li>';
       }).join('');
     }
@@ -388,18 +389,18 @@
     if (!q) res = res.slice(0, 4);
     $('[data-search-title]').textContent = q ? res.length + ' product' + (res.length === 1 ? '' : 's') : 'Trending now';
     box.innerHTML = res.length ? res.slice(0, 4).map(function (p) {
-      return '<li><a class="sp" href="product.html?id=' + p.id + '">' + (p.photo ? '<img src="' + primaryImg(p, 400, 400) + '" alt="" width="200" height="200" loading="lazy">' : '<span class="sp__ph">' + PLACEHOLDER + '</span>') + '<strong>' + hl(p.title, q) + '</strong><span>' + money(p.price) + '</span></a></li>';
+      return '<li><a class="sp" href="' + R + 'product/?id=' + p.id + '">' + (p.photo ? '<img src="' + primaryImg(p, 400, 400) + '" alt="" width="200" height="200" loading="lazy">' : '<span class="sp__ph">' + PLACEHOLDER + '</span>') + '<strong>' + hl(p.title, q) + '</strong><span>' + money(p.price) + '</span></a></li>';
     }).join('') : '<li class="search-empty"><strong>No results for “' + esc(q) + '”.</strong> Check the spelling or try “ring”, “pearl” or “gold”.</li>';
     var artBox = $('[data-search-articles]');
-    if (artBox) artBox.innerHTML = arts.slice(0, 3).map(function (a) { return '<li><a href="article.html?id=' + a.id + '">' + hl(a.title, q) + '</a></li>'; }).join('');
-    var all = $('[data-search-all]'); if (all) { all.href = 'search.html?q=' + encodeURIComponent(q); all.hidden = !q; all.querySelector('span').textContent = q; }
+    if (artBox) artBox.innerHTML = arts.slice(0, 3).map(function (a) { return '<li><a href="' + R + 'article/?id=' + a.id + '">' + hl(a.title, q) + '</a></li>'; }).join('');
+    var all = $('[data-search-all]'); if (all) { all.href = R + 'search/?q=' + encodeURIComponent(q); all.hidden = !q; all.querySelector('span').textContent = q; }
   }
   function openSearch() { renderPredictive(sInput ? sInput.value : ''); openLayerEl($('#search'), '#search-input'); }
   on(sInput, 'input', function () { renderPredictive(sInput.value); });
   $$('[data-open-search]').forEach(function (b) { on(b, 'click', openSearch); });
   $$('[data-close-search]').forEach(function (b) { on(b, 'click', function () { closeAll(); }); });
   $$('[data-suggest]').forEach(function (b) { on(b, 'click', function () { sInput.value = b.dataset.suggest; renderPredictive(sInput.value); sInput.focus(); }); });
-  on($('[data-search-form]'), 'submit', function (e) { e.preventDefault(); location.href = 'search.html?q=' + encodeURIComponent(sInput.value.trim()); });
+  on($('[data-search-form]'), 'submit', function (e) { e.preventDefault(); location.href = R + 'search/?q=' + encodeURIComponent(sInput.value.trim()); });
 
   /* ---------- Newsletter forms (success + error states) ---------- */
   $$('[data-newsletter]').forEach(function (f) {
@@ -617,7 +618,7 @@
 
   /* ---------- Public API for template scripts ---------- */
   window.OceanUI = {
-    $: $, $$: $$, on: on, esc: esc, qs: qs, store: store, money: money, toast: toast, byId: byId, isSoldOut: isSoldOut,
+    R: R, $: $, $$: $$, on: on, esc: esc, qs: qs, store: store, money: money, toast: toast, byId: byId, isSoldOut: isSoldOut,
     cardHTML: cardHTML, skeletonCards: skeletonCards, primaryImg: primaryImg, PLACEHOLDER: PLACEHOLDER, priceHTML: priceHTML, unitPrice: unitPrice,
     variantState: variantState, optionHTML: optionHTML, bindOptions: bindOptions,
     addToCart: addToCart, setQty: setQty, removeLine: removeLine, getCart: function () { return cart; }, totals: totals, lineHTML: lineHTML,
