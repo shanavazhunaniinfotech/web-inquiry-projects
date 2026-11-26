@@ -1,5 +1,5 @@
-/* Shared demo booking calendar + quote form (used by design A and B).
-   Demo only: nothing is sent or saved. */
+/* Shared demo booking calendar + quote form (design A and B).
+   Demo only: nothing is sent or saved. Returns a small API. */
 window.TintBooking = function (opts) {
   "use strict";
   var $ = function (s) { return document.querySelector(s); };
@@ -20,7 +20,7 @@ window.TintBooking = function (opts) {
     var seed = d.getFullYear() * 400 + d.getMonth() * 32 + d.getDate();
     var nowH = new Date().getHours();
     return base.map(function (t, i) {
-      var booked = rand(seed + i * 7.3) < 0.4;
+      var booked = rand(seed + i * 7.3) < 0.45;
       if (d.getTime() === today.getTime()) {
         var m = t.match(/(\d+):\d+ (AM|PM)/);
         var h = (+m[1] % 12) + (m[2] === "PM" ? 12 : 0);
@@ -30,6 +30,7 @@ window.TintBooking = function (opts) {
     });
   }
   function fmt(d, o) { return d.toLocaleDateString("en-US", o); }
+  function emit() { if (opts.onChange) opts.onChange(state); }
 
   function renderCal() {
     $(opts.title).textContent = MONTHS[view.getMonth()] + " " + view.getFullYear();
@@ -45,49 +46,45 @@ window.TintBooking = function (opts) {
       var open = slots(d).filter(function (s) { return !s.booked; }).length;
       if (d < today || !open) { btn.disabled = true; btn.setAttribute("aria-label", fmt(d, { dateStyle: "full" }) + ", unavailable"); }
       else { if (open <= 2) btn.classList.add("few"); btn.setAttribute("aria-label", fmt(d, { dateStyle: "full" }) + ", " + open + " times open"); }
+      if (d.getTime() === today.getTime()) btn.classList.add("today");
       if (state.date && d.getTime() === state.date.getTime()) btn.classList.add("sel");
-      btn.addEventListener("click", (function (dd) { return function () { state.date = dd; state.time = null; renderCal(); renderSlots(); picked(); }; })(d));
+      btn.addEventListener("click", (function (dd) { return function () { state.date = dd; state.time = null; renderCal(); renderSlots(); picked(); emit(); }; })(d));
       box.appendChild(btn);
     }
   }
   function renderSlots() {
     var box = $(opts.slots); box.innerHTML = "";
-    if (!state.date) { $(opts.slotTitle).textContent = "Pick a date to see times"; return; }
+    if (!state.date) { $(opts.slotTitle).textContent = "Pick a date to see open times"; return; }
     $(opts.slotTitle).textContent = "Open times · " + fmt(state.date, { weekday: "long", month: "long", day: "numeric" });
     slots(state.date).forEach(function (s) {
       var b = document.createElement("button");
       b.type = "button"; b.className = "slot"; b.textContent = s.t;
-      if (s.booked) b.disabled = true;
+      if (s.booked) { b.disabled = true; b.title = "Booked"; }
       if (state.time === s.t) b.classList.add("sel");
-      b.addEventListener("click", function () {
-        state.time = s.t; renderSlots(); picked();
-        if (opts.onTime) opts.onTime();
-      });
+      b.addEventListener("click", function () { state.time = s.t; renderSlots(); picked(); emit(); if (opts.onTime) opts.onTime(); });
       box.appendChild(b);
     });
   }
   function picked() {
-    var p = $(opts.picked);
-    if (state.date && state.time) { p.textContent = "📅 " + fmt(state.date, { weekday: "short", month: "short", day: "numeric" }) + " · " + state.time; p.classList.add("set"); }
-    else { p.textContent = state.date ? "Now pick a time for " + fmt(state.date, { month: "short", day: "numeric" }) : "No time picked yet"; p.classList.remove("set"); }
+    var p = $(opts.picked); if (!p) return;
+    if (state.date && state.time) { p.textContent = fmt(state.date, { weekday: "short", month: "short", day: "numeric" }) + " · " + state.time; p.classList.add("set"); }
+    else { p.textContent = state.date ? "Now pick a time" : "No time picked yet"; p.classList.remove("set"); }
   }
 
   $(opts.prev).addEventListener("click", function () { view = new Date(view.getFullYear(), view.getMonth() - 1, 1); renderCal(); });
   $(opts.next).addEventListener("click", function () { view = new Date(view.getFullYear(), view.getMonth() + 1, 1); renderCal(); });
 
-  // Service chips
-  var chips = Array.prototype.slice.call(document.querySelectorAll(opts.chips + " button"));
+  var chips = Array.prototype.slice.call(document.querySelectorAll(opts.chips + " [data-s]"));
   function setService(s) {
     state.service = s; $(opts.service).value = s;
-    chips.forEach(function (c) { c.classList.toggle("on", c.dataset.s === s); });
-    $(opts.chips).classList.remove("bad");
+    chips.forEach(function (c) { var on = c.dataset.s === s; c.classList.toggle("on", on); c.setAttribute("aria-pressed", on); });
+    $(opts.chips).classList.remove("bad"); emit();
   }
   chips.forEach(function (c) { c.addEventListener("click", function () { setService(c.dataset.s); }); });
   Array.prototype.forEach.call(document.querySelectorAll("[data-service]"), function (a) {
     a.addEventListener("click", function () { setService(a.dataset.service); });
   });
 
-  // Form
   var form = $(opts.form);
   form.addEventListener("submit", function (e) {
     e.preventDefault();
@@ -108,8 +105,23 @@ window.TintBooking = function (opts) {
   });
   $(opts.again).addEventListener("click", function () {
     form.reset(); state.date = state.time = null; setService("");
-    renderCal(); renderSlots(); picked(); $(opts.done).hidden = true;
+    renderCal(); renderSlots(); picked(); $(opts.done).hidden = true; emit();
   });
 
   renderCal(); renderSlots(); picked();
+
+  // open slots in the next 7 days (for urgency bar)
+  var week = 0;
+  for (var k = 0; k < 7; k++) { var dk = new Date(today); dk.setDate(today.getDate() + k); week += slots(dk).filter(function (s) { return !s.booked; }).length; }
+
+  return { setService: setService, state: state, openThisWeek: week };
+};
+
+/* Instant price estimator (placeholder prices, owner to confirm). */
+window.TintPrice = {
+  base: { coupe: 179, sedan: 199, suv: 239, truck: 219 },
+  film: { carbon: 0, ceramic: 120, ir: 230 },
+  cover: { std: 0, full: 140 },
+  names: { coupe: "Coupe", sedan: "Sedan", suv: "SUV", truck: "Truck", carbon: "Carbon", ceramic: "Ceramic", ir: "Ceramic IR", std: "Sides + rear", full: "Full + windshield" },
+  calc: function (v, f, c) { var p = this.base[v] + this.film[f] + this.cover[c]; return [p, p + 70]; }
 };

@@ -3,296 +3,480 @@
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <title>Tint N Tools | Premium Window Tinting</title>
-  <meta name="description" content="Premium window tinting for cars, homes and businesses. Instant quote and online booking.">
+  <title>Tint N Tools | Premium Window Tint, Instant Quote</title>
+  <meta name="description" content="Premium ceramic window tint for cars, homes and businesses. Get an instant price and book online in 60 seconds. Lifetime warranty.">
   <meta name="robots" content="noindex, nofollow">
+  <meta name="theme-color" content="#060607">
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Anton&family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Archivo:wdth,wght@62..125,300..900&family=JetBrains+Mono:wght@400;600&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="style.css">
 </head>
 <body>
-  <div class="loader" id="loader"><span>TINT<b>N</b>TOOLS</span><i></i></div>
+  <!-- Preloader -->
+  <div class="pre" id="pre" aria-hidden="true">
+    <div class="pre-num"><span id="preNum">0</span><small>%</small></div>
+    <div class="pre-word">TINT<b>N</b>TOOLS</div>
+    <div class="pre-film"></div>
+  </div>
+
+  <div class="grain" aria-hidden="true"></div>
+  <div class="cursor" id="cursor" aria-hidden="true"><span id="cursorTxt"></span></div>
+
+  <!-- Urgency bar -->
+  <div class="bar">
+    <div class="bar-in">
+      <span class="live"></span>
+      <span>Only <b id="slotsLeft">9</b> install slots left this week</span>
+      <span class="sep">/</span>
+      <a href="#book" class="bar-link">Book online in 60 sec →</a>
+    </div>
+  </div>
 
   <header class="nav" id="nav">
-    <div class="wrap nav-in">
-      <a href="#top" class="logo"><span class="mark"></span>TINT<b>N</b>TOOLS</a>
-      <nav class="links" id="links">
+    <div class="nav-in">
+      <a href="#top" class="logo" aria-label="Tint N Tools home"><svg viewBox="0 0 32 32" aria-hidden="true"><rect x="2" y="2" width="28" height="28" rx="8" fill="none" stroke="currentColor" stroke-width="2"/><path d="M8 24 24 8v16z" fill="var(--hot)"/></svg><span>TINT<b>N</b>TOOLS</span></a>
+      <nav class="links" id="links" aria-label="Main">
         <a href="#services">Services</a>
-        <a href="#compare">Shades</a>
-        <a href="#work">Our Work</a>
-        <a href="#reviews">Reviews</a>
-        <a href="#book">Book</a>
+        <a href="#packages">Packages</a>
+        <a href="#shades">Shades</a>
+        <a href="#work">Work</a>
+        <a href="#faq">FAQ</a>
       </nav>
       <div class="nav-r">
-        <a href="tel:+15550100000" class="phone hide-md">(555) 010-0000</a>
-        <a href="#" class="btn btn-line btn-sm js-wholesale"><svg viewBox="0 0 24 24"><path d="M12 2a5 5 0 0 0-5 5v3H6a2 2 0 0 0-2 2v8a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2v-8a2 2 0 0 0-2-2h-1V7a5 5 0 0 0-5-5zm-3 8V7a3 3 0 1 1 6 0v3H9z"/></svg>Wholesale Login</a>
-        <button class="burger" id="burger" aria-label="Menu" aria-expanded="false"><span></span><span></span></button>
+        <a href="tel:+15550100000" class="nav-phone hide-md"><svg viewBox="0 0 24 24"><path d="M6.6 10.8a15.1 15.1 0 0 0 6.6 6.6l2.2-2.2a1 1 0 0 1 1-.25 11.4 11.4 0 0 0 3.6.57 1 1 0 0 1 1 1V20a1 1 0 0 1-1 1A17 17 0 0 1 3 4a1 1 0 0 1 1-1h3.5a1 1 0 0 1 1 1c0 1.25.2 2.45.57 3.57a1 1 0 0 1-.25 1z"/></svg>(555) 010-0000</a>
+        <a href="#" class="btn btn-ghost btn-sm js-wholesale" data-cursor="Store"><svg viewBox="0 0 24 24"><path d="M12 2a5 5 0 0 0-5 5v3H6a2 2 0 0 0-2 2v8a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2v-8a2 2 0 0 0-2-2h-1V7a5 5 0 0 0-5-5zm-3 8V7a3 3 0 1 1 6 0v3H9z"/></svg>Wholesale Login</a>
+        <a href="#book" class="btn btn-hot btn-sm hide-sm magnetic">Get Quote</a>
+        <button class="burger" id="burger" aria-label="Open menu" aria-expanded="false"><span></span><span></span></button>
       </div>
     </div>
   </header>
 
   <main id="top">
-    <!-- HERO -->
-    <section class="hero">
-      <div class="hero-bg" data-parallax="0.25"><img src="img/hero-garage.jpg" alt="Sports car in a dark studio"></div>
-      <div class="hero-shade"></div>
-      <div class="wrap hero-in">
-        <p class="kicker reveal">Automotive · Residential · Commercial</p>
-        <h1 class="hero-title">
-          <span class="line"><span>Stay cool.</span></span>
-          <span class="line"><span>Look <em>sharp.</em></span></span>
-          <span class="line"><span>Drive private.</span></span>
-        </h1>
-        <p class="hero-lead reveal">Professional window tinting with premium ceramic films, a flawless install and a lifetime warranty.</p>
-        <div class="hero-cta reveal">
-          <a href="#book" class="btn btn-fire">Get a Free Quote <span>→</span></a>
-          <a href="#book" class="btn btn-glass">Check Availability</a>
+    <!-- ============ HERO ============ -->
+    <section class="hero" id="hero">
+      <div class="hero-media">
+        <img src="img/porsche.jpg" alt="Black sports car on the road" class="hero-img" id="heroImg">
+        <div class="film" id="film"><i class="film-edge"></i></div>
+        <div class="hero-vignette"></div>
+      </div>
+
+      <div class="hero-grid">
+        <div class="hero-copy">
+          <p class="eyebrow"><span class="dot"></span>Ceramic window tint · Lifetime warranty</p>
+          <h1 class="h-hero" aria-label="Tint that turns heads.">
+            <span class="ln"><span class="w">Tint</span> <span class="w">that</span></span>
+            <span class="ln"><span class="w hot">turns</span></span>
+            <span class="ln"><span class="w">heads.</span></span>
+          </h1>
+          <p class="hero-sub">Up to 60% cooler cabins, 99% UV blocked and a finish so clean it looks factory. Installed in a few hours.</p>
+          <div class="hero-proof">
+            <div class="stars">★★★★★</div>
+            <p><b>4.9</b> from 300+ local drivers <small>(sample rating)</small></p>
+          </div>
+          <div class="vlt" aria-hidden="true">
+            <span>VLT</span><b id="vltNum">100</b><span>%</span>
+            <i class="vlt-bar"><i id="vltBar"></i></i>
+            <em>Scroll to tint</em>
+          </div>
         </div>
+
+        <!-- Instant quote card (CRO) -->
+        <form class="quote-card" id="calc" onsubmit="return false" aria-labelledby="calcTitle">
+          <div class="qc-head">
+            <h2 id="calcTitle">Instant price</h2>
+            <span class="qc-badge">No sign-up</span>
+          </div>
+          <fieldset>
+            <legend>1. Your vehicle</legend>
+            <div class="seg" data-key="v">
+              <button type="button" data-val="coupe">Coupe</button>
+              <button type="button" data-val="sedan" class="on">Sedan</button>
+              <button type="button" data-val="suv">SUV</button>
+              <button type="button" data-val="truck">Truck</button>
+            </div>
+          </fieldset>
+          <fieldset>
+            <legend>2. Film</legend>
+            <div class="seg" data-key="f">
+              <button type="button" data-val="carbon">Carbon</button>
+              <button type="button" data-val="ceramic" class="on">Ceramic</button>
+              <button type="button" data-val="ir">Ceramic IR</button>
+            </div>
+          </fieldset>
+          <fieldset>
+            <legend>3. Coverage</legend>
+            <div class="seg" data-key="c">
+              <button type="button" data-val="std" class="on">Sides + rear</button>
+              <button type="button" data-val="full">Full + windshield</button>
+            </div>
+          </fieldset>
+          <div class="qc-price">
+            <div>
+              <small>Estimated price</small>
+              <strong>$<span id="pLow">319</span>–$<span id="pHigh">389</span></strong>
+            </div>
+            <ul>
+              <li>✓ Lifetime warranty</li>
+              <li>✓ 2–4 hr install</li>
+            </ul>
+          </div>
+          <a href="#book" class="btn btn-hot btn-block magnetic" id="lockBtn" data-service="Automotive Tint">Lock in this price <span class="arr">→</span></a>
+          <p class="qc-fine">Pay nothing now. Final price confirmed after a quick look.</p>
+        </form>
       </div>
-      <div class="hero-rail wrap reveal">
-        <div><strong data-count="2500" data-suffix="+">0</strong><span>Vehicles tinted</span></div>
-        <div><strong data-count="99" data-suffix="%">0</strong><span>UV rays blocked</span></div>
-        <div><strong data-count="60" data-suffix="%">0</strong><span>Less heat inside</span></div>
-        <div><strong>4.9★</strong><span>Customer rating</span></div>
+
+      <div class="hero-foot">
+        <div class="hf-item"><b data-count="2500" data-suffix="+">2,500+</b><span>Installs</span></div>
+        <div class="hf-item"><b data-count="99" data-suffix="%">99%</b><span>UV blocked</span></div>
+        <div class="hf-item"><b data-count="60" data-suffix="%">60%</b><span>Less heat</span></div>
+        <div class="hf-item"><b>0</b><span>Bubbles. Guaranteed.</span></div>
       </div>
-      <a href="#services" class="scroll-cue" aria-label="Scroll down"><span></span></a>
     </section>
 
-    <!-- MARQUEE -->
-    <div class="marquee" aria-hidden="true">
-      <div class="track">
-        <span>Ceramic Film</span><i>✦</i><span>Lifetime Warranty</span><i>✦</i><span>Computer-Cut Precision</span><i>✦</i><span>Same-Day Service</span><i>✦</i><span>Paint Protection</span><i>✦</i><span>Ceramic Coating</span><i>✦</i>
-        <span>Ceramic Film</span><i>✦</i><span>Lifetime Warranty</span><i>✦</i><span>Computer-Cut Precision</span><i>✦</i><span>Same-Day Service</span><i>✦</i><span>Paint Protection</span><i>✦</i><span>Ceramic Coating</span><i>✦</i>
+    <!-- ============ TRUST MARQUEE ============ -->
+    <div class="ticker" aria-hidden="true">
+      <div class="ticker-track">
+        <span>Ceramic IR</span><i></i><span>Lifetime warranty</span><i></i><span>Computer-cut patterns</span><i></i><span>Dust-free install bay</span><i></i><span>Same-day service</span><i></i><span>Paint protection film</span><i></i>
+        <span>Ceramic IR</span><i></i><span>Lifetime warranty</span><i></i><span>Computer-cut patterns</span><i></i><span>Dust-free install bay</span><i></i><span>Same-day service</span><i></i><span>Paint protection film</span><i></i>
       </div>
     </div>
 
-    <!-- SERVICES -->
-    <section class="sec" id="services">
-      <div class="wrap">
-        <div class="head reveal">
-          <p class="kicker">01 — What we do</p>
-          <h2>Services built for<br>the way you drive &amp; live</h2>
+    <!-- ============ PROBLEM / SCRUB TEXT ============ -->
+    <section class="manifesto">
+      <p class="eyebrow center">The problem</p>
+      <p class="scrub" id="scrub">Your car hits 140°F in the summer sun. Your seats fade. Your screen glares. Strangers see right in. <em>One afternoon with us fixes all of it.</em></p>
+      <div class="mani-cta"><a href="#packages" class="btn btn-line magnetic">Compare films <span class="arr">→</span></a></div>
+    </section>
+
+    <!-- ============ SERVICES (horizontal) ============ -->
+    <section class="hs" id="services">
+      <div class="hs-pin">
+        <div class="hs-head">
+          <p class="eyebrow">Services</p>
+          <h2 class="h2">Every kind<br>of <span class="hot">glass.</span></h2>
+          <p class="muted">Drag or scroll →</p>
         </div>
-        <div class="svc-grid">
-          <a href="#book" class="svc big reveal" data-service="Automotive Tint">
-            <img src="img/porsche.jpg" alt="Black car with tinted windows on the road" loading="lazy">
-            <div class="svc-body">
-              <span class="tag">Most popular</span>
-              <h3>Automotive Tint</h3>
-              <p>Cars, trucks &amp; SUVs. Cut heat, glare and fading with crystal-clear ceramic film.</p>
-              <span class="price">From $199 <em>→</em></span>
+        <div class="hs-track" id="hsTrack">
+          <article class="panel" data-cursor="Quote">
+            <img src="img/amg-black.jpg" alt="Black sports car with dark tint" loading="lazy">
+            <div class="panel-body">
+              <span class="p-num">01</span>
+              <h3>Automotive tint</h3>
+              <ul><li>Cars, trucks &amp; SUVs</li><li>Ceramic &amp; carbon films</li><li>Done in 2–4 hours</li></ul>
+              <div class="p-foot"><span>From <b>$199</b></span><a href="#book" class="p-btn" data-service="Automotive Tint">Book →</a></div>
             </div>
-          </a>
-          <a href="#book" class="svc reveal" data-service="Residential Tint">
-            <img src="img/house.jpg" alt="Modern home with large windows" loading="lazy">
-            <div class="svc-body">
+          </article>
+          <article class="panel" data-cursor="Quote">
+            <img src="img/living.jpg" alt="Bright living room with big windows" loading="lazy">
+            <div class="panel-body">
+              <span class="p-num">02</span>
               <h3>Residential</h3>
-              <p>Lower energy bills and more privacy, without losing your view.</p>
-              <span class="price">Free estimate <em>→</em></span>
+              <ul><li>Cut energy bills</li><li>Daytime privacy</li><li>No more screen glare</li></ul>
+              <div class="p-foot"><span><b>Free</b> estimate</span><a href="#book" class="p-btn" data-service="Residential Tint">Book →</a></div>
             </div>
-          </a>
-          <a href="#book" class="svc reveal" data-service="Commercial Tint">
-            <img src="img/tower.jpg" alt="Glass office buildings" loading="lazy">
-            <div class="svc-body">
+          </article>
+          <article class="panel" data-cursor="Quote">
+            <img src="img/tower.jpg" alt="Glass office towers" loading="lazy">
+            <div class="panel-body">
+              <span class="p-num">03</span>
               <h3>Commercial</h3>
-              <p>Offices &amp; storefronts. Comfort, style and security film.</p>
-              <span class="price">Free estimate <em>→</em></span>
+              <ul><li>Offices &amp; storefronts</li><li>Security &amp; safety film</li><li>After-hours installs</li></ul>
+              <div class="p-foot"><span><b>Free</b> estimate</span><a href="#book" class="p-btn" data-service="Commercial Tint">Book →</a></div>
             </div>
-          </a>
-          <a href="#book" class="svc wide reveal" data-service="Paint Protection / Ceramic Coating">
+          </article>
+          <article class="panel" data-cursor="Quote">
             <img src="img/detailing.jpg" alt="Car being detailed" loading="lazy">
-            <div class="svc-body">
-              <h3>Paint Protection &amp; Ceramic Coating</h3>
-              <p>Shield your paint from chips, scratches and UV, with a deep mirror gloss.</p>
-              <span class="price">From $499 <em>→</em></span>
+            <div class="panel-body">
+              <span class="p-num">04</span>
+              <h3>PPF &amp; ceramic coating</h3>
+              <ul><li>Stops chips &amp; scratches</li><li>Self-healing film</li><li>Mirror-gloss finish</li></ul>
+              <div class="p-foot"><span>From <b>$499</b></span><a href="#book" class="p-btn" data-service="Paint Protection / Ceramic Coating">Book →</a></div>
             </div>
-          </a>
+          </article>
+          <div class="panel panel-end">
+            <h3>Not sure what you need?</h3>
+            <p>Send us a photo and we'll recommend the right film. Free.</p>
+            <a href="#book" class="btn btn-hot magnetic">Ask an expert <span class="arr">→</span></a>
+          </div>
         </div>
       </div>
     </section>
 
-    <!-- BEFORE / AFTER -->
-    <section class="sec ba-sec">
-      <div class="wrap ba-grid">
-        <div class="reveal">
-          <p class="kicker">02 — See the difference</p>
-          <h2>Drag to <em>tint.</em></h2>
-          <p class="muted">Slide across to see how a quality ceramic film transforms the look of any car: deeper, sleeker, more private.</p>
-          <ul class="ticks">
-            <li>Blocks 99% of UV rays</li>
-            <li>No signal interference</li>
-            <li>Won't bubble, peel or turn purple</li>
-          </ul>
+    <!-- ============ BEFORE / AFTER (pinned) ============ -->
+    <section class="ba-sec" id="ba">
+      <div class="ba-pin">
+        <div class="ba-copy">
+          <p class="eyebrow">Before / after</p>
+          <h2 class="h2">Same car.<br><span class="hot">New attitude.</span></h2>
+          <p class="muted">Scroll, or drag the handle.</p>
         </div>
-        <div class="ba reveal" id="ba">
+        <div class="ba-frame" data-cursor="Drag">
           <img src="img/r8.jpg" alt="Car before tint" class="ba-img">
           <div class="ba-after" id="baAfter"><img src="img/r8.jpg" alt="Car after tint" class="ba-img"></div>
-          <div class="ba-handle" id="baHandle"><span>⇆</span></div>
-          <b class="ba-label l">Before</b><b class="ba-label r">After</b>
-          <input type="range" min="0" max="100" value="50" id="baRange" aria-label="Before and after comparison">
+          <div class="ba-line" id="baLine"><span><svg viewBox="0 0 24 24"><path d="M9 6 3 12l6 6M15 6l6 6-6 6" fill="none" stroke="currentColor" stroke-width="2"/></svg></span></div>
+          <b class="ba-tag l">Before</b><b class="ba-tag r">After · 20% ceramic</b>
+          <input type="range" min="0" max="100" value="80" id="baRange" aria-label="Before and after slider">
         </div>
       </div>
     </section>
 
-    <!-- SHADE COMPARE -->
-    <section class="sec" id="compare">
+    <!-- ============ PACKAGES (CRO) ============ -->
+    <section class="sec" id="packages">
       <div class="wrap">
-        <div class="head row reveal">
+        <div class="sec-head">
           <div>
-            <p class="kicker">03 — Pick your shade</p>
-            <h2>Find your perfect darkness</h2>
+            <p class="eyebrow">Packages</p>
+            <h2 class="h2">Good. Better. <span class="hot">Best.</span></h2>
           </div>
-          <p class="muted">VLT = how much light gets through. Lower number, darker tint. Tap a shade to preview the view from inside.</p>
+          <p class="muted">Clear prices for a standard sedan, sides and rear. Every package includes a lifetime warranty.</p>
         </div>
-        <div class="shade-stage reveal">
-          <div class="shade-view">
-            <img src="img/driving.jpg" alt="View from inside a car" id="shadeImg">
-            <div class="shade-film" id="shadeFilm"></div>
-            <div class="shade-info"><strong id="shadeBig">35%</strong><span id="shadeTxt">The sweet spot. Sleek look, clear night vision.</span></div>
+        <div class="pk-grid">
+          <article class="pk reveal">
+            <h3>Carbon</h3>
+            <p class="pk-desc">Sleek matte look, great value.</p>
+            <div class="pk-price"><small>from</small>$199</div>
+            <div class="meter"><span>Heat rejection</span><i style="--w:40%"></i></div>
+            <ul><li>99% UV blocked</li><li>Won't fade or turn purple</li><li>Lifetime warranty</li></ul>
+            <a href="#book" class="btn btn-line btn-block js-pick" data-film="carbon" data-service="Automotive Tint">Choose Carbon</a>
+          </article>
+          <article class="pk pk-hot reveal">
+            <span class="pk-flag">Most popular</span>
+            <h3>Ceramic</h3>
+            <p class="pk-desc">Noticeably cooler. Crystal-clear view.</p>
+            <div class="pk-price"><small>from</small>$319</div>
+            <div class="meter"><span>Heat rejection</span><i style="--w:72%"></i></div>
+            <ul><li>Everything in Carbon</li><li>Blocks up to 60% of heat</li><li>Zero signal interference</li><li>Sharper night visibility</li></ul>
+            <a href="#book" class="btn btn-hot btn-block js-pick magnetic" data-film="ceramic" data-service="Automotive Tint">Choose Ceramic <span class="arr">→</span></a>
+          </article>
+          <article class="pk reveal">
+            <h3>Ceramic IR</h3>
+            <p class="pk-desc">Maximum cool for hot climates.</p>
+            <div class="pk-price"><small>from</small>$429</div>
+            <div class="meter"><span>Heat rejection</span><i style="--w:95%"></i></div>
+            <ul><li>Everything in Ceramic</li><li>Top infrared rejection</li><li>Best for black interiors</li></ul>
+            <a href="#book" class="btn btn-line btn-block js-pick" data-film="ir" data-service="Automotive Tint">Choose Ceramic IR</a>
+          </article>
+        </div>
+        <p class="note center">Prices shown are placeholders for this concept.</p>
+      </div>
+    </section>
+
+    <!-- ============ SHADE GUIDE ============ -->
+    <section class="sec shade-sec" id="shades">
+      <div class="wrap shade-grid">
+        <div>
+          <p class="eyebrow">Shade guide</p>
+          <h2 class="h2">How dark<br>is <span class="hot">dark?</span></h2>
+          <p class="muted">VLT is how much light gets through. Tap a shade to see the view from the driver's seat.</p>
+          <div class="shade-list" id="shadeList" role="radiogroup" aria-label="Tint shade">
+            <button role="radio" aria-checked="false" data-v="70"><b>70%</b><span>Clear · heat only</span></button>
+            <button role="radio" aria-checked="false" data-v="50"><b>50%</b><span>Light · factory look</span></button>
+            <button role="radio" aria-checked="true" data-v="35" class="on"><b>35%</b><span>Medium · most popular</span></button>
+            <button role="radio" aria-checked="false" data-v="20"><b>20%</b><span>Dark · privacy</span></button>
+            <button role="radio" aria-checked="false" data-v="5"><b>5%</b><span>Limo · rear windows</span></button>
           </div>
-          <div class="shade-btns" id="shadeBtns">
-            <button data-v="70"><b>70%</b><span>Clear</span></button>
-            <button data-v="50"><b>50%</b><span>Light</span></button>
-            <button data-v="35" class="on"><b>35%</b><span>Medium</span></button>
-            <button data-v="20"><b>20%</b><span>Dark</span></button>
-            <button data-v="5"><b>5%</b><span>Limo</span></button>
-          </div>
+          <p class="note">We'll always recommend a shade that's legal in your state.</p>
+        </div>
+        <div class="shade-view">
+          <img src="img/driving.jpg" alt="View through the windshield from the driver's seat" loading="lazy">
+          <div class="shade-film" id="shadeFilm"></div>
+          <div class="shade-read"><b id="shadeNum">35</b><span>%<br>VLT</span></div>
         </div>
       </div>
     </section>
 
-    <!-- WORK -->
-    <section class="sec work-sec" id="work">
+    <!-- ============ WORK ============ -->
+    <section class="sec work" id="work">
       <div class="wrap">
-        <div class="head row reveal">
+        <div class="sec-head">
           <div>
-            <p class="kicker">04 — Recent work</p>
-            <h2>Fresh out the bay</h2>
+            <p class="eyebrow">Recent work</p>
+            <h2 class="h2">Fresh out<br>the <span class="hot">bay.</span></h2>
           </div>
-          <p class="muted">Sample photos for this concept. Your own project shots go here.</p>
+          <p class="muted">Stock photos for this concept. Your own project photos replace these.</p>
         </div>
-      </div>
-      <div class="work-rail" id="workRail">
-        <figure class="w"><img src="img/mustang.jpg" alt="" loading="lazy"><figcaption><b>Ford Mustang GT</b>20% ceramic · full car</figcaption></figure>
-        <figure class="w"><img src="img/amg-red.jpg" alt="" loading="lazy"><figcaption><b>Mercedes-AMG GT</b>35% sides · PPF front</figcaption></figure>
-        <figure class="w"><img src="img/bmw-red.jpg" alt="" loading="lazy"><figcaption><b>BMW M4</b>Ceramic coating</figcaption></figure>
-        <figure class="w"><img src="img/living.jpg" alt="" loading="lazy"><figcaption><b>Modern Residence</b>Heat-reduction film</figcaption></figure>
-        <figure class="w"><img src="img/amg-black.jpg" alt="" loading="lazy"><figcaption><b>AMG GT Black</b>5% rear · 20% front</figcaption></figure>
-        <figure class="w"><img src="img/bugatti.jpg" alt="" loading="lazy"><figcaption><b>Exotic Detail</b>Full PPF wrap</figcaption></figure>
-        <figure class="w"><img src="img/bmw7.jpg" alt="" loading="lazy"><figcaption><b>BMW 7 Series</b>35% ceramic</figcaption></figure>
-      </div>
-      <div class="wrap rail-ctrl">
-        <button id="railPrev" aria-label="Previous">←</button>
-        <button id="railNext" aria-label="Next">→</button>
+        <div class="work-grid">
+          <figure class="wk wk-a reveal" data-cursor="View"><img src="img/hero-garage.jpg" alt="" loading="lazy"><figcaption><b>Camaro ZL1</b><span>20% ceramic · full car</span></figcaption></figure>
+          <figure class="wk wk-b reveal" data-cursor="View"><img src="img/amg-red.jpg" alt="" loading="lazy"><figcaption><b>AMG GT</b><span>35% sides · PPF</span></figcaption></figure>
+          <figure class="wk wk-c reveal" data-cursor="View"><img src="img/bmw-red.jpg" alt="" loading="lazy"><figcaption><b>BMW M4</b><span>Ceramic coating</span></figcaption></figure>
+          <figure class="wk wk-d reveal" data-cursor="View"><img src="img/house.jpg" alt="" loading="lazy"><figcaption><b>Modern home</b><span>Solar control film</span></figcaption></figure>
+          <figure class="wk wk-e reveal" data-cursor="View"><img src="img/mustang.jpg" alt="" loading="lazy"><figcaption><b>Mustang GT</b><span>20% all-round</span></figcaption></figure>
+        </div>
       </div>
     </section>
 
-    <!-- PROCESS -->
-    <section class="sec">
-      <div class="wrap">
-        <div class="head reveal">
-          <p class="kicker">05 — How it works</p>
-          <h2>Three steps. Zero hassle.</h2>
+    <!-- ============ REVIEWS ============ -->
+    <section class="sec reviews">
+      <div class="wrap rv-head">
+        <div class="rv-score">
+          <b>4.9</b>
+          <div><div class="stars">★★★★★</div><span>300+ reviews</span></div>
         </div>
-        <ol class="steps">
-          <li class="reveal"><span>01</span><h3>Book online</h3><p>Pick a service, date and time in under a minute.</p></li>
-          <li class="reveal"><span>02</span><h3>Drop it off</h3><p>Grab a coffee. Most cars are done in 2–4 hours.</p></li>
-          <li class="reveal"><span>03</span><h3>Drive away cool</h3><p>Leave with a flawless finish and a lifetime warranty.</p></li>
-        </ol>
+        <h2 class="h2">Drivers don't<br>stop <span class="hot">talking.</span></h2>
+        <p class="note">Sample reviews for this concept. Replace with real Google reviews.</p>
       </div>
-    </section>
-
-    <!-- REVIEWS -->
-    <section class="sec reviews-sec" id="reviews">
-      <div class="wrap">
-        <div class="head row reveal">
-          <div>
-            <p class="kicker">06 — Reviews</p>
-            <h2>Drivers love the result</h2>
+      <div class="rv-rows">
+        <div class="rv-row">
+          <div class="rv-track">
+            <blockquote><p>"Not a single bubble. Truck stays way cooler and looks mean."</p><cite>Sample · F-150 · 20% ceramic</cite></blockquote>
+            <blockquote><p>"Booked on my phone at lunch, picked it up the same afternoon."</p><cite>Sample · Model 3 · 35%</cite></blockquote>
+            <blockquote><p>"Our living room glare is gone and the view is still crystal clear."</p><cite>Sample · Residential</cite></blockquote>
+            <blockquote><p>"Honest pricing. They talked me out of going too dark. Respect."</p><cite>Sample · Civic · 35%</cite></blockquote>
+            <blockquote><p>"Not a single bubble. Truck stays way cooler and looks mean."</p><cite>Sample · F-150 · 20% ceramic</cite></blockquote>
+            <blockquote><p>"Booked on my phone at lunch, picked it up the same afternoon."</p><cite>Sample · Model 3 · 35%</cite></blockquote>
+            <blockquote><p>"Our living room glare is gone and the view is still crystal clear."</p><cite>Sample · Residential</cite></blockquote>
+            <blockquote><p>"Honest pricing. They talked me out of going too dark. Respect."</p><cite>Sample · Civic · 35%</cite></blockquote>
           </div>
-          <p class="muted sample">Sample reviews for this concept. Replace with real Google reviews.</p>
         </div>
-        <div class="rev-grid">
-          <blockquote class="rev reveal"><div class="stars">★★★★★</div><p>"Spotless install, not a single bubble. My truck stays so much cooler now."</p><cite>Sample Customer · Ford F-150</cite></blockquote>
-          <blockquote class="rev reveal"><div class="stars">★★★★★</div><p>"Booked online, dropped it off, picked it up the same afternoon. Easy."</p><cite>Sample Customer · Tesla Model 3</cite></blockquote>
-          <blockquote class="rev reveal"><div class="stars">★★★★★</div><p>"Did our whole living room. The afternoon glare is gone and the view is still clear."</p><cite>Sample Customer · Residential</cite></blockquote>
+        <div class="rv-row rev">
+          <div class="rv-track">
+            <blockquote><p>"PPF on the front end saved my paint on a road trip. Worth every cent."</p><cite>Sample · M4 · PPF</cite></blockquote>
+            <blockquote><p>"Spotless shop, super professional, and the warranty is real."</p><cite>Sample · Tahoe · Ceramic IR</cite></blockquote>
+            <blockquote><p>"Did our storefront after hours. Zero disruption to the business."</p><cite>Sample · Commercial</cite></blockquote>
+            <blockquote><p>"The ceramic film is no joke. AC barely has to work now."</p><cite>Sample · Camry · Ceramic</cite></blockquote>
+            <blockquote><p>"PPF on the front end saved my paint on a road trip. Worth every cent."</p><cite>Sample · M4 · PPF</cite></blockquote>
+            <blockquote><p>"Spotless shop, super professional, and the warranty is real."</p><cite>Sample · Tahoe · Ceramic IR</cite></blockquote>
+            <blockquote><p>"Did our storefront after hours. Zero disruption to the business."</p><cite>Sample · Commercial</cite></blockquote>
+            <blockquote><p>"The ceramic film is no joke. AC barely has to work now."</p><cite>Sample · Camry · Ceramic</cite></blockquote>
+          </div>
         </div>
       </div>
     </section>
 
-    <!-- BOOKING -->
+    <!-- ============ GUARANTEE ============ -->
+    <section class="guarantee">
+      <div class="wrap g-in reveal">
+        <div class="seal" aria-hidden="true">
+          <svg viewBox="0 0 200 200"><defs><path id="circ" d="M100,100 m-78,0 a78,78 0 1,1 156,0 a78,78 0 1,1 -156,0"/></defs><text><textPath href="#circ">FLAWLESS FINISH · GUARANTEED · FLAWLESS FINISH · GUARANTEED ·</textPath></text></svg>
+          <b>✓</b>
+        </div>
+        <div>
+          <h2 class="h2">The flawless<br>finish <span class="hot">promise.</span></h2>
+          <p>See a bubble, a peel or a speck of dust? Bring it back and we'll redo it free. For as long as you own the car.</p>
+        </div>
+        <a href="#book" class="btn btn-hot magnetic">Claim your spot <span class="arr">→</span></a>
+      </div>
+    </section>
+
+    <!-- ============ BOOKING ============ -->
     <section class="sec book-sec" id="book">
-      <div class="book-bg"><img src="img/amg-black.jpg" alt=""></div>
       <div class="wrap">
-        <div class="head reveal">
-          <p class="kicker">07 — Quote &amp; booking</p>
-          <h2>Lock in your spot</h2>
-        </div>
-        <div class="book reveal">
-          <div class="cal">
-            <div class="cal-top">
-              <button id="prevM" aria-label="Previous month">‹</button>
-              <h3 id="calTitle">Month</h3>
-              <button id="nextM" aria-label="Next month">›</button>
-            </div>
-            <div class="dow"><span>S</span><span>M</span><span>T</span><span>W</span><span>T</span><span>F</span><span>S</span></div>
-            <div class="days" id="days"></div>
-            <div class="legend"><span><i class="g"></i>Open</span><span><i class="y"></i>Few left</span><span><i class="x"></i>Booked</span></div>
-            <p class="slot-title" id="slotTitle">Pick a date to see times</p>
-            <div class="slots" id="slots"></div>
+        <div class="sec-head">
+          <div>
+            <p class="eyebrow">Quote &amp; booking</p>
+            <h2 class="h2">Lock in<br>your <span class="hot">spot.</span></h2>
           </div>
-          <form class="form" id="form" novalidate>
-            <h3>Quick Quote</h3>
-            <div class="picked" id="picked">No time picked yet</div>
-            <div class="chips" id="chips">
-              <button type="button" data-s="Automotive Tint">Auto Tint</button>
-              <button type="button" data-s="Residential Tint">Residential</button>
-              <button type="button" data-s="Commercial Tint">Commercial</button>
-              <button type="button" data-s="Paint Protection / Ceramic Coating">PPF / Ceramic</button>
+          <p class="muted">Takes about 60 seconds. No payment needed.</p>
+        </div>
+
+        <div class="book">
+          <div class="book-main">
+            <ol class="progress" id="progress">
+              <li class="on"><span>1</span>Service</li>
+              <li><span>2</span>Date &amp; time</li>
+              <li><span>3</span>Details</li>
+            </ol>
+
+            <div class="step" data-step="1">
+              <h3>What are we tinting?</h3>
+              <div class="svc-pick" id="chips">
+                <button type="button" data-s="Automotive Tint"><svg viewBox="0 0 24 24"><path d="M5 11l1.5-4.5A2 2 0 0 1 8.4 5h7.2a2 2 0 0 1 1.9 1.5L19 11v6a1 1 0 0 1-1 1h-1a1 1 0 0 1-1-1v-1H8v1a1 1 0 0 1-1 1H6a1 1 0 0 1-1-1v-6zm2.2-1h9.6l-1-3H8.2l-1 3zM7.5 14a1.5 1.5 0 1 0 0-3 1.5 1.5 0 0 0 0 3zm9 0a1.5 1.5 0 1 0 0-3 1.5 1.5 0 0 0 0 3z"/></svg>Vehicle tint</button>
+                <button type="button" data-s="Residential Tint"><svg viewBox="0 0 24 24"><path d="M12 3l9 8h-3v9h-5v-6h-2v6H6v-9H3l9-8z"/></svg>Home</button>
+                <button type="button" data-s="Commercial Tint"><svg viewBox="0 0 24 24"><path d="M3 21V7l6-4v4l6-4v18H3zm14 0V9h4v12h-4z"/></svg>Business</button>
+                <button type="button" data-s="Paint Protection / Ceramic Coating"><svg viewBox="0 0 24 24"><path d="M12 2l8 3v6c0 5-3.4 9.7-8 11-4.6-1.3-8-6-8-11V5l8-3z"/></svg>PPF / Coating</button>
+              </div>
+              <button type="button" class="btn btn-hot next" data-go="2">Continue <span class="arr">→</span></button>
             </div>
-            <input type="hidden" name="service" id="service">
-            <label class="fl"><input name="vehicle" placeholder=" "><span>Vehicle (year, make, model)</span></label>
-            <div class="two">
-              <label class="fl"><input name="name" placeholder=" " autocomplete="name"><span>Your name</span></label>
-              <label class="fl"><input name="phone" type="tel" placeholder=" " autocomplete="tel"><span>Phone</span></label>
+
+            <div class="step" data-step="2" hidden>
+              <h3>Pick a date &amp; time</h3>
+              <div class="cal">
+                <div class="cal-top">
+                  <button type="button" id="prevM" aria-label="Previous month">‹</button>
+                  <b id="calTitle">Month</b>
+                  <button type="button" id="nextM" aria-label="Next month">›</button>
+                </div>
+                <div class="dow"><span>S</span><span>M</span><span>T</span><span>W</span><span>T</span><span>F</span><span>S</span></div>
+                <div class="days" id="days"></div>
+                <div class="legend"><span><i class="g"></i>Open</span><span><i class="y"></i>Almost full</span></div>
+                <p class="slot-title" id="slotTitle">Pick a date</p>
+                <div class="slots" id="slots"></div>
+              </div>
+              <div class="step-nav">
+                <button type="button" class="back" data-go="1">← Back</button>
+                <button type="button" class="btn btn-hot next" data-go="3">Continue <span class="arr">→</span></button>
+              </div>
             </div>
-            <button class="btn btn-fire full" type="submit">Get My Quote <span>→</span></button>
-            <p class="fine">No spam. We reply within 1 business hour.</p>
-            <div class="done" id="done" hidden>
-              <div class="tick">✓</div>
-              <h4>You're booked in!</h4>
-              <p id="doneTxt"></p>
-              <button type="button" class="btn btn-glass btn-sm" id="again">New request</button>
-            </div>
-          </form>
+
+            <form class="step form" data-step="3" id="form" novalidate hidden>
+              <h3>Where do we send your quote?</h3>
+              <input type="hidden" name="service" id="service">
+              <label class="fl"><input name="vehicle" placeholder=" "><span>Vehicle (year, make, model)</span></label>
+              <div class="two">
+                <label class="fl"><input name="name" placeholder=" " autocomplete="name"><span>Your name</span></label>
+                <label class="fl"><input name="phone" type="tel" placeholder=" " autocomplete="tel"><span>Mobile number</span></label>
+              </div>
+              <div class="step-nav">
+                <button type="button" class="back" data-go="2">← Back</button>
+                <button class="btn btn-hot magnetic" type="submit">Get my quote <span class="arr">→</span></button>
+              </div>
+              <p class="fine">🔒 No spam. We reply within 1 business hour.</p>
+              <div class="done" id="done" hidden>
+                <div class="tick">✓</div>
+                <h4>You're in.</h4>
+                <p id="doneTxt"></p>
+                <button type="button" class="btn btn-line btn-sm" id="again">New request</button>
+              </div>
+            </form>
+          </div>
+
+          <aside class="summary">
+            <h4>Your booking</h4>
+            <dl>
+              <div><dt>Service</dt><dd id="sumSvc">Not chosen</dd></div>
+              <div><dt>When</dt><dd id="picked">No time picked yet</dd></div>
+              <div><dt>Estimate</dt><dd id="sumEst">$319–$389</dd></div>
+            </dl>
+            <ul class="perks">
+              <li>✓ Lifetime warranty</li>
+              <li>✓ Free re-do if anything's off</li>
+              <li>✓ Free coffee &amp; Wi-Fi while you wait</li>
+            </ul>
+            <a href="tel:+15550100000" class="sum-call">Rather talk? <b>(555) 010-0000</b></a>
+          </aside>
         </div>
       </div>
     </section>
 
-    <!-- FAQ -->
-    <section class="sec">
+    <!-- ============ FAQ ============ -->
+    <section class="sec faq-sec" id="faq">
       <div class="wrap faq-grid">
-        <div class="reveal">
-          <p class="kicker">08 — FAQ</p>
-          <h2>Good questions</h2>
-          <p class="muted">Still unsure? Call us at <a href="tel:+15550100000" class="u">(555) 010-0000</a>.</p>
+        <div>
+          <p class="eyebrow">FAQ</p>
+          <h2 class="h2">Still<br><span class="hot">thinking?</span></h2>
+          <p class="muted">Call <a href="tel:+15550100000" class="u">(555) 010-0000</a> and talk to a real installer.</p>
         </div>
-        <div class="faq reveal">
-          <details open><summary>How long does a car tint take?</summary><p>Most vehicles take 2–4 hours. You can wait in our lounge or drop it off.</p></details>
-          <details><summary>Is ceramic film worth it?</summary><p>Yes. It blocks far more heat than standard film, won't fade, and doesn't interfere with phone or GPS signals.</p></details>
-          <details><summary>How dark can I legally go?</summary><p>It depends on your state. We'll recommend a legal shade for your vehicle when you book.</p></details>
-          <details><summary>When can I roll my windows down?</summary><p>Wait 3–5 days so the film can fully cure.</p></details>
+        <div class="faq">
+          <details open><summary>How long does it take?<i></i></summary><p>Most cars take 2–4 hours. Wait in our lounge or drop it off. Homes and offices depend on size, and you'll get an exact time with your quote.</p></details>
+          <details><summary>Is ceramic really worth the extra?<i></i></summary><p>If you park outside or drive in the heat, yes. Ceramic blocks far more heat than standard film, never fades and won't interfere with your phone or GPS.</p></details>
+          <details><summary>Is it legal?<i></i></summary><p>Laws vary by state. We'll recommend a legal shade for your vehicle and give you a compliance certificate.</p></details>
+          <details><summary>What if I see a bubble later?<i></i></summary><p>Bring it back. Our flawless finish promise means we fix it free, for as long as you own the car.</p></details>
+          <details><summary>When can I roll my windows down?<i></i></summary><p>Give it 3–5 days for the film to cure fully.</p></details>
         </div>
       </div>
     </section>
 
-    <!-- CTA -->
-    <section class="cta">
-      <img src="img/mustang.jpg" alt="" loading="lazy">
-      <div class="wrap cta-in reveal">
-        <h2>Ready for the<br><em>tint upgrade?</em></h2>
-        <a href="#book" class="btn btn-fire">Book Your Spot <span>→</span></a>
+    <!-- ============ FINAL CTA ============ -->
+    <section class="final">
+      <img src="img/hero-garage.jpg" alt="" loading="lazy" class="final-bg">
+      <div class="final-in">
+        <p class="eyebrow center">Ready when you are</p>
+        <h2 class="mega">Get<br><span class="hot">tinted.</span></h2>
+        <div class="final-cta">
+          <a href="#book" class="btn btn-hot btn-lg magnetic">Get my instant quote <span class="arr">→</span></a>
+          <a href="tel:+15550100000" class="btn btn-ghost btn-lg">Call (555) 010-0000</a>
+        </div>
       </div>
     </section>
   </main>
@@ -300,17 +484,28 @@
   <footer class="foot">
     <div class="wrap foot-grid">
       <div>
-        <a href="#top" class="logo"><span class="mark"></span>TINT<b>N</b>TOOLS</a>
-        <p class="muted">Premium window tint, paint protection &amp; ceramic coating.</p>
+        <p class="foot-tag">Premium window tint, paint protection &amp; ceramic coating.</p>
+        <a href="#" class="js-wholesale foot-ws">Wholesale login →</a>
       </div>
       <div><h4>Visit</h4><p>123 Main Street<br>Your City, ST 00000</p></div>
       <div><h4>Hours</h4><p>Mon–Fri 8am–6pm<br>Sat 9am–3pm · Sun closed</p></div>
-      <div><h4>Contact</h4><p><a href="tel:+15550100000">(555) 010-0000</a><br><a href="mailto:hello@example.com">hello@example.com</a></p><a href="#" class="js-wholesale u">Wholesale Login →</a></div>
+      <div><h4>Contact</h4><p><a href="tel:+15550100000">(555) 010-0000</a><br><a href="mailto:hello@example.com">hello@example.com</a></p></div>
     </div>
-    <div class="wrap foot-bot"><span>© <span id="yr"></span> Tint N Tools</span><span>Design concept A · Dark</span></div>
+    <div class="foot-word" aria-hidden="true">TINT<b>N</b>TOOLS</div>
+    <div class="wrap foot-bot"><span>© <span id="yr"></span> Tint N Tools</span><span>Design concept A · Noir</span></div>
   </footer>
 
+  <!-- Sticky mobile CTA (CRO) -->
+  <div class="dock" id="dock">
+    <a href="tel:+15550100000" class="dock-call">Call</a>
+    <a href="#book" class="dock-quote">Get instant quote →</a>
+  </div>
+
   <div class="toast" id="toast" role="status" aria-live="polite"></div>
+
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/gsap.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/ScrollTrigger.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/lenis@1.1.13/dist/lenis.min.js"></script>
   <script src="booking.js"></script>
   <script src="script.js"></script>
 </body>
