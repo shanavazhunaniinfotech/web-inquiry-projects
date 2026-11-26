@@ -1,5 +1,5 @@
 <!doctype html>
-<html lang="en">
+<html lang="en" data-card="minimal">
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
@@ -13,7 +13,7 @@
   <link href="https://fonts.googleapis.com/css2?family=Instrument+Serif:ital@0;1&family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet">
   <link rel="preload" as="image" href="images/v2-hero.jpg">
   <link rel="stylesheet" href="style.css">
-  <script>document.documentElement.classList.add('js');try{if(sessionStorage.getItem('hd-loaded'))document.documentElement.classList.add('seen')}catch(e){}</script>
+  <script>document.documentElement.classList.add('js','lite');if(/[?&]notes=1/.test(location.search))document.documentElement.classList.add('notes-url');try{if(sessionStorage.getItem('hd-loaded'))document.documentElement.classList.add('seen')}catch(e){}</script>
 </head>
 <body>
 
@@ -63,11 +63,7 @@
 
 <!-- ============ ANNOUNCEMENT ============ -->
 <div class="announce" role="region" aria-label="Store benefits">
-  <div class="announce__track" data-announce>
-    <p class="is-active">Free delivery &amp; assembly across all 7 Emirates</p>
-    <p>Pay in 4 interest-free with <b>tabby</b> or <b>tamara</b></p>
-    <p><a href="#visit">Book a free home styling visit</a></p>
-  </div>
+  <div class="announce__track" data-announce><p class="is-active">Free delivery &amp; assembly across the UAE</p></div>
 </div>
 
 <!-- ============ HEADER ============ -->
@@ -82,9 +78,8 @@
     </nav>
     <a class="logo" href="#top" aria-label="Home District — home"><img src="images/logo.png" alt="home district" width="840" height="121"></a>
     <div class="header__right">
-      <a class="nav-link hide-md" href="#visit" data-hover>Book a visit</a>
       <button class="icon-btn" type="button" aria-label="Search" data-open="search"><svg><use href="#i-search"/></svg></button>
-      <button class="icon-btn hide-sm" type="button" aria-label="Wishlist" data-wish-count-btn><svg><use href="#i-heart"/></svg><span class="count" data-wish-count hidden>0</span></button>
+      <button class="sr" type="button" data-wish-count-btn>Wishlist <span data-wish-count hidden>0</span></button>
       <button class="icon-btn" type="button" aria-label="Open cart" data-open="cart"><svg><use href="#i-bag"/></svg><span class="count" data-cart-count hidden>0</span></button>
     </div>
   </div>
@@ -110,44 +105,23 @@
         <p class="hero__overlay-title">Thoughtful furniture.<br><em>Space to feel at home.</em></p>
         <a class="btn btn--light" href="#edit" data-magnetic>Shop the collection <svg><use href="#i-arrow"/></svg></a>
       </div>
-      <button class="hotspot hero__hotspot" type="button" data-quick="coast-sofa" aria-label="Coast 3-seater sofa, AED 4,290">
-        <span class="hotspot__dot"></span>
-        <span class="hotspot__card"><strong>Coast 3-seater sofa</strong><small>AED 4,290 · or 4 × AED 1,072.50</small></span>
-      </button>
     </div>
 
     <div class="hero__foot">
       <div class="hero__cta">
-        <p class="hero__lede">Modern furniture for UAE homes. Considered materials, honest prices — delivered and assembled free.</p>
+        <p class="hero__lede">Modern furniture, made for everyday living in the UAE.</p>
         <div class="hero__btns">
-          <a class="btn btn--dark" href="#edit" data-magnetic>Shop the collection</a>
-          <a class="btn btn--line" href="#visit" data-magnetic>Book a free home visit</a>
+          <a class="btn btn--dark" href="#rooms" data-magnetic>Shop the collection <svg><use href="#i-arrow"/></svg></a>
         </div>
       </div>
-      <ul class="hero__proof" aria-label="Why customers trust us">
-        <li><span class="stars" aria-hidden="true"><svg><use href="#i-star"/></svg><svg><use href="#i-star"/></svg><svg><use href="#i-star"/></svg><svg><use href="#i-star"/></svg><svg><use href="#i-star"/></svg></span><span><b>4.9</b> · 214 reviews</span></li>
-        <li><span class="pill-tabby">tabby</span><span class="pill-tamara">tamara</span><span>Pay in 4, 0%</span></li>
-        <li class="hero__scroll" aria-hidden="true"><span></span>Scroll</li>
-      </ul>
+      <ul class="hero__proof" aria-hidden="true"><li class="hero__scroll"><span></span>Scroll</li></ul>
     </div>
   </div>
 </section>
 
-<!-- ============ 02 PROMISE MARQUEE ============ -->
-<section class="marquee" aria-label="Our promise" data-note="2">
-  <div class="marquee__track" data-marquee>
-    <div class="marquee__group">
-      <span><svg><use href="#i-truck"/></svg>Free delivery &amp; assembly</span><i>◠</i>
-      <span><svg><use href="#i-card"/></svg>Pay in 4 with tabby or tamara</span><i>◠</i>
-      <span><svg><use href="#i-shield"/></svg>5-year frame guarantee</span><i>◠</i>
-      <span><svg><use href="#i-return"/></svg>30-day home trial</span><i>◠</i>
-      <span><svg><use href="#i-home"/></svg>Free home styling visit</span><i>◠</i>
-    </div>
-  </div>
-</section>
 
 <!-- ============ 03 ROOMS (horizontal) ============ -->
-<section class="rooms" id="rooms" data-note="3">
+<section class="rooms" id="rooms" data-note="2">
   <div class="rooms__pin" data-rooms-pin>
     <div class="rooms__track" data-rooms-track>
       <div class="rooms__intro">
@@ -167,7 +141,7 @@
 </section>
 
 <!-- ============ 04 THE EDIT ============ -->
-<section class="section edit" id="edit" data-note="4">
+<section class="section edit" id="edit" data-note="3">
   <div class="wrap">
     <header class="sec-head">
       <div>
@@ -183,10 +157,18 @@
       </div>
     </header>
     <div class="edit__grid" data-products aria-live="polite"></div>
-    <div class="edit__more">
-      <p class="muted">Showing our bestsellers · 30 pieces at launch, 80+ by summer</p>
-      <a class="btn btn--line" href="#rooms" data-magnetic>Browse every room</a>
-    </div>
+  </div>
+</section>
+
+<!-- ============ PROMISE (after the products, as part of the story) ============ -->
+<section class="apromise" data-note="4" aria-label="Our promise">
+  <div class="wrap">
+    <ul class="apromise__list">
+      <li><svg><use href="#i-truck"/></svg><strong>Free delivery &amp; assembly</strong><span>To any room, in all 7 Emirates</span></li>
+      <li><svg><use href="#i-card"/></svg><strong>Pay in 4, interest-free</strong><span>With tabby or tamara</span></li>
+      <li><svg><use href="#i-return"/></svg><strong>30-day home trial</strong><span>Not right? We collect it</span></li>
+      <li><svg><use href="#i-shield"/></svg><strong>5-year guarantee</strong><span>On every frame</span></li>
+    </ul>
   </div>
 </section>
 
@@ -390,7 +372,9 @@
         </div>
         <div class="config__btns">
           <button class="btn btn--light" type="button" data-build-add data-magnetic>Add to cart</button>
-          <a class="btn btn--line-light" href="#visit" data-build-cta>Talk to a stylist</a>
+        </div>
+        <a class="link-btn config__talk" href="#visit" data-open="visit" data-build-cta>Prefer to talk it through? Book a free home visit</a>
+        <div hidden>
         </div>
       </div>
     </form>
@@ -424,33 +408,122 @@
           <button class="icon-btn icon-btn--ring" type="button" aria-label="Previous review" data-quote-prev><svg style="transform:rotate(180deg)"><use href="#i-arrow"/></svg></button>
           <div class="quote__dots" data-quote-dots></div>
           <button class="icon-btn icon-btn--ring" type="button" aria-label="Next review" data-quote-next><svg><use href="#i-arrow"/></svg></button>
-          <button class="link-btn quote__shop" type="button" data-quote-shop>Shop this piece <svg><use href="#i-arrow-ne"/></svg></button>
+          <button class="sr" type="button" data-quote-shop>Shop this piece</button>
         </div>
       </div>
     </div>
   </div>
 </section>
 
-<!-- ============ 10 HOME VISIT ============ -->
-<section class="visit band" id="visit" data-note="10">
-  <div class="visit__bg" aria-hidden="true"><img src="images/hero.jpg" alt="" loading="lazy" width="2000" height="1465" data-parallax></div>
-  <div class="wrap visit__grid">
-    <div class="visit__copy">
-      <p class="folio folio--light"><span>Free home visit</span></p>
-      <h2 class="display display--light" data-split>Not sure what fits? <em>We&rsquo;ll come to you.</em></h2>
-      <p class="visit__lede">A Home District stylist visits your home, measures your space and brings real fabrics and finishes. Free across Dubai, Abu Dhabi and Sharjah, with no obligation.</p>
-      <ul class="visit__perks">
-        <li><span>45 min</span>at your home, at a time that suits you</li>
-        <li><span>48 hrs</span>to receive your room plan and quote</li>
-        <li><span>AED 0</span>no fee, no pressure, no obligation</li>
+<!-- ============ 10 HOME VISIT (calm invitation) ============ -->
+<section class="avisit band" id="visit" data-note="10">
+  <img class="avisit__bg" src="images/hero.jpg" alt="" loading="lazy" width="2000" height="1465" data-parallax>
+  <div class="wrap avisit__body">
+    <p class="folio folio--light"><span>Free home visit</span></p>
+    <h2 class="display display--light" data-split>Not sure what fits? <em>We&rsquo;ll come to you.</em></h2>
+    <p class="avisit__text">A stylist measures your space and brings real fabrics. Free, with no obligation.</p>
+    <button class="btn btn--light" type="button" data-open="visit" data-magnetic>Book a free home visit</button>
+  </div>
+</section>
+
+<!-- ============ 11 STORY ============ -->
+<section class="section story" id="story" data-note="11">
+  <div class="wrap story__grid">
+    <figure class="story__media">
+      <div class="reveal-img"><img src="images/v2-studio.jpg" alt="A minimal oak desk and chair against a plaster wall in the Home District studio" loading="lazy" width="1200" height="1500" data-parallax></div>
+      <figcaption>The studio · Al Quoz, Dubai</figcaption>
+    </figure>
+    <div class="story__body">
+      <p class="folio"><span>The people behind it</span></p>
+      <blockquote class="story__quote">&ldquo;We kept finding beautiful furniture that cost a month&rsquo;s rent, or affordable pieces that didn&rsquo;t last a year. <em>Home District is the middle we couldn&rsquo;t find.</em>&rdquo;</blockquote>
+      <svg class="signature" viewBox="0 0 300 80" aria-hidden="true"><path data-sign d="M10 55c12-30 22-42 26-38 6 6-14 40-6 42 8 2 18-30 26-28 6 2-6 24 2 25 9 1 14-18 22-17 7 1 0 15 7 16 10 1 18-22 30-20 8 2-4 18 4 19 12 2 20-26 34-24 8 1 2 16 10 16 14 0 22-14 36-15 12-1 20 6 34 4 14-2 22-10 34-14" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/></svg>
+      <div class="founders"><div class="founders__faces"><img src="images/founder.jpg" alt="" width="56" height="56" loading="lazy"><img src="images/founder2.jpg" alt="" width="56" height="56" loading="lazy"></div><div><strong>The founders</strong><span class="muted small">Home District · Dubai</span></div></div>
+      <ul class="story__facts">
+        <li><strong>3</strong><span>makers we work with directly</span></li>
+        <li><strong>7</strong><span>Emirates, delivered free</span></li>
+        <li><strong>1</strong><span>studio you can visit</span></li>
       </ul>
-      <div class="stylist">
-        <img src="images/founder2.jpg" alt="" width="56" height="56" loading="lazy">
-        <div><strong>Your stylist, Sara M.</strong><span>Has styled 300+ homes across the UAE</span></div>
-        <span class="stars" aria-label="Rated 5 out of 5"><svg><use href="#i-star"/></svg><svg><use href="#i-star"/></svg><svg><use href="#i-star"/></svg><svg><use href="#i-star"/></svg><svg><use href="#i-star"/></svg></span>
+      <a class="link-arrow" href="#visit">Book a studio appointment <svg><use href="#i-arrow"/></svg></a>
+    </div>
+  </div>
+</section>
+
+
+<!-- ============ 13 FAQ ============ -->
+<section class="section faq" id="faq" data-note="12">
+  <div class="wrap faq__grid">
+    <div class="faq__side">
+      <p class="folio"><span>Good to know</span></p>
+      <h2 class="display" data-split>Questions, <em>answered.</em></h2>
+      <div class="wa-card">
+        <span class="wa-card__icon"><svg><use href="#i-wa"/></svg></span>
+        <div><strong>Talk to a real person</strong><span>WhatsApp · 9am–9pm, every day</span></div>
+        <a class="btn btn--dark btn--sm" href="https://wa.me/971500000000" target="_blank" rel="noopener">Chat now</a>
       </div>
     </div>
+    <div class="faq__list">
+      <details open><summary>How long does delivery take?<i></i></summary><p>In-stock pieces arrive in 3–10 days anywhere in the UAE. Tailor-made pieces take 6–8 weeks. We confirm a 2-hour window by WhatsApp the day before.</p></details>
+      <details><summary>Is assembly really free?<i></i></summary><p>Yes. Our own team carries everything to the room you choose, assembles it and takes all the packaging away — in every Emirate, at no cost.</p></details>
+      <details><summary>How do tabby and tamara work?<i></i></summary><p>Choose tabby or tamara at checkout and split your order into 4 interest-free payments. The first is taken at checkout, the rest monthly. No fees when you pay on time.</p></details>
+      <details><summary>What if it doesn&rsquo;t suit my room?<i></i></summary><p>Live with in-stock furniture for 30 days. If it&rsquo;s not right, we collect it and refund you within 7 days. Tailor-made pieces can&rsquo;t be returned — which is why swatches and home visits are free.</p></details>
+      <details><summary>What does the 5-year guarantee cover?<i></i></summary><p>Every frame, spring and joint for 5 years from delivery. If anything fails under normal use, we repair or replace it free.</p></details>
+      <details><summary>Can I see the furniture in person?<i></i></summary><p>Yes — visit our Al Quoz studio by appointment, or book a free home visit and we&rsquo;ll bring samples to you.</p></details>
+    </div>
+  </div>
+</section>
 
+<!-- ============ 14 LAUNCH ============ -->
+<section class="launch band" id="launch" data-note="13">
+  <div class="wrap launch__grid">
+    <div class="launch__arch"><img src="images/v2-tansofa.jpg" alt="A tan sofa with a grey throw beside dried pampas grass" loading="lazy" width="1600" height="1067" data-parallax></div>
+    <div class="launch__body">
+      <p class="folio folio--light"><span>January 2027</span><span>Launch list</span></p>
+      <h2 class="display display--light display--xl" data-split>Be first through <em>the door.</em></h2>
+      <p class="launch__lede">Early access to the launch collection and <b>AED 250 off</b> your first order over AED 2,000.</p>
+      <form class="launch__form" data-launch-form novalidate>
+        <label class="sr" for="l-email">Email address</label>
+        <input id="l-email" type="email" autocomplete="email" placeholder="Your email address" required>
+        <button class="btn btn--light" type="submit" data-magnetic>Get early access</button>
+      </form>
+      <p class="launch__msg" data-launch-msg role="status">Join 1,200+ people already on the list. No spam, ever.</p>
+    </div>
+  </div>
+</section>
+
+</main>
+
+<!-- ============ FOOTER ============ -->
+<footer class="footer">
+  <div class="wrap footer__grid">
+    <div class="footer__intro">
+      <p class="footer__claim">Modern living. <em>A considered home.</em></p>
+      <div class="social"><a href="#" aria-label="Instagram"><svg><use href="#i-ig"/></svg></a><a href="#" aria-label="Pinterest"><svg><use href="#i-pinterest"/></svg></a><a href="#" aria-label="TikTok"><svg><use href="#i-tiktok"/></svg></a></div>
+    </div>
+    <nav aria-label="Shop"><p class="eyebrow">Shop</p><a href="#rooms">Living</a><a href="#rooms">Dining</a><a href="#rooms">Bedroom</a><a href="#rooms">Lighting</a><a href="#tailor">Tailor-made</a></nav>
+    <nav aria-label="Help"><p class="eyebrow">Help</p><a href="#faq">Delivery &amp; assembly</a><a href="#faq">30-day trial</a><a href="#faq">Pay in 4</a><a href="#faq">Guarantee</a><a href="#details">Care guide</a></nav>
+    <nav aria-label="Company"><p class="eyebrow">Home District</p><a href="#story">Our story</a><a href="#visit">Home visits</a><a href="#details">Free swatches</a><a href="#reviews">Reviews</a><a href="#launch">Trade &amp; designers</a></nav>
+    <div class="footer__contact"><p class="eyebrow">Studio</p><p>Warehouse 12, Al Quoz 3<br>Dubai, United Arab Emirates</p><p><a href="tel:+971500000000">+971 50 000 0000</a><br><a href="mailto:hello@homedistrict.ae">hello@homedistrict.ae</a></p></div>
+  </div>
+  <div class="wrap footer__logo"><img src="images/logo.png" alt="home district" width="840" height="121" loading="lazy"></div>
+  <div class="wrap footer__bottom">
+    <p class="small muted">© 2026 Home District · All prices in AED, VAT included</p>
+    <ul class="pay" aria-label="Accepted payments"><li>Visa</li><li>Mastercard</li><li>Apple&nbsp;Pay</li><li class="pill-tabby">tabby</li><li class="pill-tamara">tamara</li></ul>
+  </div>
+</footer>
+
+<!-- ============ FLOATING ============ -->
+<a class="wa-float" href="https://wa.me/971500000000?text=Hi%20Home%20District%2C%20I%20have%20a%20question" target="_blank" rel="noopener" aria-label="Chat with us on WhatsApp"><svg aria-hidden="true"><use href="#i-wa"/></svg></a>
+<div class="mbar" data-mbar hidden>
+  <a class="btn btn--dark" href="#edit">Shop now</a>
+  <a class="btn btn--line" href="#visit">Free home visit</a>
+  <a class="mbar__wa" href="https://wa.me/971500000000" target="_blank" rel="noopener" aria-label="WhatsApp"><svg><use href="#i-wa"/></svg></a>
+</div>
+
+<!-- Home visit booking (opens from one button) -->
+<div class="drawer drawer--right visit-drawer" data-panel="visit" aria-hidden="true" role="dialog" aria-label="Book a free home visit">
+  <div class="drawer__head"><p class="drawer__title">Book a free home visit</p><button class="icon-btn" data-close aria-label="Close"><svg><use href="#i-close"/></svg></button></div>
+  <div class="visit-drawer__body">
+    <div class="visit-drawer__who"><img src="images/founder2.jpg" alt="" width="48" height="48" loading="lazy"><div><strong>Sara M. · Your stylist</strong><span>45 minutes at your home · no obligation</span></div></div>
     <form class="steps" data-visit-form novalidate>
       <ol class="steps__tabs" aria-label="Booking progress">
         <li class="is-active" data-tab="1">Rooms</li>
@@ -501,114 +574,8 @@
         <button class="link-btn" type="button" data-step-back hidden>Back</button>
         <button class="btn btn--dark" type="button" data-step-next data-magnetic>Continue</button>
       </div>
-      <p class="steps__alt"><a href="https://wa.me/971500000000?text=Hi%20Home%20District%2C%20I%27d%20like%20to%20book%20a%20home%20visit" target="_blank" rel="noopener"><svg><use href="#i-wa"/></svg>Prefer chat? Book on WhatsApp</a> · We reply within 2 hours</p>
     </form>
   </div>
-</section>
-
-<!-- ============ 11 STORY ============ -->
-<section class="section story" id="story" data-note="11">
-  <div class="wrap story__grid">
-    <figure class="story__media">
-      <div class="reveal-img"><img src="images/v2-studio.jpg" alt="A minimal oak desk and chair against a plaster wall in the Home District studio" loading="lazy" width="1200" height="1500" data-parallax></div>
-      <figcaption>The studio · Al Quoz, Dubai</figcaption>
-    </figure>
-    <div class="story__body">
-      <p class="folio"><span>The people behind it</span></p>
-      <blockquote class="story__quote">&ldquo;We kept finding beautiful furniture that cost a month&rsquo;s rent, or affordable pieces that didn&rsquo;t last a year. <em>Home District is the middle we couldn&rsquo;t find.</em>&rdquo;</blockquote>
-      <svg class="signature" viewBox="0 0 300 80" aria-hidden="true"><path data-sign d="M10 55c12-30 22-42 26-38 6 6-14 40-6 42 8 2 18-30 26-28 6 2-6 24 2 25 9 1 14-18 22-17 7 1 0 15 7 16 10 1 18-22 30-20 8 2-4 18 4 19 12 2 20-26 34-24 8 1 2 16 10 16 14 0 22-14 36-15 12-1 20 6 34 4 14-2 22-10 34-14" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/></svg>
-      <div class="founders"><div class="founders__faces"><img src="images/founder.jpg" alt="" width="56" height="56" loading="lazy"><img src="images/founder2.jpg" alt="" width="56" height="56" loading="lazy"></div><div><strong>The founders</strong><span class="muted small">Home District · Dubai</span></div></div>
-      <ul class="story__facts">
-        <li><strong>3</strong><span>makers we work with directly</span></li>
-        <li><strong>7</strong><span>Emirates, delivered free</span></li>
-        <li><strong>1</strong><span>studio you can visit</span></li>
-      </ul>
-      <a class="link-arrow" href="#visit">Book a studio appointment <svg><use href="#i-arrow"/></svg></a>
-    </div>
-  </div>
-</section>
-
-<!-- ============ 12 UGC ============ -->
-<section class="ugc" data-note="12" aria-label="Customer homes">
-  <header class="wrap sec-head sec-head--center">
-    <p class="folio"><span>@homedistrict.ae</span></p>
-    <h2 class="display" data-split>At home with <em>Home District.</em></h2>
-    <p class="muted">Tag <b>#AtHomeDistrict</b> to be featured · tap any home to shop it</p>
-  </header>
-  <div class="ugc__rows">
-    <div class="ugc__row" data-ugc-row="1"></div>
-    <div class="ugc__row ugc__row--rev" data-ugc-row="2"></div>
-  </div>
-</section>
-
-<!-- ============ 13 FAQ ============ -->
-<section class="section faq" id="faq" data-note="13">
-  <div class="wrap faq__grid">
-    <div class="faq__side">
-      <p class="folio"><span>Good to know</span></p>
-      <h2 class="display" data-split>Questions, <em>answered.</em></h2>
-      <div class="wa-card">
-        <span class="wa-card__icon"><svg><use href="#i-wa"/></svg></span>
-        <div><strong>Talk to a real person</strong><span>WhatsApp · 9am–9pm, every day</span></div>
-        <a class="btn btn--dark btn--sm" href="https://wa.me/971500000000" target="_blank" rel="noopener">Chat now</a>
-      </div>
-    </div>
-    <div class="faq__list">
-      <details open><summary>How long does delivery take?<i></i></summary><p>In-stock pieces arrive in 3–10 days anywhere in the UAE. Tailor-made pieces take 6–8 weeks. We confirm a 2-hour window by WhatsApp the day before.</p></details>
-      <details><summary>Is assembly really free?<i></i></summary><p>Yes. Our own team carries everything to the room you choose, assembles it and takes all the packaging away — in every Emirate, at no cost.</p></details>
-      <details><summary>How do tabby and tamara work?<i></i></summary><p>Choose tabby or tamara at checkout and split your order into 4 interest-free payments. The first is taken at checkout, the rest monthly. No fees when you pay on time.</p></details>
-      <details><summary>What if it doesn&rsquo;t suit my room?<i></i></summary><p>Live with in-stock furniture for 30 days. If it&rsquo;s not right, we collect it and refund you within 7 days. Tailor-made pieces can&rsquo;t be returned — which is why swatches and home visits are free.</p></details>
-      <details><summary>What does the 5-year guarantee cover?<i></i></summary><p>Every frame, spring and joint for 5 years from delivery. If anything fails under normal use, we repair or replace it free.</p></details>
-      <details><summary>Can I see the furniture in person?<i></i></summary><p>Yes — visit our Al Quoz studio by appointment, or book a free home visit and we&rsquo;ll bring samples to you.</p></details>
-    </div>
-  </div>
-</section>
-
-<!-- ============ 14 LAUNCH ============ -->
-<section class="launch band" id="launch" data-note="14">
-  <div class="wrap launch__grid">
-    <div class="launch__arch"><img src="images/v2-tansofa.jpg" alt="A tan sofa with a grey throw beside dried pampas grass" loading="lazy" width="1600" height="1067" data-parallax></div>
-    <div class="launch__body">
-      <p class="folio folio--light"><span>January 2027</span><span>Launch list</span></p>
-      <h2 class="display display--light display--xl" data-split>Be first through <em>the door.</em></h2>
-      <p class="launch__lede">Early access to the launch collection and <b>AED 250 off</b> your first order over AED 2,000.</p>
-      <form class="launch__form" data-launch-form novalidate>
-        <label class="sr" for="l-email">Email address</label>
-        <input id="l-email" type="email" autocomplete="email" placeholder="Your email address" required>
-        <button class="btn btn--light" type="submit" data-magnetic>Get early access</button>
-      </form>
-      <p class="launch__msg" data-launch-msg role="status">Join 1,200+ people already on the list. No spam, ever.</p>
-    </div>
-  </div>
-</section>
-
-</main>
-
-<!-- ============ FOOTER ============ -->
-<footer class="footer">
-  <div class="wrap footer__grid">
-    <div class="footer__intro">
-      <p class="footer__claim">Modern living. <em>A considered home.</em></p>
-      <div class="social"><a href="#" aria-label="Instagram"><svg><use href="#i-ig"/></svg></a><a href="#" aria-label="Pinterest"><svg><use href="#i-pinterest"/></svg></a><a href="#" aria-label="TikTok"><svg><use href="#i-tiktok"/></svg></a></div>
-    </div>
-    <nav aria-label="Shop"><p class="eyebrow">Shop</p><a href="#rooms">Living</a><a href="#rooms">Dining</a><a href="#rooms">Bedroom</a><a href="#rooms">Lighting</a><a href="#tailor">Tailor-made</a></nav>
-    <nav aria-label="Help"><p class="eyebrow">Help</p><a href="#faq">Delivery &amp; assembly</a><a href="#faq">30-day trial</a><a href="#faq">Pay in 4</a><a href="#faq">Guarantee</a><a href="#details">Care guide</a></nav>
-    <nav aria-label="Company"><p class="eyebrow">Home District</p><a href="#story">Our story</a><a href="#visit">Home visits</a><a href="#details">Free swatches</a><a href="#reviews">Reviews</a><a href="#launch">Trade &amp; designers</a></nav>
-    <div class="footer__contact"><p class="eyebrow">Studio</p><p>Warehouse 12, Al Quoz 3<br>Dubai, United Arab Emirates</p><p><a href="tel:+971500000000">+971 50 000 0000</a><br><a href="mailto:hello@homedistrict.ae">hello@homedistrict.ae</a></p></div>
-  </div>
-  <div class="wrap footer__logo"><img src="images/logo.png" alt="home district" width="840" height="121" loading="lazy"></div>
-  <div class="wrap footer__bottom">
-    <p class="small muted">© 2026 Home District · All prices in AED, VAT included</p>
-    <ul class="pay" aria-label="Accepted payments"><li>Visa</li><li>Mastercard</li><li>Apple&nbsp;Pay</li><li class="pill-tabby">tabby</li><li class="pill-tamara">tamara</li></ul>
-  </div>
-</footer>
-
-<!-- ============ FLOATING ============ -->
-<a class="wa-float" href="https://wa.me/971500000000?text=Hi%20Home%20District%2C%20I%20have%20a%20question" target="_blank" rel="noopener" aria-label="Chat with us on WhatsApp"><svg aria-hidden="true"><use href="#i-wa"/></svg><span>Questions? Chat with us</span></a>
-<div class="mbar" data-mbar>
-  <a class="btn btn--dark" href="#edit">Shop now</a>
-  <a class="btn btn--line" href="#visit">Free home visit</a>
-  <a class="mbar__wa" href="https://wa.me/971500000000" target="_blank" rel="noopener" aria-label="WhatsApp"><svg><use href="#i-wa"/></svg></a>
 </div>
 
 <!-- ============ MOBILE MENU ============ -->
@@ -697,6 +664,23 @@
 <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/gsap.min.js" defer></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/ScrollTrigger.min.js" defer></script>
 <script src="https://cdn.jsdelivr.net/npm/lenis@1.1.13/dist/lenis.min.js" defer></script>
+<script>
+window.HD_NOTES = {
+  1: ['Hero: one message, one action', `<p>After our call: a calmer opening. The headline ("The designer look, at a fair price") and the arch that opens into a room, with <b>one button</b>: Shop the collection, placed at the bottom. "Book a visit" has moved out of the header and further down the page.</p>`],
+  2: ['Start with the room', `<p>The story begins where customers begin: the room they're furnishing.</p>`],
+  3: ['Most loved', `<p>Quiet product cards: photo, name, colour and price. Tapping a colour dot changes the photo, and the product page opens in that colour.</p>`],
+  4: ['Our promise, after the products', `<p>As discussed, the four promises (delivery, pay in 4, home trial, guarantee) now follow the rooms and products, as part of the story.</p>`],
+  5: ['Why it costs less', `<p>A clear, honest price breakdown that explains the fair price.</p>`],
+  6: ['Shop the room', `<p>Tap a dot to see each piece, or add the whole room with a small saving.</p>`],
+  7: ['Considered details', `<p>Fine lines point to what's inside the sofa: covers, fabric, frame and foam. Below, a quiet link to free swatches.</p>`],
+  8: ['Tailor-made', `<p>Pick a design, width, fabric and legs. The sofa changes colour and size live, with an instant price.</p>`],
+  9: ['Reviews', `<p>One review at a time, with a photo from the customer's home.</p>`],
+  10: ['Free home visit', `<p>A calm invitation with one button. The booking form opens in a side panel only when someone wants it.</p>`],
+  11: ['Our story', `<p>The founders' words and faces, showing the real people behind the brand.</p>`],
+  12: ['FAQ', `<p>Key questions answered, with WhatsApp for anything else.</p>`],
+  13: ['Launch list', `<p>Early access for January 2027.</p>`]
+};
+</script>
 <script src="script.js" defer></script>
 </body>
 </html>

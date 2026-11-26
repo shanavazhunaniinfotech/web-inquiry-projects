@@ -898,3 +898,72 @@ body.notes-on [data-note] { outline: 2px dashed rgba(255,200,0,.7); outline-offs
   .visit__perks li span { font-size: 24px; }
   .stylist { border-radius: 14px; }
 }
+
+/* ==========================================================================
+   Client feedback (call, 26 Nov): fewer buttons, calmer layout
+   ========================================================================== */
+.lite .mbar { display: none !important; }
+.lite .notes-toggle { display: none; }
+.lite.notes-url .notes-toggle { display: flex; }
+.lite .wa-float { width: 52px; height: 52px; padding: 0; justify-content: center; }
+.lite .wa-float span { display: none; }
+.lite .hero__btns .btn { min-height: 58px; padding: 0 30px; }
+.lite .hero__proof { align-self: flex-end; }
+
+/* Quiet product cards */
+.mcard .pcard__media { display: block; aspect-ratio: 4 / 5; }
+.mcard__info { display: flex; justify-content: space-between; gap: 12px; padding-top: 16px; }
+.mcard__info .pcard__name { font-size: 16px; letter-spacing: -0.01em; }
+.mcard__sub { font-size: 13px; color: var(--grey); }
+.mcard__right { display: grid; justify-items: end; gap: 8px; }
+.mcard__right .pcard__price { font-size: 15px; font-weight: 500; }
+.mcard__dots { display: flex; gap: 6px; }
+.mcard__dots button { position: relative; width: 14px; height: 14px; border-radius: 50%; padding: 0; border: 0; background: var(--c); box-shadow: inset 0 0 0 1px rgba(0,0,0,.12); transition: box-shadow .3s; }
+.mcard__dots button::after { content: ""; position: absolute; inset: -15px; }
+.mcard__dots button[aria-pressed="true"] { box-shadow: 0 0 0 2px #fff, 0 0 0 3px var(--black); }
+.lite .edit__grid { gap: 44px 20px; }
+
+/* Promise row (after the products) */
+.apromise { padding-bottom: var(--sec); }
+.apromise__list { display: grid; grid-template-columns: repeat(4, 1fr); border-block: 1px solid var(--mist); }
+.apromise__list li { display: grid; justify-items: center; text-align: center; gap: 4px; padding: clamp(28px, 3vw, 44px) 16px; }
+.apromise__list li + li { border-left: 1px solid var(--mist); }
+.apromise__list svg { width: 30px; height: 30px; margin-bottom: 10px; }
+.apromise__list strong { font-size: 15px; font-weight: 500; }
+.apromise__list span { font-size: 13px; color: var(--text-2); }
+
+/* Tailor-made: one button + a quiet link */
+.config__talk { color: rgba(255,255,255,.75); text-decoration-color: rgba(255,255,255,.35); justify-self: start; }
+.config__talk:hover { color: #fff; }
+
+/* Home visit invitation + side-panel form */
+.avisit { position: relative; min-height: clamp(460px, 46vw, 640px); display: flex; align-items: flex-end; color: #fff; background: #2a2724; }
+.avisit__bg { position: absolute; inset: 0; width: 100%; height: 116%; object-fit: cover; object-position: 50% 62%; }
+.avisit::after { content: ""; position: absolute; inset: 0; background: linear-gradient(90deg, rgba(10,10,10,.72), rgba(10,10,10,.12) 75%); }
+.avisit__body { position: relative; z-index: 1; padding-block: clamp(40px, 5vw, 80px); }
+.avisit__body .display { max-width: 13ch; }
+.avisit__text { color: rgba(255,255,255,.85); margin: 20px 0 28px; max-width: 40ch; font-size: clamp(16px, 1.2vw, 18px); }
+.visit-drawer { width: min(520px, 100vw); }
+.visit-drawer__body { padding: 20px; display: grid; gap: 16px; }
+.visit-drawer__who { display: flex; align-items: center; gap: 12px; background: var(--cloud); border-radius: 6px; padding: 12px; }
+.visit-drawer__who img { width: 48px; height: 48px; border-radius: 50%; object-fit: cover; }
+.visit-drawer__who strong { display: block; font-size: 15px; font-weight: 500; }
+.visit-drawer__who span { font-size: 13px; color: var(--text-2); }
+.visit-drawer .steps { box-shadow: none; padding: 0; background: none; }
+
+@media (max-width: 1024px) { .avisit::after { background: linear-gradient(180deg, rgba(10,10,10,.1) 20%, rgba(10,10,10,.75)); } }
+@media (max-width: 760px) {
+  .apromise__list { grid-template-columns: 1fr 1fr; }
+  .apromise__list li:nth-child(3) { border-left: 0; }
+  .apromise__list li:nth-child(n+3) { border-top: 1px solid var(--mist); }
+  .mcard__info { flex-direction: column; gap: 6px; }
+  .mcard__right { justify-items: start; grid-auto-flow: column; align-items: center; gap: 10px; }
+  .lite .hero__btns .btn { width: 100%; }
+  .lite .footer__bottom { padding-bottom: calc(24px + env(safe-area-inset-bottom)); }
+  .lite .toast { bottom: calc(24px + env(safe-area-inset-bottom)); }
+  .avisit { min-height: 520px; }
+}
+/* Off-screen drawers must never widen the page */
+html { overflow-x: clip; }
+.drawer { visibility: hidden; transition: transform .6s var(--ease), visibility 0s linear .6s; }
+.drawer.is-open { visibility: visible; transition: transform .6s var(--ease), visibility 0s; }
