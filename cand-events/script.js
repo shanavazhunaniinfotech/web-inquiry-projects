@@ -194,35 +194,20 @@
     new IntersectionObserver(function (es) { es.forEach(function (e) { cb(e.isIntersecting); }); }, { rootMargin: '100px' }).observe(el);
   }
 
-  /* ---------------- Hero v2: three-can carousel on a reflective floor ---------------- */
-  var hx = $('#top'), hero = $('#heroCan'), hctx = hero.getContext('2d');
-  var heroWords = $$('.hx__w'), hudNum = $('#hudNum'), hudBar = $('#hudBar'), callout = $('#callout');
+  /* ---------------- Hero v3: one can on a display stage ---------------- */
+  var hx = $('#top'), hero = $('#heroCan'), hctx = hero.getContext('2d'), panel = $('#hzPanel');
+  var heroWords = $$('.hz__w'), hudNum = $('#hudNum'), hudBar = $('#hudBar');
   var sampleBtns = $$('[data-hs]');
-  var CYCLE = 4800;
+  var CYCLE = 5200, SPIN = 900;
   var HERO_ORDER = ['cand', 'mono', 'launch'];
-  var heroState = { cur: 0, prev: 0, tSwitch: performance.now(), tEnter: Infinity, angle: 0, vel: 0, drag: false, visible: true, mx: 0, my: 0, tmx: 0, tmy: 0, dpr: 1, cssW: 0, cssH: 0, hover: false };
-  var offs = [0, 1, 2].map(function () { return document.createElement('canvas'); });
-  var refl = document.createElement('canvas');
-
-  // split the headline into letters for a staggered rise
-  (function () {
-    var d = 0;
-    heroWords.forEach(function (w) {
-      var txt = w.textContent; w.textContent = '';
-      txt.split('').forEach(function (c) { var s = document.createElement('span'); s.className = 'ch'; s.textContent = c; s.style.setProperty('--d', d++); w.appendChild(s); });
-      d += 2;
-    });
-  })();
+  var heroState = { cur: 0, prev: 0, tSwitch: -1e9, tEnter: Infinity, angle: 0, vel: 0, drag: false, visible: true, mx: 0, my: 0, tmx: 0, tmy: 0, dpr: 1, hover: false };
+  var hOff = document.createElement('canvas'), hRefl = document.createElement('canvas');
 
   function heroResize() {
     var r = hero.getBoundingClientRect();
     heroState.dpr = Math.min(2, window.devicePixelRatio || 1);
-    heroState.cssW = r.width; heroState.cssH = r.height;
     hero.width = Math.max(1, Math.round(r.width * heroState.dpr));
     hero.height = Math.max(1, Math.round(r.height * heroState.dpr));
-    // fit the cans between the second headline line and the bottom row (desktop)
-    var l2 = $('.hx__line--2').getBoundingClientRect(), bt = $('.hx__bottom').getBoundingClientRect();
-    heroState.top = (l2.bottom - r.top) + 14; heroState.bot = (bt.top - r.top) - 8;
   }
   function heroSet(i, manual) {
     if (i === heroState.cur && !manual) return;
@@ -231,134 +216,104 @@
     sampleBtns.forEach(function (b, k) { b.setAttribute('aria-pressed', String(k === i)); b.style.setProperty('--p', '0%'); });
     hudNum.textContent = '0' + (i + 1) + ' / 03';
   }
-  sampleBtns.forEach(function (b) { b.addEventListener('click', function () { heroSet(+b.dataset.hs, true); }); });
+  sampleBtns.forEach(function (b) { b.addEventListener('click', function () { if (+b.dataset.hs !== heroState.cur) heroSet(+b.dataset.hs, true); }); });
 
-  // slot layout: 0 = front centre, 1 = right, 2 = left
-  function slotOf(j, cur) { return (j - cur + 3) % 3; }
-  function slotPos(s, L) {
-    if (s === 0) return { x: 0, s: 1, b: 0, a: 1, blur: 0, ang: 0 };
-    var side = s === 1 ? 1 : -1;
-    return { x: side * L.off, s: L.side, b: -L.cw * .16, a: .92, blur: 1.6, ang: side * .7 };
-  }
   function heroDraw(now) {
     var W = hero.width, H = hero.height, dpr = heroState.dpr;
     if (!W || !H) return;
     hctx.clearRect(0, 0, W, H);
-    heroState.mx += (heroState.tmx - heroState.mx) * .06;
-    heroState.my += (heroState.tmy - heroState.my) * .06;
+    heroState.mx += (heroState.tmx - heroState.mx) * .07;
+    heroState.my += (heroState.tmy - heroState.my) * .07;
     hx.style.setProperty('--mx', heroState.mx.toFixed(3));
     hx.style.setProperty('--my', heroState.my.toFixed(3));
+    if (!RM) { panel.style.setProperty('--ry', (heroState.mx * 4).toFixed(2) + 'deg'); panel.style.setProperty('--rx', (heroState.my * -3).toFixed(2) + 'deg'); }
 
-    var mobile = heroState.cssW < 760 || window.innerWidth <= 960;
-    var cw, floor;
-    if (mobile) { cw = Math.min(W * .3, H * .3); floor = H * .84; }
-    else {
-      var avail = Math.max(160, heroState.bot - heroState.top) * dpr;
-      var ch0 = avail * .97; cw = Math.min(W * .14, ch0 * CAN_D / CAN_H); floor = heroState.top * dpr + cw * CAN_H / CAN_D + cw * .1;
-      hx.style.setProperty('--l3y', ((floor - cw * CAN_H / CAN_D * .42) / dpr) + 'px');
-    }
-    var L = { cw: cw, off: mobile ? cw * 1.12 : cw * 1.75, side: mobile ? .7 : .7 };
-    var cx = W / 2;
-
+    var enterT = RM ? 1 : clamp((now - heroState.tEnter) / 1300, 0, 1);
     var since = now - heroState.tSwitch;
-    var tt = RM ? 1 : ease(clamp(since / 950, 0, 1));
-    if (!RM && heroState.visible && !heroState.drag && !heroState.hover && since > CYCLE) heroSet((heroState.cur + 1) % 3);
+    if (!RM && enterT >= 1 && heroState.visible && !heroState.drag && !heroState.hover && since > CYCLE) heroSet((heroState.cur + 1) % 3);
     var cyc = clamp(since / CYCLE, 0, 1);
     hudBar.style.width = (cyc * 100) + '%';
     if (sampleBtns[heroState.cur]) sampleBtns[heroState.cur].style.setProperty('--p', (cyc * 100) + '%');
 
+    // spin away the old print, then UV print the new one
+    var sp = RM ? 1 : clamp(since / SPIN, 0, 1);
+    var spin = heroState.prev === heroState.cur ? 0 : ease(sp) * Math.PI * 2;
+    var art, pr;
+    if (sp < .5 && heroState.prev !== heroState.cur) { art = ARTS[HERO_ORDER[heroState.prev]]; pr = 1; }
+    else { art = ARTS[HERO_ORDER[heroState.cur]]; pr = RM ? 1 : clamp((since - SPIN * (heroState.prev === heroState.cur ? 0 : 1) - 150) / 1200, 0, 1); }
+    if (sp >= .5 && sp < 1) pr = 0;
+
     if (!heroState.drag) {
       heroState.angle += heroState.vel; heroState.vel *= .94;
-      if (Math.abs(heroState.vel) < .002) heroState.angle += ((RM ? 0 : Math.sin(now / 1700) * .28) - heroState.angle) * .03;
+      if (Math.abs(heroState.vel) < .002) heroState.angle += ((RM ? 0 : Math.sin(now / 1900) * .3) - heroState.angle) * .03;
     }
-    var enterT = RM ? 1 : clamp((now - heroState.tEnter) / 1300, 0, 1);
 
-    var items = [];
-    for (var j = 0; j < 3; j++) {
-      var sN = slotOf(j, heroState.cur), sP = slotOf(j, heroState.prev);
-      var pN = slotPos(sN, L), pP = slotPos(sP, L), p, alpha = 1;
-      var wrap = (sN === 1 && sP === 2) || (sN === 2 && sP === 1);
-      if (wrap) { p = tt < .5 ? pP : pN; alpha = tt < .5 ? 1 - tt * 2 : tt * 2 - 1; }
-      else p = { x: lerp(pP.x, pN.x, tt), s: lerp(pP.s, pN.s, tt), b: lerp(pP.b, pN.b, tt), a: lerp(pP.a, pN.a, tt), blur: lerp(pP.blur, pN.blur, tt), ang: lerp(pP.ang, pN.ang, tt) };
-      var e = ease(clamp(enterT * 1.25 - (sN === 0 ? 0 : .2), 0, 1));
-      items.push({ j: j, slot: sN, p: p, alpha: alpha * p.a * e, rise: (1 - e) * H * .35 });
-    }
-    items.sort(function (a, b) { return a.p.s - b.p.s; });
+    var ch = H * .54, cw = Math.min(W * .3, ch * CAN_D / CAN_H); ch = cw * CAN_H / CAN_D;
+    var floor = H * .74;
+    var pad = Math.ceil(cw * .14), ow = Math.ceil(cw + pad * 2), oh = Math.ceil(ch + pad * 2);
+    if (hOff.width !== ow || hOff.height !== oh) { hOff.width = ow; hOff.height = oh; hRefl.width = ow; hRefl.height = oh; }
+    var o = hOff.getContext('2d');
+    o.clearRect(0, 0, ow, oh);
+    drawCan(o, { x: pad, y: pad, w: cw, angle: heroState.angle + spin + heroState.mx * .35, art: art, artScale: HERO_ORDER[sp < .5 && heroState.prev !== heroState.cur ? heroState.prev : heroState.cur] === 'cand' ? .9 : 1, print: ease(pr), lamp: pr > 0 && pr < 1 ? pr : null, hl: .29 + heroState.mx * .1 });
 
-    // soft floor line
-    var fg = hctx.createRadialGradient(cx, floor, 0, cx, floor, W * .45);
-    fg.addColorStop(0, 'rgba(255,255,255,.95)'); fg.addColorStop(1, 'rgba(255,255,255,0)');
-    hctx.fillStyle = fg; hctx.fillRect(0, floor - 2 * dpr, W, 4 * dpr);
+    var e = ease(enterT);
+    var canBottom = pad + ch;
+    var x = W / 2 - ow / 2 + heroState.mx * 12 * dpr;
+    var y = floor - canBottom + (1 - e) * H * .22 + Math.sin(now / 1400) * (RM ? 0 : 3 * dpr);
 
-    items.forEach(function (it) {
-      if (it.alpha <= .01) return;
-      var s = it.p.s, w = cw * s, h = w * CAN_H / CAN_D;
-      var pad = Math.ceil(w * .12);
-      var oc = offs[it.j];
-      var ow = Math.ceil(w + pad * 2), oh = Math.ceil(h + pad * 2);
-      if (oc.width !== ow || oc.height !== oh) { oc.width = ow; oc.height = oh; }
-      var octx = oc.getContext('2d');
-      octx.clearRect(0, 0, ow, oh);
-      var front = it.slot === 0;
-      var pr = front ? (RM ? 1 : clamp((now - heroState.tSwitch - 650) / 1200, 0, 1)) : 1;
-      var ang = (front ? heroState.angle : it.p.ang + Math.sin(now / 2100 + it.j) * .12) + heroState.mx * .35;
-      drawCan(octx, { x: pad, y: pad, w: w, angle: ang, art: ARTS[HERO_ORDER[it.j]], artScale: HERO_ORDER[it.j] === 'cand' ? .9 : 1, print: ease(pr), lamp: front && pr > 0 && pr < 1 ? pr : null, hl: .29 + heroState.mx * .1 });
-
-      var x = cx + it.p.x - ow / 2 + heroState.mx * 16 * dpr * s;
-      var canBottom = pad + h;                 // bottom of the can inside the offscreen
-      var base = floor + it.p.b;
-      var y = base - canBottom + it.rise + heroState.my * 8 * dpr * s;
-      hctx.save();
-      hctx.globalAlpha = it.alpha;
-      if (it.p.blur > .2) hctx.filter = 'blur(' + (it.p.blur * dpr).toFixed(1) + 'px)';
-      hctx.drawImage(oc, x, y);
-      // mirrored reflection on the floor, fading out
-      if (refl.width !== ow || refl.height !== oh) { refl.width = ow; refl.height = oh; }
-      var r = refl.getContext('2d');
-      r.globalCompositeOperation = 'source-over'; r.clearRect(0, 0, ow, oh);
-      r.save(); r.translate(0, oh); r.scale(1, -1); r.drawImage(oc, 0, 0); r.restore();
-      r.globalCompositeOperation = 'destination-in';
-      var top = oh - canBottom;               // where the flipped can's bottom sits
-      var rg = r.createLinearGradient(0, top, 0, top + h * .45);
-      rg.addColorStop(0, 'rgba(0,0,0,.3)'); rg.addColorStop(1, 'rgba(0,0,0,0)');
-      r.fillStyle = rg; r.fillRect(0, 0, ow, oh);
-      hctx.globalAlpha = it.alpha * (1 - it.rise / (H * .35));
-      hctx.drawImage(refl, x, y + canBottom - top + 2 * dpr);
-      hctx.restore();
-
-      if (front && callout) {
-        var bodyTop = y + pad + w * .085 + h * .055, bodyBot = y + pad + h - w * .085 * .6;
-        var logoY = bodyTop + (bodyBot - bodyTop) * .48;
-        callout.style.setProperty('--cx', ((x + pad + w * .8) / dpr) + 'px');
-        callout.style.setProperty('--cy', (logoY / dpr) + 'px');
-        callout.classList.toggle('is-on', tt > .95 && pr >= 1 && enterT >= 1 && !mobile);
-      }
-    });
+    // floor line
+    var fg = hctx.createRadialGradient(W / 2, floor, 0, W / 2, floor, W * .42);
+    fg.addColorStop(0, 'rgba(255,255,255,1)'); fg.addColorStop(1, 'rgba(255,255,255,0)');
+    hctx.globalAlpha = e;
+    hctx.fillStyle = fg; hctx.fillRect(0, floor - 1.5 * dpr, W, 3 * dpr);
+    hctx.drawImage(hOff, x, y);
+    // reflection
+    var r = hRefl.getContext('2d');
+    r.globalCompositeOperation = 'source-over'; r.clearRect(0, 0, ow, oh);
+    r.save(); r.translate(0, oh); r.scale(1, -1); r.drawImage(hOff, 0, 0); r.restore();
+    r.globalCompositeOperation = 'destination-in';
+    var top = oh - canBottom;
+    var rg = r.createLinearGradient(0, top, 0, top + ch * .4);
+    rg.addColorStop(0, 'rgba(0,0,0,.3)'); rg.addColorStop(1, 'rgba(0,0,0,0)');
+    r.fillStyle = rg; r.fillRect(0, 0, ow, oh);
+    hctx.globalAlpha = e * e;
+    hctx.drawImage(hRefl, x, floor - top + (floor - (y + canBottom)) * -1 + 2 * dpr);
+    hctx.globalAlpha = 1;
   }
-  // drag to spin the front can; the pointer moves the light and the parallax
+  // drag to spin; the pointer tilts the stage and moves the light
   (function () {
     var lx = 0;
     hero.addEventListener('pointerdown', function (e) { heroState.drag = true; lx = e.clientX; hero.setPointerCapture(e.pointerId); });
     hero.addEventListener('pointermove', function (e) { if (!heroState.drag) return; var dx = (e.clientX - lx) / 140; heroState.angle += dx; heroState.vel = dx; lx = e.clientX; });
     ['pointerup', 'pointercancel'].forEach(function (ev) { hero.addEventListener(ev, function () { heroState.drag = false; }); });
-    if (!RM) hx.addEventListener('pointermove', function (e) {
+    var stage = $('.hz__stage');
+    if (!RM) stage.addEventListener('pointermove', function (e) {
       if (e.pointerType !== 'mouse') return;
-      var r = hx.getBoundingClientRect();
-      heroState.tmx = clamp((e.clientX - r.left) / r.width * 2 - 1, -1, 1);
-      heroState.tmy = clamp((e.clientY - r.top) / r.height * 2 - 1, -1, 1);
+      var rr = stage.getBoundingClientRect();
+      heroState.tmx = clamp((e.clientX - rr.left) / rr.width * 2 - 1, -1, 1);
+      heroState.tmy = clamp((e.clientY - rr.top) / rr.height * 2 - 1, -1, 1);
     });
-    hx.addEventListener('pointerleave', function () { heroState.tmx = 0; heroState.tmy = 0; });
-    $('.samples').addEventListener('pointerenter', function () { heroState.hover = true; });
-    $('.samples').addEventListener('pointerleave', function () { heroState.hover = false; });
+    stage.addEventListener('pointerleave', function () { heroState.tmx = 0; heroState.tmy = 0; });
+    $('.hz__tabs').addEventListener('pointerenter', function () { heroState.hover = true; });
+    $('.hz__tabs').addEventListener('pointerleave', function () { heroState.hover = false; });
   })();
   onScreen(hero, function (v) { heroState.visible = v; });
   window.addEventListener('resize', heroResize);
   heroResize();
+  function countUp() {
+    $$('[data-count]', hx).forEach(function (b) {
+      var to = +b.dataset.count, t0 = performance.now();
+      if (RM) return;
+      (function tick(n) { var p = clamp((n - t0) / 1200, 0, 1); b.textContent = Math.round(to * ease(p)); if (p < 1) requestAnimationFrame(tick); })(t0);
+    });
+  }
   function heroEnter() {
     if (hx.classList.contains('is-ready')) return;
     hx.classList.add('is-ready');
-    heroState.tEnter = performance.now() + 250;
-    heroState.tSwitch = heroState.tEnter + 400;
+    heroState.tEnter = performance.now() + 350;
+    heroState.tSwitch = heroState.tEnter + 500;
+    heroState.prev = heroState.cur;
+    setTimeout(countUp, 600);
   }
   if (RM || seen) heroEnter(); else setTimeout(heroEnter, 1000);
 
