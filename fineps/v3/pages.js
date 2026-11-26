@@ -104,7 +104,7 @@
       const uses = fi.uses || (m && m.uses) || [];
       const chart = !p.soon && items.length > 1 ? `<div class="pdx__c"><div class="pdx__h"><h2>Sizes &amp; prices</h2>${items.some(i => i.s) ? ut() : ''}</div><div class="tw"><table class="tbl"><thead><tr><th>${fi.lbl || 'Size'}</th>${items.some(i => i.k && i.k !== 'Single roll') || p.fam === 'netting' ? '<th>Roll / length</th>' : ''}${p.fam === 'netting' ? '<th>Colour</th><th>Part no.</th>' : ''}${p.fam === 'dots' ? '<th>Per roll</th>' : ''}<th>Price</th><th>Stock</th><th></th></tr></thead><tbody>${items.map(i => { const n2 = p.fam === 'netting' && netInfo(i.s); return `<tr><td><b>${i.s ? fmtSize(i.s) : short(i)}</b></td>${items.some(j => j.k && j.k !== 'Single roll') || p.fam === 'netting' ? `<td>${n2 ? ftLen(n2[3]) : fmtLen(i.k)}</td>` : ''}${p.fam === 'netting' ? `<td>${n2 ? n2[2] : ''}</td><td>${n2 ? n2[1] : ''}</td>` : ''}${p.fam === 'dots' ? `<td>${dotsCount(i).replace(' / roll', '')}</td>` : ''}<td>${money(i.p)}</td><td>${i.a ? '<span class="stk"><i></i>In stock</span>' : '<span class="stk stk--o"><i></i>Out</span>'}</td><td>${i.a ? `<button class="add" data-add="${i.h}" data-variant="${esc((i.v || [])[0] || '')}">${icon('plus')}Add</button>` : `<button class="add add--q" data-quote="${esc(p.n)}" data-size="${esc(fmtSize(i.s))}">Contact</button>`}</td></tr>`; }).join('')}</tbody></table></div></div>` : '';
       $('#pdx').innerHTML = `<div class="pdx__g"><div class="pdx__c"><h2>Specifications</h2>${spec.length ? `<table class="tbl tbl--spec"><tbody>${spec.map(([k, v]) => `<tr><th>${k}</th><td>${v}</td></tr>`).join('')}</tbody></table>` : '<p>Specifications available on request — we\'ll send the data sheet with your quote.</p>'}</div>
-        <div class="pdx__c"><h2>Common uses</h2>${uses.length ? `<ul class="uses2">${uses.map(u => `<li>${icon('check')}${u}</li>`).join('')}</ul>` : '<p>Tell us your application and we\'ll confirm this is the right product.</p>'}<h2 style="margin-top:28px">Shipping &amp; returns</h2><p>Free Regular Shipping (8–10 days) on eligible orders, or Standard (4–7 days) and Expedited (2–4 days). 30-day returns with a prepaid label. <a class="tl" href="${B}help/#shipping">Details</a></p></div></div>${chart}`;
+        <div class="pdx__c"><h2>Common uses</h2>${uses.length ? `<ul class="uses2">${uses.map(u => `<li>${icon('check')}${u}</li>`).join('')}</ul>` : '<p>Tell us your application and we\'ll confirm this is the right product.</p>'}<h2 style="margin-top:28px">Shipping &amp; returns</h2><p>Free Regular Shipping (8–10 days), or Expedited (2–4 days) priced by zone and order weight. Returns within 30 days with an RGA number (20% restocking fee; custom items can't be returned). <a class="tl" href="${B}help/#shipping">Details</a></p></div></div>${chart}`;
       const r = $('#reqW'); if (r) r.addEventListener('input', () => { $('#reqBtn').dataset.size = [r.value, $('#reqQ').value && 'Qty ' + $('#reqQ').value].filter(Boolean).join(' · '); });
       const rq = $('#reqQ'); if (rq) rq.addEventListener('input', () => r.dispatchEvent(new Event('input')));
     }
@@ -183,4 +183,9 @@
   if (page === 'industries') industries();
   if (page === 'bulk') bulk();
   if (page === 'cart') cartPage();
+  if (page === 'account') {
+    const t = $('#acTabs');
+    t.addEventListener('click', e => { const b = e.target.closest('[data-ac]'); if (!b) return; $$('button', t).forEach(x => x.setAttribute('aria-selected', x === b)); $$('.ac__p').forEach(p => p.hidden = p.id !== b.dataset.ac); });
+    if (location.hash === '#apply') t.querySelector('[data-ac="acApply"]').click();
+  }
 })();
