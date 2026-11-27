@@ -151,6 +151,7 @@ def cart():
     <a class="btn btn--primary btn--lg" href="collection.html">Continue shopping</a>
   </div>
 </div></section>
+<script>(function () {{ var c = []; try {{ c = JSON.parse(localStorage.getItem('ocean-jewel-cart') || '[]'); }} catch (e) {{}} document.querySelector(c.length ? '[data-cp-full]' : '[data-cp-empty]').hidden = false; }})();</script>
 <section class="section scheme-2" data-section="Cart recommendations"><div class="container">
   <div class="section-head"><div><p class="eyebrow">Pairs well with</p><h2 class="h2">Complete<br>the <em>set.</em></h2></div></div>
   <ul class="product-grid" data-cp-ups></ul>
@@ -162,6 +163,7 @@ def search():
     return f'''<section class="phead phead--search" data-section="Search header"><div class="container">
   {breadcrumbs([('Home', 'index.html'), ('Search', None)])}
   <h1 class="phead__title">Search results for <span data-sq></span></h1>
+  <script>(function () {{ var q = (new URLSearchParams(location.search).get('q') || '').trim(); document.querySelector('[data-sq]').textContent = q ? '\u201c' + q + '\u201d' : 'Search our store'; }})();</script>
   <form class="searchbar" action="search.html" role="search">
     <label class="visually-hidden" for="search-page-input">Search</label>{SEARCH}
     <input id="search-page-input" type="search" name="q" placeholder="Search rings, pearls, gold…">
@@ -214,11 +216,11 @@ def article():
 <article class="article" data-section="Article">
   <header class="article__head container container--narrow">
     {breadcrumbs([('Home', 'index.html'), ('Journal', 'blog.html'), ('<span data-a-crumb>Article</span>', None)])}
-    <p class="article__meta" data-a-meta></p>
+    <p class="article__meta" data-a-meta><span class="bpost__tag bpost__tag--inline">Guides</span> 18 Nov 2026 · 5 min read · By Maya Lund</p>
     <h1 class="article__title" data-a-title>How to find your ring size at home</h1>
-    <p class="article__lead" data-a-lead></p>
+    <p class="article__lead" data-a-lead>Three easy ways to measure, and what to do if you are between sizes.</p>
   </header>
-  <figure class="article__hero container" data-a-hero></figure>
+  <figure class="article__hero container" data-a-hero><img src="https://images.unsplash.com/photo-1631982690223-8aa4be0a2497?auto=format&fit=crop&w=1800&h=900&q=78" alt="" width="1800" height="900" fetchpriority="high"></figure>
   <div class="container article__layout">
     <aside class="article__aside">
       <p class="mini-title">Share</p>

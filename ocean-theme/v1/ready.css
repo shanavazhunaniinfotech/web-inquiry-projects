@@ -326,3 +326,48 @@ p.section-head__side { display: block; }
 @media (max-width: 749px) {
   .chero__desc { min-height: 54px; }
 }
+
+/* review 4: footer quick links keep title and subtitle stacked, with room for the arrow (beats .footer__col li a) */
+.footer .footer__quick li a { display: grid; align-content: center; gap: 4px; padding: 20px 64px 20px 20px; }
+
+/* review 4: gift card art fits its text on phones */
+.pg__giftcard .gc__card-amount { line-height: 1.05; }
+@media (max-width: 749px) {
+  .pg__giftcard { padding: 20px; }
+  .pg__giftcard .gc__card { padding: 20px; }
+  .pg__giftcard .gc__card-amount { font-size: 40px; }
+}
+
+/* review 4: hold space for content the demo builds after load (a Liquid theme renders it on the server) */
+html:not(.is-rendered) [data-s-summary]:empty { min-height: 27px; }
+html:not(.is-rendered) .ftoolbar__count:empty { min-height: 22px; }
+html:not(.is-rendered) [data-results]:empty,
+html:not(.is-rendered) [data-collection-list]:empty,
+html:not(.is-rendered) [data-blog-grid]:empty,
+html:not(.is-rendered) [data-cp-ups]:empty { min-height: 110vh; }
+@media (max-width: 749px) {
+  .phead--search .phead__title [data-sq] { display: block; }
+}
+
+/* hero: numbered progress circles on the right replace the tab row, counter, arrows and pause button */
+.hero__rail { position: absolute; z-index: 3; right: clamp(20px, 3vw, 48px); top: 50%; transform: translateY(-50%); display: flex; flex-direction: column; gap: 14px; }
+.hero__dot { position: relative; display: grid; place-items: center; width: 48px; height: 48px; padding: 0; border-radius: 50%; color: rgba(255,255,255,.72); background: rgba(0,0,0,.18); backdrop-filter: blur(6px); transition: background-color .3s, color .3s; min-height: 0; }
+.hero__dot:hover { background: rgba(255,255,255,.14); color: #fff; }
+.hero__dot.is-active { color: #fff; background: rgba(255,255,255,.12); }
+.hero__dot svg { position: absolute; inset: 0; width: 100%; height: 100%; transform: rotate(-90deg); }
+.hero__dot circle { fill: none; stroke-width: 2; }
+.hero__dot .ring-bg { stroke: rgba(255,255,255,.3); }
+.hero__dot .ring-fill { stroke: var(--hero-accent, #fff); stroke-linecap: round; stroke-dasharray: 138.3; stroke-dashoffset: 138.3; transition: stroke .8s; }
+.hero__dot.is-active .ring-fill { animation: ring-fill var(--slide-ms, 6500ms) linear forwards; }
+.hero.is-paused .hero__dot.is-active .ring-fill { animation-play-state: paused; }
+.hero__dot span { position: relative; font-family: var(--f-label); font-weight: 700; font-size: 14px; letter-spacing: .02em; }
+.hero__dot:focus-visible { outline: 2px solid #fff; outline-offset: 3px; }
+@keyframes ring-fill { to { stroke-dashoffset: 0; } }
+@media (prefers-reduced-motion: reduce) { .hero__dot.is-active .ring-fill { animation: none; stroke-dashoffset: 0; } }
+@media (max-width: 749px) {
+  .hero__rail { top: 16px; right: 16px; transform: none; flex-direction: row; gap: 10px; }
+  .hero__dot { width: 44px; height: 44px; }
+}
+/* the old tab progress-bar styles must not reach the numbers */
+.hero .hero__rail .hero__dot span { height: auto; background: none; overflow: visible; border-radius: 0; }
+.hero .hero__rail .hero__dot span::after { content: none; }

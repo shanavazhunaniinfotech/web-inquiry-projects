@@ -104,6 +104,7 @@
 <section class="phead phead--search" data-section="Search header"><div class="container">
   <nav class="crumbs" aria-label="Breadcrumb"><ol><li><a href="../">Home</a></li><li aria-current="page">Search</li></ol></nav>
   <h1 class="phead__title">Search results for <span data-sq></span></h1>
+  <script>(function () { var q = (new URLSearchParams(location.search).get('q') || '').trim(); document.querySelector('[data-sq]').textContent = q ? '“' + q + '”' : 'Search our store'; })();</script>
   <form class="searchbar" action="../search/" role="search">
     <label class="visually-hidden" for="search-page-input">Search</label><svg width="18" height="18" viewBox="0 0 24 24" aria-hidden="true"><circle cx="11" cy="11" r="7" fill="none" stroke="currentColor" stroke-width="1.8"/><path d="M20 20l-3.6-3.6" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/></svg>
     <input id="search-page-input" type="search" name="q" placeholder="Search rings, pearls, gold…">

@@ -52,21 +52,10 @@ def home():
       <button class="hero__chip-add" aria-label="Choose options for Bold Link Chain" data-chip-add data-quick="10"><span aria-hidden="true">+</span></button>
     </div>
   </div>
-  <div class="container hero__controls">
-    <div class="hero__progress" role="tablist" aria-label="Choose slide">
-      <button class="hero__dot is-active" role="tab" aria-selected="true" aria-label="Slide 1: Necklaces"><span></span><em><b>01 </b>Necklaces</em></button>
-      <button class="hero__dot" role="tab" aria-selected="false" aria-label="Slide 2: Pearls"><span></span><em><b>02 </b>Pearls</em></button>
-      <button class="hero__dot" role="tab" aria-selected="false" aria-label="Slide 3: Bridal"><span></span><em><b>03 </b>Bridal</em></button>
-    </div>
-    <p class="hero__counter" aria-hidden="true"><strong data-hero-num>01</strong><span>/ 03</span></p>
-    <div class="hero__arrows">
-      <button class="icon-btn icon-btn--outline" aria-label="Previous slide" data-hero-prev>{ARR_L}</button>
-      <button class="icon-btn icon-btn--outline hero__pause" aria-label="Pause slideshow" data-hero-pause>
-        <svg class="i-pause" width="16" height="16" viewBox="0 0 24 24" aria-hidden="true"><path d="M8 5v14M16 5v14" stroke="currentColor" stroke-width="2.4" stroke-linecap="round"/></svg>
-        <svg class="i-play" width="16" height="16" viewBox="0 0 24 24" aria-hidden="true"><path d="M7 5l12 7-12 7z" fill="currentColor"/></svg>
-      </button>
-      <button class="icon-btn icon-btn--outline" aria-label="Next slide" data-hero-next>{ARR_R}</button>
-    </div>
+  <div class="hero__rail" role="tablist" aria-label="Choose slide. Press the current slide to pause or play">
+    <button class="hero__dot is-active" role="tab" aria-selected="true" data-label="Slide 1: Necklaces" aria-label="Slide 1: Necklaces"><svg viewBox="0 0 48 48" aria-hidden="true"><circle class="ring-bg" cx="24" cy="24" r="22"/><circle class="ring-fill" cx="24" cy="24" r="22"/></svg><span>1</span></button>
+    <button class="hero__dot" role="tab" aria-selected="false" data-label="Slide 2: Pearls" aria-label="Slide 2: Pearls"><svg viewBox="0 0 48 48" aria-hidden="true"><circle class="ring-bg" cx="24" cy="24" r="22"/><circle class="ring-fill" cx="24" cy="24" r="22"/></svg><span>2</span></button>
+    <button class="hero__dot" role="tab" aria-selected="false" data-label="Slide 3: Bridal" aria-label="Slide 3: Bridal"><svg viewBox="0 0 48 48" aria-hidden="true"><circle class="ring-bg" cx="24" cy="24" r="22"/><circle class="ring-fill" cx="24" cy="24" r="22"/></svg><span>3</span></button>
   </div>
 </section>
 '''

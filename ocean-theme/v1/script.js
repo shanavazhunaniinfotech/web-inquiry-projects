@@ -613,14 +613,12 @@
         var cp = $('[data-chip-price]', hero); cp.setAttribute('data-money', p.price); cp.textContent = money(p.price);
         var ca = $('[data-chip-add]', hero); ca.setAttribute('data-quick', p.id); ca.setAttribute('aria-label', 'Choose options for ' + p.title);
       }
+      labelDots();
       schedule();
     };
-    dots.forEach(function (d, i) { on(d, 'click', function () { goSlide(i); }); });
-    on($('[data-hero-prev]', hero), 'click', function () { goSlide(si - 1); });
-    on($('[data-hero-next]', hero), 'click', function () { goSlide(si + 1); });
-    var pauseBtn = $('[data-hero-pause]', hero);
-    var setPaused = function (v) { paused = v; hero.classList.toggle('is-paused', v); if (pauseBtn) pauseBtn.setAttribute('aria-label', v ? 'Play slideshow' : 'Pause slideshow'); schedule(); };
-    on(pauseBtn, 'click', function () { setPaused(!paused); });
+    var labelDots = function () { dots.forEach(function (d, i) { d.setAttribute('aria-label', d.dataset.label + (i === si ? (paused ? ', paused. Press to play' : ', playing. Press to pause') : '')); }); };
+    dots.forEach(function (d, i) { on(d, 'click', function () { if (i === si) setPaused(!paused); else goSlide(i); }); });
+    var setPaused = function (v) { paused = v; hero.classList.toggle('is-paused', v); labelDots(); schedule(); };
     setPaused(paused);
     var x0 = null;
     on(hero, 'touchstart', function (e) { x0 = e.touches[0].clientX; }, { passive: true });

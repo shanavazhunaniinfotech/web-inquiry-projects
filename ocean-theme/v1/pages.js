@@ -340,7 +340,7 @@
         '<div class="paccs">' +
           '<details open><summary>Description</summary><div><p>' + esc(p.desc) + '</p></div></details>' +
           (p.giftCard ? '' : '<details><summary>Materials &amp; care</summary><div><ul class="bullets"><li>' + D.METALS[sel.metal].label + ', recycled, stamped 585</li><li>' + (p.stone === 'None' ? 'No stones' : p.stone + (p.stone === 'Diamond' ? ', lab-grown, IGI graded' : ', traced to source')) + '</li><li>Take off before swimming or the gym</li><li>Polish with the cloth in every box</li></ul></div></details>') +
-          '<details><summary>Shipping &amp; returns</summary><div><p>Free shipping over ' + money(100) + '. Orders ship within 2 working days. Returns are free for 60 days and resizing is free, including engraved rings.</p></div></details>' +
+          (p.giftCard ? '<details><summary>How gift cards work</summary><div><p>Sent by email with a code to use at checkout. It never expires and can be spent on anything in the store, online or at our studio. Gift cards can’t be exchanged for cash.</p></div></details>' : '<details><summary>Shipping &amp; returns</summary><div><p>Free shipping over ' + money(100) + '. Orders ship within 2 working days. Returns are free for 60 days and resizing is free, including engraved rings.</p></div></details>') +
           (p.type === 'Rings' ? '<details><summary>Size guide</summary><div><table class="size-table"><caption class="visually-hidden">Ring sizes</caption><thead><tr><th scope="col">US</th><th scope="col">UK</th><th scope="col">Inside diameter</th></tr></thead><tbody><tr><td>5</td><td>J½</td><td>15.7 mm</td></tr><tr><td>6</td><td>L½</td><td>16.5 mm</td></tr><tr><td>7</td><td>N½</td><td>17.3 mm</td></tr><tr><td>8</td><td>P½</td><td>18.2 mm</td></tr><tr><td>9</td><td>R½</td><td>19.0 mm</td></tr></tbody></table></div></details>' : '') +
         '</div>' +
         '<div class="share"><span>Share</span><button type="button" class="share__btn" data-copy-link aria-label="Copy link"><svg width="16" height="16" viewBox="0 0 24 24" aria-hidden="true"><path d="M10 14a5 5 0 0 0 7 0l3-3a5 5 0 0 0-7-7l-1 1M14 10a5 5 0 0 0-7 0l-3 3a5 5 0 0 0 7 7l1-1" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/></svg> Copy link</button></div>';
@@ -616,4 +616,5 @@
     var mg = $('[data-st-media]'); if (mg) { mg.innerHTML = U.galleryHTML(U.byId(1), 'st'); U.bindGallery(mg, U.byId(1)); }
     var mg3 = $('[data-st-media3d]'); if (mg3) { mg3.innerHTML = U.galleryHTML(U.byId(2), 'st3'); U.bindGallery(mg3, U.byId(2)); }
   }
+  document.documentElement.classList.add('is-rendered');
 })();
