@@ -24,6 +24,7 @@ def facets(default_sort='featured'):
       <div class="facets__side-foot"><button class="btn btn--outline" data-clear-all>Clear all</button><button class="btn btn--primary" data-show-results>Show results</button></div>
     </aside>
     <div class="facets__results">
+      <h2 class="visually-hidden">Products</h2>
       <ul class="product-grid coll-grid" data-results aria-live="polite"></ul>
       <div class="state-empty" data-empty hidden>
         <div class="state-empty__art" aria-hidden="true">{FILTER_ICON.replace('width="18" height="18"', 'width="36" height="36"')}</div>
