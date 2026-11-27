@@ -80,6 +80,7 @@ def product():
 <section class="pdp" data-section="Main product">
   <div class="container pdp__grid">
     <div class="pg" data-gallery aria-label="Product images"></div>
+    <script>/* demo only: the gift card (product 20) has a single card image, so reserve that shape instead of a full gallery */ if (new URLSearchParams(location.search).get('id') === '20') document.documentElement.classList.add('is-giftcard-page');</script>
     <div class="pinfo-wrap"><div class="pinfo" data-pinfo></div><span data-atc-anchor aria-hidden="true"></span>
     </div>
   </div>
