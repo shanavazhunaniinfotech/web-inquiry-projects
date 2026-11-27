@@ -9,7 +9,7 @@ def facets(default_sort='featured'):
     <button class="ftoolbar__toggle" data-filter-toggle aria-expanded="false" aria-controls="filters">{FILTER_ICON}<span data-filter-label>Filter</span> <span data-filter-count></span></button>
     <p class="ftoolbar__count" aria-live="polite" data-count-results></p>
     <div class="ftoolbar__sort"><label for="sort-by">Sort by</label>
-      <div class="select"><select id="sort-by" data-sort>
+      <div class="select"><select id="sort-by" aria-label="Sort by" data-sort>
         <option value="featured">Featured</option><option value="best">Best selling</option><option value="az">Alphabetically, A–Z</option><option value="price-asc">Price, low to high</option><option value="price-desc">Price, high to low</option><option value="new">Date, new to old</option>
       </select></div></div>
   </div>
@@ -465,7 +465,7 @@ ORDERS = [('#1048', '18 Nov 2026', 'Delivered', 'is-done', 1250, ['1591209627710
 def account_orders():
     rows = ''.join(f"""<tr><th scope="row"><a href="account/order.html">{n}</a></th><td>{d}</td><td><span class="status {c}">{st}</span></td><td><span class="otbl__imgs">{''.join(f'<img src="{U(i, 96, 96)}" alt="" width="40" height="40" loading="lazy">' for i in imgs)}</span></td><td class="num" data-money="{tot}">${tot:,}.00</td><td><a class="link-u" href="account/order.html">View</a></td></tr>""" for n, d, st, c, tot, imgs in ORDERS)
     body = f"""<div class="acct2__panel"><h2 class="h4">Order history</h2>
-      <div class="otbl-wrap"><table class="otbl"><caption class="visually-hidden">Your orders</caption><thead><tr><th scope="col">Order</th><th scope="col">Date</th><th scope="col">Status</th><th scope="col">Items</th><th scope="col" class="num">Total</th><th scope="col"><span class="visually-hidden">Actions</span></th></tr></thead><tbody>{rows}</tbody></table></div></div>
+      <div class="otbl-wrap" tabindex="0" role="region" aria-label="Your orders"><table class="otbl"><caption class="visually-hidden">Your orders</caption><thead><tr><th scope="col">Order</th><th scope="col">Date</th><th scope="col">Status</th><th scope="col">Items</th><th scope="col" class="num">Total</th><th scope="col"><span class="visually-hidden">Actions</span></th></tr></thead><tbody>{rows}</tbody></table></div></div>
     <div class="acct2__cards" id="profile">
       <div class="acct2__panel"><h2 class="h4">Profile</h2><dl class="kv"><div><dt>Name</dt><dd>Maya Lund</dd></div><div><dt>Email</dt><dd>maya@example.com</dd></div><div><dt>Saved ring size</dt><dd>US 6</dd></div></dl></div>
       <div class="acct2__panel"><h2 class="h4">Default address</h2><address>Maya Lund<br>12 Harbour Street<br>Bristol BS1 4RD<br>United Kingdom</address><a class="link-u" href="account/addresses.html">Manage addresses</a></div>
@@ -479,7 +479,7 @@ def account_order():
     body = f"""<div class="acct2__panel">
       <div class="ohead"><div><h2 class="h4">Order #1048</h2><p class="muted">Placed 18 November 2026</p></div><span class="status is-done">Delivered</span></div>
       <ol class="otimeline"><li class="is-done"><strong>Confirmed</strong><span>18 Nov</span></li><li class="is-done"><strong>Hallmarked &amp; packed</strong><span>19 Nov</span></li><li class="is-done"><strong>Shipped, insured</strong><span>20 Nov</span></li><li class="is-done"><strong>Delivered</strong><span>22 Nov</span></li></ol>
-      <div class="otbl-wrap"><table class="otbl otbl--lines"><caption class="visually-hidden">Items in order #1048</caption><thead><tr><th scope="col">Item</th><th scope="col" class="num">Qty</th><th scope="col" class="num">Total</th></tr></thead><tbody>{rows}</tbody>
+      <div class="otbl-wrap" tabindex="0" role="region" aria-label="Items in order #1048"><table class="otbl otbl--lines"><caption class="visually-hidden">Items in order #1048</caption><thead><tr><th scope="col">Item</th><th scope="col" class="num">Qty</th><th scope="col" class="num">Total</th></tr></thead><tbody>{rows}</tbody>
       <tfoot><tr><th scope="row">Subtotal</th><td></td><td class="num" data-money="1250">$1,250.00</td></tr><tr><th scope="row">Shipping (insured)</th><td></td><td class="num">Free</td></tr><tr class="otbl__total"><th scope="row">Total</th><td></td><td class="num" data-money="1250">$1,250.00</td></tr></tfoot></table></div>
       <div class="ohead__actions"><a class="btn btn--primary" href="contact.html">Request a free resize</a><a class="btn btn--outline" href="account/orders.html">Back to orders</a></div>
     </div>
@@ -618,5 +618,5 @@ def states():
 <section class="section section--tight" data-section="States"><div class="container"><div class="stgrid">{''.join(blocks)}</div></div></section>
 <section class="section section--tight" data-section="Settings map"><div class="container">
   <div class="section-head"><div><h2 class="h2">Settings map</h2><p class="muted">What merchants can change in the theme editor. The live ones are in the Theme settings button.</p></div></div>
-  <div class="otbl-wrap"><table class="otbl settings-table"><caption class="visually-hidden">Merchant settings</caption><thead><tr><th scope="col">Where</th><th scope="col">Setting</th><th scope="col">Options</th></tr></thead><tbody>{rows}</tbody></table></div>
+  <div class="otbl-wrap" tabindex="0" role="region" aria-label="Merchant settings"><table class="otbl settings-table"><caption class="visually-hidden">Merchant settings</caption><thead><tr><th scope="col">Where</th><th scope="col">Setting</th><th scope="col">Options</th></tr></thead><tbody>{rows}</tbody></table></div>
 </div></section>"""

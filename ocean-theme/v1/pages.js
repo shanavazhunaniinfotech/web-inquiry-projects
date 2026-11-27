@@ -213,7 +213,7 @@
       var prods = c.match ? D.PRODUCTS.filter(function (p) { return !p.hidden && c.match(p); }) : D.PRODUCTS.filter(function (p) { return !p.hidden; });
       var imgId = c.image || (prods.filter(function (p) { return p.photo; })[0] || {}).photo;
       return '<li class="ccard' + (i === 0 ? ' ccard--wide' : '') + (imgId ? '' : ' ccard--noimg') + '"><a href="' + R + 'collection/?c=' + c.handle + '">' +
-        '<div class="ccard__media">' + (imgId ? '<img src="' + D.img(imgId, 900, 1000) + '" alt="" width="450" height="500" loading="lazy">' : '<span class="ccard__mono" aria-hidden="true">' + c.title.charAt(0) + '</span>') + '</div>' +
+        '<div class="ccard__media">' + (imgId ? '<img src="' + D.img(imgId, 900, 1000) + '" alt="" width="450" height="500"' + (i < 2 ? ' fetchpriority="high"' : ' loading="lazy"') + '>' : '<span class="ccard__mono" aria-hidden="true">' + c.title.charAt(0) + '</span>') + '</div>' +
         '<div class="ccard__body"><h2>' + esc(c.title) + '</h2><p>' + prods.length + ' product' + (prods.length === 1 ? '' : 's') + '</p><span class="ccard__arrow" aria-hidden="true">→</span></div></a></li>';
     }).join('');
   }
@@ -240,7 +240,7 @@
     var comp = D.PRODUCTS.filter(function (x) { return x.id !== p.id && !x.hidden && x.photo && x.type !== p.type && !U.isSoldOut(x); }).slice(0, 3);
     if (!comp.length) return '';
     return '<div class="worn"><p class="worn__title">Worn with</p><ul class="worn__list">' + comp.map(function (x) {
-      return '<li class="worn__item"><a class="worn__img" href="' + R + 'product/?id=' + x.id + '" tabindex="-1"><img src="' + D.img(x.photo, 300, 300, x.detail[0] || x.fp) + '" alt="" width="150" height="150" loading="lazy"></a>' +
+      return '<li class="worn__item"><a class="worn__img" href="' + R + 'product/?id=' + x.id + '" tabindex="-1" aria-hidden="true"><img src="' + D.img(x.photo, 300, 300, x.detail[0] || x.fp) + '" alt="" width="150" height="150" loading="lazy"></a>' +
         '<a class="worn__name" href="' + R + 'product/?id=' + x.id + '">' + esc(x.title) + '</a><p class="worn__price">' + U.priceHTML(x) + '</p>' +
         '<button class="worn__add" ' + (x.sizes.length > 1 || x.metals.length > 1 ? 'data-quick' : 'data-add') + '="' + x.id + '">' + (x.sizes.length > 1 || x.metals.length > 1 ? 'Choose' : 'Add') + '<span class="visually-hidden"> ' + esc(x.title) + '</span></button></li>';
     }).join('') + '</ul></div>';
@@ -500,7 +500,7 @@
      BLOG + ARTICLE
      ========================================================= */
   function postCard(a, big) {
-    return '<li class="bpost' + (big ? ' bpost--feat' : '') + '"><a href="' + R + 'article/?id=' + a.id + '"><div class="bpost__img"><img src="' + D.img(a.image, big ? 1400 : 800, big ? 900 : 600) + '" alt="" width="' + (big ? 700 : 400) + '" height="' + (big ? 450 : 300) + '" loading="lazy"><span class="bpost__tag">' + a.tag + '</span></div>' +
+    return '<li class="bpost' + (big ? ' bpost--feat' : '') + '"><a href="' + R + 'article/?id=' + a.id + '"><div class="bpost__img"><img src="' + D.img(a.image, big ? 1400 : 800, big ? 900 : 600) + '" alt="" width="' + (big ? 700 : 400) + '" height="' + (big ? 450 : 300) + '"' + (big ? ' fetchpriority="high"' : ' loading="lazy"') + '><span class="bpost__tag">' + a.tag + '</span></div>' +
       '<div class="bpost__body"><p class="bpost__meta">' + a.date + ' · ' + a.read + ' min read</p><h2>' + esc(a.title) + '</h2><p class="muted">' + esc(a.excerpt) + '</p><span class="bpost__more">Read article <span aria-hidden="true">→</span></span></div></a></li>';
   }
   if (is('blog')) {

@@ -123,6 +123,7 @@
     var y = window.scrollY;
     if (header) header.classList.toggle('is-scrolled', y > 10);
     if (toTop) toTop.classList.toggle('is-visible', y > 900);
+    document.documentElement.classList.toggle('past-hero', y > 600);
   }
   window.addEventListener('scroll', onScroll, { passive: true }); onScroll();
   on(toTop, 'click', function () { window.scrollTo({ top: 0, behavior: reduceMotion ? 'auto' : 'smooth' }); });
@@ -234,7 +235,7 @@
   function cardHTML(p, i) {
     var url = R + 'product/?id=' + p.id;
     var media = p.photo
-      ? '<img src="' + primaryImg(p, 700, 875) + '" srcset="' + primaryImg(p, 420, 525) + ' 420w, ' + primaryImg(p, 700, 875) + ' 700w" sizes="(min-width: 1200px) 25vw, (min-width: 750px) 33vw, 50vw" alt="' + esc(p.title) + '" width="700" height="875" loading="lazy">'
+      ? '<img src="' + primaryImg(p, 700, 875) + '" srcset="' + primaryImg(p, 420, 525) + ' 420w, ' + primaryImg(p, 700, 875) + ' 700w" sizes="(min-width: 1200px) 25vw, (min-width: 750px) 33vw, 50vw" alt="' + esc(p.title) + '" width="700" height="875"' + ((i || 0) < 2 && !document.querySelector('.hero') ? '' : ' loading="lazy"') + '>'
       : '<div class="card__placeholder">' + PLACEHOLDER + '<span>Image coming soon</span></div>';
     var soldOut = isSoldOut(p), multi = p.sizes.length > 1 || p.metals.length > 1;
     var hasRich = (p.media || []).map(function (m) { return m.type; });
