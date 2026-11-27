@@ -3,6 +3,7 @@
 'use strict';
 
 /* ---------- helpers ---------- */
+const R=(document.body&&document.body.dataset.base)||'./';
 const $=(s,r=document)=>r.querySelector(s);
 const $$=(s,r=document)=>Array.from(r.querySelectorAll(s));
 const money=n=>'$'+(Math.round(n*100)/100).toLocaleString('en-AU',{minimumFractionDigits:n%1?2:0,maximumFractionDigits:2});
@@ -40,7 +41,7 @@ const FREE_METRO=1500;
 
 const P={
   // bunks
-  'bk-harbour':{type:'bunk',name:'Harbour Single-over-Double Bunk',cat:'Bunks',price:1299,was:1549,wh:'syd',svg:{color:'oak'},rating:4.8,reviews:126,badge:['sale','Save $250'],url:'product.html'},
+  'bk-harbour':{type:'bunk',name:'Harbour Single-over-Double Bunk',cat:'Bunks',price:1299,was:1549,wh:'syd',svg:{color:'oak'},rating:4.8,reviews:126,badge:['sale','Save $250'],url:R+'product/'},
   'bk-coast':{type:'bunk',name:'Coast Single Bunk with Trundle',cat:'Bunks',price:1049,wh:'mel',svg:{color:'white',trundle:true,single:true},rating:4.7,reviews:88,badge:['new','New']},
   'bk-ridge':{type:'bunk',name:'Ridge Triple Sleeper Bunk',cat:'Bunks',price:1399,wh:'bne',svg:{color:'charcoal',trundle:true},rating:4.6,reviews:41,pre:'15 Jan',badge:['pre','Pre-order']},
   // beds
@@ -157,16 +158,16 @@ const NAV=[
 ];
 const MEGA={
   bunks:`<div class="mega"><div class="wrap mega__in">
-    <div><h4>By type</h4><ul><li><a href="product.html">Single-over-Double <span class="tag">Popular</span></a></li><li><a href="index.html#shop">Single Bunks</a></li><li><a href="index.html#shop">Bunks with Trundle</a></li><li><a href="index.html#shop">Triple Sleepers</a></li><li><a href="index.html#shop">Loft Beds</a></li></ul></div>
-    <div><h4>By finish</h4><ul><li><a href="index.html#shop">Natural Oak</a></li><li><a href="index.html#shop">White</a></li><li><a href="index.html#shop">Charcoal</a></li><li><a href="index.html#shop">Metal</a></li></ul></div>
-    <div><h4>Helpful</h4><ul><li><a href="product.html#sleepset">Mattress fit guide</a></li><li><a href="index.html#delivery">Delivery &amp; pickup</a></li><li><a href="index.html#faq">Bunk safety FAQ</a></li></ul></div>
-    <a class="mega__card" href="product.html"><img src="${U('photo-1522771739844-6a9f6d5f14af',600)}" alt=""><span>Bunks that come with the right mattresses<small>Matched per sleeping position · 15% off →</small></span></a>
+    <div><h4>By type</h4><ul><li><a href="${R}product/">Single-over-Double <span class="tag">Popular</span></a></li><li><a href="${R}#shop">Single Bunks</a></li><li><a href="${R}#shop">Bunks with Trundle</a></li><li><a href="${R}#shop">Triple Sleepers</a></li><li><a href="${R}#shop">Loft Beds</a></li></ul></div>
+    <div><h4>By finish</h4><ul><li><a href="${R}#shop">Natural Oak</a></li><li><a href="${R}#shop">White</a></li><li><a href="${R}#shop">Charcoal</a></li><li><a href="${R}#shop">Metal</a></li></ul></div>
+    <div><h4>Helpful</h4><ul><li><a href="${R}product/#sleepset">Mattress fit guide</a></li><li><a href="${R}#delivery">Delivery &amp; pickup</a></li><li><a href="${R}#faq">Bunk safety FAQ</a></li></ul></div>
+    <a class="mega__card" href="${R}product/"><img src="${U('photo-1522771739844-6a9f6d5f14af',600)}" alt=""><span>Bunks that come with the right mattresses<small>Matched per sleeping position · 15% off →</small></span></a>
   </div></div>`,
   mattresses:`<div class="mega"><div class="wrap mega__in">
-    <div><h4>By size</h4><ul><li><a href="index.html#shop">Single</a></li><li><a href="index.html#shop">King Single</a></li><li><a href="index.html#shop">Double</a></li><li><a href="index.html#shop">Queen</a></li><li><a href="index.html#shop">King</a></li></ul></div>
-    <div><h4>By type</h4><ul><li><a href="index.html#shop">Pocket Spring</a></li><li><a href="index.html#shop">Hybrid</a></li><li><a href="index.html#shop">Foam &amp; Latex</a></li><li><a href="index.html#shop">Bunk &amp; Trundle <span class="tag">Low profile</span></a></li></ul></div>
-    <div><h4>Accessories</h4><ul><li><a href="index.html#shop">Protectors</a></li><li><a href="index.html#shop">Pillows</a></li><li><a href="index.html#shop">Sheet sets</a></li></ul></div>
-    <a class="mega__card" href="index.html#shop"><img src="${U('photo-1588046130717-0eb0c9a3ba15',600)}" alt=""><span>Hybrid Luxe Queen<small>Now $1,149 · was $1,399 →</small></span></a>
+    <div><h4>By size</h4><ul><li><a href="${R}#shop">Single</a></li><li><a href="${R}#shop">King Single</a></li><li><a href="${R}#shop">Double</a></li><li><a href="${R}#shop">Queen</a></li><li><a href="${R}#shop">King</a></li></ul></div>
+    <div><h4>By type</h4><ul><li><a href="${R}#shop">Pocket Spring</a></li><li><a href="${R}#shop">Hybrid</a></li><li><a href="${R}#shop">Foam &amp; Latex</a></li><li><a href="${R}#shop">Bunk &amp; Trundle <span class="tag">Low profile</span></a></li></ul></div>
+    <div><h4>Accessories</h4><ul><li><a href="${R}#shop">Protectors</a></li><li><a href="${R}#shop">Pillows</a></li><li><a href="${R}#shop">Sheet sets</a></li></ul></div>
+    <a class="mega__card" href="${R}#shop"><img src="${U('photo-1588046130717-0eb0c9a3ba15',600)}" alt=""><span>Hybrid Luxe Queen<small>Now $1,149 · was $1,399 →</small></span></a>
   </div></div>`
 };
 function header(){
@@ -181,7 +182,7 @@ function header(){
   <header class="hdr">
     <div class="wrap hdr__bar">
       <button class="icon-btn menu-toggle" aria-label="Open menu">${ic.menu}</button>
-      <a class="logo" href="index.html" aria-label="beds.net.au home"><span class="logo__mark"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M3 18V7M21 18v-4a3 3 0 0 0-3-3h-8v5M3 15h18"/></svg></span>beds<small>.net.au</small></a>
+      <a class="logo" href="${R}" aria-label="beds.net.au home"><span class="logo__mark"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M3 18V7M21 18v-4a3 3 0 0 0-3-3h-8v5M3 15h18"/></svg></span>beds<small>.net.au</small></a>
       <label class="hdr__search">${ic.search}<span class="sr">Search</span><input type="search" placeholder="Search beds, bunks, mattresses…"></label>
       <div class="hdr__icons">
         <a class="icon-btn" href="#" aria-label="Account" data-demo>${ic.user}</a>
@@ -189,12 +190,12 @@ function header(){
       </div>
     </div>
     <nav class="nav" aria-label="Main"><ul class="wrap nav__list">
-      ${NAV.map(([t,k])=>k&&MEGA[k]?`<li class="nav__item"><a class="nav__link" href="${k==='bunks'?'product.html':'index.html#shop'}" aria-haspopup="true">${t}${ic.chev}</a>${MEGA[k]}</li>`:`<li class="nav__item"><a class="nav__link ${k==='sale'?'nav__link--sale':''}" href="index.html#shop">${t}</a></li>`).join('')}
+      ${NAV.map(([t,k])=>k&&MEGA[k]?`<li class="nav__item"><a class="nav__link" href="${k==='bunks'?R+'product/':R+'#shop'}" aria-haspopup="true">${t}${ic.chev}</a>${MEGA[k]}</li>`:`<li class="nav__item"><a class="nav__link ${k==='sale'?'nav__link--sale':''}" href="${R}#shop">${t}</a></li>`).join('')}
     </ul></nav>
   </header>
   <div class="mnav" aria-hidden="true"><div class="mnav__scrim"></div><div class="mnav__panel">
     <div class="mnav__head"><span class="logo"><span class="logo__mark"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="2" stroke-linecap="round"><path d="M3 18V7M21 18v-4a3 3 0 0 0-3-3h-8v5M3 15h18"/></svg></span>beds<small>.net.au</small></span><button class="cart__close mnav-close" aria-label="Close menu">${ic.x}</button></div>
-    ${NAV.map(([t,k])=>`<a href="${k==='bunks'?'product.html':'index.html#shop'}" ${k==='sale'?'style="color:var(--sale)"':''}>${t}<span>›</span></a>`).join('')}
+    ${NAV.map(([t,k])=>`<a href="${k==='bunks'?R+'product/':R+'#shop'}" ${k==='sale'?'style="color:var(--sale)"':''}>${t}<span>›</span></a>`).join('')}
   </div></div>`;
   // mega hover/click
   $$('.nav__item',h).forEach(li=>{
@@ -216,11 +217,11 @@ function footer(){
   const f=$('#site-footer');if(!f) return;
   f.innerHTML=`<footer class="ftr"><div class="wrap">
     <div class="ftr__grid">
-      <div><a class="logo" href="index.html"><span class="logo__mark"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="2" stroke-linecap="round"><path d="M3 18V7M21 18v-4a3 3 0 0 0-3-3h-8v5M3 15h18"/></svg></span>beds<small style="color:#8f98ab">.net.au</small></a>
+      <div><a class="logo" href="${R}"><span class="logo__mark"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="2" stroke-linecap="round"><path d="M3 18V7M21 18v-4a3 3 0 0 0-3-3h-8v5M3 15h18"/></svg></span>beds<small style="color:#8f98ab">.net.au</small></a>
         <p style="margin:16px 0 20px;max-width:320px">Beds, bunks and mattresses delivered Australia-wide from our Sydney, Melbourne and Brisbane warehouses.</p>
         <div class="pay-icons"><span class="pay">VISA</span><span class="pay">Mastercard</span><span class="pay">AMEX</span><span class="pay">Apple Pay</span><span class="pay">G Pay</span><span class="pay pay--pp">PayPal</span><span class="pay pay--ap">afterpay</span><span class="pay pay--zip">zip</span></div></div>
-      <div><h4>Shop</h4><ul><li><a href="index.html#shop">Beds by size</a></li><li><a href="product.html">Bunks</a></li><li><a href="index.html#shop">Mattresses</a></li><li><a href="index.html#shop">Furniture</a></li><li><a href="index.html#shop">Sale</a></li></ul></div>
-      <div><h4>Help</h4><ul><li><a href="#" data-pol>Shipping &amp; delivery</a></li><li><a href="#" data-pol>Returns &amp; exchanges</a></li><li><a href="#" data-pol>Warranty</a></li><li><a href="index.html#faq">FAQ</a></li><li><a href="#" data-pol>Contact us</a></li></ul></div>
+      <div><h4>Shop</h4><ul><li><a href="${R}#shop">Beds by size</a></li><li><a href="${R}product/">Bunks</a></li><li><a href="${R}#shop">Mattresses</a></li><li><a href="${R}#shop">Furniture</a></li><li><a href="${R}#shop">Sale</a></li></ul></div>
+      <div><h4>Help</h4><ul><li><a href="#" data-pol>Shipping &amp; delivery</a></li><li><a href="#" data-pol>Returns &amp; exchanges</a></li><li><a href="#" data-pol>Warranty</a></li><li><a href="${R}#faq">FAQ</a></li><li><a href="#" data-pol>Contact us</a></li></ul></div>
       <div><h4>Company</h4><ul><li><a href="#" data-pol>About</a></li><li><a href="#" data-pol>Privacy policy</a></li><li><a href="#" data-pol>Terms of service</a></li><li><a href="#" data-pol>Refund policy</a></li></ul></div>
     </div>
     <div class="ftr__bottom"><span>© 2026 beds.net.au · Concept prototype</span><span>Prices in AUD incl. GST</span></div>
@@ -277,7 +278,7 @@ function renderCart(){
   $('.cart__progress').innerHTML=sub>=FREE_METRO?`🎉 You've unlocked <b>free metro delivery</b><div class="bar"><i style="width:100%"></i></div>`:`You're <b>${money(FREE_METRO-sub)}</b> away from free metro delivery<div class="bar"><i style="width:${prog}%"></i></div>`;
   const body=$('.cart__body');
   if(!cart.length){
-    body.innerHTML=`<div class="cart__empty">${ic.bed}<p><b style="color:var(--ink)">Your cart is empty</b><br>Start with a bed, and we'll match the mattresses.</p><a class="btn btn--dark btn--sm" style="margin-top:16px" href="product.html">Shop bunks</a></div>`+upsellHTML();
+    body.innerHTML=`<div class="cart__empty">${ic.bed}<p><b style="color:var(--ink)">Your cart is empty</b><br>Start with a bed, and we'll match the mattresses.</p><a class="btn btn--dark btn--sm" style="margin-top:16px" href="${R}product/">Shop bunks</a></div>`+upsellHTML();
   } else {
     const groups={};cart.forEach(l=>{(groups[P[l.id].wh]=groups[P[l.id].wh]||[]).push(l)});
     const gk=Object.keys(groups);
