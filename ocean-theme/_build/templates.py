@@ -373,7 +373,7 @@ def password():
       </form>
       <div class="form-success" data-form-success tabindex="-1" hidden><p><strong>Welcome in.</strong> <a href="index.html">Continue to the store →</a></p></div>
     </div>
-    <p class="pw__foot">Are you the store owner? <a href="#">Log in here</a> · This shop will be powered by Shopify</p>
+    <p class="pw__foot">Are you the store owner? <a href="https://accounts.shopify.com/store-login" target="_blank" rel="noopener">Log in here</a> · This shop will be powered by Shopify</p>
   </div>
 </div>'''
 
@@ -388,9 +388,9 @@ def giftcard():
     <div class="gc__card" role="img" aria-label="Ocean gift card worth $100.00">
       <div class="gc__card-top">{LOGO_MARK}<span>OCEAN</span></div>
       <p class="gc__card-amount" data-money="100">$100.00</p>
-      <p class="gc__card-foot">Gift card · No expiry date</p>
+      <p class="gc__card-foot" data-gc-foot>Gift card · No expiry date</p>
     </div>
-    <div class="gc__code"><p class="mini-title">Use this code at checkout</p><p class="gc__code-value">OCEN 7H2K 9QWX 4F3M</p><button class="btn btn--outline" data-copy-code>Copy code</button></div>
+    <div class="gc__code"><p class="mini-title" data-gc-instruction>Use this code at checkout</p><p class="gc__code-value">OCEN 7H2K 9QWX 4F3M</p><button class="btn btn--outline" data-copy-code>Copy code</button></div>
     <div class="gc__grid">
       <div class="gc__qr"><div data-qr class="gc__qr-box"></div><p class="muted">Scan in store</p></div>
       <dl class="gc__balance"><div><dt>Balance</dt><dd data-money="100">$100.00</dd></div><div><dt>Expires</dt><dd>Never</dd></div></dl>
@@ -423,7 +423,7 @@ def account():
         <div class="error-summary" data-error-summary tabindex="-1" role="alert" hidden></div>
         <div class="field"><label for="login-email">Email</label><input id="login-email" type="email" autocomplete="email" data-rules="required email" data-label="Email"><p class="field__error" id="login-email-error" hidden></p></div>
         {pass_field('login-password', 'Password', 'current-password')}
-        <a class="acct__forgot" href="#" data-switch="recover">Forgot your password?</a>
+        <button type="button" class="acct__forgot" data-switch="recover">Forgot your password?</button>
         <button class="btn btn--primary btn--block btn--lg" type="submit">Sign in</button>
       </form>
       <div class="form-success" data-form-success tabindex="-1" hidden><h2 class="h4">You’re signed in</h2><p class="muted">Your orders, returns and saved sizes are on your account page.</p></div>
@@ -435,7 +435,7 @@ def account():
         <div class="error-summary" data-error-summary tabindex="-1" role="alert" hidden></div>
         <div class="field"><label for="rec-email">Email</label><input id="rec-email" type="email" autocomplete="email" data-rules="required email" data-label="Email"><p class="field__error" id="rec-email-error" hidden></p></div>
         <button class="btn btn--primary btn--block btn--lg" type="submit">Send reset link</button>
-        <a class="acct__forgot" href="#" data-switch="login">Back to sign in</a>
+        <button type="button" class="acct__forgot" data-switch="login">Back to sign in</button>
       </form>
       <div class="form-success" data-form-success tabindex="-1" hidden><h2 class="h4">Check your inbox</h2><p class="muted">If an account exists for that email, a reset link is on its way.</p></div>
     </div>
@@ -524,6 +524,25 @@ def account_addresses():
     return acct_shell('addresses', 'Addresses', body)
 
 
+def account_activate():
+    return f"""<section class="acct" data-section="Activate account"><div class="container acct__grid">
+  <div class="acct__media"><img src="{U('1611085583191-a3b181a88401', 1000, 1300)}" alt="Pearl pendant on a fine gold chain" width="500" height="650"></div>
+  <div class="acct__panel">
+    {breadcrumbs([('Home', 'index.html'), ('Account', 'account.html'), ('Activate', None)])}
+    <h1 class="acct__title">Activate your account</h1>
+    <p class="muted">You’ve been invited to an Ocean account for maya@example.com. Create a password to see your orders and start free resizes.</p>
+    <form data-validate="activate" novalidate>
+      <div class="error-summary" data-error-summary tabindex="-1" role="alert" hidden></div>
+      <div class="field"><label for="act-pass">Password</label><div class="field__row"><input id="act-pass" type="password" autocomplete="new-password" data-rules="required min8" data-label="Password"><button type="button" class="field__toggle" data-toggle-pass aria-controls="act-pass" aria-pressed="false">Show</button></div><p class="field__error" id="act-pass-error" hidden></p></div>
+      <div class="field"><label for="act-confirm">Confirm password</label><div class="field__row"><input id="act-confirm" type="password" autocomplete="new-password" data-rules="required match" data-match="act-pass" data-label="Password confirmation"><button type="button" class="field__toggle" data-toggle-pass aria-controls="act-confirm" aria-pressed="false">Show</button></div><p class="field__error" id="act-confirm-error" hidden></p></div>
+      <button class="btn btn--primary btn--block btn--lg" type="submit">Activate account</button>
+      <a class="acct__forgot" href="index.html">Decline invitation</a>
+    </form>
+    <div class="form-success" data-form-success tabindex="-1" hidden><h2 class="h4">Your account is active</h2><p class="muted">You can now see your orders and saved sizes.</p><a class="btn btn--outline" href="account/orders.html">Go to your account</a></div>
+  </div>
+</div></section>"""
+
+
 def policy(kind):
     if kind == 'privacy':
         title, upd = 'Privacy policy', 'Last updated 1 November 2026'
@@ -576,11 +595,11 @@ def states():
         return f'<section class="stcard"><header><span class="stcard__n">{n:02d}</span><h2>{title}</h2></header><p class="muted">{note}</p><div class="stcard__demo">{inner}</div></section>'
     blocks = [
         block(1, 'Hover', 'Card on hover: second image fades in, quick-add strip slides up.', '<ul class="pgrid st-grid" data-st-hover></ul>'),
-        block(2, 'Focus', 'Every interactive element has a visible 2px focus ring. Press Tab anywhere on the site.', '<div class="st-row"><button class="btn btn--primary is-focus">Primary</button><button class="btn btn--outline is-focus">Outline</button><a class="link-u is-focus" href="#">Text link</a></div><div class="field st-mt"><label for="st-f">Text field</label><input id="st-f" class="is-focus" value="Focused field"></div>'),
+        block(2, 'Focus', 'Every interactive element has a visible 2px focus ring. Press Tab anywhere on the site.', '<div class="st-row"><button class="btn btn--primary is-focus">Primary</button><button class="btn btn--outline is-focus">Outline</button><a class="link-u is-focus" href="page.html">Text link</a></div><div class="field st-mt"><label for="st-f">Text field</label><input id="st-f" class="is-focus" value="Focused field"></div>'),
         block(3, 'Loading', 'Skeleton cards while filters update; spinner inside buttons during a request.', '<ul class="pgrid st-grid st-grid--2" data-st-loading aria-busy="true"></ul><div class="st-row st-mt"><button class="btn btn--primary is-loading" disabled aria-busy="true">Add to bag</button><button class="btn btn--outline is-loading" disabled>Saving</button></div>'),
         block(4, 'Empty collection', 'Live example: <a class="link-u" href="collection.html?c=archive">The Archive</a>.', '<div class="state-empty"><h3 class="h4">This collection is empty</h3><p class="muted">There are no pieces here yet.</p><a class="btn btn--primary" href="collections.html">Browse collections</a></div>'),
         block(5, 'Error', 'Inline field errors with a summary, and a stock limit message.', '<div class="error-summary" role="alert"><p><strong>Please fix 1 error:</strong></p><ul><li><a href="#st-e">Enter a valid email address, like name@example.com.</a></li></ul></div><div class="field has-error"><label for="st-e">Email</label><input id="st-e" value="name@" aria-invalid="true" aria-describedby="st-e-err"><p class="field__error" id="st-e-err">Enter a valid email address, like name@example.com.</p></div><p class="form-msg is-error">You can only add 3 of this item to your bag.</p>'),
-        block(6, 'Sold out / unavailable variant', 'Crossed-out options, a notice and a back-in-stock link. Try the options below.', '<div class="st-variant" data-st-variant></div>'),
+        block(6, 'Sold out / unavailable variant', 'Crossed-out options, a notice and an “Email me when it’s available” link. Try the options below.', '<div class="st-variant" data-st-variant></div>'),
         block(7, 'Empty cart', 'Preview: <a class="link-u" href="cart.html?preview=empty">cart page</a> · <a class="link-u" href="index.html?cart=open&amp;preview=empty">cart drawer</a>.', '<div class="cart-empty st-cart-empty"><p class="cart-empty__title">Your bag is empty</p><p class="muted">Start with a piece you will wear every day.</p><a class="btn btn--primary" href="collection.html">Shop the collection</a></div>'),
         block(8, 'Search no results', 'Live example: <a class="link-u" href="search.html?q=xyz">search “xyz”</a>.', '<div class="state-empty"><h3 class="h4">No results for “xyz”</h3><p class="muted">Check the spelling or try one of these:</p><ul class="chips chips--center"><li><a href="search.html?q=ring">ring</a></li><li><a href="search.html?q=pearl">pearl</a></li></ul></div>'),
         block(9, 'Long product title', 'Titles wrap; the grid stays aligned.', '<ul class="pgrid st-grid" data-st-long></ul>'),

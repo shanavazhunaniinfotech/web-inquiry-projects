@@ -16,7 +16,8 @@
   var RULES = {
     email: function (v) { return /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(v) ? '' : 'Enter a valid email address, like name@example.com.'; },
     required: function (v, el) { return v ? '' : (el.dataset.label || 'This field') + ' is required.'; },
-    min8: function (v) { return v.length >= 8 ? '' : 'Use at least 8 characters.'; }
+    min8: function (v) { return v.length >= 8 ? '' : 'Use at least 8 characters.'; },
+    match: function (v, el) { var o = document.getElementById(el.dataset.match); return o && o.value === v ? '' : 'Passwords don’t match.'; }
   };
   function validate(form) {
     var errors = [];
@@ -212,9 +213,8 @@
     listEl.innerHTML = D.COLLECTIONS.map(function (c, i) {
       var prods = c.match ? D.PRODUCTS.filter(function (p) { return !p.hidden && c.match(p); }) : D.PRODUCTS.filter(function (p) { return !p.hidden; });
       var imgId = c.image || (prods.filter(function (p) { return p.photo; })[0] || {}).photo;
-      var fallback = !c.image && imgId ? '<span class="ccard__note">Using first product image</span>' : '';
       return '<li class="ccard' + (i === 0 ? ' ccard--wide' : '') + (imgId ? '' : ' ccard--noimg') + '"><a href="' + R + 'collection/?c=' + c.handle + '">' +
-        '<div class="ccard__media">' + (imgId ? '<img src="' + D.img(imgId, 900, 1000) + '" alt="" width="450" height="500" loading="lazy">' : '<span class="ccard__mono" aria-hidden="true">' + c.title.charAt(0) + '</span>') + fallback + '</div>' +
+        '<div class="ccard__media">' + (imgId ? '<img src="' + D.img(imgId, 900, 1000) + '" alt="" width="450" height="500" loading="lazy">' : '<span class="ccard__mono" aria-hidden="true">' + c.title.charAt(0) + '</span>') + '</div>' +
         '<div class="ccard__body"><h2>' + esc(c.title) + '</h2><p>' + prods.length + ' product' + (prods.length === 1 ? '' : 's') + '</p><span class="ccard__arrow" aria-hidden="true">→</span></div></a></li>';
     }).join('');
   }
@@ -288,7 +288,7 @@
             '<button type="' + (st === 'available' ? 'submit' : 'button') + '" class="btn btn--primary btn--lg pinfo__atc' + (st !== 'available' ? ' is-unavailable' : '') + '" data-atc' + (st !== 'available' ? ' disabled' : '') + '>' + buyLabel + '</button>' +
           '</div>' +
           '<p class="form-msg is-error" role="alert" data-p-error hidden></p>' +
-          (st === 'available' ? '<button type="button" class="accel__btn accel__btn--shop accel__btn--wide" aria-label="Buy with Shop Pay">Buy with <strong>shop</strong><em>Pay</em></button><a class="pinfo__more-pay" href="#" data-more-pay>More payment options</a>' : '') +
+          (st === 'available' ? '<button type="button" class="accel__btn accel__btn--shop accel__btn--wide" aria-label="Buy with Shop Pay">Buy with <strong>shop</strong><em>Pay</em></button><button type="button" class="pinfo__more-pay" data-more-pay>More payment options</button>' : '') +
         '</form>' +
         (p.giftCard ? '' : '<p class="pinfo__pickup"><strong>Pickup available at Ocean Studio.</strong> Usually ready in 24 hours. <button type="button" class="link-u" data-store-info>View store information</button></p>') +
         '<dl class="pfacts" data-feature="hallmarks">' +
@@ -522,6 +522,10 @@
       $('.gc__title').textContent = 'This gift card has expired';
       var bal = $('.gc__balance'); if (bal) bal.innerHTML = '<div><dt>Balance</dt><dd>' + money(0) + '</dd></div><div><dt>Expired</dt><dd>1 Jan 2026</dd></div>';
       var cc = $('[data-copy-code]'); if (cc) { cc.disabled = true; cc.textContent = 'Code no longer valid'; }
+      var ft = $('[data-gc-foot]'); if (ft) ft.textContent = 'Gift card · Expired 1 January 2026';
+      var ins = $('[data-gc-instruction]'); if (ins) ins.textContent = 'Gift card code (expired)';
+      var wb = $('[data-wallet]'); if (wb) wb.hidden = true;
+      var amt = $('.gc__card-amount'); if (amt) { amt.setAttribute('data-money', '0'); amt.textContent = money(0); }
     }
     var code = 'OCEN 7H2K 9QWX 4F3M';
     on($('[data-copy-code]'), 'click', function () { try { navigator.clipboard.writeText(code.replace(/\s/g, '')); } catch (e) {} var b = this; b.textContent = 'Copied'; b.classList.add('is-done'); setTimeout(function () { b.textContent = 'Copy code'; b.classList.remove('is-done'); }, 2000); });
@@ -548,8 +552,11 @@
     var sp = U.byId(2), ssel = { metal: 'rose', size: '5' };
     var renderVar = function () {
       var st = U.variantState(sp, ssel.metal, ssel.size);
-      $('[data-st-variant]').innerHTML = U.optionHTML(sp, ssel, 'st') + (st === 'available' ? '<button class="btn btn--primary btn--block">Add to bag</button>' : '<button class="btn btn--primary btn--block" disabled>' + (st === 'soldout' ? 'Sold out' : 'Unavailable') + '</button>') + '<p class="st-note">Rose gold in size 5 isn’t made (Unavailable). Size 9 is sold out in every metal.</p>';
+      $('[data-st-variant]').innerHTML = U.optionHTML(sp, ssel, 'st') + (st === 'available' ? '<button class="btn btn--primary btn--block">Add to bag</button>' : '<button class="btn btn--primary btn--block" disabled>' + (st === 'soldout' ? 'Sold out' : 'Unavailable') + '</button>') + (st !== 'available' ? '<div class="pnotice" role="status"><p><strong>' + (st === 'soldout' ? 'Size ' + ssel.size + ' is sold out.' : 'Size ' + ssel.size + ' in ' + D.METALS[ssel.metal].label + ' isn’t made.') + '</strong> Choose another option above, or</p><button type="button" class="link-u" data-st-notify>Email me when it’s available</button><form class="st-notify" data-st-notify-form novalidate hidden><label class="visually-hidden" for="st-notify-email">Email address</label><input id="st-notify-email" type="email" placeholder="Email address" autocomplete="email"><button class="btn btn--primary" type="submit">Notify me</button><p class="form-msg" role="status" aria-live="polite" data-form-msg></p></form></div>' : '') + '<p class="st-note">Rose gold in size 5 isn’t made (Unavailable). Size 9 is sold out in every metal.</p>';
       U.bindOptions($('[data-st-variant]'), sp, ssel, renderVar);
+      var nb = $('[data-st-notify]'), nf = $('[data-st-notify-form]');
+      on(nb, 'click', function () { nf.hidden = false; nb.hidden = true; $('input', nf).focus(); });
+      on(nf, 'submit', function (e) { e.preventDefault(); var i = $('input', nf), m = $('[data-form-msg]', nf), ok = /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(i.value.trim()); i.setAttribute('aria-invalid', String(!ok)); m.className = 'form-msg ' + (ok ? 'is-success' : 'is-error'); m.textContent = ok ? 'Thanks, we’ll email you when it’s back.' : 'Enter a valid email address.'; });
     };
     renderVar();
     var hc = $('[data-st-hover] .card'); if (hc) hc.classList.add('is-hover');

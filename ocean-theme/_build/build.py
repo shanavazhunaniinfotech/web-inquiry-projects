@@ -32,6 +32,7 @@ PAGES = {
     'states.html': page('Theme states | Ocean Fine Jewellery', D, 'states', states),
     'account/orders.html': page('Your account | Ocean Fine Jewellery', D, 'customers-account', T.account_orders(), 'account'),
     'account/order.html': page('Order #1048 | Ocean Fine Jewellery', D, 'customers-order', T.account_order(), 'account'),
+    'account/activate.html': page('Activate your account | Ocean Fine Jewellery', D, 'customers-activate', T.account_activate(), 'account'),
     'account/addresses.html': page('Addresses | Ocean Fine Jewellery', D, 'customers-addresses', T.account_addresses(), 'account'),
     'policies/privacy-policy.html': page('Privacy policy | Ocean Fine Jewellery', D, 'policy', T.policy('privacy')),
     'policies/terms-of-service.html': page('Terms of service | Ocean Fine Jewellery', D, 'policy', T.policy('terms')),

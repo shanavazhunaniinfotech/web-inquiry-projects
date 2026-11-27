@@ -37,7 +37,7 @@ TEMPLATES = [
               ('product.html', 'Product'), ('product.html?id=8', 'Product, sold out'), ('product.html?id=20', 'Gift card product'), ('search.html?q=gold', 'Search results'), ('search.html?q=xyz', 'Search, no results')]),
     ('Cart', [('cart.html', 'Cart page'), ('cart.html?preview=empty', 'Cart page, empty'), ('index.html?cart=open', 'Cart drawer, open'), ('index.html?cart=open&preview=empty', 'Cart drawer, empty')]),
     ('Content', [('blog.html', 'Blog'), ('article.html', 'Article'), ('page.html', 'Page'), ('contact.html', 'Contact'), ('policies/privacy-policy.html', 'Privacy policy'), ('policies/terms-of-service.html', 'Terms of service'), ('404.html', '404')]),
-    ('Customer', [('account.html', 'Sign in / register'), ('account/orders.html', 'Account: orders'), ('account/order.html', 'Account: order detail'), ('account/addresses.html', 'Account: addresses')]),
+    ('Customer', [('account.html', 'Sign in / register'), ('account/orders.html', 'Account: orders'), ('account/order.html', 'Account: order detail'), ('account/addresses.html', 'Account: addresses'), ('account/activate.html', 'Account: activate invitation')]),
     ('Standalone', [('password.html', 'Password'), ('password.html?state=error', 'Password, error'), ('gift-card.html', 'Gift card'), ('gift-card.html?state=expired', 'Gift card, expired'), ('states.html', 'All states + settings')]),
 ]
 
@@ -142,11 +142,11 @@ def footer():
     </div>
     <div class="site-footer__mid">
       <ul class="socials" aria-label="Social media">
-        <li><a href="#" aria-label="Instagram"><svg width="18" height="18" viewBox="0 0 24 24" aria-hidden="true"><rect x="3.5" y="3.5" width="17" height="17" rx="4.5" fill="none" stroke="currentColor" stroke-width="1.5"/><circle cx="12" cy="12" r="3.8" fill="none" stroke="currentColor" stroke-width="1.5"/><circle cx="17.3" cy="6.7" r="1" fill="currentColor"/></svg></a></li>
-        <li><a href="#" aria-label="Pinterest"><svg width="18" height="18" viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="12" r="8.5" fill="none" stroke="currentColor" stroke-width="1.5"/><path d="M11 8.5c3-1 5 .8 4.5 3.3-.4 2-2.4 3-3.7 1.6M11.5 10l-2 10" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/></svg></a></li>
-        <li><a href="#" aria-label="TikTok"><svg width="18" height="18" viewBox="0 0 24 24" aria-hidden="true"><path d="M14 3v11.5a3.5 3.5 0 1 1-3-3.46M14 3c.5 2.6 2.4 4.4 5 4.6" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/></svg></a></li>
+        <li><a href="https://www.instagram.com/" target="_blank" rel="noopener" aria-label="Instagram (opens in a new tab)"><svg width="18" height="18" viewBox="0 0 24 24" aria-hidden="true"><rect x="3.5" y="3.5" width="17" height="17" rx="4.5" fill="none" stroke="currentColor" stroke-width="1.5"/><circle cx="12" cy="12" r="3.8" fill="none" stroke="currentColor" stroke-width="1.5"/><circle cx="17.3" cy="6.7" r="1" fill="currentColor"/></svg></a></li>
+        <li><a href="https://www.pinterest.com/" target="_blank" rel="noopener" aria-label="Pinterest (opens in a new tab)"><svg width="18" height="18" viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="12" r="8.5" fill="none" stroke="currentColor" stroke-width="1.5"/><path d="M11 8.5c3-1 5 .8 4.5 3.3-.4 2-2.4 3-3.7 1.6M11.5 10l-2 10" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/></svg></a></li>
+        <li><a href="https://www.tiktok.com/" target="_blank" rel="noopener" aria-label="TikTok (opens in a new tab)"><svg width="18" height="18" viewBox="0 0 24 24" aria-hidden="true"><path d="M14 3v11.5a3.5 3.5 0 1 1-3-3.46M14 3c.5 2.6 2.4 4.4 5 4.6" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/></svg></a></li>
       </ul>
-      <a class="follow-shop" href="#" aria-label="Follow on Shop"><svg width="14" height="14" viewBox="0 0 24 24" aria-hidden="true"><path d="M12 21s-7-4.4-9.5-9A5.5 5.5 0 0 1 12 6a5.5 5.5 0 0 1 9.5 6C19 16.6 12 21 12 21z" fill="currentColor"/></svg>Follow on <strong>shop</strong></a>
+      <a class="follow-shop" href="https://shop.app/" target="_blank" rel="noopener" aria-label="Follow on Shop (opens in a new tab)"><svg width="14" height="14" viewBox="0 0 24 24" aria-hidden="true"><path d="M12 21s-7-4.4-9.5-9A5.5 5.5 0 0 1 12 6a5.5 5.5 0 0 1 9.5 6C19 16.6 12 21 12 21z" fill="currentColor"/></svg>Follow on <strong>shop</strong></a>
     </div>
     <div class="site-footer__bottom">
       <div class="footer__loc">{country_menu(up=True)}</div>
