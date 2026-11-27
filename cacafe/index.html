@@ -74,10 +74,9 @@
       <a href="#shop" data-filter="all">Shop all</a>
       <a href="#shop" data-filter="coffee">Coffee</a>
       <a href="#shop" data-filter="matcha">Matcha</a>
-      <a href="#shop" data-filter="weight">Weight Management</a>
       <a href="#finder">Find Your Cup</a>
       <a href="#story">Our Story</a>
-      <a href="#reviews">Reviews</a>
+      <a href="#contact">Contact</a>
     </nav>
     <div class="header__actions">
       <button class="icon-btn hide-sm" aria-label="Search"><svg><use href="#i-search"/></svg></button>
@@ -97,7 +96,7 @@
     <a href="#shop" data-filter="weight" data-close-menu>Weight Management</a>
     <a href="#finder" data-close-menu>Find Your Cup</a>
     <a href="#story" data-close-menu>Our Story</a>
-    <a href="#reviews" data-close-menu>Reviews</a>
+    <a href="#contact" data-close-menu>Contact</a>
     <div class="mnav__promo"><svg><use href="#d-truck"/></svg><p><b>Free shipping, always.</b><br>No minimum, every order.</p></div>
   </div>
 </div>
@@ -130,15 +129,6 @@
       <img src="images/logo.png" alt="" width="139" height="52">
     </div>
 
-    <div class="hero__product reveal">
-      <div class="hero__product-img"><img src="images/p-wm-coffee.webp" alt="Weight Management Coffee" width="800" height="800"></div>
-      <div class="hero__product-info">
-        <span class="hero__product-tag">Bestseller</span>
-        <b>Weight Management Coffee</b>
-        <span class="hero__product-meta">90 cal · 0g added sugar · Collagen</span>
-        <div class="hero__product-row"><span class="hero__product-price">$34.99</span><button class="btn btn--primary btn--sm" data-add="wm-coffee">Add <svg><use href="#i-plus"/></svg></button></div>
-      </div>
-    </div>
   </div>
 </section>
 
@@ -150,11 +140,11 @@
     <div class="trustbar__item"><svg><use href="#d-flag"/></svg><span><b>Made in</b> the U.S.A.</span></div>
     <div class="trustbar__item"><svg><use href="#d-leaf"/></svg><span><b>Non-GMO</b> &amp; gluten-free</span></div>
     <div class="trustbar__item"><svg><use href="#d-store"/></svg><span><b>Trusted</b> by 4 national retailers</span></div>
-    <div class="trustbar__item dup" aria-hidden="true"><svg><use href="#d-truck"/></svg><span><b>Free shipping</b> on every order</span></div>
-    <div class="trustbar__item dup" aria-hidden="true"><svg><use href="#d-heart"/></svg><span><b>30-day</b> Love-It Guarantee</span></div>
-    <div class="trustbar__item dup" aria-hidden="true"><svg><use href="#d-flag"/></svg><span><b>Made in</b> the U.S.A.</span></div>
-    <div class="trustbar__item dup" aria-hidden="true"><svg><use href="#d-leaf"/></svg><span><b>Non-GMO</b> &amp; gluten-free</span></div>
-    <div class="trustbar__item dup" aria-hidden="true"><svg><use href="#d-store"/></svg><span><b>Trusted</b> by 4 national retailers</span></div>
+    <div class="trustbar__item" aria-hidden="true"><svg><use href="#d-truck"/></svg><span><b>Free shipping</b> on every order</span></div>
+    <div class="trustbar__item" aria-hidden="true"><svg><use href="#d-heart"/></svg><span><b>30-day</b> Love-It Guarantee</span></div>
+    <div class="trustbar__item" aria-hidden="true"><svg><use href="#d-flag"/></svg><span><b>Made in</b> the U.S.A.</span></div>
+    <div class="trustbar__item" aria-hidden="true"><svg><use href="#d-leaf"/></svg><span><b>Non-GMO</b> &amp; gluten-free</span></div>
+    <div class="trustbar__item" aria-hidden="true"><svg><use href="#d-store"/></svg><span><b>Trusted</b> by 4 national retailers</span></div>
   </div>
 </div>
 
@@ -176,7 +166,7 @@
           <img src="images/matcha-bowl.webp" alt="" class="is-on" data-stage="default" width="1024" height="1024">
           <img src="images/ing-coffee.webp" alt="" data-stage="coffee" loading="lazy" width="896" height="1200">
           <img src="images/ing-matcha.webp" alt="" data-stage="matcha" loading="lazy" width="896" height="1200">
-          <img src="images/still-life.webp" alt="" data-stage="tea" loading="lazy" width="1200" height="509">
+          <img src="images/tea-cup.webp" alt="" data-stage="tea" loading="lazy" width="640" height="640">
           <img src="images/ing-coffee.webp" alt="" data-stage="focus" loading="lazy" width="896" height="1200">
           <img src="images/matcha-bowl.webp" alt="" data-stage="calm" loading="lazy" width="1024" height="1024">
           <img src="images/ing-coconut.webp" alt="" data-stage="glow" loading="lazy" width="896" height="1200">
@@ -235,6 +225,7 @@
       <div>
         <p class="kicker reveal">The collection</p>
         <h2 class="h2 reveal">Everyday blends, <em>thoughtfully made.</em></h2>
+        <p class="shop__lede reveal">Four functional blends in stock and ready to ship free. Not sure which? <a href="#finder">Take the 30-second quiz</a></p>
       </div>
       <div class="tabs reveal" role="tablist" aria-label="Filter blends">
         <button role="tab" class="tab is-active" data-tab="all">All <i data-c="all"></i></button>
@@ -248,9 +239,13 @@
     <div class="pgrid js-grid" aria-live="polite"></div>
 
     <div class="soon reveal">
-      <div class="soon__head">
-        <div><h3>Back soon</h3><p>Fresh batches are brewing. Get an email the moment yours is back.</p></div>
-        <div class="soon__nav"><button class="icon-btn icon-btn--line" data-soon="-1" aria-label="Scroll left"><svg><use href="#i-back"/></svg></button><button class="icon-btn icon-btn--line" data-soon="1" aria-label="Scroll right"><svg><use href="#i-arrow"/></svg></button></div>
+      <div class="soon__intro">
+        <span class="soon__bell"><svg><use href="#i-bell"/></svg></span>
+        <p class="kicker">Restocking</p>
+        <h3>Back <em>soon.</em></h3>
+        <p>Fresh batches of our fan favorites are brewing. Join the restock list and get first access the moment they land.</p>
+        <form class="soon__form js-soon-form"><label class="sr" for="soon-email">Email</label><input id="soon-email" type="email" placeholder="Your email" required><button class="btn btn--primary btn--sm">Alert me</button></form>
+        <div class="soon__nav"><button class="icon-btn icon-btn--line" data-soon="-1" aria-label="Scroll left"><svg><use href="#i-back"/></svg></button><button class="icon-btn icon-btn--line" data-soon="1" aria-label="Scroll right"><svg><use href="#i-arrow"/></svg></button><span class="soon__count js-soon-count"></span></div>
       </div>
       <div class="soon__track js-soon"></div>
     </div>
@@ -286,7 +281,7 @@
           <img src="images/ing-coconut.webp" alt="" data-c="coconut" loading="lazy" width="896" height="1200">
           <img src="images/ing-coffee.webp" alt="" data-c="coffee" loading="lazy" width="896" height="1200">
           <img src="images/ing-botanicals.webp" alt="" data-c="botanicals" loading="lazy" width="896" height="1200">
-          <img src="images/p-wm-matcha.webp" alt="" class="ingr__jar is-on" data-c="default" loading="lazy" width="800" height="800">
+          <img src="images/ritual-drinks.webp" alt="" class="is-on" data-c="default" loading="lazy" width="505" height="505">
         </div>
         <span class="ingr__label js-ingr-label">Hover an ingredient</span>
       </div>
@@ -317,7 +312,7 @@
     <div class="story__grid">
       <div class="story__collage reveal">
         <img src="images/fields.webp" alt="Terraced tea fields at sunrise" class="story__img story__img--a" loading="lazy" width="1200" height="509">
-        <img src="images/still-life.webp" alt="Coconut coffee on a sunlit table" class="story__img story__img--b" loading="lazy" width="1200" height="509">
+        <img src="images/story-drinks.webp" alt="Coconut latte and iced matcha on a sunlit wooden table" class="story__img story__img--b" loading="lazy" width="845" height="473">
         <div class="story__stamp">
           <svg viewBox="0 0 200 200"><defs><path id="stamp" d="M100,100 m-74,0 a74,74 0 1,1 148,0 a74,74 0 1,1 -148,0"/></defs><text><textPath href="#stamp">FAMILY-FOUNDED · SOUTHERN CALIFORNIA · </textPath></text></svg>
           <b><small>Since</small>2012</b>
@@ -349,45 +344,23 @@
         <p class="kicker reveal">Reviews</p>
         <h2 class="h2 reveal">Small ritual. <em>Big difference.</em></h2>
       </div>
-      <div class="rchips reveal" role="tablist" aria-label="Filter reviews">
-        <button class="rchip is-active" data-r="all">All</button>
-        <button class="rchip" data-r="coffee">Coffee</button>
-        <button class="rchip" data-r="matcha">Matcha</button>
-        <button class="rchip" data-r="weight">Weight Mgmt</button>
+      <div class="rsum reveal">
+        <b>4.8</b>
+        <div><span class="stars"><svg><use href="#i-star"/></svg><svg><use href="#i-star"/></svg><svg><use href="#i-star"/></svg><svg><use href="#i-star"/></svg><svg><use href="#i-star"/></svg></span><small>289 verified reviews</small></div>
+        <span class="rsum__bar" aria-label="90% five-star"><i style="width:90%"></i></span>
+        <small class="rsum__note">90% five-star</small>
       </div>
     </div>
 
-    <div class="rv">
-      <aside class="rv__summary reveal">
-        <div class="rv__score"><b>4.8</b><div><div class="stars"><svg><use href="#i-star"/></svg><svg><use href="#i-star"/></svg><svg><use href="#i-star"/></svg><svg><use href="#i-star"/></svg><svg><use href="#i-star"/></svg></div><small>from verified buyers</small></div></div>
-        <ul class="rv__bars">
-          <li><span>5★</span><i><b style="--w:86%"></b></i><em>86%</em></li>
-          <li><span>4★</span><i><b style="--w:9%"></b></i><em>9%</em></li>
-          <li><span>3★</span><i><b style="--w:3%"></b></i><em>3%</em></li>
-          <li><span>2★</span><i><b style="--w:1%"></b></i><em>1%</em></li>
-          <li><span>1★</span><i><b style="--w:1%"></b></i><em>1%</em></li>
-        </ul>
-        <ul class="rv__tags">
-          <li><b>94%</b> say it dissolves perfectly</li>
-          <li><b>91%</b> would buy again</li>
-        </ul>
-        <a href="#shop" class="btn btn--primary btn--block">Shop the favorites <svg><use href="#i-arrow"/></svg></a>
-      </aside>
+    <div class="rtrack js-rtrack reveal" tabindex="0" aria-label="Customer reviews"></div>
 
-      <div class="rv__main">
-        <figure class="rv__feature reveal">
-          <svg class="rv__q"><use href="#i-quote"/></svg>
-          <blockquote>I swapped my drive-thru latte for the Weight Management Coffee with iced oat milk. Creamy, not too sweet, and no 11am crash. It's the easiest healthy habit I've kept.</blockquote>
-          <figcaption>
-            <span class="rv__avatar" style="background:#c9a77c">J</span>
-            <span class="rv__who"><b>Jessica R.</b><small><svg><use href="#i-check"/></svg> Verified buyer · Weight Management Coffee</small></span>
-            <img src="images/p-wm-coffee.webp" alt="" width="800" height="800">
-          </figcaption>
-        </figure>
-        <div class="rv__grid js-reviews"></div>
-        <button class="btn btn--ghost js-more-reviews">Show more reviews</button>
-      </div>
+    <div class="rctrl reveal">
+      <div class="rctrl__progress"><span class="js-rprog"></span></div>
+      <span class="rctrl__count js-rcount"></span>
+      <div class="rctrl__btns"><button class="icon-btn icon-btn--line" data-rv="-1" aria-label="Previous reviews"><svg><use href="#i-back"/></svg></button><button class="icon-btn icon-btn--dark" data-rv="1" aria-label="Next reviews"><svg><use href="#i-arrow"/></svg></button></div>
     </div>
+
+    <ul class="rprods reveal js-rprods"></ul>
   </div>
 </section>
 
@@ -459,7 +432,7 @@
       <nav class="footer__col" aria-label="Shop"><h4>Shop</h4><a href="#shop" data-filter="coffee">Coffee</a><a href="#shop" data-filter="matcha">Matcha</a><a href="#shop" data-filter="tea">Tea</a><a href="#shop" data-filter="weight">Weight Management</a><a href="#shop" data-filter="all">All blends</a></nav>
       <nav class="footer__col" aria-label="Discover"><h4>Discover</h4><a href="#finder">Find your cup</a><a href="#story">Our story</a><a href="#ingredients">Ingredients</a><a href="#reviews">Reviews</a><a href="#faq">FAQ</a></nav>
       <nav class="footer__col" aria-label="Help"><h4>Help</h4><a href="#faq">Shipping</a><a href="#faq">Returns &amp; guarantee</a><a href="#faq">Track an order</a><a href="#faq">Privacy policy</a><a href="#faq">Terms of service</a></nav>
-      <div class="footer__col footer__contact">
+      <div class="footer__col footer__contact" id="contact">
         <h4>Get in touch</h4>
         <a href="mailto:contact@cacafe.com"><svg><use href="#i-mail"/></svg> contact@cacafe.com</a>
         <span><svg><use href="#i-clock"/></svg> Mon–Fri, 9am–5pm PST</span>
@@ -532,6 +505,17 @@
     <div class="cart__assure"><span><svg><use href="#d-heart"/></svg> 30-day Love-It Guarantee</span><span><svg><use href="#d-truck"/></svg> Ships free</span></div>
   </footer>
 </aside>
+
+<div class="qv" id="qv" aria-hidden="true" role="dialog" aria-labelledby="qv-title">
+  <div class="qv__card">
+    <button class="icon-btn qv__x" data-close-qv aria-label="Close quick view"><svg><use href="#i-close"/></svg></button>
+    <div class="qv__gallery">
+      <div class="qv__main js-qv-main"></div>
+      <div class="qv__thumbs js-qv-thumbs"></div>
+    </div>
+    <div class="qv__info js-qv-info"></div>
+  </div>
+</div>
 
 <div class="modal" id="notify" aria-hidden="true" role="dialog" aria-labelledby="notify-title">
   <div class="modal__card">
