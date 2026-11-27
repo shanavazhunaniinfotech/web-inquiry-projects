@@ -22,24 +22,34 @@ def home():
   </div>
   <div class="container hero__content">
     <div class="hero__copy">
-      <p class="eyebrow"><span class="dot"></span> <span data-hero-eyebrow>{SLIDES[0]['eyebrow']}</span></p>
       <div class="hero__slides-text">
         <div class="hero__text is-active" data-slide-text="0">
+          <p class="eyebrow"><span class="dot"></span> {SLIDES[0]['eyebrow']}</p>
           <h1 class="display">Gold that <em>moves</em><br>with you.</h1>
           <p class="lead">Chains, pendants and hoops in recycled 14k gold, made to be layered and worn every single day.</p>
+          <div class="hero__ctas">
+            <a class="btn btn--primary" href="{SLIDES[0]['href']}">{SLIDES[0]['cta']}</a>
+            <a class="btn btn--ghost" href="#bundle">Build a stack</a>
+          </div>
         </div>
-        <div class="hero__text" data-slide-text="1" aria-hidden="true">
+        <div class="hero__text" data-slide-text="1" aria-hidden="true" inert>
+          <p class="eyebrow"><span class="dot"></span> {SLIDES[1]['eyebrow']}</p>
           <p class="display" role="heading" aria-level="2">Pearls, <em>quietly</em><br>modern.</p>
           <p class="lead">Baroque freshwater pearls on fine gold chains. No two are the same, so yours is one of a kind.</p>
+          <div class="hero__ctas">
+            <a class="btn btn--primary" href="{SLIDES[1]['href']}">{SLIDES[1]['cta']}</a>
+            <a class="btn btn--ghost" href="#bundle">Build a stack</a>
+          </div>
         </div>
-        <div class="hero__text" data-slide-text="2" aria-hidden="true">
+        <div class="hero__text" data-slide-text="2" aria-hidden="true" inert>
+          <p class="eyebrow"><span class="dot"></span> {SLIDES[2]['eyebrow']}</p>
           <p class="display" role="heading" aria-level="2">Rings for <em>every</em><br>chapter.</p>
           <p class="lead">Solitaires, stacking bands and wedding rings, with free engraving and resizing within 60 days.</p>
+          <div class="hero__ctas">
+            <a class="btn btn--primary" href="{SLIDES[2]['href']}">{SLIDES[2]['cta']}</a>
+            <a class="btn btn--ghost" href="#bundle">Build a stack</a>
+          </div>
         </div>
-      </div>
-      <div class="hero__ctas">
-        <a class="btn btn--primary" href="{SLIDES[0]['href']}" data-hero-cta>{SLIDES[0]['cta']}</a>
-        <a class="btn btn--ghost" href="#bundle">Build a stack</a>
       </div>
     </div>
     <div class="hero__chip" data-hero-chip>

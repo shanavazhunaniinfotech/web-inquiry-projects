@@ -601,13 +601,11 @@
       hero.setAttribute('data-slide', si);
       var num = $('[data-hero-num]', hero); if (num) num.textContent = '0' + (si + 1);
       slideImgs.forEach(function (im, i) { im.classList.toggle('is-active', i === si); });
-      slideTexts.forEach(function (t, i) { t.classList.toggle('is-active', i === si); t.setAttribute('aria-hidden', String(i !== si)); });
+      slideTexts.forEach(function (t, i) { t.classList.toggle('is-active', i === si); t.setAttribute('aria-hidden', String(i !== si)); t.inert = i !== si; });
       dots.forEach(function (d, i) { d.classList.remove('is-active'); void d.offsetWidth; d.classList.toggle('is-active', i === si); d.setAttribute('aria-selected', String(i === si)); });
       var m = slideMeta[si];
       if (m) {
         var p = byId(m.id);
-        $('[data-hero-eyebrow]', hero).textContent = m.eyebrow;
-        var cta = $('[data-hero-cta]', hero); cta.textContent = m.cta; cta.href = m.href;
         $('[data-chip-img]', hero).src = primaryImg(p, 160, 160);
         $('[data-chip-name]', hero).textContent = p.title;
         var cp = $('[data-chip-price]', hero); cp.setAttribute('data-money', p.price); cp.textContent = money(p.price);

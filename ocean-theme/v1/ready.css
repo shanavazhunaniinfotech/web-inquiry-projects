@@ -384,3 +384,17 @@ html.is-giftcard-page .pg:empty { min-height: 0; aspect-ratio: 1 / 1.05; }
   .header .logo__word { font-size: 16px; letter-spacing: .1em; }
   .header .cart-pill { padding: 0 4px 0 8px; gap: 4px; }
 }
+
+/* banner: text block centred vertically; each slide's block centred in the shared stack, so shorter slides leave no gap */
+.hero.hero--v2 { justify-content: center; }
+.hero--v2 .hero__text { align-self: center; }
+.hero--v2 .hero__text .eyebrow { margin-bottom: 18px; }
+.hero--v2 .hero__text:not(.is-active) .hero__ctas, .hero--v2 .hero__text:not(.is-active) .eyebrow { opacity: 0; }
+@media (min-width: 1200px) { .hero--v2 .hero__copy { max-width: 1000px; } }
+/* banner fills the first screen below the header on tablet and desktop, with even top and bottom padding */
+@media (min-width: 750px) {
+  .hero.hero--v2 { min-height: calc(100svh - 112px); padding-top: 48px !important; padding-bottom: 48px; }
+}
+@media (min-width: 750px) and (max-width: 1199px) {
+  .hero.hero--v2 { min-height: calc(100svh - 130px); }
+}
