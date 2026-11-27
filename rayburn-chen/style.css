@@ -524,24 +524,6 @@ svg{fill:none;stroke:currentColor;stroke-width:1.6;stroke-linecap:round;stroke-l
 }
 
 
-/* what's inside the jars */
-.jars{padding-top:clamp(28px,4vw,48px)}
-.jars__grid{display:grid;grid-template-columns:repeat(4,1fr);gap:20px}
-.jar{border:1px solid var(--line);border-radius:var(--r);overflow:hidden;background:#fff}
-.jar img{width:100%;aspect-ratio:1;object-fit:cover}
-.jar__body{padding:14px 16px 18px}
-.jar__name{font-weight:800;font-size:12px;letter-spacing:.14em;text-transform:uppercase;margin-bottom:8px}
-.jar__list{font-size:13px;color:var(--ink-2);line-height:1.6}
-/* ingredient links + full list */
-.ing-links{display:flex;justify-content:center;gap:24px;margin-top:22px;flex-wrap:wrap}
-.ing-links__a{font-weight:700;font-size:14px;color:var(--l700);text-decoration:underline;text-underline-offset:3px}
-.full-ing{max-width:1080px;margin:22px auto 0;background:var(--l50);border-radius:var(--r);padding:20px}
-.full-ing__h{font-weight:800;font-size:12px;letter-spacing:.16em;text-transform:uppercase;text-align:center}
-.full-ing__legend{display:flex;justify-content:center;gap:18px;margin:10px 0 18px;font-size:12px;font-weight:700;letter-spacing:.1em;text-transform:uppercase}
-.full-ing__legend span{display:flex;align-items:center;gap:6px}
-.full-ing__grid{display:grid;grid-template-columns:repeat(4,1fr);gap:18px}
-.full-ing__grid h3{font-weight:800;font-size:12px;letter-spacing:.12em;text-transform:uppercase;margin-bottom:8px}
-.full-ing__grid li{display:flex;align-items:center;gap:7px;font-size:13px;padding:3px 0}
 /* faqs */
 .faqs{padding-top:clamp(24px,3vw,40px)}
 .faqs__list{margin-top:0}
@@ -549,11 +531,18 @@ svg{fill:none;stroke:currentColor;stroke-width:1.6;stroke-linecap:round;stroke-l
 .btn-shopall{margin-top:22px;border:1.5px solid var(--ink);border-radius:var(--r-sm);padding:14px 30px;font-weight:800;font-size:13px;letter-spacing:.14em;text-transform:uppercase}
 .btn-shopall:hover{background:var(--ink);color:#fff}
 .guar{padding-top:clamp(20px,3vw,32px)}
-@media (max-width:1000px){.jars__grid,.full-ing__grid{grid-template-columns:1fr 1fr}}
 @media (max-width:640px){
-  .jars__grid{grid-template-columns:1fr;gap:14px}
-  .jar{display:grid;grid-template-columns:110px 1fr}
-  .jar img{height:100%}
-  .full-ing__grid{grid-template-columns:1fr}
-  .full-ing{padding:16px}
 }
+
+/* ingredients popup: Froya "Key Ingredients" format */
+.modal__box--ing{max-width:760px}
+.key-ing{display:grid;grid-template-columns:repeat(3,1fr);gap:10px;padding:6px 0 18px}
+.key-ing__card{background:var(--l50);border-radius:var(--r-sm);padding:14px;text-align:center;display:flex;flex-direction:column;align-items:center;gap:4px}
+.key-ing__ic{width:52px;height:52px;margin-bottom:4px}
+.key-ing__ic svg{width:100%;height:100%;stroke:none}
+.key-ing__name{font:italic 400 17px/1.2 var(--serif);color:var(--l800)}
+.key-ing__label{font-size:10px;font-weight:800;letter-spacing:.12em;text-transform:uppercase;color:var(--ink-2)}
+.key-ing__desc{font-size:12px;color:var(--muted);line-height:1.45;margin-top:2px}
+.modal__sub{font:400 20px/1.2 var(--serif);padding:14px 0 10px;border-top:1px solid var(--line)}
+.ing-legend__h{font-weight:800;letter-spacing:.1em;text-transform:uppercase;font-size:11px}
+@media (max-width:640px){.key-ing{grid-template-columns:1fr 1fr}.modal__box--ing{padding:0 16px 18px}}

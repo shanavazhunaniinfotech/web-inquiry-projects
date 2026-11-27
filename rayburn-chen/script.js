@@ -37,7 +37,7 @@
     $$('.js-price').forEach(function (el) { el.textContent = money(p); });
     $$('.js-atc-price').forEach(function (el) { el.textContent = money(p); });
     $('.js-saving').textContent = money(save);
-    $('.js-inst').textContent = money(p / 4);
+    $('.js-inst').textContent = money(Math.round(p / 12 * 1.1 * 100) / 100);
     $('.js-save-badge').textContent = 'Save ' + Math.round(save / PRICE.compare * 100) + '%';
     $('.js-sub-box').classList.toggle('is-on', subOn);
   }
@@ -78,17 +78,6 @@
   }
   showJar(0);
 
-  /* what's inside the jars + full ingredient list (Froya format) */
-  $('.js-jars').innerHTML = JARS.map(function (x) {
-    return '<article class="jar reveal"><img src="' + x.img + '" alt="' + x.n + '" loading="lazy" width="400" height="400"><div class="jar__body"><h3 class="jar__name">' + x.n + '</h3><p class="jar__list">' + x.list.map(function (i) { return i[0]; }).join('<br>') + '</p></div></article>';
-  }).join('');
-  $('.js-full-ing').innerHTML = JARS.map(function (x) {
-    return '<div><h3>' + x.n + '</h3><ul>' + x.list.map(function (i) { return '<li><i class="lv lv--' + i[1] + '"></i>' + i[0] + '</li>'; }).join('') + '</ul></div>';
-  }).join('');
-  (function () {
-    var b = $('.js-full-toggle'), box = $('#full-ing');
-    b.addEventListener('click', function () { var open = box.hidden; box.hidden = !open; b.setAttribute('aria-expanded', open); b.textContent = open ? 'Hide the full ingredients list' : 'View the full ingredients list'; });
-  })();
 
   /* ---------- video showcase (lazy) ---------- */
   var VIDEOS = { 1: U('photo-1508214751196-bcfd4ca60f91', 720, 1280), 2: U('photo-1592621385612-4d7129426394', 720, 1280), 3: U('photo-1619451334792-150fd785ee74', 720, 1280) };
@@ -168,6 +157,9 @@
     ['flower', 'Brightens the look of dark circles', 'Vitamin C & Caffeine', 'Depuff and brighten the delicate under-eye area for a more rested look.'],
     ['drop', 'Natural glow', 'Niacinamide & Sea Buckthorn', 'Evens skin tone and restores radiance. Sea buckthorn is one of nature’s richest sources of vitamin C.']
   ];
+  $('.js-key-ing').innerHTML = ING.map(function (x) {
+    return '<div class="key-ing__card"><span class="key-ing__ic">' + BOT[x[0]] + '</span><p class="key-ing__name">' + x[2] + '</p><p class="key-ing__label">' + x[1] + '</p><p class="key-ing__desc">' + x[3] + '</p></div>';
+  }).join('');
   $('.js-ing-list').innerHTML = ING.map(function (x) {
     return '<div class="ing-row reveal"><div class="ing-row__top"><span class="ing-row__ic">' + BOT[x[0]] + '</span><div><p class="ing-row__label">' + x[1] + '</p><p class="ing-row__name">' + x[2] + '</p></div></div><p>' + x[3] + '</p></div>';
   }).join('');

@@ -122,7 +122,7 @@
     <p class="saving">🎉 Congrats! You're saving <b class="js-saving">$100</b></p>
     <!-- 11. ATC -->
     <button class="btn-atc js-atc" id="atc">Add to cart - <span class="js-atc-price">$100</span></button>
-    <p class="shoppay"><span class="shoppay__tag">Pay later</span> 4 interest-free payments of <b class="js-inst">$25.00</b> with <span class="shoppay__logo">shop</span></p>
+    <p class="shoppay"><span class="shoppay__tag">Pay later</span> 4 payments, or from <b class="js-inst">$9.17</b>/mo with <span class="shoppay__logo">shop</span></p>
     <!-- 12. Trust icons -->
     <div class="trust2">
       <div><svg><use href="#i-refresh"/></svg><span>Better skin in 60 days<br>money-back guarantee</span></div>
@@ -233,25 +233,11 @@
   </div>
 </section>
 
-<!-- 21b. WHAT'S INSIDE THE JARS (Froya order: after timeline) -->
-<section class="jars section" id="inside">
-  <div class="wrap">
-    <h2 class="h2 center reveal">What's inside the jars?</h2>
-    <div class="jars__grid js-jars"></div>
-  </div>
-</section>
-
 <!-- 22. INGREDIENTS -->
 <section class="ingredients section" id="ingredients">
   <div class="wrap">
     <h2 class="h2 center reveal">How do the ingredients work?</h2>
     <div class="ing-list js-ing-list"></div>
-    <div class="ing-links reveal"><button type="button" class="ing-links__a" data-toast="In the live store this links to the brand's verified studies page.">Read studies</button><button type="button" class="ing-links__a js-full-toggle" aria-expanded="false" aria-controls="full-ing">View the full ingredients list</button></div>
-    <div class="full-ing" id="full-ing" hidden>
-      <p class="full-ing__h">Ingredient levels</p>
-      <div class="full-ing__legend"><span><i class="lv lv--c"></i>Clinical</span><span><i class="lv lv--n"></i>Natural</span><span><i class="lv lv--o"></i>Organic</span></div>
-      <div class="full-ing__grid js-full-ing"></div>
-    </div>
   </div>
 </section>
 
@@ -412,13 +398,15 @@
   </div>
 </div>
 
-<!-- Ingredients modal -->
+<!-- Ingredients modal (Froya format: "Key Ingredients, Mixed to Work Together") -->
 <div class="modal" id="ing-modal" aria-hidden="true">
   <div class="modal__box modal__box--ing" role="dialog" aria-modal="true" aria-labelledby="ing-title">
-    <div class="modal__head"><h2 id="ing-title">What's inside the jars?</h2><button class="icon-btn" data-close aria-label="Close"><svg viewBox="0 0 24 24"><path d="M6 6l12 12M18 6 6 18"/></svg></button></div>
+    <div class="modal__head"><h2 id="ing-title">Key Ingredients, Mixed to Work Together</h2><button class="icon-btn" data-close aria-label="Close"><svg viewBox="0 0 24 24"><path d="M6 6l12 12M18 6 6 18"/></svg></button></div>
+    <div class="key-ing js-key-ing"></div>
+    <h3 class="modal__sub">Full ingredient list</h3>
     <div class="ing-tabs js-ing-tabs" role="tablist"></div>
     <div class="ing-panel js-ing-panel"></div>
-    <div class="ing-legend"><span><i class="lv lv--c"></i>Clinical active</span><span><i class="lv lv--n"></i>Natural</span><span><i class="lv lv--o"></i>Certified organic</span></div>
+    <div class="ing-legend"><span class="ing-legend__h">Ingredient levels:</span><span><i class="lv lv--c"></i>Clinical</span><span><i class="lv lv--n"></i>Natural</span><span><i class="lv lv--o"></i>Organic</span></div>
     <p class="ing-free">0 synthetic fragrance · 0 parabens · 0 sulfates · 100% vegan · dermatologist tested</p>
   </div>
 </div>
