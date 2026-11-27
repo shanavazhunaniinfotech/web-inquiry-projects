@@ -64,6 +64,7 @@
     const pick0 = items.find(x => x.a && (/^1"$/.test(x.s) || x.s === '0.185' || x.s === '2.00–2.50"')) || items.find(x => x.a) || items[0];
     if (pick0) { st.h = pick0.h; st.v = (pick0.v || [])[0] || ''; }
     const imgs0 = p.soon ? [] : (fi.imgs || [p.img]);
+    if (pick0 && /^(spline|flat)$/.test(p.fam)) { const gi = imgs0.indexOf(imgFor(pick0)); if (gi > -1) st.img = gi; }
     if (pick0 && p.fam === 'netting' && netInfo(pick0.s)) { const gi = imgs0.indexOf(FPS.NETIMG[netInfo(pick0.s)[2]]); if (gi > -1) st.img = gi; }
     const desc = (m && m.d) || fi.d || `${p.n} for ${C.n.toLowerCase()} work. Tell us the size and quantity you need and we'll send availability and pricing — usually within one business day.`;
     const imgs = p.soon ? [] : (fi.imgs || [p.img]);
@@ -75,7 +76,7 @@
     function render() {
       const x = sel();
       const gal = p.soon ? `<div class="gal"><div class="gal__m gal__m--ill">${ILL[p.ill]}</div></div>`
-        : `<div class="gal"><div class="gal__m${/^(p|app)-/.test(imgs[st.img] || imgs[0]) ? ' gal__m--ph' : ''}"><img src="${im(imgs[st.img] || imgs[0])}" alt="${esc(p.n)}"></div>${imgs.length > 1 ? `<div class="gal__t">${imgs.map((g, i) => `<button class="${i === st.img ? 'is-on' : ''}${/^(p|app)-/.test(g) ? ' ph' : ''}" data-g="${i}" aria-label="Image ${i + 1}"><img src="${im(g)}" alt=""></button>`).join('')}</div>` : ''}</div>`;
+        : `<div class="gal"><div class="gal__m${/^(p|app|n)-/.test(imgs[st.img] || imgs[0]) ? ' gal__m--ph' : ''}"><img src="${im(imgs[st.img] || imgs[0])}" alt="${esc(p.n)}"></div>${imgs.length > 1 ? `<div class="gal__t">${imgs.map((g, i) => `<button class="${i === st.img ? 'is-on' : ''}${/^(p|app|n)-/.test(g) ? ' ph' : ''}" data-g="${i}" aria-label="Image ${i + 1}"><img src="${im(g)}" alt=""></button>`).join('')}</div>` : ''}</div>`;
       let buy;
       if (p.soon || !x) {
         buy = `<div class="req"><b>Request this product</b><p>Tell us the size and quantity — we'll reply with availability and pricing.</p>
@@ -112,7 +113,7 @@
     }
     $('#pg').addEventListener('click', e => {
       const g = e.target.closest('[data-g]'); if (g) { st.img = +g.dataset.g; render(); return; }
-      const k = e.target.closest('.pd [data-k]'); if (k) { const x = sel(), n = items.find(i => i.s === x.s && i.k === k.dataset.k); if (n) { st.h = n.h; render(); } return; }
+      const k = e.target.closest('.pd [data-k]'); if (k) { const x = sel(), n = items.find(i => i.s === x.s && i.k === k.dataset.k); if (n) { st.h = n.h; const gi = imgs.indexOf(imgFor(n)); if (gi > -1) st.img = gi; render(); } return; }
       const v = e.target.closest('.pd [data-v]'); if (v) { st.v = v.dataset.v; render(); return; }
       const s = e.target.closest('.pd [data-st]'); if (s) { st.q = Math.max(1, st.q + +s.dataset.st); render(); }
     });

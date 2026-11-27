@@ -36,6 +36,11 @@
     if (p.f === 'netting' && !p.s) { const m = p.t.match(/(\d?\.\d+)\D{0,4}to\s*(\d?\.\d+)/i); if (m) p.s = (m[1].startsWith('.') ? '0' + m[1] : m[1]) + '–' + m[2] + '"'; else if (/450/.test(p.t)) p.s = '4.50–5.00"'; }
     return p;
   });
+  const RENAME = {
+    '96-inch-adjustable-bug-seal-press-fit-door-seal': '0.340" Adjustable Press Fit-In Bug Seal for Sliding Screen Doors – 8 ft length',
+    '96-inch-adjustable-vinyl-bug-strip-black-screen-door-seal': '0.440" Adjustable Black Vinyl Bug Seal for Screen Doors – 8 ft length'
+  };
+  CAT.forEach(p => { if (RENAME[p.h]) p.t = RENAME[p.h]; });
   const BY = Object.fromEntries(CAT.map(p => [p.h, p]));
   const num = s => { if (!s) return 999; const m = String(s).match(/\d+\/\d+|\d*\.?\d+/); return m ? frac(m[0]) : 999; };
   const short = p => p.t.replace(/\s*[|–-]\s*(Flexible Polyethylene.*|Durable.*|Easy.*)$/i, '').replace(/\s+/g, ' ');
@@ -43,8 +48,9 @@
   const singles = f => CAT.filter(p => p.f === f && p.s && (TAPE_F.includes(f) ? p.k === 'Single roll' : p.k !== 'Case'));
   const famAll = f => CAT.filter(p => p.f === f);
   const minP = list => list.length ? Math.min(...list.map(p => p.p)) : 0;
+  const NETIMG = { Orange: 'n-netting-orange', Blue: 'cut-netting-blue', Yellow: 'cut-netting-yellow', Green: 'n-netting-green', White: 'n-netting-white', Red: 'cut-netting-red', Black: 'n-netting-black', Gray: 'cut-netting-gray', Brown: 'cut-netting-brown' };
   const imgFor = p => {
-    if (p.f === 'netting') { const t = p.t.toLowerCase(); for (const c of ['red', 'orange', 'blue', 'yellow', 'gray', 'brown']) if (t.includes(c)) return 'cut-netting-' + c; const s = num(p.s); return 'cut-netting-' + (s < 1 ? 'blue' : s < 2.5 ? 'yellow' : s < 3.5 ? 'red' : s < 4.5 ? 'gray' : 'orange'); }
+    if (p.f === 'netting') { const t = p.t.toLowerCase(); for (const c of ['red', 'orange', 'blue', 'yellow', 'gray', 'brown', 'green', 'white', 'black']) if (t.includes(c)) return NETIMG[c[0].toUpperCase() + c.slice(1)]; const s = num(p.s); const ni = NET.find(r => Math.abs(r[0] - s) < .01); return ni ? NETIMG[ni[2]] : 'cut-netting-red'; }
     if (p.f === 'spline') return p.k === '15 lb roll' ? 'cut-spline-15lb' : p.k === '100ft' ? 'cut-spline-coil' : 'cut-round-spline';
     if (p.f === 'flat') return p.k === '1000ft' || p.k === '500ft' ? 'cut-flat-1000' : 'cut-flat-spline';
     return ({ pet: 'cut-green-tape', dots: 'cut-green-dots', glass: 'cut-glass-cloth', paper: 'cut-paper-tape', spiral: 'cut-spiral-wrap', smooth: 'cut-smooth-spline', tool: 'cut-roller-tool', bugseal: 'cut-bug-seal', clips: 'cut-screen-clips', spring: 'cut-tender-spring' })[p.f];
@@ -105,13 +111,13 @@
   /* Poly netting roll chart (client sheet): stretch range start -> [part no., colour, feet per roll] */
   const NET = [[0.25, 'Poly32', 'Orange', 1500], [0.5, 'Poly50', 'Blue', 1500], [1, 'Poly100', 'Yellow', 1000], [2, 'Poly200', 'Green', 750], [2.5, 'Poly250', 'White', 500], [3, 'Poly300', 'Red', 600], [3.5, 'Poly350', 'Black', 450], [4, 'Poly400', 'Gray', 400], [4.5, 'Poly450', 'Brown', 300], [5, 'Poly500', 'Orange', 350]];
   const PN = {
-    pet: { '0.5"': 'FGPT50072', '1"': 'FGPT100072', '2"': 'FGPT200072', '3"': 'FGPT300072', '5"': 'FGPT500072', '6"': 'FGPT600072' },
+    pet: { '0.5"': 'FGPT50072', '1"': 'FGPT100072', '2"': 'FGPT200072', '3"': 'FGPT300072', '4"': 'FGPT400072', '5"': 'FGPT500072', '6"': 'FGPT600072' },
     glass: { '1"': 'FGCT100032', '1.5"': 'FGCT150032', '2"': 'FGCT200032', '3"': 'FGCT300032', '4"': 'FGCT400032', '5"': 'FGCT500032', '6"': 'FGCT600032' },
     paper: { '0.5"': 'FPTLP50054', '1"': 'FPTLP100054', '1.5"': 'FPTLP150054', '2"': 'FPTLP200054', '3"': 'FPTLP300054' },
     dots: { '1"': 'FGD10005K', '1.5"': 'FGD15002K', '2"': 'FGD20001K', '3"': 'FGD30005H', '4"': 'FGD4000250H', '5"': 'FGD5000100H', '6"': 'FGD6000100H' }
   };
   const partNo = (fam, s) => fam === 'netting' ? ((netInfo(s) || [])[1] || '') : ((PN[fam] || {})[s] || '');
-  const NETIMG = { Orange: 'cut-netting-orange', Blue: 'cut-netting-blue', Yellow: 'cut-netting-yellow', Green: 'app-green-netting', White: 'app-white-netting', Red: 'cut-netting-red', Black: 'cut-black-spool', Gray: 'cut-netting-gray', Brown: 'cut-netting-brown' };
+  
   const netInfo = s => NET.find(r => Math.abs(r[0] - num(s)) < .01);
   const ftLen = ft => UNIT === 'mm' ? Math.round(ft * 0.3048) + ' m' : ft.toLocaleString() + ' ft';
   const tapeItems = m => m.soon ? [] : singles(m.fam).sort((a, b) => num(a.s) - num(b.s));
@@ -165,7 +171,7 @@
       d: 'Pre-cut green polyester discs with silicone adhesive. They keep powder coat, Cerakote and paint off holes, nuts, mating surfaces and grounding points — no trimming needed.',
       spec: [['Material', 'High-temperature polyester film, silicone adhesive'], ['Colour', 'Green'], ['Temperature', 'Up to 392°F (200°C)+ bake cycles'], ['Dots per roll', '1" × 5,000 · 1.5" × 2,000 · 2" × 1,000 · 3" × 500 · 4" × 250 · 5" & 6" × 100'], ['Sold as', 'Single roll']],
       uses: ['Holes & studs', 'Nuts & threads', 'Grounding points', 'Mating surfaces'] },
-    netting: { n: 'PE Protective Netting', line: 'protect', imgs: ['cut-netting-red', 'cut-netting-orange', 'cut-netting-blue', 'cut-netting-yellow', 'cut-netting-gray', 'cut-netting-brown', 'cut-black-spool', 'app-valve-netting', 'app-pump-netting', 'app-white-netting', 'app-red-netting', 'app-green-netting'], lbl: 'Stretch range',
+    netting: { n: 'PE Protective Netting', line: 'protect', imgs: ['n-netting-green', 'n-netting-orange', 'cut-netting-blue', 'cut-netting-yellow', 'n-netting-white', 'cut-netting-red', 'n-netting-black', 'cut-netting-gray', 'cut-netting-brown', 'app-green-netting', 'app-valve-netting', 'app-pump-netting', 'app-white-netting', 'app-red-netting'], lbl: 'Stretch range',
       d: 'Expandable polyethylene mesh that slides over parts to stop scratches, scuffs and metal-on-metal contact. Open mesh keeps parts visible and lets air through. Colour-coded by size, sold by the full roll.',
       spec: [['Material', 'Polyethylene (PE)'], ['Type', 'Expandable open-mesh sleeve'], ['Sizes', '10 stretch ranges, 0.25" to 5.50"'], ['Roll length', '300 – 1,500 ft by size'], ['Reusable', 'Yes']],
       uses: ['Machined parts', 'Threaded components', 'Shafts & fasteners', 'Tooling', 'Warehouse & packing lines'] },
@@ -184,7 +190,7 @@
     smooth: { n: 'Smooth Screen Spline', line: 'screen', imgs: ['cut-smooth-spline'], lbl: 'Diameter',
       d: 'Smooth gray vinyl spline for frames that call for a non-serrated profile.', spec: [['Material', 'Vinyl'], ['Colour', 'Gray'], ['Sizes', '.090", .110"'], ['Length', '100 ft']], uses: ['Window screens', 'Door screens'] },
     tool: { n: 'Screen Roller Tool', line: 'screen', imgs: ['cut-roller-tool', 'app-installer'], d: 'Convex and concave steel-bearing wheels on a hardwood handle — the one tool every screen job needs.', spec: [['Wheels', 'Steel, convex & concave'], ['Handle', 'Hardwood']], uses: ['Screen installs', 'Screen repair'] },
-    bugseal: { n: 'Bug Seal', line: 'screen', imgs: ['cut-bug-seal', 'cut-bug-seal-2'], d: 'Adjustable 8 ft vinyl seals for sliding screen doors. Trim to fit and press in.', spec: [['Length', '8 ft'], ['Material', 'Vinyl']], uses: ['Sliding screen doors'] },
+    bugseal: { n: 'Bug Seal', line: 'screen', imgs: ['cut-bug-seal', 'cut-bug-seal-2'], d: 'Adjustable vinyl bug seals for screen doors, 8 ft long. Choose 0.340" press fit-in for sliding screen doors, or 0.440" black vinyl. Trim to fit and press in.', spec: [['Sizes', '0.340" press fit-in · 0.440" black vinyl'], ['Length', '8 ft'], ['Material', 'Vinyl']], uses: ['Sliding screen doors'] },
     clips: { n: 'Window Screen Clips', line: 'screen', imgs: ['cut-screen-clips'], d: '7/16" diecast zinc clips that hold screen frames securely in the window. 100 per pack.', spec: [['Size', '7/16"'], ['Material', 'Diecast zinc'], ['Pack', '100 clips']], uses: ['Window screens'] },
     spring: { n: 'Heavy-Duty Tender Spring Kit', line: 'auto', imgs: ['cut-tender-spring'], d: '25" heavy-duty tracker tender spring kit for semi-trucks and trailers.', spec: [['Length', '25"'], ['Use', 'Semi-truck & trailer']], uses: ['Trucks', 'Trailers'] }
   };
