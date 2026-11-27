@@ -10,7 +10,7 @@ product_crumbs = '<div class="container"><nav class="crumbs" aria-label="Breadcr
 prod = T.product()
 prod = product_crumbs + prod[prod.index('</div>') + 6:]
 
-states = T.states().replace('<ul class="product-grid st-grid st-grid--2"><li data-st-loading-wrap style="display:contents"></li></ul>', '<ul class="product-grid st-grid st-grid--2" data-st-loading aria-busy="true"></ul>')
+states = T.states()
 
 QR = '\n  <script src="https://cdnjs.cloudflare.com/ajax/libs/qrcodejs/1.0.0/qrcode.min.js" defer></script>'
 
@@ -29,22 +29,27 @@ PAGES = {
     'password.html': standalone('Opening soon | Ocean Fine Jewellery', D, 'password', T.password()),
     'gift-card.html': standalone('Your gift card | Ocean Fine Jewellery', D, 'gift-card', T.giftcard(), QR),
     'account.html': page('Account | Ocean Fine Jewellery', D, 'account', T.account(), 'account'),
-    'states.html': page('Design states | Ocean Fine Jewellery', D, 'states', states),
+    'states.html': page('Theme states | Ocean Fine Jewellery', D, 'states', states),
+    'account/orders.html': page('Your account | Ocean Fine Jewellery', D, 'customers-account', T.account_orders(), 'account'),
+    'account/order.html': page('Order #1048 | Ocean Fine Jewellery', D, 'customers-order', T.account_order(), 'account'),
+    'account/addresses.html': page('Addresses | Ocean Fine Jewellery', D, 'customers-addresses', T.account_addresses(), 'account'),
+    'policies/privacy-policy.html': page('Privacy policy | Ocean Fine Jewellery', D, 'policy', T.policy('privacy')),
+    'policies/terms-of-service.html': page('Terms of service | Ocean Fine Jewellery', D, 'policy', T.policy('terms')),
 }
 import re
-NAMES = [n[:-5] for n in PAGES if n != 'index.html']
+NAMES = sorted([n[:-5] for n in PAGES if n != 'index.html'], key=len, reverse=True)
 def fix(html, R):
     html = html.replace('<html lang="en"', '<html lang="en" data-root="' + R + '"', 1)
     html = re.sub(r'(href|action)="index\.html', lambda m: m.group(1) + '="' + (R or './'), html)
     html = re.sub(r'(href|action)="(' + '|'.join(map(re.escape, NAMES)) + r')\.html', lambda m: m.group(1) + '="' + R + m.group(2) + '/', html)
-    html = re.sub(r'(href|src)="(style\.css|templates\.css|data\.js|script\.js|pages\.js)"', lambda m: m.group(1) + '="' + R + m.group(2) + '"', html)
+    html = re.sub(r'(href|src)="(style\.css|templates\.css|ocean\.css|data\.js|script\.js|pages\.js)"', lambda m: m.group(1) + '="' + R + m.group(2) + '"', html)
     return html
 for name, html in PAGES.items():
     if name == 'index.html':
         path, R = os.path.join(OUT, 'index.html'), ''
     else:
         d = os.path.join(OUT, name[:-5]); os.makedirs(d, exist_ok=True)
-        path, R = os.path.join(d, 'index.html'), '../'
+        path, R = os.path.join(d, 'index.html'), '../' * (name.count('/') + 1)
     with open(path, 'w') as f:
         f.write(fix(html, R))
 print('wrote', len(PAGES), 'pages')

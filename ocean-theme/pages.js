@@ -184,6 +184,7 @@
     document.addEventListener('keydown', function (e) { if (e.key === 'Escape') closeMobile(); });
     document.addEventListener('ocean:refresh', function () { update(false); });
     update(false);
+    if (U.qs('filters') === 'open') { if (window.innerWidth < 990) setTimeout(function () { openMobile(); }, 200); else { root.classList.remove('is-filters-closed'); } }
     return { state: state, update: update };
   }
 
@@ -232,7 +233,8 @@
     /* gallery */
     var media = p.photo ? [p.fp].concat(p.detail).map(function (fp, i) { return { src: D.img(p.photo, 1200, 1500, fp), thumb: D.img(p.photo, 200, 250, fp), alt: i ? p.title + ', detail ' + i : p.title }; }) : [];
     var gal = $('[data-gallery]');
-    if (!media.length) gal.innerHTML = '<div class="pg__placeholder">' + U.PLACEHOLDER + '<p>Image coming soon</p></div>';
+    if (p.giftCard) gal.innerHTML = '<div class="pg__giftcard"><div class="gc__card gc__card--lg" role="img" aria-label="Ocean gift card"><div class="gc__card-top"><span>Ocean</span></div><p class="gc__card-amount">Gift card</p><p class="gc__card-foot">Never expires · Delivered by email</p></div></div>';
+    else if (!media.length) gal.innerHTML = '<div class="pg__placeholder">' + U.PLACEHOLDER + '<p>Image coming soon</p></div>';
     else {
       gal.innerHTML = '<ul class="pg__track" data-track>' + media.map(function (m, i) {
         return '<li class="pg__item pg__item--' + i + '"><button class="pg__zoom" data-zoom="' + i + '" aria-label="Open image ' + (i + 1) + ' of ' + media.length + ' in full screen"><img src="' + m.src + '" alt="' + esc(m.alt) + '" width="1200" height="1500"' + (i ? ' loading="lazy"' : ' fetchpriority="high"') + '></button></li>';
@@ -248,53 +250,74 @@
 
     /* info */
     var info = $('[data-pinfo]');
-    function stockLine(st) {
-      if (st === 'soldout') return '<p class="stock stock--out"><span></span>Sold out in this size. Choose another size or check back soon.</p>';
-      if (st === 'unavailable') return '<p class="stock stock--out"><span></span>This combination isn’t made. Choose another metal or size.</p>';
-      return '<p class="stock"><span></span>In stock, ready to ship</p>';
+    function variantNotice(st) {
+      if (st === 'available') return '';
+      var what = (p.type === 'Rings' ? 'Size ' + sel.size : sel.size) + ' in ' + D.METALS[sel.metal].label;
+      var msg = U.isSoldOut(p) ? 'This piece is sold out in every size.' : (st === 'soldout' ? what + ' is sold out.' : what + ' isn’t made.');
+      return '<div class="pnotice" role="status"><p><strong>' + msg + '</strong> ' + (U.isSoldOut(p) ? 'We’re making more.' : 'Choose another option above, or') + '</p><button type="button" class="link-u" data-notify>Email me when it’s available</button></div>';
+    }
+    function giftAmount() { return +String(sel.size).replace('$', ''); }
+    function priceBlock() {
+      if (p.giftCard) return '<strong data-money="' + giftAmount() + '">' + money(giftAmount()) + '</strong>';
+      return U.priceHTML(p) + (p.compare ? '<span class="pinfo__sale">Sale · save ' + money(p.compare - p.price) + '</span>' : '');
     }
     function renderInfo() {
-      var st = U.variantState(p, sel.metal, sel.size), off = p.compare ? Math.round((1 - p.price / p.compare) * 100) : 0;
+      var st = U.variantState(p, sel.metal, sel.size);
+      var unit = p.giftCard ? giftAmount() : p.price;
+      var buyLabel = st === 'available' ? 'Add to bag · <span data-money="' + unit * sel.qty + '">' + money(unit * sel.qty) + '</span>' : (st === 'soldout' ? 'Sold out' : 'Unavailable');
+      var giftFields = p.giftCard ?
+        '<div class="giftto"><label class="fcheck" for="gift-send"><input type="checkbox" id="gift-send"' + (sel.gift ? ' checked' : '') + '><span class="fcheck__box" aria-hidden="true">' + CHECK + '</span><span class="fcheck__label">Send it to someone as a gift</span></label>' +
+        '<div class="giftto__fields form-grid" data-gift-fields' + (sel.gift ? '' : ' hidden') + '>' +
+          '<div class="field"><label for="g-email">Recipient email</label><input id="g-email" type="email" autocomplete="off" value="' + esc(sel.gEmail || '') + '"><p class="field__error" id="g-email-error" hidden></p></div>' +
+          '<div class="field"><label for="g-name">Recipient name <span class="muted">(optional)</span></label><input id="g-name" autocomplete="off" value="' + esc(sel.gName || '') + '"></div>' +
+          '<div class="field field--full"><label for="g-msg">Message <span class="muted">(optional)</span></label><textarea id="g-msg" rows="3" maxlength="200">' + esc(sel.gMsg || '') + '</textarea><span class="field__count"><span data-gmsg-n>' + (sel.gMsg || '').length + '</span>/200</span></div>' +
+          '<div class="field"><label for="g-date">Send on <span class="muted">(optional)</span></label><input id="g-date" type="date" value="' + esc(sel.gDate || '') + '"></div>' +
+        '</div></div>' : '';
       info.innerHTML =
-        '<p class="eyebrow">' + p.type + (p.stone !== 'None' ? ' · ' + p.stone : '') + '</p>' +
+        '<p class="eyebrow">' + (p.giftCard ? 'Gift card' : p.type) + '</p>' +
         '<h1 class="pinfo__title">' + esc(p.title) + '</h1>' +
-        '<a class="pinfo__rating" href="#reviews"><span class="stars" aria-hidden="true">★★★★★</span> ' + p.rating.toFixed(1) + ' <span>(' + p.reviews + ' reviews)</span></a>' +
-        '<div class="pinfo__price">' + U.priceHTML(p) + (off ? '<span class="badge badge--sale">Save ' + off + '%</span>' : '') + '</div>' +
+        '<div class="pinfo__row"><div class="pinfo__price">' + priceBlock() + '</div>' + (p.giftCard ? '' : '<a class="pinfo__rating" href="#reviews"><span class="stars" aria-hidden="true">★★★★★</span> ' + p.rating.toFixed(1) + ' · ' + p.reviews + ' reviews</a>') + '</div>' +
         (p.unitPer ? '<p class="pinfo__unit">Unit price ' + U.unitPrice(p) + '</p>' : '') +
-        '<p class="pinfo__tax">Tax included. <a href="' + R + 'page/#shipping">Shipping</a> calculated at checkout.</p>' +
-        '<p class="pinfo__instal">Pay in 4 interest-free instalments of <strong>' + money(p.price / 4) + '</strong> with <span class="shop-pay-mark">shop<b>Pay</b></span></p>' +
+        '<p class="pinfo__tax">Tax included. <a href="' + R + 'page/#shipping">Shipping</a> calculated at checkout.' + (p.giftCard ? '' : ' Or 4 interest-free payments of ' + money(p.price / 4) + ' with <span class="shop-pay-mark">shop<b>Pay</b></span>') + '</p>' +
         '<form class="pinfo__form" data-pform novalidate>' +
-          U.optionHTML(p, sel, 'p') +
-          '<div class="field field--engrave"><label for="engrave">Free engraving <span class="muted">(optional)</span></label><input id="engrave" name="properties[Engraving]" maxlength="12" placeholder="Up to 12 characters" autocomplete="off" value="' + esc(sel.engraving || '') + '"><span class="field__count" data-eng-count>' + (sel.engraving || '').length + '/12</span></div>' +
+          U.optionHTML(p, sel, 'p') + giftFields +
+          (p.giftCard ? '' : '<div class="field field--engrave"><label for="engrave">Free engraving <span class="muted">(optional)</span></label><input id="engrave" name="properties[Engraving]" maxlength="12" placeholder="Up to 12 characters" autocomplete="off" value="' + esc(sel.engraving || '') + '"><span class="field__count" data-eng-count>' + (sel.engraving || '').length + '/12</span></div>') +
+          variantNotice(st) +
           '<div class="pinfo__buy">' +
-            '<div class="qty qty--lg" role="group" aria-label="Quantity"><button type="button" aria-label="Decrease quantity" data-pq="-1">−</button><input type="number" min="1" value="' + sel.qty + '" aria-label="Quantity" data-pq-input><button type="button" aria-label="Increase quantity" data-pq="1">+</button></div>' +
-            (st === 'available' ? '<button type="submit" class="btn btn--primary btn--lg pinfo__atc" data-atc>Add to bag · <span data-money="' + p.price * sel.qty + '">' + money(p.price * sel.qty) + '</span></button>' : '<button type="button" class="btn btn--primary btn--lg pinfo__atc" disabled data-atc>' + (st === 'soldout' ? 'Sold out' : 'Unavailable') + '</button>') +
+            '<div class="qty qty--lg" role="group" aria-label="Quantity"><button type="button" aria-label="Decrease quantity" data-pq="-1"' + (st !== 'available' ? ' disabled' : '') + '>−</button><input type="number" min="1" value="' + sel.qty + '" aria-label="Quantity" data-pq-input' + (st !== 'available' ? ' disabled' : '') + '><button type="button" aria-label="Increase quantity" data-pq="1"' + (st !== 'available' ? ' disabled' : '') + '>+</button></div>' +
+            '<button type="' + (st === 'available' ? 'submit' : 'button') + '" class="btn btn--primary btn--lg pinfo__atc' + (st !== 'available' ? ' is-unavailable' : '') + '" data-atc' + (st !== 'available' ? ' disabled' : '') + '>' + buyLabel + '</button>' +
           '</div>' +
           '<p class="form-msg is-error" role="alert" data-p-error hidden></p>' +
-          (st === 'available' ? '<button type="button" class="accel__btn accel__btn--shop accel__btn--wide" aria-label="Buy with Shop Pay">Buy with <strong>shop</strong><em>Pay</em></button><a class="pinfo__more-pay" href="#" data-more-pay>More payment options</a>' : '<button type="button" class="btn btn--outline btn--block" data-notify>Email me when it’s back</button>') +
+          (st === 'available' ? '<button type="button" class="accel__btn accel__btn--shop accel__btn--wide" aria-label="Buy with Shop Pay">Buy with <strong>shop</strong><em>Pay</em></button><a class="pinfo__more-pay" href="#" data-more-pay>More payment options</a>' : '') +
         '</form>' +
-        stockLine(st) +
-        '<div class="pickup"><svg width="20" height="20" viewBox="0 0 24 24" aria-hidden="true"><path d="M4 10l8-6 8 6v10H4z M9 20v-6h6v6" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linejoin="round"/></svg><div><p><strong>Pickup available at Ocean Studio</strong></p><p class="muted">Usually ready in 24 hours</p><button type="button" class="link-btn" data-store-info>View store information</button></div></div>' +
-        '<ul class="usps">' +
-          '<li><span class="usps__i">' + CHECK + '</span>Free express shipping over ' + money(100) + '</li>' +
-          '<li><span class="usps__i">' + CHECK + '</span>60-day returns and free resizing</li>' +
-          '<li><span class="usps__i">' + CHECK + '</span>Recycled 14k gold, hallmarked</li>' +
-          '<li><span class="usps__i">' + CHECK + '</span>Lifetime polishing and care</li>' +
-        '</ul>' +
+        (p.giftCard ? '' : '<p class="pinfo__pickup"><strong>Pickup available at Ocean Studio.</strong> Usually ready in 24 hours. <button type="button" class="link-u" data-store-info>View store information</button></p>') +
+        '<dl class="pfacts" data-feature="hallmarks">' +
+          (p.giftCard ? '<div><dt>Delivery</dt><dd>By email, on the date you choose</dd></div><div><dt>Validity</dt><dd>Never expires</dd></div>' :
+          '<div><dt>Gold</dt><dd>Solid recycled 14k, stamped 585</dd></div><div><dt>Delivery</dt><dd>Free and insured over ' + money(100) + '</dd></div><div><dt>Fit</dt><dd>Free resizing for 60 days</dd></div><div><dt>Care</dt><dd>Lifetime polishing</dd></div>') +
+        '</dl>' +
         '<div class="paccs">' +
           '<details open><summary>Description</summary><div><p>' + esc(p.desc) + '</p></div></details>' +
-          '<details><summary>Materials &amp; care</summary><div><ul class="bullets"><li>' + D.METALS[sel.metal].label + ', recycled and hallmarked</li><li>' + (p.stone === 'None' ? 'No stones' : p.stone + ', responsibly sourced') + '</li><li>Remove before swimming or showering</li><li>Polish with the cloth included in every box</li></ul></div></details>' +
-          '<details><summary>Shipping &amp; returns</summary><div><p>Free express shipping over ' + money(100) + '. Orders ship within 2 working days. Returns and resizing are free for 60 days; engraved pieces can be resized but not returned.</p></div></details>' +
+          (p.giftCard ? '' : '<details><summary>Materials &amp; care</summary><div><ul class="bullets"><li>' + D.METALS[sel.metal].label + ', recycled, stamped 585</li><li>' + (p.stone === 'None' ? 'No stones' : p.stone + (p.stone === 'Diamond' ? ', lab-grown, IGI graded' : ', traced to source')) + '</li><li>Take off before swimming or the gym</li><li>Polish with the cloth in every box</li></ul></div></details>') +
+          '<details><summary>Shipping &amp; returns</summary><div><p>Free insured shipping over ' + money(100) + '. Orders ship within 2 working days. Returns are free for 60 days and resizing is free, including engraved rings.</p></div></details>' +
           (p.type === 'Rings' ? '<details><summary>Size guide</summary><div><table class="size-table"><caption class="visually-hidden">Ring sizes</caption><thead><tr><th scope="col">US</th><th scope="col">UK</th><th scope="col">Inside diameter</th></tr></thead><tbody><tr><td>5</td><td>J½</td><td>15.7 mm</td></tr><tr><td>6</td><td>L½</td><td>16.5 mm</td></tr><tr><td>7</td><td>N½</td><td>17.3 mm</td></tr><tr><td>8</td><td>P½</td><td>18.2 mm</td></tr><tr><td>9</td><td>R½</td><td>19.0 mm</td></tr></tbody></table></div></details>' : '') +
         '</div>' +
-        '<div class="share"><span>Share</span><button type="button" class="share__btn" data-copy-link aria-label="Copy link"><svg width="16" height="16" viewBox="0 0 24 24" aria-hidden="true"><path d="M10 14a5 5 0 0 0 7 0l3-3a5 5 0 0 0-7-7l-1 1M14 10a5 5 0 0 0-7 0l-3 3a5 5 0 0 0 7 7l1-1" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/></svg> Copy link</button></div>';
-      U.bindOptions(info, p, sel, function () { var e = $('#engrave'); if (e) sel.engraving = e.value; renderInfo(); });
+        '<div class="share"><button type="button" class="link-u" data-copy-link>Copy link to share</button></div>';
+      U.bindOptions(info, p, sel, function () { var e = $('#engrave'); if (e) sel.engraving = e.value; saveGift(); renderInfo(); });
       renderSticky(st);
     }
+    function saveGift() {
+      if (!p.giftCard) return;
+      var g = function (id) { var el = $('#' + id); return el ? el.value : ''; };
+      sel.gEmail = g('g-email'); sel.gName = g('g-name'); sel.gMsg = g('g-msg'); sel.gDate = g('g-date');
+    }
+    on(info, 'change', function (e) {
+      if (e.target.id === 'gift-send') { sel.gift = e.target.checked; $('[data-gift-fields]').hidden = !sel.gift; if (sel.gift) $('#g-email').focus(); }
+    });
+    on(info, 'input', function (e) { if (e.target.id === 'g-msg') $('[data-gmsg-n]').textContent = e.target.value.length; });
     on(info, 'input', function (e) { if (e.target.id === 'engrave') { sel.engraving = e.target.value; $('[data-eng-count]').textContent = e.target.value.length + '/12'; } });
     on(info, 'click', function (e) {
       var q = e.target.closest('[data-pq]');
-      if (q) { sel.qty = Math.max(1, sel.qty + +q.dataset.pq); $('[data-pq-input]').value = sel.qty; var a = $('[data-atc] [data-money]'); if (a) { a.setAttribute('data-money', p.price * sel.qty); a.textContent = money(p.price * sel.qty); } $('[data-p-error]').hidden = true; }
+      if (q) { sel.qty = Math.max(1, sel.qty + +q.dataset.pq); $('[data-pq-input]').value = sel.qty; var unitP = p.giftCard ? giftAmount() : p.price; var a = $('[data-atc] [data-money]'); if (a) { a.setAttribute('data-money', unitP * sel.qty); a.textContent = money(unitP * sel.qty); } $('[data-p-error]').hidden = true; }
       if (e.target.closest('[data-copy-link]')) { try { navigator.clipboard.writeText(location.href); } catch (er) {} U.toast('Link copied'); }
       if (e.target.closest('[data-store-info]')) U.openLayer($('#store-info'), '[data-close-modal]');
       if (e.target.closest('[data-notify]')) U.openLayer($('#notify'), 'input');
@@ -304,10 +327,16 @@
     on(info, 'change', function (e) { if (e.target.matches('[data-pq-input]')) sel.qty = Math.max(1, parseInt(e.target.value, 10) || 1); });
     function doAdd(btn) {
       var err = $('[data-p-error]');
+      if (p.giftCard) {
+        saveGift();
+        var ge = $('#g-email'), gerr = $('#g-email-error');
+        if (sel.gift && !/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(sel.gEmail || '')) { ge.setAttribute('aria-invalid', 'true'); gerr.hidden = false; gerr.textContent = 'Enter the recipient’s email address.'; ge.focus(); return; }
+        if (gerr) gerr.hidden = true;
+      }
       btn.classList.add('is-loading'); btn.disabled = true;
       setTimeout(function () {
         btn.classList.remove('is-loading'); btn.disabled = false;
-        var ok = U.addToCart(p.id, sel.qty, { metal: sel.metal, size: sel.size, engraving: sel.engraving });
+        var ok = U.addToCart(p.id, sel.qty, { metal: sel.metal, size: sel.size, engraving: sel.engraving, price: p.giftCard ? giftAmount() : 0, recipient: p.giftCard && sel.gift ? (sel.gName || sel.gEmail) : '' });
         if (!ok && err) { err.hidden = false; err.textContent = 'You can only add ' + p.stock + ' of this item to your bag. Lower the quantity and try again.'; }
       }, 500);
     }
@@ -317,9 +346,9 @@
     var sticky = $('[data-sticky-atc]');
     function renderSticky(st) {
       sticky.innerHTML = '<div class="container sticky-atc__inner">' +
-        (p.photo ? '<img src="' + U.primaryImg(p, 120, 120) + '" alt="" width="52" height="52">' : '<span class="sticky-atc__ph">' + U.PLACEHOLDER + '</span>') +
-        '<div class="sticky-atc__info"><p class="sticky-atc__title">' + esc(p.title) + '</p><p class="sticky-atc__opts">' + D.METALS[sel.metal].label + ' · ' + sel.size + '</p></div>' +
-        '<p class="sticky-atc__price">' + U.priceHTML(p) + '</p>' +
+        (p.photo ? '<img src="' + U.primaryImg(p, 120, 120) + '" alt="" width="52" height="52">' : '<span class="sticky-atc__ph">' + (p.giftCard ? 'Ocean' : U.PLACEHOLDER) + '</span>') +
+        '<div class="sticky-atc__info"><p class="sticky-atc__title">' + esc(p.title) + '</p><p class="sticky-atc__opts">' + (p.giftCard ? 'Gift card' : D.METALS[sel.metal].label + ' · ' + sel.size) + '</p></div>' +
+        '<p class="sticky-atc__price">' + priceBlock() + '</p>' +
         (st === 'available' ? '<button class="btn btn--primary" data-sticky-add>Add to bag</button>' : '<button class="btn btn--primary" disabled>' + (st === 'soldout' ? 'Sold out' : 'Unavailable') + '</button>') + '</div>';
       on($('[data-sticky-add]', sticky), 'click', function () { doAdd(this); });
     }
@@ -332,6 +361,8 @@
     }
     renderInfo();
 
+    if (p.giftCard) { var pc = $('.pcomp'); if (pc) pc.hidden = true; var rv0 = $('#reviews'); if (rv0) rv0.hidden = true; $('[data-p-crumb-type]').href = R + 'collections/'; }
+    if (U.isSoldOut(p)) { var eg = $('.field--engrave'); if (eg) eg.hidden = true; }
     /* complementary + recommendations + recently viewed */
     var comp = D.PRODUCTS.filter(function (x) { return x.id !== p.id && !x.hidden && x.type !== p.type && !U.isSoldOut(x); }).slice(0, 3);
     $('[data-complementary]').innerHTML = comp.map(function (x) {
@@ -381,7 +412,6 @@
     document.addEventListener('ocean:cart-updated', renderCartPage);
     on($('[data-cp-checkout]'), 'click', function () { U.toast('Checkout is handled by Shopify'); });
     renderCartPage();
-    $('[data-cp-pop]').innerHTML = D.PRODUCTS.filter(function (x) { return !x.hidden && !U.isSoldOut(x); }).sort(function (a, b) { return b.reviews - a.reviews; }).slice(0, 4).map(U.cardHTML).join('');
   }
 
   /* =========================================================
@@ -434,7 +464,7 @@
   }
   var BODIES = {
     2: ['Layering works best when each chain sits at a different length. Start with a short chain at 40 cm, add a pendant at 45 cm, and finish with a longer chain at 50 cm.', 'Mix textures rather than colours: a flat herringbone, a beaded chain and a fine trace chain look intentional together, even in the same gold.', 'If chains tangle, add a pendant to the longest one. The extra weight keeps it hanging straight.'],
-    3: ['Gold vermeil is a thick layer of gold over sterling silver. It wears beautifully for years if you keep it away from water, perfume and lotion.', 'Put your jewellery on last and take it off first. Store each piece separately in the pouch it came in.', 'Every Ocean piece comes with free lifetime polishing. Send it back to us and we will clean and re-polish it at no cost.'],
+    3: ['Solid 14k gold doesn’t flake or wear through, but it does pick up oils and fine scratches. Keeping it away from chlorine, perfume and lotion keeps it bright.', 'Put your jewellery on last and take it off first. Store each piece separately in the pouch it came in.', 'Every Ocean piece comes with free lifetime polishing. Send it back to us and we will clean and re-polish it at no cost.'],
     4: ['Freshwater pearls are grown in mussels and come in many shapes. Baroque pearls are irregular, and every one is unique. Keshi pearls form without a nucleus and have a bright lustre.', 'Look for lustre first: a good pearl reflects light sharply, almost like a mirror.', 'Pearls are soft, so wipe them with a damp cloth after wearing and never store them in a sealed plastic bag.'],
     5: ['Lab-grown diamonds are real diamonds, with the same chemical structure, hardness and sparkle as mined stones.', 'They are graded with the same four Cs: cut, colour, clarity and carat. Every Ocean diamond over 0.3 ct comes with an independent report.', 'Because they are grown above ground, they avoid the environmental impact of mining and cost noticeably less.'],
     6: ['The best gifts are the pieces people wear every day: a fine chain, small hoops or a pendant with meaning.', 'Every order arrives gift-boxed with a handwritten card. Add free engraving for a personal touch.', 'Not sure about size? Choose a necklace or earrings, or include a gift card so they can pick their own.']
@@ -472,7 +502,27 @@
   });
   on($('[data-reveal-password]'), 'click', function () { var f = $('[data-password-form]'); f.hidden = !f.hidden; this.setAttribute('aria-expanded', String(!f.hidden)); if (!f.hidden) $('input', f).focus(); });
 
+  if (is('password') && U.qs('state') === 'error') {
+    var pf = $('[data-password-form]'); pf.hidden = false; $('[data-reveal-password]').setAttribute('aria-expanded', 'true');
+    var pin = $('#store-password'); pin.value = 'wrongpass'; pin.setAttribute('aria-invalid', 'true');
+    var psum = $('[data-error-summary]', pf); psum.hidden = false; psum.innerHTML = '<p><strong>Wrong password.</strong> Check the password you were given and try again.</p>';
+  }
+  if (is('customers-addresses')) {
+    var wrap = $('[data-addr-form-wrap]');
+    var openForm = function (title) { $('[data-addr-form-title]').textContent = title; wrap.hidden = false; var f = $('form', wrap); f.hidden = false; $('[data-form-success]', wrap).hidden = true; $('#ad-first').focus(); };
+    on($('[data-addr-new]'), 'click', function () { $('form', wrap).reset(); openForm('Add a new address'); });
+    $$('[data-addr-edit]').forEach(function (b) { on(b, 'click', function () { var f = $('form', wrap); f.reset(); $('#ad-first').value = 'Maya'; $('#ad-last').value = 'Lund'; $('#ad-1').value = b.closest('.addr').querySelector('address').innerHTML.split('<br>')[1]; $('#ad-city').value = 'Bristol'; $('#ad-zip').value = 'BS1 4RD'; openForm('Edit address'); }); });
+    $$('[data-addr-del]').forEach(function (b) { on(b, 'click', function () { if (window.confirm('Delete this address?')) { b.closest('.addr').remove(); U.toast('Address deleted'); } }); });
+    $$('[data-addr-default]').forEach(function (b) { on(b, 'click', function () { U.toast('Default address updated'); }); });
+    on($('[data-addr-cancel]'), 'click', function () { wrap.hidden = true; $('[data-addr-new]').focus(); });
+  }
   if (is('gift-card')) {
+    if (U.qs('state') === 'expired') {
+      $('.gc').classList.add('is-expired'); $('[data-gc-expired]').hidden = false;
+      $('.gc__title').textContent = 'This gift card has expired';
+      var bal = $('.gc__balance'); if (bal) bal.innerHTML = '<div><dt>Balance</dt><dd>' + money(0) + '</dd></div><div><dt>Expired</dt><dd>1 Jan 2026</dd></div>';
+      var cc = $('[data-copy-code]'); if (cc) { cc.disabled = true; cc.textContent = 'Code no longer valid'; }
+    }
     var code = 'OCEN 7H2K 9QWX 4F3M';
     on($('[data-copy-code]'), 'click', function () { try { navigator.clipboard.writeText(code.replace(/\s/g, '')); } catch (e) {} var b = this; b.textContent = 'Copied'; b.classList.add('is-done'); setTimeout(function () { b.textContent = 'Copy code'; b.classList.remove('is-done'); }, 2000); });
     on($('[data-print]'), 'click', function () { window.print(); });

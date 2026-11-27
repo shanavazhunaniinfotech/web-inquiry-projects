@@ -109,7 +109,7 @@
   document.addEventListener('click', function () { closeDropdowns(); });
 
   /* ---------- Mega menu ---------- */
-  var mega = $('.has-mega'), megaBtn = mega ? $('.nav__link', mega) : null, megaT;
+  var mega = $('.has-mega'), megaBtn = mega ? $('.site-nav__link', mega) : null, megaT;
   function openMega() { if (!mega) return; clearTimeout(megaT); mega.classList.add('is-open'); megaBtn.setAttribute('aria-expanded', 'true'); }
   function closeMega() { if (!mega) return; mega.classList.remove('is-open'); megaBtn.setAttribute('aria-expanded', 'false'); }
   on(mega, 'mouseenter', openMega);
@@ -157,28 +157,37 @@
       ? '<span class="visually-hidden">Sale price</span><strong class="is-sale" data-money="' + p.price + '">' + money(p.price) + '</strong><span class="visually-hidden">Regular price</span><s data-money="' + p.compare + '">' + money(p.compare) + '</s>'
       : '<strong data-money="' + p.price + '">' + money(p.price) + '</strong>';
   }
+  function metalLine(p) {
+    if (p.giftCard) return 'Digital, delivered by email';
+    var m = D.METALS[p.metals[0]].label;
+    return m.charAt(0).toUpperCase() + m.slice(1) + (p.stone !== 'None' ? ' · ' + p.stone : '');
+  }
+  function alsoIn(p) {
+    if (p.metals.length < 2) return '';
+    var names = p.metals.slice(1).map(function (k) { return D.METALS[k].label.replace('14k ', '').replace(' gold', ''); });
+    return 'Also in ' + (names.length > 1 ? names.slice(0, -1).join(', ') + ' and ' + names[names.length - 1] : names[0]) + ' gold';
+  }
   function cardHTML(p, i) {
     var url = R + 'product/?id=' + p.id;
+    var soldOut = isSoldOut(p), multi = p.sizes.length > 1 || p.metals.length > 1;
+    var label = soldOut ? 'Sold out' : (p.compare ? 'Sale' : (p.badge === 'New' ? 'New' : ''));
     var media = p.photo
       ? '<img src="' + primaryImg(p, 700, 875) + '" srcset="' + primaryImg(p, 420, 525) + ' 420w, ' + primaryImg(p, 700, 875) + ' 700w" sizes="(min-width: 1200px) 25vw, (min-width: 750px) 33vw, 50vw" alt="' + esc(p.title) + '" width="700" height="875" loading="lazy">' +
-        '<img class="card__img2" src="' + D.img(p.photo, 700, 875, p.detail[0]) + '" alt="" width="700" height="875" loading="lazy">'
-      : '<div class="card__placeholder">' + PLACEHOLDER + '<span>Image coming soon</span></div>';
-    var soldOut = isSoldOut(p), multi = p.sizes.length > 1 || p.metals.length > 1;
-    return '<li class="card' + (soldOut ? ' is-sold-out' : '') + '" style="animation-delay:' + ((i || 0) % 8 * 60) + 'ms">' +
-      '<div class="card__media">' +
-        '<div class="card__badges">' + badgeHTML(p) + '</div>' + media +
-        '<button class="card__quick" aria-label="Quick view: ' + esc(p.title) + '" data-quick="' + p.id + '"><svg width="18" height="18" viewBox="0 0 24 24" aria-hidden="true"><path d="M2 12s3.6-7 10-7 10 7 10 7-3.6 7-10 7S2 12 2 12z" fill="none" stroke="currentColor" stroke-width="1.8"/><circle cx="12" cy="12" r="3" fill="none" stroke="currentColor" stroke-width="1.8"/></svg></button>' +
-        '<button class="card__add" ' + (soldOut ? 'disabled aria-label="' + esc(p.title) + ' is sold out"' : (multi ? 'data-quick="' + p.id + '" aria-label="Choose options for ' + esc(p.title) + '"' : 'data-add="' + p.id + '" aria-label="Add ' + esc(p.title) + ' to bag"')) + '>' +
-          '<span class="plus" aria-hidden="true">' + (soldOut ? '–' : '+') + '</span><span class="lbl" aria-hidden="true">' + (soldOut ? 'Sold out' : (multi ? 'Choose options' : 'Add to bag')) + '</span></button>' +
+        '<img class="pcard__img2" src="' + D.img(p.photo, 700, 875, p.detail[0]) + '" alt="" width="700" height="875" loading="lazy">'
+      : '<span class="pcard__ph">' + PLACEHOLDER + '<span>Image coming soon</span></span>';
+    return '<li class="pcard' + (soldOut ? ' is-sold-out' : '') + '" style="animation-delay:' + ((i || 0) % 8 * 50) + 'ms">' +
+      '<div class="pcard__media"><a class="pcard__link" href="' + url + '" tabindex="-1" aria-hidden="true">' + media + '</a>' +
+        (label ? '<span class="pcard__label">' + label + '</span>' : '') +
+        (soldOut ? '' : '<button class="pcard__quick" ' + (multi ? 'data-quick="' + p.id + '"' : 'data-add="' + p.id + '"') + '>' + (multi ? 'Choose options' : 'Add to bag') + '<span class="visually-hidden">: ' + esc(p.title) + '</span></button>') +
       '</div>' +
-      '<div class="card__body">' +
-        '<div class="card__top"><span class="card__type">' + p.type + '</span><span class="card__rating"><span class="stars" aria-hidden="true">★</span> ' + p.rating.toFixed(1) + '<span class="visually-hidden"> out of 5</span> <span class="rc">(' + p.reviews + ')</span></span></div>' +
-        '<h3 class="card__title"><a href="' + url + '">' + esc(p.title) + '</a></h3>' +
-        '<div class="card__price">' + priceHTML(p) + (p.unitPer ? '<span class="card__unit">' + unitPrice(p) + '</span>' : '') + '</div>' +
-        swatches(p) +
+      '<div class="pcard__body">' +
+        '<h3 class="pcard__title"><a href="' + url + '">' + esc(p.title) + '</a></h3>' +
+        '<p class="pcard__meta">' + metalLine(p) + '</p>' +
+        '<p class="pcard__price">' + priceHTML(p) + (p.unitPer ? '<span class="pcard__unit">' + unitPrice(p) + '</span>' : '') + '</p>' +
+        (alsoIn(p) ? '<p class="pcard__also">' + alsoIn(p) + '</p>' : '') +
       '</div></li>';
   }
-  function skeletonCards(n) { var s = ''; for (var i = 0; i < n; i++) s += '<li class="card card--skeleton" aria-hidden="true"><div class="card__media sk"></div><div class="card__body"><span class="sk sk--line" style="width:40%"></span><span class="sk sk--line" style="width:85%"></span><span class="sk sk--line" style="width:30%"></span></div></li>'; return s; }
+  function skeletonCards(n) { var s = ''; for (var i = 0; i < n; i++) s += '<li class="pcard pcard--skeleton" aria-hidden="true"><div class="pcard__media sk"></div><div class="pcard__body"><span class="sk sk--line" style="width:40%"></span><span class="sk sk--line" style="width:85%"></span><span class="sk sk--line" style="width:30%"></span></div></li>'; return s; }
 
   /* ---------- Delegated actions ---------- */
   document.addEventListener('click', function (e) {
@@ -191,7 +200,7 @@
   });
   function flyFrom(btn) {
     if (reduceMotion) return;
-    var src = btn.closest('.card, .hero__chip, .up, .look__row, .qv'); var im = src ? $('img', src) : null; var cart = $('.cart-btn');
+    var src = btn.closest('.pcard, .up, .look__row, .qv, .comp'); var im = src ? $('img', src) : null; var cart = $('.cart-btn');
     if (!im || !cart) return;
     var a = im.getBoundingClientRect(), b = cart.getBoundingClientRect();
     var g = im.cloneNode(); g.removeAttribute('srcset');
@@ -240,6 +249,9 @@
     return '<button class="btn btn--primary btn--block btn--lg" data-qv-add' + (extra || '') + '>Add to bag · <span data-money="' + p.price + '">' + money(p.price) + '</span></button>';
   }
   function optionHTML(p, sel, ns) {
+    if (p.giftCard) {
+      return '<fieldset class="opt"><legend class="opt__label">Amount: <strong>' + money(+sel.size.replace('$', '')) + '</strong></legend><div class="opt__row">' + p.sizes.map(function (s) { return '<label class="pill"><input type="radio" name="' + ns + '-size" value="' + s + '"' + (s === sel.size ? ' checked' : '') + '><span>' + money(+s.replace('$', '')) + '</span></label>'; }).join('') + '</div></fieldset>';
+    }
     var metalRow = '<fieldset class="opt"><legend class="opt__label">Metal: <strong>' + D.METALS[sel.metal].label + '</strong></legend><div class="opt__row">' +
       p.metals.map(function (m) { return '<label class="swatch"><input type="radio" name="' + ns + '-metal" value="' + m + '"' + (m === sel.metal ? ' checked' : '') + '><span style="--sw:' + D.METALS[m].hex + '"></span><span class="visually-hidden">' + D.METALS[m].label + '</span></label>'; }).join('') + '</div></fieldset>';
     var sizeLabel = p.type === 'Rings' ? 'Ring size' : (p.type === 'Necklaces' ? 'Length' : 'Size');
@@ -262,9 +274,10 @@
 
   /* ---------- Cart (drawer + page share one store) ---------- */
   var CART_KEY = 'ocean-jewel-cart';
-  var cart = store.get(CART_KEY, []).filter(function (l) { return byId(l.id); });
+  var previewEmpty = qs('preview') === 'empty';
+  var cart = previewEmpty ? [] : store.get(CART_KEY, []).filter(function (l) { return byId(l.id); });
   var FREE_SHIP = 100, giftWrap = store.get('ocean-gift', false);
-  function saveCart() { store.set(CART_KEY, cart); }
+  function saveCart() { if (!previewEmpty) store.set(CART_KEY, cart); }
   function lineKey(id, o) { return [id, o.metal, o.size, o.bundle ? 'b' : ''].join('|'); }
   function maxQty(p) { return p.stock; }
   function addToCart(id, qty, o) {
@@ -279,7 +292,7 @@
       toast(msg); document.dispatchEvent(new CustomEvent('ocean:cart-error', { detail: { id: id, message: msg } }));
       return false;
     }
-    if (line) line.qty += qty; else cart.push({ key: key, id: id, metal: o.metal, size: o.size, qty: qty, bundle: !!o.bundle, engraving: o.engraving || '' });
+    if (line) line.qty += qty; else cart.push({ key: key, id: id, metal: o.metal, size: o.size, qty: qty, bundle: !!o.bundle, engraving: o.engraving || '', price: o.price || 0, recipient: o.recipient || '' });
     saveCart(); renderCart();
     var c = $('[data-cart-count]'); if (c) { c.classList.add('bump'); setTimeout(function () { c.classList.remove('bump'); }, 300); }
     if (!o.silent) { if ($('#cart-drawer') && !document.body.classList.contains('template-cart')) { closeAll(true); setTimeout(function () { openCart(); }, 120); } else toast('Added to your bag'); }
@@ -294,23 +307,23 @@
   function removeLine(key) { cart = cart.filter(function (x) { return x.key !== key; }); saveCart(); renderCart(); }
   function totals() {
     var sub = 0, disc = 0;
-    cart.forEach(function (l) { var p = byId(l.id), lp = p.price * l.qty; sub += lp; if (l.bundle) disc += lp * 0.15; });
+    cart.forEach(function (l) { var p = byId(l.id), lp = (l.price || p.price) * l.qty; sub += lp; if (l.bundle) disc += lp * 0.15; });
     var wrap = giftWrap && cart.length ? 8 : 0;
     return { sub: sub + wrap, disc: disc, total: sub + wrap - disc, count: cart.reduce(function (a, l) { return a + l.qty; }, 0), wrap: wrap };
   }
   function lineHTML(l) {
-    var p = byId(l.id), opts = D.METALS[l.metal].label + ' · ' + l.size;
-    var imgH = p.photo ? '<img src="' + primaryImg(p, 220, 260) + '" alt="' + esc(p.title) + '" width="88" height="104" loading="lazy">' : '<div class="line__ph">' + PLACEHOLDER + '</div>';
+    var p = byId(l.id), unit = l.price || p.price, opts = p.giftCard ? 'Gift card · ' + money(unit) + (l.recipient ? ' · To: ' + esc(l.recipient) : '') : D.METALS[l.metal].label + ' · ' + l.size;
+    var imgH = p.photo ? '<img src="' + primaryImg(p, 220, 260) + '" alt="' + esc(p.title) + '" width="88" height="104" loading="lazy">' : (p.giftCard ? '<div class="line__ph line__ph--gift"><span>Ocean</span></div>' : '<div class="line__ph">' + PLACEHOLDER + '</div>');
     return '<li class="line" data-line="' + esc(l.key) + '">' +
       '<a class="line__img" href="' + R + 'product/?id=' + p.id + '" tabindex="-1">' + imgH + '</a>' +
       '<div class="line__info"><a class="line__title" href="' + R + 'product/?id=' + p.id + '">' + esc(p.title) + '</a>' +
         '<p class="line__meta">' + opts + (l.engraving ? ' · Engraving: “' + esc(l.engraving) + '”' : '') + '</p>' +
-        '<p class="line__unit">' + money(p.price) + (p.compare ? ' <s>' + money(p.compare) + '</s>' : '') + '</p>' +
+        '<p class="line__unit">' + money(unit) + (p.compare ? ' <s>' + money(p.compare) + '</s>' : '') + '</p>' +
         (l.bundle ? '<span class="line__tag">Stack discount −15% (−' + money(p.price * l.qty * 0.15) + ')</span>' : '') +
         '<div class="qty" role="group" aria-label="Quantity for ' + esc(p.title) + '"><button type="button" aria-label="Decrease quantity" data-qty="-1">−</button><input type="number" min="0" value="' + l.qty + '" aria-label="Quantity" data-qty-input><button type="button" aria-label="Increase quantity" data-qty="1">+</button></div>' +
         '<p class="line__error" role="alert" hidden></p>' +
       '</div>' +
-      '<div class="line__right"><span class="line__price">' + money(p.price * l.qty * (l.bundle ? 0.85 : 1)) + '</span><button type="button" class="line__remove" data-remove aria-label="Remove ' + esc(p.title) + '">Remove</button></div>' +
+      '<div class="line__right"><span class="line__price">' + money(unit * l.qty * (l.bundle ? 0.85 : 1)) + '</span><button type="button" class="line__remove" data-remove aria-label="Remove ' + esc(p.title) + '">Remove</button></div>' +
     '</li>';
   }
   function upsellList(n) {
@@ -327,18 +340,16 @@
       $('[data-cart-lines]', drawer).innerHTML = cart.map(lineHTML).join('');
       $('[data-cart-foot]', drawer).hidden = cart.length === 0;
       var left = Math.max(0, FREE_SHIP - t.total);
-      $('[data-ship-text]', drawer).innerHTML = left > 0 ? 'Spend <strong>' + money(left) + '</strong> more for free express shipping' : '<strong>Free express shipping unlocked</strong>';
-      $('[data-ship-bar]', drawer).style.width = Math.min(100, t.total / 250 * 100) + '%';
-      $$('[data-perk]', drawer).forEach(function (li) { li.classList.toggle('is-on', t.total >= +li.dataset.perk); });
+      $('[data-ship-text]', drawer).innerHTML = !cart.length ? 'Free insured shipping over ' + money(FREE_SHIP) : (left > 0 ? money(left) + ' away from free insured shipping' : 'Your order ships free and insured');
       $('[data-cart-subtotal]', drawer).textContent = money(t.sub);
       $('[data-bundle-row]', drawer).hidden = t.disc <= 0;
       $('[data-cart-discount]', drawer).textContent = '−' + money(t.disc);
       $('[data-cart-total]', drawer).textContent = money(t.total);
       var gw = $('[data-gift]', drawer); if (gw) gw.checked = giftWrap;
-      var ups = upsellList(4); $('[data-upsell]', drawer).hidden = !ups.length;
+      var ups = upsellList(cart.length ? 2 : 0); $('[data-upsell]', drawer).hidden = !ups.length || document.documentElement.classList.contains('no-upsell');
       $('[data-upsell-track]', drawer).innerHTML = ups.map(function (p) {
         return '<li class="up"><a href="' + R + 'product/?id=' + p.id + '" tabindex="-1"><img src="' + primaryImg(p, 160, 160) + '" alt="' + esc(p.title) + '" width="64" height="64" loading="lazy"></a>' +
-          '<div><a class="up__name" href="' + R + 'product/?id=' + p.id + '">' + esc(p.title) + '</a><p class="up__why">' + p.type + '</p><p class="up__price">' + money(p.price) + '</p></div>' +
+          '<div><a class="up__name" href="' + R + 'product/?id=' + p.id + '">' + esc(p.title) + '</a><p class="up__price">' + money(p.price) + '</p></div>' +
           '<button class="up__add" ' + (p.sizes.length > 1 || p.metals.length > 1 ? 'data-quick="' + p.id + '"' : 'data-add="' + p.id + '"') + ' aria-label="Add ' + esc(p.title) + '">Add</button></li>';
       }).join('');
     }
@@ -420,22 +431,30 @@
   on(sToggle, 'click', function (e) { e.stopPropagation(); var open = sPanel.hidden; sPanel.hidden = !open; sToggle.setAttribute('aria-expanded', String(open)); });
   on(sPanel, 'click', function (e) { e.stopPropagation(); });
   document.addEventListener('click', function () { if (sPanel && !sPanel.hidden) { sPanel.hidden = true; sToggle.setAttribute('aria-expanded', 'false'); } });
-  var prefs = store.get('ocean-prefs', { scheme: 'ocean', corners: 'rounded', sections: false });
+  var PREF_KEY = 'ocean-prefs-v2';
+  var prefs = store.get(PREF_KEY, { scheme: 'ocean', corners: 'editorial', header: 'center', sections: false, stickyAtc: true, hallmarks: true, upsell: true, hoverSwap: true });
+  var docEl = document.documentElement;
   function applyPrefs() {
-    document.documentElement.setAttribute('data-scheme', prefs.scheme);
-    document.documentElement.setAttribute('data-corners', prefs.corners);
+    docEl.setAttribute('data-scheme', prefs.scheme);
+    docEl.setAttribute('data-corners', prefs.corners);
+    docEl.setAttribute('data-header', prefs.header);
+    docEl.classList.toggle('no-sticky-atc', !prefs.stickyAtc);
+    docEl.classList.toggle('no-hallmarks', !prefs.hallmarks);
+    docEl.classList.toggle('no-upsell', !prefs.upsell);
+    docEl.classList.toggle('no-hover-swap', !prefs.hoverSwap);
     document.body.classList.toggle('show-sections', !!prefs.sections);
-    $$('input[name="scheme"]').forEach(function (i) { i.checked = i.value === prefs.scheme; });
-    $$('input[name="corners"]').forEach(function (i) { i.checked = i.value === prefs.corners; });
+    ['scheme', 'corners', 'header'].forEach(function (n) { $$('input[name="' + n + '"]').forEach(function (i) { i.checked = i.value === prefs[n]; }); });
+    $$('[data-setting]').forEach(function (i) { i.checked = !!prefs[i.dataset.setting]; });
     var ss = $('[data-show-sections]'); if (ss) ss.checked = !!prefs.sections;
   }
-  $$('input[name="scheme"], input[name="corners"]').forEach(function (i) { on(i, 'change', function () { prefs[i.name] = i.value; store.set('ocean-prefs', prefs); applyPrefs(); }); });
-  on($('[data-show-sections]'), 'change', function () { prefs.sections = this.checked; store.set('ocean-prefs', prefs); applyPrefs(); });
+  $$('input[name="scheme"], input[name="corners"], input[name="header"]').forEach(function (i) { on(i, 'change', function () { prefs[i.name] = i.value; store.set(PREF_KEY, prefs); applyPrefs(); }); });
+  $$('[data-setting]').forEach(function (i) { on(i, 'change', function () { prefs[i.dataset.setting] = i.checked; store.set(PREF_KEY, prefs); applyPrefs(); renderCart(); }); });
+  on($('[data-show-sections]'), 'change', function () { prefs.sections = this.checked; store.set(PREF_KEY, prefs); applyPrefs(); });
   applyPrefs();
 
   /* ---------- Reveal + count-up ---------- */
   function initReveal(root) {
-    var targets = $$('.section-head, .reveal-me, .concern-track > li, .story__copy, .story__media, .look__media, .look__panel, .tile, .bstep, .body-feature__media, .body-feature__copy, .reviews__head, .review, .jfeat, .jside, .faq__aside, .newsletter__card, .footer__hero, .footer__top > *', root);
+    var targets = $$('.shead, .catcards > li, .craft__media, .craft__copy, .look__media, .look__panel, .bstep, .gift__copy, .gift__media, .quote, .jfeat, .jside, .news2', root);
     if (!('IntersectionObserver' in window) || reduceMotion) return;
     targets.forEach(function (el, i) { if (el.classList.contains('reveal')) return; el.classList.add('reveal'); el.style.transitionDelay = ((i % 4) * 70) + 'ms'; });
     var io = new IntersectionObserver(function (en) { en.forEach(function (x) { if (x.isIntersecting) { x.target.classList.add('is-in'); io.unobserve(x.target); } }); }, { rootMargin: '0px 0px -8% 0px' });
@@ -630,4 +649,5 @@
   refreshMoney();
   renderCart();
   initReveal();
+  if (qs('cart') === 'open' && drawerEl) setTimeout(openCart, 300);
 })();
