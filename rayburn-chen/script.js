@@ -78,6 +78,18 @@
   }
   showJar(0);
 
+  /* what's inside the jars + full ingredient list (Froya format) */
+  $('.js-jars').innerHTML = JARS.map(function (x) {
+    return '<article class="jar reveal"><img src="' + x.img + '" alt="' + x.n + '" loading="lazy" width="400" height="400"><div class="jar__body"><h3 class="jar__name">' + x.n + '</h3><p class="jar__list">' + x.list.map(function (i) { return i[0]; }).join('<br>') + '</p></div></article>';
+  }).join('');
+  $('.js-full-ing').innerHTML = JARS.map(function (x) {
+    return '<div><h3>' + x.n + '</h3><ul>' + x.list.map(function (i) { return '<li><i class="lv lv--' + i[1] + '"></i>' + i[0] + '</li>'; }).join('') + '</ul></div>';
+  }).join('');
+  (function () {
+    var b = $('.js-full-toggle'), box = $('#full-ing');
+    b.addEventListener('click', function () { var open = box.hidden; box.hidden = !open; b.setAttribute('aria-expanded', open); b.textContent = open ? 'Hide the full ingredients list' : 'View the full ingredients list'; });
+  })();
+
   /* ---------- video showcase (lazy) ---------- */
   var VIDEOS = { 1: U('photo-1508214751196-bcfd4ca60f91', 720, 1280), 2: U('photo-1592621385612-4d7129426394', 720, 1280), 3: U('photo-1619451334792-150fd785ee74', 720, 1280) };
   $$('.vcard').forEach(function (v) {
