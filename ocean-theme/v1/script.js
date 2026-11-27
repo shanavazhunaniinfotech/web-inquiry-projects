@@ -332,7 +332,7 @@
           '<h2 class="qv__title" id="qv-title">' + esc(p.title) + '</h2>' +
           (p.rating && p.reviews ? '<p class="qv__rating"><span class="stars" aria-hidden="true">★</span> ' + p.rating.toFixed(1) + ' out of 5 · ' + p.reviews + ' ratings</p>' : '') +
           '<p class="qv__price" aria-live="polite">' + priceHTML(p) + '</p>' +
-          '<p class="qv__tax">Tax included. Shipping calculated at checkout.</p>' +
+          '<p class="qv__tax">' + (p.giftCard ? 'Delivered by email. No shipping needed.' : 'Tax included. Shipping calculated at checkout.') + '</p>' +
           optionHTML(p, sel, 'qv') +
           '<div class="qv__actions">' + atcButton(st, p) + '</div>' +
           '<a class="link-arrow" href="' + R + 'product/?id=' + p.id + '">View full details <span aria-hidden="true">→</span></a>' +
@@ -458,8 +458,9 @@
       $('[data-ship-text]', drawer).innerHTML = !cart.length ? 'Free shipping on orders over ' + money(FREE_SHIP) : (left > 0 ? 'Spend <strong>' + money(left) + '</strong> more for free shipping' : '<strong>Your order ships free</strong>');
       var bar = $('[data-ship-bar]', drawer); if (bar) bar.style.width = Math.min(100, t.total / FREE_SHIP * 100) + '%';
       $('[data-cart-subtotal]', drawer).textContent = money(t.sub);
-      $('[data-bundle-row]', drawer).hidden = t.disc <= 0;
-      $('[data-cart-discount]', drawer).textContent = '−' + money(t.disc);
+      var hasDisc = t.disc >= 0.005;
+      $('[data-bundle-row]', drawer).hidden = !hasDisc;
+      $('[data-cart-discount]', drawer).textContent = hasDisc ? '−' + money(t.disc) : '';
       $('[data-cart-total]', drawer).textContent = money(t.total);
       var gw = $('[data-gift]', drawer); if (gw) gw.checked = hasGiftWrap();
       var ups = upsellList(4); $('[data-upsell]', drawer).hidden = !ups.length || document.documentElement.classList.contains('no-upsell');

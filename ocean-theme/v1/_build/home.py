@@ -54,9 +54,9 @@ def home():
   </div>
   <div class="container hero__controls">
     <div class="hero__progress" role="tablist" aria-label="Choose slide">
-      <button class="hero__dot is-active" role="tab" aria-selected="true" aria-label="Slide 1: Necklaces"><span></span><em>01 Necklaces</em></button>
-      <button class="hero__dot" role="tab" aria-selected="false" aria-label="Slide 2: Pearls"><span></span><em>02 Pearls</em></button>
-      <button class="hero__dot" role="tab" aria-selected="false" aria-label="Slide 3: Bridal"><span></span><em>03 Bridal</em></button>
+      <button class="hero__dot is-active" role="tab" aria-selected="true" aria-label="Slide 1: Necklaces"><span></span><em><b>01 </b>Necklaces</em></button>
+      <button class="hero__dot" role="tab" aria-selected="false" aria-label="Slide 2: Pearls"><span></span><em><b>02 </b>Pearls</em></button>
+      <button class="hero__dot" role="tab" aria-selected="false" aria-label="Slide 3: Bridal"><span></span><em><b>03 </b>Bridal</em></button>
     </div>
     <p class="hero__counter" aria-hidden="true"><strong data-hero-num>01</strong><span>/ 03</span></p>
     <div class="hero__arrows">

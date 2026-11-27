@@ -306,3 +306,18 @@
   .settings { bottom: 76px; transition: opacity .3s, visibility .3s; }
   html:has(.hero):not(.past-hero) .settings { opacity: 0; visibility: hidden; }
 }
+
+/* review 3: intro paragraph stays one flow of text so the price is inline */
+p.section-head__side { display: block; }
+
+.hero__dot em b { font-weight: inherit; }
+
+/* review 3: phone hero slide tabs on one line, row fits the first screen */
+@media (max-width: 749px) {
+  .hero--v2 { min-height: calc(100svh - 104px); }
+  .hero__controls { margin-top: 20px; padding-right: 16px; }
+  .hero__progress { gap: 8px; }
+  .hero__dot { gap: 6px; min-width: 0; min-height: 44px; }
+  .hero__dot em { white-space: nowrap; overflow: hidden; text-overflow: ellipsis; letter-spacing: .04em; }
+  .hero__dot em b { display: none; }
+}

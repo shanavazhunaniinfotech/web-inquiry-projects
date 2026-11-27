@@ -250,7 +250,7 @@
     var opts = [{ id: '', name: 'One-time purchase', note: 'Ready to ship in 2 working days.', off: 0 }].concat(p.sellingPlans);
     return '<fieldset class="plans"><legend class="opt__label">Purchase options</legend>' + opts.map(function (o) {
       return '<label class="plan' + ((sel.plan || '') === o.id ? ' is-on' : '') + '"><input type="radio" name="p-plan" value="' + o.id + '"' + ((sel.plan || '') === o.id ? ' checked' : '') + '><span class="plan__dot" aria-hidden="true"></span><span class="plan__body"><strong>' + esc(o.name) + '</strong><span>' + esc(o.note) + '</span></span><span class="plan__price" data-money="' + p.price * (1 - o.off) + '">' + money(p.price * (1 - o.off)) + '</span>' + (o.off ? '<span class="plan__save">Save ' + Math.round(o.off * 100) + '%</span>' : '') + '</label>';
-    }).join('') + '<p class="plans__note">Selling plans are created by the merchant in Shopify and shown here automatically.</p></fieldset>';
+    }).join('') + '</fieldset>';
   }
   function planOff(p, sel) { var pl = sel.plan && p.sellingPlans ? p.sellingPlans.filter(function (x) { return x.id === sel.plan; })[0] : null; return pl ? pl.off : 0; }
 
@@ -301,7 +301,7 @@
       return U.priceHTML(p) + (p.compare ? '<span class="badge badge--sale">Save ' + Math.round((1 - p.price / p.compare) * 100) + '%</span>' : '');
     }
     function notice(st) {
-      if (st === 'available') return '<p class="stock"><span></span>In stock, ready to ship</p>';
+      if (st === 'available') return p.giftCard ? '<p class="stock"><span></span>Delivered by email, usually within minutes</p>' : '<p class="stock"><span></span>In stock, ready to ship</p>';
       var what = (p.type === 'Rings' ? 'Size ' + sel.size : sel.size) + ' in ' + D.METALS[sel.metal].label;
       var msg = U.isSoldOut(p) ? 'This piece is sold out in every size.' : (st === 'soldout' ? what + ' is sold out.' : what + ' isn’t made.');
       return '<div class="pnotice" role="status"><p><strong>' + msg + '</strong> ' + (U.isSoldOut(p) ? 'We’re making more.' : 'Choose another option above, or') + '</p><button type="button" class="link-btn" data-notify>Email me when it’s available</button></div>';
@@ -310,7 +310,7 @@
       var st = U.variantState(p, sel.metal, sel.size), unit = unitNow();
       var gift = p.giftCard ? '<div class="giftto"><label class="fcheck" for="gift-send"><input type="checkbox" id="gift-send"' + (sel.gift ? ' checked' : '') + '><span class="fcheck__box" aria-hidden="true">' + CHECK + '</span><span class="fcheck__label">Send it to someone as a gift</span></label>' +
         '<div class="giftto__fields form-grid" data-gift-fields' + (sel.gift ? '' : ' hidden') + '>' +
-          '<div class="field"><label for="g-email">Recipient email</label><input id="g-email" type="email" autocomplete="off" value="' + esc(sel.gEmail || '') + '"><p class="field__error" id="g-email-error" hidden></p></div>' +
+          '<div class="field"><label for="g-email">Recipient email <span class="muted">(required)</span></label><input id="g-email" type="email" autocomplete="off" aria-describedby="g-email-error"' + (sel.gift ? ' required aria-required="true"' : '') + ' value="' + esc(sel.gEmail || '') + '"><p class="field__error" id="g-email-error" hidden></p></div>' +
           '<div class="field"><label for="g-name">Recipient name <span class="muted">(optional)</span></label><input id="g-name" autocomplete="off" value="' + esc(sel.gName || '') + '"></div>' +
           '<div class="field field--full"><label for="g-msg">Message <span class="muted">(optional)</span></label><textarea id="g-msg" rows="3" maxlength="200">' + esc(sel.gMsg || '') + '</textarea><span class="field__count"><span data-gmsg-n>' + (sel.gMsg || '').length + '</span>/200</span></div>' +
           '<div class="field"><label for="g-date">Send on <span class="muted">(optional)</span></label><input id="g-date" type="date" value="' + esc(sel.gDate || '') + '"></div>' +
@@ -321,7 +321,7 @@
         (p.rating && p.reviews ? '<p class="pinfo__rating"><span class="stars" aria-hidden="true">★★★★★</span> ' + p.rating.toFixed(1) + ' out of 5 <span>(' + p.reviews + ' ratings)</span></p>' : '') +
         '<div class="pinfo__price" aria-live="polite" aria-atomic="true">' + priceBlock() + '</div>' +
         (p.unitPer ? '<p class="pinfo__unit">Unit price ' + U.unitPrice(p) + '</p>' : '') +
-        '<p class="pinfo__tax">Tax included. <a href="' + R + 'page/#shipping">Shipping</a> calculated at checkout.</p>' +
+        (p.giftCard ? '<p class="pinfo__tax">Delivered by email. No shipping needed.</p>' : '<p class="pinfo__tax">Tax included. <a href="' + R + 'page/#shipping">Shipping</a> calculated at checkout.</p>') +
         (p.giftCard ? '' : '<p class="pinfo__instal">Pay in 4 interest-free instalments of <strong>' + money(unit / 4) + '</strong> with <span class="shop-pay-mark">shop<b>Pay</b></span></p>') +
         '<form class="pinfo__form" data-pform novalidate>' +
           U.optionHTML(p, sel, 'p') + planPicker(p, sel) + gift +
@@ -363,7 +363,7 @@
     });
     on(info, 'change', function (e) {
       if (e.target.matches('[data-pq-input]')) sel.qty = Math.max(1, parseInt(e.target.value, 10) || 1);
-      if (e.target.id === 'gift-send') { sel.gift = e.target.checked; $('[data-gift-fields]').hidden = !sel.gift; if (sel.gift) $('#g-email').focus(); }
+      if (e.target.id === 'gift-send') { sel.gift = e.target.checked; $('[data-gift-fields]').hidden = !sel.gift; var gm = $('#g-email'); gm.required = sel.gift; if (sel.gift) { gm.setAttribute('aria-required', 'true'); gm.focus(); } else { gm.removeAttribute('aria-required'); gm.removeAttribute('aria-invalid'); $('#g-email-error').hidden = true; } }
     });
     function doAdd(btn) {
       var err = $('[data-p-error]');
