@@ -1,375 +1,262 @@
-/* Lilaé · Complete Renewal System · interactions */
+/* Lilaé · Complete Renewal System · V2 interactions */
 (function () {
   'use strict';
   var $ = function (s, c) { return (c || document).querySelector(s); };
   var $$ = function (s, c) { return Array.prototype.slice.call((c || document).querySelectorAll(s)); };
   var reduced = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
   if (reduced) document.documentElement.classList.add('reduced');
-  var money = function (n) { return '$' + (Math.round(n * 100) / 100).toFixed(n % 1 ? 2 : 0); };
-  var store = {
-    get: function (k) { try { return window.sessionStorage.getItem(k); } catch (e) { return null; } },
-    set: function (k, v) { try { window.sessionStorage.setItem(k, v); } catch (e) {} }
-  };
+  var money = function (n) { return '$' + (n % 1 ? n.toFixed(2) : n); };
+  var ic = function (id) { return '<svg><use href="#i-' + id + '"/></svg>'; };
+  var U = function (id, w, h) { return 'https://images.unsplash.com/' + id + '?w=' + w + '&h=' + h + '&fit=crop&q=70'; };
 
-  /* ---------- toast ---------- */
+  /* toast */
   var toastEl = $('.js-toast'), toastT;
-  function toast(msg) {
-    toastEl.textContent = msg; toastEl.classList.add('is-on');
-    clearTimeout(toastT); toastT = setTimeout(function () { toastEl.classList.remove('is-on'); }, 2800);
-  }
-  $$('[data-toast]').forEach(function (b) { b.addEventListener('click', function () { toast(b.getAttribute('data-toast')); }); });
-
-  /* ---------- announcement rotator ---------- */
-  var msgs = $$('.announce__msg'), mi = 0;
-  setInterval(function () {
-    var cur = msgs[mi]; cur.classList.remove('is-active'); cur.classList.add('is-out');
-    setTimeout(function () { cur.classList.remove('is-out'); }, 650);
-    mi = (mi + 1) % msgs.length; msgs[mi].classList.add('is-active');
-  }, 4500);
-
-  /* ---------- countdown to local midnight ---------- */
-  function tick() {
-    var now = new Date(), end = new Date(now); end.setHours(24, 0, 0, 0);
-    var d = Math.max(0, end - now), h = Math.floor(d / 36e5), m = Math.floor(d % 36e5 / 6e4), s = Math.floor(d % 6e4 / 1e3);
-    var t = [h, m, s].map(function (x) { return String(x).padStart(2, '0'); }).join(':');
-    $$('.js-countdown').forEach(function (el) { el.textContent = t; });
-  }
-  tick(); setInterval(tick, 1000);
-
-  /* ---------- delivery estimate ---------- */
-  (function () {
-    var now = new Date(), cutoff = new Date(now); cutoff.setHours(14, 0, 0, 0);
-    if (now > cutoff) cutoff.setDate(cutoff.getDate() + 1);
-    var left = cutoff - now, h = Math.floor(left / 36e5), m = Math.floor(left % 36e5 / 6e4);
-    var ship = new Date(cutoff), added = 0;
-    while (added < 4) { ship.setDate(ship.getDate() + 1); var day = ship.getDay(); if (day !== 0 && day !== 6) added++; }
-    $('.js-cutoff').textContent = h + 'h ' + m + 'm';
-    $('.js-arrive').textContent = ship.toLocaleDateString('en-US', { weekday: 'short', month: 'short', day: 'numeric' });
-  })();
-
-  /* ---------- header shadow ---------- */
-  var header = $('.header');
-  window.addEventListener('scroll', function () { header.classList.toggle('is-scrolled', window.scrollY > 10); }, { passive: true });
+  function toast(m) { toastEl.textContent = m; toastEl.classList.add('is-on'); clearTimeout(toastT); toastT = setTimeout(function () { toastEl.classList.remove('is-on'); }, 2800); }
+  document.addEventListener('click', function (e) { var t = e.target.closest('[data-toast]'); if (t) toast(t.getAttribute('data-toast')); });
 
   /* ---------- gallery ---------- */
-  var track = $('.js-gallery-track'), slides = $$('.gallery__slide', track), thumbs = $('.js-gallery-thumbs'), dots = $('.js-gallery-dots');
+  var track = $('.js-gallery-track'), slides = $$('.gallery__slide', track), thumbs = $('.js-thumbs'), gi = 0;
   slides.forEach(function (sl, i) {
-    var img = $('img', sl), t = document.createElement('button');
-    t.type = 'button'; t.setAttribute('role', 'tab'); t.setAttribute('aria-label', 'Show image ' + (i + 1));
-    if (img) { var ti = document.createElement('img'); ti.src = img.src.replace(/w=1100&h=1100/, 'w=160&h=160'); ti.alt = ''; ti.loading = 'lazy'; t.appendChild(ti); }
-    else { t.innerHTML = '<span style="display:grid;place-items:center;height:100%;font:400 20px Fraunces,serif;color:#5d4594;background:#efe7fb">91%</span>'; }
-    t.addEventListener('click', function () { go(i); }); thumbs.appendChild(t);
-    var d = document.createElement('button'); d.type = 'button'; d.setAttribute('aria-label', 'Image ' + (i + 1));
-    d.addEventListener('click', function () { go(i); }); dots.appendChild(d);
+    var img = $('img', sl), b = document.createElement('button');
+    b.type = 'button'; b.setAttribute('role', 'tab'); b.setAttribute('aria-label', 'Image ' + (i + 1));
+    b.innerHTML = img ? '<img src="' + img.src.replace('w=1100&h=1100', 'w=140&h=140') + '" alt="" loading="lazy">' : '<span style="display:grid;place-items:center;height:100%;font:400 18px Fraunces,serif;color:#5d4594;background:#efe7fb">91%</span>';
+    b.addEventListener('click', function () { go(i); });
+    thumbs.appendChild(b);
   });
-  var gi = 0;
   function go(i) { gi = (i + slides.length) % slides.length; track.scrollTo({ left: track.clientWidth * gi, behavior: reduced ? 'auto' : 'smooth' }); mark(); }
-  function mark() {
-    $$('button', thumbs).forEach(function (b, k) { b.classList.toggle('is-active', k === gi); b.setAttribute('aria-selected', k === gi); });
-    $$('button', dots).forEach(function (b, k) { b.classList.toggle('is-active', k === gi); });
-  }
-  var st; track.addEventListener('scroll', function () { clearTimeout(st); st = setTimeout(function () { gi = Math.round(track.scrollLeft / track.clientWidth); mark(); }, 60); }, { passive: true });
+  function mark() { $$('button', thumbs).forEach(function (b, k) { b.classList.toggle('is-active', k === gi); b.setAttribute('aria-selected', k === gi); }); }
+  var gst; track.addEventListener('scroll', function () { clearTimeout(gst); gst = setTimeout(function () { gi = Math.round(track.scrollLeft / track.clientWidth); mark(); var a = $('button.is-active', thumbs); if (a) thumbs.scrollTo({ left: a.offsetLeft - 40, behavior: 'smooth' }); }, 80); }, { passive: true });
   $('.gallery__arrow--prev').addEventListener('click', function () { go(gi - 1); });
   $('.gallery__arrow--next').addEventListener('click', function () { go(gi + 1); });
   mark();
 
-  /* ---------- offers ---------- */
-  var PLANS = {
-    sub120: { price: 279, compare: 534, gifts: 3, label: '120-Day · Subscribe & save 48%', name: '120-Day Supply · Subscription' },
-    sub40: { price: 109, compare: 178, gifts: 2, label: '40-Day · Subscribe & save 39%', name: '40-Day Supply · Subscription' },
-    once: { price: 139, compare: 178, gifts: 0, label: 'One-time purchase · save 22%', name: '40-Day Supply · One-time' }
-  };
-  var plan = 'sub40', perks = $('.js-perks');
-  function qty() { return Math.max(1, Math.min(9, parseInt($('.js-qty').value, 10) || 1)); }
-  function renderPlan() {
-    var p = PLANS[plan], q = qty();
-    $$('.offer').forEach(function (o) {
-      var on = o.getAttribute('data-plan') === plan; o.classList.toggle('is-selected', on); $('input', o).checked = on;
-    });
-    var sel = $('.offer[data-plan="' + plan + '"]');
-    if (p.gifts) { sel.after(perks); perks.classList.add('is-open'); } else perks.classList.remove('is-open');
-    $$('.gift').forEach(function (g) { g.classList.toggle('is-locked', +g.getAttribute('data-gift') > p.gifts); });
-    $$('.js-atc-price').forEach(function (el) { el.textContent = money(p.price * q); });
-    $('.js-atc-label').textContent = plan === 'once' ? 'Add to cart' : 'Subscribe & save';
-    $('.js-offer-save').textContent = 'You save ' + money((p.compare - p.price) * q);
-    $('.js-installment').textContent = money(p.price * q / 4);
-    $('.js-sticky-plan').textContent = p.label;
+  /* ---------- subscription toggle & pricing ---------- */
+  var PRICE = { sub: 100, once: 159, compare: 200 }, subOn = true;
+  function renderPrice() {
+    var p = subOn ? PRICE.sub : PRICE.once, save = PRICE.compare - p;
+    $$('.js-price').forEach(function (el) { el.textContent = money(p); });
+    $$('.js-atc-price').forEach(function (el) { el.textContent = money(p); });
+    $('.js-saving').textContent = money(save);
+    $('.js-inst').textContent = money(p / 4);
+    $('.js-save-badge').textContent = 'Save ' + Math.round(save / PRICE.compare * 100) + '%';
+    $('.js-sub-box').classList.toggle('is-on', subOn);
   }
-  $$('.offer input').forEach(function (inp) { inp.addEventListener('change', function () { plan = inp.value; renderPlan(); }); });
-  $('.js-qty-minus').addEventListener('click', function () { $('.js-qty').value = Math.max(1, qty() - 1); renderPlan(); });
-  $('.js-qty-plus').addEventListener('click', function () { $('.js-qty').value = Math.min(9, qty() + 1); renderPlan(); });
-  $('.js-qty').addEventListener('change', function () { this.value = qty(); renderPlan(); });
-  renderPlan();
+  $('.js-sub').addEventListener('change', function () { subOn = this.checked; renderPrice(); });
+  renderPrice();
 
-  /* ---------- drawers ---------- */
+  /* ---------- drawers & modals ---------- */
   var lastFocus;
-  function openDrawer(id) {
-    var d = document.getElementById(id); lastFocus = document.activeElement;
-    d.classList.add('is-open'); d.setAttribute('aria-hidden', 'false'); document.body.style.overflow = 'hidden';
-    var f = $('[data-close]', d); if (f) setTimeout(function () { f.focus(); }, 50);
-  }
+  function openEl(el) { lastFocus = document.activeElement; el.classList.add('is-open'); el.setAttribute('aria-hidden', 'false'); document.body.style.overflow = 'hidden'; var c = $('[data-close]', el); if (c) setTimeout(function () { c.focus(); }, 60); }
   function closeAll() {
-    $$('.drawer.is-open, .modal.is-open').forEach(function (d) { d.classList.remove('is-open'); d.setAttribute('aria-hidden', 'true'); });
-    document.body.style.overflow = ''; if (lastFocus && lastFocus.focus) lastFocus.focus();
+    $$('.drawer.is-open,.modal.is-open').forEach(function (d) { d.classList.remove('is-open'); d.setAttribute('aria-hidden', 'true'); });
+    document.body.style.overflow = ''; var v = $('.js-video-frame video'); if (v) v.pause();
+    if (lastFocus && lastFocus.focus) lastFocus.focus();
   }
-  $$('[data-open]').forEach(function (b) { b.addEventListener('click', function () { openDrawer(b.getAttribute('data-open')); }); });
+  $$('[data-open]').forEach(function (b) { b.addEventListener('click', function () { openEl(document.getElementById(b.getAttribute('data-open'))); }); });
+  $$('[data-open-modal]').forEach(function (b) { b.addEventListener('click', function () { openEl(document.getElementById(b.getAttribute('data-open-modal'))); }); });
   $$('[data-close]').forEach(function (b) { b.addEventListener('click', closeAll); });
-  $$('.drawer, .modal').forEach(function (d) { d.addEventListener('click', function (e) { if (e.target === d) closeAll(); }); });
+  $$('.drawer,.modal').forEach(function (d) { d.addEventListener('click', function (e) { if (e.target === d) closeAll(); }); });
   document.addEventListener('keydown', function (e) { if (e.key === 'Escape') closeAll(); });
+
+  /* ---------- ingredients popup ---------- */
+  var JARS = [
+    { n: 'Cleansing Polish', s: 'Step 1 · Exfoliate · 100 ml', img: 'images/cleanser.svg', list: [['Oryza Sativa (Rice) Powder', 'o'], ['Simmondsia Chinensis (Jojoba) Esters', 'n'], ['Glycerin', 'n'], ['Papain (Papaya Enzyme)', 'c'], ['Avena Sativa (Oat) Kernel Flour', 'o'], ['Coco-Glucoside', 'n'], ['Aloe Barbadensis Leaf Juice', 'o'], ['Panthenol (Pro-Vitamin B5)', 'c']] },
+    { n: 'Peptide Day Cream', s: 'Step 2 · Firm · 50 ml', img: 'images/day.svg', list: [['Palmitoyl Tripeptide-1 & Tetrapeptide-7 (Matrixyl® 3000)', 'c'], ['Niacinamide', 'c'], ['Squalane (Olive-derived)', 'n'], ['Sodium Hyaluronate', 'c'], ['Butyrospermum Parkii (Shea) Butter', 'o'], ['Hippophae Rhamnoides (Sea Buckthorn) Oil', 'o'], ['Tocopherol (Vitamin E)', 'n'], ['Ceramide NP', 'c']] },
+    { n: 'Bright Eye Balm', s: 'Step 3 · Brighten · 15 ml', img: 'images/eye.svg', list: [['Tetrahexyldecyl Ascorbate (Vitamin C)', 'c'], ['Caffeine', 'c'], ['Arnica Montana Flower Extract', 'n'], ['Squalane', 'n'], ['Centella Asiatica Extract', 'o'], ['Cucumis Sativus (Cucumber) Extract', 'o'], ['Beeswax (Cera Alba)', 'n'], ['Tocopherol (Vitamin E)', 'n']] },
+    { n: 'Night Renewal Balm', s: 'Step 4 · Repair · 50 ml', img: 'images/night.svg', list: [['Bakuchiol (Plant Retinol Alternative)', 'c'], ['Squalane', 'n'], ['Rosa Canina (Rosehip) Seed Oil', 'o'], ['Calendula Officinalis Flower Extract', 'o'], ['Ceramide NP', 'c'], ['Punica Granatum (Pomegranate) Seed Oil', 'o'], ['Bisabolol (Chamomile)', 'n'], ['Peptide Complex', 'c']] }
+  ];
+  var tabs = $('.js-ing-tabs'), panel = $('.js-ing-panel');
+  JARS.forEach(function (j, i) {
+    var b = document.createElement('button'); b.type = 'button'; b.setAttribute('role', 'tab');
+    b.innerHTML = '<img src="' + j.img + '" alt="">' + j.n; b.addEventListener('click', function () { showJar(i); }); tabs.appendChild(b);
+  });
+  function showJar(i) {
+    var j = JARS[i];
+    $$('button', tabs).forEach(function (b, k) { b.classList.toggle('is-active', k === i); b.setAttribute('aria-selected', k === i); });
+    panel.innerHTML = '<div class="ing-panel__head"><img src="' + j.img + '" alt=""><div><h3>' + j.n + '</h3><p>' + j.s + '</p></div></div><ul class="ing-table">' +
+      j.list.map(function (x) { return '<li><i class="lv lv--' + x[1] + '"></i>' + x[0] + '</li>'; }).join('') + '</ul>';
+  }
+  showJar(0);
+
+  /* ---------- video showcase (lazy) ---------- */
+  var VIDEOS = { 1: U('photo-1508214751196-bcfd4ca60f91', 720, 1280), 2: U('photo-1592621385612-4d7129426394', 720, 1280), 3: U('photo-1619451334792-150fd785ee74', 720, 1280) };
+  $$('.vcard').forEach(function (v) {
+    v.addEventListener('click', function () {
+      var frame = $('.js-video-frame'), src = v.getAttribute('data-src');
+      /* In the live store each card gets data-src="(mp4 URL)"; the file only downloads when tapped. */
+      frame.innerHTML = src ? '<video src="' + src + '" autoplay playsinline controls></video>' :
+        '<img src="' + VIDEOS[v.getAttribute('data-video')] + '" alt=""><div class="video-frame__msg"><b>Customer UGC video plays here</b>Videos are lazy loaded: nothing downloads until a shopper taps play, so the page stays fast.</div>';
+      openEl($('#video-modal'));
+    });
+  });
+
+  /* ---------- carousels ---------- */
+  function initCarousel(root) {
+    var tr = $('.carousel__track', root), dots = $('.js-dots', root), items = function () { return $$('.carousel__track > *', root); };
+    function pages() { return Math.max(1, Math.round(tr.scrollWidth / tr.clientWidth)); }
+    function build() {
+      dots.innerHTML = ''; var n = Math.min(items().length, Math.max(pages(), items().length - Math.round(tr.clientWidth / (items()[0].offsetWidth || 1)) + 1));
+      for (var i = 0; i < n; i++) { (function (k) { var d = document.createElement('button'); d.type = 'button'; d.setAttribute('aria-label', 'Go to slide ' + (k + 1)); d.addEventListener('click', function () { tr.scrollTo({ left: items()[k].offsetLeft - tr.offsetLeft, behavior: 'smooth' }); }); dots.appendChild(d); })(i); }
+      sync();
+    }
+    function sync() {
+      var w = items()[0].offsetWidth + 14, idx = Math.round(tr.scrollLeft / w);
+      $$('button', dots).forEach(function (d, k) { d.classList.toggle('is-active', k === Math.min(idx, dots.children.length - 1)); });
+    }
+    tr.addEventListener('scroll', function () { requestAnimationFrame(sync); }, { passive: true });
+    var p = $('.js-prev', root), n = $('.js-next', root), step = function (dir) { tr.scrollBy({ left: dir * (items()[0].offsetWidth + 14), behavior: 'smooth' }); };
+    if (p) p.addEventListener('click', function () { step(-1); });
+    if (n) n.addEventListener('click', function () { step(1); });
+    build(); window.addEventListener('resize', build);
+  }
+
+  /* before / after cards */
+  var BA = [
+    { n: 'Joan, 64', img: 'photo-1508214751196-bcfd4ca60f91', tags: [['lines', 'Reduce lines & wrinkles'], ['tone', 'Even skintone']], q: '“The picture is proof this works on my 64 year old face after 2 months!”', b: 'I have tried everything. Within weeks my lines softened and my skin looks brighter than it has in years.' },
+    { n: 'Karen, 57', img: 'photo-1592621385612-4d7129426394', tags: [['tone', 'Even skintone'], ['glow', 'Natural glow']], q: '“I have fewer dark spots and my skin has a glow again.”', b: 'I noticed a difference in the first two weeks. Now friends ask what I have been doing differently.' },
+    { n: 'Linda, 61', img: 'photo-1566616213894-2d4e1baee5d8', tags: [['lift', 'Firmer-looking skin'], ['drop', 'Moisturise skin']], q: '“My skin feels plump and firm, not tight and dry.”', b: 'At 61 I didn’t expect much. The night balm is now my favourite part of the day.' },
+    { n: 'Julie, 48', img: 'photo-1594744803329-e58b31de8bf5', tags: [['eye', 'Reduce dark circles'], ['glow', 'Natural glow']], q: '“My dark circles are so much lighter. I wear less concealer.”', b: 'The eye balm depuffs in minutes. My whole face looks rested, even after a short night.' }
+  ];
+  $('.js-ba-track').innerHTML = BA.map(function (r) {
+    var src = U(r.img, 400, 460);
+    return '<article class="bacard"><div class="bacard__imgs"><figure><img src="' + src + '" alt="' + r.n + ' before" loading="lazy"><figcaption>Before</figcaption></figure><figure><img src="' + src + '" alt="' + r.n + ' after 8 weeks" loading="lazy"><figcaption>After</figcaption></figure></div>' +
+      '<div class="bacard__body"><div class="bacard__top"><span>' + r.n + ' <i class="verified">✓ Verified</i></span><span class="stars stars--sm"></span></div><div class="bacard__tags">' +
+      r.tags.map(function (t) { return '<span>' + ic(t[0]) + t[1] + '</span>'; }).join('') + '</div><blockquote>' + r.q + '</blockquote><p>' + r.b + '</p></div></article>';
+  }).join('');
+  $$('.js-carousel').forEach(initCarousel);
+
+  /* ---------- timeline ---------- */
+  var TL = [
+    { w: '24 Hours', box: ['Deep Hydration', 'Squalane, Hyaluronic Acid, Oat Extract'], sub: 'Skin Is Calm and Comfortable', li: [['drop', 'Skin feels instantly softer and plumper'], ['calm', 'Tightness and dryness ease'], ['heart', 'Skin feels less sensitive']] },
+    { w: '3 Days', box: ['Skin Barrier Repair Begins', 'Ceramides + Squalane'], sub: '1st Signs of Healthy Skin', li: [['drop', 'Skin feels more hydrated and less tight'], ['glow', 'A natural glow starts to return'], ['heart', 'Skin starts feeling soft']] },
+    { w: 'Week 1', box: ['Skin Cell Activation', 'Bakuchiol + Niacinamide, Vitamin C, Antioxidants'], sub: 'Skin Renewal Begins', li: [['lines', 'Fine lines start softening → skin feels smoother'], ['drop', 'Hydration locks in → rough patches fade'], ['tone', 'Complexion looks more even']] },
+    { w: 'Month 1', box: ['Collagen Support', 'Matrixyl® 3000 Peptides, Vitamin C, Ceramides'], sub: 'Real Changes Start Showing', li: [['lines', 'Fewer fine lines and less dryness'], ['tone', 'Dark spots begin fading, tone looks more even'], ['glow', 'Skin is visibly glowing']] },
+    { w: 'Month 3', box: ['Your Skin Is Looking Its Best', 'Supported by Peptides + Bakuchiol, Squalane, Niacinamide, Vitamin C'], sub: 'Visibly Healthy Skin', li: [['spark', 'More supple, glossy skin'], ['heart', 'Skin is even and healthy'], ['lift', 'Confidence soars as skin looks and feels firmer']] },
+    { w: 'Month 6-12+', box: ['Systemic Skin Renewal', 'Sustained nourishment from the full 4-step system'], sub: 'A New You', li: [['star', 'Radiant skin that gets compliments'], ['glow', 'Skin looks rested and healthy'], ['shield', 'A strong skin barrier supports skin through the seasons']] }
+  ];
+  $('.js-tl').innerHTML = TL.map(function (t) {
+    return '<li class="tl__item reveal"><span class="tl__dot">' + ic('check') + '</span><p class="tl__when">' + ic('cal') + t.w + '</p><div class="tl__box"><b>' + t.box[0] + '</b>' + t.box[1] + '</div><p class="tl__sub">' + t.sub + '</p><ul class="tl__list">' +
+      t.li.map(function (l) { return '<li>' + ic(l[0]) + l[1] + '</li>'; }).join('') + '</ul></li>';
+  }).join('');
+
+  /* ---------- ingredients (botanical icons) ---------- */
+  var BOT = {
+    peptide: '<svg viewBox="0 0 64 64"><g fill="#cdb9ef"><circle cx="16" cy="20" r="9"/><circle cx="40" cy="14" r="7"/><circle cx="48" cy="38" r="9"/><circle cx="22" cy="46" r="8"/></g><g stroke="#5d4594" stroke-width="2.5" fill="none"><path d="M16 20L40 14M40 14L48 38M48 38L22 46M22 46L16 20"/></g><g fill="#5d4594"><circle cx="16" cy="20" r="3"/><circle cx="40" cy="14" r="3"/><circle cx="48" cy="38" r="3"/><circle cx="22" cy="46" r="3"/></g></svg>',
+    flower: '<svg viewBox="0 0 64 64"><g fill="#b39be3">' + [0, 45, 90, 135, 180, 225, 270, 315].map(function (a) { return '<ellipse cx="32" cy="14" rx="6" ry="12" transform="rotate(' + a + ' 32 32)"/>'; }).join('') + '</g><circle cx="32" cy="32" r="8" fill="#5d4594"/></svg>',
+    honey: '<svg viewBox="0 0 64 64"><g fill="#e4d8f8" stroke="#9579d0" stroke-width="2"><path d="M20 8l10 6v12l-10 6-10-6V14z"/><path d="M42 8l10 6v12l-10 6-10-6V14z"/><path d="M31 28l10 6v12l-10 6-10-6V34z"/></g></svg>',
+    daisy: '<svg viewBox="0 0 64 64"><g fill="#cdb9ef">' + [0, 30, 60, 90, 120, 150, 180, 210, 240, 270, 300, 330].map(function (a) { return '<rect x="30" y="6" width="4" height="22" rx="2" transform="rotate(' + a + ' 32 32)"/>'; }).join('') + '</g><circle cx="32" cy="32" r="9" fill="#9579d0"/></svg>',
+    drop: '<svg viewBox="0 0 64 64"><path d="M32 6s16 18 16 30a16 16 0 0 1-32 0C16 24 32 6 32 6z" fill="#e4d8f8" stroke="#9579d0" stroke-width="2"/><path d="M24 38a8 8 0 0 0 8 8" stroke="#5d4594" stroke-width="2.5" fill="none" stroke-linecap="round"/></svg>',
+    berry: '<svg viewBox="0 0 64 64"><path d="M32 4v56" stroke="#5d4594" stroke-width="2.5"/><g fill="#b39be3"><circle cx="24" cy="14" r="5"/><circle cx="40" cy="20" r="5"/><circle cx="24" cy="28" r="5"/><circle cx="40" cy="34" r="5"/><circle cx="24" cy="42" r="5"/><circle cx="40" cy="48" r="5"/></g><g fill="#7a5fb5"><path d="M32 18c-6-6-14-4-16-2 4 2 10 4 16 2z"/><path d="M32 40c6-6 14-4 16-2-4 2-10 4-16 2z"/></g></svg>'
+  };
+  var ING = [
+    ['peptide', 'Firmer skin', 'Matrixyl® 3000 Peptides', 'Signal peptides that encourage skin to make more collagen, so skin looks firmer and lines look softer.'],
+    ['berry', 'Softer, smoother skin', 'Bakuchiol & Rosehip', 'A gentle plant alternative to retinol that smooths texture and softens fine lines, with no redness or peeling.'],
+    ['honey', 'Supports the skin barrier', 'Squalane & Ceramides', 'Replace the lipids mature skin loses, locking in moisture and protecting the skin barrier.'],
+    ['daisy', 'Calms and soothes', 'Calendula & Chamomile', 'Powerful, fast-working soothers that calm sensitive skin and reduce the look of redness.'],
+    ['flower', 'Brightens the look of dark circles', 'Vitamin C & Caffeine', 'Depuff and brighten the delicate under-eye area for a more rested look.'],
+    ['drop', 'Natural glow', 'Niacinamide & Sea Buckthorn', 'Evens skin tone and restores radiance. Sea buckthorn is one of nature’s richest sources of vitamin C.']
+  ];
+  $('.js-ing-list').innerHTML = ING.map(function (x) {
+    return '<div class="ing-row reveal"><div class="ing-row__top"><span class="ing-row__ic">' + BOT[x[0]] + '</span><div><p class="ing-row__label">' + x[1] + '</p><p class="ing-row__name">' + x[2] + '</p></div></div><p>' + x[3] + '</p></div>';
+  }).join('');
+
+  /* ---------- routine ---------- */
+  $$('.toggle button').forEach(function (b) {
+    b.addEventListener('click', function () {
+      var t = b.getAttribute('data-time');
+      $$('.toggle button').forEach(function (x) { x.classList.toggle('is-active', x === b); x.setAttribute('aria-selected', x === b); });
+      $('.toggle').classList.toggle('is-pm', t === 'pm');
+      $$('.rstep').forEach(function (r) { r.classList.toggle('is-hidden', r.getAttribute('data-show').split(' ').indexOf(t) < 0); });
+      $('.js-eye-n').textContent = t === 'pm' ? '1' : '3';
+    });
+  });
+
+  /* ---------- reviews (Loox-style) ---------- */
+  var RV = [
+    { n: 'Carol M.', a: 61, r: 5, d: '2 days ago', img: 'photo-1566616213894-2d4e1baee5d8', video: true, t: 'Eight weeks in and the lines around my eyes have softened so much. The night balm is heaven.', tags: ['lines'] },
+    { n: 'Maria S.', a: 52, r: 5, d: '4 days ago', img: 'photo-1592621385612-4d7129426394', lbl: 'Before', t: 'My skin had gone grey and tired. Now people tell me I look rested, even on 5 hours of sleep.', tags: ['firm'] },
+    { n: 'Patricia L.', a: 54, r: 5, d: '5 days ago', t: 'Every retinol I tried left me red and flaky. This gives me results without the irritation.', tags: ['sensitive', 'lines'] },
+    { n: 'Denise R.', a: 66, r: 5, d: '1 week ago', img: 'photo-1508214751196-bcfd4ca60f91', t: 'The firmness around my cheeks and jaw is noticeable. My husband commented without me saying anything!', tags: ['firm'] },
+    { n: 'Susan B.', a: 49, r: 4, d: '1 week ago', t: 'The eye balm is the star for me. Concealer goes on so much smoother. Wish the jar was bigger.', tags: ['dark'] },
+    { n: 'Teresa G.', a: 47, r: 5, d: '2 weeks ago', img: 'photo-1594744803329-e58b31de8bf5', video: true, t: 'Puffiness is gone in the morning. I keep the eye balm in the fridge for extra cooling.', tags: ['dark'] },
+    { n: 'Margaret T.', a: 72, r: 5, d: '2 weeks ago', img: 'photo-1599305090598-fe179d501227', t: 'At 72 I didn’t expect this. My skin feels plump and soft again. Already on my second order.', tags: ['firm', 'lines'] },
+    { n: 'Angela D.', a: 58, r: 5, d: '3 weeks ago', t: 'No stinging, no breakouts, no fragrance headache. Just softer, brighter skin.', tags: ['sensitive'] },
+    { n: 'Jennifer K.', a: 52, r: 5, d: '3 weeks ago', img: 'photo-1601049541289-9b1b7bbbfe19', t: 'Replaced 7 products with 4. I spend less than on my old luxury cream and my skin looks better.', tags: ['lines'] },
+    { n: 'Barbara W.', a: 64, r: 4, d: '1 month ago', t: 'Didn’t see much the first two weeks, but by week six my skin looked noticeably firmer.', tags: ['firm'] },
+    { n: 'Helen F.', a: 69, r: 5, d: '1 month ago', img: 'photo-1573461160327-b450ce3d8e7f', t: 'Better than my $300 cream. More hydrated and even. Wish I’d found this sooner.', tags: ['lines', 'firm'] },
+    { n: 'Rosa P.', a: 55, r: 5, d: '2 months ago', t: 'Winter used to destroy my skin. Now it stays soft all day. The polish is gentle on my cheeks.', tags: ['sensitive'] }
+  ];
+  var rf = 'all', shown = 8, grid = $('.js-reviews');
+  function renderRV() {
+    var list = RV.filter(function (r) { return rf === 'all' || (rf === 'photo' ? !!r.img : r.tags.indexOf(rf) > -1); });
+    grid.innerHTML = list.slice(0, shown).map(function (r) {
+      return '<article class="rcard">' + (r.img ? '<div class="rcard__media"><img src="' + U(r.img, 400, 530) + '" alt="Photo from ' + r.n + '" loading="lazy">' + (r.video ? '<span class="vcard__play">' + ic('play') + '</span>' : '') + (r.lbl ? '<span class="rcard__lbl">' + r.lbl + '</span>' : '') + '</div>' : '') +
+        '<div class="rcard__body"><p class="rcard__name">' + r.n + '<small>' + r.d + '</small></p><span class="stars stars--sm" style="--r:' + r.r + '"></span><i class="verified">✓ Verified buyer</i><p>' + r.t + '</p></div></article>';
+    }).join('') || '<p class="center" style="column-span:all;color:#6a6472">No reviews match this filter yet.</p>';
+    $('.js-more').style.display = list.length > shown ? '' : 'none';
+  }
+  $$('.chip').forEach(function (c) { c.addEventListener('click', function () { rf = c.getAttribute('data-filter'); shown = 8; $$('.chip').forEach(function (x) { x.classList.toggle('is-active', x === c); }); renderRV(); }); });
+  $('.js-more').addEventListener('click', function () { shown += 8; renderRV(); });
+  function toggler(btn, el) { btn.addEventListener('click', function () { var open = el.hidden; el.hidden = !open; btn.setAttribute('aria-expanded', open); }); }
+  toggler($('.js-rv-sum'), $('.js-rv-dist')); toggler($('.js-rv-filter-btn'), $('.js-rv-filters'));
+  renderRV();
 
   /* ---------- cart ---------- */
   var cart = [];
-  var GIFTS = [
-    { id: 'g1', name: 'Velvet Hand Balm', price: 0, compare: 39, img: 'https://images.unsplash.com/photo-1599305090598-fe179d501227?w=160&h=160&fit=crop&q=60' },
-    { id: 'g2', name: 'Lip & Neck Serum', price: 0, compare: 29, img: 'images/serum.svg' },
-    { id: 'g3', name: 'Rose Quartz Roller', price: 0, compare: 29, img: 'https://images.unsplash.com/photo-1600428877878-1a0fd85beda8?w=160&h=160&fit=crop&q=60' }
-  ];
   function addSystem() {
-    var p = PLANS[plan], q = qty();
-    cart = cart.filter(function (i) { return i.kind !== 'system' && i.kind !== 'gift'; });
-    cart.unshift({ id: 'sys', kind: 'system', name: 'The Complete Renewal System', variant: p.name, price: p.price, compare: p.compare, qty: q, img: 'images/system.svg' });
-    GIFTS.slice(0, p.gifts).forEach(function (g) { cart.push({ id: g.id, kind: 'gift', name: g.name, variant: 'Free welcome gift', price: 0, compare: g.compare, qty: 1, img: g.img }); });
-    renderCart(); openDrawer('cart');
+    var p = subOn ? PRICE.sub : PRICE.once;
+    cart = cart.filter(function (i) { return i.id !== 'sys'; });
+    cart.unshift({ id: 'sys', name: 'The Complete Renewal System', v: subOn ? '40-day supply · Subscribe & save 50%' : '40-day supply · One-time', price: p, compare: PRICE.compare, img: 'images/system.svg' });
+    renderCart(); openEl($('#cart'));
     var c = $('.js-cart-count'); c.classList.remove('bump'); void c.offsetWidth; c.classList.add('bump');
   }
-  $$('.js-atc').forEach(function (b) {
-    b.addEventListener('click', function () {
-      addSystem();
-      if (b.hasAttribute('data-express')) toast('Prototype: Shop Pay express checkout opens here.');
-    });
-  });
-  $('.js-add-upsell').addEventListener('click', function () {
-    if (!cart.some(function (i) { return i.id === 'up'; })) cart.push({ id: 'up', kind: 'upsell', name: 'Mineral SPF 30 Veil', variant: 'Routine add-on', price: 22, compare: 32, qty: 1, img: 'images/spf.svg' });
-    renderCart(); toast('Added Mineral SPF 30 Veil');
-  });
+  $$('.js-atc').forEach(function (b) { b.addEventListener('click', addSystem); });
+  $('.js-add-upsell').addEventListener('click', function () { if (!cart.some(function (i) { return i.id === 'up'; })) cart.push({ id: 'up', name: 'Mineral SPF 30 Veil', v: 'Routine add-on', price: 22, compare: 32, img: 'images/spf.svg' }); renderCart(); toast('Added Mineral SPF 30 Veil'); });
   function renderCart() {
-    var box = $('.js-cart-items'), total = 0, compare = 0, count = 0;
-    if (!cart.length) box.innerHTML = '<p class="cart-empty">Your cart is empty.<br>Your skin deserves better.</p>';
-    else box.innerHTML = cart.map(function (i) {
-      total += i.price * i.qty; compare += i.compare * i.qty; count += i.kind === 'gift' ? 0 : i.qty;
-      return '<div class="cart-item' + (i.kind === 'gift' ? ' cart-item--gift' : '') + '"><img src="' + i.img + '" alt=""><div><b>' + i.name + '</b><small>' + i.variant + (i.qty > 1 ? ' × ' + i.qty : '') + '</small>' +
-        (i.kind !== 'gift' ? '<button class="cart-item__rm" data-rm="' + i.id + '">Remove</button>' : '') + '</div><div class="cart-item__price">' +
-        (i.price ? money(i.price * i.qty) : 'FREE') + '<s>' + money(i.compare * i.qty) + '</s></div></div>';
-    }).join('');
-    $$('[data-rm]', box).forEach(function (b) {
-      b.addEventListener('click', function () {
-        var id = b.getAttribute('data-rm');
-        cart = cart.filter(function (i) { return id === 'sys' ? (i.kind !== 'system' && i.kind !== 'gift') : i.id !== id; });
-        renderCart();
-      });
-    });
+    var box = $('.js-cart-items'), total = 0, compare = 0;
+    box.innerHTML = cart.length ? cart.map(function (i) {
+      total += i.price; compare += i.compare;
+      return '<div class="cart-item"><img src="' + i.img + '" alt=""><div><b>' + i.name + '</b><small>' + i.v + '</small><button class="cart-item__rm" data-rm="' + i.id + '">Remove</button></div><div class="cart-item__price">' + money(i.price) + '<s>' + money(i.compare) + '</s></div></div>';
+    }).join('') : '<p class="cart-empty">Your cart is empty.</p>';
+    $$('[data-rm]', box).forEach(function (b) { b.addEventListener('click', function () { var id = b.getAttribute('data-rm'); cart = cart.filter(function (i) { return id === 'sys' ? false : i.id !== id; }); renderCart(); }); });
+    var count = cart.length;
+    $('.js-cart-count').textContent = count; $('.js-cart-count-text').textContent = '(' + count + ')';
     $('.js-cart-total').textContent = money(total);
-    $('.js-cart-saving').textContent = compare > total ? 'You\'re saving ' + money(compare - total) + ' today' : '';
-    $('.js-cart-count').textContent = count;
-    $('.js-cart-count-text').textContent = '(' + count + ')';
-    $('.js-upsell').style.display = cart.some(function (i) { return i.kind === 'system'; }) && !cart.some(function (i) { return i.id === 'up'; }) ? '' : 'none';
-    var pct = Math.min(100, total / 250 * 100), msg;
-    if (total === 0) msg = 'Add the system to unlock <b>free shipping</b>';
-    else if (total < 150) msg = 'Free shipping unlocked. Add <b>' + money(150 - total) + '</b> for a free Silk Scrunchie';
-    else if (total < 250) msg = 'Silk Scrunchie unlocked! <b>' + money(250 - total) + '</b> away from a free Mini Serum';
-    else msg = 'You\'ve unlocked <b>every free gift</b> 🎉';
+    $('.js-cart-saving').textContent = compare > total ? 'You’re saving ' + money(compare - total) : '';
+    $('.js-upsell').style.display = cart.some(function (i) { return i.id === 'sys'; }) && !cart.some(function (i) { return i.id === 'up'; }) ? '' : 'none';
+    var msg = !total ? 'Add the system to unlock <b>free shipping</b>' : total < 125 ? '✓ Free shipping unlocked. Add <b>' + money(125 - total) + '</b> for a free face cloth' : total < 150 ? 'Face cloth unlocked! <b>' + money(150 - total) + '</b> away from a free hand balm' : 'You’ve unlocked <b>every free gift</b> 🎉';
     $('.js-ship-msg').innerHTML = msg;
-    $('.js-ship-fill').style.width = (total ? Math.max(pct, 22) : 0) + '%';
+    $('.js-ship-fill').style.width = (total ? Math.min(100, Math.max(25, total / 150 * 100)) : 0) + '%';
   }
   renderCart();
-
-  /* ---------- sticky ATC ---------- */
-  var sticky = $('.sticky-atc'), mainAtc = $('#atc'), footer = $('.footer');
-  if ('IntersectionObserver' in window) {
-    var atcVisible = true, footVisible = false;
-    var upd = function () {
-      var show = !atcVisible && !footVisible && mainAtc.getBoundingClientRect().top < 0;
-      sticky.classList.toggle('is-visible', show); sticky.setAttribute('aria-hidden', !show); document.body.classList.toggle('has-sticky', show);
-    };
-    new IntersectionObserver(function (e) { atcVisible = e[0].isIntersecting; upd(); }).observe(mainAtc);
-    new IntersectionObserver(function (e) { footVisible = e[0].isIntersecting; upd(); }).observe(footer);
-  }
-
-  /* ---------- reveal on scroll ---------- */
-  var revealEls = $$('.reveal');
-  if (!reduced && 'IntersectionObserver' in window) {
-    var rio = new IntersectionObserver(function (entries) {
-      entries.forEach(function (en) {
-        if (!en.isIntersecting) return;
-        var el = en.target, sibs = $$('.reveal', el.parentNode).filter(function (x) { return !x.dataset.done; });
-        var delay = Math.max(0, sibs.indexOf(el)) * 80;
-        el.dataset.done = 1;
-        el.style.transition = 'opacity .9s cubic-bezier(.22,.8,.24,1) ' + delay + 'ms, transform .9s cubic-bezier(.22,.8,.24,1) ' + delay + 'ms';
-        el.style.opacity = 1; el.style.transform = 'none';
-        rio.unobserve(el);
-      });
-    }, { rootMargin: '0px 0px -8% 0px' });
-    revealEls.forEach(function (el) { rio.observe(el); });
-  } else revealEls.forEach(function (el) { el.style.opacity = 1; el.style.transform = 'none'; });
-
-  /* ---------- stats count-up ---------- */
-  var statIO = 'IntersectionObserver' in window && new IntersectionObserver(function (entries) {
-    entries.forEach(function (en) {
-      if (!en.isIntersecting) return;
-      var st = en.target, b = $('.js-count', st), to = +b.getAttribute('data-to'), t0 = performance.now(), dur = reduced ? 1 : 1600;
-      st.classList.add('is-in');
-      (function step(t) { var k = Math.min(1, (t - t0) / dur); b.textContent = Math.round(to * (1 - Math.pow(1 - k, 3))); if (k < 1) requestAnimationFrame(step); })(t0);
-      statIO.unobserve(st);
-    });
-  }, { threshold: .4 });
-  $$('.stat').forEach(function (s) { statIO ? statIO.observe(s) : ($('.js-count', s).textContent = $('.js-count', s).dataset.to); });
-
-  /* ---------- before / after ---------- */
-  var BA = [
-    { img: 'photo-1508214751196-bcfd4ca60f91', q: '“The lines around my eyes softened so much my daughter noticed before I did.”' },
-    { img: 'photo-1592621385612-4d7129426394', q: '“My skin had gone grey and tired. Now people tell me I look rested, even on 5 hours of sleep.”' },
-    { img: 'photo-1594744803329-e58b31de8bf5', q: '“My jawline looks firmer than it has in ten years. I\'ve stopped hiding from the camera.”' }
-  ];
-  var baView = $('.js-ba'), baRange = $('.js-ba-range');
-  baRange.addEventListener('input', function () { baView.style.setProperty('--pos', baRange.value + '%'); });
-  $$('.ba__picker button').forEach(function (b) {
-    b.addEventListener('click', function () {
-      var d = BA[+b.getAttribute('data-ba')], url = 'https://images.unsplash.com/' + d.img + '?w=1000&h=1000&fit=crop&q=75';
-      $$('.ba__picker button').forEach(function (x) { x.classList.toggle('is-active', x === b); x.setAttribute('aria-selected', x === b); });
-      $('.js-ba-after').src = url; $('.js-ba-before').src = url;
-      var q = $('.js-ba-quote'); q.style.opacity = 0; setTimeout(function () { q.textContent = d.q; q.style.opacity = 1; }, 250);
-      animateBA();
-    });
-  });
-  function animateBA() {
-    if (reduced) return; var t0 = performance.now();
-    (function step(t) { var k = Math.min(1, (t - t0) / 1400), v = 50 + Math.sin(k * Math.PI * 2) * 30 * (1 - k); baRange.value = v; baView.style.setProperty('--pos', v + '%'); if (k < 1) requestAnimationFrame(step); })(t0);
-  }
-  if ('IntersectionObserver' in window) { var baIO = new IntersectionObserver(function (e) { if (e[0].isIntersecting) { animateBA(); baIO.disconnect(); } }, { threshold: .6 }); baIO.observe(baView); }
-
-  /* ---------- ingredients ---------- */
-  var ING = [
-    { t: 'Matrixyl® 3000', f: 'Found in: Day Cream, Night Balm', d: 'Signal peptides that tell skin to make more collagen. In clinical tests they reduced the look of wrinkle depth by up to 45% in 2 months.', img: 'photo-1617897903246-719242758050' },
-    { t: 'Bakuchiol', f: 'Found in: Night Renewal Balm', d: 'A plant-based alternative to retinol from the babchi seed. It smooths lines and evens tone with no redness, peeling or sun sensitivity.', img: 'photo-1573461160327-b450ce3d8e7f' },
-    { t: 'Squalane', f: 'Found in: all four steps', d: 'A copy of the oil skin makes less of after 40. It rebuilds the moisture barrier for supple, cushioned skin that stays hydrated for 72 hours.', img: 'photo-1515377905703-c4788e51af15' },
-    { t: 'Vitamin C (THD)', f: 'Found in: Bright Eye Balm, Day Cream', d: 'A stable, oil-soluble vitamin C that reaches deeper layers to fade dark spots and brighten the look of dark circles, without stinging.', img: 'photo-1576426863848-c21f53c60b19' }
-  ];
-  var ingImg = $('.js-ing-img');
-  $$('.ing__tab').forEach(function (b) {
-    b.addEventListener('click', function () {
-      var d = ING[+b.getAttribute('data-ing')];
-      $$('.ing__tab').forEach(function (x) { x.classList.toggle('is-active', x === b); x.setAttribute('aria-selected', x === b); });
-      [ingImg, $('.ing__info')].forEach(function (el) { el.classList.add('is-swapping'); el.style.transition = 'opacity .3s'; });
-      setTimeout(function () {
-        ingImg.src = 'https://images.unsplash.com/' + d.img + '?w=900&h=900&fit=crop&q=75';
-        $('.js-ing-title').textContent = d.t; $('.js-ing-found').textContent = d.f; $('.js-ing-desc').textContent = d.d;
-        ingImg.classList.remove('is-swapping'); $('.ing__info').classList.remove('is-swapping');
-      }, 300);
-    });
-  });
-
-  /* ---------- AM / PM routine ---------- */
-  $$('.toggle button').forEach(function (b) {
-    b.addEventListener('click', function () {
-      var time = b.getAttribute('data-time');
-      $$('.toggle button').forEach(function (x) { x.classList.toggle('is-active', x === b); x.setAttribute('aria-selected', x === b); });
-      $('.toggle').classList.toggle('is-pm', time === 'pm');
-      $$('.rstep').forEach(function (r) { r.classList.toggle('is-hidden', r.getAttribute('data-show').split(' ').indexOf(time) < 0); });
-      $('.js-eye-n').textContent = time === 'pm' ? '1' : '3';
-    });
-  });
-  $$('.rstep').forEach(function (r) { r.classList.toggle('is-hidden', r.getAttribute('data-show').split(' ').indexOf('am') < 0); });
-
-  /* ---------- reviews ---------- */
-  var U = function (id) { return 'https://images.unsplash.com/' + id + '?w=600&h=450&fit=crop&q=70'; };
-  var REVIEWS = [
-    { n: 'Carol M.', a: 61, d: '2 days ago', r: 5, t: 'My daughter asked if I had Botox', b: 'Eight weeks in and the lines around my eyes have softened so much. The night balm is heaven, and I wake up looking like I slept 10 hours.', tags: ['lines'], img: U('photo-1566616213894-2d4e1baee5d8'), h: 48 },
-    { n: 'Patricia L.', a: 54, d: '5 days ago', r: 5, t: 'Finally, no redness', b: 'Every retinol I tried left me red and flaky. This gives me the results without the irritation. My rosacea-prone skin is calm and glowing.', tags: ['sensitive', 'lines'], h: 31 },
-    { n: 'Denise R.', a: 66, d: '1 week ago', r: 5, t: 'Jawline is back', b: 'I was skeptical, but the firmness around my cheeks and jaw is noticeable. My husband commented without me saying anything!', tags: ['firm'], img: U('photo-1508214751196-bcfd4ca60f91'), h: 62 },
-    { n: 'Susan B.', a: 49, d: '1 week ago', r: 4, t: 'Dark circles visibly lighter', b: 'The eye balm is the star for me. Concealer goes on so much smoother. Took off one star only because I wish the eye jar was bigger.', tags: ['dark'], h: 19 },
-    { n: 'Margaret T.', a: 72, d: '2 weeks ago', r: 5, t: 'At 72 I didn\'t expect this', b: 'My skin feels plump and soft again. The routine is so simple, and I love that it\'s only 2 minutes. Already on my second 120-day plan.', tags: ['firm', 'lines'], img: U('photo-1599305090598-fe179d501227'), h: 77 },
-    { n: 'Jennifer K.', a: 52, d: '2 weeks ago', r: 5, t: 'Replaced 7 products with 4', b: 'My bathroom shelf thanks me. I spend less than I did on my old "luxury" cream and my skin looks better. The texture is gorgeous.', tags: ['lines'], h: 24 },
-    { n: 'Angela D.', a: 58, d: '3 weeks ago', r: 5, t: 'Sensitive skin approved', b: 'No stinging, no breakouts, no fragrance headache. Just softer, brighter skin. Customer service was lovely when I changed my delivery date.', tags: ['sensitive'], img: U('photo-1601049541289-9b1b7bbbfe19'), h: 15 },
-    { n: 'Linda K.', a: 58, d: '3 weeks ago', r: 5, t: 'People keep asking what I\'ve done', b: 'Nothing! Just this routine morning and night. The glow showed up by week two and the fine lines softened by week five.', tags: ['lines', 'dark'], h: 53 },
-    { n: 'Barbara W.', a: 64, d: '1 month ago', r: 4, t: 'Lovely, results take patience', b: 'Didn\'t see much the first two weeks, but stuck with it and by week six my skin looked noticeably firmer. Worth the wait.', tags: ['firm'], h: 22 },
-    { n: 'Teresa G.', a: 47, d: '1 month ago', r: 5, t: 'Puffiness gone in the morning', b: 'The eye balm depuffs within minutes. I keep it in the fridge for extra cooling. Love the subscription because I never run out.', tags: ['dark'], img: U('photo-1573461160327-b450ce3d8e7f'), h: 18 },
-    { n: 'Helen F.', a: 69, d: '1 month ago', r: 5, t: 'Better than my $300 cream', b: 'I was loyal to a department store brand for 15 years. Switched, and my skin is more hydrated and even. Wish I\'d found this sooner.', tags: ['lines', 'firm'], h: 41 },
-    { n: 'Rosa P.', a: 55, d: '2 months ago', r: 5, t: 'Dryness fixed', b: 'Winter used to destroy my skin. Now it stays soft all day. The polish is gentle enough for my sensitive cheeks.', tags: ['sensitive'], h: 12 }
-  ];
-  var filter = 'all', sort = 'recent', shown = 6, grid = $('.js-reviews');
-  function visibleReviews() {
-    var list = REVIEWS.filter(function (r) { return filter === 'all' ? true : filter === 'photo' ? !!r.img : r.tags.indexOf(filter) > -1; });
-    if (sort === 'helpful') list = list.slice().sort(function (a, b) { return b.h - a.h; });
-    if (sort === 'age') list = list.filter(function (r) { return r.a >= 60; });
-    return list;
-  }
-  var TAGN = { lines: 'Fine lines', firm: 'Firmness', dark: 'Dark circles', sensitive: 'Sensitive skin' };
-  function renderReviews() {
-    var list = visibleReviews();
-    grid.innerHTML = list.length ? list.slice(0, shown).map(function (r) {
-      return '<article class="rcard">' + (r.img ? '<div class="rcard__photo"><img src="' + r.img + '" alt="Customer photo" loading="lazy"></div>' : '') +
-        '<div class="rcard__top"><span class="stars stars--sm" style="--r:' + r.r + '"></span><span class="rcard__date">' + r.d + '</span></div>' +
-        '<h3>' + r.t + '</h3><p>' + r.b + '</p><div class="rcard__tags">' + r.tags.map(function (t) { return '<span>' + TAGN[t] + '</span>'; }).join('') + '</div>' +
-        '<div class="rcard__by"><span class="rcard__av">' + r.n[0] + '</span><div><b>' + r.n + ', ' + r.a + '</b><i class="verified">Verified buyer</i></div><button class="rcard__help" type="button">Helpful (' + r.h + ')</button></div></article>';
-    }).join('') : '<p class="empty">No reviews match this filter yet.</p>';
-    $('.js-more').style.display = list.length > shown ? '' : 'none';
-    $$('.rcard__help', grid).forEach(function (b) {
-      b.addEventListener('click', function () { if (b.classList.contains('is-on')) return; b.classList.add('is-on'); b.textContent = b.textContent.replace(/\((\d+)\)/, function (_, n) { return '(' + (+n + 1) + ')'; }); });
-    });
-  }
-  $$('.chip-btn').forEach(function (b) {
-    b.addEventListener('click', function () { filter = b.getAttribute('data-filter'); shown = 6; $$('.chip-btn').forEach(function (x) { x.classList.toggle('is-active', x === b); }); renderReviews(); });
-  });
-  $('.js-sort').addEventListener('change', function () { sort = this.value; shown = 6; renderReviews(); });
-  $('.js-more').addEventListener('click', function () { shown += 6; renderReviews(); });
-  renderReviews();
-
-  /* ---------- exit intent ---------- */
-  var exitModal = $('#exit'), started = Date.now();
-  function showExit() { if (store.get('lilae-exit')) return; store.set('lilae-exit', 1); lastFocus = document.activeElement; exitModal.classList.add('is-open'); exitModal.setAttribute('aria-hidden', 'false'); }
-  document.addEventListener('mouseout', function (e) {
-    if (!e.relatedTarget && e.clientY <= 0 && Date.now() - started > 8000 && !$('.drawer.is-open') && !document.body.classList.contains('cro-on')) showExit();
-  });
-  $('.js-exit-form').addEventListener('submit', function (e) { e.preventDefault(); closeAll(); toast('Code WELCOME10 applied: 10% off your first system'); });
   $('.js-news').addEventListener('submit', function (e) { e.preventDefault(); this.reset(); toast('Welcome! Check your inbox for 10% off.'); });
 
-  /* ---------- CRO notes (presentation mode) ---------- */
-  var croBtn = $('.js-cro-toggle'), croBuilt = false;
-  function buildNotes() {
-    $$('[data-cro]').forEach(function (el, i) {
-      var n = document.createElement('aside'); n.className = 'cro-note';
-      n.innerHTML = '<button type="button" aria-label="Minimise note">–</button><b><i>' + (i + 1) + '</i>' + el.getAttribute('data-cro-title') + '</b><p>' + el.getAttribute('data-cro') + '</p>';
-      $('button', n).addEventListener('click', function (e) { e.stopPropagation(); n.classList.toggle('is-min'); this.textContent = n.classList.contains('is-min') ? '+' : '–'; });
-      if (el.classList.contains('announce') || el.classList.contains('header')) {
-        var top = $('.cro-top') || (function () { var t = document.createElement('div'); t.className = 'cro-top wrap'; $('main').insertBefore(t, $('main').firstChild); return t; })();
-        top.appendChild(n);
-      } else if (el.classList.contains('pdp')) el.appendChild(n); else el.insertBefore(n, el.firstChild);
-    });
-    var prev = document.createElement('button'); prev.type = 'button'; prev.className = 'btn btn--ghost btn--sm cro-preview';
-    prev.textContent = 'Preview exit popup'; prev.addEventListener('click', function () { lastFocus = prev; exitModal.classList.add('is-open'); exitModal.setAttribute('aria-hidden', 'false'); });
-    document.body.appendChild(prev);
-    croBuilt = true;
+  /* ---------- sticky ATC (mobile) ---------- */
+  var sticky = $('.sticky-atc'), mainAtc = $('#atc');
+  if ('IntersectionObserver' in window) {
+    new IntersectionObserver(function (e) {
+      var show = !e[0].isIntersecting && mainAtc.getBoundingClientRect().top < 0;
+      sticky.classList.toggle('is-visible', show); sticky.setAttribute('aria-hidden', !show);
+      $('.btn-atc', sticky).tabIndex = show ? 0 : -1;
+    }).observe(mainAtc);
   }
-  croBtn.addEventListener('click', function () {
-    if (!croBuilt) buildNotes();
-    var on = !document.body.classList.contains('cro-on');
-    document.body.classList.toggle('cro-on', on); croBtn.setAttribute('aria-pressed', on);
-    if (on) { sticky.classList.add('is-visible'); toast('Layout notes on: each section explains its CRO purpose'); }
-    else sticky.classList.toggle('is-visible', document.body.classList.contains('has-sticky'));
-  });
-  if (/[?&]notes=1/.test(location.search)) croBtn.click();
 
-  /* ---------- GSAP flourishes ---------- */
-  window.addEventListener('load', function () {
-    if (!window.gsap || reduced) { $$('.tl__step').forEach(function (st) { st.classList.add('is-lit'); }); return; }
-    var gsap = window.gsap;
-    if (window.ScrollTrigger) gsap.registerPlugin(window.ScrollTrigger);
-    gsap.from('.buybox > *', { y: 18, opacity: 0, duration: .8, stagger: .05, ease: 'power3.out', clearProps: 'all' });
-    gsap.from('.gallery__main', { scale: .97, opacity: 0, duration: 1, ease: 'power3.out', clearProps: 'all' });
-    if (!window.ScrollTrigger) return;
-    gsap.to('.problem__media img', { yPercent: -6, ease: 'none', scrollTrigger: { trigger: '.problem', start: 'top bottom', end: 'bottom top', scrub: true } });
-    gsap.from('.float-card', { y: 40, opacity: 0, duration: 1, stagger: .2, ease: 'power3.out', scrollTrigger: { trigger: '.problem__media', start: 'top 70%' } });
-    var steps = $$('.tl__step');
-    if (window.innerWidth > 1100) {
-      gsap.to('.js-tl-progress', {
-        width: '100%', ease: 'none',
-        scrollTrigger: {
-          trigger: '.tl', start: 'top 75%', end: 'bottom 45%', scrub: .6,
-          onUpdate: function (s) { steps.forEach(function (st, i) { st.classList.toggle('is-lit', s.progress >= i / (steps.length - 1) - .02); }); }
-        }
+  /* ---------- reveal + count-up ---------- */
+  if (!reduced && 'IntersectionObserver' in window) {
+    var rio = new IntersectionObserver(function (es) {
+      es.forEach(function (en) {
+        if (!en.isIntersecting) return;
+        var el = en.target; el.style.transition = 'opacity .8s cubic-bezier(.22,.8,.24,1), transform .8s cubic-bezier(.22,.8,.24,1)'; el.style.opacity = 1; el.style.transform = 'none';
+        var c = el.querySelector('.js-count');
+        if (c) { var to = +c.getAttribute('data-to'), t0 = performance.now(); (function s(t) { var k = Math.min(1, (t - t0) / 1300); c.textContent = Math.round(to * (1 - Math.pow(1 - k, 3))); if (k < 1) requestAnimationFrame(s); })(t0); }
+        rio.unobserve(el);
       });
-    } else steps.forEach(function (st) { st.classList.add('is-lit'); });
-    gsap.from('.seal', { rotate: -90, scale: .6, opacity: 0, duration: 1.2, ease: 'back.out(1.6)', scrollTrigger: { trigger: '.guarantee', start: 'top 70%' } });
+    }, { rootMargin: '0px 0px -6% 0px' });
+    $$('.reveal').forEach(function (el) { rio.observe(el); });
+  } else $$('.reveal').forEach(function (el) { el.style.opacity = 1; el.style.transform = 'none'; });
+
+  window.addEventListener('load', function () {
+    if (!window.gsap || reduced) return;
+    window.gsap.from('.buybox > *', { y: 14, opacity: 0, duration: .7, stagger: .035, ease: 'power3.out', clearProps: 'all' });
   });
-  if (!window.gsap) $$('.tl__step').forEach(function (st) { st.classList.add('is-lit'); });
 })();
