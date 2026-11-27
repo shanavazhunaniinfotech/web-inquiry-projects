@@ -123,7 +123,7 @@
       '<div class="bacard__body"><div class="bacard__top"><span>' + r.n + ' <i class="verified">✓ Verified</i></span><span class="stars stars--sm"></span></div><div class="bacard__tags">' +
       r.tags.map(function (t) { return '<span>' + ic(t[0]) + t[1] + '</span>'; }).join('') + '</div><blockquote>' + r.q + '</blockquote><p>' + r.b + '</p></div></article>';
   }).join('');
-  $$('.js-carousel').forEach(initCarousel);
+  $$('.js-carousel').forEach(function (c) { if (c.getAttribute('data-carousel') !== 'xsell') initCarousel(c); });
 
   /* ---------- timeline ---------- */
   var TL = [
@@ -218,7 +218,7 @@
       total += i.price; compare += i.compare;
       return '<div class="cart-item"><img src="' + i.img + '" alt=""><div><b>' + i.name + '</b><small>' + i.v + '</small><button class="cart-item__rm" data-rm="' + i.id + '">Remove</button></div><div class="cart-item__price">' + money(i.price) + '<s>' + money(i.compare) + '</s></div></div>';
     }).join('') : '<p class="cart-empty">Your cart is empty.</p>';
-    $$('[data-rm]', box).forEach(function (b) { b.addEventListener('click', function () { var id = b.getAttribute('data-rm'); cart = cart.filter(function (i) { return id === 'sys' ? false : i.id !== id; }); renderCart(); }); });
+    $$('[data-rm]', box).forEach(function (b) { b.addEventListener('click', function () { var id = b.getAttribute('data-rm'); cart = cart.filter(function (i) { return i.id !== id; }); renderCart(); }); });
     var count = cart.length;
     $('.js-cart-count').textContent = count; $('.js-cart-count-text').textContent = '(' + count + ')';
     $('.js-cart-total').textContent = money(total);
@@ -229,6 +229,30 @@
     $('.js-ship-fill').style.width = (total ? Math.min(100, Math.max(25, total / 150 * 100)) : 0) + '%';
   }
   renderCart();
+
+  /* cross-sell */
+  var XS = [
+    { id: 'x1', n: 'Peptide Day Cream', t: 'Firm · 50 ml', p: 52, c: 65, r: 4.8, cnt: 1204, img: 'images/day.svg', badge: 'Bestseller' },
+    { id: 'x2', n: 'Night Renewal Balm', t: 'Repair · 50 ml', p: 52, c: 65, r: 4.9, cnt: 986, img: 'images/night.svg' },
+    { id: 'x3', n: 'Bright Eye Balm', t: 'Brighten · 15 ml', p: 36, c: 45, r: 4.7, cnt: 742, img: 'images/eye.svg' },
+    { id: 'x4', n: 'Cleansing Polish', t: 'Exfoliate · 100 ml', p: 38, c: 48, r: 4.8, cnt: 611, img: 'images/cleanser.svg' },
+    { id: 'x5', n: 'Mineral SPF 30 Veil', t: 'Protect · 30 ml', p: 32, c: 40, r: 4.7, cnt: 389, img: 'images/spf.svg', badge: 'New' },
+    { id: 'x6', n: 'Lip & Neck Serum', t: 'Smooth · 30 ml', p: 29, c: 36, r: 4.8, cnt: 455, img: 'images/serum.svg' }
+  ];
+  $('.js-xsell-track').innerHTML = XS.map(function (x) {
+    return '<article class="xcard"><div class="xcard__img"><img src="' + x.img + '" alt="' + x.n + '" loading="lazy" width="400" height="400">' + (x.badge ? '<span class="xcard__badge">' + x.badge + '</span>' : '') + '</div><div class="xcard__body"><span class="xcard__rv"><span class="stars stars--sm" style="--r:' + x.r + '"></span>(' + x.cnt.toLocaleString('en-US') + ')</span><h3>' + x.n.replace('&', '&amp;') + '</h3><span class="xcard__tag">' + x.t + '</span><p class="xcard__price">$' + x.p + '<s>$' + x.c + '</s></p><button class="xcard__add" type="button" data-x="' + x.id + '">Add to cart</button></div></article>';
+  }).join('');
+  $$('.xcard__add').forEach(function (b) {
+    b.addEventListener('click', function () {
+      var x = XS.filter(function (i) { return i.id === b.getAttribute('data-x'); })[0];
+      if (!cart.some(function (i) { return i.id === x.id; })) cart.push({ id: x.id, name: x.n, v: x.t, price: x.p, compare: x.c, img: x.img });
+      renderCart(); b.textContent = 'Added ✓'; b.classList.add('is-added');
+      setTimeout(function () { b.textContent = 'Add to cart'; b.classList.remove('is-added'); }, 1800);
+      toast('Added ' + x.n + ' to your cart');
+      var c = $('.js-cart-count'); c.classList.remove('bump'); void c.offsetWidth; c.classList.add('bump');
+    });
+  });
+  initCarousel($('[data-carousel="xsell"]'));
   $('.js-news').addEventListener('submit', function (e) { e.preventDefault(); this.reset(); toast('Welcome! Check your inbox for 10% off.'); });
 
   /* ---------- sticky ATC (mobile) ---------- */
