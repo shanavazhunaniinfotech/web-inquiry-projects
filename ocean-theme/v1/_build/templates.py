@@ -45,7 +45,7 @@ def collection():
     <div class="chero__copy">
       {breadcrumbs([('Home', 'index.html'), ('Collections', 'collections.html'), ('<span data-col-crumb>All jewellery</span>', None)])}
       <h1 class="chero__title" data-col-title>All jewellery</h1>
-      <p class="chero__desc" data-col-desc></p>
+      <p class="chero__desc" data-col-desc>Every piece we make, in solid recycled 14k gold.</p>
       <nav class="chero__nav" aria-label="Collections" data-col-nav>{nav}</nav>
     </div>
     <div class="chero__media" data-col-image></div>
