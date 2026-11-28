@@ -108,7 +108,7 @@ window.OCEAN = (function () {
       photo: '1599459183200-59c7687a0275', fp: [0.6, 0.27, 2.4], detail: [[0.6, 0.25, 2.4], [0.55, 0.35, 1.6]],
       metals: ['yellow'], sizes: ['40 cm'], stock: 25, hidden: true,
       desc: 'Elongated paperclip links in solid 14k recycled gold, worn high and short.' },
-    { id: 20, handle: 'gift-card', title: 'Ocean Gift Card', type: 'Gift card', stone: 'None', price: 50, compare: 0, rating: null, reviews: 0, badge: '', tags: ['gifts'],
+    { id: 20, handle: 'gift-card', title: 'Lagoon Gift Card', type: 'Gift card', stone: 'None', price: 50, compare: 0, rating: null, reviews: 0, badge: '', tags: ['gifts'],
       photo: null, giftCard: true, metals: ['yellow'], sizes: ['$50', '$100', '$250', '$500'], stock: 999, hidden: true,
       desc: 'Delivered by email on the date you choose, with your message. Never expires and can be used on anything in the store.' },
     { id: 21, handle: 'gift-wrap', title: 'Gift wrap', type: 'Gift wrap', stone: 'None', price: 8, compare: 0, rating: null, reviews: 0, badge: '', tags: [],

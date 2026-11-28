@@ -418,15 +418,32 @@
     if (!cart.some(function (l) { return l.id !== GIFT_WRAP_ID; })) cart = [];
     saveCart(); renderCart();
   }
+  /* Sample automatic discounts (preview only). In Liquid: line rows come from line_item.line_level_discount_allocations,
+     order rows from cart.cart_level_discount_applications; names are the merchant's discount titles. */
+  var SAMPLE_LINE = { name: 'Necklace Week', off: 0.10, type: 'Necklaces' }, SAMPLE_ORDER = { name: 'Spend $300, save $25', min: 300, amount: 25 };
+  function sampleDiscountOn() { return document.documentElement.classList.contains('has-sample-discount'); }
+  function lineDiscounts(l) {
+    var p = byId(l.id), lp = unitOf(l) * l.qty, out = [];
+    if (l.bundle && stackDiscountOn()) out.push({ name: 'Stack discount', amount: lp * 0.15 });
+    else if (sampleDiscountOn() && p.type === SAMPLE_LINE.type) out.push({ name: SAMPLE_LINE.name, amount: lp * SAMPLE_LINE.off });
+    return out;
+  }
   function totals() {
-    var sub = 0, disc = 0, on = stackDiscountOn();
-    cart.forEach(function (l) { var lp = unitOf(l) * l.qty; sub += lp; if (l.bundle && on) disc += lp * 0.15; });
-    return { sub: sub, disc: disc, total: sub - disc, count: cart.reduce(function (a, l) { return a + l.qty; }, 0), wrap: 0 };
+    var sub = 0, disc = 0, named = {}, list = [];
+    var add = function (name, amt, level) { if (!named[name]) { named[name] = { name: name, amount: 0, level: level }; list.push(named[name]); } named[name].amount += amt; disc += amt; };
+    cart.forEach(function (l) { sub += unitOf(l) * l.qty; lineDiscounts(l).forEach(function (d) { add(d.name, d.amount, 'line'); }); });
+    if (sampleDiscountOn() && sub - disc >= SAMPLE_ORDER.min) add(SAMPLE_ORDER.name, SAMPLE_ORDER.amount, 'order');
+    return { sub: sub, disc: disc, discounts: list, total: sub - disc, count: cart.reduce(function (a, l) { return a + l.qty; }, 0), wrap: 0 };
+  }
+  function discountRowsHTML(t, rowCls) {
+    return t.discounts.filter(function (d) { return d.amount >= 0.005; }).map(function (d) {
+      return '<div class="' + rowCls + '"><' + (rowCls.indexOf('cp-') === 0 ? 'dt' : 'span') + '>' + esc(d.name) + ' <small>(automatic' + (d.level === 'order' ? ', order' : '') + ')</small></' + (rowCls.indexOf('cp-') === 0 ? 'dt' : 'span') + '><' + (rowCls.indexOf('cp-') === 0 ? 'dd' : 'strong') + '>−' + money(d.amount) + '</' + (rowCls.indexOf('cp-') === 0 ? 'dd' : 'strong') + '></div>';
+    }).join('');
   }
   function lineHTML(l) {
-    var p = byId(l.id), unit = unitOf(l), pl = planOf(p, l), on = stackDiscountOn();
+    var p = byId(l.id), unit = unitOf(l), pl = planOf(p, l), ld = lineDiscounts(l), lineOff = ld.reduce(function (a, d) { return a + d.amount; }, 0);
     var opts = p.giftCard ? 'Gift card · ' + money(unit) + (l.recipient ? ' · To: ' + esc(l.recipient) : '') : (p.giftWrap ? 'Ribbon and a handwritten card' : D.METALS[l.metal].label + ' · ' + l.size);
-    var imgH = p.photo ? '<img src="' + primaryImg(p, 220, 260) + '" alt="' + esc(p.title) + '" width="88" height="104" loading="lazy">' : (p.giftCard || p.giftWrap ? '<div class="line__ph line__ph--brand"><span>Ocean</span></div>' : '<div class="line__ph">' + PLACEHOLDER + '</div>');
+    var imgH = p.photo ? '<img src="' + primaryImg(p, 220, 260) + '" alt="' + esc(p.title) + '" width="88" height="104" loading="lazy">' : (p.giftCard || p.giftWrap ? '<div class="line__ph line__ph--brand"><span>Lagoon</span></div>' : '<div class="line__ph">' + PLACEHOLDER + '</div>');
     var link = p.giftWrap ? '<span class="line__title">' + esc(p.title) + '</span>' : '<a class="line__title" href="' + R + 'product/?id=' + p.id + '">' + esc(p.title) + '</a>';
     return '<li class="line" data-line="' + esc(l.key) + '">' +
       (p.giftWrap ? '<span class="line__img">' + imgH + '</span>' : '<a class="line__img" href="' + R + 'product/?id=' + p.id + '" tabindex="-1">' + imgH + '</a>') +
@@ -434,11 +451,11 @@
         '<p class="line__meta">' + opts + (l.engraving ? ' · Engraving: “' + esc(l.engraving) + '”' : '') + '</p>' +
         (pl ? '<p class="line__plan">' + esc(pl.name) + '</p>' : '') +
         '<p class="line__unit">' + money(unit) + (p.compare ? ' <s>' + money(p.compare) + '</s>' : '') + (p.unitPer ? ' · ' + unitPrice(p) : '') + '</p>' +
-        (l.bundle && on ? '<span class="line__tag">Stack discount (−' + money(unit * l.qty * 0.15) + ')</span>' : '') +
+        ld.map(function (d) { return '<span class="line__tag"><svg width="12" height="12" viewBox="0 0 24 24" aria-hidden="true"><path d="M3 12V4a1 1 0 011-1h8l9 9-9 9z M8 8h.01" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linejoin="round"/></svg>' + esc(d.name) + ' (−' + money(d.amount) + ')</span>'; }).join('') +
         (p.giftWrap ? '' : '<div class="qty" role="group" aria-label="Quantity for ' + esc(p.title) + '"><button type="button" aria-label="Decrease quantity" data-qty="-1">−</button><input type="number" min="0" value="' + l.qty + '" aria-label="Quantity" data-qty-input><button type="button" aria-label="Increase quantity" data-qty="1">+</button></div>') +
         '<p class="line__error" role="alert" hidden></p>' +
       '</div>' +
-      '<div class="line__right"><span class="line__price">' + money(unit * l.qty * (l.bundle && on ? 0.85 : 1)) + '</span><button type="button" class="line__remove" data-remove aria-label="Remove ' + esc(p.title) + '">Remove</button></div>' +
+      '<div class="line__right"><span class="line__price">' + (lineOff >= 0.005 ? '<s><span class="visually-hidden">Was </span>' + money(unit * l.qty) + '</s> <span class="visually-hidden">Now </span>' : '') + money(unit * l.qty - lineOff) + '</span><button type="button" class="line__remove" data-remove aria-label="Remove ' + esc(p.title) + '">Remove</button></div>' +
     '</li>';
   }
   function upsellList(n) {
@@ -458,9 +475,7 @@
       $('[data-ship-text]', drawer).innerHTML = !cart.length ? 'Free shipping on orders over ' + money(FREE_SHIP) : (left > 0 ? 'Spend <strong>' + money(left) + '</strong> more for free shipping' : '<strong>Your order ships free</strong>');
       var bar = $('[data-ship-bar]', drawer); if (bar) bar.style.width = Math.min(100, t.total / FREE_SHIP * 100) + '%';
       $('[data-cart-subtotal]', drawer).textContent = money(t.sub);
-      var hasDisc = t.disc >= 0.005;
-      $('[data-bundle-row]', drawer).hidden = !hasDisc;
-      $('[data-cart-discount]', drawer).textContent = hasDisc ? '−' + money(t.disc) : '';
+      $('[data-disc-rows]', drawer).innerHTML = discountRowsHTML(t, 'cart-drawer__row cart-drawer__row--discount');
       $('[data-cart-total]', drawer).textContent = money(t.total);
       var gw = $('[data-gift]', drawer); if (gw) gw.checked = hasGiftWrap();
       var ups = upsellList(4); $('[data-upsell]', drawer).hidden = !ups.length || document.documentElement.classList.contains('no-upsell');
@@ -549,12 +564,14 @@
   on(sPanel, 'click', function (e) { e.stopPropagation(); });
   document.addEventListener('click', function () { if (sPanel && !sPanel.hidden) { sPanel.hidden = true; sToggle.setAttribute('aria-expanded', 'false'); } });
   var PREF_KEY = 'ocean-v1-prefs';
-  var prefs = store.get(PREF_KEY, { scheme: 'ocean', corners: 'rounded', sections: false, stackDiscount: false, stickyAtc: true, upsell: true });
+  var prefs = store.get(PREF_KEY, { scheme: 'ocean', corners: 'rounded', sections: false, stackDiscount: false, sampleDiscount: false, stickyAtc: true, upsell: true });
+  if (/[?&]discount=sample/.test(location.search)) { prefs.sampleDiscount = true; store.set(PREF_KEY, prefs); }
   function applyPrefs() {
     var de = document.documentElement;
     de.setAttribute('data-scheme', prefs.scheme);
     de.setAttribute('data-corners', prefs.corners);
     de.classList.toggle('has-stack-discount', !!prefs.stackDiscount);
+    de.classList.toggle('has-sample-discount', !!prefs.sampleDiscount);
     de.classList.toggle('no-sticky-atc', !prefs.stickyAtc);
     de.classList.toggle('no-upsell', !prefs.upsell);
     document.body.classList.toggle('show-sections', !!prefs.sections);
@@ -742,7 +759,7 @@
   window.OceanUI = {
     R: R, $: $, $$: $$, on: on, esc: esc, qs: qs, store: store, money: money, toast: toast, byId: byId, isSoldOut: isSoldOut,
     cardHTML: cardHTML, skeletonCards: skeletonCards, primaryImg: primaryImg, PLACEHOLDER: PLACEHOLDER, priceHTML: priceHTML, unitPrice: unitPrice,
-    variantState: variantState, optionHTML: optionHTML, bindOptions: bindOptions, mediaList: mediaList, mediaHTML: mediaHTML, galleryHTML: galleryHTML, bindGallery: bindGallery, ratingHTML: ratingHTML, ICON_PLAY: ICON_PLAY, ICON_3D: ICON_3D, unitOf: unitOf, stackDiscountOn: stackDiscountOn,
+    variantState: variantState, optionHTML: optionHTML, bindOptions: bindOptions, mediaList: mediaList, mediaHTML: mediaHTML, galleryHTML: galleryHTML, bindGallery: bindGallery, ratingHTML: ratingHTML, discountRowsHTML: discountRowsHTML, ICON_PLAY: ICON_PLAY, ICON_3D: ICON_3D, unitOf: unitOf, stackDiscountOn: stackDiscountOn,
     addToCart: addToCart, setQty: setQty, removeLine: removeLine, getCart: function () { return cart; }, totals: totals, lineHTML: lineHTML,
     bindLineControls: bindLineControls, upsellList: upsellList, renderCart: renderCart, openCart: openCart, openLayer: openLayerEl, closeAll: closeAll,
     searchProducts: searchProducts, initReveal: initReveal, reduceMotion: reduceMotion,

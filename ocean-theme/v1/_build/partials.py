@@ -1,4 +1,4 @@
-"""Shared partials for the Ocean theme prototype (fine jewellery preset)."""
+"""Shared partials for the Lagoon theme prototype (fine jewellery preset)."""
 import json
 
 def U(i, w, h=None, fp=None):
@@ -16,7 +16,7 @@ SEARCH = '<svg width="18" height="18" viewBox="0 0 24 24" aria-hidden="true"><ci
 USER = '<svg width="20" height="20" viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="8" r="4" fill="none" stroke="currentColor" stroke-width="1.8"/><path d="M4 21c1.5-4 4.5-6 8-6s6.5 2 8 6" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/></svg>'
 BAG = '<svg width="19" height="19" viewBox="0 0 24 24" aria-hidden="true"><path d="M5 8h14l-1.2 11.2a2 2 0 0 1-2 1.8H8.2a2 2 0 0 1-2-1.8L5 8z" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linejoin="round"/><path d="M9 8V6.5a3 3 0 0 1 6 0V8" fill="none" stroke="currentColor" stroke-width="1.8"/></svg>'
 LOGO_MARK = '<svg class="logo__mark" width="30" height="30" viewBox="0 0 32 32" aria-hidden="true"><rect width="32" height="32" rx="9" fill="currentColor"/><path d="M5 18c3.5-4 7-4 11 0s7.5 4 11 0" fill="none" stroke="#fff" stroke-width="3" stroke-linecap="round"/><path d="M5 12.5c3.5-4 7-4 11 0s7.5 4 11 0" fill="none" stroke="#fff" stroke-width="2" stroke-linecap="round" opacity=".55"/></svg>'
-LOGO = f'<a class="logo" href="index.html" aria-label="Ocean Fine Jewellery, home">{LOGO_MARK}<span class="logo__word">OCEAN</span></a>'
+LOGO = f'<a class="logo" href="index.html" aria-label="Lagoon Fine Jewellery, home">{LOGO_MARK}<span class="logo__word">LAGOON</span></a>'
 
 FAVICON = "data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect width='32' height='32' rx='8' fill='%230A7167'/%3E%3Cpath d='M5 19c3.5-4 7-4 11 0s7.5 4 11 0' fill='none' stroke='%23EAF7F6' stroke-width='3' stroke-linecap='round'/%3E%3C/svg%3E"
 
@@ -166,7 +166,7 @@ def footer(news=True):
     </div>
     <div class="footer__top">
       <div class="footer__brand">
-        <a class="logo logo--light" href="index.html" aria-label="Ocean Fine Jewellery, home">{LOGO_MARK.replace('#fff', '#0d1422')}<span class="logo__word">OCEAN</span></a>
+        <a class="logo logo--light" href="index.html" aria-label="Lagoon Fine Jewellery, home">{LOGO_MARK.replace('#fff', '#0d1422')}<span class="logo__word">LAGOON</span></a>
         <p class="footer__about">Fine jewellery in recycled gold and conflict-free stones, designed to be worn every day.</p>{NEWS}
         <div class="footer__social-row">
           <a class="follow-shop" href="https://shop.app/" target="_blank" rel="noopener" aria-label="Follow on Shop (opens in a new tab)"><svg width="16" height="16" viewBox="0 0 24 24" aria-hidden="true"><path d="M12 21s-7-4.4-9.5-9A5.5 5.5 0 0 1 12 6a5.5 5.5 0 0 1 9.5 6C19 16.6 12 21 12 21z" fill="currentColor"/></svg>Follow on <strong>shop</strong></a>
@@ -187,7 +187,7 @@ def footer(news=True):
     <div class="footer__bottom">
       <div class="footer__loc">{country_menu(up=True)}</div>
       <ul class="payments payments--icons" aria-label="Payment methods accepted"><li><svg viewBox="0 0 38 24" width="38" height="24" role="img" aria-label="Visa"><rect width="38" height="24" rx="3" fill="#fff"/><path d="M16 15.8l1.3-7.6h2l-1.2 7.6zm9-7.4a5 5 0 0 0-1.8-.3c-2 0-3.4 1-3.4 2.5 0 1.1 1 1.7 1.8 2 .8.4 1 .6 1 1 0 .5-.6.8-1.2.8a4.2 4.2 0 0 1-1.9-.4l-.3-.1-.3 1.7a6.4 6.4 0 0 0 2.2.4c2.1 0 3.5-1 3.5-2.6 0-.9-.5-1.5-1.7-2-.7-.4-1.1-.6-1.1-1s.4-.7 1.2-.7a3.7 3.7 0 0 1 1.5.3l.2.1zm5.1-.2h-1.5a1 1 0 0 0-1 .6l-3 6.9h2.1l.4-1.1h2.6l.2 1.1h1.9zm-2.5 4.9l.8-2.1.5 2.1zM14.3 8.2l-2 5.2-.2-1A5.9 5.9 0 0 0 9.4 9.3l1.8 6.5h2.1l3.1-7.6z" fill="#1A1F71"/><path d="M10.5 8.2H7.3v.2c2.5.6 4.1 2.1 4.8 3.9l-.7-3.5a.8.8 0 0 0-.9-.6z" fill="#F7B600"/></svg></li><li><svg viewBox="0 0 38 24" width="38" height="24" role="img" aria-label="Mastercard"><rect width="38" height="24" rx="3" fill="#fff"/><circle cx="15" cy="12" r="7" fill="#EB001B"/><circle cx="23" cy="12" r="7" fill="#F79E1B"/><path d="M19 6.5a7 7 0 0 1 0 11 7 7 0 0 1 0-11z" fill="#FF5F00"/></svg></li><li><svg viewBox="0 0 38 24" width="38" height="24" role="img" aria-label="American Express"><rect width="38" height="24" rx="3" fill="#1F72CD"/><text x="19" y="15.5" font-family="Arial, sans-serif" font-size="8" font-weight="700" fill="#fff" text-anchor="middle">AMEX</text></svg></li><li><svg viewBox="0 0 38 24" width="38" height="24" role="img" aria-label="PayPal"><rect width="38" height="24" rx="3" fill="#fff"/><text x="19" y="15.5" font-family="Arial, sans-serif" font-size="7.5" font-weight="700" font-style="italic" text-anchor="middle"><tspan fill="#003087">Pay</tspan><tspan fill="#009CDE">Pal</tspan></text></svg></li><li><svg viewBox="0 0 38 24" width="38" height="24" role="img" aria-label="Apple Pay"><rect width="38" height="24" rx="3" fill="#000"/><path d="M11.9 8.6c.4-.5.7-1.2.6-1.9-.6 0-1.3.4-1.7.9-.4.4-.7 1.1-.6 1.8.7.1 1.3-.3 1.7-.8zm.6 1c-.9-.1-1.7.5-2.2.5s-1.1-.5-1.9-.5a2.8 2.8 0 0 0-2.4 1.5c-1 1.8-.3 4.4.7 5.8.5.7 1 1.5 1.8 1.4.7 0 1-.5 1.9-.5s1.1.5 1.9.5c.8 0 1.3-.7 1.7-1.4a6.1 6.1 0 0 0 .8-1.6 2.5 2.5 0 0 1-1.5-2.3 2.6 2.6 0 0 1 1.2-2.2 2.7 2.7 0 0 0-2-1.2z" fill="#fff"/><text x="25" y="15.6" font-family="Arial, sans-serif" font-size="8" font-weight="600" fill="#fff" text-anchor="middle">Pay</text></svg></li><li><svg viewBox="0 0 38 24" width="38" height="24" role="img" aria-label="Shop Pay"><rect width="38" height="24" rx="3" fill="#5A31F4"/><text x="19" y="15.5" font-family="Arial, sans-serif" font-size="7.5" font-weight="700" fill="#fff" text-anchor="middle">shop Pay</text></svg></li></ul>
-      <p class="footer__copy">© 2026 Ocean Fine Jewellery · <a href="policies/privacy-policy.html">Privacy policy</a> · <a href="policies/terms-of-service.html">Terms of service</a> · Powered by Shopify</p>
+      <p class="footer__copy">© 2026 Lagoon Fine Jewellery · <a href="policies/privacy-policy.html">Privacy policy</a> · <a href="policies/terms-of-service.html">Terms of service</a> · Powered by Shopify</p>
     </div>
   </div>
 </footer>
@@ -198,7 +198,7 @@ def overlays():
     templ = ''.join(f'<li><a href="{u}">{t}</a></li>' for u, t in TEMPLATES)
     return f'''
 <div class="drawer drawer--left" id="mobile-menu" role="dialog" aria-modal="true" aria-label="Menu" hidden>
-  <div class="drawer__head"><span class="logo__word">OCEAN</span><button class="icon-btn" aria-label="Close menu" data-close-drawer>{X}</button></div>
+  <div class="drawer__head"><span class="logo__word">LAGOON</span><button class="icon-btn" aria-label="Close menu" data-close-drawer>{X}</button></div>
   <nav class="drawer__body mobile-nav" aria-label="Mobile">
     <details><summary>Rings</summary><ul><li><a href="collection.html?c=rings">All rings</a></li><li><a href="product.html?id=2">Engagement rings</a></li><li><a href="product.html?id=14">Wedding bands</a></li><li><a href="page.html#size-guide">Ring size guide</a></li></ul></details>
     <details><summary>Jewellery</summary><ul><li><a href="collection.html?c=necklaces">Necklaces</a></li><li><a href="collection.html?c=earrings">Earrings</a></li><li><a href="collection.html?c=bracelets">Bracelets</a></li></ul></details>
@@ -269,7 +269,7 @@ def overlays():
   <div class="cart-drawer__foot" data-cart-foot hidden>
     <label class="gift-toggle"><input type="checkbox" data-gift><span class="gift-toggle__ui" aria-hidden="true"></span><span><strong>Add gift wrap</strong> Ribbon and a handwritten card · <span data-money="8">$8.00</span></span></label>
     <div class="cart-drawer__row"><span>Subtotal</span><strong data-cart-subtotal>$0.00</strong></div>
-    <div class="cart-drawer__row cart-drawer__row--discount" data-bundle-row hidden><span>Stack discount</span><strong data-cart-discount></strong></div>
+    <div class="cart-drawer__discounts" data-disc-rows></div>
     <p class="cart-drawer__tax">Tax included. Discounts and shipping calculated at checkout.</p>
     <button class="btn btn--primary btn--block btn--lg" data-checkout>Check out · <span data-cart-total>$0.00</span></button>
     <div class="accel"><button class="accel__btn accel__btn--shop" aria-label="Buy with Shop Pay">Buy with <strong>shop</strong><em>Pay</em></button><button class="accel__btn accel__btn--apple" aria-label="Buy with Apple Pay"> Pay</button></div>
@@ -287,7 +287,7 @@ def overlays():
     <p class="settings__title">Templates</p>
     <ul class="settings__templates">{templ}</ul>
     <fieldset><legend>Color scheme</legend><div class="swatches">
-      <label><input type="radio" name="scheme" value="ocean" checked><span style="--a:#0A7167;--b:#EAF7F6"></span>Ocean</label>
+      <label><input type="radio" name="scheme" value="ocean" checked><span style="--a:#0A7167;--b:#EAF7F6"></span>Lagoon</label>
       <label><input type="radio" name="scheme" value="sand"><span style="--a:#8A5A3B;--b:#F6EFE7"></span>Sand</label>
       <label><input type="radio" name="scheme" value="midnight"><span style="--a:#1E2A52;--b:#ECEFF8"></span>Midnight</label></div></fieldset>
     <fieldset><legend>Corner style</legend><div class="seg">
@@ -297,6 +297,7 @@ def overlays():
       <label class="switch"><input type="checkbox" data-setting="stickyAtc"><span class="switch__ui" aria-hidden="true"></span><span>Sticky add to cart<small>Product page bar after scrolling</small></span></label>
       <label class="switch"><input type="checkbox" data-setting="upsell"><span class="switch__ui" aria-hidden="true"></span><span>Cart upsell<small>Uses Shopify product recommendations</small></span></label>
       <label class="switch"><input type="checkbox" data-setting="stackDiscount"><span class="switch__ui" aria-hidden="true"></span><span>Stack builder discount<small>Off by default. Turn on only after creating the matching automatic discount in Shopify.</small></span></label>
+      <label class="switch"><input type="checkbox" data-setting="sampleDiscount"><span class="switch__ui" aria-hidden="true"></span><span>Preview automatic discounts<small>Demo only: shows how Shopify discounts appear by name on cart lines and in the total.</small></span></label>
       <label class="switch"><input type="checkbox" data-show-sections><span class="switch__ui" aria-hidden="true"></span><span>Show section names<small>Outline each Shopify section</small></span></label>
     </fieldset>
   </div>

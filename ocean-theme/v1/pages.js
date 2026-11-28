@@ -196,7 +196,7 @@
     $('[data-col-title]').textContent = col.title;
     $('[data-col-crumb]').textContent = col.title;
     $('[data-col-desc]').textContent = col.desc;
-    document.title = col.title + ' | Ocean Fine Jewellery';
+    document.title = col.title + ' | Lagoon Fine Jewellery';
     var hero = $('[data-col-image]');
     var imgId = col.image || (base.filter(function (p) { return p.photo; })[0] || {}).photo;
     if (imgId) hero.innerHTML = '<img src="' + D.img(imgId, 1200, 700) + '" alt="" width="1200" height="700">'; else hero.hidden = true;
@@ -258,7 +258,7 @@
     var p = U.byId(U.qs('id')) || U.byId(2);
     var firstAvail = p.sizes.filter(function (s) { return U.variantState(p, p.metals[0], s) === 'available'; })[0] || p.sizes[0];
     var sel = { metal: p.metals[0], size: firstAvail, qty: 1, plan: '' };
-    document.title = p.title + ' | Ocean Fine Jewellery';
+    document.title = p.title + ' | Lagoon Fine Jewellery';
     $('[data-p-crumb-type]').textContent = p.giftCard ? 'Gift cards' : p.type; $('[data-p-crumb-type]').href = p.giftCard ? R + 'collections/' : R + 'collection/?c=' + p.type.toLowerCase();
     $('[data-p-crumb]').textContent = p.title;
 
@@ -266,7 +266,7 @@
     var gal = $('[data-gallery]'), list = U.mediaList(p);
     var images = list.filter(function (m) { return m.type === 'image'; });
     var galHTML;
-    if (p.giftCard) galHTML = '<div class="pg__giftcard"><div class="gc__card gc__card--lg" role="img" aria-label="Ocean gift card"><div class="gc__card-top"><span>OCEAN</span></div><p class="gc__card-amount">Gift card</p><p class="gc__card-foot">Never expires · Delivered by email</p></div></div>';
+    if (p.giftCard) galHTML = '<div class="pg__giftcard"><div class="gc__card gc__card--lg" role="img" aria-label="Lagoon gift card"><div class="gc__card-top"><span>LAGOON</span></div><p class="gc__card-amount">Gift card</p><p class="gc__card-foot">Never expires · Delivered by email</p></div></div>';
     else if (!list.length) galHTML = '<div class="pg__placeholder">' + U.PLACEHOLDER + '<p>Image coming soon</p></div>';
     else galHTML = '<ul class="pg__track" data-track>' + list.map(function (m, i) {
       var cls = 'pg__item pg__item--' + i + ' pg__item--' + m.type + (m.ratio > 1.1 ? ' is-wide' : m.ratio === 1 ? ' is-square' : '');
@@ -304,7 +304,7 @@
       if (st === 'available') return p.giftCard ? '<p class="stock"><span></span>Delivered by email, usually within minutes</p>' : '<p class="stock"><span></span>In stock, ready to ship</p>';
       var what = (p.type === 'Rings' ? 'Size ' + sel.size : sel.size) + ' in ' + D.METALS[sel.metal].label;
       var msg = U.isSoldOut(p) ? 'This piece is sold out in every size.' : (st === 'soldout' ? what + ' is sold out.' : what + ' isn’t made.');
-      return '<div class="pnotice" role="status"><p><strong>' + msg + '</strong> ' + (U.isSoldOut(p) ? 'We’re making more.' : 'Choose another option above, or') + '</p><button type="button" class="link-btn" data-notify>Email me when it’s available</button></div>';
+      return '<div class="pnotice" role="status"><p><strong>' + msg + '</strong> ' + (U.isSoldOut(p) ? 'We’re making more.' : 'Choose another option above.') + '</p></div>';
     }
     function renderInfo() {
       var st = U.variantState(p, sel.metal, sel.size), unit = unitNow();
@@ -322,7 +322,7 @@
         '<div class="pinfo__price" aria-live="polite" aria-atomic="true">' + priceBlock() + '</div>' +
         (p.unitPer ? '<p class="pinfo__unit">Unit price ' + U.unitPrice(p) + '</p>' : '') +
         (p.giftCard ? '<p class="pinfo__tax">Delivered by email. No shipping needed.</p>' : '<p class="pinfo__tax">Tax included. <a href="' + R + 'page/#shipping">Shipping</a> calculated at checkout.</p>') +
-        (p.giftCard ? '' : '<p class="pinfo__instal">Pay in 4 interest-free instalments of <strong>' + money(unit / 4) + '</strong> with <span class="shop-pay-mark">shop<b>Pay</b></span></p>') +
+        (p.giftCard ? '' : '<p class="pinfo__instal">Pay in 4 interest-free instalments of <strong>' + money(unit / 4) + '</strong> <span class="nowrap">with <span class="shop-pay-mark">shop<b>Pay</b></span></span></p>') +
         '<form class="pinfo__form" data-pform novalidate>' +
           U.optionHTML(p, sel, 'p') + planPicker(p, sel) + gift +
           (p.giftCard || U.isSoldOut(p) ? '' : '<div class="field field--engrave"><label for="engrave">Free engraving <span class="muted">(optional)</span></label><input id="engrave" name="properties[Engraving]" maxlength="12" placeholder="Up to 12 characters" autocomplete="off" value="' + esc(sel.engraving || '') + '"><span class="field__count" data-eng-count>' + (sel.engraving || '').length + '/12</span></div>') +
@@ -334,7 +334,7 @@
           '<p class="form-msg is-error" role="alert" data-p-error hidden></p>' +
           (st === 'available' ? '<button type="button" class="accel__btn accel__btn--shop accel__btn--wide" aria-label="Buy with Shop Pay">Buy with <strong>shop</strong><em>Pay</em></button><button type="button" class="pinfo__more-pay" data-more-pay>More payment options</button>' : '') +
         '</form>' +
-        (p.giftCard ? '' : '<div class="pickup"><svg width="20" height="20" viewBox="0 0 24 24" aria-hidden="true"><path d="M4 10l8-6 8 6v10H4z M9 20v-6h6v6" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linejoin="round"/></svg><div><p><strong>Pickup available at Ocean Studio</strong></p><p class="muted">Usually ready in 24 hours</p><button type="button" class="link-btn" data-store-info>View store information</button></div></div>') +
+        (p.giftCard ? '' : '<div class="pickup"><svg width="20" height="20" viewBox="0 0 24 24" aria-hidden="true"><path d="M4 10l8-6 8 6v10H4z M9 20v-6h6v6" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linejoin="round"/></svg><div><p><strong>Pickup available at Lagoon Studio</strong></p><p class="muted">Usually ready in 24 hours</p><button type="button" class="link-btn" data-store-info>View store information</button></div></div>') +
         '<ul class="usps">' + (p.giftCard ? '<li><span class="usps__i">' + CHECK + '</span>Delivered by email on your date</li><li><span class="usps__i">' + CHECK + '</span>Never expires</li>' :
           '<li><span class="usps__i">' + CHECK + '</span>Free shipping over ' + money(100) + '</li><li><span class="usps__i">' + CHECK + '</span>60-day returns and free resizing</li><li><span class="usps__i">' + CHECK + '</span>Solid recycled 14k gold, stamped 585</li><li><span class="usps__i">' + CHECK + '</span>Lifetime polishing</li>') + '</ul>' +
         '<div class="paccs">' +
@@ -357,7 +357,6 @@
       if (q) { sel.qty = Math.max(1, sel.qty + +q.dataset.pq); $('[data-pq-input]').value = sel.qty; var a = $('[data-atc] [data-money]'); if (a) { a.setAttribute('data-money', unitNow() * sel.qty); a.textContent = money(unitNow() * sel.qty); } $('[data-p-error]').hidden = true; }
       if (e.target.closest('[data-copy-link]')) { try { navigator.clipboard.writeText(location.href); } catch (er) {} U.toast('Link copied'); }
       if (e.target.closest('[data-store-info]')) U.openLayer($('#store-info'), '[data-close-modal]');
-      if (e.target.closest('[data-notify]')) U.openLayer($('#notify'), 'input');
       if (e.target.closest('[data-more-pay]')) { e.preventDefault(); U.toast('Shopify shows more payment options here'); }
       if (e.target.closest('.accel__btn')) U.toast('Accelerated checkout runs on Shopify');
     });
@@ -386,7 +385,7 @@
     var sticky = $('[data-sticky-atc]');
     function renderSticky(st) {
       sticky.innerHTML = '<div class="container sticky-atc__inner">' +
-        (p.photo ? '<img src="' + U.primaryImg(p, 120, 120) + '" alt="" width="52" height="52">' : '<span class="sticky-atc__ph">' + (p.giftCard ? 'Ocean' : U.PLACEHOLDER) + '</span>') +
+        (p.photo ? '<img src="' + U.primaryImg(p, 120, 120) + '" alt="" width="52" height="52">' : '<span class="sticky-atc__ph">' + (p.giftCard ? 'Lagoon' : U.PLACEHOLDER) + '</span>') +
         '<div class="sticky-atc__info"><p class="sticky-atc__title">' + esc(p.title) + '</p><p class="sticky-atc__opts">' + (p.giftCard ? 'Gift card' : D.METALS[sel.metal].label + ' · ' + sel.size) + '</p></div>' +
         '<p class="sticky-atc__price">' + priceBlock() + '</p>' +
         (st === 'available' ? '<button class="btn btn--primary" data-sticky-add>Add to bag</button>' : '<button class="btn btn--primary" disabled>' + (st === 'soldout' ? 'Sold out' : 'Unavailable') + '</button>') + '</div>';
@@ -409,11 +408,6 @@
     if (!p.hidden) U.store.set('ocean-recent', [p.id].concat(rv).slice(0, 8));
     document.addEventListener('ocean:refresh', function () { renderInfo(); $('[data-recs]').innerHTML = recs.map(U.cardHTML).join(''); });
 
-    on($('[data-notify-form]'), 'submit', function (e) {
-      e.preventDefault(); var f = e.target, inp = $('input', f), msg = $('[data-form-msg]', f);
-      var ok = /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(inp.value.trim()); inp.setAttribute('aria-invalid', String(!ok));
-      msg.className = 'form-msg ' + (ok ? 'is-success' : 'is-error'); msg.textContent = ok ? 'Thanks, we’ll email you when it’s back in stock.' : 'Enter a valid email address.';
-    });
   }
 
   /* ---------- Featured product section (home) ---------- */
@@ -446,15 +440,18 @@
     U.bindLineControls(linesEl);
     var gift = $('[data-cp-gift]');
     on(gift, 'change', function () { U.setGiftWrap(gift.checked); });
+    if (/[?&]discount=sample/.test(location.search) && !U.getCart().length) { U.addToCart(5, 1, { silent: true }); U.addToCart(4, 1, { silent: true }); }
     function renderCartPage() {
       var cart = U.getCart(), t = U.totals();
       $('[data-cp-empty]').hidden = cart.length > 0;
       $('[data-cp-full]').hidden = cart.length === 0;
       $('[data-cp-count]').textContent = t.count + ' item' + (t.count === 1 ? '' : 's');
       linesEl.innerHTML = cart.map(U.lineHTML).join('');
+      linesEl.style.minHeight = '';
       $('[data-cp-sub]').textContent = money(t.sub);
       $('[data-cp-wrap-row]').hidden = true;
-      $('[data-cp-disc-row]').hidden = !t.disc; $('[data-cp-disc]').textContent = '−' + money(t.disc);
+      $$('.cp-totals__disc').forEach(function (r) { r.remove(); });
+      $('.cp-totals__total').insertAdjacentHTML('beforebegin', U.discountRowsHTML(t, 'cp-totals__disc'));
       $('[data-cp-total]').textContent = money(t.total);
       gift.checked = U.getGiftWrap();
       var left = Math.max(0, 100 - t.total);
@@ -517,14 +514,14 @@
   }
   var BODIES = {
     2: ['Layering works best when each chain sits at a different length. Start with a short chain at 40 cm, add a pendant at 45 cm, and finish with a longer chain at 50 cm.', 'Mix textures rather than colours: a flat herringbone, a beaded chain and a fine trace chain look intentional together, even in the same gold.', 'If chains tangle, add a pendant to the longest one. The extra weight keeps it hanging straight.'],
-    3: ['Solid 14k gold doesn’t flake or wear through, but it does pick up oils and fine scratches. Keeping it away from chlorine, perfume and lotion keeps it bright.', 'Put your jewellery on last and take it off first. Store each piece separately in the pouch it came in.', 'Every Ocean piece comes with free lifetime polishing. Send it back to us and we will clean and re-polish it at no cost.'],
+    3: ['Solid 14k gold doesn’t flake or wear through, but it does pick up oils and fine scratches. Keeping it away from chlorine, perfume and lotion keeps it bright.', 'Put your jewellery on last and take it off first. Store each piece separately in the pouch it came in.', 'Every Lagoon piece comes with free lifetime polishing. Send it back to us and we will clean and re-polish it at no cost.'],
     4: ['Freshwater pearls are grown in mussels and come in many shapes. Baroque pearls are irregular, and every one is unique. Keshi pearls form without a nucleus and have a bright lustre.', 'Look for lustre first: a good pearl reflects light sharply, almost like a mirror.', 'Pearls are soft, so wipe them with a damp cloth after wearing and never store them in a sealed plastic bag.'],
-    5: ['Lab-grown diamonds are real diamonds, with the same chemical structure, hardness and sparkle as mined stones.', 'They are graded with the same four Cs: cut, colour, clarity and carat. Every Ocean diamond over 0.3 ct comes with an independent report.', 'Because they are grown above ground, they avoid the environmental impact of mining and cost noticeably less.'],
+    5: ['Lab-grown diamonds are real diamonds, with the same chemical structure, hardness and sparkle as mined stones.', 'They are graded with the same four Cs: cut, colour, clarity and carat. Every Lagoon diamond over 0.3 ct comes with an independent report.', 'Because they are grown above ground, they avoid the environmental impact of mining and cost noticeably less.'],
     6: ['The best gifts are the pieces people wear every day: a fine chain, small hoops or a pendant with meaning.', 'Every order arrives gift-boxed with a handwritten card. Add free engraving for a personal touch.', 'Not sure about size? Choose a necklace or earrings, or include a gift card so they can pick their own.']
   };
   if (is('article')) {
     var a = D.ARTICLES.filter(function (x) { return x.id === +U.qs('id'); })[0] || D.ARTICLES[0];
-    document.title = a.title + ' | The Ocean Journal';
+    document.title = a.title + ' | The Lagoon Journal';
     $('[data-a-title]').textContent = a.title;
     $('[data-a-crumb]').textContent = a.title;
     $('[data-a-meta]').innerHTML = '<span class="bpost__tag bpost__tag--inline">' + a.tag + '</span> ' + a.date + ' · ' + a.read + ' min read · By ' + a.author;
@@ -601,15 +598,13 @@
     put('[data-st-long]', U.cardHTML(U.byId(9)));
     put('[data-st-noimg]', U.cardHTML(U.byId(16)));
     put('[data-st-sold]', U.cardHTML(U.byId(8)));
+    put('[data-st-noreviews]', U.cardHTML(U.byId(12)));
     put('[data-st-loading]', U.skeletonCards(2));
     var sp = U.byId(2), ssel = { metal: 'rose', size: '5' };
     var renderVar = function () {
       var st = U.variantState(sp, ssel.metal, ssel.size);
-      $('[data-st-variant]').innerHTML = U.optionHTML(sp, ssel, 'st') + (st !== 'available' ? '<div class="pnotice" role="status"><p><strong>' + (st === 'soldout' ? 'Size ' + ssel.size + ' is sold out.' : 'Size ' + ssel.size + ' in ' + D.METALS[ssel.metal].label + ' isn’t made.') + '</strong> Choose another option above, or</p><button type="button" class="link-btn" data-st-notify>Email me when it’s available</button><form class="st-notify" data-st-notify-form novalidate hidden><label class="visually-hidden" for="st-notify-email">Email address</label><input id="st-notify-email" type="email" placeholder="Email address" autocomplete="email"><button class="btn btn--primary" type="submit">Notify me</button><p class="form-msg" role="status" aria-live="polite" data-form-msg></p></form></div>' : '') + (st === 'available' ? '<button class="btn btn--primary btn--block">Add to bag</button>' : '<button class="btn btn--primary btn--block" disabled>' + (st === 'soldout' ? 'Sold out' : 'Unavailable') + '</button>') + '<p class="st-note">Rose gold in size 5 isn’t made (Unavailable). Size 9 is sold out in every metal.</p>';
+      $('[data-st-variant]').innerHTML = U.optionHTML(sp, ssel, 'st') + (st !== 'available' ? '<div class="pnotice" role="status"><p><strong>' + (st === 'soldout' ? 'Size ' + ssel.size + ' is sold out.' : 'Size ' + ssel.size + ' in ' + D.METALS[ssel.metal].label + ' isn’t made.') + '</strong> Choose another option above.</p></div>' : '') + (st === 'available' ? '<button class="btn btn--primary btn--block">Add to bag</button>' : '<button class="btn btn--primary btn--block" disabled>' + (st === 'soldout' ? 'Sold out' : 'Unavailable') + '</button>') + '<p class="st-note">Rose gold in size 5 isn’t made (Unavailable). Size 9 is sold out in every metal.</p>';
       U.bindOptions($('[data-st-variant]'), sp, ssel, renderVar);
-      var nb = $('[data-st-notify]'), nf = $('[data-st-notify-form]');
-      on(nb, 'click', function () { nf.hidden = false; nb.hidden = true; $('input', nf).focus(); });
-      on(nf, 'submit', function (e) { e.preventDefault(); var i = $('input', nf), m = $('[data-form-msg]', nf), ok = /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(i.value.trim()); i.setAttribute('aria-invalid', String(!ok)); m.className = 'form-msg ' + (ok ? 'is-success' : 'is-error'); m.textContent = ok ? 'Thanks, we’ll email you when it’s back.' : 'Enter a valid email address.'; });
     };
     renderVar();
     var hc = $('[data-st-hover] .card'); if (hc) hc.classList.add('is-hover');

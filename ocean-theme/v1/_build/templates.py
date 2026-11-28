@@ -98,19 +98,13 @@ def product():
 <div class="modal lightbox" id="lightbox" role="dialog" aria-modal="true" aria-label="Product image" hidden>
   <div class="lightbox__panel">
     <button class="icon-btn modal__close" aria-label="Close" data-close-modal>{X}</button>
-    <img data-lb-img src="data:image/gif;base64,R0lGODlhAQABAAAAACw=" alt="">
+    <img data-lb-img alt="">
     <div class="lightbox__nav"><button class="icon-btn icon-btn--outline" aria-label="Previous image" data-lb-prev>{ARR_L}</button><span data-lb-n></span><button class="icon-btn icon-btn--outline" aria-label="Next image" data-lb-next>{ARR_R}</button></div>
   </div>
 </div>
 <div class="modal" id="store-info" role="dialog" aria-modal="true" aria-labelledby="store-title" hidden>
   <div class="modal__panel modal__panel--sm"><button class="icon-btn modal__close" aria-label="Close" data-close-modal>{X}</button>
-    <div class="modal__body"><h2 class="h4" id="store-title">Ocean Studio</h2><p class="stock"><span></span>Pickup available, usually ready in 24 hours</p><p class="muted">Collect your order from our studio by appointment. We’ll email you when it’s ready, with directions and opening hours.</p></div></div>
-</div>
-<div class="modal" id="notify" role="dialog" aria-modal="true" aria-labelledby="notify-title" hidden>
-  <div class="modal__panel modal__panel--sm"><button class="icon-btn modal__close" aria-label="Close" data-close-modal>{X}</button>
-    <form class="modal__body" data-notify-form novalidate><h2 class="h4" id="notify-title">Email me when it’s back</h2><p class="muted">We’ll send one email when this size is back in stock.</p>
-      <div class="field"><label for="notify-email">Email address</label><input id="notify-email" type="email" autocomplete="email" required></div>
-      <button class="btn btn--primary btn--block" type="submit">Notify me</button><p class="form-msg" role="status" aria-live="polite" data-form-msg></p></form></div>
+    <div class="modal__body"><h2 class="h4" id="store-title">Lagoon Studio</h2><p class="stock"><span></span>Pickup available, usually ready in 24 hours</p><p class="muted">Collect your order from our studio by appointment. We’ll email you when it’s ready, with directions and opening hours.</p></div></div>
 </div>'''
 
 
@@ -136,7 +130,6 @@ def cart():
       <dl class="cp-totals">
         <div><dt>Subtotal</dt><dd data-cp-sub>$0.00</dd></div>
         <div data-cp-wrap-row hidden><dt>Gift wrap</dt><dd data-cp-wrap></dd></div>
-        <div class="cp-totals__disc" data-cp-disc-row hidden><dt>Stack discount (automatic)</dt><dd data-cp-disc></dd></div>
         <div class="cp-totals__total"><dt>Estimated total</dt><dd data-cp-total>$0.00</dd></div>
       </dl>
       <p class="cart-drawer__tax">Tax included. Discounts and shipping calculated at checkout.</p>
@@ -152,7 +145,7 @@ def cart():
     <a class="btn btn--primary btn--lg" href="collection.html">Continue shopping</a>
   </div>
 </div></section>
-<script>(function () {{ var c = []; try {{ c = JSON.parse(localStorage.getItem('ocean-jewel-cart') || '[]'); }} catch (e) {{}} document.querySelector(c.length ? '[data-cp-full]' : '[data-cp-empty]').hidden = false; }})();</script>
+<script>(function () {{ var c = []; try {{ c = JSON.parse(localStorage.getItem('ocean-jewel-cart') || '[]'); }} catch (e) {{}} var n = c.length || (/[?&]discount=sample/.test(location.search) ? 2 : 0); document.querySelector(n ? '[data-cp-full]' : '[data-cp-empty]').hidden = false; if (n) {{ var q = c.length ? c.reduce(function (a, l) {{ return a + (l.qty || 0); }}, 0) : 2; document.querySelector('[data-cp-count]').textContent = q + ' item' + (q === 1 ? '' : 's'); document.querySelector('[data-cartpage-lines]').style.minHeight = (n * (innerWidth < 750 ? 240 : 185) + (n - 1) * 4) + 'px'; }} }})();</script>
 <section class="section scheme-2" data-section="Cart recommendations"><div class="container">
   <div class="section-head"><div><p class="eyebrow">Pairs well with</p><h2 class="h2">Complete<br>the <em>set.</em></h2></div></div>
   <ul class="product-grid" data-cp-ups></ul>
@@ -268,8 +261,8 @@ def article():
 
 def page():
     return f'''<section class="phead" data-section="Page header"><div class="container">
-  {breadcrumbs([('Home', 'index.html'), ('About Ocean', None)])}
-  <h1 class="phead__title">About Ocean</h1>
+  {breadcrumbs([('Home', 'index.html'), ('About Lagoon', None)])}
+  <h1 class="phead__title">About Lagoon</h1>
   <p class="phead__lead">Fine jewellery designed to be worn every day, made from recycled gold and stones we can trace.</p>
 </div></section>
 <figure class="page-hero container"><img src="{U('1631982690223-8aa4be0a2497', 1800, 700)}" alt="Gold rings arranged in a jewellery tray" width="1800" height="700"></figure>
@@ -278,7 +271,7 @@ def page():
     <li><a href="#story">Our story</a></li><li><a href="#materials">Materials</a></li><li><a href="#size-guide">Ring size guide</a></li><li><a href="#care">Jewellery care</a></li><li><a href="#shipping">Shipping &amp; returns</a></li></ol></nav>
   <div class="rte">
     <h2 id="story">Our story</h2>
-    <p>Ocean started at a single workbench with a simple idea: fine jewellery should be worn, not saved for special occasions. Every piece we make is designed to be comfortable enough to sleep in and strong enough to wear in the shower.</p>
+    <p>Lagoon started at a single workbench with a simple idea: fine jewellery should be worn, not saved for special occasions. Every piece we make is designed to be comfortable enough to sleep in and strong enough to wear in the shower.</p>
     <p>We work with a small group of family-run workshops. Each piece is cast, set and polished by hand, then hallmarked by an independent assay office.</p>
     <h2 id="materials">Materials</h2>
     <p>We use recycled 14k and 18k gold for our fine pieces and thick gold vermeil over recycled sterling silver for our everyday range. Our diamonds are lab-grown and come with an independent report above 0.3 ct. Our coloured stones and pearls are traceable to source.</p>
@@ -315,7 +308,7 @@ def contact():
       <div class="field"><label for="ct-topic">Topic</label><div class="select"><select id="ct-topic"><option>Sizing and fit</option><option>An existing order</option><option>Custom or engraving</option><option>Something else</option></select></div></div>
       <div class="field"><label for="ct-order">Order number <span class="muted">(optional)</span></label><input id="ct-order" inputmode="numeric" placeholder="#1001"></div>
       <div class="field field--full"><label for="ct-msg">Message</label><textarea id="ct-msg" rows="6" data-rules="required" data-label="Message"></textarea><p class="field__error" id="ct-msg-error" hidden></p></div>
-      <label class="fcheck fcheck--consent field--full" for="ct-consent"><input type="checkbox" id="ct-consent" data-rules="required" data-label="Consent"><span class="fcheck__box" aria-hidden="true"><svg width="12" height="12" viewBox="0 0 20 20"><path d="M5 10.5l3 3 7-7" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round"/></svg></span><span class="fcheck__label">I agree to Ocean storing my details to reply to this message.</span></label>
+      <label class="fcheck fcheck--consent field--full" for="ct-consent"><input type="checkbox" id="ct-consent" data-rules="required" data-label="Consent"><span class="fcheck__box" aria-hidden="true"><svg width="12" height="12" viewBox="0 0 20 20"><path d="M5 10.5l3 3 7-7" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round"/></svg></span><span class="fcheck__label">I agree to Lagoon storing my details to reply to this message.</span></label>
       <p class="field__error field--full" id="ct-consent-error" hidden></p>
       <button class="btn btn--primary btn--lg" type="submit">Send message</button>
     </form>
@@ -378,9 +371,9 @@ def giftcard():
   <div class="gc__main">
     <div class="gc__expired" data-gc-expired role="status" hidden><strong>This gift card expired on 1 January 2026.</strong> It can no longer be used at checkout. Contact us if you think this is a mistake.</div>
     <p class="eyebrow">Gift card</p>
-    <h1 class="gc__title">Here’s your <span data-money="100">$100.00</span> gift card for Ocean</h1>
-    <div class="gc__card" role="img" aria-label="Ocean gift card worth $100.00">
-      <div class="gc__card-top">{LOGO_MARK}<span>OCEAN</span></div>
+    <h1 class="gc__title">Here’s your <span data-money="100">$100.00</span> gift card for Lagoon</h1>
+    <div class="gc__card" role="img" aria-label="Lagoon gift card worth $100.00">
+      <div class="gc__card-top">{LOGO_MARK}<span>LAGOON</span></div>
       <p class="gc__card-amount" data-money="100">$100.00</p>
       <p class="gc__card-foot" data-gc-foot>Gift card · No expiry date</p>
     </div>
@@ -443,7 +436,7 @@ def account():
         <div class="field--full">{pass_field('reg-password', 'Password', 'new-password')}</div>
         <button class="btn btn--primary btn--block btn--lg field--full" type="submit">Create account</button>
       </form>
-      <div class="form-success" data-form-success tabindex="-1" hidden><h2 class="h4">Welcome to Ocean</h2><p class="muted">Your account is ready.</p></div>
+      <div class="form-success" data-form-success tabindex="-1" hidden><h2 class="h4">Welcome to Lagoon</h2><p class="muted">Your account is ready.</p></div>
     </div>
   </div>
 </div></section>'''
@@ -523,7 +516,7 @@ def account_activate():
   <div class="acct__panel">
     {breadcrumbs([('Home', 'index.html'), ('Account', 'account.html'), ('Activate', None)])}
     <h1 class="acct__title">Activate your account</h1>
-    <p class="muted">You’ve been invited to an Ocean account for maya@example.com. Create a password to see your orders and start free resizes.</p>
+    <p class="muted">You’ve been invited to an Lagoon account for maya@example.com. Create a password to see your orders and start free resizes.</p>
     <form data-validate="activate" novalidate>
       <div class="error-summary" data-error-summary tabindex="-1" role="alert" hidden></div>
       <div class="field"><label for="act-pass">Password</label><div class="field__row"><input id="act-pass" type="password" autocomplete="new-password" data-rules="required min8" data-label="Password"><button type="button" class="field__toggle" data-toggle-pass aria-controls="act-pass" aria-pressed="false">Show</button></div><p class="field__error" id="act-pass-error" hidden></p></div>
@@ -547,7 +540,7 @@ def policy(kind):
                 ('Contact', 'Questions about this policy can be sent through our contact page.')]
     else:
         title, upd = 'Terms of service', 'Last updated 1 November 2026'
-        secs = [('Overview', 'These terms apply to all purchases from Ocean Fine Jewellery. By placing an order you agree to them.'),
+        secs = [('Overview', 'These terms apply to all purchases from Lagoon Fine Jewellery. By placing an order you agree to them.'),
                 ('Products and pricing', 'All jewellery is solid recycled 14k gold unless stated. Prices are shown in your local currency and include tax where applicable. We may correct pricing errors before shipping.'),
                 ('Orders', 'An order is accepted when we send a shipping confirmation. Made-to-order and engraved pieces begin production once payment is confirmed.'),
                 ('Shipping', 'Orders ship insured within 2 working days. Risk passes to you on delivery.'),
@@ -569,6 +562,7 @@ def policy(kind):
 
 
 SETTINGS = [
+    ('Cart', 'Discounts', 'No setting. Shopify automatic discounts show by name on cart lines and in the total, from discount allocations.'),
     ('Theme settings', 'Logo', 'Image picker and width. Works in portrait and landscape.'),
     ('Theme settings', 'Colors', 'Four schemes (background, text, accent, button), each with a matching foreground.'),
     ('Theme settings', 'Typography', 'Heading and body font pickers from the Shopify font library (default DM Sans).'),
@@ -600,7 +594,7 @@ def states():
         block(3, 'Loading', 'Skeleton cards while filters update, and a spinner inside buttons while a request runs.', '<ul class="product-grid st-grid st-grid--2" data-st-loading aria-busy="true"></ul><div class="st-row st-mt"><button class="btn btn--primary is-loading" disabled aria-busy="true">Add to bag</button><button class="btn btn--outline is-loading" disabled>Saving</button></div>'),
         block(4, 'Empty collection', 'Live example: <a class="link-btn" href="collection.html?c=archive">The Archive</a>.', '<div class="state-empty"><h3 class="h4">This collection is empty</h3><p class="muted">There are no products here yet.</p><a class="btn btn--primary" href="collections.html">Browse collections</a></div>'),
         block(5, 'Error', 'Inline field errors with an error summary, and a stock limit message.', '<div class="error-summary" role="alert"><p><strong>Please fix 1 error:</strong></p><ul><li><a href="#st-e">Enter a valid email address, like name@example.com.</a></li></ul></div><div class="field has-error"><label for="st-e">Email</label><input id="st-e" value="name@" aria-invalid="true" aria-describedby="st-e-err"><p class="field__error" id="st-e-err">Enter a valid email address, like name@example.com.</p></div><p class="form-msg is-error">You can only add 3 of this item to your bag.</p>'),
-        block(6, 'Sold out / unavailable variant', 'Crossed-out options, a notice and an “Email me when it’s available” link. Try the options below.', '<div class="st-variant" data-st-variant></div>'),
+        block(6, 'Sold out / unavailable variant', 'Crossed-out options and a notice that points to the options still available. Try the options below.', '<div class="st-variant" data-st-variant></div>'),
         block(7, 'Empty cart', 'Live: <a class="link-btn" href="index.html?cart=open">open the cart drawer</a> with nothing in it.', '<div class="cart-empty st-cart-empty"><p class="h4">Your bag is empty</p><p class="muted">Not sure where to start? Our most-worn piece is a good first one.</p><a class="btn btn--primary" href="collection.html">Shop the collection</a></div>'),
         block(8, 'Search no results', 'Live example: <a class="link-btn" href="search.html?q=xyz">search “xyz”</a>.', '<div class="state-empty"><h3 class="h4">No results for “xyz”</h3><p class="muted">Check the spelling or try one of these:</p><ul class="chips chips--center"><li><a href="search.html?q=ring">ring</a></li><li><a href="search.html?q=pearl">pearl</a></li></ul></div>'),
         block(9, 'Long product title', 'Titles are never truncated; the grid stays aligned.', '<ul class="product-grid st-grid" data-st-long></ul>'),
@@ -609,6 +603,8 @@ def states():
         block(12, 'Video media', 'Poster with a play badge; plays inline with controls. Also used for YouTube and Vimeo media.', '<div class="st-media" data-st-media></div>'),
         block(13, '3D and AR media', 'Opens a 3D view with button controls (rotate, zoom, reset) as a single-tap alternative to gestures, and “View in your space” on phones.', '<div class="st-media" data-st-media3d></div>'),
         block(14, 'Selling plan and gift card', 'Purchase options on the product page, plan name on cart lines; gift card with recipient form.', '<div class="st-row"><a class="btn btn--outline" href="product.html?id=1">Selling plan</a><a class="btn btn--outline" href="product.html?id=20">Gift card product</a><a class="btn btn--outline" href="password.html?state=error">Password error</a><a class="btn btn--outline" href="gift-card.html?state=expired">Expired gift card</a></div>'),
+        block(15, 'No reviews yet', 'Ratings come from the reviews.rating and reviews.rating_count metafields. With no reviews the stars are hidden and nothing else moves, on the card and the product page.', '<ul class="product-grid st-grid" data-st-noreviews></ul><div class="st-row st-mt"><a class="btn btn--outline" href="product.html?id=12">Product page with no reviews</a></div>'),
+        block(16, 'Automatic discount', 'Shopify automatic discounts shown by name: “Necklace Week” on the necklace line, and “Spend $300, save $25” on the order total. Preview only. Turn it off in Theme settings.', '<div class="st-row"><a class="btn btn--outline" href="cart.html?discount=sample">Cart page with discounts</a><a class="btn btn--outline" href="index.html?cart=open&amp;discount=sample">Cart drawer with discounts</a></div>'),
     ]
     rows = ''.join(f'<tr><td>{a}</td><th scope="row">{b}</th><td>{c}</td></tr>' for a, b, c in SETTINGS)
     from partials import TEMPLATES

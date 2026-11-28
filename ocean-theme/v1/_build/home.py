@@ -63,9 +63,9 @@ def home():
     </div>
   </div>
   <div class="hero__rail" role="tablist" aria-label="Choose slide. Press the current slide to pause or play">
-    <button class="hero__dot is-active" role="tab" aria-selected="true" data-label="Slide 1: Necklaces" aria-label="Slide 1: Necklaces"><svg viewBox="0 0 48 48" aria-hidden="true"><circle class="ring-bg" cx="24" cy="24" r="22"/><circle class="ring-fill" cx="24" cy="24" r="22"/></svg><span>1</span></button>
-    <button class="hero__dot" role="tab" aria-selected="false" data-label="Slide 2: Pearls" aria-label="Slide 2: Pearls"><svg viewBox="0 0 48 48" aria-hidden="true"><circle class="ring-bg" cx="24" cy="24" r="22"/><circle class="ring-fill" cx="24" cy="24" r="22"/></svg><span>2</span></button>
-    <button class="hero__dot" role="tab" aria-selected="false" data-label="Slide 3: Bridal" aria-label="Slide 3: Bridal"><svg viewBox="0 0 48 48" aria-hidden="true"><circle class="ring-bg" cx="24" cy="24" r="22"/><circle class="ring-fill" cx="24" cy="24" r="22"/></svg><span>3</span></button>
+    <button class="hero__dot is-active" role="tab" aria-selected="true" data-label="Slide 1: Necklaces" aria-label="Slide 1: Necklaces"><svg viewBox="0 0 48 48" aria-hidden="true"><circle class="ring-bg" cx="24" cy="24" r="22"/><circle class="ring-fill" cx="24" cy="24" r="22"/></svg><i class="hero__pp" aria-hidden="true"></i><span>1</span></button>
+    <button class="hero__dot" role="tab" aria-selected="false" data-label="Slide 2: Pearls" aria-label="Slide 2: Pearls"><svg viewBox="0 0 48 48" aria-hidden="true"><circle class="ring-bg" cx="24" cy="24" r="22"/><circle class="ring-fill" cx="24" cy="24" r="22"/></svg><i class="hero__pp" aria-hidden="true"></i><span>2</span></button>
+    <button class="hero__dot" role="tab" aria-selected="false" data-label="Slide 3: Bridal" aria-label="Slide 3: Bridal"><svg viewBox="0 0 48 48" aria-hidden="true"><circle class="ring-bg" cx="24" cy="24" r="22"/><circle class="ring-fill" cx="24" cy="24" r="22"/></svg><i class="hero__pp" aria-hidden="true"></i><span>3</span></button>
   </div>
 </section>
 '''
@@ -158,7 +158,7 @@ def home():
     bento = f'''<section class="section scheme-3 features" id="features" data-section="Multicolumn">
   <div class="container">
     <div class="section-head section-head--light">
-      <div><p class="eyebrow"><span class="idx">(05)</span> The Ocean promise</p><h2 class="h2">Fine jewellery.<br><em>Fair prices.</em></h2></div>
+      <div><p class="eyebrow"><span class="idx">(05)</span> The Lagoon promise</p><h2 class="h2">Fine jewellery.<br><em>Fair prices.</em></h2></div>
       <p class="muted section-head__side">What comes with every piece, whether it’s a <span class="nowrap"><span data-money="120">$120.00</span></span> chain or a diamond solitaire.</p>
     </div>
     <div class="bento">
@@ -271,7 +271,7 @@ def home():
   <div class="container"><div class="newsletter__card">
     <img class="newsletter__bg" src="{U('1626784215021-2e39ccf971cd', 1800)}" alt="" width="1800" height="900" loading="lazy">
     <div class="newsletter__inner">
-      <p class="eyebrow eyebrow--light">The Ocean List</p>
+      <p class="eyebrow eyebrow--light">The Lagoon List</p>
       <h2 class="h2">10% off your first piece,<br>and early access to new drops.</h2>
       <form class="newsletter__form" novalidate data-newsletter>
         <label class="visually-hidden" for="nl-email">Email address</label>
