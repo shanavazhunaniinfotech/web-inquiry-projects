@@ -1,152 +1,129 @@
 <!doctype html>
-<html lang="en-AU">
+<html lang="en-AU" class="no-js">
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>Harbour Single-over-Double Bunk · beds.net.au</title>
-<meta name="description" content="Concept product page: single-over-double bunk with a mattress picker for each sleeping position, filtered by size and maximum thickness.">
+<meta name="description" content="Concept product page: single-over-double bunk with a live preview and a mattress picker for every sleeping position.">
 <meta name="robots" content="noindex">
-<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns=%27http://www.w3.org/2000/svg%27 viewBox=%270 0 32 32%27%3E%3Crect width=%2732%27 height=%2732%27 rx=%278%27 fill=%27%2316213a%27/%3E%3Cpath d=%27M7 23V10M25 23v-5a3 3 0 0 0-3-3h-9v6M7 20h18%27 fill=%27none%27 stroke=%27white%27 stroke-width=%272.4%27 stroke-linecap=%27round%27/%3E%3C/svg%3E">
+<meta name="theme-color" content="#F4EFE6">
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns=%27http://www.w3.org/2000/svg%27 viewBox=%270 0 32 32%27%3E%3Ccircle cx=%2716%27 cy=%2716%27 r=%2716%27 fill=%27%23121833%27/%3E%3Cpath d=%27M21 19.5A7 7 0 1 1 13.5 10a5.5 5.5 0 0 0 7.5 9.5z%27 fill=%27%23F1A679%27/%3E%3C/svg%3E">
 <link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,400;0,9..144,500;0,9..144,600;1,9..144,500&family=Manrope:wght@400;500;600;700;800&display=swap" rel="stylesheet">
-<link rel="stylesheet" href="../style.css">
+<link href="https://fonts.googleapis.com/css2?family=Instrument+Sans:wght@400;500;600;700&family=Instrument+Serif:ital@0;1&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="../site.css">
 </head>
 <body data-page="pdp" data-notes="pdp" data-base="../">
-<div id="site-header"></div>
+<div class="grain" aria-hidden="true"></div>
+<div id="hdr"></div>
 
-<main id="pdp">
-  <div class="wrap crumbs"><a href="../">Home</a><span>/</span><a href="../#shop">Bunks</a><span>/</span>Harbour Single-over-Double Bunk</div>
+<main>
+<div class="wrap pdp-wrap">
+  <nav class="crumb" aria-label="Breadcrumb"><a href="../">Home</a><span>/</span><a href="../#shop">Bunks</a><span>/</span><span style="color:var(--ink)">Harbour Single-over-Double</span></nav>
+  <div class="pdp">
+    <!-- gallery -->
+    <div class="gal">
+      <div class="gal__th" id="gth"></div>
+      <div class="gal__main" id="gmain" data-cur="Preview"></div>
+    </div>
 
-  <section class="sec" style="padding-top:28px">
-    <div class="wrap pdp">
-      <!-- gallery -->
-      <div class="gallery">
-        <div class="gallery__main" id="gal-main"></div>
-        <div class="thumbs" id="thumbs"></div>
+    <!-- buy box -->
+    <div class="buy">
+      <div class="buy__meta"><span class="kicker"><i></i>Bunks · Single-over-Double</span><a class="stars" href="#reviews">★★★★★ <small>4.8 · 126 reviews</small></a></div>
+      <h1>Harbour <em style="font-style:italic">Bunk</em></h1>
+      <p class="buy__sub">Solid pine with a single on top and a full double below. Add a pull-out trundle and it sleeps four.</p>
+      <div class="buy__price" id="price"></div>
+      <div class="bnpl" id="bnpl"></div>
+      <div class="urg" id="urg" aria-live="polite"></div>
+
+      <div class="step"><div class="step__h"><b><i>1</i>Finish</b><span id="fin-n"></span></div><div class="fins" id="fins"></div></div>
+      <div class="step"><div class="step__h"><b><i>2</i>Configuration</b><span>Trundle adds a 4th bed</span></div>
+        <div class="cfgs"><button class="cfg on" data-t="0" aria-pressed="true"><b>Bunk only</b><span>Sleeps 3 · 1 single + 1 double</span></button><button class="cfg" data-t="1" aria-pressed="false"><span class="pop">Most chosen</span><b>Bunk + trundle</b><span>Sleeps 4 · +$349</span></button></div></div>
+      <div class="step" id="sleepset"><div class="step__h"><b><i>3</i>Mattresses for each position</b><span><span class="save" style="background:var(--sage)">−<span data-pct>15</span>% with bed</span></span></div>
+        <div class="posset"><div class="ptabs" id="ptabs" role="tablist"></div><div class="ppanel" id="ppanel"></div></div></div>
+      <div class="step"><div class="step__h"><b><i>4</i>Finish the set</b><span>Also −<span data-pct>15</span>%</span></div><div class="addons" id="addons"></div></div>
+
+      <div class="summary">
+        <div class="summary__rows" id="sumrows"></div>
+        <div class="summary__tot" id="sumtot"></div>
+        <div style="display:flex;gap:10px">
+          <div class="qt" style="height:62px;box-shadow:inset 0 0 0 1px rgba(255,255,255,.25);color:#fff"><button id="qm" aria-label="Decrease quantity" style="width:40px">−</button><span id="qn">1</span><button id="qp" aria-label="Increase quantity" style="width:40px">+</button></div>
+          <button class="btn btn--glow" id="atc" style="flex:1">Add sleep set to cart</button>
+        </div>
+        <div class="summary__bnpl" id="sumbnpl"></div>
       </div>
-
-      <!-- buy box -->
-      <div class="buy">
-        <div class="buy__top"><span class="badge badge--sale">Save $250</span><span class="stars">★★★★★<small>4.8 · 126 reviews</small></span></div>
-        <h1>Harbour Single-over-Double Bunk</h1>
-        <p style="color:var(--muted);margin-top:10px">Solid pine bunk with a single on top and a double below. Optional pull-out trundle sleeps a third.</p>
-        <div class="buy__price" id="price"></div>
-        <div class="bnpl" id="bnpl"></div>
-
-        <div class="opt"><div class="opt__label">Finish <span id="color-name"></span></div><div class="swatches" id="swatches"></div></div>
-        <div class="opt"><div class="opt__label">Configuration</div>
-          <div class="configs">
-            <button class="config on" data-t="0" aria-pressed="true"><b>Bunk only</b><span>Sleeps 3 (1 single + 1 double)</span></button>
-            <button class="config" data-t="1" aria-pressed="false"><b>Bunk + trundle</b><span>Sleeps 4 · +$349</span></button>
-          </div>
-        </div>
-
-        <div class="stock" id="stock"></div>
-        <div class="deliv-mini"><b>Delivery &amp; pickup</b><span style="color:var(--muted)"> · ships from Sydney NSW</span>
-          <form id="dm-form"><label class="sr" for="dm-in">Postcode</label><input id="dm-in" inputmode="numeric" maxlength="4" placeholder="Postcode"><button class="btn btn--ghost btn--sm" type="submit">Check</button></form>
-          <div id="dm-out" aria-live="polite"></div>
-        </div>
-
-        <!-- mattress positions -->
-        <div class="sleepset" id="sleepset">
-          <div class="sleepset__head"><div><h3>Add mattresses for each sleeping position</h3><p>We only show mattresses that are the right size and thickness for each spot.</p></div><span class="offer-chip">−<span data-pct>15</span>% with this bed</span></div>
-          <div class="postabs" id="postabs" role="tablist"></div>
-          <div class="pospanel" id="pospanel"></div>
-          <div class="sleepset__sum" id="setsum"></div>
-        </div>
-
-        <div class="atc">
-          <div class="qty"><button id="qminus" aria-label="Decrease quantity">−</button><span id="qn">1</span><button id="qplus" aria-label="Increase quantity">+</button></div>
-          <button class="btn btn--dark" id="atc">Add to cart</button>
-        </div>
-        <p id="atc-sub" style="font-size:13px;color:var(--muted);margin-top:8px;text-align:center"></p>
-        <div class="assure">
-          <div><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 3 5 6v6c0 4.5 3 7.5 7 9 4-1.5 7-4.5 7-9V6z"/><path d="m9 12 2 2 4-4"/></svg>5-year frame warranty</div>
-          <div><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 21s-7-6.2-7-12a7 7 0 0 1 14 0c0 5.8-7 12-7 12z"/><circle cx="12" cy="9" r="2.5"/></svg>Free click &amp; collect</div>
-          <div><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><rect x="3" y="5" width="18" height="14" rx="2"/><path d="M3 10h18"/></svg>Afterpay · Zip · PayPal</div>
-        </div>
+      <div class="eta" id="eta" aria-live="polite"></div>
+      <div class="assure">
+        <div><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><path d="M12 3 5 6v6c0 4.5 3 7.5 7 9 4-1.5 7-4.5 7-9V6z"/><path d="m9 12 2 2 4-4"/></svg>5-year frame warranty</div>
+        <div><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><path d="M12 21s-7-6.2-7-12a7 7 0 0 1 14 0c0 5.8-7 12-7 12z"/><circle cx="12" cy="9" r="2.5"/></svg>Free click &amp; collect</div>
+        <div><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round"><rect x="5" y="11" width="14" height="10" rx="2"/><path d="M8 11V7a4 4 0 0 1 8 0v4"/></svg>Secure checkout</div>
       </div>
     </div>
-  </section>
+  </div>
+</div>
 
-  <!-- details -->
-  <section class="sec sec--sand">
-    <div class="wrap">
-      <div class="dtabs" role="tablist">
-        <button class="dtab on" data-d="d-fit" role="tab" aria-selected="true">Mattress fit guide</button>
-        <button class="dtab" data-d="d-dim" role="tab" aria-selected="false">Dimensions</button>
-        <button class="dtab" data-d="d-del" role="tab" aria-selected="false">Delivery &amp; pickup</button>
-        <button class="dtab" data-d="d-war" role="tab" aria-selected="false">Warranty &amp; care</button>
-      </div>
-      <div class="dpanel on" id="d-fit">
-        <div class="two-col">
-          <div><h2 style="font-size:34px;margin-bottom:16px">What fits where</h2><p>Each sleeping position on this bunk has its own mattress size and maximum thickness. A top bunk mattress that's too thick reduces the height of the guard rail, and a trundle mattress that's too thick won't slide under the bed.</p><p>The mattress picker above uses these numbers, so you can only choose mattresses that fit.</p></div>
-          <table class="spec-table"><thead><tr><th>Position</th><th>Mattress size</th><th>Max thickness</th></tr></thead><tbody>
-            <tr><td><b>Top bunk</b></td><td>Single (92 × 188 cm)</td><td>16 cm</td></tr>
-            <tr><td><b>Bottom bunk</b></td><td>Double (137 × 188 cm)</td><td>22 cm</td></tr>
-            <tr><td><b>Trundle</b> (optional)</td><td>Single (92 × 188 cm)</td><td>12 cm</td></tr>
-          </tbody></table>
-        </div>
-      </div>
-      <div class="dpanel" id="d-dim">
-        <div class="two-col">
-          <table class="spec-table"><tbody>
-            <tr><td>Overall size</td><td>W 147 × L 198 × H 165 cm</td></tr>
-            <tr><td>Clearance under top bunk</td><td>82 cm</td></tr>
-            <tr><td>Material</td><td>Solid pine, non-toxic finish</td></tr>
-            <tr><td>Weight limit</td><td>Top 100 kg · Bottom 200 kg</td></tr>
-            <tr><td>Boxes / cubic</td><td>3 boxes · 0.42 m³ · 78 kg</td></tr>
-          </tbody></table>
-          <ul class="ticks"><li>Full-length guard rails on the top bunk</li><li>Ladder can be fitted left or right</li><li>Converts into a separate single and double bed</li><li>Slat base, so no bed base is needed</li></ul>
-        </div>
-      </div>
-      <div class="dpanel" id="d-del">
-        <div class="two-col">
-          <div><h2 style="font-size:34px;margin-bottom:16px">Delivered or collected</h2><p>This bunk ships from our Sydney NSW warehouse. Freight is quoted live by the carrier at checkout from your postcode and the box size and weight. If you add items from other warehouses, each one is quoted and added up.</p></div>
-          <ul class="ticks"><li>Metro Sydney, Melbourne &amp; Brisbane: 2–4 business days</li><li>Regional &amp; interstate: 3–12 business days</li><li>Free click &amp; collect from Sydney (eligible postcodes)</li><li>Tracking link emailed as soon as it ships</li></ul>
-        </div>
-      </div>
-      <div class="dpanel" id="d-war">
-        <div class="two-col">
-          <div><h2 style="font-size:34px;margin-bottom:16px">Warranty &amp; care</h2><p>5-year manufacturer warranty on the frame and 12 months on the hardware. Wipe clean with a damp cloth, and re-tighten the bolts after the first month.</p></div>
-          <ul class="ticks"><li>Claims handled by our team</li><li>Spare parts available</li><li>Change-of-mind returns per our returns policy</li></ul>
-        </div>
-      </div>
+<!-- features -->
+<section class="sec" style="margin-top:40px">
+  <div class="wrap">
+    <div class="shead rv"><div><span class="kicker"><i></i>Why families choose Harbour</span><h2 class="h2">Built for <em>growing up.</em></h2></div><p class="lead">Solid pine, full-length guard rails and a frame that splits into two separate beds when the kids want their own rooms.</p></div>
+    <div class="feat-row">
+      <article class="feat rv"><div class="feat__img"><img src="https://images.unsplash.com/photo-1609766857041-ed402ea8069a?auto=format&fit=crop&w=900&q=72" alt="" loading="lazy"></div><div class="feat__b"><h3>Solid, not wobbly</h3><p>Kiln-dried pine posts and a slat base. Top 100 kg, bottom 200 kg weight rating.</p></div></article>
+      <article class="feat rv"><div class="feat__img"><div class="ill fx-bunk"></div></div><div class="feat__b"><h3>Splits into two beds</h3><p>Later on, unbolt the top and it becomes a separate single and double.</p></div></article>
+      <article class="feat rv"><div class="feat__img"><div class="ill fx-bunk"></div></div><div class="feat__b"><h3>Sleepover-ready</h3><p>The optional trundle rolls out on castors and tucks away by day.</p></div></article>
     </div>
-  </section>
+  </div>
+</section>
 
-  <!-- you may also like -->
-  <section class="sec">
-    <div class="wrap">
-      <div class="sec-head"><div><span class="eyebrow">Also popular</span><h2 style="margin-top:12px">More bunks &amp; kids beds</h2></div><a class="link-arrow" href="../#shop">View all</a></div>
-      <div class="grid" id="related"></div>
+<!-- specs -->
+<section class="sec" style="background:var(--bg-2)">
+  <div class="wrap spec">
+    <div class="spec__card rv"><h3>What fits where</h3><table class="st"><thead><tr><th>Position</th><th>Size</th><th>Max thickness</th></tr></thead><tbody>
+      <tr><td><b>Top bunk</b></td><td>Single · 92 × 188</td><td>16 cm</td></tr><tr><td><b>Bottom bunk</b></td><td>Double · 137 × 188</td><td>22 cm</td></tr><tr><td><b>Trundle</b></td><td>Single · 92 × 188</td><td>12 cm</td></tr></tbody></table>
+      <p style="color:var(--muted);font-size:14px;margin-top:14px">The mattress picker above uses these numbers, so you can only choose mattresses that fit.</p></div>
+    <div class="spec__card rv"><h3>Dimensions &amp; delivery</h3><table class="st"><tbody>
+      <tr><td>Overall</td><td>W 147 × L 198 × H 165 cm</td></tr><tr><td>Under top bunk</td><td>82 cm clearance</td></tr><tr><td>Boxes</td><td>3 · 0.42 m³ · 78 kg</td></tr><tr><td>Ships from</td><td>Sydney NSW warehouse</td></tr><tr><td>Assembly</td><td>Approx. 90 min · tools included</td></tr></tbody></table></div>
+  </div>
+</section>
+
+<!-- reviews -->
+<section class="sec" id="reviews">
+  <div class="wrap">
+    <div class="reviews-top rv"><div class="rscore">4.8</div><div><span class="kicker"><i></i>126 reviews</span><h2 class="h2" style="margin-top:12px;font-size:clamp(36px,4vw,60px)">Parents <em>sleep better too.</em></h2></div>
+      <div class="rbars"><div>5<i style="--w:84%"></i>84%</div><div>4<i style="--w:12%"></i>12%</div><div>3<i style="--w:3%"></i>3%</div><div>2<i style="--w:1%"></i>1%</div><div>1<i style="--w:0%"></i>0%</div></div></div>
+    <div class="feat-row">
+      <figure class="rcard rv" style="margin:0;width:auto"><span class="stars">★★★★★</span><q>Ordered the bunk with both mattresses in one go. Everything fit perfectly and the rail sits well above the top mattress.</q><footer><span class="av">SM</span><div><b>Sarah M.</b><span>Penrith NSW · Natural Oak</span><span class="ver">✓ Verified buyer</span></div></footer></figure>
+      <figure class="rcard rv" style="margin:0;width:auto"><span class="stars">★★★★★</span><q>The trundle is a game changer for sleepovers. Solid build, took us about 90 minutes with two people.</q><footer><span class="av">DR</span><div><b>Daniel R.</b><span>Castle Hill NSW · White + trundle</span><span class="ver">✓ Verified buyer</span></div></footer></figure>
+      <figure class="rcard rv" style="margin:0;width:auto"><span class="stars">★★★★☆</span><q>Pre-ordered the charcoal. The ETA showed everywhere and it arrived the week they said. Wish it came sooner, but it was worth the wait.</q><footer><span class="av">AN</span><div><b>Aisha N.</b><span>Newcastle NSW · Charcoal</span><span class="ver">✓ Verified buyer</span></div></footer></figure>
     </div>
-  </section>
+    <p style="color:var(--muted-2);font-size:12px;margin-top:16px">Sample reviews for this concept.</p>
+  </div>
+</section>
+
+<!-- related -->
+<section class="sec" style="padding-top:0">
+  <div class="wrap">
+    <div class="rail-head"><div><span class="kicker"><i></i>You might also like</span><h2 class="h2" style="margin-top:16px;font-size:clamp(36px,4vw,60px)">More for the <em>kids' room.</em></h2></div><a class="ulink" href="../#shop">View all →</a></div>
+    <div class="rail" id="rel"></div>
+  </div>
+</section>
 </main>
 
-<div class="sticky-atc"><div><b id="sticky-name">Harbour Bunk</b><span id="sticky-price"></span></div><button class="btn btn--dark btn--sm" id="sticky-atc-btn">Add to cart</button></div>
-
-<div id="site-footer"></div>
+<div class="stick" aria-hidden="false"><div class="wrap"><div class="stick__img" id="stk-img"></div><div class="stick__t" id="stk-t"></div><button class="btn btn--glow" id="stk-btn">Add to cart <span class="arr">→</span></button></div></div>
+<div id="ftr"></div>
 
 <script>
 window.BEDS_NOTES={pdp:`
 <h3>How the mattress picker works in Shopify</h3>
-<p>Your admin can add a new bunk, trundle or single-over-double bed without a developer. They fill in a few product fields and the page does the rest.</p>
-<div class="note"><b>1. The bed stores its sleeping positions</b><p>A product metafield (a list of "Mattress position" metaobjects) holds the label, size and max thickness for each spot.</p><code>bed.metafields.custom.mattress_positions
+<p>Your team adds a new bunk, trundle or single-over-double bed by filling in a few product fields. There's no developer step.</p>
+<div class="note"><b>1. The bed stores its sleeping positions</b><p>A product metafield holds each position's label, size and max thickness.</p><code>bed.metafields.custom.mattress_positions
  → Top bunk     · Single · max 16cm
  → Bottom bunk  · Double · max 22cm
  → Trundle      · Single · max 12cm</code></div>
-<div class="note"><b>2. Each mattress stores its size and thickness</b><p>Two simple fields on every mattress: <i>size</i> and <i>thickness_cm</i>. The page shows a mattress for a position only if the size matches and it isn't over the max.</p></div>
-<div class="note"><b>3. Offer discount set by the admin</b><p>One automatic discount (e.g. 15% off mattresses and accessories when a bed is in the cart) with an exclusion list, here the Euro Top. Change the % any time in Discounts or the bundle app.</p></div>
-<div class="note"><b>4. Pre-order with an ETA</b><p>Charcoal shows a pre-order selling plan. The ETA is a variant field shown on the product page, cart, checkout and confirmation email. When stock reaches 0 and pre-order is off, the item shows "Out of stock".</p></div>
-<div class="note"><b>5. Grouped by warehouse in the cart</b><p>Each item knows its Shopify Location, so the cart and checkout can show where it ships from and get a freight quote for each warehouse.</p></div>`};
+<div class="note"><b>2. Each mattress stores its size and thickness</b><p>A mattress only appears for a position if the size matches and it's not over the max.</p></div>
+<div class="note"><b>3. Bed offer discount</b><p>One automatic discount (e.g. 15% off mattresses and add-ons when a bed is in the cart) with an exclusion list. Here the Euro Top is excluded. Change it in the admin view and this page updates.</p></div>
+<div class="note"><b>4. Pre-order + ETA</b><p>Charcoal is on pre-order. The ETA shows here, in the cart, at checkout and in the confirmation email. At 0 stock with pre-order off, it shows "Sold out".</p></div>
+<div class="note"><b>5. Delivery date</b><p>The postcode check and dispatch cut-off use the warehouse (Shopify Location). Exact freight comes from the carrier API at checkout.</p></div>`};
 </script>
-<script src="../script.js"></script>
-<script>
-document.addEventListener('DOMContentLoaded',function(){var P=BEDS.P;var el=document.getElementById('related');el.innerHTML=['bk-coast','bk-ridge','b-noah','b-harper'].map(function(id){return BEDS.cardHTML(P[id])}).join('');
-el.querySelectorAll('[data-add]').forEach(function(b){b.onclick=function(){BEDS.addToCart(b.dataset.add,{variant:''});BEDS.openCart()}});
-el.querySelectorAll('[data-nolink]').forEach(function(a){a.addEventListener('click',function(e){e.preventDefault();BEDS.toast('Only the Harbour bunk has a full product page in this demo')})});
-el.querySelectorAll('[data-notify]').forEach(function(b){b.onclick=function(){BEDS.toast('Back-in-stock alert set')}});});
-</script>
+<script src="https://unpkg.com/lenis@1.1.13/dist/lenis.min.js" defer></script>
+<script src="../site.js" defer></script>
 </body>
 </html>
