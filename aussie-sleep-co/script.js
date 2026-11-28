@@ -36,7 +36,10 @@ const WH={
   bne:{name:'Brisbane QLD warehouse',short:'Brisbane',sup:'Supplier C',color:'#5a6fa8',pc:'4110',pickup:false}
 };
 // Offer discount (admin-set in the app / Shopify discount, global + exclusions)
-const OFFER={pct:15,types:['mattress','accessory'],exclude:['m-euro-s']};
+const ADMIN=store.get('bna_admin',{});
+const OFFER=Object.assign({pct:15,types:['mattress','accessory'],exclude:['m-euro-s']},ADMIN.offer||{});
+// pre-order on the Harbour Charcoal variant (admin can switch it off or change the ETA)
+const PRE=Object.assign({on:true,eta:'15 Jan'},ADMIN.pre||{});
 const FREE_METRO=1500;
 
 const P={
@@ -74,7 +77,7 @@ const P={
   'a-prot-q':{type:'accessory',name:'Waterproof Mattress Protector — Queen',price:99,wh:'syd',img:'photo-1631049552057-403cdb8f0658'}
 };
 Object.keys(P).forEach(k=>P[k].id=k);
-window.BEDS={P,WH,OFFER};
+window.BEDS={P,WH,OFFER,PRE,store,money,money2,mediaFor:(p,w)=>mediaFor(p,w),R};
 
 /* ---------- SVG renders ---------- */
 const FR={
@@ -173,7 +176,7 @@ const MEGA={
 function header(){
   const h=$('#site-header');if(!h) return;
   h.innerHTML=`
-  <div class="demo-ribbon"><b>Concept prototype</b> for beds.net.au · design &amp; UX preview, not the live store</div>
+  <div class="demo-ribbon"><b>Concept prototype</b> for beds.net.au · design &amp; UX preview, not the live store · <a href="${R}admin/" style="color:#9fd1b7;font-weight:700;text-decoration:underline">See the admin view →</a></div>
   <div class="announce"><div class="announce__track">
     <span>${ic.truck.replace('22','16').replace('22','16')} Free metro delivery over ${money(FREE_METRO)}</span>
     <span>Afterpay &amp; Zip available</span>
@@ -295,18 +298,20 @@ function renderCart(){
      <button class="btn btn--dark btn--block checkout-btn">Checkout securely ${ic.arrow}</button>
      <div class="cart__bnpl">or 4 interest-free payments of <b style="color:var(--ink)">${money2(sub/4)}</b> with <span class="pay pay--ap">afterpay</span><span class="pay pay--zip">zip</span></div>
      <div class="cart__note">GST included · PayPal, Apple Pay &amp; Google Pay at checkout</div>`:'';
-  const cb=$('.checkout-btn');if(cb) cb.onclick=()=>{if(window.BEDS.onCheckout) window.BEDS.onCheckout(); else toast('Next in this demo: multi-warehouse freight checkout')};
+  const cb=$('.checkout-btn');if(cb) cb.onclick=()=>{location.href=R+'checkout/'};
   $$('[data-q]',body).forEach(b=>b.onclick=()=>{const l=cart.find(x=>x.key===b.dataset.k);if(!l) return;l.qty+=+b.dataset.q;if(l.qty<1) cart=cart.filter(x=>x!==l);save();renderCart()});
   $$('[data-rm]',body).forEach(b=>b.onclick=()=>{cart=cart.filter(x=>x.key!==b.dataset.rm);save();renderCart()});
   $$('[data-up]',body).forEach(b=>b.onclick=()=>{addToCart(b.dataset.up);toast(`${ic.check} Added ${P[b.dataset.up].name}`)});
 }
+function preOf(l){const p=P[l.id];if(p.pre) return p.pre;if(p.id==='bk-harbour'&&/Charcoal/.test(l.variant||'')&&PRE.on&&!((ADMIN.inv||{}).charcoal>0)) return PRE.eta;return null}
+window.BEDS.preOf=preOf;window.BEDS.unitPrice=l=>unitPrice(l);window.BEDS.getCart=()=>cart;window.BEDS.setCart=c=>{cart=c;save();renderCart()};window.BEDS.ic=ic;
 function lineHTML(l){
   const p=P[l.id],u=unitPrice(l);
   return `<div class="line"><div class="line__img">${mediaFor(p,200)}</div>
    <div><div class="line__name">${p.name}</div>
     ${l.variant||l.pos?`<div class="line__var">${[l.pos,l.variant].filter(Boolean).join(' · ')}</div>`:''}
     ${u.offer?`<span class="line__flag line__flag--offer">${ic.check} Bed offer −${OFFER.pct}%</span>`:''}
-    ${p.pre||(l.variant&&/Charcoal/.test(l.variant)&&p.id==='bk-harbour')?`<span class="line__flag line__flag--pre">${ic.clock.replace(/22/g,'12')} Pre-order · ETA ${p.pre||'15 Jan'}</span>`:''}
+    ${preOf(l)?`<span class="line__flag line__flag--pre">${ic.clock.replace(/22/g,'12')} Pre-order · ETA ${preOf(l)}</span>`:''}
     <div class="line__ctrl"><div class="mini-qty"><button data-q="-1" data-k="${l.key}" aria-label="Decrease">−</button><span>${l.qty}</span><button data-q="1" data-k="${l.key}" aria-label="Increase">+</button></div><button class="line__rm" data-rm="${l.key}">Remove</button></div></div>
    <div class="line__price">${money2(u.now*l.qty)}${u.offer?`<s>${money2(u.base*l.qty)}</s>`:p.was?`<s>${money2((p.was+(l.add||0))*l.qty)}</s>`:''}</div></div>`;
 }
@@ -407,13 +412,15 @@ function bindCards(root){
 function pdp(){
   const root=$('#pdp');if(!root) return;
   const bed=P['bk-harbour'];
-  const COLORS=[{k:'oak',n:'Natural Oak',hex:'#c99a66'},{k:'white',n:'White',hex:'#f3efe7'},{k:'charcoal',n:'Charcoal',hex:'#3d424c',pre:'15 Jan'}];
+  const COLORS=[{k:'oak',n:'Natural Oak',hex:'#c99a66'},{k:'white',n:'White',hex:'#f3efe7'},{k:'charcoal',n:'Charcoal',hex:'#3d424c',pre:PRE.on?PRE.eta:null}];
   // positions are metafields on the bed: size + max thickness for each sleeping position
   const POS={
     top:{label:'Top bunk',size:'Single',max:16,note:'Guard rail height needs a low-profile mattress'},
     bottom:{label:'Bottom bunk',size:'Double',max:22,note:'Standard double, up to 22cm'},
     trundle:{label:'Trundle',size:'Single',max:12,note:'Must slide under the bottom bunk'}
   };
+  const INV=Object.assign({oak:4,white:7,charcoal:0},ADMIN.inv||{});
+  if(ADMIN.pos) Object.keys(ADMIN.pos).forEach(k=>{if(POS[k]) Object.assign(POS[k],ADMIN.pos[k])});
   const st={color:'oak',trundle:false,qty:1,tab:'top',sel:{top:'m-bunk-s',bottom:'m-bunk-d',trundle:'m-slim-s'},showHidden:{}};
   const mats=Object.values(P).filter(p=>p.type==='mattress'&&!p.cat);
 
@@ -439,14 +446,18 @@ function pdp(){
   function drawBuy(){
     $('#price').innerHTML=`<b>${money(bedPrice())}</b><s>${money(bedWas())}</s><span class="save-pill">Save ${money(bedWas()-bedPrice())}</span>`;
     $('#bnpl').innerHTML=`or 4 interest-free payments of <b>${money2(bedPrice()/4)}</b> with <span class="pay pay--ap">afterpay</span> or <span class="pay pay--zip">zip</span>`;
-    $('#swatches').innerHTML=COLORS.map(c=>`<button class="swatch ${st.color===c.k?'on':''}" data-c="${c.k}" aria-pressed="${st.color===c.k}"><i style="background:${c.hex}"></i>${c.n}${c.pre?'<small>PRE-ORDER</small>':''}</button>`).join('');
+    $('#swatches').innerHTML=COLORS.map(c=>`<button class="swatch ${st.color===c.k?'on':''}" data-c="${c.k}" aria-pressed="${st.color===c.k}"><i style="background:${c.hex}"></i>${c.n}${INV[c.k]<=0?(c.pre?'<small>PRE-ORDER</small>':'<small style="color:#9aa1ad">SOLD OUT</small>'):''}</button>`).join('');
     $('#color-name').textContent=COLORS.find(c=>c.k===st.color).n;
     $$('#swatches .swatch').forEach(b=>b.onclick=()=>{st.color=b.dataset.c;drawBuy();drawGallery()});
     $$('.config').forEach(b=>{b.classList.toggle('on',(b.dataset.t==='1')===st.trundle);b.setAttribute('aria-pressed',(b.dataset.t==='1')===st.trundle)});
     const col=COLORS.find(c=>c.k===st.color);
-    $('#stock').className='stock'+(col.pre?' stock--pre':'');
-    $('#stock').innerHTML=col.pre?`<i class="dot dot--warm"></i><div><b>Pre-order · ETA ${col.pre}</b><span>Charcoal is on its way from ${WH.syd.sup}. Order now to lock in this price. We'll email you if the date changes.</span></div>`:`<i class="dot"></i><div><b>In stock · ships from ${WH.syd.name}</b><span>Only 4 left in ${col.n}. Dispatches in 1–2 business days.</span></div>`;
-    $('#atc').innerHTML=col.pre?`Pre-order now ${ic.arrow}`:`Add to cart ${ic.arrow}`;
+    const qty=INV[col.k];const pre=qty<=0&&col.pre;const oos=qty<=0&&!col.pre;
+    $('#stock').className='stock'+(pre?' stock--pre':'');
+    $('#stock').innerHTML=pre?`<i class="dot dot--warm"></i><div><b>Pre-order · ETA ${col.pre}</b><span>${col.n} is on its way from ${WH.syd.sup}. Order now to lock in this price. We'll email you if the date changes.</span></div>`
+      :oos?`<i class="dot dot--off"></i><div><b>Out of stock</b><span>${col.n} is sold out at ${WH.syd.name}. Choose another finish, or we'll let you know when it's back.</span></div>`
+      :`<i class="dot"></i><div><b>In stock · ships from ${WH.syd.name}</b><span>${qty<=(ADMIN.threshold==null?2:ADMIN.threshold)?`Only ${qty} left`:`${qty} available`} in ${col.n}. Dispatches in 1–2 business days.</span></div>`;
+    $('#atc').innerHTML=pre?`Pre-order now ${ic.arrow}`:oos?'Out of stock':`Add to cart ${ic.arrow}`;
+    $('#atc').disabled=oos;$('#sticky-atc-btn').disabled=oos;$('#atc').style.opacity=oos?.45:'';
     drawSet();
     $('#sticky-name').textContent=`Harbour Bunk · ${col.n}`;
   }
@@ -504,6 +515,7 @@ function pdp(){
 /* ---------- init ---------- */
 document.addEventListener('DOMContentLoaded',()=>{
   header();footer();cartEls();renderCart();home();pdp();reveal();
+  $$('[data-pct]').forEach(e=>e.textContent=OFFER.pct);
   const n=document.body.dataset.notes;if(n&&window.BEDS_NOTES&&window.BEDS_NOTES[n]) notes(window.BEDS_NOTES[n]);
   document.addEventListener('click',e=>{const a=e.target.closest('a[href="#"]');if(!a) return;e.preventDefault();if(a.closest('#site-footer')||a.closest('#site-header')) return;if(a.hasAttribute('data-pol')) toast('Store &amp; policy pages are published from your supplied wording in the live build')});
 });

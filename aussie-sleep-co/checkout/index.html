@@ -1,0 +1,97 @@
+<!doctype html>
+<html lang="en-AU">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Checkout · beds.net.au</title>
+<meta name="description" content="Concept checkout: live freight quotes for each warehouse, click & collect, Shopify Payments, PayPal, Afterpay and Zip.">
+<meta name="robots" content="noindex">
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns=%27http://www.w3.org/2000/svg%27 viewBox=%270 0 32 32%27%3E%3Crect width=%2732%27 height=%2732%27 rx=%278%27 fill=%27%2316213a%27/%3E%3Cpath d=%27M7 23V10M25 23v-5a3 3 0 0 0-3-3h-9v6M7 20h18%27 fill=%27none%27 stroke=%27white%27 stroke-width=%272.4%27 stroke-linecap=%27round%27/%3E%3C/svg%3E">
+<link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,400;0,9..144,500;0,9..144,600;1,9..144,500&family=Manrope:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="../style.css">
+</head>
+<body class="co-body" data-page="checkout" data-notes="checkout" data-base="../">
+<div class="demo-ribbon"><b>Concept prototype</b> · checkout preview with sample freight rates, no real payment is taken</div>
+<header class="co-hdr"><div class="wrap">
+  <a class="logo" href="../"><span class="logo__mark"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M3 18V7M21 18v-4a3 3 0 0 0-3-3h-8v5M3 15h18"/></svg></span>beds<small>.net.au</small></a>
+  <span class="co-lock"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><rect x="5" y="11" width="14" height="10" rx="2"/><path d="M8 11V7a4 4 0 0 1 8 0v4"/></svg>Secure checkout</span>
+</div></header>
+
+<div class="mob-sum" id="mob-sum"><button type="button" aria-expanded="false"><span>Show order summary ⌄</span><b id="mob-total"></b></button><div class="mob-sum__body" id="mob-sum-body"></div></div>
+
+<div class="co">
+  <main class="co__main">
+    <div class="co-steps"><a href="../">Cart</a>›<b>Information</b>›<b>Delivery</b>›<b>Payment</b></div>
+
+    <div class="express">
+      <button class="ex-shop" type="button" data-ex>shop<span style="opacity:.8">Pay</span></button>
+      <button class="ex-apple" type="button" data-ex>Apple Pay</button>
+      <button class="ex-g" type="button" data-ex>G Pay</button>
+      <button class="ex-pp" type="button" data-ex>PayPal</button>
+    </div>
+    <div class="or">or pay another way</div>
+
+    <section class="co-sec">
+      <h2><span class="num">1</span>Contact</h2>
+      <div class="fld"><div class="in"><label for="em">Email</label><input id="em" type="email" value="sarah@example.com"></div>
+      <label style="display:flex;gap:8px;align-items:center;font-size:14px;color:var(--muted)"><input type="checkbox" checked> Email me with news and offers</label></div>
+    </section>
+
+    <section class="co-sec">
+      <h2><span class="num">2</span>Delivery</h2>
+      <div class="dm" id="dm">
+        <button type="button" class="on" data-m="ship"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M3 6h11v10H3zM14 10h4l3 3v3h-7"/><circle cx="7" cy="18" r="2"/><circle cx="17" cy="18" r="2"/></svg><span>Ship to me<small>Live carrier quote</small></span></button>
+        <button type="button" data-m="pickup"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M12 21s-7-6.2-7-12a7 7 0 0 1 14 0c0 5.8-7 12-7 12z"/><circle cx="12" cy="9" r="2.5"/></svg><span>Click &amp; collect<small id="pk-sub">From our warehouse, free</small></span></button>
+      </div>
+      <div class="fld" style="margin-top:14px">
+        <div class="fld-row"><div class="in"><label for="fn">First name</label><input id="fn" value="Sarah"></div><div class="in"><label for="ln">Last name</label><input id="ln" value="Mitchell"></div></div>
+        <div class="in"><label for="ad">Address</label><input id="ad" value="14 Example Street"></div>
+        <div class="fld-row3"><div class="in"><label for="sb">Suburb</label><input id="sb" value="Baulkham Hills"></div><div class="in"><label for="stt">State</label><input id="stt" value="NSW" readonly></div><div class="in"><label for="pc">Postcode</label><input id="pc" inputmode="numeric" maxlength="4" value="2153"></div></div>
+        <p style="font-size:13px;color:var(--muted)">Try other postcodes: <a href="#" data-pc="3000" style="color:var(--accent);font-weight:700">3000 Melbourne</a> · <a href="#" data-pc="4000" style="color:var(--accent);font-weight:700">4000 Brisbane</a> · <a href="#" data-pc="2650" style="color:var(--accent);font-weight:700">2650 Wagga</a> · <a href="#" data-pc="6000" style="color:var(--accent);font-weight:700">6000 Perth</a></p>
+      </div>
+    </section>
+
+    <section class="co-sec">
+      <h2><span class="num">3</span>Freight</h2>
+      <div id="freight"></div>
+    </section>
+
+    <section class="co-sec">
+      <h2><span class="num">4</span>Payment</h2>
+      <p style="font-size:13.5px;color:var(--muted);margin:-6px 0 12px">All transactions are secure and encrypted.</p>
+      <div class="pay-m" id="paym">
+        <div class="pm-opt on" data-p="card"><button type="button"><span class="radio"></span>Credit or debit card<span class="pay">VISA</span></button>
+          <div class="pm-body"><div class="fld"><div class="in"><label>Card number</label><input value="4242 4242 4242 4242"></div><div class="fld-row"><div class="in"><label>Expiry</label><input value="12 / 28"></div><div class="in"><label>Security code</label><input value="123"></div></div></div></div></div>
+        <div class="pm-opt" data-p="paypal"><button type="button"><span class="radio"></span>PayPal<span class="pay pay--pp">PayPal</span></button><div class="pm-body">You'll be redirected to PayPal to complete your purchase.</div></div>
+        <div class="pm-opt" data-p="afterpay"><button type="button"><span class="radio"></span>Afterpay<span class="pay pay--ap">afterpay</span></button><div class="pm-body" id="ap-body"></div></div>
+        <div class="pm-opt" data-p="zip"><button type="button"><span class="radio"></span>Zip, own it now, pay later<span class="pay pay--zip">zip</span></button><div class="pm-body">Pay over time with flexible repayments. You'll be redirected to Zip.</div></div>
+      </div>
+      <div id="pre-note"></div>
+      <button class="btn btn--dark btn--block" id="paynow" style="margin-top:22px;min-height:58px;font-size:16px">Pay now</button>
+      <p style="font-size:12.5px;color:var(--muted);text-align:center;margin-top:12px">Refund policy · Shipping policy · Privacy policy · Terms of service</p>
+    </section>
+  </main>
+
+  <aside class="co__side"><div class="co__sticky" id="summary"></div></aside>
+</div>
+
+<div class="modal" id="done" role="dialog" aria-modal="true" aria-label="Order confirmed"><div class="modal__box" id="done-box"></div></div>
+
+<script>
+window.BEDS_NOTES={checkout:`
+<h3>How freight works in the live store</h3>
+<p>Shopify's carrier-calculated shipping (available on the Grow plan) asks the freight app for rates every time the customer changes their address.</p>
+<div class="note"><b>1. Split by warehouse</b><p>Each item belongs to a Shopify Location. The app groups the cart by location, so one order can have up to 3 freight legs (more as you add suppliers).</p></div>
+<div class="note"><b>2. Quote each leg live</b><p>Each leg is sent to the carrier API (Allied Express, Hunter Express, or an aggregator like Starshipit) with total weight, cubic size, origin postcode and the customer's postcode. The leg totals are then added together.</p><code>Leg = origin location + items
+  weight_kg, cubic_m3 (product fields)
+  → carrier API → rate + ETA
+Total freight = Σ legs</code></div>
+<div class="note"><b>3. Click &amp; collect</b><p>Shopify's local pickup is turned on for the Locations you choose, limited to nearby postcodes. Items at other warehouses still ship.</p></div>
+<div class="note"><b>4. Payments</b><p>Shopify Payments (cards, Apple Pay, Google Pay, Shop Pay) plus PayPal, Afterpay and Zip, all in the native checkout.</p></div>
+<p style="margin-top:14px;font-size:13px">The rates on this page are sample numbers that show the logic. They are not real carrier prices.</p>`};
+</script>
+<script src="../script.js"></script>
+<script src="checkout.js"></script>
+</body>
+</html>
