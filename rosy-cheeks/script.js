@@ -1,5 +1,5 @@
 (function () {
-  var PRICE = 65.99, SUB = 31.68, SHIP = 4.95, PROT = 2.95;
+  var PRICE = 65.99, SUB = 31.68, SHIP = 4.95, PROT = 2.95, GIFT = 24.99;
   var money = function (n) { return '$' + n.toFixed(2); };
   var $ = function (s, r) { return (r || document).querySelector(s); };
   var $$ = function (s, r) { return Array.prototype.slice.call((r || document).querySelectorAll(s)); };
@@ -68,17 +68,17 @@
       html += '<div class="line">' +
         '<div class="line-img"><img src="img/rose1.jpg" alt=""></div>' +
         '<div><div class="line-t">Rosy™ Advanced Redness Relief Cream</div>' +
-        '<div class="line-v">Single Tube · ' + (sub ? 'Autoships every month' : 'One-time purchase') + '</div>' +
-        '<div class="line-p">' + money((sub ? SUB : PRICE) * m.qty) + (sub ? ' <s>' + money(PRICE * m.qty) + '</s>' : '') + '</div>' +
+        '<div class="line-v">Single Tube' + (sub ? ' · Ships monthly' : '') + '</div>' +
+        '<div class="line-p">' + money((sub ? SUB : PRICE) * m.qty) + (sub ? ' <s>' + money(PRICE * m.qty) + '</s> <em class="tag">SAVE 52%</em>' : '') + '</div>' +
         '<div class="qty"><button data-q="-1" aria-label="Decrease">−</button><span>' + m.qty + '</span><button data-q="1" aria-label="Increase">+</button></div></div>' +
         '<button class="line-del" data-del="main" aria-label="Remove"><svg viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M4 7h16M9 7V4h6v3M6 7l1 13h10l1-13"/></svg></button>' +
-        '<label class="line-auto"><input type="checkbox" class="sw" data-auto ' + (sub ? 'checked' : '') + '> Autorefill &amp; save <em>52%</em></label>' +
+        (sub ? '' : '<label class="line-auto"><input type="checkbox" class="sw" data-auto> Autorefill &amp; save <em>52%</em></label>') +
         '</div>';
       if (sub) {
         html += '<div class="line gift">' +
           '<div class="line-img"><img src="img/gift.svg" alt=""></div>' +
-          '<div><div class="line-t">Rosy Soothing Ice Globes</div><div class="line-v">Free gift with autorefill</div>' +
-          '<div class="line-p"><span class="free">FREE</span> <s>$24.99</s></div></div><span></span></div>';
+          '<div><div class="line-t">FREE Rosy Soothing Ice Globes</div><div class="line-v">Cools &amp; calms flushed skin on contact</div>' +
+          '<div class="line-p"><span class="free">FREE</span> <s>' + money(GIFT) + '</s> <em class="tag">GIFT</em></div></div><span></span></div>';
       }
     }
     UPSELLS.forEach(function (u) {
@@ -107,13 +107,19 @@
     // shipping bar
     var s = subtotal(), fs = freeShip(), bar = $('[data-ship-bar]');
     if (!n) bar.innerHTML = '<svg viewBox="0 0 24 24" width="14" height="14" fill="none" stroke="currentColor" stroke-width="1.8" style="vertical-align:-2px"><path d="M1 4h14v12H1zM15 9h4l4 4v3h-8"/><circle cx="6" cy="18" r="2"/><circle cx="18" cy="18" r="2"/></svg> Free shipping on every autorefill order';
-    else if (fs) bar.innerHTML = '<span class="ok">✓ You\'ve unlocked FREE shipping</span><div class="ship-bar"><i style="width:100%"></i></div>';
+    else if (fs) bar.innerHTML = '<span class="ok">✓ FREE shipping</span> with your order';
     else bar.innerHTML = 'Shipping <b>' + money(SHIP) + '</b> · free on every autorefill order';
 
     var ship = fs ? 0 : SHIP;
     $('[data-sub]').textContent = money(s);
     $('[data-shipcost]').innerHTML = fs ? '<span class="ok">FREE</span>' : money(SHIP);
     $('[data-total]').textContent = money(s + ship + (cart.prot ? PROT : 0));
+    var saved = 0;
+    if (cart.main && cart.main.plan === 'sub') saved += (PRICE - SUB) * cart.main.qty + GIFT;
+    UPSELLS.forEach(function (u) { if (cart.ups[u.id]) saved += (u.was - u.price) * cart.ups[u.id]; });
+    var sr = $('[data-saverow]');
+    sr.hidden = saved <= 0;
+    $('[data-saved]').textContent = '−' + money(saved);
   }
 
   lines.addEventListener('click', function (e) {
