@@ -3,6 +3,7 @@
 'use strict';
 document.documentElement.classList.remove('no-js');
 const R=(document.body&&document.body.dataset.base)||'./';
+const H=(document.body&&document.body.dataset.home)||R;
 const $=(s,r=document)=>r.querySelector(s);
 const $$=(s,r=document)=>Array.from(r.querySelectorAll(s));
 const fm=n=>'$'+Number(n).toLocaleString('en-AU',{minimumFractionDigits:n%1?2:0,maximumFractionDigits:2});
@@ -72,7 +73,7 @@ const P={
  'a-pillow-q':{type:'accessory',name:'Hotel Pillow (2-pack)',price:89,wh:'syd',img:'photo-1584100936595-c0654b55a2e2'},
  'a-prot-q':{type:'accessory',name:'Waterproof Protector — Queen',price:99,wh:'syd',img:'photo-1631049552057-403cdb8f0658'}
 };
-Object.keys(P).forEach(k=>{P[k].id=k;if(P[k].url) P[k].url=R+P[k].url});
+Object.keys(P).forEach(k=>{P[k].id=k;if(P[k].url) P[k].url=H+P[k].url});
 const offerOn=p=>OFFER.types.includes(p.type)&&!OFFER.exclude.includes(p.id);
 const offerPrice=p=>offerOn(p)?Math.round(p.price*(1-OFFER.pct/100)*100)/100:p.price;
 
@@ -141,34 +142,34 @@ let tt;function toast(m){let t=$('.toast');if(!t){t=document.createElement('div'
 /* ================= header / footer / chrome ================= */
 const NAV=[['Beds','beds'],['Bunks','bunks'],['Mattresses','mats'],['Furniture'],['Sale','sale']];
 const MEGA={
- beds:`<div class="mega"><div class="mega__in"><div><h5>By size</h5><ul><li><a href="${R}#shop">Single Beds</a></li><li><a href="${R}#shop">King Single Beds</a></li><li><a href="${R}#shop">Double Beds</a></li><li><a href="${R}#shop">Queen Beds <span class="pill">Most popular</span></a></li><li><a href="${R}#shop">King Beds</a></li></ul></div>
-  <div><h5>By style</h5><ul><li><a href="${R}#shop">Upholstered</a></li><li><a href="${R}#shop">Timber</a></li><li><a href="${R}#shop">Storage beds</a></li><li><a href="${R}#shop">Kids beds</a></li></ul></div>
-  <div><h5>Help me choose</h5><ul><li><a href="${R}#finder">30-second bed finder</a></li><li><a href="${R}#delivery">Delivery to my postcode</a></li><li><a href="${R}#faq">Size guide</a></li></ul></div>
-  <a class="mega__feat" href="${R}#shop"><img src="${U('photo-1617325247661-675ab4b64ae2',700)}" alt=""><div><b>The Oslo King</b><span>Solid timber platform · from $1,449 →</span></div></a></div></div>`,
- bunks:`<div class="mega"><div class="mega__in"><div><h5>By type</h5><ul><li><a href="${R}product/">Single-over-Double <span class="pill">Bestseller</span></a></li><li><a href="${R}#shop">Single Bunks</a></li><li><a href="${R}#shop">Bunks with Trundle</a></li><li><a href="${R}#shop">Triple Sleepers</a></li></ul></div>
-  <div><h5>By finish</h5><ul><li><a href="${R}#shop">Natural Oak</a></li><li><a href="${R}#shop">White</a></li><li><a href="${R}#shop">Charcoal</a></li></ul></div>
-  <div><h5>Good to know</h5><ul><li><a href="${R}#story">How mattress matching works</a></li><li><a href="${R}#faq">Bunk safety FAQ</a></li></ul></div>
-  <a class="mega__feat" href="${R}product/"><img src="${U('photo-1522771739844-6a9f6d5f14af',700)}" alt=""><div><b>Bunks that come with the right mattresses</b><span>Matched to every position · ${OFFER.pct}% off →</span></div></a></div></div>`,
- mats:`<div class="mega"><div class="mega__in"><div><h5>By size</h5><ul><li><a href="${R}#shop">Single</a></li><li><a href="${R}#shop">King Single</a></li><li><a href="${R}#shop">Double</a></li><li><a href="${R}#shop">Queen</a></li><li><a href="${R}#shop">King</a></li></ul></div>
-  <div><h5>By type</h5><ul><li><a href="${R}#shop">Hybrid</a></li><li><a href="${R}#shop">Pocket spring</a></li><li><a href="${R}#shop">Latex &amp; foam</a></li><li><a href="${R}#shop">Bunk &amp; trundle <span class="pill">Low profile</span></a></li></ul></div>
-  <div><h5>Accessories</h5><ul><li><a href="${R}#shop">Protectors</a></li><li><a href="${R}#shop">Pillows</a></li><li><a href="${R}#shop">Sheet sets</a></li></ul></div>
-  <a class="mega__feat" href="${R}#shop"><img src="${U('photo-1588046130717-0eb0c9a3ba15',700)}" alt=""><div><b>Hybrid Luxe Queen</b><span>Now $1,149 · was $1,399 →</span></div></a></div></div>`
+ beds:`<div class="mega"><div class="mega__in"><div><h5>By size</h5><ul><li><a href="${H}#shop">Single Beds</a></li><li><a href="${H}#shop">King Single Beds</a></li><li><a href="${H}#shop">Double Beds</a></li><li><a href="${H}#shop">Queen Beds <span class="pill">Most popular</span></a></li><li><a href="${H}#shop">King Beds</a></li></ul></div>
+  <div><h5>By style</h5><ul><li><a href="${H}#shop">Upholstered</a></li><li><a href="${H}#shop">Timber</a></li><li><a href="${H}#shop">Storage beds</a></li><li><a href="${H}#shop">Kids beds</a></li></ul></div>
+  <div><h5>Help me choose</h5><ul><li><a href="${H}#finder">30-second bed finder</a></li><li><a href="${H}#delivery">Delivery to my postcode</a></li><li><a href="${H}#faq">Size guide</a></li></ul></div>
+  <a class="mega__feat" href="${H}#shop"><img src="${U('photo-1617325247661-675ab4b64ae2',700)}" alt=""><div><b>The Oslo King</b><span>Solid timber platform · from $1,449 →</span></div></a></div></div>`,
+ bunks:`<div class="mega"><div class="mega__in"><div><h5>By type</h5><ul><li><a href="${H}product/">Single-over-Double <span class="pill">Bestseller</span></a></li><li><a href="${H}#shop">Single Bunks</a></li><li><a href="${H}#shop">Bunks with Trundle</a></li><li><a href="${H}#shop">Triple Sleepers</a></li></ul></div>
+  <div><h5>By finish</h5><ul><li><a href="${H}#shop">Natural Oak</a></li><li><a href="${H}#shop">White</a></li><li><a href="${H}#shop">Charcoal</a></li></ul></div>
+  <div><h5>Good to know</h5><ul><li><a href="${H}#story">How mattress matching works</a></li><li><a href="${H}#faq">Bunk safety FAQ</a></li></ul></div>
+  <a class="mega__feat" href="${H}product/"><img src="${U('photo-1522771739844-6a9f6d5f14af',700)}" alt=""><div><b>Bunks that come with the right mattresses</b><span>Matched to every position · ${OFFER.pct}% off →</span></div></a></div></div>`,
+ mats:`<div class="mega"><div class="mega__in"><div><h5>By size</h5><ul><li><a href="${H}#shop">Single</a></li><li><a href="${H}#shop">King Single</a></li><li><a href="${H}#shop">Double</a></li><li><a href="${H}#shop">Queen</a></li><li><a href="${H}#shop">King</a></li></ul></div>
+  <div><h5>By type</h5><ul><li><a href="${H}#shop">Hybrid</a></li><li><a href="${H}#shop">Pocket spring</a></li><li><a href="${H}#shop">Latex &amp; foam</a></li><li><a href="${H}#shop">Bunk &amp; trundle <span class="pill">Low profile</span></a></li></ul></div>
+  <div><h5>Accessories</h5><ul><li><a href="${H}#shop">Protectors</a></li><li><a href="${H}#shop">Pillows</a></li><li><a href="${H}#shop">Sheet sets</a></li></ul></div>
+  <a class="mega__feat" href="${H}#shop"><img src="${U('photo-1588046130717-0eb0c9a3ba15',700)}" alt=""><div><b>Hybrid Luxe Queen</b><span>Now $1,149 · was $1,399 →</span></div></a></div></div>`
 };
 const logo=`<span class="logo__m"></span>beds<small>.net.au</small>`;
 function chrome(){
  const h=$('#hdr');if(h){
   const over=h.dataset.over==='1';
-  h.innerHTML=`<div class="ann__demo">Concept prototype for beds.net.au · not the live store · <a href="${R}admin/">See the admin view</a> · <a href="${R}v1/">v1</a></div>
+  h.innerHTML=`<div class="ann__demo">Concept prototype for beds.net.au · <a href="${R}">Design A</a> · <a href="${R}b/">Design B</a> · <a href="${R}admin/">Admin view</a></div>
   <div class="ann"><div class="ann__track">${Array(2).fill(`<span><b>Free metro delivery</b> over ${fm(FREE)}</span><i></i><span>Bed offer: <b>${OFFER.pct}% off</b> mattresses &amp; add-ons with any bed</span><i></i><span>Click &amp; collect from Sydney &amp; Melbourne</span><i></i><span><b>Afterpay</b> &amp; <b>Zip</b> · pay in 4</span><i></i><span>Rated <b>4.8★</b> by 2,400+ Aussie families</span><i></i>`).join('')}</div></div>
   <header class="hdr ${over?'hdr--over':''}" id="hdrbar"><div class="wrap hdr__bar">
-   <nav aria-label="Main"><ul class="hdr__nav">${NAV.map(([t,k])=>`<li class="nav-item"><a class="nl ${k==='sale'?'nl--sale':''}" href="${k==='bunks'?R+'product/':R+'#shop'}">${t}${MEGA[k]?I.chev:''}</a>${MEGA[k]||''}</li>`).join('')}</ul>
+   <nav aria-label="Main"><ul class="hdr__nav">${NAV.map(([t,k])=>`<li class="nav-item"><a class="nl ${k==='sale'?'nl--sale':''}" href="${k==='bunks'?H+'product/':H+'#shop'}">${t}${MEGA[k]?I.chev:''}</a>${MEGA[k]||''}</li>`).join('')}</ul>
    <button class="ib burger" aria-label="Open menu">${I.menu}</button></nav>
-   <a class="logo" href="${R}" aria-label="beds.net.au home">${logo}</a>
-   <div class="hdr__right"><a class="finder-btn" href="${R}#finder">${I.spark}<span>Find my bed</span></a><button class="ib" aria-label="Search" data-demo="Search is part of the live Shopify build">${I.search}</button><button class="ib" aria-label="Account" data-demo="Customer accounts are part of the live Shopify build">${I.user}</button><button class="ib cart-open" aria-label="Open cart">${I.bag}<span class="cnt">0</span></button></div>
+   <a class="logo" href="${H}" aria-label="beds.net.au home">${logo}</a>
+   <div class="hdr__right"><a class="finder-btn" href="${H}#finder">${I.spark}<span>Find my bed</span></a><button class="ib" aria-label="Search" data-demo="Search is part of the live Shopify build">${I.search}</button><button class="ib" aria-label="Account" data-demo="Customer accounts are part of the live Shopify build">${I.user}</button><button class="ib cart-open" aria-label="Open cart">${I.bag}<span class="cnt">0</span></button></div>
   </div></header>
   <div class="mdrawer" aria-hidden="true"><div class="mdrawer__scrim"></div><div class="mdrawer__p"><div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:20px"><span class="logo" style="color:#fff">${logo}</span><button class="xbtn md-x" aria-label="Close menu" style="background:rgba(255,255,255,.1);color:#fff">${I.x}</button></div>
-   <div class="mdrawer__links">${[['Single Beds','92 × 188'],['King Single','107 × 203'],['Double Beds','137 × 188'],['Queen Beds','153 × 203'],['King Beds','183 × 203'],['Bunks','Matched mattresses'],['Mattresses','All sizes'],['Furniture',''],['Sale','Up to 20% off']].map(([t,s])=>`<a href="${t==='Bunks'?R+'product/':R+'#shop'}">${t}<small>${s}</small></a>`).join('')}</div>
-   <a class="btn btn--glow" style="margin-top:28px" href="${R}#finder">Take the bed finder <span class="arr">${I.arr}</span></a></div></div>`;
+   <div class="mdrawer__links">${[['Single Beds','92 × 188'],['King Single','107 × 203'],['Double Beds','137 × 188'],['Queen Beds','153 × 203'],['King Beds','183 × 203'],['Bunks','Matched mattresses'],['Mattresses','All sizes'],['Furniture',''],['Sale','Up to 20% off']].map(([t,s])=>`<a href="${t==='Bunks'?H+'product/':H+'#shop'}">${t}<small>${s}</small></a>`).join('')}</div>
+   <a class="btn btn--glow" style="margin-top:28px" href="${H}#finder">Take the bed finder <span class="arr">${I.arr}</span></a></div></div>`;
   $$('.nav-item',h).forEach(li=>{if(!$('.mega',li)) return;let tm;
    li.addEventListener('mouseenter',()=>{clearTimeout(tm);$$('.nav-item.open').forEach(o=>o!==li&&o.classList.remove('open'));li.classList.add('open')});
    li.addEventListener('mouseleave',()=>{tm=setTimeout(()=>li.classList.remove('open'),160)});
@@ -183,15 +184,15 @@ function chrome(){
   f.innerHTML=`<footer class="ftr"><div class="wrap"><div class="ftr__top">
    <div><span class="logo" style="color:#fff">${logo}</span><p style="margin-top:18px;max-width:360px">Beds, bunks and mattresses delivered Australia-wide from our Sydney, Melbourne and Brisbane warehouses.</p>
     <form class="ftr__news" onsubmit="event.preventDefault();BEDS.toast('Thanks! Your $50 welcome code is on its way')"><label class="sr" for="fnl">Email</label><input id="fnl" type="email" required placeholder="Email for $50 off your first bed"><button class="btn btn--glow btn--sm">Join</button></form></div>
-   <div><h4>Shop</h4><ul><li><a href="${R}#shop">Beds</a></li><li><a href="${R}product/">Bunks</a></li><li><a href="${R}#shop">Mattresses</a></li><li><a href="${R}#shop">Furniture</a></li><li><a href="${R}#shop">Sale</a></li></ul></div>
-   <div><h4>Help</h4><ul><li><a href="#" data-pol>Shipping &amp; delivery</a></li><li><a href="#" data-pol>Returns &amp; exchanges</a></li><li><a href="#" data-pol>Warranty</a></li><li><a href="${R}#faq">FAQ</a></li><li><a href="#" data-pol>Contact us</a></li></ul></div>
+   <div><h4>Shop</h4><ul><li><a href="${H}#shop">Beds</a></li><li><a href="${H}product/">Bunks</a></li><li><a href="${H}#shop">Mattresses</a></li><li><a href="${H}#shop">Furniture</a></li><li><a href="${H}#shop">Sale</a></li></ul></div>
+   <div><h4>Help</h4><ul><li><a href="#" data-pol>Shipping &amp; delivery</a></li><li><a href="#" data-pol>Returns &amp; exchanges</a></li><li><a href="#" data-pol>Warranty</a></li><li><a href="${H}#faq">FAQ</a></li><li><a href="#" data-pol>Contact us</a></li></ul></div>
    <div><h4>Company</h4><ul><li><a href="#" data-pol>About</a></li><li><a href="#" data-pol>Privacy policy</a></li><li><a href="#" data-pol>Terms of service</a></li><li><a href="#" data-pol>Refund policy</a></li></ul></div>
   </div><div class="ftr__word" aria-hidden="true">sleep well.</div>
   <div class="ftr__bot"><span>© 2026 beds.net.au · Concept prototype · Prices in AUD incl. GST</span><div class="pays"><span class="pay">VISA</span><span class="pay">Mastercard</span><span class="pay">AMEX</span><span class="pay">Apple Pay</span><span class="pay">G Pay</span><span class="pay pay--pp">PayPal</span><span class="pay pay--ap">afterpay</span><span class="pay pay--zip">zip</span></div></div></div></footer>`;
  }
  // dock
  if(!$('.dock')){const d=document.createElement('nav');d.className='dock';d.setAttribute('aria-label','Quick links');
-  d.innerHTML=`<a href="${R}">${I.home}Home</a><a href="${R}#shop">${I.search}Shop</a><a class="main" href="${R}#finder">${I.spark}Find my bed</a><button class="cart-open" aria-label="Open cart">${I.bag}Cart<span class="cnt">0</span></button>`;document.body.appendChild(d);
+  d.innerHTML=`<a href="${H}">${I.home}Home</a><a href="${H}#shop">${I.search}Shop</a><a class="main" href="${H}#finder">${I.spark}Find my bed</a><button class="cart-open" aria-label="Open cart">${I.bag}Cart<span class="cnt">0</span></button>`;document.body.appendChild(d);
   let ly=0;window.addEventListener('scroll',()=>{const y=window.scrollY;d.classList.toggle('show',y>500&&(y<ly||y<900));ly=y},{passive:true});}
  document.addEventListener('click',e=>{
   const c=e.target.closest('.cart-open');if(c){openCart();return}
@@ -234,7 +235,7 @@ function renderCart(){
  const bed=hasBed();const pct=Math.min(100,sub/FREE*100);
  $('.tiers').innerHTML=`<div class="tiers__msg">${sub>=FREE?`You've unlocked <b>free metro delivery</b> 🎉`:`<b>${fm2(FREE-sub)}</b> away from free metro delivery`}${bed?'':` · add a bed to unlock <b>${OFFER.pct}% off</b> add-ons`}</div><div class="tiers__bar"><i style="width:${pct}%"></i></div><div class="tiers__pts"><span class="${bed?'got':''}">${bed?I.chk:'○'} Bed offer −${OFFER.pct}%</span><span class="${sub>=FREE?'got':''}">${sub>=FREE?I.chk:'○'} Free metro delivery · ${fm(FREE)}</span></div>`;
  const b=$('.cart__b');
- if(!cart.length){b.innerHTML=`<div class="cart__empty"><div class="moonx"></div><p class="serif" style="font-size:30px;line-height:1">Your cart is resting</p><p style="color:var(--muted);margin:8px 0 18px">Start with a bed and we'll match the mattresses.</p><a class="btn btn--sm" href="${R}product/">Shop the Harbour bunk <span class="arr">${I.arr}</span></a></div>`+upsHTML()}
+ if(!cart.length){b.innerHTML=`<div class="cart__empty"><div class="moonx"></div><p class="serif" style="font-size:30px;line-height:1">Your cart is resting</p><p style="color:var(--muted);margin:8px 0 18px">Start with a bed and we'll match the mattresses.</p><a class="btn btn--sm" href="${H}product/">Shop the Harbour bunk <span class="arr">${I.arr}</span></a></div>`+upsHTML()}
  else{
   const g={};cart.forEach(l=>{(g[P[l.id].wh]=g[P[l.id].wh]||[]).push(l)});const gk=Object.keys(g);
   const offSave=cart.reduce((a,l)=>{const u=unit(l);return a+(u.base-u.now)*l.qty},0);
